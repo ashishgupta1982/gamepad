@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CATEGORIES, DIFFICULTY_LEVELS } from '../../../data/quizConstants';
+import { CATEGORIES, DIFFICULTY_LEVELS } from '../../../../data/quizConstants';
 
 export default function SetupScreen({ 
   playerCount, playerNames, selectedCategories, customCategoryName, customCategoryDescription,
