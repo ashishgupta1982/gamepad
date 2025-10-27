@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import ProfessionalHeader from '../../../components/ProfessionalHeader';
-import { CATEGORIES } from './constants';
+import { CATEGORIES } from '../../../data/quizConstants';
 import GamesListScreen from './components/GamesListScreen';
 import SetupScreen from './components/SetupScreen';
 import WaitingScreen from './components/WaitingScreen';

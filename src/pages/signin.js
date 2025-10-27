@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Header from '../components/Header';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
@@ -21,7 +21,7 @@ export default function SignIn() {
     }
   }, [teamsLoading, isTeams, isAuthenticating, authSuccess, handleTeamsAutoLogin]);
 
-  const handleTeamsAutoLogin = async () => {
+  const handleTeamsAutoLogin = useCallback(async () => {
     setIsAuthenticating(true);
     setAuthError(null);
 
@@ -61,7 +61,7 @@ export default function SignIn() {
       setAuthError(error.message || 'Failed to authenticate with Teams');
       setIsAuthenticating(false);
     }
-  };
+  }, [router]);
 
   return (
     <>
