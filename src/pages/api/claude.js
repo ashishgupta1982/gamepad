@@ -90,9 +90,10 @@ export default async function handler(req, res) {
     }
 
     // Call Claude API normally
+    // Increase max_tokens for quiz games that need to generate multiple questions
     const message = await anthropic.messages.create({
       model: "claude-3-haiku-20240307", // claude-3-sonnet-20240229 & claude-3-haiku-20240307
-      max_tokens: 1000,
+      max_tokens: 4000,
       messages: [{
         role: "user",
         content: prompt

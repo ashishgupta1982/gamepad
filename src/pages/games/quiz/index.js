@@ -25,6 +25,7 @@ export default function QuizGame() {
   const [customCategoryDescription, setCustomCategoryDescription] = useState('');
   const [numberOfQuestions, setNumberOfQuestions] = useState(10);
   const [difficulty, setDifficulty] = useState('medium');
+  const [showCategorySelection, setShowCategorySelection] = useState(false);
   
   // Game play state
   const [playerAnswers, setPlayerAnswers] = useState({});
@@ -99,18 +100,29 @@ export default function QuizGame() {
         hard: 'very challenging questions for experienced players'
       };
       
-      const prompt = `Generate ${numQuestions || numberOfQuestions} multiple choice quiz questions with the following specifications:
+      const categoryInstructions = categoriesToUse.map(cat => {
+        if (cat.toLowerCase().includes('riddles')) {
+          return 'For Riddles questions: Create actual riddles (clever word puzzles to solve), not questions about riddles. Examples: "I speak without a mouth and hear without ears. What am I?" (Answer: an echo), or "What has keys but no locks, space but no room, and you can enter but not go inside?" (Answer: a keyboard).';
+        }
+        return null;
+      }).filter(Boolean);
+      
+      const prompt = `Generate ${numQuestions || numberOfQuestions} challenging multiple choice quiz questions in pub quiz style with the following specifications:
 - Categories: ${categoriesToUse.join(', ')}
 - ${categoriesToUse.length > 1 ? `Generate approximately ${questionsPerCategory} questions per category` : 'Generate all questions for this category'}
-- Each question should have exactly 4 options (A, B, C, D)
+- Each question should have exactly 5 options (A, B, C, D, E)
 - Difficulty level: ${difficultyInstructions[difficultyLevel]}
-- Include one correct answer and three plausible distractors
-- Questions should be engaging and suitable for family play
+- Questions should be testing and challenging - the kind you'd find at a difficult pub quiz
+- Make distractors very plausible and close to the correct answer
+- Avoid obvious or too-easy questions
+- Include one correct answer and four very plausible distractors
+- Questions should test actual knowledge, not trivial facts
+${categoryInstructions.length > 0 ? '- SPECIAL INSTRUCTIONS: ' + categoryInstructions.join('. ') : ''}
 
 For each question, provide the following in JSON format:
 {
   "question": "The question text here",
-  "options": ["Option A", "Option B", "Option C", "Option D"],
+  "options": ["Option A", "Option B", "Option C", "Option D", "Option E"],
   "correctAnswer": 0,
   "category": "Category name",
   "explanation": "An interesting fact or explanation about the answer"
@@ -130,12 +142,84 @@ Return ONLY a JSON array of questions, no additional text or formatting.`;
 
       const result = await response.json();
       
+      // Helper function to safely parse JSON
+      const tryParseJSON = (text) => {
+        let cleaned = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+        
+        // First try to find and parse the JSON array
+        const arrayMatch = cleaned.match(/\[[\s\S]*\]/);
+        if (arrayMatch) {
+          try {
+            let jsonStr = arrayMatch[0];
+            
+            // Fix common JSON issues
+            // Remove trailing commas
+            jsonStr = jsonStr.replace(/,(\s*[}\]])/g, '$1');
+            // Fix unclosed strings
+            jsonStr = jsonStr.replace(/:\s*"([^"]*)"/g, ': "$1"');
+            
+            return JSON.parse(jsonStr);
+          } catch (e) {
+            console.error('Failed to parse matched array:', e);
+            console.error('Problematic JSON:', arrayMatch[0].substring(0, 200));
+          }
+        }
+        
+        // If array parsing failed, try to extract individual question objects
+        const questionPattern = /\{\s*"[^"]+":\s*"[^"]*"[^{}]*\}/g;
+        const questionMatches = cleaned.match(questionPattern);
+        
+        if (questionMatches && questionMatches.length > 0) {
+          const questions = questionMatches.map(match => {
+            try {
+              let fixed = match;
+              
+              // Ensure it's valid JSON
+              fixed = fixed.replace(/,(\s*[}\]])/g, '$1');
+              
+              // Check if all required fields are present
+              const hasQuestion = fixed.includes('"question"');
+              const hasOptions = fixed.includes('"options"');
+              const hasCorrectAnswer = fixed.includes('"correctAnswer"');
+              
+              if (!hasQuestion || !hasOptions || !hasCorrectAnswer) {
+                return null;
+              }
+              
+              // Add missing optional fields
+              if (!fixed.includes('"category"')) {
+                fixed = fixed.replace(/}$/, ', "category": "General"}');
+              }
+              if (!fixed.includes('"explanation"')) {
+                fixed = fixed.replace(/}$/, ', "explanation": ""}');
+              }
+              
+              return JSON.parse(fixed);
+            } catch (e) {
+              console.error('Failed to parse individual question:', e);
+              return null;
+            }
+          }).filter(Boolean);
+          
+          if (questions.length > 0) {
+            return questions;
+          }
+        }
+        
+        return null;
+      };
+      
       let questions;
       try {
-        const jsonMatch = result.match(/\[[\s\S]*\]/);
-        questions = JSON.parse(jsonMatch ? jsonMatch[0] : result);
-      } catch (e) {
-        questions = JSON.parse(result);
+        questions = tryParseJSON(result);
+        
+        if (!questions) {
+          throw new Error('Could not extract questions');
+        }
+      } catch (error) {
+        console.error('Failed to parse questions:', error);
+        console.error('Raw response:', result);
+        throw new Error('Failed to generate questions. Please try again.');
       }
 
       if (!Array.isArray(questions)) {
@@ -162,12 +246,14 @@ Return ONLY a JSON array of questions, no additional text or formatting.`;
 
       const gameData = {
         gameType: 'quiz',
-        players: playerNames,
+        players: playerNames, // API expects array of strings
         quizConfig: {
           categories: categoriesToSave,
           totalQuestions: numberOfQuestions,
           difficulty: difficulty,
           currentQuestionIndex: 0,
+          currentRound: 1,
+          rounds: [],
           questions: []
         }
       };
@@ -179,13 +265,37 @@ Return ONLY a JSON array of questions, no additional text or formatting.`;
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(gameData)
         });
+        
+        if (!res.ok) {
+          throw new Error(`Failed to create game: ${res.status}`);
+        }
+        
         const data = await res.json();
-        game = data.game;
+        game = data?.game;
+        
+        if (!game) {
+          console.error('Game creation failed, response:', data);
+          throw new Error('Failed to create game - no game returned from API');
+        }
+        
+        // Ensure quizConfig exists in the returned game
+        if (!game.quizConfig) {
+          game.quizConfig = gameData.quizConfig;
+        }
       } else {
         game = {
           _id: 'guest',
-          ...gameData,
-          players: playerNames.map(name => ({ name, scores: [] }))
+          gameType: 'quiz',
+          players: playerNames.map(name => ({ name, scores: [], roundScores: [] })),
+          quizConfig: {
+            categories: categoriesToSave,
+            totalQuestions: numberOfQuestions,
+            difficulty: difficulty,
+            currentQuestionIndex: 0,
+            currentRound: 1,
+            rounds: [],
+            questions: []
+          }
         };
       }
 
@@ -210,7 +320,16 @@ Return ONLY a JSON array of questions, no additional text or formatting.`;
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
-              quizConfig: updatedGame.quizConfig,
+              quizConfig: {
+                ...updatedGame.quizConfig,
+                rounds: [
+                  {
+                    roundNumber: updatedGame.quizConfig.currentRound || 1,
+                    categories: categoriesToSave,
+                    questions: questions
+                  }
+                ]
+              },
               players: updatedGame.players
             })
           });
@@ -238,11 +357,10 @@ Return ONLY a JSON array of questions, no additional text or formatting.`;
     });
   };
 
-  const handleRevealAnswer = () => {
+  const handleRevealAnswer = async () => {
     setShowAnswer(true);
-  };
-
-  const handleNextQuestion = async () => {
+    
+    // Calculate and update scores immediately when revealing answer
     const currentQIndex = currentGame.quizConfig.currentQuestionIndex;
     const currentQuestion = currentGame.quizConfig.questions[currentQIndex];
     
@@ -250,15 +368,52 @@ Return ONLY a JSON array of questions, no additional text or formatting.`;
       const playerAnswer = playerAnswers[index];
       const isCorrect = playerAnswer === currentQuestion.correctAnswer;
       
+      // Accumulate scores across all rounds
+      const newScores = [...player.scores, isCorrect ? 1 : 0];
+      
+      // Calculate round scores
+      const currentRoundNumber = currentGame.quizConfig.currentRound;
+      const roundScores = player.roundScores || [];
+      
+      // Update round score if this is the first question of the round
+      const updatedRoundScores = [...roundScores];
+      while (updatedRoundScores.length < currentRoundNumber) {
+        updatedRoundScores.push(0);
+      }
+      
       return {
         ...player,
-        scores: [...player.scores, isCorrect ? 1 : 0]
+        scores: newScores,
+        roundScores: updatedRoundScores
       };
     });
 
     const updatedGame = {
       ...currentGame,
-      players: updatedPlayers,
+      players: updatedPlayers
+    };
+
+    setCurrentGame(updatedGame);
+
+    // Save to database if logged in
+    if (session && currentGame._id !== 'guest') {
+      try {
+        await fetch(`/api/games/${currentGame._id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ players: updatedPlayers })
+        });
+      } catch (error) {
+        console.error('Failed to save game:', error);
+      }
+    }
+  };
+
+  const handleNextQuestion = async () => {
+    const currentQIndex = currentGame.quizConfig.currentQuestionIndex;
+    
+    const updatedGame = {
+      ...currentGame,
       quizConfig: {
         ...currentGame.quizConfig,
         currentQuestionIndex: currentQIndex + 1
@@ -279,7 +434,6 @@ Return ONLY a JSON array of questions, no additional text or formatting.`;
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
-            players: updatedPlayers,
             quizConfig: updatedGame.quizConfig
           })
         });
@@ -289,27 +443,38 @@ Return ONLY a JSON array of questions, no additional text or formatting.`;
     }
   };
 
-  const handleStartNewRound = async () => {
+  const handleStartNewRound = async (newCategories = null, newDifficulty = null) => {
+    setShowCategorySelection(false);
     setScreen('waiting');
     setPlayerAnswers({});
     setShowAnswer(false);
     
     try {
-      const gameCategories = currentGame.quizConfig.categories.map(cat => {
+      const gameCategories = newCategories || currentGame.quizConfig.categories.map(cat => {
         if (cat.includes(':')) {
           return 'Custom';
         }
         return cat;
       });
       
-      const questions = await generateQuestions(gameCategories, currentGame.quizConfig.totalQuestions, currentGame.quizConfig.difficulty);
+      const questions = await generateQuestions(gameCategories, currentGame.quizConfig.totalQuestions, newDifficulty || currentGame.quizConfig.difficulty);
+      const nextRound = currentGame.quizConfig.currentRound + 1;
       
+      // Keep all existing scores - don't reset!
       const updatedGame = {
         ...currentGame,
-        players: currentGame.players.map(p => ({ ...p, scores: [] })),
         quizConfig: {
           ...currentGame.quizConfig,
           currentQuestionIndex: 0,
+          currentRound: nextRound,
+          rounds: [
+            ...(currentGame.quizConfig.rounds || []),
+            {
+              roundNumber: nextRound,
+              categories: gameCategories,
+              questions: questions
+            }
+          ],
           questions: questions
         }
       };
@@ -322,8 +487,7 @@ Return ONLY a JSON array of questions, no additional text or formatting.`;
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
-              quizConfig: updatedGame.quizConfig,
-              players: updatedGame.players
+              quizConfig: updatedGame.quizConfig
             })
           });
         } catch (error) {
@@ -380,7 +544,7 @@ Return ONLY a JSON array of questions, no additional text or formatting.`;
           </div>
         )}
 
-        <div className="pt-20 px-4 pb-12">
+        <div className="pt-4 px-4 pb-8">
           {screen === 'games' && (
             <GamesListScreen
               games={games}

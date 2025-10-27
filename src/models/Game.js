@@ -19,6 +19,10 @@ const GameSchema = new mongoose.Schema({
     scores: {
       type: [Number],
       default: []
+    },
+    roundScores: {
+      type: [Number],
+      default: []
     }
   }],
   // Additional fields for quiz game
@@ -27,6 +31,18 @@ const GameSchema = new mongoose.Schema({
     totalQuestions: Number,
     difficulty: String,
     currentQuestionIndex: { type: Number, default: 0 },
+    currentRound: { type: Number, default: 1 },
+    rounds: [{
+      roundNumber: Number,
+      categories: [String],
+      questions: [{
+        question: String,
+        options: [String],
+        correctAnswer: Number,
+        explanation: String,
+        category: String
+      }]
+    }],
     questions: [{
       question: String,
       options: [String],
