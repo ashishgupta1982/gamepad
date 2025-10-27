@@ -19,7 +19,7 @@ export default function SignIn() {
     if (!teamsLoading && isTeams && !isAuthenticating && !authSuccess) {
       handleTeamsAutoLogin();
     }
-  }, [teamsLoading, isTeams, isAuthenticating, authSuccess]);
+  }, [teamsLoading, isTeams, isAuthenticating, authSuccess, handleTeamsAutoLogin]);
 
   const handleTeamsAutoLogin = async () => {
     setIsAuthenticating(true);

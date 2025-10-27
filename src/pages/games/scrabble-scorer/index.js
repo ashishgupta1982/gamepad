@@ -432,7 +432,7 @@ function GamePlayScreen({ game, onAddScore, onEndGame, onBack }) {
       });
       setExpandedHistory(expanded);
     }
-  }, []);
+  }, [game.players]);
 
   const toggleHistory = (playerIndex) => {
     setExpandedHistory(prev => ({
