@@ -4,11 +4,11 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import ProfessionalHeader from '../../../components/ProfessionalHeader';
 import { CATEGORIES } from '../../../data/quizConstants';
-import GamesListScreen from './components/GamesListScreen';
-import SetupScreen from './components/SetupScreen';
-import WaitingScreen from './components/WaitingScreen';
-import PlayScreen from './components/PlayScreen';
-import ResultsScreen from './components/ResultsScreen';
+import GamesListScreen from '../../components/quiz/GamesListScreen';
+import SetupScreen from '../../components/quiz/SetupScreen';
+import WaitingScreen from '../../components/quiz/WaitingScreen';
+import PlayScreen from '../../components/quiz/PlayScreen';
+import ResultsScreen from '../../components/quiz/ResultsScreen';
 
 export default function QuizGame() {
   const { data: session, status } = useSession();
