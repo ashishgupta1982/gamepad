@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CATEGORIES, DIFFICULTY_LEVELS } from '../../../../data/quizConstants';
+import { CATEGORIES, DIFFICULTY_LEVELS } from '@/data/quizConstants';
 
 export default function ResultsScreen({ game, onStartNewRound, onEndGame, onBack, onCategorySelect }) {
   const [showCategorySelection, setShowCategorySelection] = useState(false);
