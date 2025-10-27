@@ -18,6 +18,14 @@ export default function Home() {
       available: true
     },
     {
+      id: 'quiz',
+      name: 'Quiz Game',
+      description: 'Test your knowledge with customizable categories and questions!',
+      icon: '🧠',
+      color: 'from-blue-500 to-indigo-500',
+      available: true
+    },
+    {
       id: 'coming-soon-1',
       name: 'More Games Coming Soon!',
       description: 'Check back later for more exciting games',
@@ -30,6 +38,8 @@ export default function Home() {
   const handleGameClick = (gameId) => {
     if (gameId === 'scrabble-scorer') {
       router.push('/games/scrabble-scorer');
+    } else if (gameId === 'quiz') {
+      router.push('/games/quiz');
     }
   };
 
@@ -42,7 +52,7 @@ export default function Home() {
       </Head>
 
       <main className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100">
-        <ProfessionalHeader hideProfileAndSettings={!session} />
+        <ProfessionalHeader />
 
         {/* Hero Section */}
         <section className="pt-20 pb-12 px-6">

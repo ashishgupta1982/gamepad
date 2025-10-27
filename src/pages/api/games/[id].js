@@ -33,7 +33,7 @@ export default async function handler(req, res) {
 
   if (req.method === 'PATCH') {
     try {
-      const { players, status } = req.body;
+      const { players, status, quizConfig } = req.body;
 
       const game = await Game.findOne({
         _id: id,
@@ -50,6 +50,10 @@ export default async function handler(req, res) {
 
       if (status) {
         game.status = status;
+      }
+
+      if (quizConfig) {
+        game.quizConfig = quizConfig;
       }
 
       game.updatedAt = Date.now();

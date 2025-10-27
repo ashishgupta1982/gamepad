@@ -24,18 +24,24 @@ export default async function handler(req, res) {
 
   if (req.method === 'POST') {
     try {
-      const { gameType, players } = req.body;
+      const { gameType, players, quizConfig } = req.body;
 
       if (!gameType || !players || players.length === 0) {
         return res.status(400).json({ error: 'Invalid game data' });
       }
 
-      const game = await Game.create({
+      const gameData = {
         userId: session.user.email,
         gameType,
         players: players.map(name => ({ name, scores: [] })),
         status: 'active'
-      });
+      };
+
+      if (quizConfig) {
+        gameData.quizConfig = quizConfig;
+      }
+
+      const game = await Game.create(gameData);
 
       return res.status(201).json({ game });
     } catch (error) {

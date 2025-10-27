@@ -9,7 +9,7 @@ const GameSchema = new mongoose.Schema({
   gameType: {
     type: String,
     required: true,
-    enum: ['scrabble-scorer']
+    enum: ['scrabble-scorer', 'quiz']
   },
   players: [{
     name: {
@@ -21,6 +21,20 @@ const GameSchema = new mongoose.Schema({
       default: []
     }
   }],
+  // Additional fields for quiz game
+  quizConfig: {
+    categories: [String],
+    totalQuestions: Number,
+    difficulty: String,
+    currentQuestionIndex: { type: Number, default: 0 },
+    questions: [{
+      question: String,
+      options: [String],
+      correctAnswer: Number,
+      explanation: String,
+      category: String
+    }]
+  },
   status: {
     type: String,
     enum: ['active', 'completed'],
