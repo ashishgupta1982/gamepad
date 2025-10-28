@@ -6,7 +6,7 @@ export default function SetupScreen({
   numberOfQuestions, difficulty, previousCustomCategories, creatingNewCustom,
   onPlayerCountChange, onPlayerNameChange, onCategoryToggle,
   onCustomCategoryNameChange, onCustomCategoryDescriptionChange, onNumberOfQuestionsChange,
-  onDifficultyChange, onStart, onBack, isGenerating, onCreateNewCustom, onBackToPrevious
+  onDifficultyChange, onStart, onBack, isGenerating, onCreateNewCustom, onBackToPrevious, onDeleteCustomCategory
 }) {
 
   return (
@@ -187,20 +187,33 @@ export default function SetupScreen({
                   {previousCustomCategories.map((cat, idx) => {
                     const [name, desc] = cat.includes(':') ? cat.split(':') : [cat, ''];
                     return (
-                      <button
+                      <div
                         key={idx}
-                        onClick={() => onCategoryToggle(`custom:${cat}`)}
-                        className={`
-                          text-left px-3 py-2 rounded-lg border-2 transition-all text-sm
-                          ${selectedCategories.includes(`custom:${cat}`)
-                            ? 'bg-white border-purple-500 shadow-md'
-                            : 'bg-white border-purple-200 hover:border-purple-300'
-                          }
-                        `}
+                        className="relative group"
                       >
-                        <div className="font-semibold text-slate-700">{name}</div>
-                        {desc && <div className="text-xs text-slate-500">{desc}</div>}
-                      </button>
+                        <button
+                          onClick={() => onCategoryToggle(`custom:${cat}`)}
+                          className={`
+                            w-full text-left px-3 py-2 rounded-lg border-2 transition-all text-sm
+                            ${selectedCategories.includes(`custom:${cat}`)
+                              ? 'bg-white border-purple-500 shadow-md'
+                              : 'bg-white border-purple-200 hover:border-purple-300'
+                            }
+                          `}
+                        >
+                          <div className="font-semibold text-slate-700">{name}</div>
+                          {desc && <div className="text-xs text-slate-500">{desc}</div>}
+                        </button>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onDeleteCustomCategory(cat);
+                          }}
+                          className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity text-red-500 hover:text-red-700 text-lg font-bold leading-none"
+                        >
+                          ×
+                        </button>
+                      </div>
                     );
                   })}
                 </div>

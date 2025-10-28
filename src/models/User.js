@@ -17,6 +17,10 @@ const UserSchema = new mongoose.Schema({
   lastLoginAt: {
     type: Date,
     default: Date.now
+  },
+  customQuizCategories: {
+    type: [String],
+    default: []
   }
 });
 

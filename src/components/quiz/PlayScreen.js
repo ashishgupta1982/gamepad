@@ -128,7 +128,7 @@ export default function PlayScreen({ game, playerAnswers, showAnswer, onAnswerSe
           </div>
 
           {/* Player Answer Cards - Compact Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {game.players.map((player, playerIndex) => {
               const playerAnswer = playerAnswers[playerIndex];
               const hasAnswered = playerAnswer !== undefined;
@@ -147,15 +147,15 @@ export default function PlayScreen({ game, playerAnswers, showAnswer, onAnswerSe
                       : 'border-slate-300'
                   }`}
                 >
-                  <div className="flex items-center gap-2">
-                    <h3 className="font-bold text-slate-700 text-xs flex items-center gap-1 min-w-[80px]">
+                  <div className="space-y-2">
+                    <h3 className="font-bold text-slate-700 text-xs flex items-center gap-1">
                       {player.name}
                       {hasAnswered && !showAnswer && <span className="text-green-600 text-sm">✓</span>}
                       {showAnswer && isCorrect && <span className="text-base">🏆</span>}
                     </h3>
                     
                     {!showAnswer && (
-                      <div className="flex gap-1.5 items-center">
+                      <div className="flex gap-1.5 flex-wrap">
                         {hasAnswered ? (
                           <div className="flex items-center gap-1 px-2 py-1 bg-green-50 rounded border border-green-400">
                             <span className="text-green-600 text-sm">✓</span>

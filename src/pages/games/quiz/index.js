@@ -23,7 +23,7 @@ export default function QuizGame() {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [customCategoryName, setCustomCategoryName] = useState('');
   const [customCategoryDescription, setCustomCategoryDescription] = useState('');
-  const [numberOfQuestions, setNumberOfQuestions] = useState(10);
+  const [numberOfQuestions, setNumberOfQuestions] = useState(5);
   const [difficulty, setDifficulty] = useState('medium');
   const [showCategorySelection, setShowCategorySelection] = useState(false);
   const [previousCustomCategories, setPreviousCustomCategories] = useState([]);
@@ -45,6 +45,44 @@ export default function QuizGame() {
     }
   }, [session, status]);
 
+  const loadCustomCategories = async () => {
+    if (!session) return;
+    
+    try {
+      const res = await fetch('/api/user');
+      if (res.ok) {
+        const user = await res.json();
+        console.log('Loaded custom categories from user:', user.customQuizCategories);
+        setPreviousCustomCategories(user.customQuizCategories || []);
+      }
+    } catch (error) {
+      console.error('Failed to load custom categories:', error);
+    }
+  };
+
+  const deleteCustomCategory = async (categoryToDelete) => {
+    if (!session) return;
+    
+    try {
+      const updatedCategories = previousCustomCategories.filter(cat => cat !== categoryToDelete);
+      
+      const res = await fetch('/api/user', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          customQuizCategories: updatedCategories
+        })
+      });
+      
+      if (res.ok) {
+        setPreviousCustomCategories(updatedCategories);
+        console.log('Deleted custom category:', categoryToDelete);
+      }
+    } catch (error) {
+      console.error('Failed to delete custom category:', error);
+    }
+  };
+
   const loadGames = async () => {
     try {
       const res = await fetch('/api/games');
@@ -52,19 +90,9 @@ export default function QuizGame() {
       const quizGames = data.games.filter(g => g.gameType === 'quiz');
       setGames(quizGames);
       
-      // Extract custom categories from all games
-      const allCustomCats = new Set();
-      quizGames.forEach(game => {
-        if (game.quizConfig?.categories) {
-          game.quizConfig.categories.forEach(cat => {
-            if (cat.includes(':')) {
-              allCustomCats.add(cat);
-            }
-          });
-        }
-      });
+      // Load custom categories from user profile
+      await loadCustomCategories();
       
-      setPreviousCustomCategories(Array.from(allCustomCats));
       setScreen(quizGames.length > 0 ? 'games' : 'setup');
     } catch (error) {
       console.error('Failed to load games:', error);
@@ -72,14 +100,16 @@ export default function QuizGame() {
     }
   };
 
-  const handleNewGame = () => {
+  const handleNewGame = async () => {
     setCurrentGame(null);
     setPlayerCount(2);
     setPlayerNames(['Player 1', 'Player 2']);
     setSelectedCategories([]);
     setCustomCategoryName('');
     setCustomCategoryDescription('');
-    setNumberOfQuestions(10);
+    setNumberOfQuestions(5);
+    // Reload custom categories for the new game
+    await loadCustomCategories();
     setScreen('setup');
   };
 
@@ -312,6 +342,32 @@ Return ONLY a JSON array of questions, no additional text or formatting.`;
 
       let game;
       if (session) {
+        // First, save any new custom categories to the user profile
+        const newCustomCategories = selectedCategories
+          .filter(cat => cat.startsWith('custom:') && !previousCustomCategories.includes(cat.replace('custom:', '')))
+          .map(cat => cat.replace('custom:', ''));
+        
+        console.log('New custom categories to save:', newCustomCategories);
+        console.log('Previous custom categories:', previousCustomCategories);
+        
+        if (newCustomCategories.length > 0) {
+          try {
+            const saveRes = await fetch('/api/user', {
+              method: 'PATCH',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                customQuizCategories: [...previousCustomCategories, ...newCustomCategories]
+              })
+            });
+            const saveData = await saveRes.json();
+            console.log('Saved custom categories, response:', saveData);
+            // Reload custom categories
+            await loadCustomCategories();
+          } catch (error) {
+            console.error('Failed to save custom categories:', error);
+          }
+        }
+        
         const res = await fetch('/api/games', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -660,6 +716,7 @@ Return ONLY a JSON array of questions, no additional text or formatting.`;
               isGenerating={isGeneratingQuestion}
               onCreateNewCustom={() => setCreatingNewCustom(true)}
               onBackToPrevious={() => setCreatingNewCustom(false)}
+              onDeleteCustomCategory={deleteCustomCategory}
             />
           )}
 
