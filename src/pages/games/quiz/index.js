@@ -26,6 +26,8 @@ export default function QuizGame() {
   const [numberOfQuestions, setNumberOfQuestions] = useState(10);
   const [difficulty, setDifficulty] = useState('medium');
   const [showCategorySelection, setShowCategorySelection] = useState(false);
+  const [previousCustomCategories, setPreviousCustomCategories] = useState([]);
+  const [creatingNewCustom, setCreatingNewCustom] = useState(false);
   
   // Game play state
   const [playerAnswers, setPlayerAnswers] = useState({});
@@ -49,6 +51,20 @@ export default function QuizGame() {
       const data = await res.json();
       const quizGames = data.games.filter(g => g.gameType === 'quiz');
       setGames(quizGames);
+      
+      // Extract custom categories from all games
+      const allCustomCats = new Set();
+      quizGames.forEach(game => {
+        if (game.quizConfig?.categories) {
+          game.quizConfig.categories.forEach(cat => {
+            if (cat.includes(':')) {
+              allCustomCats.add(cat);
+            }
+          });
+        }
+      });
+      
+      setPreviousCustomCategories(Array.from(allCustomCats));
       setScreen(quizGames.length > 0 ? 'games' : 'setup');
     } catch (error) {
       console.error('Failed to load games:', error);
@@ -100,15 +116,47 @@ export default function QuizGame() {
         hard: 'very challenging questions for experienced players'
       };
       
-      const categoryInstructions = categoriesToUse.map(cat => {
-        if (cat.toLowerCase().includes('riddles')) {
-          return 'For Riddles questions: Create actual riddles (clever word puzzles to solve), not questions about riddles. Examples: "I speak without a mouth and hear without ears. What am I?" (Answer: an echo), or "What has keys but no locks, space but no room, and you can enter but not go inside?" (Answer: a keyboard).';
+      // Pre-process category-specific instructions
+      // Add category-specific instructions here as needed
+      const categoryInstructionMap = {
+        'Brain Teasers': 'Create fun word games that use lateral thinking and clever wordplay. These should be puzzles that require creative thinking and looking at problems from different angles to solve. Examples: riddles, puns, word play, or problems that have surprising solutions.',
+      };
+      
+      // Check if any categories need special instructions
+      const specialInstructions = categoriesToUse
+        .map(cat => {
+          // Check exact match first
+          if (categoryInstructionMap[cat]) {
+            return categoryInstructionMap[cat];
+          }
+          // Check if the category contains any key term
+          const matchingKey = Object.keys(categoryInstructionMap).find(key => 
+            cat.toLowerCase().includes(key.toLowerCase()) || key.toLowerCase().includes(cat.toLowerCase())
+          );
+          return matchingKey ? categoryInstructionMap[matchingKey] : null;
+        })
+        .filter(Boolean);
+      
+      // Handle custom categories that have format "Topic: Description"
+      const processedCategories = categoriesToUse.map(cat => {
+        if (cat.includes(':')) {
+          const [topic, description] = cat.split(':').map(s => s.trim());
+          return { name: topic, description: description };
         }
-        return null;
-      }).filter(Boolean);
+        return { name: cat, description: null };
+      });
+      
+      const categoriesText = processedCategories.map(cat => 
+        cat.description ? `${cat.name} (${cat.description})` : cat.name
+      ).join(', ');
+      
+      const customInstructions = processedCategories
+        .filter(cat => cat.description)
+        .map(cat => `For "${cat.name}" category: Focus on questions about ${cat.description}. All questions in this category should be specifically about this topic.`)
+        .join('\n  • ');
       
       const prompt = `Generate ${numQuestions || numberOfQuestions} challenging multiple choice quiz questions in pub quiz style with the following specifications:
-- Categories: ${categoriesToUse.join(', ')}
+- Categories: ${categoriesText}
 - ${categoriesToUse.length > 1 ? `Generate approximately ${questionsPerCategory} questions per category` : 'Generate all questions for this category'}
 - Each question should have exactly 5 options (A, B, C, D, E)
 - Difficulty level: ${difficultyInstructions[difficultyLevel]}
@@ -117,7 +165,8 @@ export default function QuizGame() {
 - Avoid obvious or too-easy questions
 - Include one correct answer and four very plausible distractors
 - Questions should test actual knowledge, not trivial facts
-${categoryInstructions.length > 0 ? '- SPECIAL INSTRUCTIONS: ' + categoryInstructions.join('. ') : ''}
+${customInstructions ? '\n- CUSTOM CATEGORY INSTRUCTIONS:\n  • ' + customInstructions : ''}
+${specialInstructions.length > 0 ? '\n- SPECIAL CATEGORY INSTRUCTIONS:\n' + specialInstructions.map(inst => `  • ${inst}`).join('\n') : ''}
 
 For each question, provide the following in JSON format:
 {
@@ -237,12 +286,15 @@ Return ONLY a JSON array of questions, no additional text or formatting.`;
 
   const handleStartGame = async () => {
     try {
-      const categoriesToSave = selectedCategories.map(cat => {
-        if (cat === 'custom') {
-          return `${customCategoryName}: ${customCategoryDescription}`;
-        }
-        return CATEGORIES.find(c => c.id === cat)?.name || cat;
-      });
+      const categoriesToSave = selectedCategories
+        .filter(cat => cat !== 'custom') // Remove plain 'custom' from selected categories
+        .map(cat => {
+          if (cat.startsWith('custom:')) {
+            // Extract the actual category name (remove 'custom:' prefix)
+            return cat.replace('custom:', '');
+          }
+          return CATEGORIES.find(c => c.id === cat)?.name || cat;
+        });
 
       const gameData = {
         gameType: 'quiz',
@@ -490,6 +542,8 @@ Return ONLY a JSON array of questions, no additional text or formatting.`;
               quizConfig: updatedGame.quizConfig
             })
           });
+          // Reload games to update custom categories list
+          await loadGames();
         } catch (error) {
           console.error('Failed to save game:', error);
         }
@@ -563,6 +617,8 @@ Return ONLY a JSON array of questions, no additional text or formatting.`;
               customCategoryDescription={customCategoryDescription}
               numberOfQuestions={numberOfQuestions}
               difficulty={difficulty}
+              previousCustomCategories={previousCustomCategories}
+              creatingNewCustom={creatingNewCustom}
               onPlayerCountChange={(count) => {
                 setPlayerCount(count);
                 setPlayerNames(Array.from({ length: count }, (_, i) => `Player ${i + 1}`));
@@ -574,15 +630,23 @@ Return ONLY a JSON array of questions, no additional text or formatting.`;
               }}
               onCategoryToggle={(categoryId) => {
                 if (categoryId === 'custom') {
+                  // Toggle the custom category section
+                  if (selectedCategories.includes('custom')) {
+                    setSelectedCategories(prev => prev.filter(c => c !== 'custom' && !c.startsWith('custom:')));
+                  } else {
+                    setSelectedCategories(prev => [...prev, 'custom']);
+                  }
+                } else if (categoryId.startsWith('custom:')) {
+                  // Previous custom category selected
                   setSelectedCategories(prev => 
-                    prev.includes('custom') 
-                      ? prev.filter(c => c !== 'custom')
-                      : [...prev, 'custom']
+                    prev.includes(categoryId)
+                      ? prev.filter(c => c !== categoryId)
+                      : [...prev, categoryId]
                   );
                 } else {
                   setSelectedCategories(prev => 
                     prev.includes(categoryId)
-                      ? prev.filter(c => c !== categoryId && c !== 'custom')
+                      ? prev.filter(c => c !== categoryId)
                       : [...prev, categoryId]
                   );
                 }
@@ -594,6 +658,8 @@ Return ONLY a JSON array of questions, no additional text or formatting.`;
               onStart={handleStartGame}
               onBack={() => session ? loadGames() : router.push('/')}
               isGenerating={isGeneratingQuestion}
+              onCreateNewCustom={() => setCreatingNewCustom(true)}
+              onBackToPrevious={() => setCreatingNewCustom(false)}
             />
           )}
 

@@ -7,7 +7,7 @@ export const CATEGORIES = [
   { id: 'history', name: 'History', icon: '🏛️' },
   { id: 'geography', name: 'Geography', icon: '🌍' },
   { id: 'science', name: 'Science', icon: '🧪' },
-  { id: 'logic', name: 'Riddles', icon: '🧩' },
+  { id: 'brain-teasers', name: 'Brain Teasers', icon: '🧩' },
   { id: 'custom', name: 'Custom', icon: '✨' }
 ];
 

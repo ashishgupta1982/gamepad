@@ -3,15 +3,11 @@ import { CATEGORIES, DIFFICULTY_LEVELS } from '@/data/quizConstants';
 
 export default function SetupScreen({ 
   playerCount, playerNames, selectedCategories, customCategoryName, customCategoryDescription,
-  numberOfQuestions, difficulty, onPlayerCountChange, onPlayerNameChange, onCategoryToggle,
+  numberOfQuestions, difficulty, previousCustomCategories, creatingNewCustom,
+  onPlayerCountChange, onPlayerNameChange, onCategoryToggle,
   onCustomCategoryNameChange, onCustomCategoryDescriptionChange, onNumberOfQuestionsChange,
-  onDifficultyChange, onStart, onBack, isGenerating 
+  onDifficultyChange, onStart, onBack, isGenerating, onCreateNewCustom, onBackToPrevious
 }) {
-  const [showCustomInput, setShowCustomInput] = useState(false);
-
-  useEffect(() => {
-    setShowCustomInput(selectedCategories.includes('custom'));
-  }, [selectedCategories]);
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -145,26 +141,122 @@ export default function SetupScreen({
           </div>
         </div>
 
-        {/* Custom Category Input */}
-        {showCustomInput && (
+        {/* Custom Categories Section */}
+        {selectedCategories.includes('custom') && (
           <div className="bg-purple-50 rounded-xl p-4 mb-6 border-2 border-purple-300">
-            <h3 className="text-sm font-bold text-purple-700 mb-3">✨ Custom Category</h3>
-            <div className="space-y-2">
-              <input
-                type="text"
-                value={customCategoryName}
-                onChange={(e) => onCustomCategoryNameChange(e.target.value)}
-                placeholder="Category name"
-                className="w-full px-3 py-2 rounded-lg border-2 border-purple-300 focus:border-purple-500 focus:outline-none text-sm bg-white"
-              />
-              <input
-                type="text"
-                value={customCategoryDescription}
-                onChange={(e) => onCustomCategoryDescriptionChange(e.target.value)}
-                placeholder="Description (optional)"
-                className="w-full px-3 py-2 rounded-lg border-2 border-purple-300 focus:border-purple-500 focus:outline-none text-sm bg-white"
-              />
-            </div>
+            <h3 className="text-sm font-bold text-purple-700 mb-3">✨ Custom Categories</h3>
+            
+            {/* Show currently selected custom categories */}
+            {selectedCategories.filter(c => c.startsWith('custom:') && !previousCustomCategories.includes(c.replace('custom:', ''))).length > 0 && (
+              <div className="mb-3">
+                <p className="text-xs text-purple-600 mb-2">Selected for this game:</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  {selectedCategories
+                    .filter(c => c.startsWith('custom:') && !previousCustomCategories.includes(c.replace('custom:', '')))
+                    .map((cat, idx) => {
+                      const catString = cat.replace('custom:', '');
+                      const [name, desc] = catString.includes(':') ? catString.split(':') : [catString, ''];
+                    return (
+                      <div
+                        key={idx}
+                        className="text-left px-3 py-2 rounded-lg border-2 bg-white border-purple-500 shadow-md text-sm flex justify-between items-center"
+                      >
+                        <div>
+                          <div className="font-semibold text-slate-700">{name}</div>
+                          {desc && <div className="text-xs text-slate-500">{desc}</div>}
+                        </div>
+                        <button
+                          onClick={() => onCategoryToggle(cat)}
+                          className="text-red-500 hover:text-red-700 ml-2"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    );
+                    })}
+                </div>
+              </div>
+            )}
+            
+            {/* Show either previous categories OR create new form */}
+            {previousCustomCategories.length > 0 && !creatingNewCustom ? (
+              /* Previous Custom Categories */
+              <div className="mb-3">
+                <p className="text-xs text-purple-600 mb-2">Select from your previous categories:</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                  {previousCustomCategories.map((cat, idx) => {
+                    const [name, desc] = cat.includes(':') ? cat.split(':') : [cat, ''];
+                    return (
+                      <button
+                        key={idx}
+                        onClick={() => onCategoryToggle(`custom:${cat}`)}
+                        className={`
+                          text-left px-3 py-2 rounded-lg border-2 transition-all text-sm
+                          ${selectedCategories.includes(`custom:${cat}`)
+                            ? 'bg-white border-purple-500 shadow-md'
+                            : 'bg-white border-purple-200 hover:border-purple-300'
+                          }
+                        `}
+                      >
+                        <div className="font-semibold text-slate-700">{name}</div>
+                        {desc && <div className="text-xs text-slate-500">{desc}</div>}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            ) : (
+              /* Create New Custom Category */
+              <div className="mb-3">
+                <div className="space-y-2">
+                  <input
+                    type="text"
+                    value={customCategoryName}
+                    onChange={(e) => onCustomCategoryNameChange(e.target.value)}
+                    placeholder="Category name (e.g., Harry Potter)"
+                    className="w-full px-3 py-2 rounded-lg border-2 border-purple-300 focus:border-purple-500 focus:outline-none text-sm bg-white"
+                  />
+                  <input
+                    type="text"
+                    value={customCategoryDescription}
+                    onChange={(e) => onCustomCategoryDescriptionChange(e.target.value)}
+                    placeholder="Topic to ask about (e.g., Books and films)"
+                    className="w-full px-3 py-2 rounded-lg border-2 border-purple-300 focus:border-purple-500 focus:outline-none text-sm bg-white"
+                  />
+                </div>
+                <button
+                  onClick={() => {
+                    if (customCategoryName) {
+                      onCategoryToggle(`custom:${customCategoryName}: ${customCategoryDescription}`);
+                      onCustomCategoryNameChange('');
+                      onCustomCategoryDescriptionChange('');
+                    }
+                  }}
+                  className="mt-2 px-4 py-1 bg-white border-2 border-purple-400 rounded-lg text-sm font-semibold text-purple-600 hover:bg-purple-100 transition-all"
+                >
+                  ✓ Add Custom Category
+                </button>
+                {/* Button to go back to previous categories */}
+                {previousCustomCategories.length > 0 && (
+                  <button
+                    onClick={onBackToPrevious}
+                    className="mt-2 text-xs text-purple-600 hover:text-purple-700 font-semibold block"
+                  >
+                    ← Back to categories
+                  </button>
+                )}
+              </div>
+            )}
+            
+            {/* Toggle button when viewing previous categories to create new */}
+            {previousCustomCategories.length > 0 && !creatingNewCustom && (
+              <button
+                onClick={onCreateNewCustom}
+                className="text-xs text-purple-600 hover:text-purple-700 font-semibold"
+              >
+                + Create new custom category
+              </button>
+            )}
           </div>
         )}
 
