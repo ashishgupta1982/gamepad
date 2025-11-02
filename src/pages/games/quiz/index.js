@@ -742,6 +742,8 @@ Return ONLY a JSON array of questions, no additional text or formatting.`;
               onStartNewRound={handleStartNewRound}
               onEndGame={handleEndGame}
               onBack={() => router.push('/')}
+              previousCustomCategories={previousCustomCategories}
+              session={session}
             />
           )}
         </div>

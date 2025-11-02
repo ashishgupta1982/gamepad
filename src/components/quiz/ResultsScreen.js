@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { CATEGORIES, DIFFICULTY_LEVELS } from '@/data/quizConstants';
 
-export default function ResultsScreen({ game, onStartNewRound, onEndGame, onBack, onCategorySelect }) {
+export default function ResultsScreen({ game, onStartNewRound, onEndGame, onBack, onCategorySelect, previousCustomCategories = [], session }) {
   const [showCategorySelection, setShowCategorySelection] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [difficulty, setDifficulty] = useState(game.quizConfig.difficulty || 'medium');
+  const [customCategoryName, setCustomCategoryName] = useState('');
+  const [customCategoryDescription, setCustomCategoryDescription] = useState('');
+  const [creatingNewCustom, setCreatingNewCustom] = useState(false);
 
   const playersWithScores = game.players.map((player, index) => ({
     ...player,
@@ -19,28 +22,39 @@ export default function ResultsScreen({ game, onStartNewRound, onEndGame, onBack
     if (categoryId === 'custom') {
       setSelectedCategories(prev => 
         prev.includes('custom') 
-          ? prev.filter(c => c !== 'custom')
+          ? prev.filter(c => c !== 'custom' && !c.startsWith('custom:'))
           : [...prev, 'custom']
+      );
+    } else if (categoryId.startsWith('custom:')) {
+      setSelectedCategories(prev => 
+        prev.includes(categoryId)
+          ? prev.filter(c => c !== categoryId)
+          : [...prev, categoryId]
       );
     } else {
       setSelectedCategories(prev => 
         prev.includes(categoryId)
-          ? prev.filter(c => c !== categoryId && c !== 'custom')
+          ? prev.filter(c => c !== categoryId && !c.startsWith('custom:'))
           : [...prev, categoryId]
       );
     }
   };
 
   const handleStartRound = () => {
-    if (selectedCategories.length === 0) {
+    if (selectedCategories.length === 0 || (selectedCategories.includes('custom') && selectedCategories.filter(c => c !== 'custom').length === 0)) {
       alert('Please select at least one category');
       return;
     }
     
-    const categoriesToSave = selectedCategories.map(cat => {
-      if (cat === 'custom') return 'Custom';
-      return CATEGORIES.find(c => c.id === cat)?.name || cat;
-    });
+    const categoriesToSave = selectedCategories
+      .filter(cat => cat !== 'custom') // Remove plain 'custom' from selected categories
+      .map(cat => {
+        if (cat.startsWith('custom:')) {
+          // Extract the actual category name (remove 'custom:' prefix)
+          return cat.replace('custom:', '');
+        }
+        return CATEGORIES.find(c => c.id === cat)?.name || cat;
+      });
     
     onStartNewRound(categoriesToSave, difficulty);
   };
@@ -72,6 +86,121 @@ export default function ResultsScreen({ game, onStartNewRound, onEndGame, onBack
               ))}
             </div>
           </div>
+
+          {/* Custom Categories Section */}
+          {selectedCategories.includes('custom') && (
+            <div className="mb-6 bg-purple-50 rounded-xl p-4 border-2 border-purple-300">
+              <h3 className="text-sm font-bold text-purple-700 mb-3">✨ Custom Categories</h3>
+              
+              {/* Show currently selected custom categories */}
+              {selectedCategories.filter(c => c.startsWith('custom:') && !previousCustomCategories.includes(c.replace('custom:', ''))).length > 0 && (
+                <div className="mb-3">
+                  <p className="text-xs text-purple-600 mb-2">Selected for this game:</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {selectedCategories
+                      .filter(c => c.startsWith('custom:') && !previousCustomCategories.includes(c.replace('custom:', '')))
+                      .map((cat, idx) => {
+                        const catString = cat.replace('custom:', '');
+                        const [name, desc] = catString.includes(':') ? catString.split(':') : [catString, ''];
+                        return (
+                          <div
+                            key={idx}
+                            className="text-left px-3 py-2 rounded-lg border-2 bg-white border-purple-500 shadow-md text-sm flex justify-between items-center"
+                          >
+                            <div>
+                              <div className="font-semibold text-slate-700">{name}</div>
+                              {desc && <div className="text-xs text-slate-500">{desc}</div>}
+                            </div>
+                            <button
+                              onClick={() => handleCategoryToggle(cat)}
+                              className="text-red-500 hover:text-red-700 ml-2"
+                            >
+                              ×
+                            </button>
+                          </div>
+                        );
+                      })}
+                  </div>
+                </div>
+              )}
+              
+              {/* Show either previous categories OR create new form */}
+              {previousCustomCategories.length > 0 && !creatingNewCustom ? (
+                <div className="mb-3">
+                  <p className="text-xs text-purple-600 mb-2">Select from your previous categories:</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    {previousCustomCategories.map((cat, idx) => {
+                      const [name, desc] = cat.includes(':') ? cat.split(':') : [cat, ''];
+                      return (
+                        <button
+                          key={idx}
+                          onClick={() => handleCategoryToggle(`custom:${cat}`)}
+                          className={`
+                            text-left px-3 py-2 rounded-lg border-2 transition-all text-sm
+                            ${selectedCategories.includes(`custom:${cat}`)
+                              ? 'bg-white border-purple-500 shadow-md'
+                              : 'bg-white border-purple-200 hover:border-purple-300'
+                            }
+                          `}
+                        >
+                          <div className="font-semibold text-slate-700">{name}</div>
+                          {desc && <div className="text-xs text-slate-500">{desc}</div>}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : (
+                <div className="mb-3">
+                  <div className="space-y-2">
+                    <input
+                      type="text"
+                      value={customCategoryName}
+                      onChange={(e) => setCustomCategoryName(e.target.value)}
+                      placeholder="Category name (e.g., Harry Potter)"
+                      className="w-full px-3 py-2 rounded-lg border-2 border-purple-300 focus:border-purple-500 focus:outline-none text-sm bg-white"
+                    />
+                    <input
+                      type="text"
+                      value={customCategoryDescription}
+                      onChange={(e) => setCustomCategoryDescription(e.target.value)}
+                      placeholder="Topic to ask about (e.g., Books and films)"
+                      className="w-full px-3 py-2 rounded-lg border-2 border-purple-300 focus:border-purple-500 focus:outline-none text-sm bg-white"
+                    />
+                  </div>
+                  <button
+                    onClick={() => {
+                      if (customCategoryName) {
+                        handleCategoryToggle(`custom:${customCategoryName}: ${customCategoryDescription}`);
+                        setCustomCategoryName('');
+                        setCustomCategoryDescription('');
+                      }
+                    }}
+                    className="mt-2 px-4 py-1 bg-white border-2 border-purple-400 rounded-lg text-sm font-semibold text-purple-600 hover:bg-purple-100 transition-all"
+                  >
+                    ✓ Add Custom Category
+                  </button>
+                  {previousCustomCategories.length > 0 && (
+                    <button
+                      onClick={() => setCreatingNewCustom(false)}
+                      className="mt-2 text-xs text-purple-600 hover:text-purple-700 font-semibold block ml-2"
+                    >
+                      ← Back to categories
+                    </button>
+                  )}
+                </div>
+              )}
+              
+              {previousCustomCategories.length > 0 && !creatingNewCustom && (
+                <button
+                  onClick={() => setCreatingNewCustom(true)}
+                  className="text-xs text-purple-600 hover:text-purple-700 font-semibold"
+                >
+                  + Create new custom category
+                </button>
+              )}
+            </div>
+          )}
 
           <div className="mb-6">
             <label className="text-sm font-semibold text-slate-700 mb-3 block">Difficulty</label>
