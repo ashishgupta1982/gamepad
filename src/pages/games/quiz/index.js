@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import ProfessionalHeader from '@/components/ProfessionalHeader';
@@ -35,19 +35,9 @@ export default function QuizGame() {
   const [isGeneratingQuestion, setIsGeneratingQuestion] = useState(false);
   const [notification, setNotification] = useState(null);
 
-  useEffect(() => {
-    if (status === 'loading') return;
-
-    if (session) {
-      loadGames();
-    } else {
-      setScreen('setup');
-    }
-  }, [session, status]);
-
-  const loadCustomCategories = async () => {
+  const loadCustomCategories = useCallback(async () => {
     if (!session) return;
-    
+
     try {
       const res = await fetch('/api/user');
       if (res.ok) {
@@ -58,14 +48,41 @@ export default function QuizGame() {
     } catch (error) {
       console.error('Failed to load custom categories:', error);
     }
-  };
+  }, [session]);
+
+  const loadGames = useCallback(async () => {
+    try {
+      const res = await fetch('/api/games');
+      const data = await res.json();
+      const quizGames = data.games.filter(g => g.gameType === 'quiz');
+      setGames(quizGames);
+
+      // Load custom categories from user profile
+      await loadCustomCategories();
+
+      setScreen(quizGames.length > 0 ? 'games' : 'setup');
+    } catch (error) {
+      console.error('Failed to load games:', error);
+      setScreen('setup');
+    }
+  }, [loadCustomCategories]);
+
+  useEffect(() => {
+    if (status === 'loading') return;
+
+    if (session) {
+      loadGames();
+    } else {
+      setScreen('setup');
+    }
+  }, [session, status, loadGames]);
 
   const deleteCustomCategory = async (categoryToDelete) => {
     if (!session) return;
-    
+
     try {
       const updatedCategories = previousCustomCategories.filter(cat => cat !== categoryToDelete);
-      
+
       const res = await fetch('/api/user', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
@@ -73,30 +90,13 @@ export default function QuizGame() {
           customQuizCategories: updatedCategories
         })
       });
-      
+
       if (res.ok) {
         setPreviousCustomCategories(updatedCategories);
         console.log('Deleted custom category:', categoryToDelete);
       }
     } catch (error) {
       console.error('Failed to delete custom category:', error);
-    }
-  };
-
-  const loadGames = async () => {
-    try {
-      const res = await fetch('/api/games');
-      const data = await res.json();
-      const quizGames = data.games.filter(g => g.gameType === 'quiz');
-      setGames(quizGames);
-      
-      // Load custom categories from user profile
-      await loadCustomCategories();
-      
-      setScreen(quizGames.length > 0 ? 'games' : 'setup');
-    } catch (error) {
-      console.error('Failed to load games:', error);
-      setScreen('setup');
     }
   };
 
