@@ -2,49 +2,15 @@ import { useState, useEffect, useRef } from 'react';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { Button } from './ui/button';
-import { useTeamsContext } from '../hooks/useTeamsContext';
 
 export default function Header({ showBackButton = false, onBackClick }) {
   const { data: session } = useSession();
-  const { isTeams } = useTeamsContext();
   const router = useRouter();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const [teamsUser, setTeamsUser] = useState(null);
 
-  // Fetch Teams user session on mount (client-side)
-  useEffect(() => {
-    if (isTeams) {
-      // Check if we have a Teams session by trying to fetch user data
-      fetch('/api/user')
-        .then(res => res.ok ? res.json() : null)
-        .then(data => {
-          if (data?.user) {
-            setTeamsUser(data.user);
-          }
-        })
-        .catch(() => {
-          // No Teams session
-          setTeamsUser(null);
-        });
-    }
-  }, [isTeams]);
-
-  // Determine which user session to use
-  const user = session?.user || teamsUser;
-  const isAuthenticated = !!(session || teamsUser);
-
-  const handleSignOut = async () => {
-    if (isTeams && teamsUser) {
-      // Sign out from Teams session
-      await fetch('/api/auth/teams-signout', { method: 'POST' });
-      setTeamsUser(null);
-      router.push('/signin');
-    } else {
-      // Sign out from NextAuth session
-      signOut();
-    }
-  };
+  const user = session?.user;
+  const isAuthenticated = !!session;
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -124,7 +90,7 @@ export default function Header({ showBackButton = false, onBackClick }) {
                     </button>
                     {isAuthenticated ? (
                       <button
-                        onClick={() => { handleSignOut(); setDropdownOpen(false); }}
+                        onClick={() => { signOut(); setDropdownOpen(false); }}
                         className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
                       >
                         Sign Out

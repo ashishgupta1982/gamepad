@@ -1,5 +1,9 @@
 {
   "permissions": {
+    "allow": [
+      "Bash(cd:*)",
+      "Bash(npm uninstall:*)"
+    ],
     "defaultMode": "acceptEdits"
   }
 }

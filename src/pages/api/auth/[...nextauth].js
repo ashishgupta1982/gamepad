@@ -1,6 +1,5 @@
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
-import AzureADProvider from 'next-auth/providers/azure-ad';
 import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
 import clientPromise from '../../../lib/mongodb-adapter';
 import User from '../../../models/User';
@@ -11,24 +10,6 @@ export const authOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
-    }),
-    AzureADProvider({
-      clientId: process.env.AZURE_AD_CLIENT_ID,
-      clientSecret: process.env.AZURE_AD_CLIENT_SECRET,
-      tenantId: process.env.AZURE_AD_TENANT_ID || "common", // Use "common" for multi-tenant
-      authorization: {
-        params: {
-          scope: "openid email profile User.Read",
-        },
-      },
-      profile(profile) {
-        return {
-          id: profile.sub,
-          name: profile.name,
-          email: profile.email,
-          image: profile.picture,
-        };
-      },
     }),
   ],
   adapter: MongoDBAdapter(clientPromise),

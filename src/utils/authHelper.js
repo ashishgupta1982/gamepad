@@ -1,42 +1,25 @@
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
-import { getTeamsSession } from './teamsSession';
 
 /**
- * Unified authentication helper that supports both NextAuth and Teams sessions
+ * Authentication helper using NextAuth sessions
  *
  * @param {Object} req - Next.js request object
  * @param {Object} res - Next.js response object
- * @returns {Promise<Object|null>} User object with { email, name, id, role, sessionType } or null
+ * @returns {Promise<Object|null>} User object with { email, name, id, role } or null
  */
 export async function getAuthenticatedUser(req, res) {
-  // First, try to get NextAuth session (for web users)
-  const nextAuthSession = await getServerSession(req, res, authOptions);
+  const session = await getServerSession(req, res, authOptions);
 
-  if (nextAuthSession?.user) {
+  if (session?.user) {
     return {
-      email: nextAuthSession.user.email,
-      name: nextAuthSession.user.name,
-      id: nextAuthSession.user.id,
-      role: nextAuthSession.user.role,
-      sessionType: 'nextauth'
+      email: session.user.email,
+      name: session.user.name,
+      id: session.user.id,
+      role: session.user.role,
     };
   }
 
-  // If no NextAuth session, try Teams session
-  const teamsSession = getTeamsSession(req);
-
-  if (teamsSession) {
-    return {
-      email: teamsSession.email,
-      name: teamsSession.name,
-      id: teamsSession.id,
-      role: teamsSession.role,
-      sessionType: 'teams'
-    };
-  }
-
-  // No valid session found
   return null;
 }
 

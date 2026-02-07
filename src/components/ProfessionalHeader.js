@@ -2,44 +2,15 @@ import { useState, useEffect, useRef } from 'react';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { Button } from './ui/button';
-import { useTeamsContext } from '../hooks/useTeamsContext';
 
 export default function ProfessionalHeader({ showBackButton = false, onBackClick, hideProfileAndSettings = false }) {
   const { data: session } = useSession();
-  const { isTeams } = useTeamsContext();
   const router = useRouter();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const [teamsUser, setTeamsUser] = useState(null);
 
-  // Fetch Teams user session on mount (client-side)
-  useEffect(() => {
-    if (isTeams) {
-      fetch('/api/user')
-        .then(res => res.ok ? res.json() : null)
-        .then(data => {
-          if (data?.user) {
-            setTeamsUser(data.user);
-          }
-        })
-        .catch(() => {
-          setTeamsUser(null);
-        });
-    }
-  }, [isTeams]);
-
-  const user = session?.user || teamsUser;
-  const isAuthenticated = !!(session || teamsUser);
-
-  const handleSignOut = async () => {
-    if (isTeams && teamsUser) {
-      await fetch('/api/auth/teams-signout', { method: 'POST' });
-      setTeamsUser(null);
-      router.push('/signin');
-    } else {
-      signOut();
-    }
-  };
+  const user = session?.user;
+  const isAuthenticated = !!session;
 
 
   // Close dropdown when clicking outside
@@ -129,7 +100,7 @@ export default function ProfessionalHeader({ showBackButton = false, onBackClick
                       </button>
                       {isAuthenticated ? (
                         <button
-                          onClick={() => { handleSignOut(); setDropdownOpen(false); }}
+                          onClick={() => { signOut(); setDropdownOpen(false); }}
                           className="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors flex items-center"
                         >
                           <svg className="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">

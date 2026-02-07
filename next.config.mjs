@@ -13,16 +13,16 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://accounts.google.com https://apis.google.com https://res.cdn.office.net",
+              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://accounts.google.com https://apis.google.com",
               "style-src 'self' 'unsafe-inline' https://accounts.google.com https://fonts.googleapis.com",
               "img-src 'self' data: blob: https: http:",
               "font-src 'self' https://fonts.gstatic.com",
-              "connect-src 'self' https://accounts.google.com https://api.anthropic.com https://oauth2.googleapis.com https://login.microsoftonline.com https://graph.microsoft.com",
+              "connect-src 'self' https://accounts.google.com https://api.anthropic.com https://oauth2.googleapis.com",
               "frame-src 'self' https://accounts.google.com",
               "object-src 'none'",
               "base-uri 'self'",
               "form-action 'self'",
-              "frame-ancestors 'self' https://teams.microsoft.com https://*.teams.microsoft.com https://*.office.com",
+              "frame-ancestors 'self'",
               "upgrade-insecure-requests"
             ].join('; '),
           },
@@ -31,7 +31,7 @@ const nextConfig = {
             key: 'Strict-Transport-Security',
             value: 'max-age=31536000; includeSubDomains; preload'
           },
-          // Prevents clickjacking attacks (SAMEORIGIN allows Teams embedding)
+          // Prevents clickjacking attacks
           {
             key: 'X-Frame-Options',
             value: 'SAMEORIGIN'

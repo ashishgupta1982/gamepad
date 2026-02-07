@@ -55,60 +55,56 @@ export default function Home() {
         <ProfessionalHeader />
 
         {/* Hero Section */}
-        <section className="pt-20 pb-12 px-6">
-          <div className="max-w-6xl mx-auto text-center">
-            <div className="mb-8">
-              <h1 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-4">
-                🎮 Gamepad
-              </h1>
-              <p className="text-2xl text-slate-700 font-medium">
-                Fun Games for the Whole Family!
-              </p>
-            </div>
+        <section className="pt-16 pb-6 px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-2">
+              Fun Games for the Family
+            </h1>
+            <p className="text-base text-slate-500 font-medium">
+              Pick a game and start playing!
+            </p>
 
             {session ? (
-              <p className="text-lg text-slate-600 mb-12">
-                Welcome back, {session.user.name}! Your game progress is saved automatically.
+              <p className="text-sm text-slate-500 mt-3">
+                Welcome back, {session.user.name}!
               </p>
             ) : (
-              <div className="mb-12 p-6 bg-white/60 backdrop-blur-sm rounded-2xl max-w-2xl mx-auto border border-purple-200">
-                <p className="text-lg text-slate-700 mb-3">
-                  👋 Sign in to save your game progress!
-                </p>
-                <p className="text-slate-600">
-                  Play as a guest or sign in to keep your scores and resume games later.
+              <div className="mt-4 mb-2 px-4 py-3 bg-white/60 backdrop-blur-sm rounded-xl max-w-md mx-auto border border-purple-100 flex items-center gap-2">
+                <span className="text-sm">👋</span>
+                <p className="text-sm text-slate-600">
+                  Sign in to save progress, or play as guest.
                 </p>
               </div>
             )}
 
             {/* Game Selection Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 max-w-3xl mx-auto mt-6">
               {games.map((game) => (
                 <div
                   key={game.id}
                   onClick={() => game.available && handleGameClick(game.id)}
                   className={`
-                    relative overflow-hidden rounded-3xl p-8
-                    transform transition-all duration-300
+                    relative overflow-hidden rounded-xl p-4 md:p-5
+                    transform transition-all duration-200
                     ${game.available
-                      ? 'cursor-pointer hover:scale-105 hover:shadow-2xl'
-                      : 'opacity-60 cursor-not-allowed'
+                      ? 'cursor-pointer hover:scale-[1.03] hover:shadow-lg active:scale-[0.98]'
+                      : 'opacity-50 cursor-not-allowed'
                     }
                   `}
                 >
                   <div className={`absolute inset-0 bg-gradient-to-br ${game.color} opacity-90`}></div>
 
-                  <div className="relative z-10 text-white">
-                    <div className="text-6xl mb-4">{game.icon}</div>
-                    <h3 className="text-2xl font-bold mb-3">{game.name}</h3>
-                    <p className="text-white/90 leading-relaxed">
+                  <div className="relative z-10 text-white text-center">
+                    <div className="text-3xl md:text-4xl mb-2">{game.icon}</div>
+                    <h3 className="text-sm md:text-base font-bold mb-1">{game.name}</h3>
+                    <p className="text-white/80 text-xs leading-snug hidden md:block">
                       {game.description}
                     </p>
 
                     {game.available && (
-                      <div className="mt-6">
-                        <span className="inline-block bg-white text-purple-600 font-semibold px-6 py-2 rounded-full">
-                          Play Now →
+                      <div className="mt-3">
+                        <span className="inline-block bg-white/20 backdrop-blur-sm text-white font-semibold text-xs px-3 py-1.5 rounded-full border border-white/30">
+                          Play Now
                         </span>
                       </div>
                     )}
@@ -120,10 +116,10 @@ export default function Home() {
         </section>
 
         {/* Footer */}
-        <footer className="py-8 px-6 bg-slate-900 text-white mt-20">
-          <div className="max-w-6xl mx-auto text-center">
-            <p className="text-slate-400">
-              © 2024 Gamepad. Have fun playing! 🎉
+        <footer className="py-4 px-4 bg-slate-900 text-white mt-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <p className="text-xs text-slate-400">
+              &copy; 2024 Gamepad
             </p>
           </div>
         </footer>
