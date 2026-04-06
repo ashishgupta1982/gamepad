@@ -32,6 +32,9 @@ const GameSchema = new mongoose.Schema({
     difficulty: String,
     currentQuestionIndex: { type: Number, default: 0 },
     currentRound: { type: Number, default: 1 },
+    mode: { type: String, enum: ['same-device', 'multi-device'], default: 'same-device' },
+    timePerQuestion: { type: Number, default: 20 },
+    scoringType: { type: String, enum: ['speed', 'classic'], default: 'speed' },
     rounds: [{
       roundNumber: Number,
       categories: [String],
@@ -49,6 +52,14 @@ const GameSchema = new mongoose.Schema({
       correctAnswer: Number,
       explanation: String,
       category: String
+    }],
+    playerStats: [{
+      name: String,
+      totalScore: { type: Number, default: 0 },
+      correctCount: { type: Number, default: 0 },
+      avgResponseTime: { type: Number, default: 0 },
+      bestStreak: { type: Number, default: 0 },
+      pointsPerQuestion: [Number]
     }]
   },
   status: {

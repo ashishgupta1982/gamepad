@@ -1,49 +1,86 @@
 import Head from 'next/head';
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import ProfessionalHeader from '@/components/ProfessionalHeader';
-import { CATEGORIES } from '@/data/quizConstants';
-import GamesListScreen from '@/components/quiz/GamesListScreen';
-import SetupScreen from '@/components/quiz/SetupScreen';
+import { CATEGORIES, AVATAR_EMOJIS, AVATAR_COLORS, GAME_MODES } from '@/data/quizConstants';
+import useQuizTimer from '@/hooks/useQuizTimer';
+import useQuizScoring from '@/hooks/useQuizScoring';
+
+import QuizHome from '@/components/quiz/QuizHome';
+import CategoryPicker from '@/components/quiz/CategoryPicker';
+import PlayerSetup from '@/components/quiz/PlayerSetup';
+import GameSettings from '@/components/quiz/GameSettings';
 import WaitingScreen from '@/components/quiz/WaitingScreen';
-import PlayScreen from '@/components/quiz/PlayScreen';
-import ResultsScreen from '@/components/quiz/ResultsScreen';
+import QuestionDisplay from '@/components/quiz/QuestionDisplay';
+import SameDeviceAnswerZones from '@/components/quiz/SameDeviceAnswerZones';
+import QuestionResult from '@/components/quiz/QuestionResult';
+import LiveScoreboard from '@/components/quiz/LiveScoreboard';
+import FinalPodium from '@/components/quiz/FinalPodium';
+import GameHistory from '@/components/quiz/GameHistory';
+import LeaderboardView from '@/components/quiz/LeaderboardView';
+
+// Multi-device components
+import HostLobby from '@/components/quiz/HostLobby';
+import JoinScreen from '@/components/quiz/JoinScreen';
+import PlayerLobby from '@/components/quiz/PlayerLobby';
+
+/*
+ * Screen flow:
+ * home -> setup -> waiting -> question -> question-result -> scoreboard -> (loop or) podium
+ *                                                                          -> leaderboard
+ * Multi-device host: home -> setup -> host-lobby -> question -> ...
+ * Multi-device player: join -> player-lobby -> player-question -> ...
+ */
 
 export default function QuizGame() {
   const { data: session, status } = useSession();
   const router = useRouter();
+
+  // --- Screen state ---
   const [screen, setScreen] = useState('loading');
-  const [games, setGames] = useState([]);
-  const [currentGame, setCurrentGame] = useState(null);
-  
-  // Setup state
-  const [playerCount, setPlayerCount] = useState(2);
-  const [playerNames, setPlayerNames] = useState(['Player 1', 'Player 2']);
+  const [gameMode, setGameMode] = useState(GAME_MODES.SAME_DEVICE);
+
+  // --- Setup state ---
+  const [players, setPlayers] = useState([
+    { name: 'Player 1', avatar: AVATAR_EMOJIS[0], avatarColor: AVATAR_COLORS[0] },
+    { name: 'Player 2', avatar: AVATAR_EMOJIS[1], avatarColor: AVATAR_COLORS[1] }
+  ]);
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [customCategoryName, setCustomCategoryName] = useState('');
-  const [customCategoryDescription, setCustomCategoryDescription] = useState('');
-  const [numberOfQuestions, setNumberOfQuestions] = useState(5);
+  const [customCategories, setCustomCategories] = useState([]);
+  const [questionCount, setQuestionCount] = useState(10);
   const [difficulty, setDifficulty] = useState('medium');
-  const [showCategorySelection, setShowCategorySelection] = useState(false);
-  const [previousCustomCategories, setPreviousCustomCategories] = useState([]);
-  const [creatingNewCustom, setCreatingNewCustom] = useState(false);
-  
-  // Game play state
+  const [timePerQuestion, setTimePerQuestion] = useState(20);
+
+  // --- Game state ---
+  const [currentGame, setCurrentGame] = useState(null);
+  const [questions, setQuestions] = useState([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [playerAnswers, setPlayerAnswers] = useState({});
-  const [showAnswer, setShowAnswer] = useState(false);
-  const [isGeneratingQuestion, setIsGeneratingQuestion] = useState(false);
+  const [revealed, setRevealed] = useState(false);
+  const [gamePlayers, setGamePlayers] = useState([]);
   const [notification, setNotification] = useState(null);
+  const [games, setGames] = useState([]);
+
+  // --- Multi-device state ---
+  const [roomCode, setRoomCode] = useState(null);
+  const [playerId, setPlayerId] = useState(null);
+  const [isHost, setIsHost] = useState(false);
+
+  // --- Hooks ---
+  const { calculatePoints } = useQuizScoring();
+  const timer = useQuizTimer(timePerQuestion, handleTimeUp);
+  const timerStartRef = useRef(null);
+
+  // ─── Data loading ───
 
   const loadCustomCategories = useCallback(async () => {
     if (!session) return;
-
     try {
       const res = await fetch('/api/user');
       if (res.ok) {
         const user = await res.json();
-        console.log('Loaded custom categories from user:', user.customQuizCategories);
-        setPreviousCustomCategories(user.customQuizCategories || []);
+        setCustomCategories(user.customQuizCategories || []);
       }
     } catch (error) {
       console.error('Failed to load custom categories:', error);
@@ -54,77 +91,412 @@ export default function QuizGame() {
     try {
       const res = await fetch('/api/games');
       const data = await res.json();
-      const quizGames = data.games.filter(g => g.gameType === 'quiz');
-      setGames(quizGames);
-
-      // Load custom categories from user profile
-      await loadCustomCategories();
-
-      setScreen(quizGames.length > 0 ? 'games' : 'setup');
+      setGames(data.games?.filter(g => g.gameType === 'quiz') || []);
     } catch (error) {
       console.error('Failed to load games:', error);
-      setScreen('setup');
     }
-  }, [loadCustomCategories]);
+  }, []);
 
   useEffect(() => {
     if (status === 'loading') return;
-
     if (session) {
       loadGames();
-    } else {
-      setScreen('setup');
+      loadCustomCategories();
     }
-  }, [session, status, loadGames]);
+    setScreen('home');
+  }, [session, status, loadGames, loadCustomCategories]);
 
-  const deleteCustomCategory = async (categoryToDelete) => {
-    if (!session) return;
+  // ─── Question generation ───
+
+  const generateQuestions = async () => {
+    const categoriesToUse = selectedCategories.map(cat => {
+      if (cat.startsWith('custom:')) return cat.replace('custom:', '');
+      return CATEGORIES.find(c => c.id === cat)?.name || cat;
+    });
+
+    if (categoriesToUse.length === 0) categoriesToUse.push('General Knowledge');
+
+    const questionsPerCategory = Math.ceil(questionCount / categoriesToUse.length);
+
+    const difficultyInstructions = {
+      easy: 'kids ages 5-10 with simple, fun questions',
+      medium: 'teenagers and adults with intermediate questions',
+      hard: 'very challenging expert-level questions'
+    };
+
+    const categoryInstructionMap = {
+      'Brain Teasers': 'Create fun puzzles using lateral thinking and clever wordplay. These should require creative thinking.',
+    };
+
+    const processedCategories = categoriesToUse.map(cat => {
+      if (cat.includes(':')) {
+        const [topic, desc] = cat.split(':').map(s => s.trim());
+        return { name: topic, description: desc };
+      }
+      return { name: cat, description: null };
+    });
+
+    const categoriesText = processedCategories.map(c =>
+      c.description ? `${c.name} (${c.description})` : c.name
+    ).join(', ');
+
+    const customInstructions = processedCategories
+      .filter(c => c.description)
+      .map(c => `For "${c.name}": Focus specifically on ${c.description}.`)
+      .join('\n  ');
+
+    const specialInstructions = categoriesToUse
+      .map(cat => categoryInstructionMap[cat])
+      .filter(Boolean)
+      .join('\n  ');
+
+    const prompt = `Generate ${questionCount} multiple choice quiz questions:
+- Categories: ${categoriesText}
+${categoriesToUse.length > 1 ? `- ~${questionsPerCategory} questions per category` : ''}
+- Each question has exactly 4 options (A, B, C, D)
+- Difficulty: ${difficultyInstructions[difficulty]}
+- Make questions engaging and interesting - pub quiz quality
+- Distractors should be very plausible
+- Vary the position of the correct answer
+${customInstructions ? `- CUSTOM INSTRUCTIONS:\n  ${customInstructions}` : ''}
+${specialInstructions ? `- SPECIAL INSTRUCTIONS:\n  ${specialInstructions}` : ''}
+
+Return ONLY a JSON array:
+[{"question":"...","options":["A","B","C","D"],"correctAnswer":0,"category":"...","explanation":"..."}]`;
+
+    const response = await fetch('/api/claude', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt, useCache: false })
+    });
+
+    if (!response.ok) throw new Error('Failed to generate questions');
+
+    const result = await response.json();
+    let parsed = tryParseJSON(result);
+    if (!parsed) throw new Error('Failed to parse questions');
+    if (!Array.isArray(parsed)) parsed = [parsed];
+
+    // Validate and fix: ensure 4 options
+    return parsed.map(q => ({
+      ...q,
+      options: (q.options || []).slice(0, 4),
+      correctAnswer: Math.min(q.correctAnswer || 0, 3)
+    }));
+  };
+
+  function tryParseJSON(text) {
+    const cleaned = String(text).replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+    const arrayMatch = cleaned.match(/\[[\s\S]*\]/);
+    if (arrayMatch) {
+      try {
+        let json = arrayMatch[0].replace(/,(\s*[}\]])/g, '$1');
+        return JSON.parse(json);
+      } catch (e) { /* fall through */ }
+    }
+    return null;
+  }
+
+  // ─── Game lifecycle ───
+
+  const handleStartGame = async () => {
+    setScreen('waiting');
 
     try {
-      const updatedCategories = previousCustomCategories.filter(cat => cat !== categoryToDelete);
+      // Save new custom categories
+      const newCustom = selectedCategories
+        .filter(c => c.startsWith('custom:') && !customCategories.includes(c.replace('custom:', '')))
+        .map(c => c.replace('custom:', ''));
 
-      const res = await fetch('/api/user', {
-        method: 'PATCH',
+      if (newCustom.length > 0 && session) {
+        await fetch('/api/user', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ customQuizCategories: [...customCategories, ...newCustom] })
+        });
+        setCustomCategories(prev => [...prev, ...newCustom]);
+      }
+
+      const qs = await generateQuestions();
+      setQuestions(qs);
+      setCurrentQuestionIndex(0);
+
+      // Initialize game players with scoring
+      const gp = players.map((p, i) => ({
+        id: `local-${i}`,
+        name: p.name,
+        avatar: p.avatar,
+        avatarColor: p.avatarColor,
+        score: 0,
+        streak: 0,
+        answers: []
+      }));
+      setGamePlayers(gp);
+
+      // Save game to DB
+      const categoriesToSave = selectedCategories.map(cat => {
+        if (cat.startsWith('custom:')) return cat.replace('custom:', '');
+        return CATEGORIES.find(c => c.id === cat)?.name || cat;
+      });
+
+      let game = null;
+      if (session) {
+        const res = await fetch('/api/games', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            gameType: 'quiz',
+            players: gp.map(p => p.name),
+            quizConfig: {
+              categories: categoriesToSave,
+              totalQuestions: questionCount,
+              difficulty,
+              mode: gameMode,
+              timePerQuestion,
+              scoringType: 'speed',
+              currentQuestionIndex: 0,
+              currentRound: 1,
+              questions: qs
+            }
+          })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          game = data.game;
+        }
+      }
+
+      if (!game) {
+        game = { _id: 'guest', gameType: 'quiz' };
+      }
+      setCurrentGame(game);
+
+      // Start the first question
+      setPlayerAnswers({});
+      setRevealed(false);
+      setScreen('question');
+      timerStartRef.current = Date.now();
+      timer.start();
+    } catch (error) {
+      console.error('Failed to start game:', error);
+      showNotification('Failed to generate questions. Please try again.');
+      setScreen('setup');
+    }
+  };
+
+  const handleStartMultiDeviceGame = async () => {
+    setScreen('waiting');
+    try {
+      const qs = await generateQuestions();
+      setQuestions(qs);
+      setCurrentQuestionIndex(0);
+
+      // Save new custom categories
+      const newCustom = selectedCategories
+        .filter(c => c.startsWith('custom:') && !customCategories.includes(c.replace('custom:', '')))
+        .map(c => c.replace('custom:', ''));
+      if (newCustom.length > 0 && session) {
+        await fetch('/api/user', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ customQuizCategories: [...customCategories, ...newCustom] })
+        });
+        setCustomCategories(prev => [...prev, ...newCustom]);
+      }
+
+      const categoriesToSave = selectedCategories.map(cat => {
+        if (cat.startsWith('custom:')) return cat.replace('custom:', '');
+        return CATEGORIES.find(c => c.id === cat)?.name || cat;
+      });
+
+      // Create room
+      const res = await fetch('/api/quiz/rooms', {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          customQuizCategories: updatedCategories
+          settings: {
+            categories: categoriesToSave,
+            difficulty,
+            questionCount,
+            timePerQuestion
+          },
+          questions: qs
         })
       });
 
-      if (res.ok) {
-        setPreviousCustomCategories(updatedCategories);
-        console.log('Deleted custom category:', categoryToDelete);
-      }
+      if (!res.ok) throw new Error('Failed to create room');
+      const data = await res.json();
+      setRoomCode(data.roomCode);
+      setIsHost(true);
+      setGamePlayers([]);
+      setScreen('host-lobby');
     } catch (error) {
-      console.error('Failed to delete custom category:', error);
+      console.error('Failed to create room:', error);
+      showNotification('Failed to create game room. Please try again.');
+      setScreen('setup');
     }
   };
 
-  const handleNewGame = async () => {
-    setCurrentGame(null);
-    setPlayerCount(2);
-    setPlayerNames(['Player 1', 'Player 2']);
-    setSelectedCategories([]);
-    setCustomCategoryName('');
-    setCustomCategoryDescription('');
-    setNumberOfQuestions(5);
-    // Reload custom categories for the new game
-    await loadCustomCategories();
+  // ─── Answer handling ───
+
+  function handleTimeUp() {
+    // Auto-reveal when time runs out
+    if (!revealed) {
+      handleReveal();
+    }
+  }
+
+  const handlePlayerAnswer = (playerIdx, answerIdx) => {
+    if (revealed || playerAnswers[playerIdx] !== undefined) return;
+
+    const timeMs = Date.now() - (timerStartRef.current || Date.now());
+    setPlayerAnswers(prev => ({
+      ...prev,
+      [playerIdx]: { answer: answerIdx, timeMs }
+    }));
+
+    // Auto-reveal if all players answered
+    const totalAnswered = Object.keys(playerAnswers).length + 1;
+    if (totalAnswered >= gamePlayers.length) {
+      setTimeout(() => handleReveal(), 300);
+    }
+  };
+
+  const handleReveal = () => {
+    timer.stop();
+    setRevealed(true);
+
+    const question = questions[currentQuestionIndex];
+    const totalTimeMs = timePerQuestion * 1000;
+
+    const updatedPlayers = gamePlayers.map((player, idx) => {
+      const answer = playerAnswers[idx];
+      const selectedOption = answer?.answer;
+      const timeMs = answer?.timeMs || totalTimeMs;
+      const correct = selectedOption === question.correctAnswer;
+
+      const { points, streak } = calculatePoints(correct, timeMs, totalTimeMs, player.streak);
+
+      return {
+        ...player,
+        score: player.score + points,
+        streak: correct ? streak : 0,
+        answers: [
+          ...player.answers,
+          {
+            questionIndex: currentQuestionIndex,
+            selectedOption,
+            timeMs,
+            correct,
+            points
+          }
+        ]
+      };
+    });
+
+    setGamePlayers(updatedPlayers);
+
+    // Save to DB
+    if (session && currentGame?._id !== 'guest') {
+      fetch(`/api/games/${currentGame._id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          players: updatedPlayers.map(p => ({
+            name: p.name,
+            scores: p.answers.map(a => a.points),
+            roundScores: [p.score]
+          })),
+          quizConfig: {
+            currentQuestionIndex
+          }
+        })
+      }).catch(e => console.error('Failed to save:', e));
+    }
+  };
+
+  const handleShowScoreboard = () => {
+    setScreen('scoreboard');
+  };
+
+  const handleNextQuestion = () => {
+    const nextIdx = currentQuestionIndex + 1;
+
+    if (nextIdx >= questions.length) {
+      handleGameEnd();
+      return;
+    }
+
+    setCurrentQuestionIndex(nextIdx);
+    setPlayerAnswers({});
+    setRevealed(false);
+    setScreen('question');
+    timerStartRef.current = Date.now();
+    timer.start();
+  };
+
+  const handleGameEnd = async () => {
+    // Mark game complete
+    if (session && currentGame?._id !== 'guest') {
+      fetch(`/api/games/${currentGame._id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          status: 'completed',
+          quizConfig: {
+            playerStats: gamePlayers.map(p => ({
+              name: p.name,
+              totalScore: p.score,
+              correctCount: p.answers.filter(a => a.correct).length,
+              avgResponseTime: p.answers.length > 0
+                ? p.answers.reduce((sum, a) => sum + (a.timeMs || 0), 0) / p.answers.length
+                : 0,
+              bestStreak: Math.max(...p.answers.reduce((streaks, a, i) => {
+                if (a.correct) {
+                  streaks.push((streaks.length > 0 ? streaks[streaks.length - 1] : 0) + 1);
+                } else {
+                  streaks.push(0);
+                }
+                return streaks;
+              }, [0]), 0),
+              pointsPerQuestion: p.answers.map(a => a.points)
+            }))
+          }
+        })
+      }).catch(e => console.error('Failed to save final:', e));
+
+      // Save player stats
+      fetch('/api/quiz/stats', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          gameId: currentGame._id,
+          players: gamePlayers,
+          categories: selectedCategories.map(cat => {
+            if (cat.startsWith('custom:')) return cat.replace('custom:', '');
+            return CATEGORIES.find(c => c.id === cat)?.name || cat;
+          })
+        })
+      }).catch(e => console.error('Failed to save stats:', e));
+    }
+
+    setScreen('podium');
+  };
+
+  const handlePlayAgain = () => {
+    setCurrentQuestionIndex(0);
+    setPlayerAnswers({});
+    setRevealed(false);
+    setGamePlayers(prev => prev.map(p => ({ ...p, score: 0, streak: 0, answers: [] })));
     setScreen('setup');
   };
 
-  const handleContinueGame = (game) => {
-    setCurrentGame(game);
-    if (game.quizConfig && game.quizConfig.questions && game.quizConfig.questions.length > 0) {
-      setScreen('play');
-    } else {
-      setScreen('waiting');
-    }
+  const handleEndGame = () => {
+    router.push('/');
   };
 
   const handleDeleteGame = async (gameId) => {
-    if (!confirm('Are you sure you want to delete this game?')) return;
-
+    if (!confirm('Delete this game?')) return;
     try {
       await fetch(`/api/games/${gameId}`, { method: 'DELETE' });
       loadGames();
@@ -133,500 +505,110 @@ export default function QuizGame() {
     }
   };
 
-  const generateQuestions = async (categories = null, numQuestions = null, diffLevel = null) => {
-    setIsGeneratingQuestion(true);
+  const handleContinueGame = (game) => {
+    setCurrentGame(game);
+    const config = game.quizConfig || {};
+    if (config.questions?.length > 0) {
+      setQuestions(config.questions);
+      setCurrentQuestionIndex(config.currentQuestionIndex || 0);
+      setTimePerQuestion(config.timePerQuestion || 20);
+      setGamePlayers(game.players?.map((p, i) => ({
+        id: `local-${i}`,
+        name: p.name,
+        avatar: AVATAR_EMOJIS[i % AVATAR_EMOJIS.length],
+        avatarColor: AVATAR_COLORS[i % AVATAR_COLORS.length],
+        score: (p.scores || []).reduce((s, v) => s + v, 0),
+        streak: 0,
+        answers: []
+      })) || []);
+      setPlayerAnswers({});
+      setRevealed(false);
+      setScreen('question');
+      timerStartRef.current = Date.now();
+      timer.start();
+    }
+  };
+
+  const handleToggleCategory = (catId) => {
+    setSelectedCategories(prev =>
+      prev.includes(catId) ? prev.filter(c => c !== catId) : [...prev, catId]
+    );
+  };
+
+  const handleAddCustomCategory = (catString) => {
+    const catId = `custom:${catString}`;
+    setSelectedCategories(prev => [...prev, catId]);
+  };
+
+  const handleDeleteCustomCategory = async (cat) => {
+    if (!session) return;
+    const updated = customCategories.filter(c => c !== cat);
     try {
-      const categoriesToUse = categories || (selectedCategories.length > 0 ? selectedCategories : ['General Knowledge']);
-      const difficultyLevel = diffLevel || difficulty;
-      const questionsPerCategory = Math.ceil((numQuestions || numberOfQuestions) / categoriesToUse.length);
-      
-      const difficultyInstructions = {
-        easy: 'kids ages 5-10 with simple questions',
-        medium: 'teenagers and adults with intermediate level questions',
-        hard: 'very challenging questions for experienced players'
-      };
-      
-      // Pre-process category-specific instructions
-      // Add category-specific instructions here as needed
-      const categoryInstructionMap = {
-        'Brain Teasers': 'Create fun word games that use lateral thinking and clever wordplay. These should be puzzles that require creative thinking and looking at problems from different angles to solve. Examples: riddles, puns, word play, or problems that have surprising solutions.',
-      };
-      
-      // Check if any categories need special instructions
-      const specialInstructions = categoriesToUse
-        .map(cat => {
-          // Check exact match first
-          if (categoryInstructionMap[cat]) {
-            return categoryInstructionMap[cat];
-          }
-          // Check if the category contains any key term
-          const matchingKey = Object.keys(categoryInstructionMap).find(key => 
-            cat.toLowerCase().includes(key.toLowerCase()) || key.toLowerCase().includes(cat.toLowerCase())
-          );
-          return matchingKey ? categoryInstructionMap[matchingKey] : null;
-        })
-        .filter(Boolean);
-      
-      // Handle custom categories that have format "Topic: Description"
-      const processedCategories = categoriesToUse.map(cat => {
-        if (cat.includes(':')) {
-          const [topic, description] = cat.split(':').map(s => s.trim());
-          return { name: topic, description: description };
-        }
-        return { name: cat, description: null };
+      await fetch('/api/user', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ customQuizCategories: updated })
       });
-      
-      const categoriesText = processedCategories.map(cat => 
-        cat.description ? `${cat.name} (${cat.description})` : cat.name
-      ).join(', ');
-      
-      const customInstructions = processedCategories
-        .filter(cat => cat.description)
-        .map(cat => `For "${cat.name}" category: Focus on questions about ${cat.description}. All questions in this category should be specifically about this topic.`)
-        .join('\n  • ');
-      
-      const prompt = `Generate ${numQuestions || numberOfQuestions} challenging multiple choice quiz questions in pub quiz style with the following specifications:
-- Categories: ${categoriesText}
-- ${categoriesToUse.length > 1 ? `Generate approximately ${questionsPerCategory} questions per category` : 'Generate all questions for this category'}
-- Each question should have exactly 5 options (A, B, C, D, E)
-- Difficulty level: ${difficultyInstructions[difficultyLevel]}
-- Questions should be testing and challenging - the kind you'd find at a difficult pub quiz
-- Make distractors very plausible and close to the correct answer
-- Avoid obvious or too-easy questions
-- Include one correct answer and four very plausible distractors
-- Questions should test actual knowledge, not trivial facts
-${customInstructions ? '\n- CUSTOM CATEGORY INSTRUCTIONS:\n  • ' + customInstructions : ''}
-${specialInstructions.length > 0 ? '\n- SPECIAL CATEGORY INSTRUCTIONS:\n' + specialInstructions.map(inst => `  • ${inst}`).join('\n') : ''}
+      setCustomCategories(updated);
+      setSelectedCategories(prev => prev.filter(c => c !== `custom:${cat}`));
+    } catch (e) {
+      console.error('Failed to delete custom category:', e);
+    }
+  };
 
-For each question, provide the following in JSON format:
-{
-  "question": "The question text here",
-  "options": ["Option A", "Option B", "Option C", "Option D", "Option E"],
-  "correctAnswer": 0,
-  "category": "Category name",
-  "explanation": "An interesting fact or explanation about the answer"
-}
+  // ─── Multi-device handlers ───
 
-Return ONLY a JSON array of questions, no additional text or formatting.`;
+  const handleHostStartGame = () => {
+    // This is called when host starts the game from lobby
+    const gp = gamePlayers.map(p => ({ ...p, score: 0, streak: 0, answers: [] }));
+    setGamePlayers(gp);
+    setCurrentQuestionIndex(0);
+    setPlayerAnswers({});
+    setRevealed(false);
+    setScreen('question');
+    timerStartRef.current = Date.now();
+    timer.start();
 
-      const response = await fetch('/api/claude', {
+    // Notify players via room update
+    if (roomCode) {
+      fetch(`/api/quiz/rooms/${roomCode}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          status: 'question',
+          currentQuestionIndex: 0,
+          questionStartedAt: new Date().toISOString()
+        })
+      }).catch(e => console.error('Failed to update room:', e));
+    }
+  };
+
+  const handleJoinRoom = async (code, playerName, avatar, avatarColor) => {
+    try {
+      const res = await fetch(`/api/quiz/rooms/${code}/join`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt, useCache: false })
+        body: JSON.stringify({ name: playerName, avatar, avatarColor })
       });
-
-      if (!response.ok) {
-        throw new Error('Failed to generate questions');
-      }
-
-      const result = await response.json();
-      
-      // Helper function to safely parse JSON
-      const tryParseJSON = (text) => {
-        let cleaned = text.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
-        
-        // First try to find and parse the JSON array
-        const arrayMatch = cleaned.match(/\[[\s\S]*\]/);
-        if (arrayMatch) {
-          try {
-            let jsonStr = arrayMatch[0];
-            
-            // Fix common JSON issues
-            // Remove trailing commas
-            jsonStr = jsonStr.replace(/,(\s*[}\]])/g, '$1');
-            // Fix unclosed strings
-            jsonStr = jsonStr.replace(/:\s*"([^"]*)"/g, ': "$1"');
-            
-            return JSON.parse(jsonStr);
-          } catch (e) {
-            console.error('Failed to parse matched array:', e);
-            console.error('Problematic JSON:', arrayMatch[0].substring(0, 200));
-          }
-        }
-        
-        // If array parsing failed, try to extract individual question objects
-        const questionPattern = /\{\s*"[^"]+":\s*"[^"]*"[^{}]*\}/g;
-        const questionMatches = cleaned.match(questionPattern);
-        
-        if (questionMatches && questionMatches.length > 0) {
-          const questions = questionMatches.map(match => {
-            try {
-              let fixed = match;
-              
-              // Ensure it's valid JSON
-              fixed = fixed.replace(/,(\s*[}\]])/g, '$1');
-              
-              // Check if all required fields are present
-              const hasQuestion = fixed.includes('"question"');
-              const hasOptions = fixed.includes('"options"');
-              const hasCorrectAnswer = fixed.includes('"correctAnswer"');
-              
-              if (!hasQuestion || !hasOptions || !hasCorrectAnswer) {
-                return null;
-              }
-              
-              // Add missing optional fields
-              if (!fixed.includes('"category"')) {
-                fixed = fixed.replace(/}$/, ', "category": "General"}');
-              }
-              if (!fixed.includes('"explanation"')) {
-                fixed = fixed.replace(/}$/, ', "explanation": ""}');
-              }
-              
-              return JSON.parse(fixed);
-            } catch (e) {
-              console.error('Failed to parse individual question:', e);
-              return null;
-            }
-          }).filter(Boolean);
-          
-          if (questions.length > 0) {
-            return questions;
-          }
-        }
-        
-        return null;
-      };
-      
-      let questions;
-      try {
-        questions = tryParseJSON(result);
-        
-        if (!questions) {
-          throw new Error('Could not extract questions');
-        }
-      } catch (error) {
-        console.error('Failed to parse questions:', error);
-        console.error('Raw response:', result);
-        throw new Error('Failed to generate questions. Please try again.');
-      }
-
-      if (!Array.isArray(questions)) {
-        questions = [questions];
-      }
-
-      return questions;
+      if (!res.ok) throw new Error('Failed to join');
+      const data = await res.json();
+      setRoomCode(code);
+      setPlayerId(data.playerId);
+      setIsHost(false);
+      setScreen('player-lobby');
     } catch (error) {
-      console.error('Error generating questions:', error);
-      throw error;
-    } finally {
-      setIsGeneratingQuestion(false);
+      showNotification('Failed to join room. Check the code and try again.');
     }
   };
 
-  const handleStartGame = async () => {
-    try {
-      const categoriesToSave = selectedCategories
-        .filter(cat => cat !== 'custom') // Remove plain 'custom' from selected categories
-        .map(cat => {
-          if (cat.startsWith('custom:')) {
-            // Extract the actual category name (remove 'custom:' prefix)
-            return cat.replace('custom:', '');
-          }
-          return CATEGORIES.find(c => c.id === cat)?.name || cat;
-        });
-
-      const gameData = {
-        gameType: 'quiz',
-        players: playerNames, // API expects array of strings
-        quizConfig: {
-          categories: categoriesToSave,
-          totalQuestions: numberOfQuestions,
-          difficulty: difficulty,
-          currentQuestionIndex: 0,
-          currentRound: 1,
-          rounds: [],
-          questions: []
-        }
-      };
-
-      let game;
-      if (session) {
-        // First, save any new custom categories to the user profile
-        const newCustomCategories = selectedCategories
-          .filter(cat => cat.startsWith('custom:') && !previousCustomCategories.includes(cat.replace('custom:', '')))
-          .map(cat => cat.replace('custom:', ''));
-        
-        console.log('New custom categories to save:', newCustomCategories);
-        console.log('Previous custom categories:', previousCustomCategories);
-        
-        if (newCustomCategories.length > 0) {
-          try {
-            const saveRes = await fetch('/api/user', {
-              method: 'PATCH',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                customQuizCategories: [...previousCustomCategories, ...newCustomCategories]
-              })
-            });
-            const saveData = await saveRes.json();
-            console.log('Saved custom categories, response:', saveData);
-            // Reload custom categories
-            await loadCustomCategories();
-          } catch (error) {
-            console.error('Failed to save custom categories:', error);
-          }
-        }
-        
-        const res = await fetch('/api/games', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(gameData)
-        });
-        
-        if (!res.ok) {
-          throw new Error(`Failed to create game: ${res.status}`);
-        }
-        
-        const data = await res.json();
-        game = data?.game;
-        
-        if (!game) {
-          console.error('Game creation failed, response:', data);
-          throw new Error('Failed to create game - no game returned from API');
-        }
-        
-        // Ensure quizConfig exists in the returned game
-        if (!game.quizConfig) {
-          game.quizConfig = gameData.quizConfig;
-        }
-      } else {
-        game = {
-          _id: 'guest',
-          gameType: 'quiz',
-          players: playerNames.map(name => ({ name, scores: [], roundScores: [] })),
-          quizConfig: {
-            categories: categoriesToSave,
-            totalQuestions: numberOfQuestions,
-            difficulty: difficulty,
-            currentQuestionIndex: 0,
-            currentRound: 1,
-            rounds: [],
-            questions: []
-          }
-        };
-      }
-
-      setCurrentGame(game);
-      setScreen('waiting');
-      
-      const questions = await generateQuestions();
-      
-      const updatedGame = {
-        ...game,
-        quizConfig: {
-          ...game.quizConfig,
-          questions: questions
-        }
-      };
-
-      setCurrentGame(updatedGame);
-
-      if (session && game._id !== 'guest') {
-        try {
-          await fetch(`/api/games/${game._id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-              quizConfig: {
-                ...updatedGame.quizConfig,
-                rounds: [
-                  {
-                    roundNumber: updatedGame.quizConfig.currentRound || 1,
-                    categories: categoriesToSave,
-                    questions: questions
-                  }
-                ]
-              },
-              players: updatedGame.players
-            })
-          });
-        } catch (error) {
-          console.error('Failed to save game:', error);
-        }
-      }
-
-      setScreen('play');
-    } catch (error) {
-      console.error('Failed to start game:', error);
-      showNotification('Failed to generate questions. Please try again.');
-    }
-  };
+  // ─── Notifications ───
 
   const showNotification = (message) => {
     setNotification(message);
     setTimeout(() => setNotification(null), 3000);
   };
 
-  const handleSubmitAnswer = (playerIndex, answerIndex) => {
-    setPlayerAnswers({
-      ...playerAnswers,
-      [playerIndex]: answerIndex
-    });
-  };
-
-  const handleRevealAnswer = async () => {
-    setShowAnswer(true);
-    
-    // Calculate and update scores immediately when revealing answer
-    const currentQIndex = currentGame.quizConfig.currentQuestionIndex;
-    const currentQuestion = currentGame.quizConfig.questions[currentQIndex];
-    
-    const updatedPlayers = currentGame.players.map((player, index) => {
-      const playerAnswer = playerAnswers[index];
-      const isCorrect = playerAnswer === currentQuestion.correctAnswer;
-      
-      // Accumulate scores across all rounds
-      const newScores = [...player.scores, isCorrect ? 1 : 0];
-      
-      // Calculate round scores
-      const currentRoundNumber = currentGame.quizConfig.currentRound;
-      const roundScores = player.roundScores || [];
-      
-      // Update round score if this is the first question of the round
-      const updatedRoundScores = [...roundScores];
-      while (updatedRoundScores.length < currentRoundNumber) {
-        updatedRoundScores.push(0);
-      }
-      
-      return {
-        ...player,
-        scores: newScores,
-        roundScores: updatedRoundScores
-      };
-    });
-
-    const updatedGame = {
-      ...currentGame,
-      players: updatedPlayers
-    };
-
-    setCurrentGame(updatedGame);
-
-    // Save to database if logged in
-    if (session && currentGame._id !== 'guest') {
-      try {
-        await fetch(`/api/games/${currentGame._id}`, {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ players: updatedPlayers })
-        });
-      } catch (error) {
-        console.error('Failed to save game:', error);
-      }
-    }
-  };
-
-  const handleNextQuestion = async () => {
-    const currentQIndex = currentGame.quizConfig.currentQuestionIndex;
-    
-    const updatedGame = {
-      ...currentGame,
-      quizConfig: {
-        ...currentGame.quizConfig,
-        currentQuestionIndex: currentQIndex + 1
-      }
-    };
-
-    setCurrentGame(updatedGame);
-    setPlayerAnswers({});
-    setShowAnswer(false);
-
-    if (currentQIndex + 1 >= currentGame.quizConfig.questions.length) {
-      setScreen('results');
-    }
-
-    if (session && currentGame._id !== 'guest') {
-      try {
-        await fetch(`/api/games/${currentGame._id}`, {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ 
-            quizConfig: updatedGame.quizConfig
-          })
-        });
-      } catch (error) {
-        console.error('Failed to save game:', error);
-      }
-    }
-  };
-
-  const handleStartNewRound = async (newCategories = null, newDifficulty = null) => {
-    setShowCategorySelection(false);
-    setScreen('waiting');
-    setPlayerAnswers({});
-    setShowAnswer(false);
-    
-    try {
-      const gameCategories = newCategories || currentGame.quizConfig.categories.map(cat => {
-        if (cat.includes(':')) {
-          return 'Custom';
-        }
-        return cat;
-      });
-      
-      const questions = await generateQuestions(gameCategories, currentGame.quizConfig.totalQuestions, newDifficulty || currentGame.quizConfig.difficulty);
-      const nextRound = currentGame.quizConfig.currentRound + 1;
-      
-      // Keep all existing scores - don't reset!
-      const updatedGame = {
-        ...currentGame,
-        quizConfig: {
-          ...currentGame.quizConfig,
-          currentQuestionIndex: 0,
-          currentRound: nextRound,
-          rounds: [
-            ...(currentGame.quizConfig.rounds || []),
-            {
-              roundNumber: nextRound,
-              categories: gameCategories,
-              questions: questions
-            }
-          ],
-          questions: questions
-        }
-      };
-
-      setCurrentGame(updatedGame);
-
-      if (session && currentGame._id !== 'guest') {
-        try {
-          await fetch(`/api/games/${currentGame._id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-              quizConfig: updatedGame.quizConfig
-            })
-          });
-          // Reload games to update custom categories list
-          await loadGames();
-        } catch (error) {
-          console.error('Failed to save game:', error);
-        }
-      }
-
-      setScreen('play');
-    } catch (error) {
-      console.error('Failed to generate questions:', error);
-      showNotification('Failed to generate new questions. Please try again.');
-      setScreen('results');
-    }
-  };
-
-  const handleEndGame = async () => {
-    if (session && currentGame._id !== 'guest') {
-      try {
-        await fetch(`/api/games/${currentGame._id}`, {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ status: 'completed' })
-        });
-      } catch (error) {
-        console.error('Failed to end game:', error);
-      }
-    }
-    router.push('/');
-  };
+  // ─── Render ───
 
   if (screen === 'loading') {
     return (
@@ -636,6 +618,9 @@ Return ONLY a JSON array of questions, no additional text or formatting.`;
     );
   }
 
+  const currentQuestion = questions[currentQuestionIndex];
+  const allAnswered = Object.keys(playerAnswers).length >= gamePlayers.length && gamePlayers.length > 0;
+
   return (
     <>
       <Head>
@@ -644,106 +629,300 @@ Return ONLY a JSON array of questions, no additional text or formatting.`;
       </Head>
 
       <main className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100">
-        <ProfessionalHeader />
+        {screen !== 'question' && screen !== 'question-result' && screen !== 'scoreboard' && screen !== 'podium' && (
+          <ProfessionalHeader />
+        )}
 
         {notification && (
-          <div className="fixed top-24 left-1/2 transform -translate-x-1/2 z-50 animate-bounce">
-            <div className="bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-8 py-4 rounded-full shadow-2xl text-lg font-bold">
+          <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
+            <div className="bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-6 py-3 rounded-full shadow-2xl text-sm font-bold">
               {notification}
             </div>
           </div>
         )}
 
-        <div className="pt-4 px-4 pb-8">
-          {screen === 'games' && (
-            <GamesListScreen
+        <div className={`${screen === 'question' || screen === 'question-result' || screen === 'scoreboard' || screen === 'podium' ? 'pt-4' : 'pt-2'} px-4 pb-8`}>
+
+          {/* ── HOME ── */}
+          {screen === 'home' && (
+            <QuizHome
               games={games}
-              onNewGame={handleNewGame}
+              onNewGame={() => setScreen('setup')}
               onContinueGame={handleContinueGame}
               onDeleteGame={handleDeleteGame}
+              onJoinGame={() => setScreen('join')}
+              onViewLeaderboard={() => setScreen('leaderboard')}
+              onViewHistory={() => setScreen('history')}
             />
           )}
 
+          {/* ── SETUP ── */}
           {screen === 'setup' && (
-            <SetupScreen
-              playerCount={playerCount}
-              playerNames={playerNames}
-              selectedCategories={selectedCategories}
-              customCategoryName={customCategoryName}
-              customCategoryDescription={customCategoryDescription}
-              numberOfQuestions={numberOfQuestions}
-              difficulty={difficulty}
-              previousCustomCategories={previousCustomCategories}
-              creatingNewCustom={creatingNewCustom}
-              onPlayerCountChange={(count) => {
-                setPlayerCount(count);
-                setPlayerNames(Array.from({ length: count }, (_, i) => `Player ${i + 1}`));
-              }}
-              onPlayerNameChange={(index, name) => {
-                const newNames = [...playerNames];
-                newNames[index] = name;
-                setPlayerNames(newNames);
-              }}
-              onCategoryToggle={(categoryId) => {
-                if (categoryId === 'custom') {
-                  // Toggle the custom category section
-                  if (selectedCategories.includes('custom')) {
-                    setSelectedCategories(prev => prev.filter(c => c !== 'custom' && !c.startsWith('custom:')));
-                  } else {
-                    setSelectedCategories(prev => [...prev, 'custom']);
-                  }
-                } else if (categoryId.startsWith('custom:')) {
-                  // Previous custom category selected
-                  setSelectedCategories(prev => 
-                    prev.includes(categoryId)
-                      ? prev.filter(c => c !== categoryId)
-                      : [...prev, categoryId]
-                  );
-                } else {
-                  setSelectedCategories(prev => 
-                    prev.includes(categoryId)
-                      ? prev.filter(c => c !== categoryId)
-                      : [...prev, categoryId]
-                  );
-                }
-              }}
-              onCustomCategoryNameChange={setCustomCategoryName}
-              onCustomCategoryDescriptionChange={setCustomCategoryDescription}
-              onNumberOfQuestionsChange={setNumberOfQuestions}
-              onDifficultyChange={setDifficulty}
-              onStart={handleStartGame}
-              onBack={() => session ? loadGames() : router.push('/')}
-              isGenerating={isGeneratingQuestion}
-              onCreateNewCustom={() => setCreatingNewCustom(true)}
-              onBackToPrevious={() => setCreatingNewCustom(false)}
-              onDeleteCustomCategory={deleteCustomCategory}
-            />
+            <div className="max-w-2xl mx-auto">
+              <button
+                onClick={() => setScreen('home')}
+                className="mb-4 text-purple-600 hover:text-purple-700 font-semibold text-sm"
+              >
+                ← Back
+              </button>
+
+              <div className="bg-gradient-to-br from-white via-purple-50/30 to-pink-50/30 rounded-3xl p-5 shadow-xl border border-purple-100">
+                <h2 className="text-2xl font-bold text-center mb-5 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+                  Set Up Your Quiz
+                </h2>
+
+                {/* Game mode selector */}
+                <div className="flex gap-2 mb-5">
+                  <button
+                    onClick={() => setGameMode(GAME_MODES.SAME_DEVICE)}
+                    className={`flex-1 p-3 rounded-xl text-sm font-semibold transition-all text-center
+                      ${gameMode === GAME_MODES.SAME_DEVICE
+                        ? 'bg-purple-100 text-purple-700 ring-2 ring-purple-400'
+                        : 'bg-white text-slate-500 border border-slate-200 hover:border-purple-200'
+                      }`}
+                  >
+                    <span className="block text-xl mb-1">📱</span>
+                    Same Device
+                  </button>
+                  <button
+                    onClick={() => setGameMode(GAME_MODES.MULTI_DEVICE)}
+                    className={`flex-1 p-3 rounded-xl text-sm font-semibold transition-all text-center
+                      ${gameMode === GAME_MODES.MULTI_DEVICE
+                        ? 'bg-purple-100 text-purple-700 ring-2 ring-purple-400'
+                        : 'bg-white text-slate-500 border border-slate-200 hover:border-purple-200'
+                      }`}
+                  >
+                    <span className="block text-xl mb-1">🌐</span>
+                    Multi-Device
+                  </button>
+                </div>
+
+                <div className="space-y-5">
+                  <GameSettings
+                    questionCount={questionCount}
+                    onQuestionCountChange={setQuestionCount}
+                    difficulty={difficulty}
+                    onDifficultyChange={setDifficulty}
+                    timePerQuestion={timePerQuestion}
+                    onTimeChange={setTimePerQuestion}
+                  />
+
+                  <CategoryPicker
+                    selectedCategories={selectedCategories}
+                    onToggleCategory={handleToggleCategory}
+                    customCategories={customCategories}
+                    onAddCustomCategory={handleAddCustomCategory}
+                    onDeleteCustomCategory={handleDeleteCustomCategory}
+                  />
+
+                  {gameMode === GAME_MODES.SAME_DEVICE && (
+                    <PlayerSetup
+                      players={players}
+                      onPlayersChange={setPlayers}
+                    />
+                  )}
+                </div>
+
+                {/* Start button */}
+                <button
+                  onClick={gameMode === GAME_MODES.SAME_DEVICE ? handleStartGame : handleStartMultiDeviceGame}
+                  disabled={selectedCategories.length === 0}
+                  className="w-full mt-6 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white
+                             font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all
+                             disabled:opacity-50 disabled:cursor-not-allowed active:scale-98"
+                >
+                  {gameMode === GAME_MODES.SAME_DEVICE ? 'Start Quiz!' : 'Create Room'}
+                </button>
+              </div>
+            </div>
           )}
 
-          {screen === 'waiting' && isGeneratingQuestion && (
+          {/* ── WAITING ── */}
+          {screen === 'waiting' && (
             <WaitingScreen />
           )}
 
-          {screen === 'play' && currentGame && (
-            <PlayScreen
-              game={currentGame}
-              playerAnswers={playerAnswers}
-              showAnswer={showAnswer}
-              onAnswerSelect={handleSubmitAnswer}
-              onRevealAnswer={handleRevealAnswer}
-              onNextQuestion={handleNextQuestion}
-              onBack={() => router.push('/')}
+          {/* ── QUESTION (same-device) ── */}
+          {screen === 'question' && currentQuestion && gameMode === GAME_MODES.SAME_DEVICE && (
+            <div className="max-w-5xl mx-auto">
+              {/* Compact scoreboard */}
+              <LiveScoreboard
+                players={gamePlayers}
+                questionIndex={currentQuestionIndex}
+                totalQuestions={questions.length}
+                compact={true}
+              />
+
+              {/* Question display */}
+              <div className="mb-4">
+                <QuestionDisplay
+                  question={currentQuestion}
+                  questionIndex={currentQuestionIndex}
+                  totalQuestions={questions.length}
+                  timeLeft={timer.timeLeft}
+                  totalTime={timePerQuestion}
+                  revealed={revealed}
+                  disabled={revealed}
+                  category={currentQuestion.category}
+                  selectedAnswer={null}
+                  correctAnswer={revealed ? currentQuestion.correctAnswer : null}
+                  onSelectAnswer={() => {}}
+                />
+              </div>
+
+              {/* Player answer zones */}
+              <SameDeviceAnswerZones
+                players={gamePlayers}
+                options={currentQuestion.options}
+                playerAnswers={Object.fromEntries(
+                  Object.entries(playerAnswers).map(([k, v]) => [k, v.answer])
+                )}
+                onPlayerAnswer={handlePlayerAnswer}
+                revealed={revealed}
+                correctAnswer={currentQuestion.correctAnswer}
+                disabled={revealed}
+              />
+
+              {/* Reveal / Next buttons */}
+              <div className="mt-4 text-center">
+                {!revealed && allAnswered && (
+                  <button
+                    onClick={handleReveal}
+                    className="px-8 py-3 bg-yellow-500 text-white font-bold rounded-xl shadow-lg
+                               hover:bg-yellow-600 transition-all animate-pulse"
+                  >
+                    Reveal Answer!
+                  </button>
+                )}
+                {revealed && (
+                  <button
+                    onClick={handleShowScoreboard}
+                    className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold
+                               rounded-xl shadow-lg hover:shadow-xl transition-all"
+                  >
+                    {currentQuestionIndex + 1 >= questions.length ? 'See Final Results' : 'Continue'}
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* ── QUESTION (multi-device host) ── */}
+          {screen === 'question' && currentQuestion && gameMode === GAME_MODES.MULTI_DEVICE && isHost && (
+            <div className="max-w-3xl mx-auto">
+              <LiveScoreboard
+                players={gamePlayers}
+                questionIndex={currentQuestionIndex}
+                totalQuestions={questions.length}
+                compact={true}
+              />
+              <QuestionDisplay
+                question={currentQuestion}
+                questionIndex={currentQuestionIndex}
+                totalQuestions={questions.length}
+                timeLeft={timer.timeLeft}
+                totalTime={timePerQuestion}
+                revealed={revealed}
+                disabled={true}
+                category={currentQuestion.category}
+                selectedAnswer={null}
+                correctAnswer={revealed ? currentQuestion.correctAnswer : null}
+                onSelectAnswer={() => {}}
+              />
+              <div className="mt-4 text-center text-sm text-slate-500">
+                {Object.keys(playerAnswers).length} / {gamePlayers.length} players answered
+              </div>
+              {revealed && (
+                <div className="mt-4 text-center">
+                  <button
+                    onClick={handleShowScoreboard}
+                    className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold
+                               rounded-xl shadow-lg"
+                  >
+                    Continue
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* ── QUESTION RESULT ── */}
+          {screen === 'question-result' && currentQuestion && (
+            <QuestionResult
+              players={gamePlayers}
+              questionIndex={currentQuestionIndex}
+              question={currentQuestion}
+              onContinue={handleShowScoreboard}
             />
           )}
 
-          {screen === 'results' && currentGame && (
-            <ResultsScreen
-              game={currentGame}
-              onStartNewRound={handleStartNewRound}
+          {/* ── SCOREBOARD ── */}
+          {screen === 'scoreboard' && (
+            <LiveScoreboard
+              players={gamePlayers}
+              questionIndex={currentQuestionIndex}
+              totalQuestions={questions.length}
+              onContinue={currentQuestionIndex + 1 >= questions.length ? handleGameEnd : handleNextQuestion}
+            />
+          )}
+
+          {/* ── FINAL PODIUM ── */}
+          {screen === 'podium' && (
+            <FinalPodium
+              players={gamePlayers}
+              onPlayAgain={handlePlayAgain}
               onEndGame={handleEndGame}
-              onBack={() => router.push('/')}
-              previousCustomCategories={previousCustomCategories}
-              session={session}
+              onViewLeaderboard={() => setScreen('leaderboard')}
+            />
+          )}
+
+          {/* ── HOST LOBBY ── */}
+          {screen === 'host-lobby' && roomCode && (
+            <HostLobby
+              roomCode={roomCode}
+              players={gamePlayers}
+              onStart={handleHostStartGame}
+              onUpdatePlayers={setGamePlayers}
+              onBack={() => setScreen('setup')}
+            />
+          )}
+
+          {/* ── JOIN ── */}
+          {screen === 'join' && (
+            <JoinScreen
+              onJoin={handleJoinRoom}
+              onBack={() => setScreen('home')}
+            />
+          )}
+
+          {/* ── PLAYER LOBBY ── */}
+          {screen === 'player-lobby' && roomCode && (
+            <PlayerLobby
+              roomCode={roomCode}
+              playerId={playerId}
+              onGameStart={(qs, gp) => {
+                setQuestions(qs);
+                setGamePlayers(gp);
+                setCurrentQuestionIndex(0);
+                setScreen('question');
+                timerStartRef.current = Date.now();
+                timer.start();
+              }}
+            />
+          )}
+
+          {/* ── LEADERBOARD ── */}
+          {screen === 'leaderboard' && (
+            <LeaderboardView onBack={() => setScreen(currentGame ? 'podium' : 'home')} />
+          )}
+
+          {/* ── HISTORY ── */}
+          {screen === 'history' && (
+            <GameHistory
+              games={games}
+              onBack={() => setScreen('home')}
+              onContinueGame={handleContinueGame}
+              onDeleteGame={handleDeleteGame}
             />
           )}
         </div>
@@ -751,4 +930,3 @@ Return ONLY a JSON array of questions, no additional text or formatting.`;
     </>
   );
 }
-
