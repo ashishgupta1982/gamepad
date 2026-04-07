@@ -76,13 +76,15 @@ export default function QuizGame() {
   const { calculatePoints } = useQuizScoring();
   const timer = useQuizTimer(timePerQuestion, handleTimeUp);
   const timerStartRef = useRef(null);
+  const playerAnswersRef = useRef({});
+  const pendingScoresRef = useRef(null); // Deferred score updates for same-device mode
 
   // SSE hook for multi-device gameplay (host uses this during question/scoreboard screens)
   const isMultiDevice = gameMode === GAME_MODES.MULTI_DEVICE;
   const multiDeviceActive = isMultiDevice && roomCode &&
     ['question', 'scoreboard', 'question-result', 'podium'].includes(screen);
   const { roomState: hostRoomState } = useQuizRoom(roomCode, isHost && multiDeviceActive);
-  const { roomState: playerRoomState } = useQuizRoom(roomCode, !isHost && isMultiDevice && screen === 'question');
+  const { roomState: playerRoomState } = useQuizRoom(roomCode, !isHost && isMultiDevice && ['question', 'question-result', 'scoreboard', 'podium'].includes(screen));
 
   // Sync gamePlayers and answer count from SSE for host
   useEffect(() => {
@@ -103,8 +105,11 @@ export default function QuizGame() {
             }
           }
 
+          // Defer score sync until 'scores' status so top scoreboard doesn't update early
+          const useServerScore = rs.status === 'scores' || rs.status === 'finished';
           return {
             ...p,
+            score: useServerScore ? p.score : (existing?.score ?? p.score ?? 0),
             answers,
             streak: existing?.streak ?? p.streak ?? 0
           };
@@ -189,13 +194,26 @@ export default function QuizGame() {
             }
           }
 
+          // Defer score sync until 'scores' status
+          const useServerScore = rs.status === 'scores' || rs.status === 'finished';
           return {
             ...p,
+            score: useServerScore ? p.score : (existing?.score ?? p.score ?? 0),
             answers,
             streak: existing?.streak ?? p.streak ?? 0
           };
         });
       });
+    }
+
+    // Transition to question-result when host moves to 'scores' status
+    if (rs.status === 'scores' && screen !== 'question-result' && screen !== 'scoreboard') {
+      setScreen('question-result');
+    }
+
+    // Transition to podium when host finishes the game
+    if (rs.status === 'finished' && screen !== 'podium') {
+      setScreen('podium');
     }
   }, [playerRoomState?.stateVersion, isHost, isMultiDevice]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -277,6 +295,7 @@ export default function QuizGame() {
       .filter(Boolean)
       .join('\n  ');
 
+    const seed = Math.floor(Math.random() * 10000);
     const prompt = `Generate ${questionCount} multiple choice quiz questions:
 - Categories: ${categoriesText}
 ${categoriesToUse.length > 1 ? `- ~${questionsPerCategory} questions per category` : ''}
@@ -285,6 +304,7 @@ ${categoriesToUse.length > 1 ? `- ~${questionsPerCategory} questions per categor
 - Make questions engaging and interesting - pub quiz quality
 - Distractors should be very plausible
 - Vary the position of the correct answer
+- Variety seed: #${seed}. Generate fresh, unique questions. Avoid the most common/obvious questions. Be creative and surprising.
 ${customInstructions ? `- CUSTOM INSTRUCTIONS:\n  ${customInstructions}` : ''}
 ${specialInstructions ? `- SPECIAL INSTRUCTIONS:\n  ${specialInstructions}` : ''}
 
@@ -491,16 +511,18 @@ Return ONLY a JSON array:
   }
 
   const handlePlayerAnswer = (playerIdx, answerIdx) => {
-    if (revealed || playerAnswers[playerIdx] !== undefined) return;
+    if (revealed || playerAnswersRef.current[playerIdx] !== undefined) return;
 
     const timeMs = Date.now() - (timerStartRef.current || Date.now());
+    const answerData = { answer: answerIdx, timeMs };
+    playerAnswersRef.current[playerIdx] = answerData;
     setPlayerAnswers(prev => ({
       ...prev,
-      [playerIdx]: { answer: answerIdx, timeMs }
+      [playerIdx]: answerData
     }));
 
     // Auto-reveal if all players answered
-    const totalAnswered = Object.keys(playerAnswers).length + 1;
+    const totalAnswered = Object.keys(playerAnswersRef.current).length;
     if (totalAnswered >= gamePlayers.length) {
       setTimeout(() => handleReveal(), 300);
     }
@@ -521,21 +543,23 @@ Return ONLY a JSON array:
       return;
     }
 
-    // Same-device: calculate scores locally
+    // Same-device: calculate scores locally but defer score update until scoreboard
     const question = questions[currentQuestionIndex];
     const totalTimeMs = timePerQuestion * 1000;
 
+    const pendingPoints = {};
     const updatedPlayers = gamePlayers.map((player, idx) => {
-      const answer = playerAnswers[idx];
+      const answer = playerAnswersRef.current[idx];
       const selectedOption = answer?.answer;
       const timeMs = answer?.timeMs || totalTimeMs;
       const correct = selectedOption === question.correctAnswer;
 
       const { points, streak } = calculatePoints(correct, timeMs, totalTimeMs, player.streak);
+      pendingPoints[idx] = { points, streak: correct ? streak : 0 };
 
       return {
         ...player,
-        score: player.score + points,
+        // Don't update score yet — defer until scoreboard
         streak: correct ? streak : 0,
         answers: [
           ...player.answers,
@@ -550,28 +574,41 @@ Return ONLY a JSON array:
       };
     });
 
+    pendingScoresRef.current = pendingPoints;
     setGamePlayers(updatedPlayers);
-
-    // Save to DB
-    if (session && currentGame?._id !== 'guest') {
-      fetch(`/api/games/${currentGame._id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          players: updatedPlayers.map(p => ({
-            name: p.name,
-            scores: p.answers.map(a => a.points),
-            roundScores: [p.score]
-          })),
-          quizConfig: {
-            currentQuestionIndex
-          }
-        })
-      }).catch(e => console.error('Failed to save:', e));
-    }
   };
 
   const handleShowScoreboard = () => {
+    // Apply deferred score updates for same-device mode
+    if (!isMultiDevice && pendingScoresRef.current) {
+      const pending = pendingScoresRef.current;
+      setGamePlayers(prev => {
+        const updated = prev.map((player, idx) => {
+          const p = pending[idx];
+          if (!p) return player;
+          return { ...player, score: player.score + p.points };
+        });
+
+        // Save to DB
+        if (session && currentGame?._id !== 'guest') {
+          fetch(`/api/games/${currentGame._id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              players: updated.map(p => ({
+                name: p.name,
+                scores: p.answers.map(a => a.points),
+                roundScores: [p.score]
+              })),
+              quizConfig: { currentQuestionIndex }
+            })
+          }).catch(e => console.error('Failed to save:', e));
+        }
+
+        return updated;
+      });
+      pendingScoresRef.current = null;
+    }
     setScreen('scoreboard');
   };
 
@@ -585,6 +622,7 @@ Return ONLY a JSON array:
 
     setCurrentQuestionIndex(nextIdx);
     setPlayerAnswers({});
+    playerAnswersRef.current = {};
     setRevealed(false);
     setHostAnswered(false);
     setMultiDeviceAnswerCount(0);
@@ -651,12 +689,22 @@ Return ONLY a JSON array:
       }).catch(e => console.error('Failed to save stats:', e));
     }
 
+    // Notify players of game end
+    if (isMultiDevice && isHost && roomCode) {
+      fetch(`/api/quiz/rooms/${roomCode}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: 'finished' })
+      }).catch(e => console.error('Failed to update room:', e));
+    }
+
     setScreen('podium');
   };
 
   const handlePlayAgain = () => {
     setCurrentQuestionIndex(0);
     setPlayerAnswers({});
+    playerAnswersRef.current = {};
     setRevealed(false);
     setGamePlayers(prev => prev.map(p => ({ ...p, score: 0, streak: 0, answers: [] })));
     setScreen('setup');
@@ -1030,7 +1078,17 @@ Return ONLY a JSON array:
               {isHost && revealed && (
                 <div className="mt-4 text-center">
                   <button
-                    onClick={() => setScreen('question-result')}
+                    onClick={() => {
+                      // Notify all players to show scores
+                      if (roomCode) {
+                        fetch(`/api/quiz/rooms/${roomCode}`, {
+                          method: 'PATCH',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ status: 'scores' })
+                        }).catch(e => console.error('Failed to update room:', e));
+                      }
+                      setScreen('question-result');
+                    }}
                     className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold
                                rounded-xl shadow-lg"
                   >
@@ -1053,12 +1111,22 @@ Return ONLY a JSON array:
 
           {/* ── SCOREBOARD ── */}
           {screen === 'scoreboard' && (
-            <LiveScoreboard
-              players={gamePlayers}
-              questionIndex={currentQuestionIndex}
-              totalQuestions={questions.length}
-              onContinue={currentQuestionIndex + 1 >= questions.length ? handleGameEnd : handleNextQuestion}
-            />
+            <>
+              <LiveScoreboard
+                players={gamePlayers}
+                questionIndex={currentQuestionIndex}
+                totalQuestions={questions.length}
+                onContinue={(!isMultiDevice || isHost)
+                  ? (currentQuestionIndex + 1 >= questions.length ? handleGameEnd : handleNextQuestion)
+                  : null
+                }
+              />
+              {isMultiDevice && !isHost && (
+                <div className="mt-4 text-center text-slate-500 text-sm font-medium animate-pulse">
+                  Waiting for host to continue...
+                </div>
+              )}
+            </>
           )}
 
           {/* ── FINAL PODIUM ── */}
