@@ -36,11 +36,12 @@ export default function DartsPage() {
       const res = await fetch('/api/games?gameType=darts');
       if (res.ok) {
         const data = await res.json();
-        setGames(data);
+        const dartsGames = (data.games || []).filter(g => g.gameType === 'darts');
+        setGames(dartsGames);
 
         // Extract unique player names from past games
         const names = new Set();
-        data.forEach(g => {
+        dartsGames.forEach(g => {
           g.players?.forEach(p => {
             if (p.name && !p.name.match(/^Player \d+$/)) {
               names.add(p.name);
@@ -61,7 +62,7 @@ export default function DartsPage() {
 
   const createGame = async (config) => {
     try {
-      const players = playerNames.map(name => ({ name }));
+      const players = playerNames;
       const res = await fetch('/api/games', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -73,9 +74,9 @@ export default function DartsPage() {
         })
       });
       if (res.ok) {
-        const game = await res.json();
-        setCurrentGame(game);
-        return game;
+        const data = await res.json();
+        setCurrentGame(data.game);
+        return data.game;
       }
     } catch (err) {
       console.error('Failed to create game:', err);
