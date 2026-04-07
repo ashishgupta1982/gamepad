@@ -30,8 +30,9 @@ import PlayerLobby from '@/components/quiz/PlayerLobby';
  * Screen flow:
  * home -> setup -> waiting -> question -> question-result -> scoreboard -> (loop or) podium
  *                                                                          -> leaderboard
+ * New round: podium -> round-setup -> waiting -> question -> ...  (scores carry over)
  * Multi-device host: home -> setup -> host-lobby -> question -> ...
- * Multi-device player: join -> player-lobby -> player-question -> ...
+ * Multi-device player: join -> player-lobby -> question -> ...  (auto-advances via SSE)
  */
 
 export default function QuizGame() {
@@ -710,6 +711,73 @@ Return ONLY a JSON array:
     setScreen('setup');
   };
 
+  const handleNewRound = () => {
+    setCurrentQuestionIndex(0);
+    setPlayerAnswers({});
+    playerAnswersRef.current = {};
+    pendingScoresRef.current = null;
+    setRevealed(false);
+    setHostAnswered(false);
+    setMultiDeviceAnswerCount(0);
+    // Keep gamePlayers with their scores
+    setScreen('round-setup');
+  };
+
+  const handleStartNewRound = async () => {
+    setScreen('waiting');
+    try {
+      const qs = await generateQuestions();
+      setQuestions(qs);
+      setCurrentQuestionIndex(0);
+      setPlayerAnswers({});
+      playerAnswersRef.current = {};
+      pendingScoresRef.current = null;
+
+      // Reset per-round data but keep scores
+      setGamePlayers(prev => prev.map(p => ({
+        ...p,
+        streak: 0,
+        answers: []
+      })));
+
+      if (isMultiDevice && isHost && roomCode) {
+        const categoriesToSave = selectedCategories.map(cat => {
+          if (cat.startsWith('custom:')) return cat.replace('custom:', '');
+          return CATEGORIES.find(c => c.id === cat)?.name || cat;
+        });
+
+        await fetch(`/api/quiz/rooms/${roomCode}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            questions: qs,
+            settings: {
+              categories: categoriesToSave,
+              difficulty,
+              questionCount,
+              timePerQuestion
+            },
+            status: 'question',
+            currentQuestionIndex: 0,
+            questionStartedAt: new Date().toISOString(),
+            resetPlayerAnswers: true
+          })
+        });
+      }
+
+      setRevealed(false);
+      setHostAnswered(false);
+      setMultiDeviceAnswerCount(0);
+      timerStartRef.current = Date.now();
+      timer.start();
+      setScreen('question');
+    } catch (error) {
+      console.error('Failed to start new round:', error);
+      showNotification('Failed to generate questions. Please try again.');
+      setScreen('round-setup');
+    }
+  };
+
   const handleEndGame = () => {
     router.push('/');
   };
@@ -958,6 +1026,72 @@ Return ONLY a JSON array:
             </div>
           )}
 
+          {/* ── ROUND SETUP (new round with same players, keep scores) ── */}
+          {screen === 'round-setup' && (
+            <div className="max-w-2xl mx-auto">
+              <button
+                onClick={() => setScreen('podium')}
+                className="mb-4 text-purple-600 hover:text-purple-700 font-semibold text-sm"
+              >
+                ← Back to Results
+              </button>
+
+              <div className="bg-gradient-to-br from-white via-purple-50/30 to-pink-50/30 rounded-3xl p-5 shadow-xl border border-purple-100">
+                <h2 className="text-2xl font-bold text-center mb-2 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+                  New Round
+                </h2>
+                <p className="text-center text-slate-500 text-sm mb-5">
+                  Same players, scores carry over
+                </p>
+
+                {/* Show current players and scores */}
+                <div className="flex flex-wrap gap-2 justify-center mb-5">
+                  {gamePlayers.map(p => (
+                    <div key={p.id || p.name} className="flex items-center gap-1.5 bg-white rounded-full px-3 py-1.5 shadow-sm text-sm">
+                      <div
+                        className="w-5 h-5 rounded-full flex items-center justify-center text-xs text-white"
+                        style={{ backgroundColor: p.avatarColor || '#6c5ce7' }}
+                      >
+                        {p.avatar || p.name?.[0]?.toUpperCase()}
+                      </div>
+                      <span className="font-semibold text-slate-700">{p.name}</span>
+                      <span className="font-bold text-purple-600">{p.score}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="space-y-5">
+                  <GameSettings
+                    questionCount={questionCount}
+                    onQuestionCountChange={setQuestionCount}
+                    difficulty={difficulty}
+                    onDifficultyChange={setDifficulty}
+                    timePerQuestion={timePerQuestion}
+                    onTimeChange={setTimePerQuestion}
+                  />
+
+                  <CategoryPicker
+                    selectedCategories={selectedCategories}
+                    onToggleCategory={handleToggleCategory}
+                    customCategories={customCategories}
+                    onAddCustomCategory={handleAddCustomCategory}
+                    onDeleteCustomCategory={handleDeleteCustomCategory}
+                  />
+                </div>
+
+                <button
+                  onClick={handleStartNewRound}
+                  disabled={selectedCategories.length === 0}
+                  className="w-full mt-6 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white
+                             font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all
+                             disabled:opacity-50 disabled:cursor-not-allowed active:scale-98"
+                >
+                  Start Round!
+                </button>
+              </div>
+            </div>
+          )}
+
           {/* ── WAITING ── */}
           {screen === 'waiting' && (
             <WaitingScreen />
@@ -1133,6 +1267,7 @@ Return ONLY a JSON array:
           {screen === 'podium' && (
             <FinalPodium
               players={gamePlayers}
+              onNewRound={isHost || !isMultiDevice ? handleNewRound : null}
               onPlayAgain={handlePlayAgain}
               onEndGame={handleEndGame}
               onViewLeaderboard={() => setScreen('leaderboard')}

@@ -51,7 +51,7 @@ export default async function handler(req, res) {
 
   if (req.method === 'PATCH') {
     const updates = req.body;
-    const allowedFields = ['status', 'currentQuestionIndex', 'questionStartedAt', 'players'];
+    const allowedFields = ['status', 'currentQuestionIndex', 'questionStartedAt', 'players', 'questions', 'settings'];
 
     // Support updating a specific player's name
     if (updates.updatePlayer) {
@@ -68,6 +68,15 @@ export default async function handler(req, res) {
         room[key] = updates[key];
       }
     });
+
+    // Reset player answers for new round (keep scores)
+    if (updates.resetPlayerAnswers) {
+      room.players.forEach(p => {
+        p.answers = [];
+        p.streak = 0;
+      });
+      room.markModified('players');
+    }
 
     room.stateVersion = (room.stateVersion || 0) + 1;
     await room.save();

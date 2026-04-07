@@ -23,7 +23,7 @@ function ConfettiPiece({ delay }) {
   );
 }
 
-export default function FinalPodium({ players, onPlayAgain, onEndGame, onViewLeaderboard }) {
+export default function FinalPodium({ players, onPlayAgain, onNewRound, onEndGame, onViewLeaderboard }) {
   const [showConfetti, setShowConfetti] = useState(false);
   const [revealed, setRevealed] = useState(0);
 
@@ -196,18 +196,27 @@ export default function FinalPodium({ players, onPlayAgain, onEndGame, onViewLea
       </div>
 
       {/* Actions */}
+      {onNewRound && (
+        <button
+          onClick={onNewRound}
+          className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold
+                     text-lg rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-98"
+        >
+          New Round
+        </button>
+      )}
       <div className="flex gap-3">
         <button
           onClick={onPlayAgain}
-          className="flex-1 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold
-                     text-lg rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-98"
+          className="flex-1 py-3 bg-slate-100 text-slate-600 font-semibold rounded-xl
+                     hover:bg-slate-200 transition-all"
         >
-          Play Again
+          Reset Scores
         </button>
         <button
           onClick={onEndGame}
-          className="px-6 py-4 bg-slate-200 text-slate-700 font-bold text-lg rounded-xl
-                     hover:bg-slate-300 transition-all"
+          className="flex-1 py-3 bg-slate-100 text-slate-600 font-semibold rounded-xl
+                     hover:bg-slate-200 transition-all"
         >
           Done
         </button>
