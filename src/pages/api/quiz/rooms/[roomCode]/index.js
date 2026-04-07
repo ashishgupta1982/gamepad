@@ -53,6 +53,16 @@ export default async function handler(req, res) {
     const updates = req.body;
     const allowedFields = ['status', 'currentQuestionIndex', 'questionStartedAt', 'players'];
 
+    // Support updating a specific player's name
+    if (updates.updatePlayer) {
+      const { id, name } = updates.updatePlayer;
+      const player = room.players.find(p => p.id === id);
+      if (player && name) {
+        player.name = name;
+        room.markModified('players');
+      }
+    }
+
     Object.keys(updates).forEach(key => {
       if (allowedFields.includes(key)) {
         room[key] = updates[key];

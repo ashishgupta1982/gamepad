@@ -92,9 +92,20 @@ export default function QuizGame() {
       setGamePlayers(prev => {
         return rs.players.map(p => {
           const existing = prev.find(ep => ep.id === p.id);
+          const existingAnswers = existing?.answers || [];
+
+          // During reveal, merge lastAnswer data into answers array for QuestionResult
+          let answers = existingAnswers;
+          if (rs.status === 'reveal' && p.lastAnswer && p.lastAnswer.questionIndex >= 0) {
+            const alreadyHas = existingAnswers.some(a => a.questionIndex === p.lastAnswer.questionIndex);
+            if (!alreadyHas) {
+              answers = [...existingAnswers, p.lastAnswer];
+            }
+          }
+
           return {
             ...p,
-            answers: existing?.answers || [],
+            answers,
             streak: existing?.streak ?? p.streak ?? 0
           };
         });
@@ -164,11 +175,27 @@ export default function QuizGame() {
 
     // Sync players for scoreboard
     if (rs.players) {
-      setGamePlayers(rs.players.map(p => ({
-        ...p,
-        answers: p.answers || [],
-        streak: p.streak ?? 0
-      })));
+      setGamePlayers(prev => {
+        return rs.players.map(p => {
+          const existing = prev.find(ep => ep.id === p.id);
+          const existingAnswers = existing?.answers || [];
+
+          // During reveal, merge lastAnswer data for QuestionResult
+          let answers = existingAnswers;
+          if (rs.status === 'reveal' && p.lastAnswer && p.lastAnswer.questionIndex >= 0) {
+            const alreadyHas = existingAnswers.some(a => a.questionIndex === p.lastAnswer.questionIndex);
+            if (!alreadyHas) {
+              answers = [...existingAnswers, p.lastAnswer];
+            }
+          }
+
+          return {
+            ...p,
+            answers,
+            streak: existing?.streak ?? p.streak ?? 0
+          };
+        });
+      });
     }
   }, [playerRoomState?.stateVersion, isHost, isMultiDevice]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -942,7 +969,7 @@ Return ONLY a JSON array:
                 )}
                 {revealed && (
                   <button
-                    onClick={handleShowScoreboard}
+                    onClick={() => setScreen('question-result')}
                     className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold
                                rounded-xl shadow-lg hover:shadow-xl transition-all"
                   >
@@ -1003,7 +1030,7 @@ Return ONLY a JSON array:
               {isHost && revealed && (
                 <div className="mt-4 text-center">
                   <button
-                    onClick={handleShowScoreboard}
+                    onClick={() => setScreen('question-result')}
                     className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold
                                rounded-xl shadow-lg"
                   >
@@ -1069,16 +1096,29 @@ Return ONLY a JSON array:
             <PlayerLobby
               roomCode={roomCode}
               playerId={playerId}
-              onGameStart={(qs, gp) => {
-                if (qs) setQuestions(qs);
+              onGameStart={(roomStateOrQs, gp) => {
                 if (gp) setGamePlayers(gp.map(p => ({ ...p, answers: p.answers || [], streak: p.streak ?? 0 })));
                 setGameMode(GAME_MODES.MULTI_DEVICE);
-                setCurrentQuestionIndex(0);
                 setHostAnswered(false);
                 setPlayerAnswers({});
                 setRevealed(false);
+
+                // roomStateOrQs is the SSE room state — extract currentQuestion
+                if (roomStateOrQs && roomStateOrQs.currentQuestion) {
+                  const idx = roomStateOrQs.currentQuestionIndex || 0;
+                  setQuestions(prev => {
+                    const updated = [...prev];
+                    updated[idx] = { ...roomStateOrQs.currentQuestion, correctAnswer: null };
+                    return updated;
+                  });
+                  setCurrentQuestionIndex(idx);
+                  timerStartRef.current = new Date(roomStateOrQs.questionStartedAt || Date.now()).getTime();
+                } else {
+                  setCurrentQuestionIndex(0);
+                  timerStartRef.current = Date.now();
+                }
+
                 setScreen('question');
-                timerStartRef.current = Date.now();
                 timer.start();
               }}
             />

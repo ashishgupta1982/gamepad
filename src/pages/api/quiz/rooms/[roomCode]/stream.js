@@ -37,17 +37,36 @@ export default async function handler(req, res) {
 
   const sendState = (room) => {
     if (closed) return;
+    const qIdx = room.currentQuestionIndex;
+    const includeAnswers = room.status === 'reveal' && qIdx >= 0;
+
     const data = {
       status: room.status,
-      players: room.players.map(p => ({
-        id: p.id,
-        name: p.name,
-        avatar: p.avatar,
-        avatarColor: p.avatarColor,
-        score: p.score,
-        streak: p.streak,
-        connected: p.connected
-      })),
+      players: room.players.map(p => {
+        const playerData = {
+          id: p.id,
+          name: p.name,
+          avatar: p.avatar,
+          avatarColor: p.avatarColor,
+          score: p.score,
+          streak: p.streak,
+          connected: p.connected
+        };
+        // Include current question's answer during reveal so QuestionResult can show per-question scores
+        if (includeAnswers) {
+          const answer = p.answers?.find(a => a.questionIndex === qIdx);
+          if (answer) {
+            playerData.lastAnswer = {
+              questionIndex: answer.questionIndex,
+              correct: answer.correct,
+              points: answer.points,
+              timeMs: answer.timeMs,
+              selectedOption: answer.selectedOption
+            };
+          }
+        }
+        return playerData;
+      }),
       currentQuestionIndex: room.currentQuestionIndex,
       questionStartedAt: room.questionStartedAt,
       stateVersion: room.stateVersion,

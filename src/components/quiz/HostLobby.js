@@ -4,6 +4,22 @@ import useQuizRoom from '@/hooks/useQuizRoom';
 export default function HostLobby({ roomCode, players, hostPlayerId, onStart, onUpdatePlayers, onBack }) {
   const { roomState, connected } = useQuizRoom(roomCode);
   const [copied, setCopied] = useState(false);
+  const [editingName, setEditingName] = useState(false);
+  const [hostName, setHostName] = useState('');
+
+  const updateHostName = async (newName) => {
+    if (!newName.trim() || !hostPlayerId) return;
+    try {
+      await fetch(`/api/quiz/rooms/${roomCode}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ updatePlayer: { id: hostPlayerId, name: newName.trim() } })
+      });
+    } catch (e) {
+      console.error('Failed to update name:', e);
+    }
+    setEditingName(false);
+  };
 
   useEffect(() => {
     if (roomState?.players) {
@@ -95,11 +111,47 @@ export default function HostLobby({ roomCode, players, hostPlayerId, onStart, on
                   >
                     {player.avatar || player.name?.[0]?.toUpperCase()}
                   </div>
-                  <span className="font-semibold text-slate-700">{player.name}</span>
-                  {player.id === hostPlayerId && (
-                    <span className="text-[10px] bg-purple-200 text-purple-700 px-1.5 py-0.5 rounded-full font-bold">
-                      HOST
+                  {player.id === hostPlayerId && editingName ? (
+                    <input
+                      autoFocus
+                      className="font-semibold text-slate-700 bg-white border border-purple-300 rounded-lg px-2 py-1 text-sm w-28 focus:outline-none focus:ring-2 focus:ring-purple-400"
+                      value={hostName}
+                      onChange={(e) => setHostName(e.target.value)}
+                      onBlur={() => updateHostName(hostName)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') updateHostName(hostName);
+                        if (e.key === 'Escape') setEditingName(false);
+                      }}
+                      maxLength={20}
+                    />
+                  ) : (
+                    <span
+                      className={`font-semibold text-slate-700 ${player.id === hostPlayerId ? 'cursor-pointer hover:text-purple-600' : ''}`}
+                      onClick={() => {
+                        if (player.id === hostPlayerId) {
+                          setHostName(player.name);
+                          setEditingName(true);
+                        }
+                      }}
+                    >
+                      {player.name}
                     </span>
+                  )}
+                  {player.id === hostPlayerId && (
+                    <>
+                      <span className="text-[10px] bg-purple-200 text-purple-700 px-1.5 py-0.5 rounded-full font-bold">
+                        HOST
+                      </span>
+                      {!editingName && (
+                        <button
+                          onClick={() => { setHostName(player.name); setEditingName(true); }}
+                          className="text-purple-400 hover:text-purple-600 text-xs"
+                          title="Edit name"
+                        >
+                          ✏️
+                        </button>
+                      )}
+                    </>
                   )}
                   <div className={`ml-auto w-2 h-2 rounded-full ${player.connected ? 'bg-green-500' : 'bg-slate-300'}`} />
                 </div>

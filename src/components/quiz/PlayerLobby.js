@@ -7,7 +7,7 @@ export default function PlayerLobby({ roomCode, playerId, onGameStart }) {
   // Watch for game start
   React.useEffect(() => {
     if (roomState?.status === 'question' && roomState.currentQuestion) {
-      onGameStart(null, roomState.players);
+      onGameStart(roomState, roomState.players);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomState?.status]);
