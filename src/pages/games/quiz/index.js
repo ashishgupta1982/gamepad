@@ -6,6 +6,7 @@ import ProfessionalHeader from '@/components/ProfessionalHeader';
 import { CATEGORIES, AVATAR_EMOJIS, AVATAR_COLORS, GAME_MODES } from '@/data/quizConstants';
 import useQuizTimer from '@/hooks/useQuizTimer';
 import useQuizScoring from '@/hooks/useQuizScoring';
+import useQuizRoom from '@/hooks/useQuizRoom';
 
 import QuizHome from '@/components/quiz/QuizHome';
 import CategoryPicker from '@/components/quiz/CategoryPicker';
@@ -67,10 +68,109 @@ export default function QuizGame() {
   const [playerId, setPlayerId] = useState(null);
   const [isHost, setIsHost] = useState(false);
 
+  // --- Multi-device answer state ---
+  const [hostAnswered, setHostAnswered] = useState(false);
+  const [multiDeviceAnswerCount, setMultiDeviceAnswerCount] = useState(0);
+
   // --- Hooks ---
   const { calculatePoints } = useQuizScoring();
   const timer = useQuizTimer(timePerQuestion, handleTimeUp);
   const timerStartRef = useRef(null);
+
+  // SSE hook for multi-device gameplay (host uses this during question/scoreboard screens)
+  const isMultiDevice = gameMode === GAME_MODES.MULTI_DEVICE;
+  const multiDeviceActive = isMultiDevice && roomCode &&
+    ['question', 'scoreboard', 'question-result', 'podium'].includes(screen);
+  const { roomState: hostRoomState } = useQuizRoom(roomCode, isHost && multiDeviceActive);
+  const { roomState: playerRoomState } = useQuizRoom(roomCode, !isHost && isMultiDevice && screen === 'question');
+
+  // Sync gamePlayers and answer count from SSE for host
+  useEffect(() => {
+    if (!hostRoomState || !isHost) return;
+    const rs = hostRoomState;
+    if (rs.players && rs.players.length > 0) {
+      setGamePlayers(prev => {
+        return rs.players.map(p => {
+          const existing = prev.find(ep => ep.id === p.id);
+          return {
+            ...p,
+            answers: existing?.answers || [],
+            streak: existing?.streak ?? p.streak ?? 0
+          };
+        });
+      });
+    }
+    if (typeof rs.answeredCount === 'number') {
+      setMultiDeviceAnswerCount(rs.answeredCount);
+    }
+  }, [hostRoomState?.stateVersion, isHost]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Auto-reveal for host when all multi-device players have answered
+  useEffect(() => {
+    if (!isHost || !isMultiDevice || screen !== 'question' || revealed) return;
+    if (gamePlayers.length > 0 && multiDeviceAnswerCount >= gamePlayers.length) {
+      setTimeout(() => {
+        timer.stop();
+        setRevealed(true);
+        // Update room to reveal state
+        if (roomCode) {
+          fetch(`/api/quiz/rooms/${roomCode}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: 'reveal' })
+          }).catch(e => console.error('Failed to update room for reveal:', e));
+        }
+      }, 500);
+    }
+  }, [multiDeviceAnswerCount, gamePlayers.length, isHost, isMultiDevice, screen, revealed]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // For joined players: watch SSE for question changes and reveals
+  useEffect(() => {
+    if (isHost || !playerRoomState || !isMultiDevice) return;
+    const rs = playerRoomState;
+
+    // Update current question from SSE
+    if (rs.currentQuestion && rs.status === 'question') {
+      const newIdx = rs.currentQuestionIndex;
+      if (newIdx !== currentQuestionIndex || screen !== 'question') {
+        setQuestions(prev => {
+          const updated = [...prev];
+          updated[newIdx] = { ...rs.currentQuestion, correctAnswer: null };
+          return updated;
+        });
+        setCurrentQuestionIndex(newIdx);
+        setHostAnswered(false);
+        setRevealed(false);
+        setScreen('question');
+        timerStartRef.current = new Date(rs.questionStartedAt || Date.now()).getTime();
+        timer.start();
+      }
+    }
+
+    // Reveal answer from SSE
+    if (rs.status === 'reveal' && rs.revealedAnswer && !revealed) {
+      timer.stop();
+      setRevealed(true);
+      // Update current question with correct answer
+      setQuestions(prev => {
+        const updated = [...prev];
+        const idx = rs.currentQuestionIndex;
+        if (updated[idx]) {
+          updated[idx] = { ...updated[idx], correctAnswer: rs.revealedAnswer.correctAnswer };
+        }
+        return updated;
+      });
+    }
+
+    // Sync players for scoreboard
+    if (rs.players) {
+      setGamePlayers(rs.players.map(p => ({
+        ...p,
+        answers: p.answers || [],
+        streak: p.streak ?? 0
+      })));
+    }
+  }, [playerRoomState?.stateVersion, isHost, isMultiDevice]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ─── Data loading ───
 
@@ -328,6 +428,23 @@ Return ONLY a JSON array:
       const data = await res.json();
       setRoomCode(data.roomCode);
       setIsHost(true);
+
+      // Auto-join host as first player
+      const hostPlayer = players[0] || { name: 'Host', avatar: AVATAR_EMOJIS[0], avatarColor: AVATAR_COLORS[0] };
+      const joinRes = await fetch(`/api/quiz/rooms/${data.roomCode}/join`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: hostPlayer.name,
+          avatar: hostPlayer.avatar,
+          avatarColor: hostPlayer.avatarColor
+        })
+      });
+      if (joinRes.ok) {
+        const joinData = await joinRes.json();
+        setPlayerId(joinData.playerId);
+      }
+
       setGamePlayers([]);
       setScreen('host-lobby');
     } catch (error) {
@@ -366,6 +483,18 @@ Return ONLY a JSON array:
     timer.stop();
     setRevealed(true);
 
+    // For multi-device: scores are calculated server-side in the answer API
+    // Just update room status to 'reveal' so players see the answer
+    if (isMultiDevice && isHost && roomCode) {
+      fetch(`/api/quiz/rooms/${roomCode}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: 'reveal' })
+      }).catch(e => console.error('Failed to update room for reveal:', e));
+      return;
+    }
+
+    // Same-device: calculate scores locally
     const question = questions[currentQuestionIndex];
     const totalTimeMs = timePerQuestion * 1000;
 
@@ -430,9 +559,24 @@ Return ONLY a JSON array:
     setCurrentQuestionIndex(nextIdx);
     setPlayerAnswers({});
     setRevealed(false);
+    setHostAnswered(false);
+    setMultiDeviceAnswerCount(0);
     setScreen('question');
     timerStartRef.current = Date.now();
     timer.start();
+
+    // For multi-device: notify players of next question
+    if (isMultiDevice && isHost && roomCode) {
+      fetch(`/api/quiz/rooms/${roomCode}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          status: 'question',
+          currentQuestionIndex: nextIdx,
+          questionStartedAt: new Date().toISOString()
+        })
+      }).catch(e => console.error('Failed to update room:', e));
+    }
   };
 
   const handleGameEnd = async () => {
@@ -565,6 +709,8 @@ Return ONLY a JSON array:
     setCurrentQuestionIndex(0);
     setPlayerAnswers({});
     setRevealed(false);
+    setHostAnswered(false);
+    setMultiDeviceAnswerCount(0);
     setScreen('question');
     timerStartRef.current = Date.now();
     timer.start();
@@ -807,15 +953,17 @@ Return ONLY a JSON array:
             </div>
           )}
 
-          {/* ── QUESTION (multi-device host) ── */}
-          {screen === 'question' && currentQuestion && gameMode === GAME_MODES.MULTI_DEVICE && isHost && (
+          {/* ── QUESTION (multi-device — host and joined players) ── */}
+          {screen === 'question' && currentQuestion && gameMode === GAME_MODES.MULTI_DEVICE && (
             <div className="max-w-3xl mx-auto">
-              <LiveScoreboard
-                players={gamePlayers}
-                questionIndex={currentQuestionIndex}
-                totalQuestions={questions.length}
-                compact={true}
-              />
+              {isHost && (
+                <LiveScoreboard
+                  players={gamePlayers}
+                  questionIndex={currentQuestionIndex}
+                  totalQuestions={questions.length}
+                  compact={true}
+                />
+              )}
               <QuestionDisplay
                 question={currentQuestion}
                 questionIndex={currentQuestionIndex}
@@ -823,23 +971,43 @@ Return ONLY a JSON array:
                 timeLeft={timer.timeLeft}
                 totalTime={timePerQuestion}
                 revealed={revealed}
-                disabled={true}
+                disabled={hostAnswered || revealed}
                 category={currentQuestion.category}
-                selectedAnswer={null}
+                selectedAnswer={hostAnswered ? playerAnswers['self']?.answer : null}
                 correctAnswer={revealed ? currentQuestion.correctAnswer : null}
-                onSelectAnswer={() => {}}
+                onSelectAnswer={(answerIdx) => {
+                  if (hostAnswered || revealed || !playerId || !roomCode) return;
+                  setHostAnswered(true);
+                  const timeMs = Date.now() - (timerStartRef.current || Date.now());
+                  setPlayerAnswers(prev => ({ ...prev, self: { answer: answerIdx, timeMs } }));
+                  // Submit answer to server
+                  fetch(`/api/quiz/rooms/${roomCode}/answer`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ playerId, selectedOption: answerIdx, timeMs })
+                  }).catch(e => console.error('Failed to submit answer:', e));
+                }}
               />
-              <div className="mt-4 text-center text-sm text-slate-500">
-                {Object.keys(playerAnswers).length} / {gamePlayers.length} players answered
-              </div>
-              {revealed && (
+              {hostAnswered && !revealed && (
+                <div className="mt-3 text-center">
+                  <div className="inline-block bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">
+                    Answer submitted! Waiting for others...
+                  </div>
+                </div>
+              )}
+              {isHost && (
+                <div className="mt-3 text-center text-sm text-slate-500">
+                  {multiDeviceAnswerCount} / {gamePlayers.length} players answered
+                </div>
+              )}
+              {isHost && revealed && (
                 <div className="mt-4 text-center">
                   <button
                     onClick={handleShowScoreboard}
                     className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold
                                rounded-xl shadow-lg"
                   >
-                    Continue
+                    {currentQuestionIndex + 1 >= questions.length ? 'See Final Results' : 'Continue'}
                   </button>
                 </div>
               )}
@@ -881,6 +1049,7 @@ Return ONLY a JSON array:
             <HostLobby
               roomCode={roomCode}
               players={gamePlayers}
+              hostPlayerId={playerId}
               onStart={handleHostStartGame}
               onUpdatePlayers={setGamePlayers}
               onBack={() => setScreen('setup')}
@@ -901,9 +1070,13 @@ Return ONLY a JSON array:
               roomCode={roomCode}
               playerId={playerId}
               onGameStart={(qs, gp) => {
-                setQuestions(qs);
-                setGamePlayers(gp);
+                if (qs) setQuestions(qs);
+                if (gp) setGamePlayers(gp.map(p => ({ ...p, answers: p.answers || [], streak: p.streak ?? 0 })));
+                setGameMode(GAME_MODES.MULTI_DEVICE);
                 setCurrentQuestionIndex(0);
+                setHostAnswered(false);
+                setPlayerAnswers({});
+                setRevealed(false);
                 setScreen('question');
                 timerStartRef.current = Date.now();
                 timer.start();

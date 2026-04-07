@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import useQuizRoom from '@/hooks/useQuizRoom';
 
-export default function HostLobby({ roomCode, players, onStart, onUpdatePlayers, onBack }) {
+export default function HostLobby({ roomCode, players, hostPlayerId, onStart, onUpdatePlayers, onBack }) {
   const { roomState, connected } = useQuizRoom(roomCode);
   const [copied, setCopied] = useState(false);
 
@@ -96,6 +96,11 @@ export default function HostLobby({ roomCode, players, onStart, onUpdatePlayers,
                     {player.avatar || player.name?.[0]?.toUpperCase()}
                   </div>
                   <span className="font-semibold text-slate-700">{player.name}</span>
+                  {player.id === hostPlayerId && (
+                    <span className="text-[10px] bg-purple-200 text-purple-700 px-1.5 py-0.5 rounded-full font-bold">
+                      HOST
+                    </span>
+                  )}
                   <div className={`ml-auto w-2 h-2 rounded-full ${player.connected ? 'bg-green-500' : 'bg-slate-300'}`} />
                 </div>
               ))}
