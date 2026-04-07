@@ -1209,12 +1209,12 @@ Return ONLY a JSON array:
                   {multiDeviceAnswerCount} / {gamePlayers.length} players answered
                 </div>
               )}
-              {isHost && revealed && (
+              {revealed && (
                 <div className="mt-4 text-center">
                   <button
                     onClick={() => {
-                      // Notify all players to show scores
-                      if (roomCode) {
+                      // Host: notify all players to show scores
+                      if (isHost && roomCode) {
                         fetch(`/api/quiz/rooms/${roomCode}`, {
                           method: 'PATCH',
                           headers: { 'Content-Type': 'application/json' },
