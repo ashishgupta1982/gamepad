@@ -26,12 +26,12 @@ export default function Home() {
       available: true
     },
     {
-      id: 'coming-soon-1',
-      name: 'More Games Coming Soon!',
-      description: 'Check back later for more exciting games',
-      icon: '🎮',
-      color: 'from-gray-400 to-gray-500',
-      available: false
+      id: 'darts',
+      name: 'Darts Scorer',
+      description: 'Score X01, Cricket, Around the Clock and more!',
+      icon: '🎯',
+      color: 'from-red-500 to-orange-500',
+      available: true
     }
   ];
 
@@ -40,6 +40,8 @@ export default function Home() {
       router.push('/games/scrabble-scorer');
     } else if (gameId === 'quiz') {
       router.push('/games/quiz');
+    } else if (gameId === 'darts') {
+      router.push('/games/darts');
     }
   };
 

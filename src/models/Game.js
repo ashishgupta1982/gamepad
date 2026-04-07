@@ -9,7 +9,7 @@ const GameSchema = new mongoose.Schema({
   gameType: {
     type: String,
     required: true,
-    enum: ['scrabble-scorer', 'quiz']
+    enum: ['scrabble-scorer', 'quiz', 'darts']
   },
   players: [{
     name: {
@@ -61,6 +61,34 @@ const GameSchema = new mongoose.Schema({
       bestStreak: { type: Number, default: 0 },
       pointsPerQuestion: [Number]
     }]
+  },
+  // Additional fields for darts game
+  dartsConfig: {
+    gameMode: String,
+    startingScore: Number,
+    doubleOut: { type: Boolean, default: true },
+    doubleIn: { type: Boolean, default: false },
+    currentPlayerIndex: { type: Number, default: 0 },
+    currentRound: { type: Number, default: 1 },
+    legs: { type: Number, default: 1 },
+    currentLeg: { type: Number, default: 1 },
+    legsWon: [Number],
+    turns: [{
+      playerIndex: Number,
+      round: Number,
+      leg: Number,
+      darts: [Number],
+      total: Number,
+      bust: Boolean,
+      checkout: Boolean
+    }],
+    remainingScores: [Number],
+    cricketMarks: [[Number]],
+    cricketPoints: [Number],
+    clockTargets: [Number],
+    killerNumbers: [Number],
+    killerLives: [Number],
+    killerActive: [Boolean]
   },
   status: {
     type: String,

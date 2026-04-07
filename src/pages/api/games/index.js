@@ -24,7 +24,7 @@ export default async function handler(req, res) {
 
   if (req.method === 'POST') {
     try {
-      const { gameType, players, quizConfig } = req.body;
+      const { gameType, players, quizConfig, dartsConfig } = req.body;
 
       if (!gameType || !players || players.length === 0) {
         return res.status(400).json({ error: 'Invalid game data' });
@@ -39,6 +39,10 @@ export default async function handler(req, res) {
 
       if (quizConfig) {
         gameData.quizConfig = quizConfig;
+      }
+
+      if (dartsConfig) {
+        gameData.dartsConfig = dartsConfig;
       }
 
       const game = await Game.create(gameData);
