@@ -1,7 +1,7 @@
 import React from 'react';
 import { ANSWER_COLORS } from '@/data/quizConstants';
 
-export default function QuestionResult({ players, questionIndex, question, onContinue }) {
+export default function QuestionResult({ players, questionIndex, question, onContinue, isLastQuestion }) {
   const correctAnswer = question.options[question.correctAnswer];
 
   const sortedPlayers = [...players].sort((a, b) => {
@@ -85,7 +85,7 @@ export default function QuestionResult({ players, questionIndex, question, onCon
         className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold
                    text-lg rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-98"
       >
-        Continue
+        {isLastQuestion ? 'See Final Results' : 'Continue'}
       </button>
     </div>
   );

@@ -37,10 +37,16 @@ export default async function handler(req, res) {
   const correct = selectedOption === question.correctAnswer;
   const totalTimeMs = (room.settings.timePerQuestion || 20) * 1000;
 
+  // Calculate timeMs server-side for fair scoring across all devices
+  // This eliminates the host advantage from SSE polling delay
+  const serverTimeMs = room.questionStartedAt
+    ? Math.min(Math.max(Date.now() - new Date(room.questionStartedAt).getTime(), 0), totalTimeMs)
+    : (timeMs || totalTimeMs);
+
   // Calculate points
   let points = 0;
   if (correct) {
-    const speedMultiplier = 1.0 - ((timeMs / totalTimeMs) * SCORING.SPEED_WEIGHT);
+    const speedMultiplier = 1.0 - ((serverTimeMs / totalTimeMs) * SCORING.SPEED_WEIGHT);
     const streakMultiplier = Math.min(
       1.0 + (player.streak * SCORING.STREAK_BONUS),
       SCORING.MAX_STREAK_MULTIPLIER
@@ -51,7 +57,7 @@ export default async function handler(req, res) {
   player.answers.push({
     questionIndex: qIdx,
     selectedOption,
-    timeMs,
+    timeMs: serverTimeMs,
     correct,
     points
   });

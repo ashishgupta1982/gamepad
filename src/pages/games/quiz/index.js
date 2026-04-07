@@ -646,48 +646,63 @@ Return ONLY a JSON array:
   };
 
   const handleGameEnd = async () => {
-    // Mark game complete
-    if (session && currentGame?._id !== 'guest') {
-      fetch(`/api/games/${currentGame._id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          status: 'completed',
-          quizConfig: {
-            playerStats: gamePlayers.map(p => ({
-              name: p.name,
-              totalScore: p.score,
-              correctCount: p.answers.filter(a => a.correct).length,
-              avgResponseTime: p.answers.length > 0
-                ? p.answers.reduce((sum, a) => sum + (a.timeMs || 0), 0) / p.answers.length
-                : 0,
-              bestStreak: Math.max(...p.answers.reduce((streaks, a, i) => {
-                if (a.correct) {
-                  streaks.push((streaks.length > 0 ? streaks[streaks.length - 1] : 0) + 1);
-                } else {
-                  streaks.push(0);
-                }
-                return streaks;
-              }, [0]), 0),
-              pointsPerQuestion: p.answers.map(a => a.points)
-            }))
-          }
-        })
-      }).catch(e => console.error('Failed to save final:', e));
+    // Apply any pending score updates (same-device mode)
+    let finalPlayers = gamePlayers;
+    if (!isMultiDevice && pendingScoresRef.current) {
+      const pending = pendingScoresRef.current;
+      finalPlayers = gamePlayers.map((player, idx) => {
+        const p = pending[idx];
+        return p ? { ...player, score: player.score + p.points } : player;
+      });
+      pendingScoresRef.current = null;
+      setGamePlayers(finalPlayers);
+    }
 
-      // Save player stats
-      fetch('/api/quiz/stats', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          gameId: currentGame._id,
-          players: gamePlayers,
-          categories: selectedCategories.map(cat => {
-            if (cat.startsWith('custom:')) return cat.replace('custom:', '');
-            return CATEGORIES.find(c => c.id === cat)?.name || cat;
+    // Save game completion to DB
+    try {
+      if (session && currentGame?._id && currentGame._id !== 'guest') {
+        fetch(`/api/games/${currentGame._id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            status: 'completed',
+            quizConfig: {
+              playerStats: finalPlayers.map(p => ({
+                name: p.name,
+                totalScore: p.score,
+                correctCount: p.answers.filter(a => a.correct).length,
+                avgResponseTime: p.answers.length > 0
+                  ? p.answers.reduce((sum, a) => sum + (a.timeMs || 0), 0) / p.answers.length
+                  : 0,
+                bestStreak: Math.max(...p.answers.reduce((streaks, a, i) => {
+                  if (a.correct) {
+                    streaks.push((streaks.length > 0 ? streaks[streaks.length - 1] : 0) + 1);
+                  } else {
+                    streaks.push(0);
+                  }
+                  return streaks;
+                }, [0]), 0),
+                pointsPerQuestion: p.answers.map(a => a.points)
+              }))
+            }
           })
-        })
-      }).catch(e => console.error('Failed to save stats:', e));
+        }).catch(e => console.error('Failed to save final:', e));
+
+        fetch('/api/quiz/stats', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            gameId: currentGame._id,
+            players: finalPlayers,
+            categories: selectedCategories.map(cat => {
+              if (cat.startsWith('custom:')) return cat.replace('custom:', '');
+              return CATEGORIES.find(c => c.id === cat)?.name || cat;
+            })
+          })
+        }).catch(e => console.error('Failed to save stats:', e));
+      }
+    } catch (e) {
+      console.error('Failed to save game data:', e);
     }
 
     // Notify players of game end
@@ -1155,7 +1170,7 @@ Return ONLY a JSON array:
                     className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold
                                rounded-xl shadow-lg hover:shadow-xl transition-all"
                   >
-                    {currentQuestionIndex + 1 >= questions.length ? 'See Final Results' : 'Continue'}
+                    Continue
                   </button>
                 )}
               </div>
@@ -1226,7 +1241,7 @@ Return ONLY a JSON array:
                     className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold
                                rounded-xl shadow-lg"
                   >
-                    {currentQuestionIndex + 1 >= questions.length ? 'See Final Results' : 'Continue'}
+                    Continue
                   </button>
                 </div>
               )}
@@ -1239,7 +1254,11 @@ Return ONLY a JSON array:
               players={gamePlayers}
               questionIndex={currentQuestionIndex}
               question={currentQuestion}
-              onContinue={handleShowScoreboard}
+              isLastQuestion={currentQuestionIndex + 1 >= questions.length}
+              onContinue={currentQuestionIndex + 1 >= questions.length
+                ? handleGameEnd
+                : handleShowScoreboard
+              }
             />
           )}
 
