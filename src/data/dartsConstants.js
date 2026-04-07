@@ -6,28 +6,59 @@ export const GAME_MODES = [
     name: 'X01',
     icon: '🎯',
     desc: 'Classic darts! Race to zero from 101, 301, 501 and more.',
-    color: 'from-red-500 to-orange-500'
+    color: 'from-red-500 to-orange-500',
+    rules: [
+      'Each player starts at the chosen score (e.g. 501)',
+      'Take turns throwing 3 darts, then enter your total score',
+      'Your score is subtracted from your remaining total',
+      'Must finish on exactly 0 — with a double if double-out is on',
+      'Going below 0 or to exactly 1 is a "bust" — your turn is voided',
+      'When your remaining score is 170 or less, checkout suggestions are shown',
+      'First player to check out wins the leg'
+    ]
   },
   {
     id: 'cricket',
     name: 'Cricket',
     icon: '🏏',
     desc: 'Close numbers 15-20 and bullseye. Strategy meets accuracy.',
-    color: 'from-blue-500 to-indigo-500'
+    color: 'from-blue-500 to-indigo-500',
+    rules: [
+      'Targets are: 20, 19, 18, 17, 16, 15, and Bullseye',
+      'Hit each number 3 times to "close" it (single = 1 mark, double = 2, triple = 3)',
+      'Once you close a number, extra hits score points — unless your opponent has also closed it',
+      'Win by closing all 7 numbers AND having equal or more points than your opponent',
+      'For each turn, enter which targets you hit with your 3 darts'
+    ]
   },
   {
     id: 'around-the-clock',
     name: 'Around the Clock',
     icon: '🕐',
     desc: 'Hit 1 through 20 in order, then bullseye. Simple and fun!',
-    color: 'from-green-500 to-emerald-500'
+    color: 'from-green-500 to-emerald-500',
+    rules: [
+      'Hit numbers 1 through 20 in order, then finish with Bullseye',
+      'Each turn you throw 3 darts at your current target number',
+      'Hit your target = advance to the next number',
+      'Miss = stay on your current number until next turn',
+      'First player to hit all 21 targets (1-20 + Bull) wins'
+    ]
   },
   {
     id: 'killer',
     name: 'Killer',
     icon: '💀',
     desc: 'Elimination game! Become a killer and take out opponents.',
-    color: 'from-purple-500 to-pink-500'
+    color: 'from-purple-500 to-pink-500',
+    rules: [
+      'Each player is assigned a random number with a matching double',
+      'Phase 1: Hit your own double to become a "Killer"',
+      'Phase 2: Once you are a Killer, hit opponents\' doubles to remove their lives',
+      'Each player starts with 3 lives',
+      'Lose all your lives and you are eliminated',
+      'Last player standing wins!'
+    ]
   }
 ];
 

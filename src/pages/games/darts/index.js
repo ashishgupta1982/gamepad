@@ -10,7 +10,8 @@ import CricketGame from '@/components/darts/CricketGame';
 import ClockGame from '@/components/darts/ClockGame';
 import KillerGame from '@/components/darts/KillerGame';
 import DartsGameOver from '@/components/darts/DartsGameOver';
-import { CRICKET_TARGETS } from '@/data/dartsConstants';
+import RulesModal from '@/components/darts/RulesModal';
+import { CRICKET_TARGETS, GAME_MODES } from '@/data/dartsConstants';
 
 // Screens: loading, home, mode-select, setup, playing, game-over
 export default function DartsPage() {
@@ -30,6 +31,7 @@ export default function DartsPage() {
 
   // Killer number assignment
   const [killerNumbers, setKillerNumbers] = useState([]);
+  const [showRules, setShowRules] = useState(false);
 
   const fetchGames = useCallback(async () => {
     try {
@@ -198,7 +200,8 @@ export default function DartsPage() {
 
   const handleBack = () => {
     if (screen === 'playing') {
-      // Save and go home
+      // Set screen first so game component unmounts before config is nulled
+      setScreen('home');
       setCurrentGame(null);
       fetchGames();
     } else if (screen === 'setup') {
@@ -248,12 +251,21 @@ export default function DartsPage() {
               ← Back
             </button>
 
-            <h2 className="text-2xl font-bold text-center mb-5 text-slate-800">
+            <h2 className="text-2xl font-bold text-center mb-2 text-slate-800">
               {gameMode === 'x01' ? 'X01 Setup' :
                gameMode === 'cricket' ? 'Cricket Setup' :
                gameMode === 'around-the-clock' ? 'Around the Clock' :
                'Killer Setup'}
             </h2>
+
+            <div className="text-center mb-5">
+              <button
+                onClick={() => setShowRules(true)}
+                className="text-sm font-semibold text-blue-500 hover:text-blue-600 transition-colors"
+              >
+                How to Play?
+              </button>
+            </div>
 
             {/* X01 specific settings */}
             {gameMode === 'x01' && (
@@ -371,6 +383,13 @@ export default function DartsPage() {
           />
         )}
       </div>
+
+      {showRules && (
+        <RulesModal
+          mode={GAME_MODES.find(m => m.id === gameMode)}
+          onClose={() => setShowRules(false)}
+        />
+      )}
     </div>
   );
 }
