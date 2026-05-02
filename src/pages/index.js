@@ -32,6 +32,14 @@ export default function Home() {
       icon: '🎯',
       color: 'from-red-500 to-orange-500',
       available: true
+    },
+    {
+      id: 'travel-bingo',
+      name: 'Travel Bingo',
+      description: 'Road-trip bingo for the whole convoy. Spot it, snap it, win!',
+      icon: '🚗',
+      color: 'from-emerald-500 to-teal-500',
+      available: true
     }
   ];
 
@@ -42,6 +50,8 @@ export default function Home() {
       router.push('/games/quiz');
     } else if (gameId === 'darts') {
       router.push('/games/darts');
+    } else if (gameId === 'travel-bingo') {
+      router.push('/games/travel-bingo');
     }
   };
 

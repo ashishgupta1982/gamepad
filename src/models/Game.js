@@ -9,7 +9,7 @@ const GameSchema = new mongoose.Schema({
   gameType: {
     type: String,
     required: true,
-    enum: ['scrabble-scorer', 'quiz', 'darts']
+    enum: ['scrabble-scorer', 'quiz', 'darts', 'travel-bingo']
   },
   players: [{
     name: {
@@ -89,6 +89,42 @@ const GameSchema = new mongoose.Schema({
     killerNumbers: [Number],
     killerLives: [Number],
     killerActive: [Boolean]
+  },
+  // Additional fields for travel-bingo game
+  travelBingoConfig: {
+    joinCode: { type: String, index: true },
+    hostUserId: String,
+    phase: {
+      type: String,
+      enum: ['submission', 'generating', 'playing', 'completed'],
+      default: 'submission'
+    },
+    cars: [{
+      carId: String,
+      name: String,
+      userId: String,
+      joinedAt: { type: Date, default: Date.now },
+      submittedItems: { type: [String], default: [] },
+      card: [{
+        tileId: String,
+        label: String,
+        category: String,
+        found: { type: Boolean, default: false },
+        foundAt: Date,
+        photoUrl: String,
+        caption: String,
+        comments: [{
+          commentId: String,
+          carId: String,
+          carName: String,
+          text: String,
+          createdAt: { type: Date, default: Date.now }
+        }]
+      }],
+      completedAt: Date
+    }],
+    categories: { type: [String], default: [] },
+    winnerCarId: String
   },
   status: {
     type: String,
