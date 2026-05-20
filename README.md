@@ -1,175 +1,82 @@
-# Next.js Base Skeleton App
+# Gamepad
 
-A production-ready skeleton application built with Next.js, featuring authentication, AI integration, and modern React patterns. Perfect for rapid project prototyping and development.
+A family game launcher with four playable games: Scrabble Scorer, Quiz (Kahoot-style multi-device or same-device), Darts Scorer (X01, Cricket, Around the Clock, Killer), and Travel Bingo (road-trip photo bingo across multiple cars).
 
-## 🚀 Features
+## Why
 
-- **Authentication**: Complete NextAuth.js setup with Google and Azure AD providers
-- **AI Integration**: Built-in Claude API integration with rate limiting and caching
-- **Database**: MongoDB connection with Mongoose ODM
-- **UI Components**: Pre-built ShadCN/UI components with Tailwind CSS
-- **User Management**: Basic user profile system with role-based access
-- **Caching**: Intelligent response caching for improved performance
-- **Rate Limiting**: API protection against abuse
-- **Modern Stack**: Next.js 15, React 19, and latest dependencies
+Built so the family can play games together on phones and tablets without paying for or installing separate apps. Scores persist for signed-in users; guests can play without an account.
 
-## 📦 What's Included
+## Tech Stack
 
-### Core Components
-- `ClaudeChat` - AI chat interface with text input/output
-- `SettingsPage` - Simplified user profile management
-- `Header` - Reusable navigation component with authentication
-- UI Kit - Button, Card, Alert components
+| Layer | Choice |
+|-------|--------|
+| Framework | Next.js 15 (Pages Router) + React 19 |
+| Styling | Tailwind CSS + ShadCN/UI |
+| Auth | NextAuth.js (Google + Azure AD) |
+| Database | MongoDB + Mongoose |
+| Realtime | Server-Sent Events (SSE) for multi-device quiz |
+| Media | Cloudinary (Travel Bingo photo uploads) |
+| AI | Anthropic Claude SDK (cached) |
+| Node | 22.x |
 
-### API Routes
-- `/api/auth/[...nextauth]` - Authentication endpoints
-- `/api/claude` - AI chat API with caching
-- `/api/user` - User profile management
-
-### Database Models
-- `User` - Basic user information (name, email, role)
-- `CachedResponse` - Generic caching for API responses
-
-## 🛠️ Quick Start
-
-### 1. Environment Setup
-
-Copy `.env.example` to `.env.local` and fill in your values:
-
-```env
-# Database
-MONGODB_URI=mongodb://localhost:27017/your-app-name
-
-# Authentication
-NEXTAUTH_URL=http://localhost:3000
-NEXTAUTH_SECRET=your-nextauth-secret
-
-# Google OAuth
-GOOGLE_ID=your-google-client-id
-GOOGLE_SECRET=your-google-client-secret
-
-# Azure AD OAuth (optional)
-AZURE_AD_CLIENT_ID=your-azure-client-id
-AZURE_AD_CLIENT_SECRET=your-azure-client-secret
-AZURE_AD_TENANT_ID=your-azure-tenant-id
-
-# Claude AI
-ANTHROPIC_API_KEY=your-anthropic-api-key
-```
-
-### 2. Install Dependencies
+## Quick Start
 
 ```bash
 npm install
+npm run dev      # http://localhost:3000
+npm run build
+npm run start
+npm run lint
 ```
 
-### 3. Run Development Server
+## Environment Variables
 
-```bash
-npm run dev
+Copy to `.env.local`:
+
+```
+MONGODB_URI=
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=
+
+GOOGLE_ID=
+GOOGLE_SECRET=
+
+AZURE_AD_CLIENT_ID=
+AZURE_AD_CLIENT_SECRET=
+AZURE_AD_TENANT_ID=
+
+ANTHROPIC_API_KEY=
+
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
 ```
 
-Visit [http://localhost:3000](http://localhost:3000) to see your app!
+## Games
 
-## 🔧 Configuration
+| Game | Route | Notes |
+|------|-------|-------|
+| Scrabble Scorer | `/games/scrabble-scorer` | Up to 4 players, fun awards |
+| Quiz | `/games/quiz` (`/games/quiz/join`) | Same-device or multi-device with 6-char room codes |
+| Darts | `/games/darts` | X01, Cricket, Around the Clock, Killer |
+| Travel Bingo | `/games/travel-bingo` | Multi-car road-trip bingo with photo proof |
 
-### Authentication Providers
-
-The skeleton includes Google and Azure AD providers. To add more providers, edit `src/pages/api/auth/[...nextauth].js`.
-
-### Database Models
-
-Modify or extend the models in `src/models/`:
-- Add new fields to the User model
-- Create new models for your app's needs
-
-### UI Customization
-
-- Update `tailwind.config.mjs` for design system changes
-- Modify components in `src/components/ui/` for consistent styling
-- Add new pages in `src/pages/`
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 src/
-├── components/
-│   ├── ui/           # Reusable UI components
-│   ├── ClaudeChat.js # AI chat interface
-│   └── settings/     # Settings components
-├── pages/
-│   ├── api/          # API routes
-│   ├── index.js      # Landing page
-│   └── _app.js       # App configuration
-├── models/           # Database models
-├── lib/              # Utility libraries
-└── utils/            # Helper functions
+├── pages/              # Routes + API
+│   ├── games/          # Game UIs
+│   └── api/            # REST + SSE endpoints
+├── components/         # Per-game component folders + shared UI
+├── models/             # Mongoose schemas
+├── hooks/              # useQuizRoom, useQuizScoring, useQuizTimer
+├── lib/                # mongodb, cloudinaryUpload, travelBingo helpers
+├── utils/              # authHelper, rateLimiter
+├── data/               # quizConstants, dartsConstants
+└── styles/             # globals.css
 ```
 
-## 🚀 Deployment
+## Deployment
 
-### Vercel (Recommended)
-
-1. Push to GitHub
-2. Connect to Vercel
-3. Add environment variables
-4. Deploy!
-
-### Other Platforms
-
-The app is compatible with any Node.js hosting platform:
-- Heroku
-- Railway
-- DigitalOcean App Platform
-- AWS/GCP/Azure
-
-## 🔒 Security Features
-
-- Rate limiting on AI API endpoints
-- Input validation and sanitization
-- Secure session management with NextAuth.js
-- Environment variable protection
-- CSRF protection built-in
-
-## 📊 Performance Features
-
-- Response caching with MongoDB
-- Optimized bundle splitting
-- Image optimization ready
-- Edge API routes supported
-
-## 🎨 Customization Ideas
-
-This skeleton is perfect for building:
-- AI-powered SaaS applications
-- Content management systems
-- User dashboards and admin panels
-- API-first applications
-- Modern web applications
-
-## 🤝 Contributing
-
-This is a base skeleton - fork it and make it your own! Common improvements:
-- Add more UI components
-- Implement additional auth providers
-- Add email systems
-- Include payment integration
-- Add more database models
-
-## 📝 License
-
-MIT License - feel free to use this for any project!
-
-## 🆘 Support
-
-This skeleton provides a solid foundation but you may need to:
-- Adjust for your specific use case
-- Add business logic
-- Customize the UI/UX
-- Configure for your deployment environment
-
----
-
-**Happy coding!** 🎉
-
-Built with ❤️ for rapid development and modern web applications.
+Optimised for Vercel. Add env vars in the dashboard and deploy. Any Node 22 host works.
