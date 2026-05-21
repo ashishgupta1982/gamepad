@@ -32,7 +32,7 @@ src/
 │       ├── user.js
 │       ├── games/                # CRUD for Game records
 │       │   ├── index.js, [id].js
-│       │   └── travel-bingo/     # create, by-code/[code], [id]/{join,submit-items,generate,mark-tile,comment}
+│       │   └── travel-bingo/     # create, by-code/[code], [id]/{index,join,submit-items,generate,mark-tile,comment}
 │       └── quiz/
 │           ├── leaderboard.js
 │           ├── stats/{index.js,[playerId].js}
@@ -108,6 +108,7 @@ Standard NextAuth user with `role`.
 | `CLAUDE_API` | 30/min |
 | `STANDARD_API` | 60/min |
 | `ADMIN_API` | 30/min |
+| `READ_API` | 120/min |
 
 Note: `/api/claude` sets `X-RateLimit-Limit: 10` in response headers but the actual bucket allows 30/min. Header value is stale.
 
