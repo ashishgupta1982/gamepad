@@ -1,6 +1,6 @@
 # Gamepad - AI Assistant Notes
 
-Family game launcher: Scrabble Scorer, Quiz, Darts, Travel Bingo. Next.js 15 (Pages Router) + React 19, MongoDB/Mongoose, NextAuth (Google + Azure AD), Anthropic Claude SDK, Cloudinary for photos.
+Family game launcher: Scrabble Scorer, Quiz, Darts, Travel Bingo. Next.js 15 (Pages Router) + React 19, MongoDB/Mongoose, NextAuth (Google), Anthropic Claude SDK, Cloudinary for photos.
 
 ## Quick Commands
 
@@ -95,7 +95,7 @@ Standard NextAuth user with `role`.
 
 - Client: `useSession()` from `next-auth/react`
 - API: `getAuthenticatedUser(req, res)` from `src/utils/authHelper.js`, or wrap with `withAuth(handler)` to 401 unauthenticated
-- Providers: Google + Azure AD (both configured in `[...nextauth].js`)
+- Providers: Google only (configured in `[...nextauth].js`)
 - MongoDB adapter via `@next-auth/mongodb-adapter`
 - Guest play is supported — many game APIs work without a session (host gets a session id, players join by code)
 
@@ -157,4 +157,4 @@ Helpers in `src/lib/travelBingo.js`: `generateJoinCode`, `generateId`, `findCar`
 - Added Scrabble Scorer, then quiz (rebuilt Kahoot-style with SSE multi-device), darts (X01/Cricket/Clock/Killer), Travel Bingo
 - Quiz: multi-device host-can-play, per-question scores, SSE answer tracking, new round continuation, same-device scoring fixes
 - Darts: setup screen + rules modal, fixed back-button crash and start-game bug
-- Last commit `45a5fbb` — Travel Bingo (2026-05-02)
+- Last feature commit `45a5fbb` — Travel Bingo (2026-05-02)
