@@ -12,7 +12,7 @@ Built so the family can play games together on phones and tablets without paying
 |-------|--------|
 | Framework | Next.js 15 (Pages Router) + React 19 |
 | Styling | Tailwind CSS + ShadCN/UI |
-| Auth | NextAuth.js (Google + Azure AD) |
+| Auth | NextAuth.js (Google) |
 | Database | MongoDB + Mongoose |
 | Realtime | Server-Sent Events (SSE) for multi-device quiz |
 | Media | Cloudinary (Travel Bingo photo uploads) |
@@ -40,10 +40,6 @@ NEXTAUTH_SECRET=
 
 GOOGLE_ID=
 GOOGLE_SECRET=
-
-AZURE_AD_CLIENT_ID=
-AZURE_AD_CLIENT_SECRET=
-AZURE_AD_TENANT_ID=
 
 ANTHROPIC_API_KEY=
 
