@@ -23,12 +23,12 @@ export default function Settings() {
   return (
     <>
       <Head>
-        <title>Settings - Aspiro Consulting</title>
+        <title>Settings — GamePad</title>
         <meta name="description" content="Manage your account settings" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      <main className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-teal-50">
         <Header showBackButton={true} onBackClick={handleBack} />
         
         <SettingsPage 

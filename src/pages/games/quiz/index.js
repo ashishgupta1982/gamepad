@@ -913,7 +913,7 @@ Return ONLY a JSON array:
   return (
     <>
       <Head>
-        <title>Quiz Game - Gamepad</title>
+        <title>Quiz Game — GamePad</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 

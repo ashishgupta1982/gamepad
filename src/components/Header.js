@@ -34,11 +34,9 @@ export default function Header({ showBackButton = false, onBackClick }) {
             onClick={() => router.push('/')}
             className="flex items-center space-x-2 hover:opacity-80 transition-opacity"
           >
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">A</span>
-            </div>
+            <img src="/logo.svg" alt="" aria-hidden="true" className="w-8 h-8 rounded-lg shrink-0" />
             <h1 className="text-xl font-semibold text-slate-900">
-              Aspiro Consulting
+              GamePad
             </h1>
           </button>
           
@@ -66,7 +64,7 @@ export default function Header({ showBackButton = false, onBackClick }) {
               <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-medium transition-all duration-200 hover:shadow-lg"
+                  className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center text-white font-medium transition-all duration-200 hover:shadow-lg"
                 >
                   {user?.name ? user.name.charAt(0).toUpperCase() : 'G'}
                 </button>

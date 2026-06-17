@@ -148,7 +148,7 @@ export default function ScrabbleScorer() {
   return (
     <>
       <Head>
-        <title>Scrabble Scorer - Gamepad</title>
+        <title>Scrabble Scorer — GamePad</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 

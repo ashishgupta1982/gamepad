@@ -6,14 +6,14 @@ import { Button } from '../ui/button';
 const SettingsPage = ({ session, isGuest, onSignIn, onSignOut }) => {
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
-      <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 overflow-hidden shadow-lg rounded-xl">
+      <div className="bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200 overflow-hidden shadow-lg rounded-xl">
         <div className="p-6 bg-white">
           <h1 className="text-2xl font-bold mb-6">Settings</h1>
 
           <div className="space-y-6">
             {/* User Details Section */}
             <Card className="bg-white shadow-sm border border-gray-200">
-              <CardHeader className="bg-gradient-to-r from-gray-50 to-blue-50 border-b border-gray-200 px-6 py-4">
+              <CardHeader className="bg-gradient-to-r from-gray-50 to-orange-50 border-b border-gray-200 px-6 py-4">
                 <CardTitle className="text-gray-800 flex items-center space-x-2 text-lg">
                   <UserCircle className="w-5 h-5" />
                   <span>User Details</span>
@@ -35,7 +35,7 @@ const SettingsPage = ({ session, isGuest, onSignIn, onSignOut }) => {
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-600">Status</span>
-                    <span className="px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                    <span className="px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
                       {session ? 'Authenticated' : 'Guest'}
                     </span>
                   </div>
@@ -45,7 +45,7 @@ const SettingsPage = ({ session, isGuest, onSignIn, onSignOut }) => {
 
             {/* Authentication Section */}
             <Card className="bg-white shadow-sm border border-gray-200">
-              <CardHeader className="bg-gradient-to-r from-green-50 to-blue-50 border-b border-green-200 px-6 py-4">
+              <CardHeader className="bg-gradient-to-r from-emerald-50 to-teal-50 border-b border-emerald-200 px-6 py-4">
                 <CardTitle className="text-gray-800 flex items-center space-x-2 text-lg">
                   <Shield className="w-5 h-5" />
                   <span>Account</span>
@@ -61,7 +61,7 @@ const SettingsPage = ({ session, isGuest, onSignIn, onSignOut }) => {
                       </div>
                       <Button
                         onClick={onSignIn}
-                        className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-2 rounded-lg text-base w-full sm:w-auto"
+                        className="bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-700 hover:to-amber-700 text-white px-6 py-2 rounded-lg text-base w-full sm:w-auto"
                       >
                         Sign In
                       </Button>

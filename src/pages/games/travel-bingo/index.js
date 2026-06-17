@@ -242,7 +242,7 @@ export default function TravelBingoPage() {
   return (
     <>
       <Head>
-        <title>Travel Bingo - Gamepad</title>
+        <title>Travel Bingo — GamePad</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 

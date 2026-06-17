@@ -58,18 +58,19 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Gamepad - Fun Games for the Family</title>
-        <meta name="description" content="Play fun games with family and friends. Track scores, compete, and have fun!" />
+        <title>GamePad — Fun games for the family</title>
+        <meta name="description" content="GamePad bundles four ready-to-play family games — Scrabble Scorer, Quiz, Darts, and Travel Bingo. No setup, no scoring headaches; play in seconds." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="canonical" href="https://gamepad.ashishgupta.co.uk/" />
       </Head>
 
-      <main className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100">
+      <main className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-teal-50">
         <ProfessionalHeader />
 
         {/* Hero Section */}
         <section className="pt-16 pb-6 px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-2">
+            <h1 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-amber-500 mb-2">
               Fun Games for the Family
             </h1>
             <p className="text-base text-slate-500 font-medium">
@@ -81,7 +82,7 @@ export default function Home() {
                 Welcome back, {session.user.name}!
               </p>
             ) : (
-              <div className="mt-4 mb-2 px-4 py-3 bg-white/60 backdrop-blur-sm rounded-xl max-w-md mx-auto border border-purple-100 flex items-center gap-2">
+              <div className="mt-4 mb-2 px-4 py-3 bg-white/60 backdrop-blur-sm rounded-xl max-w-md mx-auto border border-orange-100 flex items-center gap-2">
                 <span className="text-sm">👋</span>
                 <p className="text-sm text-slate-600">
                   Sign in to save progress, or play as guest.
@@ -131,7 +132,7 @@ export default function Home() {
         <footer className="py-4 px-4 bg-slate-900 text-white mt-8">
           <div className="max-w-4xl mx-auto text-center">
             <p className="text-xs text-slate-400">
-              &copy; 2024 Gamepad
+              &copy; 2026 GamePad
             </p>
           </div>
         </footer>

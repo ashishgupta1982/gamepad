@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gamepad.ashishgupta.co.uk/sitemap.xml

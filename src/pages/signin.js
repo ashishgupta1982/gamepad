@@ -11,12 +11,12 @@ export default function SignIn() {
   return (
     <>
       <Head>
-        <title>Sign In - Aspiro Consulting</title>
-        <meta name="description" content="Sign in to Aspiro Consulting AI platform" />
+        <title>Sign in — GamePad</title>
+        <meta name="description" content="Sign in to GamePad to save your scores and stats — or keep playing as a guest." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      <main className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-teal-50">
         <Header />
         <div className="flex items-center justify-center px-6 py-20">
           <div className="max-w-md w-full">

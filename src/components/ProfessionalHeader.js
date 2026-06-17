@@ -36,10 +36,10 @@ export default function ProfessionalHeader({ showBackButton = false, onBackClick
             onClick={() => router.push('/')}
             className="flex items-center space-x-3 hover:opacity-80 transition-opacity"
           >
-            <div className="text-4xl">🎮</div>
+            <img src="/logo.svg" alt="" aria-hidden="true" className="w-10 h-10 rounded-xl shrink-0" />
             <div className="text-left">
-              <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
-                Gamepad
+              <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-amber-500">
+                GamePad
               </h1>
             </div>
           </button>
@@ -72,7 +72,7 @@ export default function ProfessionalHeader({ showBackButton = false, onBackClick
                 <div className="relative" ref={dropdownRef}>
                   <button
                     onClick={() => setDropdownOpen(!dropdownOpen)}
-                    className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-medium transition-all duration-200 hover:shadow-lg hover:scale-105"
+                    className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center text-white font-medium transition-all duration-200 hover:shadow-lg hover:scale-105"
                   >
                     {user?.name ? user.name.charAt(0).toUpperCase() : 'G'}
                   </button>
