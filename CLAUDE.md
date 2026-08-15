@@ -146,15 +146,23 @@ Helpers in `src/lib/travelBingo.js`: `generateJoinCode`, `generateId`, `findCar`
 - **`QuizRoom.pre('save')` always bumps `stateVersion`** — even on no-op saves. Don't rely on it as a change detector beyond SSE.
 - **`Game.gameType` enum is the source of truth** for which sub-config is populated. Polymorphic doc — be careful with mass projections.
 - **Travel Bingo photos use signed Cloudinary uploads from the client**, not server-side upload. Server only signs.
-- **A stray empty file named `next`** sits at the repo root (likely an accidental redirect of `next` CLI output). Safe to delete; do not edit.
+- **A stray empty file named `next`** still sits at the repo root (0 bytes, dated Oct 2025 — likely an accidental redirect of `next` CLI output). Safe to delete; do not edit. Listed in `TODO.md`.
 - **`.eslintrc.json` is minimal** — lint is permissive.
 - **No tests** in the repo. Don't assume CI.
 - **`.env.local` contains live secrets** (Mongo, Google, Anthropic, Cloudinary) and is untracked. Do not echo or paste them. The local `NEXTAUTH_SECRET` is a weak placeholder — must be rotated before any deploy.
 
-## Recent Work (since 2025-10-24)
+## Brand & SEO surface
 
-- Built full game launcher (was a generic Next.js skeleton)
-- Added Scrabble Scorer, then quiz (rebuilt Kahoot-style with SSE multi-device), darts (X01/Cricket/Clock/Killer), Travel Bingo
-- Quiz: multi-device host-can-play, per-question scores, SSE answer tracking, new round continuation, same-device scoring fixes
+The app has a real public identity — don't reintroduce skeleton defaults when copying files in from a sibling project. `public/` carries `icon.svg`, `logo.svg`, `apple-touch-icon.png`, `icon-192.png` / `icon-512.png`, `og-card.png`, `manifest.json`, `robots.txt` and `sitemap.xml`, with OG/Twitter meta and structured data wired through `_app.js` / `_document.js`. The brand pass (`c4f1c91`) deleted `next.svg` and `vercel.svg` and renamed the package — if those reappear, they came from a copied file.
+
+## Working across machines
+
+`GIT_SYNC_GUIDE.md` at the repo root documents keeping this repo in sync when work happens in more than one place, and `sync-check.ps1` is the pre-flight check it describes — run it before starting work to see whether local and remote have diverged.
+
+## History
+
+- Built as a full game launcher from a generic Next.js skeleton (from 2025-10-24)
+- Scrabble Scorer → Quiz (rebuilt Kahoot-style with SSE multi-device) → Darts (X01/Cricket/Clock/Killer) → Travel Bingo
+- Quiz: multi-device host-can-play, per-question scores, SSE answer tracking, new-round continuation, same-device scoring fixes
 - Darts: setup screen + rules modal, fixed back-button crash and start-game bug
-- Last feature commit `45a5fbb` — Travel Bingo (2026-05-02)
+- Last gameplay feature: Travel Bingo (`45a5fbb`, 2026-05-02). Since then: the GamePad brand/SEO pass and the git sync guide — no gameplay changes.

@@ -73,6 +73,18 @@ src/
 └── styles/             # globals.css
 ```
 
+## Working across machines
+
+`GIT_SYNC_GUIDE.md` covers keeping this repo in sync when work happens in more
+than one place; `./sync-check.ps1` is the pre-flight check — run it before
+starting work to see whether local and remote have diverged.
+
 ## Deployment
 
-Optimised for Vercel. Add env vars in the dashboard and deploy. Any Node 22 host works.
+Optimised for Vercel. Add env vars in the dashboard and deploy. Any Node 22 host
+works.
+
+The app ships a full public identity — icons, `manifest.json`, `og-card.png`,
+`robots.txt`, `sitemap.xml` and OG/Twitter meta. Next.js skeleton defaults
+(`next.svg`, `vercel.svg`, boilerplate titles) were removed deliberately; don't
+let them return via a copied file.
