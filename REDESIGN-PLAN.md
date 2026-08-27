@@ -1,6 +1,6 @@
 # GamePad — Realignment & Redesign Plan
 
-**Status:** proposed, awaiting go-ahead
+**Status:** ✅ **complete** — all phases landed 2026-08-27
 **Written:** 2026-08-27
 
 Two jobs in one pass:
@@ -425,22 +425,22 @@ only discovered it had not been kept when they came back and it was gone.
 - Consistent, honest empty states, replacing three improvised behaviours
   (hard 401 / localStorage / `userId: null`).
 
-### Phase 5 — Reskin: Scrabble Scorer *(pilot)*
+### Phase 5 — Reskin: Scrabble Scorer *(pilot)* ✅ **DONE**
 
 864 lines, one file, self-contained, simplest domain. If the design system
 survives this, it survives the rest. Splits into components on the way through.
 
-### Phase 6 — Reskin: Darts
+### Phase 6 — Reskin: Darts ✅ **DONE**
 
 16 components, 2,051 lines, plus a 395-line page. Four modes (X01, Cricket,
 Clock, Killer). The biggest beneficiary of the shared keypad.
 
-### Phase 7 — Reskin: Travel Bingo
+### Phase 7 — Reskin: Travel Bingo ✅ **DONE**
 
 8 components, 647 lines, plus a 388-line page. Smallest surface, and already the
 most mobile-native game in the app.
 
-### Phase 8 — Reskin: Quiz *(last, deliberately)* + first tests
+### Phase 8 — Reskin: Quiz *(last, deliberately)* + first tests ✅ **DONE**
 
 24 components, 3,107 lines, plus a **1,348-line page** — the largest, and the
 only one with live multi-device state. The SSE room machine
@@ -500,3 +500,41 @@ Phases 0–4 are the realignment and are worth shipping as a unit — after Phas
 GamePad is a suite citizen with a proper landing page, even with four
 old-looking games behind it. Phases 5–8 are then independently shippable, one
 game at a time, with no pressure to land together.
+
+
+---
+
+## Outcome
+
+All phases landed on 2026-08-27, one commit each.
+
+**What the reskin phases actually found.** The redesign was the stated goal; the
+defects were the more valuable half:
+
+| | |
+|---|---|
+| Travel Bingo | Five API routes took identity from the request body with no session check. `join` was idempotent by that id, so supplying someone else's handed you their card, progress and score. |
+| Darts | Completely broken for guests — Start Game was a dead button, silently, because the create call 401'd and the null return was never handled. |
+| Scrabble | Edit handlers assigned to a prop (`game.players = …`), so edits only appeared to save. Tied players were silently ranked 1st and 2nd. |
+| Quiz | The scoring formula existed twice with nothing keeping the copies in step. A late answer scored *negative* points; a zero time limit produced `NaN` into the database. |
+| Landing page | Production has been advertising a photo feature deleted in `60ad439`. |
+
+**Two things about the method worth keeping.**
+
+The games that carry real logic — Darts, Travel Bingo, Quiz — were re-coloured by
+a mechanical pass that touches *only* colour utilities, never structure. The
+failure mode is then visual and loud rather than behavioural and silent: the pass
+was not shade-aware for gradient stops, so a pale page wash collapsed into
+saturated tokens **three times**, and each time it was obvious the moment the page
+rendered. A regex that could reach into game logic would not have been.
+
+Tests went in *before* the quiz reskin, not after. Tests written afterwards
+describe whatever the redesign left behind; these describe what the game already
+did, which is the only version that can catch a regression.
+
+**Still outstanding, needs Ashish:**
+
+- `RESEND_API_KEY` + `EMAIL_FROM` in Vercel, or verification and reset emails
+  silently never arrive in production.
+- `NEXTAUTH_SECRET` — confirm the deployed value is not the local placeholder.
+- Nothing is pushed. All work is local commits on `master`.
