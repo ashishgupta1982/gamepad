@@ -2,7 +2,7 @@ import Head from 'next/head';
 import React from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import ProfessionalHeader from '../components/ProfessionalHeader';
+import AppHeader from '@/components/layout/AppHeader';
 
 export default function Home() {
   const { data: session } = useSession();
@@ -64,7 +64,7 @@ export default function Home() {
       </Head>
 
       <main className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-teal-50">
-        <ProfessionalHeader />
+        <AppHeader />
 
         {/* Hero Section */}
         <section className="pt-16 pb-6 px-4">

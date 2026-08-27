@@ -241,9 +241,57 @@ carries on, so email silently never arrives in production. Local dev is fine.
 **Result: Google + email/password.** Apple comes later for free — it registers
 itself once its four env vars appear, with no code change.
 
-### Phase 2 — Design system & app shell
+### Phase 2 — Design system & app shell ✅ **DONE** (2026-08-27)
 
 *The leverage phase. Everything after this is mechanical reskinning.*
+
+Built: `cn()` (clsx + tailwind-merge — both were already dependencies and
+nothing imported them; every component concatenated class strings by hand, so a
+caller's `className` never reliably won). Primitives `button`, `card`, `alert`,
+`input`, `badge`, `sheet`. Shell `AppHeader` + `GameShell`. Game primitives
+`NumericKeypad` + `TurnIndicator`. Hook `useWakeLock`.
+
+**Scope call:** built what Phases 3 and 5–8 will actually consume. Tabs, toast
+and avatar were in the original list and are **not** built — nothing needs them
+yet, and a primitive designed without a call site is a guess.
+
+**The two headers are deleted, not deprecated.** `Header.js` and
+`ProfessionalHeader.js` were near-identical copies that had already drifted in
+height, avatar size and content. All seven pages now use `AppHeader`. Three
+things changed in the merge:
+
+1. The account menu is a bottom **sheet**, not a hover-positioned dropdown. A
+   dropdown anchored under a cursor is meaningless on touch, and its options sat
+   at the top of the screen, out of thumb reach.
+2. **The email address is out of the header bar.** It was rendered in plain
+   sight on every screen of a device that gets handed to other people. It now
+   lives one tap inside the sheet.
+3. `py-2` and a 36px avatar, down from `py-4` and 40px — the old bar spent about
+   72px of a ~650px viewport on a logo and an avatar, on every screen.
+
+**A bug caught in my own code, worth recording** because it is the exact failure
+mode §3 warns about: `TurnIndicator` first built its colour as
+`` `text-${tone}` ``. Tailwind generates only classes it can literally see, so
+an interpolated name is never emitted and the element silently renders in the
+inherited colour — no error, no warning, and it reads as the prop being ignored.
+Replaced with an explicit `TONES` map, and the rule is now in `CLAUDE.md`.
+
+Two deliberate design decisions:
+
+- **`GameShell`'s action bar is a flex sibling, not `fixed`.** A fixed footer
+  overlaps the last row of content on short screens — the standard failure of
+  hand-rolled sticky footers, and one that only shows up on the devices this app
+  actually runs on.
+- **`NumericKeypad` holds `value` as a string, and does not own the display.**
+  A string so an empty pad and a typed `0` stay distinguishable, which they are
+  not once `parseInt` has run. No display because that is where the games really
+  differ — darts needs BUST/CHECKOUT states, scrabble a running word score — so
+  the reusable part is the keys and the digit rules.
+
+**Verified:** lint clean; all ten routes 200 with no compile errors; every new
+utility (`press`, `pb-safe`, `tnum`, `min-h-touch`, `bg-brand-soft`,
+`text-game-darts`, `animate-pop-in`, …) confirmed present in the compiled
+stylesheet now that real components reference them.
 
 - Token layer: colour, spacing, radius, elevation, motion curves.
 - Grow `components/ui/` into a real primitive set — button, card, dialog, sheet,

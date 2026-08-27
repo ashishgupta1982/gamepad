@@ -1,47 +1,61 @@
 import React from 'react';
+import { cn } from '@/lib/cn';
 
-const Button = React.forwardRef(({ className, children, variant = "default", size = "default", ...props }, ref) => {
-  // Button variants with proper Tailwind classes and custom styles
-  const variantStyles = {
-    default: "bg-blue-600 hover:bg-blue-700 text-white font-medium shadow-sm hover:shadow-md transition-all duration-200",
-    outline: "bg-white border-2 border-gray-200 text-gray-700 font-medium shadow-sm hover:shadow-md hover:border-gray-300 hover:bg-gray-50 transition-all duration-200",
-    secondary: "bg-gray-100 hover:bg-gray-200 text-gray-900 border border-gray-200 font-medium shadow-sm hover:shadow-md transition-all duration-200",
-    ghost: "text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium transition-all duration-200",
-    link: "text-blue-600 hover:text-blue-700 underline-offset-4 hover:underline font-medium transition-all duration-200",
-    destructive: "bg-red-600 hover:bg-red-700 text-white font-medium shadow-sm hover:shadow-md transition-all duration-200",
-    success: "bg-green-600 hover:bg-green-700 text-white font-medium shadow-sm hover:shadow-md transition-all duration-200",
-    warning: "bg-yellow-500 hover:bg-yellow-600 text-white font-medium shadow-sm hover:shadow-md transition-all duration-200",
-    gradient: "bg-gradient-to-r from-brand to-warning text-brand-foreground font-medium shadow-sm hover:shadow-md transition-all duration-200",
-  };
+// Variants map onto the design tokens rather than raw palette classes, so a
+// brand change is one line in globals.css. The previous version hardcoded
+// blue-600, gray-100, red-600 and so on — skeleton defaults that had nothing to
+// do with GamePad's actual identity and that nobody ever revisited.
+const VARIANTS = {
+  primary: 'bg-brand text-brand-foreground shadow-sm hover:bg-brand/90',
+  accent: 'bg-accent text-accent-foreground shadow-sm hover:bg-accent/90',
+  secondary: 'bg-muted text-foreground hover:bg-border',
+  outline: 'border-2 border-border bg-card text-foreground hover:bg-muted',
+  ghost: 'text-muted-foreground hover:bg-muted hover:text-foreground',
+  destructive: 'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
+  success: 'bg-success text-success-foreground shadow-sm hover:bg-success/90',
+  link: 'text-brand underline-offset-4 hover:underline',
+};
 
-  // Button sizes
-  const sizeStyles = {
-    default: "h-10 px-4 py-2",
-    sm: "h-8 px-3 py-1 text-xs",
-    lg: "h-12 px-6 py-3 text-base",
-    icon: "h-10 w-10 p-0",
-  };
+// Every size except `xs` clears the 44px minimum touch target. `xs` exists for
+// dense spots and deliberately does not — use it only where a larger parent
+// already provides the tap area.
+const SIZES = {
+  xs: 'h-8 px-3 text-xs gap-1.5',
+  sm: 'min-h-touch px-4 text-sm gap-2',
+  md: 'min-h-touch px-5 text-base gap-2',
+  lg: 'min-h-[52px] px-6 text-lg gap-2.5',
+  icon: 'min-h-touch min-w-touch p-0',
+};
 
-  // Combine all classes with proper precedence
-  const baseClasses = "inline-flex items-center justify-center rounded-lg text-sm transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none";
-  const variantClass = variantStyles[variant] || variantStyles.default;
-  const sizeClass = sizeStyles[size] || sizeStyles.default;
-  
-  // Use clsx or a simple join to ensure proper class ordering
-  const combinedClasses = [baseClasses, variantClass, sizeClass, className].filter(Boolean).join(' ');
-
+const Button = React.forwardRef(function Button(
+  { className, children, variant = 'primary', size = 'md', fullWidth = false, ...props },
+  ref,
+) {
   return (
     <button
       ref={ref}
-      className={combinedClasses}
+      // `press` is the tactile squash-and-spring from globals.css, applied here
+      // rather than at each call site so every button in the app feels the same
+      // under a thumb. That consistency is the whole point of the direction.
+      //
+      // Unknown variant/size names fall back rather than rendering unstyled, so
+      // an un-migrated call site degrades to a sensible button instead of a
+      // transparent rectangle.
+      className={cn(
+        'press inline-flex items-center justify-center rounded-lg font-semibold',
+        'transition-colors duration-200',
+        'disabled:pointer-events-none disabled:opacity-50',
+        VARIANTS[variant] || VARIANTS.primary,
+        SIZES[size] || SIZES.md,
+        fullWidth && 'w-full',
+        className,
+      )}
       {...props}
     >
       {children}
     </button>
   );
 });
-
-Button.displayName = 'Button';
 
 export default Button;
 export { Button };

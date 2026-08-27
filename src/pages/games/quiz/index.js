@@ -2,7 +2,7 @@ import Head from 'next/head';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import ProfessionalHeader from '@/components/ProfessionalHeader';
+import AppHeader from '@/components/layout/AppHeader';
 import { CATEGORIES, AVATAR_EMOJIS, AVATAR_COLORS, GAME_MODES } from '@/data/quizConstants';
 import useQuizTimer from '@/hooks/useQuizTimer';
 import useQuizScoring from '@/hooks/useQuizScoring';
@@ -918,7 +918,7 @@ Return ONLY a JSON array:
 
       <main className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100">
         {screen !== 'question' && screen !== 'question-result' && screen !== 'scoreboard' && screen !== 'podium' && (
-          <ProfessionalHeader />
+          <AppHeader />
         )}
 
         {notification && (

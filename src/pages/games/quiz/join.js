@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import ProfessionalHeader from '@/components/ProfessionalHeader';
+import AppHeader from '@/components/layout/AppHeader';
 import JoinScreen from '@/components/quiz/JoinScreen';
 import PlayerLobby from '@/components/quiz/PlayerLobby';
 import useQuizRoom from '@/hooks/useQuizRoom';
@@ -83,7 +83,7 @@ export default function JoinPage() {
         <title>Join Quiz — GamePad</title>
       </Head>
       <main className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100">
-        {screen === 'join' && <ProfessionalHeader />}
+        {screen === 'join' && <AppHeader />}
         <div className="pt-4 px-4 pb-8">
 
           {screen === 'join' && (

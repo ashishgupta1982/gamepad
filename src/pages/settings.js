@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import Header from '../components/Header';
+import AppHeader from '@/components/layout/AppHeader';
 import SettingsPage from '../components/settings/SettingsPage';
 
 export default function Settings() {
@@ -28,7 +28,7 @@ export default function Settings() {
       </Head>
 
       <main className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-teal-50">
-        <Header showBackButton={true} onBackClick={handleBack} />
+        <AppHeader showBack onBack={handleBack} title="Settings" />
         
         <SettingsPage 
           session={session}

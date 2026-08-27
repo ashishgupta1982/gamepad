@@ -4,9 +4,8 @@ Family game launcher: Scrabble Scorer, Quiz, Darts, Travel Bingo. Next.js 15 (Pa
 
 > **Active work:** `REDESIGN-PLAN.md` at the repo root is the agreed plan to
 > realign GamePad with the Aspiro suite (shared `@aspiro/auth`) and redesign it
-> mobile-first. **Phases 0 and 1 are done.** Read the plan before starting
-> anything, so you pick up at the right phase rather than re-deciding settled
-> questions.
+> mobile-first. **Phases 0-2 are done.** Read the plan before starting anything,
+> so you pick up at the right phase rather than re-deciding settled questions.
 
 ## Quick Commands
 
@@ -51,16 +50,17 @@ src/
 │               ├── index.js
 │               └── [roomCode]/{index,join,answer,stream}.js   # stream.js = SSE
 ├── components/
-│   ├── ui/                       # button, card, alert — 3 primitives only
+│   ├── ui/                       # button, card, alert, input, badge, sheet
+│   ├── layout/                   # AppHeader, GameShell
+│   ├── game/                     # NumericKeypad, TurnIndicator
 │   ├── quiz/                     # Host + player screens, lobby, podium, etc.
 │   ├── darts/                    # X01/Cricket/Clock/Killer boards + setup
 │   ├── travel-bingo/             # Card, lobby, feed
 │   ├── settings/
 │   ├── ClaudeChat.js
-│   ├── Header.js, ProfessionalHeader.js
 ├── models/                       # Mongoose
-├── hooks/                        # useQuizRoom, useQuizScoring, useQuizTimer
-├── lib/                          # auth, brand, mongodb, mongodb-adapter, travelBingo
+├── hooks/                        # useQuizRoom, useQuizScoring, useQuizTimer, useWakeLock
+├── lib/                          # auth, brand, cn, mongodb, mongodb-adapter, travelBingo
 ├── utils/                        # authHelper, rateLimiter
 ├── data/                         # quizConstants, dartsConstants
 └── styles/globals.css            # design tokens + base layer + utilities
@@ -209,6 +209,23 @@ Rebuilt in Phase 0. **Read `REDESIGN-PLAN.md` §3 before changing any of it.**
   `.scroll-contain`, plus `min-h-touch` (44px).
 - `prefers-reduced-motion` is handled globally — don't re-implement per component.
 
+**Components** — build on these rather than hand-rolling:
+
+| | |
+|---|---|
+| `ui/button`, `ui/card`, `ui/alert`, `ui/input`, `ui/badge` | token-backed primitives; `cn()` from `lib/cn` merges classes so a caller's `className` genuinely wins |
+| `ui/sheet` | Radix-backed. `side="bottom"` (default) is a bottom sheet — the right shape on a phone, since it opens under the thumb; `side="center"` for short confirms |
+| `layout/AppHeader` | the one header |
+| `layout/GameShell` | header + scrolling body + **bottom action bar**. Primary actions belong in `actions`, not at the top of the screen |
+| `game/NumericKeypad` | shared score entry. Controlled, holds `value` as a **string** so an empty pad and a typed `0` stay distinguishable. Does not own the display — that is where the games genuinely differ |
+| `game/TurnIndicator` | whose turn it is, readable at arm's length |
+| `hooks/useWakeLock` | opt in via `GameShell keepAwake` |
+
+> **Never build a class name by interpolation** (`` `text-${tone}` ``). Tailwind
+> generates only what it can literally see, so an interpolated class is never
+> emitted and the element silently renders unstyled — no error, no warning. Use
+> an explicit lookup map, as `TurnIndicator` does.
+
 ## Realtime (Quiz)
 
 Multi-device quiz uses SSE, not WebSockets. Client opens `GET /api/quiz/rooms/[roomCode]/stream`; server polls the room and pushes when `stateVersion` increments. Players submit answers via `POST /api/quiz/rooms/[roomCode]/answer`. Hook: `src/hooks/useQuizRoom.js`.
@@ -244,7 +261,7 @@ Helpers in `src/lib/travelBingo.js`: `generateJoinCode`, `generateId`, `findCar`
 
 ## Gotchas
 
-- **Two headers exist.** `Header.js` (used by `/signin`, `/settings`) and `ProfessionalHeader.js` (everything else). Phase 2 collapses them into one. Don't add a third.
+- **One header: `layout/AppHeader.jsx`.** `Header.js` and `ProfessionalHeader.js` were near-identical duplicates and are deleted. Don't add a second. Its account menu is a bottom **sheet**, not a dropdown — this phone gets passed around, and a hover-anchored menu is meaningless on touch. **The email address is deliberately not in the header bar**; it lives one tap inside the sheet.
 - **`src/pages/api/quiz/...` uses `@/...` absolute imports**, but some other files use relative paths (`../../../lib/mongodb`). Both work via `jsconfig.json` baseUrl=src.
 - **`QuizRoom.pre('save')` always bumps `stateVersion`** — even on no-op saves. Don't rely on it as a change detector beyond SSE.
 - **`Game.gameType` enum is the source of truth** for which sub-config is populated. Polymorphic doc — be careful with mass projections.
@@ -268,4 +285,5 @@ The app has a real public identity — don't reintroduce skeleton defaults when 
 - Last gameplay feature: Travel Bingo (`45a5fbb`, 2026-05-02)
 - Since then: brand/SEO pass, git sync guide, Travel Bingo photo feature removed (`60ad439`)
 - 2026-08-27: redesign plan agreed; **Phase 0** landed — design tokens, fonts, mobile base layer, config-bug fixes, doc accuracy
+- 2026-08-27: **Phase 2** landed — design system, one app shell, shared keypad/turn primitives
 - 2026-08-27: **Phase 1** landed — migrated to `@aspiro/auth` v0.7.1; email/password added alongside Google; GamePad is no longer the suite's odd one out

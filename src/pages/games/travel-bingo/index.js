@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import ProfessionalHeader from '@/components/ProfessionalHeader';
+import AppHeader from '@/components/layout/AppHeader';
 import LandingScreen from '@/components/travel-bingo/LandingScreen';
 import SubmissionScreen from '@/components/travel-bingo/SubmissionScreen';
 import BingoCard from '@/components/travel-bingo/BingoCard';
@@ -246,7 +246,7 @@ export default function TravelBingoPage() {
       </Head>
 
       <main className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-sky-50">
-        <ProfessionalHeader />
+        <AppHeader />
 
         {!game && authStatus !== 'loading' && (
           <LandingScreen onCreate={handleCreate} onJoin={handleJoin} busy={busy} />

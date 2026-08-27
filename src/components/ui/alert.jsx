@@ -1,38 +1,38 @@
 import React from 'react';
+import { cn } from '@/lib/cn';
 
-const Alert = ({ className, variant = "default", icon, ...props }) => {
-  const variantStyles = {
-    default: "bg-background text-foreground border-gray-200",
-    primary: "bg-blue-50 text-blue-800 border-blue-200",
-    success: "bg-green-50 text-green-800 border-green-200",
-    warning: "bg-yellow-50 text-yellow-800 border-yellow-200", 
-    destructive: "bg-red-50 text-red-800 border-red-200"
-  };
-
-  return (
-    <div
-      role="alert"
-      className={`
-        relative w-full rounded-lg border p-4 shadow-sm
-        transition-all duration-200
-        ${icon ? '[&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground' : ''}
-        ${variantStyles[variant] || variantStyles.default} 
-        ${className}
-      `}
-      {...props}
-    />
-  );
+// Token-backed, and each variant keeps a border as well as a tint — colour is
+// never the only thing distinguishing a warning from an error, which matters
+// for anyone who cannot separate the two hues.
+const VARIANTS = {
+  default: 'border-border bg-card text-card-foreground',
+  info: 'border-accent/30 bg-accent-soft text-foreground',
+  success: 'border-success/30 bg-success/5 text-foreground',
+  warning: 'border-warning/40 bg-warning/10 text-foreground',
+  destructive: 'border-destructive/30 bg-destructive/5 text-foreground',
 };
-Alert.displayName = "Alert";
+
+const Alert = ({ className, variant = 'default', ...props }) => (
+  <div
+    role="alert"
+    className={cn(
+      'relative w-full rounded-lg border p-4',
+      VARIANTS[variant] || VARIANTS.default,
+      className,
+    )}
+    {...props}
+  />
+);
+Alert.displayName = 'Alert';
 
 const AlertTitle = ({ className, ...props }) => (
-  <h5 className={`mb-1 font-medium leading-none tracking-tight ${className}`} {...props} />
+  <h5 className={cn('mb-1 font-semibold leading-none tracking-tight', className)} {...props} />
 );
-AlertTitle.displayName = "AlertTitle";
+AlertTitle.displayName = 'AlertTitle';
 
 const AlertDescription = ({ className, ...props }) => (
-  <div className={`text-sm [&_p]:leading-relaxed ${className}`} {...props} />
+  <div className={cn('text-sm leading-relaxed text-muted-foreground', className)} {...props} />
 );
-AlertDescription.displayName = "AlertDescription";
+AlertDescription.displayName = 'AlertDescription';
 
 export { Alert, AlertTitle, AlertDescription };

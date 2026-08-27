@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
-import ProfessionalHeader from '@/components/ProfessionalHeader';
+import AppHeader from '@/components/layout/AppHeader';
 import DartsHome from '@/components/darts/DartsHome';
 import GameModeSelector from '@/components/darts/GameModeSelector';
 import PlayerSetup from '@/components/darts/PlayerSetup';
@@ -218,7 +218,7 @@ export default function DartsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
-      <ProfessionalHeader />
+      <AppHeader />
       <div className="p-4 pb-20">
         {screen === 'loading' && (
           <div className="flex items-center justify-center py-20">

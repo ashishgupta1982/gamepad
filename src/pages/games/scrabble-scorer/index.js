@@ -2,7 +2,7 @@ import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import ProfessionalHeader from '../../../components/ProfessionalHeader';
+import AppHeader from '@/components/layout/AppHeader';
 
 export default function ScrabbleScorer() {
   const { data: session, status } = useSession();
@@ -152,7 +152,7 @@ export default function ScrabbleScorer() {
       </Head>
 
       <main className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100">
-        <ProfessionalHeader />
+        <AppHeader />
 
         {/* Notification */}
         {notification && (
