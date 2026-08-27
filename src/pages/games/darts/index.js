@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import AppHeader from '@/components/layout/AppHeader';
+import GameShell from '@/components/layout/GameShell';
 import DartsHome from '@/components/darts/DartsHome';
 import GameModeSelector from '@/components/darts/GameModeSelector';
 import PlayerSetup from '@/components/darts/PlayerSetup';
@@ -247,13 +247,31 @@ export default function DartsPage() {
   const players = currentGame?.players || playerNames.map(name => ({ name }));
   const dartsConfig = currentGame?.dartsConfig || {};
 
+  // Titles the shell by screen, so the header says where you are rather than
+  // repeating "Darts" over a screen that is plainly a Cricket board.
+  const shellTitle =
+    screen === 'playing' || screen === 'game-over'
+      ? GAME_MODES.find((m) => m.id === gameMode)?.name || 'Darts'
+      : 'Darts Scorer';
+
+  const shellBack = () => {
+    if (screen === 'mode-select') return setScreen('home');
+    if (screen === 'setup') return setScreen('mode-select');
+    if (screen === 'playing' || screen === 'game-over') return handleBack();
+    return router.push('/');
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
-      <AppHeader />
-      <div className="p-4 pb-20">
+    <GameShell
+      title={shellTitle}
+      onBack={shellBack}
+      // A darts leg is read between throws far more often than it is touched.
+      keepAwake={screen === 'playing'}
+    >
+      <div>
         {screen === 'loading' && (
           <div className="flex items-center justify-center py-20">
-            <div className="animate-spin w-8 h-8 border-4 border-red-500 border-t-transparent rounded-full" />
+            <div className="animate-spin w-8 h-8 border-4 border-game-darts border-t-transparent rounded-full" />
           </div>
         )}
 
@@ -276,14 +294,8 @@ export default function DartsPage() {
         {screen === 'setup' && (
           <div className="max-w-lg mx-auto">
             <GuestNotice className="mb-4" />
-            <button
-              onClick={() => setScreen('mode-select')}
-              className="mb-4 text-red-500 hover:text-red-600 font-semibold text-sm"
-            >
-              ← Back
-            </button>
 
-            <h2 className="text-2xl font-bold text-center mb-2 text-slate-800">
+            <h2 className="text-2xl font-bold text-center mb-2 text-foreground">
               {gameMode === 'x01' ? 'X01 Setup' :
                gameMode === 'cricket' ? 'Cricket Setup' :
                gameMode === 'around-the-clock' ? 'Around the Clock' :
@@ -293,7 +305,7 @@ export default function DartsPage() {
             <div className="text-center mb-5">
               <button
                 onClick={() => setShowRules(true)}
-                className="text-sm font-semibold text-blue-500 hover:text-blue-600 transition-colors"
+                className="text-sm font-semibold text-accent hover:text-accent transition-colors"
               >
                 How to Play?
               </button>
@@ -316,7 +328,7 @@ export default function DartsPage() {
             )}
 
             {/* Player setup */}
-            <div className="bg-white rounded-xl p-3 border border-slate-100 mb-4">
+            <div className="bg-card rounded-xl p-3 border border-border mb-4">
               <PlayerSetup
                 players={playerNames}
                 onPlayersChange={setPlayerNames}
@@ -326,15 +338,15 @@ export default function DartsPage() {
 
             {/* Killer number assignment */}
             {gameMode === 'killer' && (
-              <div className="bg-white rounded-xl p-3 border border-slate-100 mb-4">
-                <label className="text-xs font-bold text-slate-500 uppercase tracking-wide mb-2 block">
+              <div className="bg-card rounded-xl p-3 border border-border mb-4">
+                <label className="text-xs font-bold text-muted-foreground uppercase tracking-wide mb-2 block">
                   Assigned Numbers
                 </label>
                 <div className="space-y-1.5">
                   {playerNames.map((name, idx) => (
-                    <div key={idx} className="flex items-center justify-between px-2 py-1.5 bg-purple-50 rounded-lg">
-                      <span className="text-sm font-semibold text-slate-700">{name}</span>
-                      <span className="text-sm font-bold text-purple-600">
+                    <div key={idx} className="flex items-center justify-between px-2 py-1.5 bg-brand/10 rounded-lg">
+                      <span className="text-sm font-semibold text-foreground">{name}</span>
+                      <span className="text-sm font-bold text-brand">
                         Double {killerNumbers[idx] || idx + 1}
                       </span>
                     </div>
@@ -346,8 +358,8 @@ export default function DartsPage() {
                     const shuffled = available.sort(() => Math.random() - 0.5);
                     setKillerNumbers(shuffled.slice(0, 8));
                   }}
-                  className="mt-2 w-full py-2 text-xs font-semibold text-purple-600 bg-purple-50
-                             rounded-lg hover:bg-purple-100 transition-colors"
+                  className="mt-2 w-full py-2 text-xs font-semibold text-brand bg-brand/10
+                             rounded-lg hover:bg-brand/10 transition-colors"
                 >
                   Re-shuffle Numbers
                 </button>
@@ -357,7 +369,7 @@ export default function DartsPage() {
             {/* Start button */}
             <button
               onClick={handleStartGame}
-              className="w-full py-4 bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold
+              className="w-full py-4 bg-gradient-to-r from-game-darts to-game-darts text-white font-bold
                          text-lg rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-[0.98]"
             >
               Start Game
@@ -422,6 +434,6 @@ export default function DartsPage() {
           onClose={() => setShowRules(false)}
         />
       )}
-    </div>
+    </GameShell>
   );
 }

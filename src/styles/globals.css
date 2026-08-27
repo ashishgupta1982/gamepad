@@ -32,11 +32,13 @@
 
   /* Brand — #EA580C */
   --brand: 21 90% 48%;
+  --brand-deep: 16 88% 38%;
   --brand-foreground: 0 0% 100%;
   --brand-soft: 24 95% 95%;
 
   /* Accent — teal #0D9488 */
   --accent: 175 84% 32%;
+  --accent-deep: 178 86% 23%;
   --accent-foreground: 0 0% 100%;
   --accent-soft: 173 60% 95%;
 
@@ -44,6 +46,7 @@
   --destructive: 0 72% 45%;
   --destructive-foreground: 0 0% 100%;
   --success: 152 60% 32%;
+  --success-deep: 156 62% 23%;
   --success-foreground: 0 0% 100%;
   --warning: 38 92% 42%;
   --warning-foreground: 0 0% 100%;

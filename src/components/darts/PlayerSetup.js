@@ -33,13 +33,13 @@ export default function PlayerSetup({ players, onPlayersChange, previousNames = 
   return (
     <div>
       <div className="flex items-center justify-between mb-3">
-        <label className="text-xs font-bold text-slate-500 uppercase tracking-wide">
+        <label className="text-xs font-bold text-muted-foreground uppercase tracking-wide">
           Players ({players.length})
         </label>
         {players.length < maxPlayers && (
           <button
             onClick={addPlayer}
-            className="text-sm font-semibold text-red-500 hover:text-red-600 transition-colors"
+            className="text-sm font-semibold text-game-darts hover:text-game-darts-deep transition-colors"
           >
             + Add Player
           </button>
@@ -49,14 +49,14 @@ export default function PlayerSetup({ players, onPlayersChange, previousNames = 
       {/* Previous names quick-pick */}
       {availableNames.length > 0 && (
         <div className="mb-3">
-          <div className="text-[11px] text-slate-400 mb-1.5">Quick add:</div>
+          <div className="text-[11px] text-muted-foreground mb-1.5">Quick add:</div>
           <div className="flex flex-wrap gap-1.5">
             {availableNames.slice(0, 8).map(name => (
               <button
                 key={name}
                 onClick={() => addPreviousName(name)}
-                className="px-3 py-1 bg-orange-50 text-orange-700 rounded-full text-xs font-semibold
-                           hover:bg-orange-100 transition-colors border border-orange-200"
+                className="px-3 py-1 bg-game-darts/10 text-game-darts rounded-full text-xs font-semibold
+                           hover:bg-game-darts/10 transition-colors border border-game-darts/30"
               >
                 {name}
               </button>
@@ -67,8 +67,8 @@ export default function PlayerSetup({ players, onPlayersChange, previousNames = 
 
       <div className="space-y-2">
         {players.map((name, idx) => (
-          <div key={idx} className="flex items-center gap-2 bg-white rounded-xl p-2.5 border border-slate-100">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-red-400 to-orange-400 flex items-center justify-center
+          <div key={idx} className="flex items-center gap-2 bg-card rounded-xl p-2.5 border border-border">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-game-darts to-game-darts flex items-center justify-center
                             text-white font-bold text-sm shrink-0">
               {idx + 1}
             </div>
@@ -76,7 +76,7 @@ export default function PlayerSetup({ players, onPlayersChange, previousNames = 
               type="text"
               value={name}
               onChange={(e) => updateName(idx, e.target.value)}
-              className="flex-1 bg-transparent font-semibold text-slate-700 outline-none min-w-0"
+              className="flex-1 bg-transparent font-semibold text-foreground outline-none min-w-0"
               style={{ fontSize: '16px' }}
               placeholder={`Player ${idx + 1}`}
               maxLength={20}
@@ -84,7 +84,7 @@ export default function PlayerSetup({ players, onPlayersChange, previousNames = 
             {players.length > 1 && (
               <button
                 onClick={() => removePlayer(idx)}
-                className="text-slate-300 hover:text-red-400 transition-colors text-lg shrink-0"
+                className="text-border hover:text-game-darts transition-colors text-lg shrink-0"
               >
                 ✕
               </button>
@@ -106,8 +106,8 @@ export default function PlayerSetup({ players, onPlayersChange, previousNames = 
             }}
             className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               players.length === count
-                ? 'bg-red-100 text-red-700 ring-1 ring-red-300'
-                : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
+                ? 'bg-game-darts/10 text-game-darts ring-1 ring-game-darts'
+                : 'bg-muted text-muted-foreground hover:bg-border'
             }`}
           >
             {count} players

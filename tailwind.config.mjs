@@ -43,12 +43,14 @@ export default {
         // #EA580C by the brand pass (c4f1c91). Changing it would invalidate them.
         brand: {
           DEFAULT: token('brand'),
+          deep: token('brand-deep'),
           foreground: token('brand-foreground'),
           soft: token('brand-soft'),
         },
         // Secondary accent — teal. The other half of the existing identity.
         accent: {
           DEFAULT: token('accent'),
+          deep: token('accent-deep'),
           foreground: token('accent-foreground'),
           soft: token('accent-soft'),
         },
@@ -76,6 +78,7 @@ export default {
         },
         success: {
           DEFAULT: token('success'),
+          deep: token('success-deep'),
           foreground: token('success-foreground'),
         },
         warning: {

@@ -6,7 +6,7 @@ export const GAME_MODES = [
     name: 'X01',
     icon: '🎯',
     desc: 'Classic darts! Race to zero from 101, 301, 501 and more.',
-    color: 'from-red-500 to-orange-500',
+    color: 'from-game-darts to-game-darts-deep',
     rules: [
       'Each player starts at the chosen score (e.g. 501)',
       'Take turns throwing 3 darts, then enter your total score',
@@ -22,7 +22,7 @@ export const GAME_MODES = [
     name: 'Cricket',
     icon: '🏏',
     desc: 'Close numbers 15-20 and bullseye. Strategy meets accuracy.',
-    color: 'from-blue-500 to-indigo-500',
+    color: 'from-accent to-accent-deep',
     rules: [
       'Targets are: 20, 19, 18, 17, 16, 15, and Bullseye',
       'Hit each number 3 times to "close" it (single = 1 mark, double = 2, triple = 3)',
@@ -36,7 +36,7 @@ export const GAME_MODES = [
     name: 'Around the Clock',
     icon: '🕐',
     desc: 'Hit 1 through 20 in order, then bullseye. Simple and fun!',
-    color: 'from-green-500 to-emerald-500',
+    color: 'from-success to-success-deep',
     rules: [
       'Hit numbers 1 through 20 in order, then finish with Bullseye',
       'Each turn you throw 3 darts at your current target number',
@@ -50,7 +50,7 @@ export const GAME_MODES = [
     name: 'Killer',
     icon: '💀',
     desc: 'Elimination game! Become a killer and take out opponents.',
-    color: 'from-purple-500 to-pink-500',
+    color: 'from-brand to-brand-deep',
     rules: [
       'Each player is assigned a random number with a matching double',
       'Phase 1: Hit your own double to become a "Killer"',

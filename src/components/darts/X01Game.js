@@ -145,10 +145,7 @@ export default function X01Game({
     <div className="max-w-lg mx-auto">
       {/* Header */}
       <div className="flex items-center justify-between mb-3">
-        <button onClick={onBack} className="text-red-500 hover:text-red-600 font-semibold text-sm">
-          ← Back
-        </button>
-        <div className="text-sm text-slate-500">
+        <div className="text-sm text-muted-foreground">
           Round {currentRound}
           {legs > 1 && ` · Leg ${currentLeg}/${legs}`}
         </div>
@@ -157,7 +154,7 @@ export default function X01Game({
       {/* Notification */}
       {notification && (
         <div className="mb-3 text-center">
-          <div className="inline-block bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-semibold">
+          <div className="inline-block bg-warning/10 text-warning px-4 py-2 rounded-full text-sm font-semibold">
             {notification}
           </div>
         </div>

@@ -15,8 +15,8 @@ export default function CheckoutSuggestion({ remaining }) {
   if (!checkout) {
     if (BOGEY_NUMBERS.includes(remaining)) {
       return (
-        <div className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-center">
-          <div className="text-xs text-slate-400">No checkout on {remaining}</div>
+        <div className="bg-muted border border-border rounded-xl px-3 py-2 text-center">
+          <div className="text-xs text-muted-foreground">No checkout on {remaining}</div>
         </div>
       );
     }
@@ -24,11 +24,11 @@ export default function CheckoutSuggestion({ remaining }) {
   }
 
   return (
-    <div className="bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 text-center">
-      <div className="text-[11px] font-bold text-amber-600 uppercase tracking-wide mb-0.5">
+    <div className="bg-warning/10 border border-warning/30 rounded-xl px-3 py-2 text-center">
+      <div className="text-[11px] font-bold text-warning uppercase tracking-wide mb-0.5">
         Checkout ({remaining})
       </div>
-      <div className="text-amber-800 font-bold text-base tracking-wide">
+      <div className="text-warning font-bold text-base tracking-wide">
         {checkout.join(' → ')}
       </div>
     </div>

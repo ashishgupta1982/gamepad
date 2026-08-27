@@ -65,29 +65,29 @@ export default function DartsGameOver({ players, dartsConfig, onPlayAgain, onEnd
       {/* Winner announcement */}
       <div className="mb-6">
         <div className="text-5xl mb-3">🏆</div>
-        <h1 className="text-3xl font-bold text-slate-800 mb-1">Game Over!</h1>
+        <h1 className="text-3xl font-bold text-foreground mb-1">Game Over!</h1>
         {winner && (
-          <p className="text-xl text-red-500 font-semibold">{winner.name} wins!</p>
+          <p className="text-xl text-game-darts font-semibold">{winner.name} wins!</p>
         )}
       </div>
 
       {/* Stats */}
-      <div className="bg-white rounded-2xl p-4 shadow-md border border-slate-100 mb-6">
-        <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wide mb-3">Results</h3>
+      <div className="bg-card rounded-2xl p-4 shadow-md border border-border mb-6">
+        <h3 className="text-sm font-bold text-muted-foreground uppercase tracking-wide mb-3">Results</h3>
         <div className="space-y-3">
           {stats.map((s, idx) => (
-            <div key={idx} className={`p-3 rounded-xl ${idx === 0 && mode === 'x01' ? 'bg-yellow-50 border border-yellow-200' : 'bg-slate-50'}`}>
+            <div key={idx} className={`p-3 rounded-xl ${idx === 0 && mode === 'x01' ? 'bg-warning/10 border border-warning/30' : 'bg-muted'}`}>
               <div className="flex items-center justify-between mb-1">
-                <span className="font-bold text-slate-700">{s.name}</span>
+                <span className="font-bold text-foreground">{s.name}</span>
                 {mode === 'x01' && (
-                  <span className="text-sm font-semibold text-red-500">{s.legsWon} leg{s.legsWon !== 1 ? 's' : ''}</span>
+                  <span className="text-sm font-semibold text-game-darts">{s.legsWon} leg{s.legsWon !== 1 ? 's' : ''}</span>
                 )}
                 {mode === 'cricket' && (
-                  <span className="text-sm font-semibold text-blue-600">{s.points} pts</span>
+                  <span className="text-sm font-semibold text-accent">{s.points} pts</span>
                 )}
               </div>
               {mode === 'x01' && (
-                <div className="flex gap-4 text-xs text-slate-500">
+                <div className="flex gap-4 text-xs text-muted-foreground">
                   <span>Avg: {s.average}</span>
                   <span>High: {s.highest}</span>
                   <span>Checkouts: {s.checkouts}</span>
@@ -95,10 +95,10 @@ export default function DartsGameOver({ players, dartsConfig, onPlayAgain, onEnd
                 </div>
               )}
               {mode === 'around-the-clock' && (
-                <div className="text-xs text-slate-500">{s.reached}</div>
+                <div className="text-xs text-muted-foreground">{s.reached}</div>
               )}
               {mode === 'killer' && (
-                <div className="text-xs text-slate-500">
+                <div className="text-xs text-muted-foreground">
                   Lives: {s.lives} {s.wasKiller ? '(Killer)' : ''}
                 </div>
               )}
@@ -111,15 +111,15 @@ export default function DartsGameOver({ players, dartsConfig, onPlayAgain, onEnd
       <div className="flex gap-3">
         <button
           onClick={onPlayAgain}
-          className="flex-1 py-4 bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold
+          className="flex-1 py-4 bg-gradient-to-r from-game-darts to-game-darts text-white font-bold
                      text-lg rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-[0.98]"
         >
           Play Again
         </button>
         <button
           onClick={onEndGame}
-          className="px-6 py-4 bg-slate-200 text-slate-700 font-bold text-lg rounded-xl
-                     hover:bg-slate-300 transition-all"
+          className="px-6 py-4 bg-border text-foreground font-bold text-lg rounded-xl
+                     hover:bg-border transition-all"
         >
           Done
         </button>

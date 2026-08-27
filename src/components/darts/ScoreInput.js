@@ -1,151 +1,122 @@
 import React, { useState } from 'react';
+import { Undo2 } from 'lucide-react';
 import { MAX_TURN_SCORE } from '@/data/dartsConstants';
+import NumericKeypad from '@/components/game/NumericKeypad';
+import TurnIndicator from '@/components/game/TurnIndicator';
+import { cn } from '@/lib/cn';
 
+// Turn entry for X01.
+//
+// Built on the shared NumericKeypad rather than its own grid. Three games take a
+// number from a thumb and each drew its own pad: Darts ran 7-8-9 along the top
+// like a calculator, the others 1-2-3 like a phone. On a phone the phone layout
+// wins — it is the one every dial pad and passcode screen has already taught
+// your thumb.
+//
+// The display stays here rather than moving into the keypad, because the bust
+// and checkout states are what make this darts rather than arithmetic, and no
+// other game has them.
 export default function ScoreInput({
   currentPlayer,
   remainingScore,
   onSubmit,
   onUndo,
   canUndo,
-  checkoutSuggestion
+  checkoutSuggestion,
 }) {
   const [value, setValue] = useState('');
 
-  const numValue = parseInt(value) || 0;
-  const wouldBust = numValue > remainingScore || (remainingScore - numValue === 1) || numValue > MAX_TURN_SCORE;
+  const numValue = parseInt(value, 10) || 0;
+  const wouldBust =
+    numValue > remainingScore || remainingScore - numValue === 1 || numValue > MAX_TURN_SCORE;
   const isCheckout = numValue === remainingScore && numValue >= 2;
 
-  const handleDigit = (digit) => {
-    const newVal = value + digit;
-    if (parseInt(newVal) <= MAX_TURN_SCORE) {
-      setValue(newVal);
-    }
-  };
-
-  const handleBackspace = () => {
-    setValue(value.slice(0, -1));
-  };
-
-  const handleSubmit = () => {
-    if (value === '') return;
-    const score = parseInt(value) || 0;
-    if (score > MAX_TURN_SCORE) return;
-    onSubmit(score);
-    setValue('');
-  };
-
-  const handleNoScore = () => {
-    onSubmit(0);
+  const submit = () => {
+    if (value === '' || wouldBust) return;
+    onSubmit(numValue);
     setValue('');
   };
 
   return (
-    <div className="max-w-sm mx-auto">
-      {/* Current player + remaining */}
-      <div className="flex items-center justify-between mb-3 px-1">
-        <div className="text-sm font-bold text-slate-600">{currentPlayer}</div>
-        <div className="text-sm">
-          <span className="text-slate-400">Remaining: </span>
-          <span className="font-bold text-red-500 text-lg">{remainingScore}</span>
-        </div>
-      </div>
+    <div className="mx-auto w-full max-w-sm">
+      <TurnIndicator
+        name={currentPlayer}
+        label="To throw"
+        detail={remainingScore}
+        tone="darts"
+        className="mb-3"
+      />
 
-      {/* Score display */}
-      <div className={`text-center py-4 mb-3 rounded-2xl border-2 transition-colors ${
-        wouldBust && value ? 'bg-red-50 border-red-300' :
-        isCheckout ? 'bg-green-50 border-green-300' :
-        'bg-white border-slate-200'
-      }`}>
-        <div className={`text-5xl font-bold font-mono tracking-wider min-h-[60px] flex items-center justify-center ${
-          wouldBust && value ? 'text-red-500' :
-          isCheckout ? 'text-green-600' :
-          'text-slate-800'
-        }`}>
-          {value || <span className="text-slate-300">0</span>}
+      <div
+        className={cn(
+          'mb-3 rounded-lg border-2 py-4 text-center transition-colors',
+          wouldBust && value
+            ? 'border-destructive/40 bg-destructive/5'
+            : isCheckout
+              ? 'border-success/40 bg-success/5'
+              : 'border-border bg-card',
+        )}
+      >
+        <div
+          className={cn(
+            'tnum flex min-h-[56px] items-center justify-center font-display text-5xl font-semibold leading-none',
+            wouldBust && value
+              ? 'text-destructive'
+              : isCheckout
+                ? 'text-success'
+                : 'text-foreground',
+          )}
+        >
+          {value || <span className="text-muted-foreground/40">0</span>}
         </div>
         {wouldBust && value && (
-          <div className="text-red-500 text-sm font-bold mt-1">BUST!</div>
+          <div className="mt-1 text-sm font-semibold text-destructive">Bust</div>
         )}
-        {isCheckout && (
-          <div className="text-green-600 text-sm font-bold mt-1">CHECKOUT!</div>
-        )}
+        {isCheckout && <div className="mt-1 text-sm font-semibold text-success">Checkout!</div>}
       </div>
 
-      {/* Checkout suggestion */}
       {checkoutSuggestion && !value && (
-        <div className="bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 mb-3 text-center">
-          <div className="text-[11px] font-bold text-amber-600 uppercase tracking-wide mb-0.5">Checkout</div>
-          <div className="text-amber-800 font-bold text-base tracking-wide">
+        <div className="mb-3 rounded-lg border border-warning/30 bg-warning/10 px-3 py-2 text-center">
+          <div className="text-xs font-semibold uppercase tracking-wide text-warning">Checkout</div>
+          <div className="font-display text-base font-semibold tracking-wide text-warning">
             {checkoutSuggestion.join(' → ')}
           </div>
         </div>
       )}
 
-      {/* Numpad */}
-      <div className="grid grid-cols-3 gap-2 mb-3">
-        {[7, 8, 9, 4, 5, 6, 1, 2, 3].map(digit => (
+      <NumericKeypad
+        value={value}
+        onChange={setValue}
+        max={MAX_TURN_SCORE}
+        maxLength={3}
+        onSubmit={submit}
+        submitLabel={isCheckout ? 'Check out' : 'Enter score'}
+        submitDisabled={wouldBust}
+        // Three darts that scored nothing is the most common turn in a bad leg,
+        // so it gets a key rather than being buried under the pad.
+        extraKey={
           <button
-            key={digit}
-            onClick={() => handleDigit(String(digit))}
-            className="h-14 rounded-xl bg-white border border-slate-200 text-slate-800 font-bold text-xl
-                       active:bg-slate-100 active:scale-95 transition-all shadow-sm
-                       hover:bg-slate-50 select-none"
-            style={{ fontSize: '20px' }}
+            type="button"
+            onClick={() => {
+              onSubmit(0);
+              setValue('');
+            }}
+            className="press flex min-h-[56px] items-center justify-center rounded-lg border border-border bg-card text-sm font-semibold text-muted-foreground shadow-sm transition-colors hover:bg-muted"
           >
-            {digit}
+            No score
           </button>
-        ))}
-        <button
-          onClick={handleBackspace}
-          className="h-14 rounded-xl bg-slate-100 border border-slate-200 text-slate-600 font-bold text-xl
-                     active:bg-slate-200 active:scale-95 transition-all select-none"
-        >
-          ⌫
-        </button>
-        <button
-          onClick={() => handleDigit('0')}
-          className="h-14 rounded-xl bg-white border border-slate-200 text-slate-800 font-bold text-xl
-                     active:bg-slate-100 active:scale-95 transition-all shadow-sm select-none"
-          style={{ fontSize: '20px' }}
-        >
-          0
-        </button>
-        <button
-          onClick={handleSubmit}
-          disabled={!value || (wouldBust && value)}
-          className={`h-14 rounded-xl font-bold text-xl transition-all active:scale-95 select-none ${
-            !value || (wouldBust && value)
-              ? 'bg-slate-100 text-slate-300 border border-slate-200'
-              : isCheckout
-                ? 'bg-green-500 text-white shadow-md hover:bg-green-600'
-                : 'bg-red-500 text-white shadow-md hover:bg-red-600'
-          }`}
-        >
-          ✓
-        </button>
-      </div>
+        }
+      />
 
-      {/* Action buttons */}
-      <div className="flex gap-2">
-        <button
-          onClick={handleNoScore}
-          className="flex-1 py-3 bg-slate-100 text-slate-600 font-semibold rounded-xl
-                     hover:bg-slate-200 transition-all active:scale-95 text-sm"
-        >
-          No Score
-        </button>
-        <button
-          onClick={onUndo}
-          disabled={!canUndo}
-          className={`flex-1 py-3 font-semibold rounded-xl transition-all active:scale-95 text-sm ${
-            canUndo
-              ? 'bg-amber-100 text-amber-700 hover:bg-amber-200'
-              : 'bg-slate-50 text-slate-300'
-          }`}
-        >
-          ↩ Undo Last
-        </button>
-      </div>
+      <button
+        type="button"
+        onClick={onUndo}
+        disabled={!canUndo}
+        className="press mt-2 flex min-h-touch w-full items-center justify-center gap-2 rounded-lg bg-muted text-sm font-semibold text-muted-foreground transition-colors hover:bg-border disabled:pointer-events-none disabled:opacity-40"
+      >
+        <Undo2 className="h-4 w-4" aria-hidden="true" />
+        Undo last turn
+      </button>
     </div>
   );
 }

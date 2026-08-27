@@ -10,15 +10,15 @@ export default function CricketBoard({ players, cricketMarks, cricketPoints, cur
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden">
+    <div className="bg-card rounded-2xl shadow-md border border-border overflow-hidden">
       {/* Header row */}
       <div className="grid gap-0" style={{ gridTemplateColumns: `1fr repeat(${players.length}, 1fr)` }}>
-        <div className="p-2 bg-slate-50 border-b border-r border-slate-200" />
+        <div className="p-2 bg-muted border-b border-r border-border" />
         {players.map((player, idx) => (
           <div
             key={idx}
-            className={`p-2 text-center border-b border-slate-200 text-xs font-bold truncate ${
-              idx === currentPlayerIndex ? 'bg-blue-50 text-blue-700' : 'bg-slate-50 text-slate-600'
+            className={`p-2 text-center border-b border-border text-xs font-bold truncate ${
+              idx === currentPlayerIndex ? 'bg-accent/10 text-accent' : 'bg-muted text-muted-foreground'
             }`}
           >
             {player.name}
@@ -33,7 +33,7 @@ export default function CricketBoard({ players, cricketMarks, cricketPoints, cur
           className="grid gap-0"
           style={{ gridTemplateColumns: `1fr repeat(${players.length}, 1fr)` }}
         >
-          <div className="p-2.5 text-center font-bold text-slate-700 text-sm border-r border-slate-100 bg-slate-50">
+          <div className="p-2.5 text-center font-bold text-foreground text-sm border-r border-border bg-muted">
             {CRICKET_TARGET_LABELS[target]}
           </div>
           {players.map((_, pIdx) => {
@@ -42,8 +42,8 @@ export default function CricketBoard({ players, cricketMarks, cricketPoints, cur
             return (
               <div
                 key={pIdx}
-                className={`p-2.5 text-center text-lg font-bold border-r border-slate-50 ${
-                  isClosed ? 'text-green-600 bg-green-50' : marks > 0 ? 'text-blue-600' : 'text-slate-300'
+                className={`p-2.5 text-center text-lg font-bold border-r border-border ${
+                  isClosed ? 'text-success bg-success/10' : marks > 0 ? 'text-accent' : 'text-border'
                 }`}
               >
                 {getMarkSymbol(marks)}
@@ -54,15 +54,15 @@ export default function CricketBoard({ players, cricketMarks, cricketPoints, cur
       ))}
 
       {/* Points row */}
-      <div className="grid gap-0 border-t-2 border-slate-200" style={{ gridTemplateColumns: `1fr repeat(${players.length}, 1fr)` }}>
-        <div className="p-2.5 text-center font-bold text-slate-500 text-xs uppercase border-r border-slate-200 bg-slate-50">
+      <div className="grid gap-0 border-t-2 border-border" style={{ gridTemplateColumns: `1fr repeat(${players.length}, 1fr)` }}>
+        <div className="p-2.5 text-center font-bold text-muted-foreground text-xs uppercase border-r border-border bg-muted">
           Points
         </div>
         {players.map((_, pIdx) => (
           <div
             key={pIdx}
             className={`p-2.5 text-center font-bold text-lg ${
-              pIdx === currentPlayerIndex ? 'text-blue-700 bg-blue-50' : 'text-slate-700'
+              pIdx === currentPlayerIndex ? 'text-accent bg-accent/10' : 'text-foreground'
             }`}
           >
             {cricketPoints?.[pIdx] || 0}

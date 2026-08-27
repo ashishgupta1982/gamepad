@@ -166,16 +166,13 @@ export default function KillerGame({
     <div className="max-w-lg mx-auto">
       {/* Header */}
       <div className="flex items-center justify-between mb-3">
-        <button onClick={onBack} className="text-purple-500 hover:text-purple-600 font-semibold text-sm">
-          ← Back
-        </button>
-        <div className="text-sm text-slate-500">Round {currentRound}</div>
+        <div className="text-sm text-muted-foreground">Round {currentRound}</div>
       </div>
 
       {/* Notification */}
       {notification && (
         <div className="mb-3 text-center">
-          <div className="inline-block bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-semibold">
+          <div className="inline-block bg-warning/10 text-warning px-4 py-2 rounded-full text-sm font-semibold">
             {notification}
           </div>
         </div>
@@ -193,36 +190,36 @@ export default function KillerGame({
               key={idx}
               className={`p-3 rounded-xl transition-all ${
                 !alive
-                  ? 'bg-slate-50 border border-slate-100 opacity-50'
+                  ? 'bg-muted border border-border opacity-50'
                   : isActive
-                    ? 'bg-purple-50 border-2 border-purple-400 shadow-md'
-                    : 'bg-white border border-slate-100'
+                    ? 'bg-brand/10 border-2 border-brand shadow-md'
+                    : 'bg-card border border-border'
               }`}
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-white ${
-                    !alive ? 'bg-slate-300' : isKiller ? 'bg-purple-500' : 'bg-slate-400'
+                    !alive ? 'bg-border' : isKiller ? 'bg-brand' : 'bg-muted-foreground'
                   }`}>
                     {killerNumbers[idx]}
                   </div>
                   <div>
                     <div className="flex items-center gap-1.5">
-                      <span className={`font-bold text-sm ${alive ? 'text-slate-700' : 'text-slate-400 line-through'}`}>
+                      <span className={`font-bold text-sm ${alive ? 'text-foreground' : 'text-muted-foreground line-through'}`}>
                         {player.name}
                       </span>
                       {isKiller && alive && (
-                        <span className="text-[10px] bg-purple-100 text-purple-700 px-1.5 py-0.5 rounded-full font-bold">
+                        <span className="text-[10px] bg-brand/10 text-brand px-1.5 py-0.5 rounded-full font-bold">
                           KILLER
                         </span>
                       )}
                       {!alive && (
-                        <span className="text-[10px] bg-slate-200 text-slate-500 px-1.5 py-0.5 rounded-full font-bold">
+                        <span className="text-[10px] bg-border text-muted-foreground px-1.5 py-0.5 rounded-full font-bold">
                           OUT
                         </span>
                       )}
                     </div>
-                    <div className="text-[11px] text-slate-400">
+                    <div className="text-[11px] text-muted-foreground">
                       Double {killerNumbers[idx]}
                     </div>
                   </div>
@@ -232,7 +229,7 @@ export default function KillerGame({
                     <div
                       key={life}
                       className={`w-4 h-4 rounded-full ${
-                        life <= killerLives[idx] ? 'bg-red-500' : 'bg-slate-200'
+                        life <= killerLives[idx] ? 'bg-game-darts' : 'bg-border'
                       }`}
                     />
                   ))}
@@ -245,13 +242,13 @@ export default function KillerGame({
 
       {/* Current player action */}
       <div className="text-center mb-3">
-        <div className="text-sm text-slate-400 mb-1">{players[currentPlayerIndex]?.name}&apos;s turn</div>
+        <div className="text-sm text-muted-foreground mb-1">{players[currentPlayerIndex]?.name}&apos;s turn</div>
         {!currentIsKiller ? (
-          <div className="text-sm text-purple-600 font-semibold">
+          <div className="text-sm text-brand font-semibold">
             Hit Double {killerNumbers[currentPlayerIndex]} to become a Killer!
           </div>
         ) : (
-          <div className="text-sm text-purple-600 font-semibold">
+          <div className="text-sm text-brand font-semibold">
             Hit an opponent&apos;s double to remove a life!
           </div>
         )}
@@ -262,15 +259,15 @@ export default function KillerGame({
         <div className="grid grid-cols-2 gap-3 mb-3">
           <button
             onClick={handleMiss}
-            className="py-5 bg-slate-100 text-slate-600 font-bold text-lg rounded-2xl
-                       hover:bg-slate-200 transition-all active:scale-95"
+            className="py-5 bg-muted text-muted-foreground font-bold text-lg rounded-2xl
+                       hover:bg-border transition-all active:scale-95"
           >
             Miss
           </button>
           <button
             onClick={handleBecomeKiller}
-            className="py-5 bg-purple-500 text-white font-bold text-lg rounded-2xl shadow-md
-                       hover:bg-purple-600 transition-all active:scale-95"
+            className="py-5 bg-brand text-white font-bold text-lg rounded-2xl shadow-md
+                       hover:bg-brand transition-all active:scale-95"
           >
             Hit D{killerNumbers[currentPlayerIndex]}!
           </button>
@@ -284,19 +281,19 @@ export default function KillerGame({
                 <button
                   key={idx}
                   onClick={() => handleHitPlayer(idx)}
-                  className="py-4 bg-red-50 border-2 border-red-200 text-red-700 font-bold text-sm rounded-xl
-                             hover:bg-red-100 hover:border-red-300 transition-all active:scale-95"
+                  className="py-4 bg-game-darts/10 border-2 border-game-darts/30 text-game-darts font-bold text-sm rounded-xl
+                             hover:bg-game-darts/10 hover:border-game-darts/30 transition-all active:scale-95"
                 >
                   Hit {player.name}
-                  <div className="text-[11px] font-normal text-red-400">D{killerNumbers[idx]}</div>
+                  <div className="text-[11px] font-normal text-game-darts">D{killerNumbers[idx]}</div>
                 </button>
               );
             })}
           </div>
           <button
             onClick={handleMiss}
-            className="w-full py-4 bg-slate-100 text-slate-600 font-bold text-lg rounded-2xl
-                       hover:bg-slate-200 transition-all active:scale-95"
+            className="w-full py-4 bg-muted text-muted-foreground font-bold text-lg rounded-2xl
+                       hover:bg-border transition-all active:scale-95"
           >
             Miss
           </button>
@@ -309,8 +306,8 @@ export default function KillerGame({
         disabled={turns.length === 0}
         className={`w-full py-3 font-semibold rounded-xl transition-all active:scale-95 text-sm ${
           turns.length > 0
-            ? 'bg-amber-100 text-amber-700 hover:bg-amber-200'
-            : 'bg-slate-50 text-slate-300'
+            ? 'bg-warning/10 text-warning hover:bg-warning/20'
+            : 'bg-muted text-border'
         }`}
       >
         ↩ Undo Last

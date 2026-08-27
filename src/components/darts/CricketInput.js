@@ -32,8 +32,8 @@ export default function CricketInput({ currentPlayer, onSubmitMarks, onUndo, can
     <div className="max-w-sm mx-auto">
       {/* Current player */}
       <div className="text-center mb-3">
-        <div className="text-sm font-bold text-slate-600">{currentPlayer}&apos;s Turn</div>
-        <div className="text-xs text-slate-400">Dart {Math.min(dartMarks.length + 1, 3)} of 3</div>
+        <div className="text-sm font-bold text-muted-foreground">{currentPlayer}&apos;s Turn</div>
+        <div className="text-xs text-muted-foreground">Dart {Math.min(dartMarks.length + 1, 3)} of 3</div>
       </div>
 
       {/* Darts thrown display */}
@@ -47,9 +47,9 @@ export default function CricketInput({ currentPlayer, onSubmitMarks, onUndo, can
               className={`w-24 h-12 rounded-xl flex items-center justify-center text-sm font-bold border-2 transition-all ${
                 mark
                   ? mark.targetIndex === -1
-                    ? 'bg-slate-100 border-slate-300 text-slate-500 cursor-pointer hover:border-red-300'
-                    : 'bg-blue-50 border-blue-300 text-blue-700 cursor-pointer hover:border-red-300'
-                  : 'bg-white border-dashed border-slate-200 text-slate-300'
+                    ? 'bg-muted border-border text-muted-foreground cursor-pointer hover:border-game-darts/30'
+                    : 'bg-accent/10 border-accent/30 text-accent cursor-pointer hover:border-game-darts/30'
+                  : 'bg-card border-dashed border-border text-border'
               }`}
             >
               {mark
@@ -66,7 +66,7 @@ export default function CricketInput({ currentPlayer, onSubmitMarks, onUndo, can
       <div className="space-y-2 mb-3">
         {CRICKET_TARGETS.map((target, tIdx) => (
           <div key={target} className="flex items-center gap-2">
-            <div className="w-12 text-center font-bold text-slate-600 text-sm">
+            <div className="w-12 text-center font-bold text-muted-foreground text-sm">
               {CRICKET_TARGET_LABELS[target]}
             </div>
             <div className="flex gap-1.5 flex-1">
@@ -77,8 +77,8 @@ export default function CricketInput({ currentPlayer, onSubmitMarks, onUndo, can
                   disabled={dartMarks.length >= 3}
                   className={`flex-1 py-2.5 rounded-lg font-semibold text-sm transition-all active:scale-95 ${
                     dartMarks.length >= 3
-                      ? 'bg-slate-50 text-slate-300'
-                      : 'bg-white border border-slate-200 text-slate-700 hover:bg-blue-50 hover:border-blue-300 active:bg-blue-100'
+                      ? 'bg-muted text-border'
+                      : 'bg-card border border-border text-foreground hover:bg-accent/10 hover:border-accent/30 active:bg-accent/10'
                   }`}
                 >
                   {target === 'BULL'
@@ -98,8 +98,8 @@ export default function CricketInput({ currentPlayer, onSubmitMarks, onUndo, can
           disabled={dartMarks.length >= 3}
           className={`py-3 rounded-xl font-semibold text-sm transition-all active:scale-95 ${
             dartMarks.length >= 3
-              ? 'bg-slate-50 text-slate-300'
-              : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              ? 'bg-muted text-border'
+              : 'bg-muted text-muted-foreground hover:bg-border'
           }`}
         >
           Miss
@@ -109,8 +109,8 @@ export default function CricketInput({ currentPlayer, onSubmitMarks, onUndo, can
           disabled={dartMarks.length === 0}
           className={`py-3 rounded-xl font-semibold text-sm transition-all active:scale-95 ${
             dartMarks.length === 0
-              ? 'bg-slate-50 text-slate-300'
-              : 'bg-amber-100 text-amber-700 hover:bg-amber-200'
+              ? 'bg-muted text-border'
+              : 'bg-warning/10 text-warning hover:bg-warning/20'
           }`}
         >
           Clear
@@ -120,8 +120,8 @@ export default function CricketInput({ currentPlayer, onSubmitMarks, onUndo, can
           disabled={dartMarks.length === 0}
           className={`py-3 rounded-xl font-bold text-sm transition-all active:scale-95 ${
             dartMarks.length === 0
-              ? 'bg-slate-100 text-slate-300'
-              : 'bg-blue-500 text-white shadow-md hover:bg-blue-600'
+              ? 'bg-muted text-border'
+              : 'bg-accent text-white shadow-md hover:bg-accent'
           }`}
         >
           Submit
@@ -133,8 +133,8 @@ export default function CricketInput({ currentPlayer, onSubmitMarks, onUndo, can
         disabled={!canUndo}
         className={`w-full py-3 font-semibold rounded-xl transition-all active:scale-95 text-sm ${
           canUndo
-            ? 'bg-amber-100 text-amber-700 hover:bg-amber-200'
-            : 'bg-slate-50 text-slate-300'
+            ? 'bg-warning/10 text-warning hover:bg-warning/20'
+            : 'bg-muted text-border'
         }`}
       >
         ↩ Undo Last Turn

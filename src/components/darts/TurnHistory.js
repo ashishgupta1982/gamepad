@@ -5,7 +5,7 @@ export default function TurnHistory({ turns, players, maxVisible = 10 }) {
 
   if (recentTurns.length === 0) {
     return (
-      <div className="text-center text-slate-400 text-sm py-4">
+      <div className="text-center text-muted-foreground text-sm py-4">
         No turns yet
       </div>
     );
@@ -13,17 +13,17 @@ export default function TurnHistory({ turns, players, maxVisible = 10 }) {
 
   return (
     <div className="space-y-1">
-      <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">Recent Turns</h4>
+      <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-wide mb-2">Recent Turns</h4>
       {recentTurns.map((turn, idx) => {
         const playerName = players[turn.playerIndex]?.name || `P${turn.playerIndex + 1}`;
         return (
           <div
             key={turns.length - 1 - idx}
             className={`flex items-center justify-between py-1.5 px-2 rounded-lg text-sm
-              ${turn.bust ? 'bg-red-50 text-red-700' : turn.checkout ? 'bg-green-50 text-green-700' : 'bg-slate-50 text-slate-600'}`}
+              ${turn.bust ? 'bg-game-darts/10 text-game-darts' : turn.checkout ? 'bg-success/10 text-success' : 'bg-muted text-muted-foreground'}`}
           >
             <div className="flex items-center gap-2">
-              <span className="font-medium text-xs text-slate-400">R{turn.round}</span>
+              <span className="font-medium text-xs text-muted-foreground">R{turn.round}</span>
               <span className="font-semibold">{playerName}</span>
             </div>
             <div className="flex items-center gap-2">
