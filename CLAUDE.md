@@ -1,11 +1,12 @@
 # Gamepad - AI Assistant Notes
 
-Family game launcher: Scrabble Scorer, Quiz, Darts, Travel Bingo. Next.js 15 (Pages Router) + React 19, MongoDB/Mongoose, NextAuth (Google), Anthropic Claude SDK.
+Family game launcher: Scrabble Scorer, Quiz, Darts, Travel Bingo. Next.js 15 (Pages Router) + React 19, MongoDB/Mongoose, shared `@aspiro/auth` (Google + email/password), Anthropic Claude SDK.
 
 > **Active work:** `REDESIGN-PLAN.md` at the repo root is the agreed plan to
 > realign GamePad with the Aspiro suite (shared `@aspiro/auth`) and redesign it
-> mobile-first. **Phase 0 is done.** Read the plan before starting anything, so
-> you pick up at the right phase rather than re-deciding settled questions.
+> mobile-first. **Phases 0 and 1 are done.** Read the plan before starting
+> anything, so you pick up at the right phase rather than re-deciding settled
+> questions.
 
 ## Quick Commands
 
@@ -28,6 +29,7 @@ src/
 ├── pages/
 │   ├── index.js                  # Game launcher grid
 │   ├── signin.js, settings.js
+│   ├── reset-password.js, verify-email.js   # landing pages for emailed links
 │   ├── _app.js                   # fonts, SEO/OG defaults, SessionProvider
 │   ├── _document.js              # icons, manifest, PWA meta, structured data
 │   ├── games/
@@ -36,7 +38,7 @@ src/
 │   │   ├── darts/                # index.js (mode picker + game)
 │   │   └── travel-bingo/         # index.js (lobby + play)
 │   └── api/
-│       ├── auth/[...nextauth].js
+│       ├── auth/                 # [...nextauth] + 6 @aspiro/auth re-exports
 │       ├── claude.js             # Cached AI chat (rate-limited)
 │       ├── user.js
 │       ├── games/                # CRUD for Game records
@@ -58,7 +60,7 @@ src/
 │   ├── Header.js, ProfessionalHeader.js
 ├── models/                       # Mongoose
 ├── hooks/                        # useQuizRoom, useQuizScoring, useQuizTimer
-├── lib/                          # mongodb, mongodb-adapter, travelBingo
+├── lib/                          # auth, brand, mongodb, mongodb-adapter, travelBingo
 ├── utils/                        # authHelper, rateLimiter
 ├── data/                         # quizConstants, dartsConstants
 └── styles/globals.css            # design tokens + base layer + utilities
@@ -107,20 +109,60 @@ Generic cache for Claude responses, keyed off prompt hash. Used by `/api/claude`
 
 ### `User` (src/models/User.js)
 
-Minimal — `email`, `name`, `role`, `lastLoginAt`, `customQuizCategories`. No auth
-fields yet; Phase 1 spreads `authFields` from `@aspiro/auth/model` into it.
+`email`, `name`, `role`, `lastLoginAt`, `customQuizCategories`, plus `authFields`
+spread in from `@aspiro/auth/model` (password hash, verification and reset
+state). **`name` is deliberately not required** — GamePad registers with
+`requireName: false`, so the package falls back to the address local-part, and a
+required field here would reject that write and break sign-up from the inside.
 
-## Auth
+## Auth — `@aspiro/auth`
 
-- Client: `useSession()` from `next-auth/react`
-- API: `getAuthenticatedUser(req, res)` from `src/utils/authHelper.js`, or wrap with `withAuth(handler)` to 401 unauthenticated
-- Providers: **Google only**, hand-rolled in `[...nextauth].js`
-- MongoDB adapter via `@next-auth/mongodb-adapter`
-- Guest play is supported — many game APIs work without a session (host gets a session id, players join by code)
+All of it comes from the shared package (v0.7.1, pinned like the rest of the
+suite). **`src/lib/auth.js` is the only auth code this app owns** — one
+`createAuth({...})` call. Don't hand-roll auth here.
 
-> **GamePad is the last app in the suite not on `@aspiro/auth`.** The package's
-> README lists it as "deferred". Phase 1 of the redesign plan migrates it and
-> adds email/password. Don't hand-roll more auth here in the meantime.
+- **Providers: Google + email/password.** Apple ships dormant and activates
+  itself when `APPLE_SERVICES_ID` / `APPLE_TEAM_ID` / `APPLE_KEY_ID` /
+  `APPLE_PRIVATE_KEY` are all present — an env-var change, never a code change.
+- **Email/password does not use a `CredentialsProvider`.** It is a custom DB
+  session minted by the package's own `/api/auth/login` route, which is why
+  `/api/auth/providers` correctly lists **only** Google. That is the suite
+  pattern, not a bug.
+- **Routes:** `src/pages/api/auth/` holds `[...nextauth].js` plus six three-line
+  re-exports (`login`, `register`, `verify-email`, `forgot-password`,
+  `reset-password`, `resend-verification`). In the pages router a static file
+  beats the catch-all, which is why the split works and why they cannot collapse
+  into one dispatcher.
+- **Pages:** `/reset-password` and `/verify-email` serve the links the package
+  emails. It generates those URLs, so the app must serve the pages or the link
+  404s silently. **GamePad has no middleware and no signed-out redirect**, so
+  nothing can eat them — keep that true if an auth gate is ever added.
+- **`/signin` cannot be deleted**, however redundant it looks. `pages: { signIn,
+  error }` points at it, the header links to it, and NextAuth lands there on
+  failure with `?error=<code>` — which it now reads and displays.
+- `src/lib/brand.js` has **no imports** on purpose: `auth.js` pulls in mongoose,
+  the Mongo adapter and bcrypt, so a client component importing the brand from
+  there would drag all of that into the browser bundle.
+- Client: `useSession()`. API: `getAuthenticatedUser(req, res)` from
+  `src/utils/authHelper.js`, or `withAuth(handler)` to 401 unauthenticated.
+- Guest play is supported — many game APIs work without a session.
+
+**Two config lines are load-bearing and fail silently if removed:**
+`transpilePackages: ['@aspiro/auth']` in `next.config.mjs` (the package ships raw
+JSX), and `'./node_modules/@aspiro/auth/src/**/*.{js,jsx}'` in the Tailwind
+`content` array — without the latter none of the dialog's classes are generated,
+so it renders unpositioned and invisible with nothing erroring.
+
+## Environment
+
+See `.env.example` (committed — `.gitignore` blanket-ignores `.env*` with an
+explicit `!.env.example` opt-in). Google uses `GOOGLE_ID` / `GOOGLE_SECRET`; the
+package expects exactly those names, so don't rename them to `GOOGLE_CLIENT_ID`.
+
+> **`RESEND_API_KEY` + `EMAIL_FROM` must be set in Vercel.** If they are missing,
+> the package logs the verification/reset link to the server console and carries
+> on — nothing throws and nothing warns. A missing env var is therefore the most
+> likely cause of "email isn't sending", not a bug in the flow.
 
 ## Rate Limiting
 
@@ -132,14 +174,16 @@ fields yet; Phase 1 spreads `authFields` from `@aspiro/auth/model` into it.
 | `STANDARD_API` | 60/min |
 | `ADMIN_API` | 30/min |
 | `READ_API` | 120/min |
+| `AUTH_API` | 10 / 15 min |
 
 `/api/claude` derives its `X-RateLimit-*` headers from `RATE_LIMITS.CLAUDE_API`
 rather than hardcoding them, so the advertised limit cannot drift from the
 enforced one again.
 
-> `getClientIP` is defined in `rateLimiter.js` but **not exported**, so
-> `/api/claude` carries a duplicate copy. Phase 1 exports it and adds the
-> `AUTH_API` bucket (10 / 15 min / IP) that `@aspiro/auth` needs.
+`getClientIP` is exported — `@aspiro/auth` takes it as config, rate-limiting its
+routes through this limiter rather than shipping a second one. The `AUTH_API`
+bucket (10 / 15 min / IP) is deliberately a much longer window than the others:
+it exists to make online password guessing impractical, not to smooth bursts.
 
 ## Design System
 
@@ -224,3 +268,4 @@ The app has a real public identity — don't reintroduce skeleton defaults when 
 - Last gameplay feature: Travel Bingo (`45a5fbb`, 2026-05-02)
 - Since then: brand/SEO pass, git sync guide, Travel Bingo photo feature removed (`60ad439`)
 - 2026-08-27: redesign plan agreed; **Phase 0** landed — design tokens, fonts, mobile base layer, config-bug fixes, doc accuracy
+- 2026-08-27: **Phase 1** landed — migrated to `@aspiro/auth` v0.7.1; email/password added alongside Google; GamePad is no longer the suite's odd one out

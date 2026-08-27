@@ -1,83 +1,145 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { signIn } from 'next-auth/react';
-import Header from '../components/Header';
-import { Button } from '../components/ui/button';
-import { Card } from '../components/ui/card';
+import { ArrowLeft, Save, Trophy, Users, AlertCircle } from 'lucide-react';
+import { SignInDialog } from '@aspiro/auth/ui';
+import { BRAND } from '../lib/brand';
 
+// NextAuth reports failures by bouncing back here with ?error=<code>. Nothing
+// read that before, so a failed provider sign-in looked like a silent no-op:
+// the dialog closed, the page reloaded, and the user was still signed out with
+// no explanation. Codes are NextAuth's own.
+const ERRORS = {
+  OAuthAccountNotLinked:
+    'That email is already registered with a different sign-in method. Use the one you signed up with.',
+  AccessDenied: 'That sign-in was cancelled or refused.',
+  Verification: 'That link has expired or has already been used. Request a new one.',
+  CredentialsSignin: 'Those details were not recognised.',
+  Configuration: 'Sign-in is misconfigured on the server. This one is not your fault.',
+  OAuthSignin: 'Could not reach the sign-in provider. Try again in a moment.',
+  OAuthCallback: 'Could not reach the sign-in provider. Try again in a moment.',
+  SessionRequired: 'Sign in to see that page.',
+};
+
+const PERKS = [
+  { icon: Save, text: 'Your games save automatically' },
+  { icon: Trophy, text: 'Scores and stats build up over time' },
+  { icon: Users, text: 'Same account on every device' },
+];
+
+// GamePad's /signin is a fallback, not a front door.
+//
+// Every game is playable signed out, so nothing routes here to gate access —
+// `pages: { signIn, error }` points at it, the header links to it, and NextAuth
+// lands here on failure. That is why it cannot be deleted however redundant it
+// looks once the landing page has its own dialog.
+//
+// It exists to do two things the dialog alone cannot: explain what signing in
+// actually buys you, and say plainly that not signing in is a real option.
 export default function SignIn() {
   const router = useRouter();
+  const [open, setOpen] = useState(false);
+
+  const code = typeof router.query.error === 'string' ? router.query.error : null;
+  const error = code ? ERRORS[code] || 'Something went wrong signing in. Try again.' : null;
+
+  // Open the dialog on arrival, but not on top of an error — someone bounced
+  // back here needs to read what went wrong before being handed the same form.
+  useEffect(() => {
+    if (!router.isReady) return;
+    if (!code) setOpen(true);
+  }, [router.isReady, code]);
+
+  const handleSignIn = (provider, callbackUrl) =>
+    signIn(provider, { callbackUrl: callbackUrl || '/' });
 
   return (
     <>
       <Head>
         <title>Sign in — GamePad</title>
-        <meta name="description" content="Sign in to GamePad to save your scores and stats — or keep playing as a guest." />
+        <meta
+          name="description"
+          content="Sign in to GamePad to save your scores and stats — or keep playing as a guest."
+        />
       </Head>
 
-      <main className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-teal-50">
-        <Header />
-        <div className="flex items-center justify-center px-6 py-20">
-          <div className="max-w-md w-full">
-            <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold text-slate-900 mb-4">
-                Sign In
-              </h1>
-              <p className="text-slate-600">
-                Choose your preferred sign-in method
-              </p>
+      <main className="flex min-h-dvh flex-col bg-background px-safe">
+        <header className="pt-safe">
+          <Link
+            href="/"
+            className="press inline-flex min-h-touch items-center gap-2 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground"
+          >
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+            All games
+          </Link>
+        </header>
+
+        <div className="mx-auto flex w-full max-w-sm flex-1 flex-col justify-center py-10">
+          <img src="/logo.svg" alt="" aria-hidden="true" className="mb-6 h-14 w-14 rounded-2xl" />
+
+          <h1 className="font-display text-3xl font-semibold text-foreground">
+            Save your games
+          </h1>
+          <p className="mt-2 text-base leading-relaxed text-muted-foreground">
+            Everything on GamePad works without an account. Signing in just means
+            it sticks around afterwards.
+          </p>
+
+          {error && (
+            <div
+              role="alert"
+              className="mt-6 flex items-start gap-3 rounded-lg border border-destructive/30 bg-destructive/5 p-4"
+            >
+              <AlertCircle
+                className="mt-0.5 h-5 w-5 shrink-0 text-destructive"
+                aria-hidden="true"
+              />
+              <p className="text-sm text-foreground">{error}</p>
             </div>
+          )}
 
-            {/* Sign In Card */}
-            <Card className="p-8 border-0 bg-white/80 backdrop-blur-sm shadow-xl">
-              <div className="space-y-6">
+          <ul className="mt-8 space-y-4">
+            {PERKS.map(({ icon: Icon, text }) => (
+              <li key={text} className="flex items-center gap-3">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-soft">
+                  <Icon className="h-4 w-4 text-brand" aria-hidden="true" />
+                </span>
+                <span className="text-sm text-foreground">{text}</span>
+              </li>
+            ))}
+          </ul>
 
-              {/* Google Sign In */}
-              <Button
-                onClick={() => signIn('google', { prompt: 'select_account', callbackUrl: '/' })}
-                variant="outline"
-                size="lg"
-                className="w-full h-14 flex items-center justify-center gap-3 text-lg"
-              >
-                <svg className="w-6 h-6" viewBox="0 0 24 24">
-                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                </svg>
-                Continue with Google
-              </Button>
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            className="press mt-8 min-h-touch w-full rounded-lg bg-brand px-6 text-base font-semibold text-brand-foreground shadow-sm transition-colors duration-200 hover:bg-brand/90"
+          >
+            {error ? 'Try again' : 'Sign in'}
+          </button>
 
-              {/* Divider */}
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-200" />
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-gray-500">or</span>
-                </div>
-              </div>
-
-              {/* Guest Access */}
-              <Button
-                onClick={() => router.push('/')}
-                variant="outline"
-                className="w-full h-12 border-slate-300 text-slate-600 hover:bg-slate-50"
-              >
-                Continue as Guest
-              </Button>
-              </div>
-            </Card>
-
-            {/* Footer */}
-            <div className="text-center mt-8">
-              <p className="text-slate-500 text-sm">
-                By signing in, you agree to our terms of service and privacy policy
-              </p>
-            </div>
-          </div>
+          <Link
+            href="/"
+            className="press mt-3 flex min-h-touch w-full items-center justify-center rounded-lg text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground"
+          >
+            Keep playing as a guest
+          </Link>
         </div>
       </main>
+
+      {/* One dialog, one set of options. The page never renders provider buttons
+          of its own — two copies of the same choices is how a sibling app ended
+          up offering different options at the top and bottom of a page. */}
+      <SignInDialog
+        open={open}
+        onOpenChange={setOpen}
+        title="Sign in to GamePad"
+        description="Save your scores, stats and game history."
+        appleEnabled={process.env.NEXT_PUBLIC_APPLE_ENABLED === 'true'}
+        accent={BRAND.colour}
+        onSignIn={handleSignIn}
+      />
     </>
   );
 }

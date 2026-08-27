@@ -167,9 +167,55 @@ Ordered so each phase is independently shippable and de-risks the next.
 errors; tokens and every new utility confirmed present in the compiled
 stylesheet, with `<alpha-value>` wiring correct so `bg-brand/10` works.
 
-### Phase 1 — Shared auth (`@aspiro/auth`)
+### Phase 1 — Shared auth (`@aspiro/auth`) ✅ **DONE** (2026-08-27)
 
 *Mechanical. Follow the README's eleven traps literally.*
+
+**Landed as specified.** GamePad is no longer the suite's odd one out — the
+package's "Out of scope: GamePad (deferred)" line is now stale.
+
+Trap-by-trap outcome, since these are the parts that fail silently:
+
+| Trap | Outcome |
+|---|---|
+| 1 — Tailwind must scan the package | Added. **Verified**, not assumed: the compiled stylesheet grew 79.4 KB → 86.2 KB from that glob alone, and `.sm\:max-w-md` (used only by the dialog) is present inside its media query. |
+| 2 — `transpilePackages` | Added. |
+| 3 — unresolved peers pass lint, fail deploy | Installed `bcryptjs`, `jsonwebtoken`, `cookie`, `@radix-ui/react-dialog`. **All nine bare imports resolved via `require.resolve` before committing** — lint does not do this. |
+| 4 — auth gate eats the emailed links | Not applicable, and confirmed so: no `middleware.js`, no signed-out redirect in `_app.js`, no bare-pages list. GamePad was the easiest of the seven for exactly this reason. |
+| 5 — `/signin` is load-bearing | Kept and rebuilt around `SignInDialog`. It now reads `?error=` and maps NextAuth's codes to real sentences — nothing read that before, so a failed provider sign-in was a silent no-op. |
+| 6 — brand in its own file | `src/lib/brand.js`, no imports. |
+| 7 — no `file:` linking | Pinned to the `v0.7.1` tarball, matching all six sibling apps. |
+| 8 — the second app audits the first | Nothing to send back; `verifyNote` carries GamePad's own copy. |
+| 9 — provisioning belongs in `onSession` | N/A — GamePad's callback only decorates. It returns early on `enrichFailed`. |
+| 10 — env var names | **Checked before installing.** The package expects `GOOGLE_ID` / `GOOGLE_SECRET`, which is exactly what GamePad already had, so Google sign-in was untouched. |
+| 11 — don't promote an app's local fix | Nothing promoted. |
+
+**Beyond the checklist:**
+
+- Removed the duplicate `getClientIP` from `/api/claude`. It only existed because
+  the copy in `rateLimiter.js` was never exported — which is the same fact trap 3
+  is about.
+- `User.name` is deliberately **not** `required`. With `requireName: false` the
+  package falls back to the address local-part, and a required field would have
+  rejected that write and broken sign-up from the inside.
+- Added `.env.example` and opted it out of the blanket `.env*` ignore, because
+  the new email vars fail silently when missing and the list needs to live
+  somewhere a new machine can find.
+- Confirmed nothing depended on the old session shape: the previous callback set
+  `session.userId`, which **no code in the repo ever read**. The five real
+  readers all use `session.user.id`, which the package sets.
+
+**Verified:** lint clean; `/`, `/signin`, `/signin?error=…`, `/reset-password`,
+`/verify-email`, `/settings` and the game routes all 200; the six auth routes
+return 405 to a GET (handler mounted, method-guarded) rather than 500;
+`/api/games` and `/api/user` still 401 unauthenticated.
+
+> `/api/auth/providers` lists **only Google**, and that is correct — email/password
+> is a custom DB-session route, not a `CredentialsProvider`. Don't "fix" it.
+
+**Still outstanding, needs Ashish:** `RESEND_API_KEY` + `EMAIL_FROM` in Vercel.
+Without them the package logs verification/reset links to the server console and
+carries on, so email silently never arrives in production. Local dev is fine.
 
 - `npm i @aspiro/auth` — pin a tag, as the rest of the suite does (**not** `file:`, trap 7).
 - `next.config.mjs` → `transpilePackages: ['@aspiro/auth']` (trap 2).

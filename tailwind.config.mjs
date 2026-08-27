@@ -17,7 +17,17 @@ export default {
 
   // Only ./src exists. The old config also scanned ./pages, ./components and
   // ./app, none of which are real directories in this repo.
-  content: ['./src/**/*.{js,jsx}'],
+  //
+  // The @aspiro/auth entry is REQUIRED and is not optional tidiness: Tailwind
+  // only generates classes it can see, and by default it never looks inside
+  // node_modules. Drop that line and none of the sign-in dialog's utility
+  // classes are emitted, so it renders with no positioning, no background and
+  // no size — invisible. Nothing errors, nothing warns, and the DOM node is
+  // genuinely there. It has cost a debugging session in more than one app.
+  content: [
+    './src/**/*.{js,jsx}',
+    './node_modules/@aspiro/auth/src/**/*.{js,jsx}',
+  ],
 
   theme: {
     extend: {

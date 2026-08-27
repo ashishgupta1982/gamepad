@@ -1,7 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 import dbConnect from '../../lib/mongodb';
 import CachedResponse from '../../models/CachedResponse';
-import { checkRate, RATE_LIMITS } from '../../utils/rateLimiter';
+import { checkRate, getClientIP, RATE_LIMITS } from '../../utils/rateLimiter';
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -13,14 +13,9 @@ function createCacheKey(prompt) {
   return Buffer.from(prompt).toString('base64').substring(0, 50);
 }
 
-// Helper function to get client IP
-function getClientIP(req) {
-  return req.headers['x-forwarded-for']?.split(',')[0] || 
-         req.headers['x-real-ip'] || 
-         req.connection?.remoteAddress || 
-         req.socket?.remoteAddress ||
-         'unknown';
-}
+// getClientIP now comes from utils/rateLimiter, which is where the limiter it
+// feeds already lived. The local copy here existed only because that function
+// was never exported.
 
 export default async function handler(req, res) {
   // Apply rate limiting

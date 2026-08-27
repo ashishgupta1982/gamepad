@@ -34,15 +34,34 @@ export const RATE_LIMITS = {
     windowMs: 60 * 1000,     // 1 minute window
     maxRequests: 120,        // 120 requests per minute
     message: 'Too many requests. Please slow down.'
+  },
+
+  // Sign-in, registration, password reset and verification resends.
+  //
+  // Required by @aspiro/auth. The window is deliberately far longer than the
+  // others: this bucket exists to make online password guessing impractical,
+  // not to smooth out bursty traffic. Ten attempts per quarter hour per IP is
+  // generous for a real person who has forgotten which password they used, and
+  // useless to anyone working through a list.
+  AUTH_API: {
+    windowMs: 15 * 60 * 1000, // 15 minute window
+    maxRequests: 10,          // 10 attempts per 15 minutes
+    message: 'Too many sign-in attempts. Please wait a few minutes and try again.'
   }
 };
 
 /**
  * Get client IP address from request
+ *
+ * Exported because @aspiro/auth takes it as config — the package rate-limits the
+ * auth routes using the host app's limiter rather than shipping a second one.
+ * It was defined here but not exported for a long time, which is why
+ * /api/claude ended up carrying a duplicate copy.
+ *
  * @param {Object} req - Express request object
  * @returns {string} - Client IP address
  */
-function getClientIP(req) {
+export function getClientIP(req) {
   return req.headers['x-forwarded-for']?.split(',')[0] || 
          req.headers['x-real-ip'] || 
          req.connection?.remoteAddress || 

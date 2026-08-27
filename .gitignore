@@ -32,6 +32,10 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# ...opted in: .env.example documents which vars are required and holds no
+# secrets. @aspiro/auth fails silently on missing RESEND_API_KEY/EMAIL_FROM,
+# so the list needs to live somewhere a new machine can actually find it.
+!.env.example
 
 # vercel
 .vercel
