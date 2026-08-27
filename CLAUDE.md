@@ -282,6 +282,25 @@ Phase 4 notes in `REDESIGN-PLAN.md` for what that allowed.
 
 ## Quiz internals
 
+**The quiz advances itself between questions.** A question used to need three
+Continue taps — past the reveal, past the points, past the leaderboard — which on
+a fast game round a table turned whoever held the host device into a button
+operator. `hooks/useAutoAdvance.js` + `components/quiz/AutoAdvance.jsx` replace
+all three with visible countdowns; durations are in `AUTO_ADVANCE`
+(`data/quizConstants.js`).
+
+> **Only one device runs the clock** — the host in multi-device play, the single
+> device otherwise (`drivesRoom`). Everyone else is moved by SSE. A timer per
+> device would drift, and "the whole table starts the next question together" is
+> the point. A non-driving device is passed `secondsLeft={null}` and shows the
+> message without a number, because a frozen or disagreeing count reads as broken.
+
+The countdown is deliberately visible, and the host's Skip is deliberately
+quiet: if skipping becomes the normal way through, the durations are wrong —
+change `AUTO_ADVANCE`, don't add another button.
+
+
+
 - **`lib/quizScoring.js` is the only scoring formula.** It used to exist twice —
   in `hooks/useQuizScoring.js` for same-device play and inline in the answer API
   route for multi-device. They were identical by coincidence, with nothing

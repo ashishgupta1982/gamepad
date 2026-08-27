@@ -1,7 +1,7 @@
 import React from 'react';
 import { ANSWER_COLORS } from '@/data/quizConstants';
 
-export default function QuestionResult({ players, questionIndex, question, onContinue }) {
+export default function QuestionResult({ players, questionIndex, question }) {
   const correctAnswer = question.options[question.correctAnswer];
 
   const sortedPlayers = [...players].sort((a, b) => {
@@ -79,14 +79,6 @@ export default function QuestionResult({ players, questionIndex, question, onCon
           );
         })}
       </div>
-
-      <button
-        onClick={onContinue}
-        className="w-full py-4 bg-gradient-to-r from-brand to-brand-deep text-white font-bold
-                   text-lg rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-98"
-      >
-        Continue
-      </button>
     </div>
   );
 }

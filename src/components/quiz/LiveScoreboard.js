@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export default function LiveScoreboard({ players, questionIndex, totalQuestions, onContinue, compact = false }) {
+export default function LiveScoreboard({ players, questionIndex, totalQuestions, compact = false }) {
   const [animatedScores, setAnimatedScores] = useState({});
 
   const sortedPlayers = [...players].sort((a, b) => (b.score || 0) - (a.score || 0));
@@ -105,16 +105,6 @@ export default function LiveScoreboard({ players, questionIndex, totalQuestions,
           );
         })}
       </div>
-
-      {onContinue && (
-        <button
-          onClick={onContinue}
-          className="w-full py-4 bg-gradient-to-r from-brand to-brand-deep text-white font-bold
-                     text-lg rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-98"
-        >
-          {questionIndex + 1 >= totalQuestions ? 'See Final Results' : 'Next Question'}
-        </button>
-      )}
     </div>
   );
 }

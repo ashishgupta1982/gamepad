@@ -152,7 +152,7 @@ export default function JoinPage() {
                   <span className="font-semibold">Did you know?</span> {roomState.revealedAnswer.explanation}
                 </div>
               )}
-              <div className="mt-4 text-muted-foreground text-sm">Waiting for host...</div>
+              <div className="mt-4 text-sm text-muted-foreground">Scores coming up…</div>
             </div>
           )}
 

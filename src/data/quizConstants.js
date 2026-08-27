@@ -69,3 +69,15 @@ export const ROOM_STATUSES = {
   SCORES: 'scores',
   FINISHED: 'finished'
 };
+
+// How long each between-questions screen stays up before the quiz moves itself
+// on. Tuned for a game played round a table: long enough to read the answer and
+// see who gained, short enough that nobody reaches for a button.
+//
+// Only the host counts down in multi-device play; everyone else follows over
+// SSE, so these are also what keeps the table in step.
+export const AUTO_ADVANCE = {
+  REVEAL_SECONDS: 3,   // correct answer highlighted on the question
+  RESULTS_SECONDS: 5,  // who got it right, and what it was worth
+  SCORES_SECONDS: 5,   // the leaderboard
+};
