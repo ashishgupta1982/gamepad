@@ -68,7 +68,7 @@ export default function PlayerSetup({ players, onPlayersChange, previousNames = 
       <div className="space-y-2">
         {players.map((name, idx) => (
           <div key={idx} className="flex items-center gap-2 bg-card rounded-xl p-2.5 border border-border">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-game-darts to-game-darts flex items-center justify-center
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-game-darts to-game-darts-deep flex items-center justify-center
                             text-white font-bold text-sm shrink-0">
               {idx + 1}
             </div>

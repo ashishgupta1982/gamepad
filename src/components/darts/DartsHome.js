@@ -8,7 +8,7 @@ export default function DartsHome({ games, onNewGame, onContinueGame, onDeleteGa
   return (
     <div className="max-w-2xl mx-auto">
       <div className="text-center mb-6">
-        <h1 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-game-darts to-game-darts mb-2">
+        <h1 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-game-darts to-game-darts-deep mb-2">
           Darts
         </h1>
         <p className="text-muted-foreground">Choose a game mode and start throwing!</p>
@@ -16,7 +16,7 @@ export default function DartsHome({ games, onNewGame, onContinueGame, onDeleteGa
 
       <button
         onClick={onNewGame}
-        className="w-full py-5 bg-gradient-to-r from-game-darts to-game-darts text-white font-bold
+        className="w-full py-5 bg-gradient-to-r from-game-darts to-game-darts-deep text-white font-bold
                    text-xl rounded-2xl shadow-lg hover:shadow-xl transition-all active:scale-[0.98] mb-6"
       >
         <span className="block text-3xl mb-1">🎯</span>

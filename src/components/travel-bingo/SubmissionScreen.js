@@ -40,9 +40,9 @@ export default function SubmissionScreen({ game, myCarId, isHost, onSubmitItems,
 
   return (
     <div className="max-w-2xl mx-auto px-4 pt-4 pb-10">
-      <div className="bg-white rounded-2xl shadow-md p-5 border border-emerald-100">
-        <h2 className="text-xl font-bold text-slate-800 mb-1">What do you want to spot?</h2>
-        <p className="text-sm text-slate-500 mb-4">
+      <div className="bg-card rounded-2xl shadow-md p-5 border border-game-bingo/30">
+        <h2 className="text-xl font-bold text-foreground mb-1">What do you want to spot?</h2>
+        <p className="text-sm text-muted-foreground mb-4">
           Add things you&apos;d love to find on this road trip — animals, signs, vehicles, landmarks, snacks, anything.
           Aim for at least {MIN_ITEMS_PER_CAR}. Items get pooled across all cars and AI builds your bingo cards.
         </p>
@@ -54,11 +54,11 @@ export default function SubmissionScreen({ game, myCarId, isHost, onSubmitItems,
             onChange={(e) => setDraft(e.target.value.slice(0, 100))}
             onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addItem())}
             placeholder="e.g. red tractor"
-            className="flex-1 px-4 py-2.5 border-2 border-slate-200 rounded-xl focus:outline-none focus:border-emerald-400"
+            className="flex-1 px-4 py-2.5 border-2 border-border rounded-xl focus:outline-none focus:border-game-bingo"
           />
           <button
             onClick={addItem}
-            className="px-4 py-2.5 rounded-xl font-semibold text-white bg-emerald-500 hover:bg-emerald-600"
+            className="px-4 py-2.5 rounded-xl font-semibold text-white bg-game-bingo hover:bg-game-bingo"
           >
             Add
           </button>
@@ -67,11 +67,11 @@ export default function SubmissionScreen({ game, myCarId, isHost, onSubmitItems,
         {items.length > 0 && (
           <ul className="mt-4 flex flex-wrap gap-2">
             {items.map((it, idx) => (
-              <li key={idx} className="bg-emerald-50 text-emerald-800 px-3 py-1.5 rounded-full text-sm flex items-center gap-2">
+              <li key={idx} className="bg-game-bingo/10 text-game-bingo px-3 py-1.5 rounded-full text-sm flex items-center gap-2">
                 <span>{it}</span>
                 <button
                   onClick={() => removeItem(idx)}
-                  className="text-emerald-600 hover:text-emerald-900 font-bold"
+                  className="text-game-bingo hover:text-game-bingo font-bold"
                   aria-label="Remove"
                 >
                   ×
@@ -82,42 +82,42 @@ export default function SubmissionScreen({ game, myCarId, isHost, onSubmitItems,
         )}
 
         <div className="flex items-center justify-between mt-5">
-          <p className="text-xs text-slate-500">{items.length} item{items.length === 1 ? '' : 's'} on your list</p>
+          <p className="text-xs text-muted-foreground">{items.length} item{items.length === 1 ? '' : 's'} on your list</p>
           <button
             onClick={save}
             disabled={saving}
-            className="px-4 py-2 text-sm rounded-lg font-semibold bg-slate-800 text-white hover:bg-slate-900 disabled:opacity-50"
+            className="px-4 py-2 text-sm rounded-lg font-semibold bg-foreground text-white hover:bg-foreground disabled:opacity-50"
           >
             {saving ? 'Saving…' : 'Save my list'}
           </button>
         </div>
-        {error && <p className="text-sm text-red-600 mt-2">{error}</p>}
+        {error && <p className="text-sm text-destructive mt-2">{error}</p>}
       </div>
 
-      <div className="mt-5 bg-white rounded-2xl shadow-md p-5 border border-emerald-100">
-        <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">Convoy submissions</p>
+      <div className="mt-5 bg-card rounded-2xl shadow-md p-5 border border-game-bingo/30">
+        <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">Convoy submissions</p>
         <ul className="space-y-2">
           {cars.map(c => {
             const count = c.submittedItems?.length || 0;
             const ready = count >= MIN_ITEMS_PER_CAR;
             return (
-              <li key={c.carId} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-50">
+              <li key={c.carId} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-muted">
                 <span className="text-lg">🚗</span>
-                <span className="font-medium text-slate-800 flex-1">{c.name}</span>
-                <span className={`text-sm font-semibold ${ready ? 'text-emerald-600' : 'text-slate-400'}`}>
+                <span className="font-medium text-foreground flex-1">{c.name}</span>
+                <span className={`text-sm font-semibold ${ready ? 'text-game-bingo' : 'text-muted-foreground'}`}>
                   {count} item{count === 1 ? '' : 's'} {ready && '✓'}
                 </span>
               </li>
             );
           })}
         </ul>
-        <p className="text-xs text-slate-500 mt-3">{totalSubmitted} items submitted across the convoy</p>
+        <p className="text-xs text-muted-foreground mt-3">{totalSubmitted} items submitted across the convoy</p>
 
         {isHost && (
           <button
             onClick={onGenerate}
             disabled={!allCarsReady || generating || totalSubmitted < 9}
-            className="w-full mt-4 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-500 hover:opacity-90 disabled:opacity-40"
+            className="w-full mt-4 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-game-bingo to-game-bingo-deep hover:opacity-90 disabled:opacity-40"
           >
             {generating
               ? 'AI is building your bingo cards…'
@@ -127,7 +127,7 @@ export default function SubmissionScreen({ game, myCarId, isHost, onSubmitItems,
           </button>
         )}
         {!isHost && (
-          <p className="mt-4 text-center text-sm text-slate-500">
+          <p className="mt-4 text-center text-sm text-muted-foreground">
             Waiting for the host to generate cards…
           </p>
         )}

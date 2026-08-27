@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import AppHeader from '@/components/layout/AppHeader';
+import { useRouter } from 'next/router';
+import GameShell from '@/components/layout/GameShell';
 import LandingScreen from '@/components/travel-bingo/LandingScreen';
 import SubmissionScreen from '@/components/travel-bingo/SubmissionScreen';
 import BingoCard from '@/components/travel-bingo/BingoCard';
@@ -49,6 +50,7 @@ function clearStored() {
 
 export default function TravelBingoPage() {
   const { data: session, status: authStatus } = useSession();
+  const router = useRouter();
   const [game, setGame] = useState(null);
   const [myCarId, setMyCarId] = useState(null);
   const [busy, setBusy] = useState(false);
@@ -250,8 +252,14 @@ export default function TravelBingoPage() {
         <title>Travel Bingo — GamePad</title>
       </Head>
 
-      <main className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-sky-50">
-        <AppHeader />
+      <GameShell
+        title="Travel Bingo"
+        onBack={() => router.push('/')}
+        bodyClassName="px-0"
+        // A bingo card is watched out of a car window for long stretches
+        // between taps, which is exactly what the wake lock is for.
+        keepAwake={!!game}
+      >
 
         {!game && authStatus !== 'loading' && (
           <LandingScreen onCreate={handleCreate} onJoin={handleJoin} busy={busy} />
@@ -268,10 +276,10 @@ export default function TravelBingoPage() {
               generating={generating}
             />
             <div className="max-w-2xl mx-auto px-4 mt-4 mb-8 text-center">
-              <p className="text-xs text-slate-500 mb-2">
-                Game code: <span className="font-mono font-bold text-emerald-700 tracking-wider">{game.travelBingoConfig.joinCode}</span>
+              <p className="text-xs text-muted-foreground mb-2">
+                Game code: <span className="font-mono font-bold text-game-bingo tracking-wider">{game.travelBingoConfig.joinCode}</span>
               </p>
-              <button onClick={handleLeave} className="text-xs text-slate-400 hover:text-red-600 underline">
+              <button onClick={handleLeave} className="text-xs text-muted-foreground hover:text-destructive underline">
                 Leave game
               </button>
             </div>
@@ -280,19 +288,19 @@ export default function TravelBingoPage() {
 
         {game && phase === 'generating' && (
           <div className="max-w-md mx-auto px-4 pt-12 text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500 mx-auto" />
-            <p className="mt-4 text-slate-600 font-semibold">AI is building your bingo cards…</p>
-            <p className="text-xs text-slate-400 mt-1">This usually takes a few seconds.</p>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-game-bingo mx-auto" />
+            <p className="mt-4 text-muted-foreground font-semibold">AI is building your bingo cards…</p>
+            <p className="text-xs text-muted-foreground mt-1">This usually takes a few seconds.</p>
           </div>
         )}
 
         {game && phase === 'playing' && myCar && (
           <div className="max-w-3xl mx-auto px-4 pt-3 pb-10">
-            <div className="flex bg-white rounded-xl shadow p-1 mb-4 border border-emerald-100">
+            <div className="flex bg-card rounded-xl shadow p-1 mb-4 border border-game-bingo/30">
               <button
                 onClick={() => setActiveView('mine')}
                 className={`flex-1 py-2 text-sm font-semibold rounded-lg transition ${
-                  activeView === 'mine' ? 'bg-emerald-500 text-white shadow' : 'text-slate-500'
+                  activeView === 'mine' ? 'bg-game-bingo text-white shadow' : 'text-muted-foreground'
                 }`}
               >
                 My card
@@ -300,7 +308,7 @@ export default function TravelBingoPage() {
               <button
                 onClick={() => setActiveView('others')}
                 className={`flex-1 py-2 text-sm font-semibold rounded-lg transition ${
-                  activeView === 'others' ? 'bg-emerald-500 text-white shadow' : 'text-slate-500'
+                  activeView === 'others' ? 'bg-game-bingo text-white shadow' : 'text-muted-foreground'
                 }`}
               >
                 Other cars
@@ -308,7 +316,7 @@ export default function TravelBingoPage() {
               <button
                 onClick={() => setActiveView('feed')}
                 className={`flex-1 py-2 text-sm font-semibold rounded-lg transition ${
-                  activeView === 'feed' ? 'bg-emerald-500 text-white shadow' : 'text-slate-500'
+                  activeView === 'feed' ? 'bg-game-bingo text-white shadow' : 'text-muted-foreground'
                 }`}
               >
                 Live feed
@@ -334,7 +342,7 @@ export default function TravelBingoPage() {
             {activeView === 'others' && (
               <div className="space-y-4">
                 {otherCars.length === 0 ? (
-                  <p className="text-center text-sm text-slate-500">No other cars yet.</p>
+                  <p className="text-center text-sm text-muted-foreground">No other cars yet.</p>
                 ) : otherCars.map(c => (
                   <BingoCard
                     key={c.carId}
@@ -354,10 +362,10 @@ export default function TravelBingoPage() {
             )}
 
             <div className="text-center mt-6">
-              <p className="text-xs text-slate-500">
-                Game code: <span className="font-mono font-bold text-emerald-700 tracking-wider">{game.travelBingoConfig.joinCode}</span>
+              <p className="text-xs text-muted-foreground">
+                Game code: <span className="font-mono font-bold text-game-bingo tracking-wider">{game.travelBingoConfig.joinCode}</span>
               </p>
-              <button onClick={handleLeave} className="text-xs text-slate-400 hover:text-red-600 underline mt-1">
+              <button onClick={handleLeave} className="text-xs text-muted-foreground hover:text-destructive underline mt-1">
                 Leave game
               </button>
             </div>
@@ -370,7 +378,7 @@ export default function TravelBingoPage() {
 
         {error && (
           <div className="max-w-md mx-auto px-4 mt-3">
-            <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg px-3 py-2">
+            <div className="bg-destructive/10 border border-destructive/30 text-destructive text-sm rounded-lg px-3 py-2">
               {error}
             </div>
           </div>
@@ -386,7 +394,7 @@ export default function TravelBingoPage() {
           onUnmark={handleUnmark}
           onAddComment={handleAddComment}
         />
-      </main>
+      </GameShell>
     </>
   );
 }

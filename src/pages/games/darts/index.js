@@ -369,7 +369,7 @@ export default function DartsPage() {
             {/* Start button */}
             <button
               onClick={handleStartGame}
-              className="w-full py-4 bg-gradient-to-r from-game-darts to-game-darts text-white font-bold
+              className="w-full py-4 bg-gradient-to-r from-game-darts to-game-darts-deep text-white font-bold
                          text-lg rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-[0.98]"
             >
               Start Game

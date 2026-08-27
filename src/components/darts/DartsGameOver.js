@@ -111,7 +111,7 @@ export default function DartsGameOver({ players, dartsConfig, onPlayAgain, onEnd
       <div className="flex gap-3">
         <button
           onClick={onPlayAgain}
-          className="flex-1 py-4 bg-gradient-to-r from-game-darts to-game-darts text-white font-bold
+          className="flex-1 py-4 bg-gradient-to-r from-game-darts to-game-darts-deep text-white font-bold
                      text-lg rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-[0.98]"
         >
           Play Again

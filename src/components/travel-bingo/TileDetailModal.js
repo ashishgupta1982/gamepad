@@ -60,33 +60,33 @@ export default function TileDetailModal({
 
   return (
     <div className="fixed inset-0 bg-black/60 z-40 flex items-end sm:items-center justify-center p-0 sm:p-4">
-      <div className="bg-white w-full sm:max-w-lg rounded-t-2xl sm:rounded-2xl shadow-xl max-h-[92vh] overflow-y-auto">
-        <div className="sticky top-0 bg-white border-b border-slate-100 px-5 py-3 flex items-center justify-between z-10">
+      <div className="bg-card w-full sm:max-w-lg rounded-t-2xl sm:rounded-2xl shadow-xl max-h-[92vh] overflow-y-auto">
+        <div className="sticky top-0 bg-card border-b border-border px-5 py-3 flex items-center justify-between z-10">
           <div>
-            <p className="text-xs text-slate-500">{ownerCar.name}{!isOwner && " · viewing"}</p>
-            <h3 className="text-lg font-bold text-slate-800">{tile.label}</h3>
-            <p className="text-xs text-emerald-600 font-medium">{tile.category}</p>
+            <p className="text-xs text-muted-foreground">{ownerCar.name}{!isOwner && " · viewing"}</p>
+            <h3 className="text-lg font-bold text-foreground">{tile.label}</h3>
+            <p className="text-xs text-game-bingo font-medium">{tile.category}</p>
           </div>
-          <button onClick={onClose} className="text-slate-400 hover:text-slate-600 text-2xl leading-none">×</button>
+          <button onClick={onClose} className="text-muted-foreground hover:text-muted-foreground text-2xl leading-none">×</button>
         </div>
 
         <div className="p-5 space-y-5">
           {isOwner && !tile.found && (
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">
+              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
                 Mark as found
               </p>
               <textarea
                 value={caption}
                 onChange={(e) => setCaption(e.target.value.slice(0, 280))}
                 placeholder="Add a caption (optional)"
-                className="w-full px-3 py-2 text-sm border-2 border-slate-200 rounded-xl focus:outline-none focus:border-emerald-400"
+                className="w-full px-3 py-2 text-sm border-2 border-border rounded-xl focus:outline-none focus:border-game-bingo"
                 rows={2}
               />
               <button
                 onClick={handleMark}
                 disabled={busy}
-                className="w-full mt-3 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-emerald-500 to-teal-500 hover:opacity-90 disabled:opacity-50"
+                className="w-full mt-3 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-game-bingo to-game-bingo-deep hover:opacity-90 disabled:opacity-50"
               >
                 {busy ? 'Saving…' : '✓ Spotted it!'}
               </button>
@@ -95,15 +95,15 @@ export default function TileDetailModal({
 
           {tile.found && (
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700 mb-2">
+              <p className="text-xs font-semibold uppercase tracking-wider text-game-bingo mb-2">
                 Spotted ✓
               </p>
-              {tile.caption && <p className="text-sm text-slate-700 italic">&ldquo;{tile.caption}&rdquo;</p>}
+              {tile.caption && <p className="text-sm text-foreground italic">&ldquo;{tile.caption}&rdquo;</p>}
               {isOwner && (
                 <button
                   onClick={handleUnmark}
                   disabled={busy}
-                  className="mt-3 text-xs text-slate-500 hover:text-red-600 underline"
+                  className="mt-3 text-xs text-muted-foreground hover:text-destructive underline"
                 >
                   Undo (mark as not found)
                 </button>
@@ -112,17 +112,17 @@ export default function TileDetailModal({
           )}
 
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">
+            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
               Comments ({comments.length})
             </p>
             {comments.length === 0 ? (
-              <p className="text-sm text-slate-400 italic">No comments yet.</p>
+              <p className="text-sm text-muted-foreground italic">No comments yet.</p>
             ) : (
               <ul className="space-y-2 mb-3">
                 {comments.map(c => (
-                  <li key={c.commentId} className="bg-slate-50 rounded-xl px-3 py-2">
-                    <p className="text-xs font-semibold text-emerald-700">{c.carName}</p>
-                    <p className="text-sm text-slate-700">{c.text}</p>
+                  <li key={c.commentId} className="bg-muted rounded-xl px-3 py-2">
+                    <p className="text-xs font-semibold text-game-bingo">{c.carName}</p>
+                    <p className="text-sm text-foreground">{c.text}</p>
                   </li>
                 ))}
               </ul>
@@ -134,12 +134,12 @@ export default function TileDetailModal({
                 onChange={(e) => setCommentDraft(e.target.value.slice(0, 280))}
                 onKeyDown={(e) => e.key === 'Enter' && handleComment()}
                 placeholder="Say something nice…"
-                className="flex-1 px-3 py-2 text-sm border-2 border-slate-200 rounded-xl focus:outline-none focus:border-emerald-400"
+                className="flex-1 px-3 py-2 text-sm border-2 border-border rounded-xl focus:outline-none focus:border-game-bingo"
               />
               <button
                 onClick={handleComment}
                 disabled={busy || !commentDraft.trim()}
-                className="px-3 py-2 text-sm rounded-xl font-semibold bg-emerald-500 text-white hover:bg-emerald-600 disabled:opacity-50"
+                className="px-3 py-2 text-sm rounded-xl font-semibold bg-game-bingo text-white hover:bg-game-bingo disabled:opacity-50"
               >
                 Post
               </button>

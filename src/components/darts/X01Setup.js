@@ -25,7 +25,7 @@ export default function X01Setup({
               onClick={() => onStartingScoreChange(score)}
               className={`flex-1 py-2.5 rounded-lg font-bold text-sm transition-all
                 ${startingScore === score
-                  ? 'bg-gradient-to-r from-game-darts to-game-darts text-white shadow-md scale-105'
+                  ? 'bg-gradient-to-r from-game-darts to-game-darts-deep text-white shadow-md scale-105'
                   : 'bg-muted text-muted-foreground hover:bg-border'
                 }`}
             >
@@ -47,7 +47,7 @@ export default function X01Setup({
               onClick={() => onLegsChange(l)}
               className={`flex-1 py-2.5 rounded-lg font-bold text-sm transition-all
                 ${legs === l
-                  ? 'bg-gradient-to-r from-game-darts to-game-darts text-white shadow-md scale-105'
+                  ? 'bg-gradient-to-r from-game-darts to-game-darts-deep text-white shadow-md scale-105'
                   : 'bg-muted text-muted-foreground hover:bg-border'
                 }`}
             >

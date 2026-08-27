@@ -6,8 +6,8 @@ export default function Scoreboard({ cars, winnerCarId, myCarId }) {
   });
 
   return (
-    <div className="bg-white rounded-2xl shadow-md p-4 border border-emerald-100">
-      <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">Scoreboard</p>
+    <div className="bg-card rounded-2xl shadow-md p-4 border border-game-bingo/30">
+      <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">Scoreboard</p>
       <ul className="space-y-2">
         {sorted.map((c) => {
           const total = c.card?.length || 9;
@@ -17,16 +17,16 @@ export default function Scoreboard({ cars, winnerCarId, myCarId }) {
           return (
             <li key={c.carId} className="space-y-1">
               <div className="flex items-center justify-between text-sm">
-                <span className="font-medium text-slate-800 flex items-center gap-2">
+                <span className="font-medium text-foreground flex items-center gap-2">
                   {isWinner && <span>🏆</span>}
                   <span>{c.name}</span>
-                  {c.carId === myCarId && <span className="text-xs text-emerald-700">(you)</span>}
+                  {c.carId === myCarId && <span className="text-xs text-game-bingo">(you)</span>}
                 </span>
-                <span className="font-mono text-xs text-slate-600">{found}/{total}</span>
+                <span className="font-mono text-xs text-muted-foreground">{found}/{total}</span>
               </div>
-              <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
+              <div className="h-1.5 bg-muted rounded-full overflow-hidden">
                 <div
-                  className={`h-full transition-all ${isWinner ? 'bg-gradient-to-r from-amber-400 to-orange-500' : 'bg-gradient-to-r from-emerald-400 to-teal-500'}`}
+                  className={`h-full transition-all ${isWinner ? 'bg-gradient-to-r from-warning to-brand' : 'bg-gradient-to-r from-game-bingo to-game-bingo-deep'}`}
                   style={{ width: `${pct}%` }}
                 />
               </div>
