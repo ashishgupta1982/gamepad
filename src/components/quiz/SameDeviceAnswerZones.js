@@ -29,8 +29,8 @@ export default function SameDeviceAnswerZones({
             key={player.id || player.name || playerIdx}
             className={`rounded-2xl p-3 transition-all ${
               hasAnswered
-                ? 'bg-white/60 ring-2 ring-green-400'
-                : 'bg-white/90 shadow-md'
+                ? 'bg-card/60 ring-2 ring-success'
+                : 'bg-card/90 shadow-md'
             }`}
           >
             {/* Player header */}
@@ -41,15 +41,15 @@ export default function SameDeviceAnswerZones({
               >
                 {player.avatar || player.name?.[0]?.toUpperCase()}
               </div>
-              <span className="font-bold text-slate-700 text-sm truncate">{player.name}</span>
+              <span className="font-bold text-foreground text-sm truncate">{player.name}</span>
               {hasAnswered && !revealed && (
-                <span className="ml-auto text-green-500 text-sm">✓</span>
+                <span className="ml-auto text-success text-sm">✓</span>
               )}
             </div>
 
             {/* Answer buttons */}
             {hasAnswered && !revealed ? (
-              <div className="text-center py-4 text-slate-400 text-sm font-medium">
+              <div className="text-center py-4 text-muted-foreground text-sm font-medium">
                 Answer locked in!
               </div>
             ) : (

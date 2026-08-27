@@ -43,7 +43,7 @@ export default function FinalPodium({ players, onPlayAgain, onNewRound, onEndGam
   }, []);
 
   const podiumHeight = { 0: 'h-32', 1: 'h-24', 2: 'h-20' };
-  const podiumColors = { 0: 'from-yellow-400 to-yellow-500', 1: 'from-slate-300 to-slate-400', 2: 'from-amber-600 to-amber-700' };
+  const podiumColors = { 0: 'from-warning to-warning', 1: 'from-border to-muted-foreground', 2: 'from-warning to-warning' };
   const medals = { 0: '👑', 1: '🥈', 2: '🥉' };
 
   return (
@@ -68,11 +68,11 @@ export default function FinalPodium({ players, onPlayAgain, onNewRound, onEndGam
         </div>
       )}
 
-      <h1 className="text-3xl md:text-4xl font-bold text-slate-800 mb-2 mt-4">
+      <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2 mt-4">
         Game Over!
       </h1>
       {winner && (
-        <p className="text-lg text-purple-600 font-semibold mb-8">
+        <p className="text-lg text-brand font-semibold mb-8">
           {winner.name} wins with {winner.score?.toLocaleString()} points!
         </p>
       )}
@@ -94,8 +94,8 @@ export default function FinalPodium({ players, onPlayAgain, onNewRound, onEndGam
             >
               {second.avatar || second.name?.[0]?.toUpperCase()}
             </div>
-            <div className="text-sm font-bold text-slate-700 mb-1 truncate w-full">{second.name}</div>
-            <div className="text-xs text-slate-500 mb-2">{second.score?.toLocaleString()} pts</div>
+            <div className="text-sm font-bold text-foreground mb-1 truncate w-full">{second.name}</div>
+            <div className="text-xs text-muted-foreground mb-2">{second.score?.toLocaleString()} pts</div>
             <div className={`w-full ${podiumHeight[1]} bg-gradient-to-b ${podiumColors[1]} rounded-t-xl flex items-start justify-center pt-3`}>
               <span className="text-2xl">{medals[1]}</span>
             </div>
@@ -112,13 +112,13 @@ export default function FinalPodium({ players, onPlayAgain, onNewRound, onEndGam
             }}
           >
             <div
-              className="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mb-2 shadow-lg ring-4 ring-yellow-400"
+              className="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mb-2 shadow-lg ring-4 ring-warning"
               style={{ backgroundColor: winner.avatarColor || '#6c5ce7', color: 'white' }}
             >
               {winner.avatar || winner.name?.[0]?.toUpperCase()}
             </div>
-            <div className="text-base font-bold text-slate-800 mb-1 truncate w-full">{winner.name}</div>
-            <div className="text-sm text-purple-600 font-semibold mb-2">{winner.score?.toLocaleString()} pts</div>
+            <div className="text-base font-bold text-foreground mb-1 truncate w-full">{winner.name}</div>
+            <div className="text-sm text-brand font-semibold mb-2">{winner.score?.toLocaleString()} pts</div>
             <div className={`w-full ${podiumHeight[0]} bg-gradient-to-b ${podiumColors[0]} rounded-t-xl flex items-start justify-center pt-3`}>
               <span className="text-3xl">{medals[0]}</span>
             </div>
@@ -140,8 +140,8 @@ export default function FinalPodium({ players, onPlayAgain, onNewRound, onEndGam
             >
               {third.avatar || third.name?.[0]?.toUpperCase()}
             </div>
-            <div className="text-sm font-bold text-slate-700 mb-1 truncate w-full">{third.name}</div>
-            <div className="text-xs text-slate-500 mb-2">{third.score?.toLocaleString()} pts</div>
+            <div className="text-sm font-bold text-foreground mb-1 truncate w-full">{third.name}</div>
+            <div className="text-xs text-muted-foreground mb-2">{third.score?.toLocaleString()} pts</div>
             <div className={`w-full ${podiumHeight[2]} bg-gradient-to-b ${podiumColors[2]} rounded-t-xl flex items-start justify-center pt-3`}>
               <span className="text-2xl">{medals[2]}</span>
             </div>
@@ -153,26 +153,26 @@ export default function FinalPodium({ players, onPlayAgain, onNewRound, onEndGam
       {sorted.length > 3 && (
         <div className="space-y-2 mb-6">
           {sorted.slice(3).map((player, idx) => (
-            <div key={player.id || player.name} className="flex items-center justify-between bg-white rounded-xl p-3 shadow-sm">
+            <div key={player.id || player.name} className="flex items-center justify-between bg-card rounded-xl p-3 shadow-sm">
               <div className="flex items-center gap-3">
-                <span className="text-sm font-bold text-slate-400 w-6">#{idx + 4}</span>
+                <span className="text-sm font-bold text-muted-foreground w-6">#{idx + 4}</span>
                 <div
                   className="w-8 h-8 rounded-full flex items-center justify-center text-sm"
                   style={{ backgroundColor: player.avatarColor || '#6c5ce7', color: 'white' }}
                 >
                   {player.avatar || player.name?.[0]?.toUpperCase()}
                 </div>
-                <span className="font-semibold text-slate-700">{player.name}</span>
+                <span className="font-semibold text-foreground">{player.name}</span>
               </div>
-              <span className="font-bold text-slate-600">{player.score?.toLocaleString()} pts</span>
+              <span className="font-bold text-muted-foreground">{player.score?.toLocaleString()} pts</span>
             </div>
           ))}
         </div>
       )}
 
       {/* Full results for all players */}
-      <div className="bg-white rounded-2xl p-4 shadow-md mb-6">
-        <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wide mb-3">Full Results</h3>
+      <div className="bg-card rounded-2xl p-4 shadow-md mb-6">
+        <h3 className="text-sm font-bold text-muted-foreground uppercase tracking-wide mb-3">Full Results</h3>
         <div className="space-y-2">
           {sorted.map((player, idx) => {
             const correct = player.answers?.filter(a => a.correct).length || 0;
@@ -182,12 +182,12 @@ export default function FinalPodium({ players, onPlayAgain, onNewRound, onEndGam
               : '-';
 
             return (
-              <div key={player.id || player.name} className="flex items-center justify-between text-sm py-1 border-b border-slate-50 last:border-0">
-                <span className="text-slate-600">{player.name}</span>
-                <div className="flex items-center gap-4 text-slate-500">
+              <div key={player.id || player.name} className="flex items-center justify-between text-sm py-1 border-b border-border last:border-0">
+                <span className="text-muted-foreground">{player.name}</span>
+                <div className="flex items-center gap-4 text-muted-foreground">
                   <span>{correct}/{total} correct</span>
                   <span>avg {avgTime}s</span>
-                  <span className="font-bold text-purple-600">{player.score?.toLocaleString()}</span>
+                  <span className="font-bold text-brand">{player.score?.toLocaleString()}</span>
                 </div>
               </div>
             );
@@ -199,7 +199,7 @@ export default function FinalPodium({ players, onPlayAgain, onNewRound, onEndGam
       {onNewRound && (
         <button
           onClick={onNewRound}
-          className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold
+          className="w-full py-4 bg-gradient-to-r from-brand to-brand-deep text-white font-bold
                      text-lg rounded-xl shadow-lg hover:shadow-xl transition-all active:scale-98"
         >
           New Round
@@ -208,15 +208,15 @@ export default function FinalPodium({ players, onPlayAgain, onNewRound, onEndGam
       <div className="flex gap-3">
         <button
           onClick={onPlayAgain}
-          className="flex-1 py-3 bg-slate-100 text-slate-600 font-semibold rounded-xl
-                     hover:bg-slate-200 transition-all"
+          className="flex-1 py-3 bg-muted text-muted-foreground font-semibold rounded-xl
+                     hover:bg-border transition-all"
         >
           Reset Scores
         </button>
         <button
           onClick={onEndGame}
-          className="flex-1 py-3 bg-slate-100 text-slate-600 font-semibold rounded-xl
-                     hover:bg-slate-200 transition-all"
+          className="flex-1 py-3 bg-muted text-muted-foreground font-semibold rounded-xl
+                     hover:bg-border transition-all"
         >
           Done
         </button>
@@ -224,7 +224,7 @@ export default function FinalPodium({ players, onPlayAgain, onNewRound, onEndGam
       {onViewLeaderboard && (
         <button
           onClick={onViewLeaderboard}
-          className="w-full mt-3 py-3 text-purple-600 font-semibold text-sm hover:bg-purple-50 rounded-xl transition-all"
+          className="w-full mt-3 py-3 text-brand font-semibold text-sm hover:bg-brand/10 rounded-xl transition-all"
         >
           View All-Time Leaderboard
         </button>

@@ -1,6 +1,6 @@
 import dbConnect from '@/lib/mongodb';
 import QuizRoom from '@/models/QuizRoom';
-import { SCORING } from '@/data/quizConstants';
+import { scoreAnswer } from '@/lib/quizScoring';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -37,16 +37,9 @@ export default async function handler(req, res) {
   const correct = selectedOption === question.correctAnswer;
   const totalTimeMs = (room.settings.timePerQuestion || 20) * 1000;
 
-  // Calculate points
-  let points = 0;
-  if (correct) {
-    const speedMultiplier = 1.0 - ((timeMs / totalTimeMs) * SCORING.SPEED_WEIGHT);
-    const streakMultiplier = Math.min(
-      1.0 + (player.streak * SCORING.STREAK_BONUS),
-      SCORING.MAX_STREAK_MULTIPLIER
-    );
-    points = Math.round(SCORING.BASE_POINTS * speedMultiplier * streakMultiplier);
-  }
+  // One formula, shared with same-device play. This was an inline copy of the
+  // client's, identical by coincidence rather than by construction.
+  const { points } = scoreAnswer(correct, timeMs, totalTimeMs, player.streak);
 
   player.answers.push({
     questionIndex: qIdx,

@@ -59,13 +59,13 @@ export default function AnswerGrid({
               <span className="flex-1 text-left leading-tight">{option}</span>
             </div>
             {revealed && index === correctAnswer && (
-              <div className="absolute top-2 right-2 w-7 h-7 bg-white rounded-full flex items-center justify-center">
-                <span className="text-green-600 text-lg">✓</span>
+              <div className="absolute top-2 right-2 w-7 h-7 bg-card rounded-full flex items-center justify-center">
+                <span className="text-success text-lg">✓</span>
               </div>
             )}
             {revealed && selectedAnswer === index && index !== correctAnswer && (
-              <div className="absolute top-2 right-2 w-7 h-7 bg-white rounded-full flex items-center justify-center">
-                <span className="text-red-600 text-lg">✗</span>
+              <div className="absolute top-2 right-2 w-7 h-7 bg-card rounded-full flex items-center justify-center">
+                <span className="text-destructive text-lg">✗</span>
               </div>
             )}
           </button>

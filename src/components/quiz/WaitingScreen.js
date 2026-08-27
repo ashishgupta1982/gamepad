@@ -34,23 +34,23 @@ export default function WaitingScreen({ message }) {
     <div className="flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
       {/* Animated loader */}
       <div className="relative mb-8">
-        <div className="w-20 h-20 rounded-full border-4 border-purple-200 border-t-purple-600 animate-spin" />
+        <div className="w-20 h-20 rounded-full border-4 border-brand/30 border-t-purple-600 animate-spin" />
         <div className="absolute inset-0 flex items-center justify-center">
           <span className="text-2xl">🧠</span>
         </div>
       </div>
 
-      <h2 className="text-2xl font-bold text-slate-800 mb-2">
+      <h2 className="text-2xl font-bold text-foreground mb-2">
         {message || 'Preparing Your Quiz'}{dots}
       </h2>
-      <p className="text-slate-500 text-sm mb-8">
+      <p className="text-muted-foreground text-sm mb-8">
         Our AI is crafting the perfect questions for you
       </p>
 
       {/* Fun fact */}
-      <div className="bg-white/80 backdrop-blur rounded-2xl p-5 max-w-md shadow-sm border border-purple-100">
-        <div className="text-xs font-bold text-purple-500 uppercase tracking-wide mb-2">Did you know?</div>
-        <p className="text-slate-600 text-sm leading-relaxed transition-all">
+      <div className="bg-card/80 backdrop-blur rounded-2xl p-5 max-w-md shadow-sm border border-brand/30">
+        <div className="text-xs font-bold text-brand uppercase tracking-wide mb-2">Did you know?</div>
+        <p className="text-muted-foreground text-sm leading-relaxed transition-all">
           {QUIZ_FACTS[factIndex]}
         </p>
       </div>

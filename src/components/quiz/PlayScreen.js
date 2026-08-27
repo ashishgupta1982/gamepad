@@ -9,7 +9,7 @@ export default function PlayScreen({ game, playerAnswers, showAnswer, onAnswerSe
   if (!currentQuestion) {
     return (
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-purple-600 mb-4">Loading question...</h2>
+        <h2 className="text-2xl font-bold text-brand mb-4">Loading question...</h2>
       </div>
     );
   }
@@ -27,23 +27,23 @@ export default function PlayScreen({ game, playerAnswers, showAnswer, onAnswerSe
           </div>
           
           {/* Question Card */}
-          <div className="bg-white rounded-2xl p-4 shadow-lg mb-3">
+          <div className="bg-card rounded-2xl p-4 shadow-lg mb-3">
             {/* Header inside card - All on one line */}
             <div className="flex justify-between items-center gap-3 mb-4">
               <button
                 onClick={onBack}
-                className="text-purple-600 hover:text-purple-700 font-semibold text-xs whitespace-nowrap"
+                className="text-brand hover:text-brand font-semibold text-xs whitespace-nowrap"
               >
                 ← Back
               </button>
-              <div className="bg-purple-100 text-purple-700 px-3 py-1.5 rounded-full text-xs font-semibold">
+              <div className="bg-brand/10 text-brand px-3 py-1.5 rounded-full text-xs font-semibold">
                 {currentQuestion.category}
               </div>
-              <div className="bg-purple-100 px-3 py-1.5 rounded-full text-purple-700 font-semibold text-xs whitespace-nowrap">
+              <div className="bg-brand/10 px-3 py-1.5 rounded-full text-brand font-semibold text-xs whitespace-nowrap">
                 Question {currentQIndex + 1} of {totalQuestions}
               </div>
             </div>
-            <h2 className="text-lg md:text-xl font-bold text-slate-800 mb-4">
+            <h2 className="text-lg md:text-xl font-bold text-foreground mb-4">
               {currentQuestion.question}
             </h2>
 
@@ -55,19 +55,19 @@ export default function PlayScreen({ game, playerAnswers, showAnswer, onAnswerSe
                 
                 // Same color scheme as player cards  
                 const colorClasses = [
-                  'border-blue-500 bg-blue-50', // A - Blue
-                  'border-green-500 bg-green-50', // B - Green  
-                  'border-orange-500 bg-orange-50', // C - Orange
-                  'border-purple-500 bg-purple-50', // D - Purple
-                  'border-pink-500 bg-pink-50', // E - Pink
+                  'border-game-quiz bg-game-quiz/10', // A - Blue
+                  'border-success bg-success/10', // B - Green  
+                  'border-brand bg-brand/10', // C - Orange
+                  'border-brand bg-brand/10', // D - Purple
+                  'border-brand bg-brand/10', // E - Pink
                 ];
                 
                 const badgeColors = [
-                  'bg-blue-500', // A
-                  'bg-green-500', // B
-                  'bg-orange-500', // C
-                  'bg-purple-500', // D
-                  'bg-pink-500', // E
+                  'bg-game-quiz', // A
+                  'bg-success', // B
+                  'bg-brand', // C
+                  'bg-brand', // D
+                  'bg-brand', // E
                 ];
                 
                 return (
@@ -76,9 +76,9 @@ export default function PlayScreen({ game, playerAnswers, showAnswer, onAnswerSe
                     className={`
                       p-4 rounded-xl border-2 transition-all hover:shadow-md
                       ${showAnswer && isCorrect 
-                        ? 'border-green-500 bg-green-50 shadow-lg' 
+                        ? 'border-success bg-success/10 shadow-lg' 
                         : showAnswer 
-                        ? 'border-red-200 bg-red-50 opacity-50'
+                        ? 'border-destructive/30 bg-destructive/10 opacity-50'
                         : colorClasses[index]
                       }
                     `}
@@ -91,7 +91,7 @@ export default function PlayScreen({ game, playerAnswers, showAnswer, onAnswerSe
                       `}>
                         {letter}
                       </div>
-                      <div className="font-semibold text-sm text-slate-700 flex-1">{option}</div>
+                      <div className="font-semibold text-sm text-foreground flex-1">{option}</div>
                       {showAnswer && isCorrect && <span className="text-xl animate-bounce">✓</span>}
                     </div>
                   </div>
@@ -100,9 +100,9 @@ export default function PlayScreen({ game, playerAnswers, showAnswer, onAnswerSe
             </div>
 
             {showAnswer && (
-              <div className="bg-purple-50 border border-purple-200 rounded-lg p-4 mb-4">
-                <h3 className="font-bold text-purple-700 mb-1 text-sm">💡 Interesting Fact:</h3>
-                <p className="text-slate-700 text-sm">{currentQuestion.explanation}</p>
+              <div className="bg-brand/10 border border-brand/30 rounded-lg p-4 mb-4">
+                <h3 className="font-bold text-brand mb-1 text-sm">💡 Interesting Fact:</h3>
+                <p className="text-foreground text-sm">{currentQuestion.explanation}</p>
               </div>
             )}
 
@@ -112,14 +112,14 @@ export default function PlayScreen({ game, playerAnswers, showAnswer, onAnswerSe
                 <button
                   onClick={onRevealAnswer}
                   disabled={!allPlayersAnswered}
-                  className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 rounded-lg font-bold hover:scale-105 transform transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                  className="w-full bg-gradient-to-r from-brand to-brand-deep text-white py-3 rounded-lg font-bold hover:scale-105 transform transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm"
                 >
                   {allPlayersAnswered ? '✨ Reveal Answer' : `⏳ Waiting for ${game.players.length - Object.keys(playerAnswers).length} more...`}
                 </button>
               ) : (
                 <button
                   onClick={onNextQuestion}
-                  className="w-full bg-gradient-to-r from-green-500 to-emerald-500 text-white py-3 rounded-lg font-bold hover:scale-105 transform transition-all text-sm"
+                  className="w-full bg-gradient-to-r from-success to-success-deep text-white py-3 rounded-lg font-bold hover:scale-105 transform transition-all text-sm"
                 >
                   ➡️ Next Question
                 </button>
@@ -137,29 +137,29 @@ export default function PlayScreen({ game, playerAnswers, showAnswer, onAnswerSe
               return (
                 <div 
                   key={playerIndex}
-                  className={`bg-white rounded-lg p-2 shadow-md border-2 transition-all ${
+                  className={`bg-card rounded-lg p-2 shadow-md border-2 transition-all ${
                     showAnswer && isCorrect 
-                      ? 'border-green-500 bg-green-50' 
+                      ? 'border-success bg-success/10' 
                       : showAnswer && !isCorrect && hasAnswered
-                      ? 'border-red-400 bg-red-50'
+                      ? 'border-destructive bg-destructive/10'
                       : hasAnswered
-                      ? 'border-green-400 bg-green-50'
-                      : 'border-slate-300'
+                      ? 'border-success bg-success/10'
+                      : 'border-border'
                   }`}
                 >
                   <div className="space-y-2">
-                    <h3 className="font-bold text-slate-700 text-xs flex items-center gap-1">
+                    <h3 className="font-bold text-foreground text-xs flex items-center gap-1">
                       {player.name}
-                      {hasAnswered && !showAnswer && <span className="text-green-600 text-sm">✓</span>}
+                      {hasAnswered && !showAnswer && <span className="text-success text-sm">✓</span>}
                       {showAnswer && isCorrect && <span className="text-base">🏆</span>}
                     </h3>
                     
                     {!showAnswer && (
                       <div className="flex gap-1.5 flex-wrap">
                         {hasAnswered ? (
-                          <div className="flex items-center gap-1 px-2 py-1 bg-green-50 rounded border border-green-400">
-                            <span className="text-green-600 text-sm">✓</span>
-                            <span className="text-[10px] text-green-700 font-bold">Locked</span>
+                          <div className="flex items-center gap-1 px-2 py-1 bg-success/10 rounded border border-success">
+                            <span className="text-success text-sm">✓</span>
+                            <span className="text-[10px] text-success font-bold">Locked</span>
                           </div>
                         ) : (
                           currentQuestion.options.map((option, optionIndex) => {
@@ -168,11 +168,11 @@ export default function PlayScreen({ game, playerAnswers, showAnswer, onAnswerSe
                           
                           // Color coding for each letter
                           const colors = {
-                            0: 'from-blue-500 to-blue-600',  // A - Blue
-                            1: 'from-green-500 to-green-600', // B - Green
-                            2: 'from-orange-500 to-orange-600', // C - Orange
-                            3: 'from-purple-500 to-purple-600', // D - Purple
-                            4: 'from-pink-500 to-pink-600',   // E - Pink
+                            0: 'from-game-quiz to-game-quiz-deep',  // A - Blue
+                            1: 'from-success to-success-deep', // B - Green
+                            2: 'from-brand to-brand-deep', // C - Orange
+                            3: 'from-brand to-brand-deep', // D - Purple
+                            4: 'from-brand to-brand-deep',   // E - Pink
                           };
                           
                           return (
@@ -207,14 +207,14 @@ export default function PlayScreen({ game, playerAnswers, showAnswer, onAnswerSe
                         
                         if (wasSelected) {
                           if (isCorrect) {
-                            className += ' bg-green-500 text-white scale-110 shadow-xl border-2 border-green-600';
+                            className += ' bg-success text-white scale-110 shadow-xl border-2 border-success';
                           } else {
-                            className += ' bg-red-500 text-white scale-110 shadow-xl border-2 border-red-600';
+                            className += ' bg-destructive text-white scale-110 shadow-xl border-2 border-destructive';
                           }
                         } else if (isCorrect) {
-                          className += ' bg-green-100 text-green-700 opacity-60';
+                          className += ' bg-success/10 text-success opacity-60';
                         } else {
-                          className += ' bg-slate-200 text-slate-400 opacity-30';
+                          className += ' bg-border text-muted-foreground opacity-30';
                         }
                         
                         return (

@@ -19,11 +19,11 @@ export default function QuestionDisplay({
     <div className="w-full max-w-3xl mx-auto">
       {/* Header bar */}
       <div className="flex items-center justify-between mb-4">
-        <div className="bg-white/80 backdrop-blur px-3 py-1.5 rounded-full text-sm font-semibold text-purple-700">
+        <div className="bg-card/80 backdrop-blur px-3 py-1.5 rounded-full text-sm font-semibold text-brand">
           {questionIndex + 1} / {totalQuestions}
         </div>
         {category && (
-          <div className="bg-white/80 backdrop-blur px-3 py-1.5 rounded-full text-sm font-medium text-slate-600">
+          <div className="bg-card/80 backdrop-blur px-3 py-1.5 rounded-full text-sm font-medium text-muted-foreground">
             {category}
           </div>
         )}
@@ -31,8 +31,8 @@ export default function QuestionDisplay({
       </div>
 
       {/* Question */}
-      <div className="bg-white rounded-2xl p-5 md:p-6 shadow-lg mb-4">
-        <h2 className="text-xl md:text-2xl font-bold text-slate-800 text-center leading-tight">
+      <div className="bg-card rounded-2xl p-5 md:p-6 shadow-lg mb-4">
+        <h2 className="text-xl md:text-2xl font-bold text-foreground text-center leading-tight">
           {question.question}
         </h2>
       </div>
@@ -49,7 +49,7 @@ export default function QuestionDisplay({
 
       {/* Explanation after reveal */}
       {revealed && question.explanation && (
-        <div className="mt-4 bg-blue-50 border border-blue-200 rounded-xl p-4 text-sm text-blue-800">
+        <div className="mt-4 bg-game-quiz/10 border border-game-quiz/30 rounded-xl p-4 text-sm text-game-quiz">
           <span className="font-semibold">Did you know?</span> {question.explanation}
         </div>
       )}

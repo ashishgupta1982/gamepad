@@ -2,7 +2,7 @@ import Head from 'next/head';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import AppHeader from '@/components/layout/AppHeader';
+import GameShell from '@/components/layout/GameShell';
 import { CATEGORIES, AVATAR_EMOJIS, AVATAR_COLORS, GAME_MODES } from '@/data/quizConstants';
 import useQuizTimer from '@/hooks/useQuizTimer';
 import useQuizScoring from '@/hooks/useQuizScoring';
@@ -901,8 +901,8 @@ Return ONLY a JSON array:
 
   if (screen === 'loading') {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100 flex items-center justify-center">
-        <div className="text-2xl text-purple-600">Loading...</div>
+      <div className="flex min-h-dvh items-center justify-center bg-background">
+        <div className="text-2xl text-brand">Loading...</div>
       </div>
     );
   }
@@ -916,14 +916,17 @@ Return ONLY a JSON array:
         <title>Quiz Game — GamePad</title>
       </Head>
 
-      <main className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100">
-        {screen !== 'question' && screen !== 'question-result' && screen !== 'scoreboard' && screen !== 'podium' && (
-          <AppHeader />
-        )}
-
+      <GameShell
+        title="Quiz"
+        onBack={() => router.push('/')}
+        // Held for the screens that are read rather than tapped — a
+        // question timer running out because the phone slept would end a
+        // round for everyone watching it.
+        keepAwake={['question', 'question-result', 'scoreboard', 'waiting', 'host-lobby'].includes(screen)}
+      >
         {notification && (
           <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
-            <div className="bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-6 py-3 rounded-full shadow-2xl text-sm font-bold">
+            <div className="bg-gradient-to-r from-warning to-brand text-white px-6 py-3 rounded-full shadow-2xl text-sm font-bold">
               {notification}
             </div>
           </div>
@@ -949,13 +952,13 @@ Return ONLY a JSON array:
             <div className="max-w-2xl mx-auto">
               <button
                 onClick={() => setScreen('home')}
-                className="mb-4 text-purple-600 hover:text-purple-700 font-semibold text-sm"
+                className="mb-4 text-brand hover:text-brand font-semibold text-sm"
               >
                 ← Back
               </button>
 
-              <div className="bg-gradient-to-br from-white via-purple-50/30 to-pink-50/30 rounded-3xl p-5 shadow-xl border border-purple-100">
-                <h2 className="text-2xl font-bold text-center mb-5 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+              <div className="bg-gradient-to-br from-white via-brand/30 to-brand/30 rounded-3xl p-5 shadow-xl border border-brand/30">
+                <h2 className="text-2xl font-bold text-center mb-5 text-transparent bg-clip-text bg-gradient-to-r from-brand to-brand-deep">
                   Set Up Your Quiz
                 </h2>
 
@@ -965,8 +968,8 @@ Return ONLY a JSON array:
                     onClick={() => setGameMode(GAME_MODES.SAME_DEVICE)}
                     className={`flex-1 p-3 rounded-xl text-sm font-semibold transition-all text-center
                       ${gameMode === GAME_MODES.SAME_DEVICE
-                        ? 'bg-purple-100 text-purple-700 ring-2 ring-purple-400'
-                        : 'bg-white text-slate-500 border border-slate-200 hover:border-purple-200'
+                        ? 'bg-brand/10 text-brand ring-2 ring-brand'
+                        : 'bg-card text-muted-foreground border border-border hover:border-brand/30'
                       }`}
                   >
                     <span className="block text-xl mb-1">📱</span>
@@ -976,8 +979,8 @@ Return ONLY a JSON array:
                     onClick={() => setGameMode(GAME_MODES.MULTI_DEVICE)}
                     className={`flex-1 p-3 rounded-xl text-sm font-semibold transition-all text-center
                       ${gameMode === GAME_MODES.MULTI_DEVICE
-                        ? 'bg-purple-100 text-purple-700 ring-2 ring-purple-400'
-                        : 'bg-white text-slate-500 border border-slate-200 hover:border-purple-200'
+                        ? 'bg-brand/10 text-brand ring-2 ring-brand'
+                        : 'bg-card text-muted-foreground border border-border hover:border-brand/30'
                       }`}
                   >
                     <span className="block text-xl mb-1">🌐</span>
@@ -1015,7 +1018,7 @@ Return ONLY a JSON array:
                 <button
                   onClick={gameMode === GAME_MODES.SAME_DEVICE ? handleStartGame : handleStartMultiDeviceGame}
                   disabled={selectedCategories.length === 0}
-                  className="w-full mt-6 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white
+                  className="w-full mt-6 py-4 bg-gradient-to-r from-brand to-brand-deep text-white
                              font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all
                              disabled:opacity-50 disabled:cursor-not-allowed active:scale-98"
                 >
@@ -1030,31 +1033,31 @@ Return ONLY a JSON array:
             <div className="max-w-2xl mx-auto">
               <button
                 onClick={() => setScreen('podium')}
-                className="mb-4 text-purple-600 hover:text-purple-700 font-semibold text-sm"
+                className="mb-4 text-brand hover:text-brand font-semibold text-sm"
               >
                 ← Back to Results
               </button>
 
-              <div className="bg-gradient-to-br from-white via-purple-50/30 to-pink-50/30 rounded-3xl p-5 shadow-xl border border-purple-100">
-                <h2 className="text-2xl font-bold text-center mb-2 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+              <div className="bg-gradient-to-br from-white via-brand/30 to-brand/30 rounded-3xl p-5 shadow-xl border border-brand/30">
+                <h2 className="text-2xl font-bold text-center mb-2 text-transparent bg-clip-text bg-gradient-to-r from-brand to-brand-deep">
                   New Round
                 </h2>
-                <p className="text-center text-slate-500 text-sm mb-5">
+                <p className="text-center text-muted-foreground text-sm mb-5">
                   Same players, scores carry over
                 </p>
 
                 {/* Show current players and scores */}
                 <div className="flex flex-wrap gap-2 justify-center mb-5">
                   {gamePlayers.map(p => (
-                    <div key={p.id || p.name} className="flex items-center gap-1.5 bg-white rounded-full px-3 py-1.5 shadow-sm text-sm">
+                    <div key={p.id || p.name} className="flex items-center gap-1.5 bg-card rounded-full px-3 py-1.5 shadow-sm text-sm">
                       <div
                         className="w-5 h-5 rounded-full flex items-center justify-center text-xs text-white"
                         style={{ backgroundColor: p.avatarColor || '#6c5ce7' }}
                       >
                         {p.avatar || p.name?.[0]?.toUpperCase()}
                       </div>
-                      <span className="font-semibold text-slate-700">{p.name}</span>
-                      <span className="font-bold text-purple-600">{p.score}</span>
+                      <span className="font-semibold text-foreground">{p.name}</span>
+                      <span className="font-bold text-brand">{p.score}</span>
                     </div>
                   ))}
                 </div>
@@ -1081,7 +1084,7 @@ Return ONLY a JSON array:
                 <button
                   onClick={handleStartNewRound}
                   disabled={selectedCategories.length === 0}
-                  className="w-full mt-6 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white
+                  className="w-full mt-6 py-4 bg-gradient-to-r from-brand to-brand-deep text-white
                              font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all
                              disabled:opacity-50 disabled:cursor-not-allowed active:scale-98"
                 >
@@ -1142,8 +1145,8 @@ Return ONLY a JSON array:
                 {!revealed && allAnswered && (
                   <button
                     onClick={handleReveal}
-                    className="px-8 py-3 bg-yellow-500 text-white font-bold rounded-xl shadow-lg
-                               hover:bg-yellow-600 transition-all animate-pulse"
+                    className="px-8 py-3 bg-warning text-white font-bold rounded-xl shadow-lg
+                               hover:bg-warning transition-all animate-pulse"
                   >
                     Reveal Answer!
                   </button>
@@ -1151,7 +1154,7 @@ Return ONLY a JSON array:
                 {revealed && (
                   <button
                     onClick={() => setScreen('question-result')}
-                    className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold
+                    className="px-8 py-3 bg-gradient-to-r from-brand to-brand-deep text-white font-bold
                                rounded-xl shadow-lg hover:shadow-xl transition-all"
                   >
                     {currentQuestionIndex + 1 >= questions.length ? 'See Final Results' : 'Continue'}
@@ -1198,13 +1201,13 @@ Return ONLY a JSON array:
               />
               {hostAnswered && !revealed && (
                 <div className="mt-3 text-center">
-                  <div className="inline-block bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">
+                  <div className="inline-block bg-success/10 text-success px-4 py-2 rounded-full text-sm font-semibold">
                     Answer submitted! Waiting for others...
                   </div>
                 </div>
               )}
               {isHost && (
-                <div className="mt-3 text-center text-sm text-slate-500">
+                <div className="mt-3 text-center text-sm text-muted-foreground">
                   {multiDeviceAnswerCount} / {gamePlayers.length} players answered
                 </div>
               )}
@@ -1222,7 +1225,7 @@ Return ONLY a JSON array:
                       }
                       setScreen('question-result');
                     }}
-                    className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold
+                    className="px-8 py-3 bg-gradient-to-r from-brand to-brand-deep text-white font-bold
                                rounded-xl shadow-lg"
                   >
                     {currentQuestionIndex + 1 >= questions.length ? 'See Final Results' : 'Continue'}
@@ -1255,7 +1258,7 @@ Return ONLY a JSON array:
                 }
               />
               {isMultiDevice && !isHost && (
-                <div className="mt-4 text-center text-slate-500 text-sm font-medium animate-pulse">
+                <div className="mt-4 text-center text-muted-foreground text-sm font-medium animate-pulse">
                   Waiting for host to continue...
                 </div>
               )}
@@ -1341,7 +1344,7 @@ Return ONLY a JSON array:
             />
           )}
         </div>
-      </main>
+      </GameShell>
     </>
   );
 }

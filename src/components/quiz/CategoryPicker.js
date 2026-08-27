@@ -28,7 +28,7 @@ export default function CategoryPicker({
 
   return (
     <div>
-      <label className="text-xs font-bold text-slate-500 uppercase tracking-wide mb-2 block">
+      <label className="text-xs font-bold text-muted-foreground uppercase tracking-wide mb-2 block">
         Categories
       </label>
 
@@ -42,8 +42,8 @@ export default function CategoryPicker({
               onClick={() => onToggleCategory(cat.id)}
               className={`flex items-center gap-2 p-2.5 rounded-xl text-sm font-semibold transition-all
                 ${isSelected
-                  ? 'bg-purple-100 text-purple-700 ring-2 ring-purple-400 shadow-sm'
-                  : 'bg-white text-slate-600 border border-slate-200 hover:border-purple-200 hover:bg-purple-50'
+                  ? 'bg-brand/10 text-brand ring-2 ring-brand shadow-sm'
+                  : 'bg-card text-muted-foreground border border-border hover:border-brand/30 hover:bg-brand/10'
                 }`}
             >
               <span className="text-lg">{cat.icon}</span>
@@ -55,12 +55,12 @@ export default function CategoryPicker({
 
       {/* Custom categories */}
       {showCustomInput && (
-        <div className="border-t border-slate-100 pt-3 mt-3">
+        <div className="border-t border-border pt-3 mt-3">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-slate-400 uppercase tracking-wide">Custom Categories</span>
+            <span className="text-xs font-bold text-muted-foreground uppercase tracking-wide">Custom Categories</span>
             <button
               onClick={() => setShowNewCustom(!showNewCustom)}
-              className="text-xs font-semibold text-purple-600 hover:text-purple-700"
+              className="text-xs font-semibold text-brand hover:text-brand"
             >
               {showNewCustom ? 'Cancel' : '+ Create New'}
             </button>
@@ -80,8 +80,8 @@ export default function CategoryPicker({
                       onClick={() => onToggleCategory(catId)}
                       className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all
                         ${isSelected
-                          ? 'bg-purple-100 text-purple-700 ring-1 ring-purple-400'
-                          : 'bg-slate-100 text-slate-600 hover:bg-purple-50'
+                          ? 'bg-brand/10 text-brand ring-1 ring-brand'
+                          : 'bg-muted text-muted-foreground hover:bg-brand/10'
                         }`}
                     >
                       <span>✨</span>
@@ -90,7 +90,7 @@ export default function CategoryPicker({
                     {onDeleteCustomCategory && (
                       <button
                         onClick={() => onDeleteCustomCategory(cat)}
-                        className="text-slate-300 hover:text-red-400 text-xs transition-colors"
+                        className="text-border hover:text-destructive text-xs transition-colors"
                       >
                         ✕
                       </button>
@@ -103,14 +103,14 @@ export default function CategoryPicker({
 
           {/* New custom category form */}
           {showNewCustom && (
-            <div className="bg-purple-50 rounded-xl p-3 space-y-2">
+            <div className="bg-brand/10 rounded-xl p-3 space-y-2">
               <input
                 type="text"
                 value={customName}
                 onChange={(e) => setCustomName(e.target.value)}
                 placeholder="Category name (e.g., Harry Potter)"
-                className="w-full px-3 py-2 rounded-lg border border-purple-200 text-sm outline-none
-                           focus:ring-2 focus:ring-purple-400 bg-white"
+                className="w-full px-3 py-2 rounded-lg border border-brand/30 text-sm outline-none
+                           focus:ring-2 focus:ring-brand bg-card"
                 maxLength={50}
               />
               <input
@@ -118,15 +118,15 @@ export default function CategoryPicker({
                 value={customDescription}
                 onChange={(e) => setCustomDescription(e.target.value)}
                 placeholder="Description (optional)"
-                className="w-full px-3 py-2 rounded-lg border border-purple-200 text-sm outline-none
-                           focus:ring-2 focus:ring-purple-400 bg-white"
+                className="w-full px-3 py-2 rounded-lg border border-brand/30 text-sm outline-none
+                           focus:ring-2 focus:ring-brand bg-card"
                 maxLength={100}
               />
               <button
                 onClick={handleAddCustom}
                 disabled={!customName.trim()}
-                className="w-full py-2 bg-purple-600 text-white font-semibold text-sm rounded-lg
-                           disabled:opacity-50 disabled:cursor-not-allowed hover:bg-purple-700 transition-all"
+                className="w-full py-2 bg-brand text-white font-semibold text-sm rounded-lg
+                           disabled:opacity-50 disabled:cursor-not-allowed hover:bg-brand transition-all"
               >
                 Add Category
               </button>

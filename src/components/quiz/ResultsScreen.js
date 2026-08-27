@@ -62,11 +62,11 @@ export default function ResultsScreen({ game, onStartNewRound, onEndGame, onBack
   if (showCategorySelection) {
     return (
       <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-2xl p-6 shadow-lg">
-          <h3 className="text-2xl font-bold text-slate-700 mb-6">Select New Categories</h3>
+        <div className="bg-card rounded-2xl p-6 shadow-lg">
+          <h3 className="text-2xl font-bold text-foreground mb-6">Select New Categories</h3>
           
           <div className="mb-6">
-            <label className="text-sm font-semibold text-slate-700 mb-3 block">Categories</label>
+            <label className="text-sm font-semibold text-foreground mb-3 block">Categories</label>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
               {CATEGORIES.map(category => (
                 <button
@@ -75,8 +75,8 @@ export default function ResultsScreen({ game, onStartNewRound, onEndGame, onBack
                   className={`
                     py-3 px-2 rounded-lg transition-all border-2 flex flex-col items-center gap-1
                     ${selectedCategories.includes(category.id)
-                      ? 'bg-purple-50 border-purple-500 shadow-md'
-                      : 'bg-white border-slate-200 hover:border-purple-300'
+                      ? 'bg-brand/10 border-brand shadow-md'
+                      : 'bg-card border-border hover:border-brand/30'
                     }
                   `}
                 >
@@ -89,13 +89,13 @@ export default function ResultsScreen({ game, onStartNewRound, onEndGame, onBack
 
           {/* Custom Categories Section */}
           {selectedCategories.includes('custom') && (
-            <div className="mb-6 bg-purple-50 rounded-xl p-4 border-2 border-purple-300">
-              <h3 className="text-sm font-bold text-purple-700 mb-3">✨ Custom Categories</h3>
+            <div className="mb-6 bg-brand/10 rounded-xl p-4 border-2 border-brand/30">
+              <h3 className="text-sm font-bold text-brand mb-3">✨ Custom Categories</h3>
               
               {/* Show currently selected custom categories */}
               {selectedCategories.filter(c => c.startsWith('custom:') && !previousCustomCategories.includes(c.replace('custom:', ''))).length > 0 && (
                 <div className="mb-3">
-                  <p className="text-xs text-purple-600 mb-2">Selected for this game:</p>
+                  <p className="text-xs text-brand mb-2">Selected for this game:</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     {selectedCategories
                       .filter(c => c.startsWith('custom:') && !previousCustomCategories.includes(c.replace('custom:', '')))
@@ -105,15 +105,15 @@ export default function ResultsScreen({ game, onStartNewRound, onEndGame, onBack
                         return (
                           <div
                             key={idx}
-                            className="text-left px-3 py-2 rounded-lg border-2 bg-white border-purple-500 shadow-md text-sm flex justify-between items-center"
+                            className="text-left px-3 py-2 rounded-lg border-2 bg-card border-brand shadow-md text-sm flex justify-between items-center"
                           >
                             <div>
-                              <div className="font-semibold text-slate-700">{name}</div>
-                              {desc && <div className="text-xs text-slate-500">{desc}</div>}
+                              <div className="font-semibold text-foreground">{name}</div>
+                              {desc && <div className="text-xs text-muted-foreground">{desc}</div>}
                             </div>
                             <button
                               onClick={() => handleCategoryToggle(cat)}
-                              className="text-red-500 hover:text-red-700 ml-2"
+                              className="text-destructive hover:text-destructive ml-2"
                             >
                               ×
                             </button>
@@ -127,7 +127,7 @@ export default function ResultsScreen({ game, onStartNewRound, onEndGame, onBack
               {/* Show either previous categories OR create new form */}
               {previousCustomCategories.length > 0 && !creatingNewCustom ? (
                 <div className="mb-3">
-                  <p className="text-xs text-purple-600 mb-2">Select from your previous categories:</p>
+                  <p className="text-xs text-brand mb-2">Select from your previous categories:</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     {previousCustomCategories.map((cat, idx) => {
                       const [name, desc] = cat.includes(':') ? cat.split(':') : [cat, ''];
@@ -138,13 +138,13 @@ export default function ResultsScreen({ game, onStartNewRound, onEndGame, onBack
                           className={`
                             text-left px-3 py-2 rounded-lg border-2 transition-all text-sm
                             ${selectedCategories.includes(`custom:${cat}`)
-                              ? 'bg-white border-purple-500 shadow-md'
-                              : 'bg-white border-purple-200 hover:border-purple-300'
+                              ? 'bg-card border-brand shadow-md'
+                              : 'bg-card border-brand/30 hover:border-brand/30'
                             }
                           `}
                         >
-                          <div className="font-semibold text-slate-700">{name}</div>
-                          {desc && <div className="text-xs text-slate-500">{desc}</div>}
+                          <div className="font-semibold text-foreground">{name}</div>
+                          {desc && <div className="text-xs text-muted-foreground">{desc}</div>}
                         </button>
                       );
                     })}
@@ -158,14 +158,14 @@ export default function ResultsScreen({ game, onStartNewRound, onEndGame, onBack
                       value={customCategoryName}
                       onChange={(e) => setCustomCategoryName(e.target.value)}
                       placeholder="Category name (e.g., Harry Potter)"
-                      className="w-full px-3 py-2 rounded-lg border-2 border-purple-300 focus:border-purple-500 focus:outline-none text-sm bg-white"
+                      className="w-full px-3 py-2 rounded-lg border-2 border-brand/30 focus:border-brand focus:outline-none text-sm bg-card"
                     />
                     <input
                       type="text"
                       value={customCategoryDescription}
                       onChange={(e) => setCustomCategoryDescription(e.target.value)}
                       placeholder="Topic to ask about (e.g., Books and films)"
-                      className="w-full px-3 py-2 rounded-lg border-2 border-purple-300 focus:border-purple-500 focus:outline-none text-sm bg-white"
+                      className="w-full px-3 py-2 rounded-lg border-2 border-brand/30 focus:border-brand focus:outline-none text-sm bg-card"
                     />
                   </div>
                   <button
@@ -176,14 +176,14 @@ export default function ResultsScreen({ game, onStartNewRound, onEndGame, onBack
                         setCustomCategoryDescription('');
                       }
                     }}
-                    className="mt-2 px-4 py-1 bg-white border-2 border-purple-400 rounded-lg text-sm font-semibold text-purple-600 hover:bg-purple-100 transition-all"
+                    className="mt-2 px-4 py-1 bg-card border-2 border-brand rounded-lg text-sm font-semibold text-brand hover:bg-brand/10 transition-all"
                   >
                     ✓ Add Custom Category
                   </button>
                   {previousCustomCategories.length > 0 && (
                     <button
                       onClick={() => setCreatingNewCustom(false)}
-                      className="mt-2 text-xs text-purple-600 hover:text-purple-700 font-semibold block ml-2"
+                      className="mt-2 text-xs text-brand hover:text-brand font-semibold block ml-2"
                     >
                       ← Back to categories
                     </button>
@@ -194,7 +194,7 @@ export default function ResultsScreen({ game, onStartNewRound, onEndGame, onBack
               {previousCustomCategories.length > 0 && !creatingNewCustom && (
                 <button
                   onClick={() => setCreatingNewCustom(true)}
-                  className="text-xs text-purple-600 hover:text-purple-700 font-semibold"
+                  className="text-xs text-brand hover:text-brand font-semibold"
                 >
                   + Create new custom category
                 </button>
@@ -203,7 +203,7 @@ export default function ResultsScreen({ game, onStartNewRound, onEndGame, onBack
           )}
 
           <div className="mb-6">
-            <label className="text-sm font-semibold text-slate-700 mb-3 block">Difficulty</label>
+            <label className="text-sm font-semibold text-foreground mb-3 block">Difficulty</label>
             <div className="flex gap-2">
               {DIFFICULTY_LEVELS.map(level => (
                 <button
@@ -212,13 +212,13 @@ export default function ResultsScreen({ game, onStartNewRound, onEndGame, onBack
                   className={`
                     flex-1 py-3 rounded-lg transition-all border text-center
                     ${difficulty === level.id
-                      ? 'border-purple-500 bg-purple-50 shadow-md'
-                      : 'border-slate-200 hover:border-purple-300'
+                      ? 'border-brand bg-brand/10 shadow-md'
+                      : 'border-border hover:border-brand/30'
                     }
                   `}
                 >
                   <div className="text-lg">{level.icon}</div>
-                  <div className="text-xs font-bold text-slate-700 mt-1">{level.name}</div>
+                  <div className="text-xs font-bold text-foreground mt-1">{level.name}</div>
                 </button>
               ))}
             </div>
@@ -227,14 +227,14 @@ export default function ResultsScreen({ game, onStartNewRound, onEndGame, onBack
           <div className="flex gap-3">
             <button
               onClick={() => setShowCategorySelection(false)}
-              className="flex-1 bg-slate-200 text-slate-700 py-3 rounded-lg font-bold hover:bg-slate-300 transition-all"
+              className="flex-1 bg-border text-foreground py-3 rounded-lg font-bold hover:bg-border transition-all"
             >
               Cancel
             </button>
             <button
               onClick={handleStartRound}
               disabled={selectedCategories.length === 0}
-              className="flex-1 bg-gradient-to-r from-green-500 to-emerald-500 text-white py-3 rounded-lg font-bold hover:scale-105 transform transition-all shadow-lg disabled:opacity-50"
+              className="flex-1 bg-gradient-to-r from-success to-success-deep text-white py-3 rounded-lg font-bold hover:scale-105 transform transition-all shadow-lg disabled:opacity-50"
             >
               Start New Round
             </button>
@@ -249,32 +249,32 @@ export default function ResultsScreen({ game, onStartNewRound, onEndGame, onBack
       <div className="flex justify-between items-center mb-6">
         <button
           onClick={onBack}
-          className="text-purple-600 hover:text-purple-700 font-semibold"
+          className="text-brand hover:text-brand font-semibold"
         >
           ← Back
         </button>
       </div>
 
-      <div className="bg-white rounded-2xl p-4 shadow-lg mb-4 text-center">
+      <div className="bg-card rounded-2xl p-4 shadow-lg mb-4 text-center">
         <div className="text-3xl mb-2">🎉</div>
-        <h2 className="text-2xl font-bold text-purple-600 mb-1">Game Complete!</h2>
-        <div className="text-xl font-bold text-slate-700 mb-2">
+        <h2 className="text-2xl font-bold text-brand mb-1">Game Complete!</h2>
+        <div className="text-xl font-bold text-foreground mb-2">
           {winner.name} Wins! 👑
         </div>
-        <div className="text-sm text-slate-600">
+        <div className="text-sm text-muted-foreground">
           Final Score: {winner.totalScore}/{game.quizConfig.totalQuestions} ({winner.percentage}%)
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl p-6 shadow-lg mb-6">
-        <h3 className="text-2xl font-bold text-slate-700 mb-4">Final Standings</h3>
+      <div className="bg-card rounded-2xl p-6 shadow-lg mb-6">
+        <h3 className="text-2xl font-bold text-foreground mb-4">Final Standings</h3>
         <div className="space-y-3">
           {playersWithScores.map((player, rank) => {
             const percentage = ((player.scores.filter(s => s === 1).length / (game.quizConfig?.totalQuestions || 1)) * 100).toFixed(0);
-            const positionColor = rank === 0 ? 'bg-gradient-to-r from-yellow-400 to-orange-400' :
-                                  rank === 1 ? 'bg-gradient-to-r from-slate-300 to-slate-400' :
-                                  rank === 2 ? 'bg-gradient-to-r from-orange-600 to-orange-700' :
-                                  'bg-slate-100';
+            const positionColor = rank === 0 ? 'bg-gradient-to-r from-warning to-brand' :
+                                  rank === 1 ? 'bg-gradient-to-r from-border to-muted-foreground' :
+                                  rank === 2 ? 'bg-gradient-to-r from-brand to-brand-deep' :
+                                  'bg-muted';
             const emoji = rank === 0 ? '👑' : rank === 1 ? '🥈' : rank === 2 ? '🥉' : `#${rank + 1}`;
             
             return (
@@ -300,13 +300,13 @@ export default function ResultsScreen({ game, onStartNewRound, onEndGame, onBack
       <div className="grid md:grid-cols-2 gap-4">
         <button
           onClick={() => setShowCategorySelection(true)}
-          className="bg-gradient-to-r from-green-500 to-emerald-500 text-white py-4 rounded-xl text-xl font-bold hover:scale-105 transform transition-all shadow-lg"
+          className="bg-gradient-to-r from-success to-success-deep text-white py-4 rounded-xl text-xl font-bold hover:scale-105 transform transition-all shadow-lg"
         >
           New Round ➕
         </button>
         <button
           onClick={onEndGame}
-          className="bg-red-500 text-white py-4 rounded-xl text-xl font-bold hover:bg-red-600 transform transition-all shadow-lg"
+          className="bg-destructive text-white py-4 rounded-xl text-xl font-bold hover:bg-destructive transform transition-all shadow-lg"
         >
           End Game
         </button>

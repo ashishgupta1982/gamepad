@@ -1,23 +1,17 @@
 import { useCallback } from 'react';
-import { SCORING } from '@/data/quizConstants';
+import { scoreAnswer, scoreClassic } from '@/lib/quizScoring';
 
+// Thin wrapper over lib/quizScoring so same-device play and multi-device play
+// score identically. The formula used to live here in full and again inline in
+// the answer API route — identical by coincidence, with nothing keeping them so.
 export default function useQuizScoring() {
-  const calculatePoints = useCallback((correct, timeMs, totalTimeMs, currentStreak) => {
-    if (!correct) return { points: 0, streak: 0 };
+  const calculatePoints = useCallback(
+    (correct, timeMs, totalTimeMs, currentStreak) =>
+      scoreAnswer(correct, timeMs, totalTimeMs, currentStreak),
+    [],
+  );
 
-    const speedMultiplier = 1.0 - ((timeMs / totalTimeMs) * SCORING.SPEED_WEIGHT);
-    const streakMultiplier = Math.min(
-      1.0 + (currentStreak * SCORING.STREAK_BONUS),
-      SCORING.MAX_STREAK_MULTIPLIER
-    );
-
-    const points = Math.round(SCORING.BASE_POINTS * speedMultiplier * streakMultiplier);
-    return { points, streak: currentStreak + 1 };
-  }, []);
-
-  const calculateClassicPoints = useCallback((correct) => {
-    return { points: correct ? 1 : 0, streak: correct ? 1 : 0 };
-  }, []);
+  const calculateClassicPoints = useCallback((correct) => scoreClassic(correct), []);
 
   return { calculatePoints, calculateClassicPoints };
 }

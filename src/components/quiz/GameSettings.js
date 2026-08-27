@@ -12,8 +12,8 @@ export default function GameSettings({
   return (
     <div className="space-y-4">
       {/* Question count */}
-      <div className="bg-white rounded-xl p-3 border border-slate-100">
-        <label className="text-xs font-bold text-slate-500 uppercase tracking-wide mb-2 block">
+      <div className="bg-card rounded-xl p-3 border border-border">
+        <label className="text-xs font-bold text-muted-foreground uppercase tracking-wide mb-2 block">
           Questions
         </label>
         <div className="flex gap-2">
@@ -23,8 +23,8 @@ export default function GameSettings({
               onClick={() => onQuestionCountChange(num)}
               className={`flex-1 py-2.5 rounded-lg font-bold text-sm transition-all
                 ${questionCount === num
-                  ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-md scale-105'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  ? 'bg-gradient-to-r from-success to-success-deep text-white shadow-md scale-105'
+                  : 'bg-muted text-muted-foreground hover:bg-border'
                 }`}
             >
               {num}
@@ -34,8 +34,8 @@ export default function GameSettings({
       </div>
 
       {/* Difficulty */}
-      <div className="bg-white rounded-xl p-3 border border-slate-100">
-        <label className="text-xs font-bold text-slate-500 uppercase tracking-wide mb-2 block">
+      <div className="bg-card rounded-xl p-3 border border-border">
+        <label className="text-xs font-bold text-muted-foreground uppercase tracking-wide mb-2 block">
           Difficulty
         </label>
         <div className="flex gap-2">
@@ -45,8 +45,8 @@ export default function GameSettings({
               onClick={() => onDifficultyChange(level.id)}
               className={`flex-1 py-2.5 rounded-lg font-bold text-sm transition-all
                 ${difficulty === level.id
-                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-md scale-105'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  ? 'bg-gradient-to-r from-brand to-brand-deep text-white shadow-md scale-105'
+                  : 'bg-muted text-muted-foreground hover:bg-border'
                 }`}
             >
               <span className="block text-lg mb-0.5">{level.icon}</span>
@@ -57,8 +57,8 @@ export default function GameSettings({
       </div>
 
       {/* Timer */}
-      <div className="bg-white rounded-xl p-3 border border-slate-100">
-        <label className="text-xs font-bold text-slate-500 uppercase tracking-wide mb-2 block">
+      <div className="bg-card rounded-xl p-3 border border-border">
+        <label className="text-xs font-bold text-muted-foreground uppercase tracking-wide mb-2 block">
           Time Per Question
         </label>
         <div className="flex gap-2">
@@ -68,8 +68,8 @@ export default function GameSettings({
               onClick={() => onTimeChange(opt.id)}
               className={`flex-1 py-2.5 rounded-lg font-bold text-sm transition-all
                 ${timePerQuestion === opt.id
-                  ? 'bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-md scale-105'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  ? 'bg-gradient-to-r from-game-quiz to-accent text-white shadow-md scale-105'
+                  : 'bg-muted text-muted-foreground hover:bg-border'
                 }`}
             >
               <span className="block text-base">{opt.label}</span>

@@ -52,19 +52,19 @@ export default function HostLobby({ roomCode, players, hostPlayerId, onStart, on
     <div className="max-w-lg mx-auto text-center">
       <button
         onClick={onBack}
-        className="mb-4 text-purple-600 hover:text-purple-700 font-semibold text-sm self-start block"
+        className="mb-4 text-brand hover:text-brand font-semibold text-sm self-start block"
       >
         ← Back
       </button>
 
-      <div className="bg-white rounded-3xl p-6 shadow-xl border border-purple-100">
-        <h2 className="text-2xl font-bold text-slate-800 mb-2">Game Room</h2>
-        <p className="text-slate-500 text-sm mb-6">Share this code with players to join</p>
+      <div className="bg-card rounded-3xl p-6 shadow-xl border border-brand/30">
+        <h2 className="text-2xl font-bold text-foreground mb-2">Game Room</h2>
+        <p className="text-muted-foreground text-sm mb-6">Share this code with players to join</p>
 
         {/* Room code display */}
         <button
           onClick={copyCode}
-          className="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white
+          className="inline-block bg-gradient-to-r from-brand to-brand-deep text-white
                      px-8 py-4 rounded-2xl mb-4 transition-transform active:scale-95"
         >
           <div className="text-4xl font-mono font-bold tracking-[0.3em]">{roomCode}</div>
@@ -74,24 +74,24 @@ export default function HostLobby({ roomCode, players, hostPlayerId, onStart, on
         </button>
 
         {/* Join URL */}
-        <div className="text-xs text-slate-400 mb-6">
+        <div className="text-xs text-muted-foreground mb-6">
           or visit: <span className="font-mono">/games/quiz/join?code={roomCode}</span>
         </div>
 
         {/* Connection status */}
         <div className="flex items-center justify-center gap-2 text-sm mb-4">
-          <div className={`w-2 h-2 rounded-full ${connected ? 'bg-green-500' : 'bg-red-500'}`} />
-          <span className="text-slate-500">{connected ? 'Connected' : 'Connecting...'}</span>
+          <div className={`w-2 h-2 rounded-full ${connected ? 'bg-success' : 'bg-destructive'}`} />
+          <span className="text-muted-foreground">{connected ? 'Connected' : 'Connecting...'}</span>
         </div>
 
         {/* Players list */}
         <div className="mb-6">
-          <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wide mb-3">
+          <h3 className="text-sm font-bold text-muted-foreground uppercase tracking-wide mb-3">
             Players ({currentPlayers.length})
           </h3>
 
           {currentPlayers.length === 0 ? (
-            <div className="py-8 text-slate-400 text-sm">
+            <div className="py-8 text-muted-foreground text-sm">
               Waiting for players to join...
             </div>
           ) : (
@@ -99,7 +99,7 @@ export default function HostLobby({ roomCode, players, hostPlayerId, onStart, on
               {currentPlayers.map((player, idx) => (
                 <div
                   key={player.id || idx}
-                  className="flex items-center gap-3 bg-purple-50 rounded-xl p-3"
+                  className="flex items-center gap-3 bg-brand/10 rounded-xl p-3"
                   style={{
                     animation: 'slide-up 0.3s ease-out',
                     animationDelay: `${idx * 0.1}s`
@@ -114,7 +114,7 @@ export default function HostLobby({ roomCode, players, hostPlayerId, onStart, on
                   {player.id === hostPlayerId && editingName ? (
                     <input
                       autoFocus
-                      className="font-semibold text-slate-700 bg-white border border-purple-300 rounded-lg px-2 py-1 text-sm w-28 focus:outline-none focus:ring-2 focus:ring-purple-400"
+                      className="font-semibold text-foreground bg-card border border-brand/30 rounded-lg px-2 py-1 text-sm w-28 focus:outline-none focus:ring-2 focus:ring-brand"
                       value={hostName}
                       onChange={(e) => setHostName(e.target.value)}
                       onBlur={() => updateHostName(hostName)}
@@ -126,7 +126,7 @@ export default function HostLobby({ roomCode, players, hostPlayerId, onStart, on
                     />
                   ) : (
                     <span
-                      className={`font-semibold text-slate-700 ${player.id === hostPlayerId ? 'cursor-pointer hover:text-purple-600' : ''}`}
+                      className={`font-semibold text-foreground ${player.id === hostPlayerId ? 'cursor-pointer hover:text-brand' : ''}`}
                       onClick={() => {
                         if (player.id === hostPlayerId) {
                           setHostName(player.name);
@@ -139,13 +139,13 @@ export default function HostLobby({ roomCode, players, hostPlayerId, onStart, on
                   )}
                   {player.id === hostPlayerId && (
                     <>
-                      <span className="text-[10px] bg-purple-200 text-purple-700 px-1.5 py-0.5 rounded-full font-bold">
+                      <span className="text-[10px] bg-brand/20 text-brand px-1.5 py-0.5 rounded-full font-bold">
                         HOST
                       </span>
                       {!editingName && (
                         <button
                           onClick={() => { setHostName(player.name); setEditingName(true); }}
-                          className="text-purple-400 hover:text-purple-600 text-xs"
+                          className="text-brand hover:text-brand text-xs"
                           title="Edit name"
                         >
                           ✏️
@@ -153,7 +153,7 @@ export default function HostLobby({ roomCode, players, hostPlayerId, onStart, on
                       )}
                     </>
                   )}
-                  <div className={`ml-auto w-2 h-2 rounded-full ${player.connected ? 'bg-green-500' : 'bg-slate-300'}`} />
+                  <div className={`ml-auto w-2 h-2 rounded-full ${player.connected ? 'bg-success' : 'bg-border'}`} />
                 </div>
               ))}
             </div>
@@ -164,7 +164,7 @@ export default function HostLobby({ roomCode, players, hostPlayerId, onStart, on
         <button
           onClick={onStart}
           disabled={currentPlayers.length < 1}
-          className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold
+          className="w-full py-4 bg-gradient-to-r from-brand to-brand-deep text-white font-bold
                      text-lg rounded-xl shadow-lg hover:shadow-xl transition-all
                      disabled:opacity-50 disabled:cursor-not-allowed"
         >

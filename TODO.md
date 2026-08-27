@@ -19,15 +19,14 @@ sessions; everyone signs in again, which is fine for a family app.
 
 **Closes in:** redesign Phase 1, which touches auth end to end anyway.
 
-## 2. No tests
+## 2. Test coverage is narrow
 
-There is no test framework in the repo and no CI. The quiz SSE room-state machine
-(`lobby → playing → question → reveal → scores → finished`, with `stateVersion`
-as the SSE cursor) is the piece with enough moving parts to be worth covering.
+`vitest` is in, with 34 tests over the quiz room state machine and the scoring
+formula (`src/lib/*.test.js`). Nothing else is covered and there is no CI.
 
-**Closes in:** redesign Phase 8, which adds `vitest` and writes that coverage
-*before* reskinning the quiz — tests written afterwards would only encode
-whatever the redesign happened to leave behind.
+That was the deliberate scope — those two are the pieces that break quietly.
+Component and end-to-end coverage remain unwritten; worth revisiting only if
+GamePad grows beyond a family utility.
 
 ---
 

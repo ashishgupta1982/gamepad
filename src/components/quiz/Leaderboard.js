@@ -32,15 +32,15 @@ export default function Leaderboard({ game, compact = false }) {
   // Compact horizontal layout for mobile/tablet
   if (compact) {
     return (
-      <div className="bg-white rounded-lg px-3 py-2 shadow-md">
+      <div className="bg-card rounded-lg px-3 py-2 shadow-md">
         <div className="flex gap-1.5 overflow-x-auto">
           {playersWithScores.map((player, rank) => {
             const emoji = rank === 0 ? '👑' : rank === 1 ? '🥈' : rank === 2 ? '🥉' : `#${rank + 1}`;
-            const bgColor = rank === 0 ? 'bg-gradient-to-br from-yellow-400 to-orange-500' :
-                            rank === 1 ? 'bg-gradient-to-br from-slate-300 to-slate-400' :
-                            rank === 2 ? 'bg-gradient-to-br from-orange-600 to-orange-700' :
-                            'bg-slate-100 border border-slate-200';
-            const textColor = rank < 3 ? 'text-white' : 'text-slate-700';
+            const bgColor = rank === 0 ? 'bg-gradient-to-br from-warning to-brand' :
+                            rank === 1 ? 'bg-gradient-to-br from-border to-muted-foreground' :
+                            rank === 2 ? 'bg-gradient-to-br from-brand to-brand-deep' :
+                            'bg-muted border border-border';
+            const textColor = rank < 3 ? 'text-white' : 'text-foreground';
             
             return (
               <div
@@ -53,7 +53,7 @@ export default function Leaderboard({ game, compact = false }) {
                 </div>
                 <div className="text-center">
                   <div className="text-base font-bold">{player.totalScore}</div>
-                  <div className={`text-[8px] ${rank < 3 ? 'text-white/80' : 'text-slate-500'}`}>
+                  <div className={`text-[8px] ${rank < 3 ? 'text-white/80' : 'text-muted-foreground'}`}>
                     {player.correctCount}/{player.roundsPlayed}
                   </div>
                 </div>
@@ -67,25 +67,25 @@ export default function Leaderboard({ game, compact = false }) {
 
   // Original vertical layout for desktop
   return (
-    <div className="bg-white rounded-xl p-3 shadow-lg sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto">
-      <div className="flex items-center gap-2 mb-3 pb-2 border-b border-slate-200">
+    <div className="bg-card rounded-xl p-3 shadow-lg sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto">
+      <div className="flex items-center gap-2 mb-3 pb-2 border-b border-border">
         <span className="text-xl">🏆</span>
-        <h3 className="font-bold text-slate-700 text-xs uppercase tracking-wide">Leaderboard</h3>
+        <h3 className="font-bold text-foreground text-xs uppercase tracking-wide">Leaderboard</h3>
       </div>
       
       <div className="space-y-1.5">
         {playersWithScores.map((player, rank) => {
-          const positionColor = rank === 0 ? 'bg-gradient-to-br from-yellow-400 to-orange-500' :
-                                rank === 1 ? 'bg-gradient-to-br from-slate-300 to-slate-400' :
-                                rank === 2 ? 'bg-gradient-to-br from-orange-600 to-orange-700' :
-                                'bg-slate-50 border border-slate-200';
+          const positionColor = rank === 0 ? 'bg-gradient-to-br from-warning to-brand' :
+                                rank === 1 ? 'bg-gradient-to-br from-border to-muted-foreground' :
+                                rank === 2 ? 'bg-gradient-to-br from-brand to-brand-deep' :
+                                'bg-muted border border-border';
           const emoji = rank === 0 ? '👑' : rank === 1 ? '🥈' : rank === 2 ? '🥉' : `#${rank + 1}`;
           const isAnimated = player.positionChange && Math.abs(player.positionChange) > 0;
           
           return (
             <div
               key={player.index}
-              className={`${positionColor} ${rank < 3 ? 'text-white' : 'text-slate-700'} p-2 rounded-md transition-all duration-500 text-xs ${
+              className={`${positionColor} ${rank < 3 ? 'text-white' : 'text-foreground'} p-2 rounded-md transition-all duration-500 text-xs ${
                 isAnimated ? (player.positionChange > 0 ? 'animate-slide-up' : 'animate-slide-down') : ''
               }`}
             >
@@ -99,7 +99,7 @@ export default function Leaderboard({ game, compact = false }) {
               
               {/* Show round-by-round scores */}
               {rounds.length > 0 && (
-                <div className={`text-[10px] mt-0.5 ${rank < 3 ? 'text-white/80' : 'text-slate-500'}`}>
+                <div className={`text-[10px] mt-0.5 ${rank < 3 ? 'text-white/80' : 'text-muted-foreground'}`}>
                   {player.correctCount}/{player.roundsPlayed}
                   {isAnimated && (
                     <span className="ml-1">
@@ -111,7 +111,7 @@ export default function Leaderboard({ game, compact = false }) {
               
               {/* Show per-round score breakdown */}
               {rounds.length > 1 && (
-                <div className="mt-1 pt-1 border-t border-slate-300/30">
+                <div className="mt-1 pt-1 border-t border-border/30">
                   {rounds.map((round, idx) => {
                     const roundScore = player.scores.slice(
                       (round.roundNumber - 1) * game.quizConfig.totalQuestions,
@@ -151,8 +151,8 @@ export default function Leaderboard({ game, compact = false }) {
       </div>
 
       {currentQIndex > 0 && (
-        <div className="mt-3 pt-2 border-t border-slate-200">
-          <div className="text-[10px] text-slate-400 text-center">
+        <div className="mt-3 pt-2 border-t border-border">
+          <div className="text-[10px] text-muted-foreground text-center">
             Round {currentRound}
           </div>
         </div>

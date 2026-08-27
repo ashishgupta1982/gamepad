@@ -29,13 +29,13 @@ export default function PlayerSetup({ players, onPlayersChange, maxPlayers = 6 }
   return (
     <div>
       <div className="flex items-center justify-between mb-3">
-        <label className="text-xs font-bold text-slate-500 uppercase tracking-wide">
+        <label className="text-xs font-bold text-muted-foreground uppercase tracking-wide">
           Players ({players.length})
         </label>
         {players.length < maxPlayers && (
           <button
             onClick={addPlayer}
-            className="text-sm font-semibold text-purple-600 hover:text-purple-700 transition-colors"
+            className="text-sm font-semibold text-brand hover:text-brand transition-colors"
           >
             + Add Player
           </button>
@@ -44,7 +44,7 @@ export default function PlayerSetup({ players, onPlayersChange, maxPlayers = 6 }
 
       <div className="space-y-2">
         {players.map((player, idx) => (
-          <div key={idx} className="flex items-center gap-2 bg-white rounded-xl p-2.5 border border-slate-100">
+          <div key={idx} className="flex items-center gap-2 bg-card rounded-xl p-2.5 border border-border">
             {/* Avatar color cycle button */}
             <button
               onClick={() => {
@@ -66,7 +66,7 @@ export default function PlayerSetup({ players, onPlayersChange, maxPlayers = 6 }
                 const nextEmoji = AVATAR_EMOJIS[(currentIdx + 1) % AVATAR_EMOJIS.length];
                 updatePlayer(idx, 'avatar', nextEmoji);
               }}
-              className="text-xs text-slate-400 hover:text-purple-500 transition-colors shrink-0"
+              className="text-xs text-muted-foreground hover:text-brand transition-colors shrink-0"
               title="Change avatar"
             >
               🔄
@@ -77,8 +77,8 @@ export default function PlayerSetup({ players, onPlayersChange, maxPlayers = 6 }
               type="text"
               value={player.name}
               onChange={(e) => updatePlayer(idx, 'name', e.target.value)}
-              className="flex-1 bg-transparent font-semibold text-slate-700 outline-none text-sm
-                         placeholder-slate-300 min-w-0"
+              className="flex-1 bg-transparent font-semibold text-foreground outline-none text-sm
+                         placeholder-border min-w-0"
               placeholder={`Player ${idx + 1}`}
               maxLength={20}
             />
@@ -87,7 +87,7 @@ export default function PlayerSetup({ players, onPlayersChange, maxPlayers = 6 }
             {players.length > 1 && (
               <button
                 onClick={() => removePlayer(idx)}
-                className="text-slate-300 hover:text-red-400 transition-colors text-lg shrink-0"
+                className="text-border hover:text-destructive transition-colors text-lg shrink-0"
               >
                 ✕
               </button>
@@ -111,8 +111,8 @@ export default function PlayerSetup({ players, onPlayersChange, maxPlayers = 6 }
             }}
             className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
               players.length === count
-                ? 'bg-purple-100 text-purple-700 ring-1 ring-purple-300'
-                : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
+                ? 'bg-brand/10 text-brand ring-1 ring-brand'
+                : 'bg-muted text-muted-foreground hover:bg-border'
             }`}
           >
             {count} players

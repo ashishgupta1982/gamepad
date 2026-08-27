@@ -82,7 +82,7 @@ export default function JoinPage() {
       <Head>
         <title>Join Quiz — GamePad</title>
       </Head>
-      <main className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100">
+      <main className="min-h-dvh bg-background">
         {screen === 'join' && <AppHeader />}
         <div className="pt-4 px-4 pb-8">
 
@@ -102,17 +102,17 @@ export default function JoinPage() {
             <div className="max-w-lg mx-auto">
               {/* Compact status */}
               <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-semibold text-purple-700 bg-white/80 px-3 py-1 rounded-full">
+                <span className="text-sm font-semibold text-brand bg-card/80 px-3 py-1 rounded-full">
                   Q{(roomState?.currentQuestionIndex || 0) + 1} / {roomState?.totalQuestions}
                 </span>
-                <span className="text-sm text-slate-500 bg-white/80 px-3 py-1 rounded-full">
+                <span className="text-sm text-muted-foreground bg-card/80 px-3 py-1 rounded-full">
                   {question.category}
                 </span>
               </div>
 
               {/* Question */}
-              <div className="bg-white rounded-2xl p-5 shadow-lg mb-4">
-                <h2 className="text-xl font-bold text-slate-800 text-center">{question.question}</h2>
+              <div className="bg-card rounded-2xl p-5 shadow-lg mb-4">
+                <h2 className="text-xl font-bold text-foreground text-center">{question.question}</h2>
               </div>
 
               {/* Answers */}
@@ -126,7 +126,7 @@ export default function JoinPage() {
               />
 
               {answerSubmitted && screen === 'player-question' && (
-                <div className="text-center mt-4 text-slate-500 text-sm font-medium">
+                <div className="text-center mt-4 text-muted-foreground text-sm font-medium">
                   Answer locked in! Waiting for others...
                 </div>
               )}
@@ -137,8 +137,8 @@ export default function JoinPage() {
             <div className="max-w-lg mx-auto text-center">
               <div className={`rounded-2xl p-6 mb-4 ${
                 selectedAnswer === roomState.revealedAnswer.correctAnswer
-                  ? 'bg-green-100 text-green-800'
-                  : 'bg-red-100 text-red-800'
+                  ? 'bg-success/10 text-success'
+                  : 'bg-destructive/10 text-destructive'
               }`}>
                 <div className="text-4xl mb-2">
                   {selectedAnswer === roomState.revealedAnswer.correctAnswer ? '🎉' : '😔'}
@@ -148,11 +148,11 @@ export default function JoinPage() {
                 </div>
               </div>
               {roomState.revealedAnswer.explanation && (
-                <div className="bg-blue-50 rounded-xl p-4 text-sm text-blue-800">
+                <div className="bg-game-quiz/10 rounded-xl p-4 text-sm text-game-quiz">
                   <span className="font-semibold">Did you know?</span> {roomState.revealedAnswer.explanation}
                 </div>
               )}
-              <div className="mt-4 text-slate-400 text-sm">Waiting for host...</div>
+              <div className="mt-4 text-muted-foreground text-sm">Waiting for host...</div>
             </div>
           )}
 

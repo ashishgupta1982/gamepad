@@ -38,14 +38,14 @@ export default function JoinScreen({ onJoin, onBack }) {
     <div className="max-w-md mx-auto">
       <button
         onClick={onBack}
-        className="mb-4 text-purple-600 hover:text-purple-700 font-semibold text-sm"
+        className="mb-4 text-brand hover:text-brand font-semibold text-sm"
       >
         ← Back
       </button>
 
-      <div className="bg-white rounded-3xl p-6 shadow-xl border border-purple-100 text-center">
-        <h2 className="text-2xl font-bold text-slate-800 mb-2">Join a Game</h2>
-        <p className="text-slate-500 text-sm mb-6">Enter the room code shown on the host&apos;s screen</p>
+      <div className="bg-card rounded-3xl p-6 shadow-xl border border-brand/30 text-center">
+        <h2 className="text-2xl font-bold text-foreground mb-2">Join a Game</h2>
+        <p className="text-muted-foreground text-sm mb-6">Enter the room code shown on the host&apos;s screen</p>
 
         {/* Room code input */}
         <input
@@ -54,8 +54,8 @@ export default function JoinScreen({ onJoin, onBack }) {
           onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6))}
           placeholder="ROOM CODE"
           className="w-full text-center text-3xl font-mono font-bold tracking-[0.3em] py-4 px-4
-                     border-2 border-purple-200 rounded-xl outline-none focus:border-purple-500
-                     text-slate-800 placeholder-slate-300 mb-4"
+                     border-2 border-brand/30 rounded-xl outline-none focus:border-brand
+                     text-foreground placeholder-border mb-4"
           maxLength={6}
           autoFocus
         />
@@ -66,8 +66,8 @@ export default function JoinScreen({ onJoin, onBack }) {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Your name"
-          className="w-full text-center text-lg py-3 px-4 border border-slate-200 rounded-xl
-                     outline-none focus:border-purple-400 text-slate-700 mb-4"
+          className="w-full text-center text-lg py-3 px-4 border border-border rounded-xl
+                     outline-none focus:border-brand text-foreground mb-4"
           maxLength={20}
         />
 
@@ -89,20 +89,20 @@ export default function JoinScreen({ onJoin, onBack }) {
               const idx = AVATAR_COLORS.indexOf(avatarColor);
               setAvatarColor(AVATAR_COLORS[(idx + 1) % AVATAR_COLORS.length]);
             }}
-            className="text-xs text-slate-400 hover:text-purple-500"
+            className="text-xs text-muted-foreground hover:text-brand"
           >
             Change color
           </button>
         </div>
 
         {error && (
-          <div className="text-red-500 text-sm mb-4">{error}</div>
+          <div className="text-destructive text-sm mb-4">{error}</div>
         )}
 
         <button
           onClick={handleJoin}
           disabled={code.length < 6 || !name.trim() || joining}
-          className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold
+          className="w-full py-4 bg-gradient-to-r from-brand to-brand-deep text-white font-bold
                      text-lg rounded-xl shadow-lg hover:shadow-xl transition-all
                      disabled:opacity-50 disabled:cursor-not-allowed"
         >
