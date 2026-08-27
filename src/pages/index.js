@@ -21,11 +21,30 @@ function GameCard({ game }) {
   const tone = GAME_TONES[game.tone];
 
   return (
+    // A Link, not a <button>: it navigates, and a control that changes the URL
+    // should be an anchor so middle-click, cmd-click and "open in new tab" all
+    // work. It just has to *behave* like a button, which is what the states
+    // below are for.
+    //
+    // Note it does not use the shared `.press` utility. That sets `transform`
+    // as a plain declaration, which would fight the hover translate at equal
+    // specificity and leave the winner down to stylesheet order. These states
+    // are all Tailwind variants instead, where the cascade is defined: active
+    // is generated after hover, so the press reliably beats the lift.
     <Link
       href={game.href}
       className={cn(
-        'press relative flex h-full min-h-[136px] flex-col overflow-hidden rounded-2xl p-4',
+        'group relative flex h-full min-h-[136px] flex-col overflow-hidden rounded-2xl p-4',
         'text-white shadow-lg ring-1 ring-inset ring-white/20',
+        'transition duration-200 ease-soft',
+        // Hover: lift toward the reader and light up. transform and box-shadow
+        // only — neither reflows the page, so nothing around the tile moves.
+        'hover:-translate-y-1 hover:shadow-2xl hover:ring-white/40',
+        // Press: drop back down and squash. This is the tactile half.
+        'active:translate-y-0 active:scale-[0.97] active:shadow-md',
+        // The lift is decoration; someone who asked for less motion gets the
+        // colour and shadow changes without the movement.
+        'motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100',
         tone.gradient,
       )}
     >
@@ -34,23 +53,35 @@ function GameCard({ game }) {
           of being lit from somewhere. */}
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-white/15 blur-2xl"
+        className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-white/15 opacity-70 blur-2xl transition-opacity duration-200 group-hover:opacity-100"
       />
 
       {/* The emoji sits on white rather than directly on the colour. Platform
           emoji carry their own palette, and dropping a multicoloured glyph
           straight onto a saturated tile muddies both — the white plate reads as
           an app icon and lets the artwork keep its own colours. */}
-      <span className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-3xl leading-none shadow-sm">
+      <span className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-3xl leading-none shadow-sm transition-transform duration-200 group-hover:scale-105 motion-reduce:group-hover:scale-100">
         <span aria-hidden="true">{game.emoji}</span>
       </span>
 
-      <span className="relative mt-auto pt-4">
-        <span className="block font-display text-xl font-semibold leading-tight">
-          {game.name}
+      <span className="relative mt-auto flex items-end justify-between gap-3 pt-4">
+        <span className="min-w-0">
+          <span className="block font-display text-xl font-semibold leading-tight">
+            {game.name}
+          </span>
+          <span className="mt-1 block text-sm leading-snug text-white/90">
+            {game.description}
+          </span>
         </span>
-        <span className="mt-1 block text-sm leading-snug text-white/90">
-          {game.description}
+
+        {/* The explicit "this is pressable" cue. A coloured rectangle with text
+            on it is not obviously a control until something on it looks like one,
+            and on touch there is no hover to discover it with. */}
+        <span
+          aria-hidden="true"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/25 ring-1 ring-inset ring-white/30 transition-colors duration-200 group-hover:bg-white/40"
+        >
+          <Play className="h-4 w-4 translate-x-px fill-white text-white" />
         </span>
       </span>
     </Link>
@@ -84,7 +115,7 @@ function ContinueStrip({ games }) {
             <li key={g._id}>
               <Link
                 href={meta.href}
-                className="press flex items-center gap-3 rounded-lg border border-border bg-card px-3 py-2.5 shadow-sm transition-colors hover:bg-muted/40"
+                className="group flex items-center gap-3 rounded-lg border border-border bg-card px-3 py-2.5 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-md active:translate-y-0 active:scale-[0.99] motion-reduce:hover:translate-y-0"
               >
                 <span
                   className={cn(
@@ -103,7 +134,7 @@ function ContinueStrip({ games }) {
                     {names.length ? names.join(', ') : 'In progress'}
                   </span>
                 </span>
-                <Play className="h-4 w-4 shrink-0 text-muted-foreground/60" aria-hidden="true" />
+                <Play className="h-4 w-4 shrink-0 fill-muted-foreground/60 text-muted-foreground/60 transition-colors group-hover:fill-brand group-hover:text-brand" aria-hidden="true" />
               </Link>
             </li>
           );
