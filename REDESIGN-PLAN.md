@@ -304,9 +304,50 @@ stylesheet now that real components reference them.
 - Tactile motion primitives: press-deform + spring bounce, reduced-motion aware.
 - Icons: `lucide-react` throughout. Emoji stay in *copy*, never as *icons*.
 
-### Phase 3 — Landing page `/`
+### Phase 3 — Landing page `/` ✅ **DONE** (2026-08-27)
 
 *Public, playable, and the launcher. Not gated.*
+
+Game metadata moved out of the page into `src/data/games.js`. The launcher held
+it inline as emoji plus a Tailwind gradient string, alongside a `handleGameClick`
+that was a four-branch if/else mapping each id to the route named after it — so
+adding a game meant edits in three places. It is now one entry.
+
+**The card copy is checked against the code, not invented.** "1-4 players" is
+what Scrabble's setup screen actually offers, "4 modes" is the length of
+`GAME_MODES`, "16 categories" is the length of `CATEGORIES`, and the checkout
+helper really does start at 170. A landing page that overstates the product is a
+bug with a longer feedback loop than most.
+
+Layout: **one column on a phone, two from `sm`**. Two columns at 375px would cut
+each description to roughly 18 characters a line — which is why the old emoji
+tiles hid their descriptions on mobile entirely (`hidden md:block`) rather than
+solving it.
+
+Per-game identity colours replace the five unrelated gradients, which were doing
+the work of identity while carrying none of it.
+
+**Two bugs caught in my own draft before commit**, both worth recording:
+
+1. A `Hi, {name}` greeting was first written as `Evening, {name}`. Hardcoding a
+   time of day is wrong most of the day, and computing it properly would render
+   one string on the server and another on the client — a hydration mismatch for
+   no benefit. Dropped the time entirely.
+2. The card grid used `<li className="contents">` so the `Link` could be the
+   grid item. It works, but `h-full` on the link is the plain way to get equal
+   card heights, and does not depend on a reader knowing what `display: contents`
+   does to the box tree.
+
+**Verified:** lint clean; all routes 200; the games, their names and every meta
+badge present in the **server-rendered** HTML. The upsell card and continue strip
+are gated on `status` and therefore appear after hydration — confirmed shipped by
+finding their strings in the page chunk. That gating is deliberate: keying on
+`'unauthenticated'` rather than `!session` means the card cannot flash at someone
+already signed in.
+
+> The continue strip reads `/api/games`, which is still keyed by **email**.
+> Phase 4 moves that to `session.user.id`; the strip needs no change when it
+> does, since it only reads what the endpoint returns.
 
 - Four real game cards — icon, name, what it does, how many players, how long.
 - **Guest play is the default path.** Sign-in is a visible upgrade

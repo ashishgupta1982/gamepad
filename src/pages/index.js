@@ -1,141 +1,252 @@
 import Head from 'next/head';
-import React from 'react';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { useSession, signIn } from 'next-auth/react';
+import { ChevronRight, Play, Save, Trophy, Users, History } from 'lucide-react';
+import { SignInDialog } from '@aspiro/auth/ui';
 import AppHeader from '@/components/layout/AppHeader';
+import { Badge } from '@/components/ui/badge';
+import { GAMES, GAME_TONES, GAME_BY_TYPE } from '@/data/games';
+import { BRAND } from '@/lib/brand';
+import { cn } from '@/lib/cn';
+
+// The launcher, and the public landing page. Deliberately one thing.
+//
+// CookBook gates everything and uses /signin as its brochure, which is right for
+// CookBook and wrong here: GamePad's whole point is that you can play without an
+// account. So there is no wall, no "get started" funnel, and the games are the
+// first thing on the page. Signing in is offered as an upgrade, below the games,
+// phrased as what it adds rather than what it unlocks.
+
+function GameCard({ game }) {
+  const tone = GAME_TONES[game.tone];
+  const Icon = game.icon;
+
+  return (
+    <Link
+      href={game.href}
+      className="press flex h-full items-start gap-4 rounded-lg border border-border bg-card p-4 shadow-sm transition-colors hover:border-border/60 hover:bg-muted/40"
+    >
+      <span
+        className={cn(
+          'flex h-12 w-12 shrink-0 items-center justify-center rounded-lg',
+          tone.soft,
+        )}
+      >
+        <Icon className={cn('h-6 w-6', tone.text)} aria-hidden="true" />
+      </span>
+
+      <span className="min-w-0 flex-1">
+        <span className="flex items-center gap-2">
+          <span className="font-display text-lg font-semibold text-foreground">{game.name}</span>
+        </span>
+        <span className="mt-0.5 block text-sm leading-relaxed text-muted-foreground">
+          {game.description}
+        </span>
+        <span className="mt-2 flex flex-wrap gap-1.5">
+          {game.meta.map((m) => (
+            <Badge key={m}>{m}</Badge>
+          ))}
+        </span>
+      </span>
+
+      <ChevronRight
+        className="mt-3 h-5 w-5 shrink-0 text-muted-foreground/60"
+        aria-hidden="true"
+      />
+    </Link>
+  );
+}
+
+// Only rendered for a signed-in user with saved games. A signed-out visitor is
+// not shown an empty "your games" shell — an empty state for something you have
+// not opted into reads as a nag, not a feature.
+function ContinueStrip({ games }) {
+  if (!games.length) return null;
+
+  return (
+    <section className="mb-8" aria-labelledby="continue-heading">
+      <h2
+        id="continue-heading"
+        className="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground"
+      >
+        <History className="h-4 w-4" aria-hidden="true" />
+        Pick up where you left off
+      </h2>
+
+      <ul className="flex flex-col gap-2">
+        {games.map((g) => {
+          const meta = GAME_BY_TYPE[g.gameType];
+          if (!meta) return null;
+          const tone = GAME_TONES[meta.tone];
+          const Icon = meta.icon;
+          const names = (g.players || []).map((p) => p.name).filter(Boolean);
+
+          return (
+            <li key={g._id}>
+              <Link
+                href={meta.href}
+                className="press flex items-center gap-3 rounded-lg border border-border bg-card px-3 py-2.5 shadow-sm transition-colors hover:bg-muted/40"
+              >
+                <span
+                  className={cn(
+                    'flex h-9 w-9 shrink-0 items-center justify-center rounded-lg',
+                    tone.soft,
+                  )}
+                >
+                  <Icon className={cn('h-4 w-4', tone.text)} aria-hidden="true" />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate text-sm font-semibold text-foreground">
+                    {meta.name}
+                  </span>
+                  <span className="block truncate text-xs text-muted-foreground">
+                    {names.length ? names.join(', ') : 'In progress'}
+                  </span>
+                </span>
+                <Play className="h-4 w-4 shrink-0 text-muted-foreground/60" aria-hidden="true" />
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  );
+}
+
+const PERKS = [
+  { icon: Save, text: 'Games save automatically' },
+  { icon: Trophy, text: 'Scores and stats build up' },
+  { icon: Users, text: 'Same account on every device' },
+];
 
 export default function Home() {
-  const { data: session } = useSession();
-  const router = useRouter();
+  const { data: session, status } = useSession();
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [recent, setRecent] = useState([]);
 
-  const games = [
-    {
-      id: 'scrabble-scorer',
-      name: 'Scrabble Scorer',
-      description: 'Track scores for up to 4 players with fun awards and achievements!',
-      icon: '🎲',
-      color: 'from-purple-500 to-pink-500',
-      available: true
-    },
-    {
-      id: 'quiz',
-      name: 'Quiz Game',
-      description: 'Test your knowledge with customizable categories and questions!',
-      icon: '🧠',
-      color: 'from-blue-500 to-indigo-500',
-      available: true
-    },
-    {
-      id: 'darts',
-      name: 'Darts Scorer',
-      description: 'Score X01, Cricket, Around the Clock and more!',
-      icon: '🎯',
-      color: 'from-red-500 to-orange-500',
-      available: true
-    },
-    {
-      id: 'travel-bingo',
-      name: 'Travel Bingo',
-      description: 'Road-trip bingo for the whole convoy. Spot it, snap it, win!',
-      icon: '🚗',
-      color: 'from-emerald-500 to-teal-500',
-      available: true
-    }
-  ];
+  const isAuthenticated = status === 'authenticated';
 
-  const handleGameClick = (gameId) => {
-    if (gameId === 'scrabble-scorer') {
-      router.push('/games/scrabble-scorer');
-    } else if (gameId === 'quiz') {
-      router.push('/games/quiz');
-    } else if (gameId === 'darts') {
-      router.push('/games/darts');
-    } else if (gameId === 'travel-bingo') {
-      router.push('/games/travel-bingo');
+  // Saved games only exist for a signed-in user, so this never fires for a
+  // guest. A failure is swallowed: the strip is a convenience, and a dead
+  // network call must not stop someone reaching the games below it.
+  useEffect(() => {
+    if (!isAuthenticated) {
+      setRecent([]);
+      return;
     }
-  };
+    let cancelled = false;
+    fetch('/api/games')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (cancelled || !data?.games) return;
+        setRecent(data.games.filter((g) => g.status === 'active').slice(0, 3));
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [isAuthenticated]);
 
   return (
     <>
       <Head>
         <title>GamePad — Fun games for the family</title>
-        <meta name="description" content="GamePad bundles four ready-to-play family games — Scrabble Scorer, Quiz, Darts, and Travel Bingo. No setup, no scoring headaches; play in seconds." />
         <link rel="canonical" href="https://gamepad.ashishgupta.co.uk/" />
       </Head>
 
-      <main className="min-h-screen bg-gradient-to-br from-orange-50 via-amber-50 to-teal-50">
+      <div className="flex min-h-dvh flex-col bg-background">
         <AppHeader />
 
-        {/* Hero Section */}
-        <section className="pt-16 pb-6 px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-amber-500 mb-2">
-              Fun Games for the Family
+        <main className="flex-1 px-4 py-6">
+          <div className="mx-auto w-full max-w-3xl">
+            <h1 className="font-display text-3xl font-semibold tracking-tight text-foreground">
+              {/* No time-of-day greeting. It would be computed on the server
+                  and again on the client, and "Good evening" rendered against
+                  "Good afternoon" is a hydration mismatch for no benefit. */}
+              {isAuthenticated && session?.user?.name
+                ? `Hi, ${session.user.name.split(' ')[0]}`
+                : 'Pick a game'}
             </h1>
-            <p className="text-base text-slate-500 font-medium">
-              Pick a game and start playing!
+            <p className="mt-1 text-base text-muted-foreground">
+              Four games, no setup. Start playing in a tap.
             </p>
 
-            {session ? (
-              <p className="text-sm text-slate-500 mt-3">
-                Welcome back, {session.user.name}!
-              </p>
-            ) : (
-              <div className="mt-4 mb-2 px-4 py-3 bg-white/60 backdrop-blur-sm rounded-xl max-w-md mx-auto border border-orange-100 flex items-center gap-2">
-                <span className="text-sm">👋</span>
-                <p className="text-sm text-slate-600">
-                  Sign in to save progress, or play as guest.
-                </p>
-              </div>
-            )}
+            <div className="mt-8">
+              <ContinueStrip games={recent} />
 
-            {/* Game Selection Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 max-w-3xl mx-auto mt-6">
-              {games.map((game) => (
-                <div
-                  key={game.id}
-                  onClick={() => game.available && handleGameClick(game.id)}
-                  className={`
-                    relative overflow-hidden rounded-xl p-4 md:p-5
-                    transform transition-all duration-200
-                    ${game.available
-                      ? 'cursor-pointer hover:scale-[1.03] hover:shadow-lg active:scale-[0.98]'
-                      : 'opacity-50 cursor-not-allowed'
-                    }
-                  `}
-                >
-                  <div className={`absolute inset-0 bg-gradient-to-br ${game.color} opacity-90`}></div>
+              <section aria-labelledby="games-heading">
+                <h2 id="games-heading" className="sr-only">
+                  Games
+                </h2>
+                {/* One column on a phone, two from sm. Two columns at 375px
+                    would squeeze each description to about 18 characters a
+                    line, which is how the old emoji tiles ended up hiding
+                    their text on mobile entirely. */}
+                <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  {GAMES.map((game) => (
+                    <li key={game.id}>
+                      <GameCard game={game} />
+                    </li>
+                  ))}
+                </ul>
+              </section>
 
-                  <div className="relative z-10 text-white text-center">
-                    <div className="text-3xl md:text-4xl mb-2">{game.icon}</div>
-                    <h3 className="text-sm md:text-base font-bold mb-1">{game.name}</h3>
-                    <p className="text-white/80 text-xs leading-snug hidden md:block">
-                      {game.description}
-                    </p>
+              {/* The upgrade, not a gate. Below the games on purpose — a
+                  first-time visitor should reach a game before they reach a
+                  reason to sign up. Hidden entirely while the session is still
+                  loading, so it cannot flash at someone already signed in. */}
+              {status === 'unauthenticated' && (
+                <section className="mt-8 rounded-lg border border-border bg-card p-5 shadow-sm">
+                  <h2 className="font-display text-xl font-semibold text-foreground">
+                    Want it to stick around?
+                  </h2>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                    Every game works as you are. Sign in and they stop
+                    disappearing when you close the tab.
+                  </p>
 
-                    {game.available && (
-                      <div className="mt-3">
-                        <span className="inline-block bg-white/20 backdrop-blur-sm text-white font-semibold text-xs px-3 py-1.5 rounded-full border border-white/30">
-                          Play Now
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
+                  <ul className="mt-4 space-y-2.5">
+                    {PERKS.map(({ icon: Icon, text }) => (
+                      <li key={text} className="flex items-center gap-2.5">
+                        <Icon className="h-4 w-4 shrink-0 text-brand" aria-hidden="true" />
+                        <span className="text-sm text-foreground">{text}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <button
+                    type="button"
+                    onClick={() => setDialogOpen(true)}
+                    className="press mt-5 flex min-h-touch w-full items-center justify-center rounded-lg bg-brand px-6 text-base font-semibold text-brand-foreground shadow-sm transition-colors hover:bg-brand/90"
+                  >
+                    Sign in
+                  </button>
+                </section>
+              )}
             </div>
           </div>
-        </section>
+        </main>
 
-        {/* Footer */}
-        <footer className="py-4 px-4 bg-slate-900 text-white mt-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <p className="text-xs text-slate-400">
-              &copy; 2026 GamePad
-            </p>
-          </div>
+        <footer className="border-t border-border px-4 py-6 pb-safe">
+          <p className="mx-auto max-w-3xl text-xs text-muted-foreground">
+            &copy; {new Date().getFullYear()} GamePad
+          </p>
         </footer>
-      </main>
+      </div>
+
+      {/* Exactly one instance on the page. A sibling app once rendered its
+          sign-in options twice and the two copies drifted, so the bottom of the
+          page ended up offering fewer ways in than the top. */}
+      <SignInDialog
+        open={dialogOpen}
+        onOpenChange={setDialogOpen}
+        title="Sign in to GamePad"
+        description="Save your scores, stats and game history."
+        appleEnabled={process.env.NEXT_PUBLIC_APPLE_ENABLED === 'true'}
+        accent={BRAND.colour}
+        onSignIn={(provider, callbackUrl) => signIn(provider, { callbackUrl: callbackUrl || '/' })}
+      />
     </>
   );
 }

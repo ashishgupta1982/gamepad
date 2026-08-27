@@ -4,7 +4,7 @@ Family game launcher: Scrabble Scorer, Quiz, Darts, Travel Bingo. Next.js 15 (Pa
 
 > **Active work:** `REDESIGN-PLAN.md` at the repo root is the agreed plan to
 > realign GamePad with the Aspiro suite (shared `@aspiro/auth`) and redesign it
-> mobile-first. **Phases 0-2 are done.** Read the plan before starting anything,
+> mobile-first. **Phases 0-3 are done.** Read the plan before starting anything,
 > so you pick up at the right phase rather than re-deciding settled questions.
 
 ## Quick Commands
@@ -26,7 +26,7 @@ npm run lint
 ```
 src/
 ├── pages/
-│   ├── index.js                  # Game launcher grid
+│   ├── index.js                  # Landing page AND launcher — public, not gated
 │   ├── signin.js, settings.js
 │   ├── reset-password.js, verify-email.js   # landing pages for emailed links
 │   ├── _app.js                   # fonts, SEO/OG defaults, SessionProvider
@@ -62,7 +62,7 @@ src/
 ├── hooks/                        # useQuizRoom, useQuizScoring, useQuizTimer, useWakeLock
 ├── lib/                          # auth, brand, cn, mongodb, mongodb-adapter, travelBingo
 ├── utils/                        # authHelper, rateLimiter
-├── data/                         # quizConstants, dartsConstants
+├── data/                         # games (launcher metadata), quizConstants, dartsConstants
 └── styles/globals.css            # design tokens + base layer + utilities
 ```
 
@@ -226,6 +226,27 @@ Rebuilt in Phase 0. **Read `REDESIGN-PLAN.md` §3 before changing any of it.**
 > emitted and the element silently renders unstyled — no error, no warning. Use
 > an explicit lookup map, as `TurnIndicator` does.
 
+## Landing page (`/`)
+
+**It is the launcher and the public landing page, deliberately one thing.** Do
+not gate it. CookBook gates everything and uses `/signin` as its brochure — right
+for CookBook, wrong here, because GamePad's whole point is that you can play
+without an account.
+
+- The four games come from `src/data/games.js`, not inline in the page. Adding a
+  fifth game is one entry, not an edit in three places.
+- **Sign-in sits *below* the games**, framed as what it adds. A first-time
+  visitor should reach a game before they reach a reason to sign up.
+- Exactly **one** `SignInDialog` instance per page. Rendering the options twice
+  is how a sibling app ended up offering fewer ways in at the bottom of a page
+  than at the top.
+- The upsell card and the continue strip are gated on `status`, so they render
+  **after hydration**, not in the SSR HTML. That is intentional: gating on
+  `'unauthenticated'` rather than `!session` means the card cannot flash at
+  someone who is already signed in. The games themselves are in the server HTML.
+- A signed-out visitor gets **no** empty "your games" shell. An empty state for
+  something you never opted into reads as a nag.
+
 ## Realtime (Quiz)
 
 Multi-device quiz uses SSE, not WebSockets. Client opens `GET /api/quiz/rooms/[roomCode]/stream`; server polls the room and pushes when `stateVersion` increments. Players submit answers via `POST /api/quiz/rooms/[roomCode]/answer`. Hook: `src/hooks/useQuizRoom.js`.
@@ -285,5 +306,6 @@ The app has a real public identity — don't reintroduce skeleton defaults when 
 - Last gameplay feature: Travel Bingo (`45a5fbb`, 2026-05-02)
 - Since then: brand/SEO pass, git sync guide, Travel Bingo photo feature removed (`60ad439`)
 - 2026-08-27: redesign plan agreed; **Phase 0** landed — design tokens, fonts, mobile base layer, config-bug fixes, doc accuracy
+- 2026-08-27: **Phase 3** landed — landing page rebuilt as a public launcher
 - 2026-08-27: **Phase 2** landed — design system, one app shell, shared keypad/turn primitives
 - 2026-08-27: **Phase 1** landed — migrated to `@aspiro/auth` v0.7.1; email/password added alongside Google; GamePad is no longer the suite's odd one out
