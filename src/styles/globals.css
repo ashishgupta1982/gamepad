@@ -2,152 +2,158 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom CSS Variables for professional theme */
+/* ---------------------------------------------------------------------------
+   Design tokens
+   ---------------------------------------------------------------------------
+   HSL channel triplets, not full hsl() strings — tailwind.config.mjs wraps
+   these with an <alpha-value> placeholder so opacity modifiers (bg-brand/10)
+   work. Change a colour here and it changes everywhere.
+
+   The rust/teal identity is deliberate and matches the shipped brand assets:
+   manifest.json's theme_color, the icons and the OG card are all #EA580C.
+--------------------------------------------------------------------------- */
 :root {
-  --background: 0 0% 100%;
-  --foreground: 215.4 16.3% 16.9%;
+  /* Warm neutrals — a cool grey next to rust reads as dirty, so the greys
+     carry a little of the brand hue. */
+  --background: 30 40% 98%;
+  --foreground: 20 14% 12%;
+
   --card: 0 0% 100%;
-  --card-foreground: 215.4 16.3% 16.9%;
+  --card-foreground: 20 14% 12%;
   --popover: 0 0% 100%;
-  --popover-foreground: 215.4 16.3% 16.9%;
-  --primary: 215.4 16.3% 16.9%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 210 40% 96%;
-  --secondary-foreground: 215.4 16.3% 16.9%;
-  --muted: 210 40% 96%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-  --accent: 210 40% 96%;
-  --accent-foreground: 215.4 16.3% 16.9%;
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 215.4 16.3% 16.9%;
-  --radius: 0.5rem;
+  --popover-foreground: 20 14% 12%;
+
+  --muted: 30 20% 95%;
+  --muted-foreground: 25 8% 38%; /* 4.5:1+ on --muted and on --card */
+
+  --border: 30 15% 88%;
+  --input: 30 15% 88%;
+  --ring: 21 90% 48%;
+
+  /* Brand — #EA580C */
+  --brand: 21 90% 48%;
+  --brand-foreground: 0 0% 100%;
+  --brand-soft: 24 95% 95%;
+
+  /* Accent — teal #0D9488 */
+  --accent: 175 84% 32%;
+  --accent-foreground: 0 0% 100%;
+  --accent-soft: 173 60% 95%;
+
+  /* Semantic */
+  --destructive: 0 72% 45%;
+  --destructive-foreground: 0 0% 100%;
+  --success: 152 60% 32%;
+  --success-foreground: 0 0% 100%;
+  --warning: 38 92% 42%;
+  --warning-foreground: 0 0% 100%;
+
+  /* Per-game identity colours */
+  --game-scrabble: 271 65% 48%;
+  --game-quiz: 231 62% 52%;
+  --game-darts: 0 72% 48%;
+  --game-bingo: 168 70% 34%;
+
+  --radius: 0.875rem;
 }
 
-/* Professional button styles */
-.btn-primary {
-  background: #0f172a;
-  color: white;
-  transition: all 0.2s ease;
-}
-
-.btn-primary:hover {
-  background: #1e293b;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
-}
-
-/* Animation classes */
-.animate-slide-in-up {
-  animation: slideInUp 0.5s ease-out;
-}
-
-@keyframes slideInUp {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
   }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
 
-@keyframes slideIn {
-  from {
-    transform: translateX(-20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
+  body {
+    @apply bg-background text-foreground font-body antialiased;
 
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
+    /* The phone gets passed around and tapped fast. These three lines are most
+       of why the app currently feels laggy and fragile on mobile:
+       - manipulation removes the 300ms double-tap-to-zoom delay
+       - overscroll-behavior stops a mistap near the top of the screen
+         pull-to-refreshing the page and binning a live game
+       - dvh survives the mobile browser chrome collapsing on scroll */
+    touch-action: manipulation;
+    overscroll-behavior-y: contain;
+    min-height: 100dvh;
   }
-  50% {
-    transform: translateY(-10px);
-  }
-}
 
-.animate-bounce-delayed {
-  animation: bounce 1s ease-in-out;
-}
-
-@keyframes slideUp {
-  from {
-    transform: translateY(20px);
-    opacity: 0.5;
+  h1, h2, h3, h4 {
+    @apply font-display;
   }
-  to {
-    transform: translateY(0);
-    opacity: 1;
+
+  /* Interactive elements should say so. */
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']) {
+    @apply cursor-pointer;
+  }
+
+  /* One consistent focus ring, keyboard-only. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
   }
 }
 
-@keyframes slideDown {
-  from {
-    transform: translateY(-20px);
-    opacity: 0.5;
+@layer utilities {
+  /* Scores, timers and countdowns must not jitter as their digits change. */
+  .tnum {
+    font-variant-numeric: tabular-nums;
   }
-  to {
-    transform: translateY(0);
-    opacity: 1;
+
+  /* Safe areas — the bottom action bar has to clear the iOS home indicator.
+     max() keeps sane padding on devices with no inset. */
+  .pb-safe {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  .pt-safe {
+    padding-top: max(0.5rem, env(safe-area-inset-top));
+  }
+  .px-safe {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+
+  /* Tactile press: squash under the thumb, spring back on release. The whole
+     "Deformable UI" feel is this one utility applied consistently. */
+  .press {
+    transition: transform 120ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .press:active {
+    transform: scale(0.96);
+  }
+
+  /* Momentum scrolling inside panels without leaking to the page behind. */
+  .scroll-contain {
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
-.animate-slideUp {
-  animation: slideUp 0.5s ease-out;
-}
-
-.animate-slideDown {
-  animation: slideDown 0.5s ease-out;
-}
-
-/* Custom scrollbar */
+/* Scrollbars — desktop only; mobile has none to style. */
 ::-webkit-scrollbar {
   width: 8px;
 }
-
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: hsl(var(--muted));
 }
-
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: hsl(var(--border));
   border-radius: 4px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: hsl(var(--muted-foreground) / 0.5);
 }
 
-/* Focus states */
-.focus-ring {
-  @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
-}
-
-/* Card component base styles */
-.card {
-  @apply bg-white rounded-lg border border-gray-200 shadow-sm;
-}
-
-/* Backdrop blur support */
-.backdrop-blur-sm {
-  backdrop-filter: blur(4px);
-}
-
-/* Professional text utilities */
-.text-gradient {
-  @apply bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent;
-}
-
-/* Professional focus states */
-.focus-ring {
-  @apply focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2;
+/* Honour the OS setting. Springs and slides are decoration; nothing here
+   carries meaning that is lost when they are switched off. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

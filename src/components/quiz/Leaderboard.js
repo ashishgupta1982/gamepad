@@ -86,7 +86,7 @@ export default function Leaderboard({ game, compact = false }) {
             <div
               key={player.index}
               className={`${positionColor} ${rank < 3 ? 'text-white' : 'text-slate-700'} p-2 rounded-md transition-all duration-500 text-xs ${
-                isAnimated ? (player.positionChange > 0 ? 'animate-slideUp' : 'animate-slideDown') : ''
+                isAnimated ? (player.positionChange > 0 ? 'animate-slide-up' : 'animate-slide-down') : ''
               }`}
             >
               <div className="flex items-center justify-between">

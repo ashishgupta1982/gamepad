@@ -243,7 +243,6 @@ export default function TravelBingoPage() {
     <>
       <Head>
         <title>Travel Bingo — GamePad</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
       <main className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-sky-50">

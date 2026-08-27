@@ -11,7 +11,7 @@ const Button = React.forwardRef(({ className, children, variant = "default", siz
     destructive: "bg-red-600 hover:bg-red-700 text-white font-medium shadow-sm hover:shadow-md transition-all duration-200",
     success: "bg-green-600 hover:bg-green-700 text-white font-medium shadow-sm hover:shadow-md transition-all duration-200",
     warning: "bg-yellow-500 hover:bg-yellow-600 text-white font-medium shadow-sm hover:shadow-md transition-all duration-200",
-    gradient: "btn-primary", // Use the custom gradient style from globals.css
+    gradient: "bg-gradient-to-r from-brand to-warning text-brand-foreground font-medium shadow-sm hover:shadow-md transition-all duration-200",
   };
 
   // Button sizes

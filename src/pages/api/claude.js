@@ -1,7 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 import dbConnect from '../../lib/mongodb';
 import CachedResponse from '../../models/CachedResponse';
-import { checkRate } from '../../utils/rateLimiter';
+import { checkRate, RATE_LIMITS } from '../../utils/rateLimiter';
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -27,16 +27,23 @@ export default async function handler(req, res) {
   const clientIP = getClientIP(req);
   const rateLimitResult = checkRate(clientIP, 'CLAUDE_API');
   
-  // Set rate limit headers
-  res.setHeader('X-RateLimit-Limit', '10');
+  // Rate limit headers, read from the bucket that is actually enforced.
+  //
+  // These used to be the literal 10 while CLAUDE_API allowed 30/min. A response
+  // header that lies about the limit is worse than no header at all, because a
+  // client written against it backs off at the wrong point. Deriving it from
+  // RATE_LIMITS means the two cannot drift apart again.
+  const claudeLimit = RATE_LIMITS.CLAUDE_API.maxRequests;
+
+  res.setHeader('X-RateLimit-Limit', String(claudeLimit));
   res.setHeader('X-RateLimit-Remaining', rateLimitResult.remaining.toString());
   res.setHeader('X-RateLimit-Reset', Math.ceil(rateLimitResult.resetTime / 1000).toString());
-  
+
   if (!rateLimitResult.allowed) {
     return res.status(429).json({
-      error: 'Too many AI requests. Please wait a minute before trying again.',
+      error: RATE_LIMITS.CLAUDE_API.message,
       retryAfter: Math.ceil((rateLimitResult.resetTime - Date.now()) / 1000),
-      limit: 10,
+      limit: claudeLimit,
       current: rateLimitResult.current
     });
   }

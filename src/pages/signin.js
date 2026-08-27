@@ -13,7 +13,6 @@ export default function SignIn() {
       <Head>
         <title>Sign in — GamePad</title>
         <meta name="description" content="Sign in to GamePad to save your scores and stats — or keep playing as a guest." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
       <main className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-teal-50">

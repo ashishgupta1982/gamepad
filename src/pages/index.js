@@ -60,7 +60,6 @@ export default function Home() {
       <Head>
         <title>GamePad — Fun games for the family</title>
         <meta name="description" content="GamePad bundles four ready-to-play family games — Scrabble Scorer, Quiz, Darts, and Travel Bingo. No setup, no scoring headaches; play in seconds." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="canonical" href="https://gamepad.ashishgupta.co.uk/" />
       </Head>
 

@@ -914,7 +914,6 @@ Return ONLY a JSON array:
     <>
       <Head>
         <title>Quiz Game — GamePad</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
       <main className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-50 to-blue-100">
