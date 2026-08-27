@@ -9,6 +9,7 @@ import TileDetailModal from '@/components/travel-bingo/TileDetailModal';
 import Scoreboard from '@/components/travel-bingo/Scoreboard';
 import ProgressFeed from '@/components/travel-bingo/ProgressFeed';
 import ResultsScreen from '@/components/travel-bingo/ResultsScreen';
+import { getPlayerIdentity, guestIdForRequest } from '@/lib/identity';
 
 const STORAGE_KEY = 'travel-bingo:active';
 
@@ -34,16 +35,17 @@ function clearStored() {
   try { localStorage.removeItem(STORAGE_KEY); } catch {}
 }
 
-function ensureUserId(session) {
-  if (session?.user?.email) return `user:${session.user.email}`;
-  if (typeof window === 'undefined') return null;
-  let guest = localStorage.getItem('travel-bingo:guestId');
-  if (!guest) {
-    guest = `guest_${Math.random().toString(36).slice(2, 10)}_${Date.now().toString(36)}`;
-    localStorage.setItem('travel-bingo:guestId', guest);
-  }
-  return guest;
-}
+// Identity comes from lib/identity now, not from here.
+//
+// This file used to mint its own: `user:<email>` when signed in, and a
+// `travel-bingo:guestId` otherwise. Both were wrong. The email form matched
+// nothing else in the app — every other endpoint keys on session.user.id — and
+// the guest key was per-game, so the same person was a different player in
+// Travel Bingo than anywhere else.
+//
+// The id is also no longer sent as the authoritative `userId`. The server reads
+// the session and only falls back to `guestId` when there is none, so a body
+// field can no longer name someone else's account.
 
 export default function TravelBingoPage() {
   const { data: session, status: authStatus } = useSession();
@@ -54,12 +56,14 @@ export default function TravelBingoPage() {
   const [activeView, setActiveView] = useState('mine'); // 'mine' | 'others' | 'feed'
   const [openTile, setOpenTile] = useState(null); // { tile, ownerCar }
   const [error, setError] = useState('');
-  const userIdRef = useRef(null);
+  const guestIdRef = useRef(undefined);
 
-  // Establish userId once auth is resolved
+  // A guest id to send alongside requests. Undefined once signed in — the
+  // server ignores it then anyway, and sending one would only invite confusion
+  // about which identity won.
   useEffect(() => {
     if (authStatus === 'loading') return;
-    userIdRef.current = ensureUserId(session);
+    guestIdRef.current = guestIdForRequest(session);
   }, [authStatus, session]);
 
   // Resume from localStorage on mount
@@ -96,11 +100,10 @@ export default function TravelBingoPage() {
     setBusy(true);
     setError('');
     try {
-      const userId = userIdRef.current || ensureUserId(session);
       const res = await fetch('/api/games/travel-bingo/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ hostUserId: userId, hostCarName: carName }),
+        body: JSON.stringify({ hostCarName: carName, guestId: guestIdRef.current }),
       });
       if (!res.ok) throw new Error((await res.json())?.error || 'Failed to create');
       const { gameId, carId } = await res.json();
@@ -119,7 +122,6 @@ export default function TravelBingoPage() {
     setBusy(true);
     setError('');
     try {
-      const userId = userIdRef.current || ensureUserId(session);
       const lookup = await fetch(`/api/games/travel-bingo/by-code/${code}`);
       if (!lookup.ok) throw new Error('Game not found for that code');
       const { gameId } = await lookup.json();
@@ -127,7 +129,7 @@ export default function TravelBingoPage() {
       const join = await fetch(`/api/games/travel-bingo/${gameId}/join`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ carName, userId }),
+        body: JSON.stringify({ carName, guestId: guestIdRef.current }),
       });
       if (!join.ok) throw new Error((await join.json())?.error || 'Failed to join');
       const { carId, game: joined } = await join.json();
@@ -147,7 +149,7 @@ export default function TravelBingoPage() {
     const res = await fetch(`/api/games/travel-bingo/${game._id}/submit-items`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ carId: myCarId, items }),
+      body: JSON.stringify({ carId: myCarId, items, guestId: guestIdRef.current }),
     });
     if (!res.ok) throw new Error((await res.json())?.error || 'Save failed');
     const { game: updated } = await res.json();
@@ -159,11 +161,10 @@ export default function TravelBingoPage() {
     setGenerating(true);
     setError('');
     try {
-      const userId = userIdRef.current || ensureUserId(session);
       const res = await fetch(`/api/games/travel-bingo/${game._id}/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ hostUserId: userId }),
+        body: JSON.stringify({ guestId: guestIdRef.current }),
       });
       if (!res.ok) throw new Error((await res.json())?.error || 'Generation failed');
       const { game: updated } = await res.json();
@@ -181,7 +182,7 @@ export default function TravelBingoPage() {
     const res = await fetch(`/api/games/travel-bingo/${game._id}/mark-tile`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ carId: myCarId, tileId, caption, found: true }),
+      body: JSON.stringify({ carId: myCarId, tileId, caption, found: true, guestId: guestIdRef.current }),
     });
     if (!res.ok) throw new Error((await res.json())?.error || 'Save failed');
     const { game: updated } = await res.json();
@@ -193,7 +194,7 @@ export default function TravelBingoPage() {
     const res = await fetch(`/api/games/travel-bingo/${game._id}/mark-tile`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ carId: myCarId, tileId, found: false }),
+      body: JSON.stringify({ carId: myCarId, tileId, found: false, guestId: guestIdRef.current }),
     });
     if (!res.ok) throw new Error((await res.json())?.error || 'Save failed');
     const { game: updated } = await res.json();
@@ -230,7 +231,11 @@ export default function TravelBingoPage() {
     setOpenTile(null);
   };
 
-  const isHost = !!(game && userIdRef.current && game.travelBingoConfig?.hostUserId === userIdRef.current);
+  // Compared against the player's real id — session id when signed in, guest id
+  // otherwise — not against whatever this client last sent. This is a display
+  // hint only; the server re-checks the host on every host-only action.
+  const playerId = getPlayerIdentity(session).id;
+  const isHost = !!(game && playerId && game.travelBingoConfig?.hostUserId === playerId);
   const myCar = game?.travelBingoConfig?.cars?.find(c => c.carId === myCarId);
   const otherCars = (game?.travelBingoConfig?.cars || []).filter(c => c.carId !== myCarId);
   const phase = game?.travelBingoConfig?.phase;

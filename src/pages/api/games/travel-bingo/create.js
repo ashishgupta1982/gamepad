@@ -1,17 +1,25 @@
 import dbConnect from '@/lib/mongodb';
 import Game from '@/models/Game';
 import { generateJoinCode, generateId } from '@/lib/travelBingo';
+import { resolvePlayer } from '@/utils/playerIdentity';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { hostUserId, hostCarName } = req.body || {};
+  const { hostCarName } = req.body || {};
 
-  if (!hostUserId || typeof hostUserId !== 'string') {
-    return res.status(400).json({ error: 'hostUserId required' });
+  // The host is whoever the SESSION says, falling back to a guest id only when
+  // there is no session at all. This route used to take `hostUserId` from the
+  // body and write it straight on as the game's owner, so a caller could mint
+  // games owned by any account whose id they knew — without being signed in.
+  const player = await resolvePlayer(req, res);
+  if (!player) {
+    return res.status(400).json({ error: 'Could not identify player' });
   }
+  const hostUserId = player.id;
+
   if (!hostCarName || typeof hostCarName !== 'string' || !hostCarName.trim()) {
     return res.status(400).json({ error: 'hostCarName required' });
   }

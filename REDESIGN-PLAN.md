@@ -361,9 +361,61 @@ already signed in.
   account. `/signin` still cannot be deleted (trap 5) — `pages: { signIn, error }`
   points at it — but it becomes a fallback, not the front door.
 
-### Phase 4 — Identity & the save contract
+### Phase 4 — Identity & the save contract ✅ **DONE** (2026-08-27)
 
 *You confirmed: no legacy data concerns, do it right.*
+
+Done as specified: `Game.userId` is now `session.user.id`, with no backfill and
+no compatibility shim. Travel Bingo's private `travel-bingo:guestId` and its
+`user:<email>` string are retired in favour of one app-wide identity
+(`lib/identity.js` on the client, `utils/playerIdentity.js` on the server).
+
+**This phase turned up two real defects. Neither was on the plan.**
+
+**1. Travel Bingo's routes took identity from the request body.** Five of them,
+with no session check anywhere in the flow:
+
+- `create` wrote whatever `hostUserId` it was handed on as the game's owner, so
+  a caller could mint games owned by any account whose id they knew — while
+  signed out.
+- `join` matched cars by a body-supplied `userId` and, being **idempotent by
+  design**, returned the *existing* car on a match. Supplying someone else's id
+  handed you their card, their progress and their score.
+- `generate` gated "only the host can do this" on a body field — a game-state
+  change and a billable AI call, authorised by the caller.
+- `mark-tile`, `submit-items` and `comment` accepted a `carId` with no ownership
+  check, so any participant could fill in a rival's card (which decides the
+  winner), overwrite their suggestions, or post comments under their name.
+
+All six now go through `resolvePlayer`, where **the session wins
+unconditionally** and a body id is consulted only when there is no session at
+all — and must match `/^guest_[a-z0-9]{4,48}$/`, which is what makes it
+structurally incapable of naming a Mongo ObjectId.
+
+Verified against a running server: an account-shaped id in the body is rejected
+`400`, a well-formed guest id succeeds `201`, and an ObjectId offered *as* a
+guest id is rejected `400`.
+
+**2. Darts was completely broken for guests.** `createGame` POSTed
+unconditionally; for a signed-out player that `401`s, `createGame` returned
+`null`, and `if (game) setScreen('playing')` never fired. **Start Game was a dead
+button** — nothing happened, and nothing was logged or shown. Directly contrary
+to "obviously all the game modes work without it". Darts now uses the same
+`_id: 'guest'` local-game sentinel Scrabble and Quiz already had, so all three
+agree.
+
+**The contract is now stated, not just implemented.** Scrabble and Quiz already
+skipped every write for a guest — but silently, so a guest played a full game and
+only discovered it had not been kept when they came back and it was gone.
+`game/GuestNotice` says so before the game starts.
+
+> ⚠️ **Test artifact in production.** The identity guard was verified with live
+> `curl` calls against the dev server, which is wired to the **production**
+> `gamepad` database. The successful case created a real Travel Bingo game —
+> `_id 6a9086806dae2b67a1b5d9af`, owner `guest_ab12cd34`, one car, join code
+> `5YEKAQ`. It is inert and indistinguishable from an abandoned guest game, and
+> is left in place rather than deleted, because removing it means a manual write
+> to prod. Say the word and it goes.
 
 - `Game.userId` → `session.user.id`. **No backfill, no compatibility shim.**
   Existing saved games are abandoned by design; a user signing in sees an empty

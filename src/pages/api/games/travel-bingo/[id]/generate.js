@@ -2,6 +2,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import dbConnect from '@/lib/mongodb';
 import Game from '@/models/Game';
 import { generateId, isHost } from '@/lib/travelBingo';
+import { resolvePlayer } from '@/utils/playerIdentity';
 import { checkRate } from '@/utils/rateLimiter';
 import { serializeGame } from './index';
 
@@ -74,7 +75,15 @@ export default async function handler(req, res) {
   }
 
   const { id } = req.query;
-  const { hostUserId } = req.body || {};
+
+  // Host check keyed off the session, not a body field. Reading hostUserId
+  // from the body meant anyone who knew the host's id could trigger a
+  // generation — which is both a game-state change and a billable AI call.
+  const player = await resolvePlayer(req, res);
+  if (!player) {
+    return res.status(400).json({ error: 'Could not identify player' });
+  }
+  const hostUserId = player.id;
 
   await dbConnect();
 

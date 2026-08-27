@@ -2,6 +2,7 @@ import dbConnect from '@/lib/mongodb';
 import Game from '@/models/Game';
 import { findCar, generateId } from '@/lib/travelBingo';
 import { serializeGame } from './index';
+import { resolvePlayer } from '@/utils/playerIdentity';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -26,6 +27,13 @@ export default async function handler(req, res) {
 
   const author = findCar(game, carId);
   if (!author) return res.status(404).json({ error: 'Author car not found' });
+
+  // The comment is attributed to the author car's name, so an unchecked carId
+  // let anyone post under another car's identity.
+  const player = await resolvePlayer(req, res);
+  if (!player || author.userId !== player.id) {
+    return res.status(403).json({ error: 'You can only comment as your own car' });
+  }
 
   const owner = findCar(game, ownerCarId);
   if (!owner) return res.status(404).json({ error: 'Owner car not found' });

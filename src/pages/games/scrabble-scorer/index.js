@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import AppHeader from '@/components/layout/AppHeader';
+import GuestNotice from '@/components/game/GuestNotice';
 
 export default function ScrabbleScorer() {
   const { data: session, status } = useSession();
@@ -174,6 +175,8 @@ export default function ScrabbleScorer() {
           )}
 
           {screen === 'setup' && (
+            <>
+            <GuestNotice className="mb-4 max-w-lg mx-auto" />
             <PlayerSetupScreen
               games={games}
               playerCount={playerCount}
@@ -190,6 +193,7 @@ export default function ScrabbleScorer() {
               onStart={handleStartGame}
               onBack={() => session ? loadGames() : router.push('/')}
             />
+            </>
           )}
 
           {screen === 'play' && currentGame && (

@@ -2,6 +2,7 @@ import dbConnect from '@/lib/mongodb';
 import Game from '@/models/Game';
 import { generateId } from '@/lib/travelBingo';
 import { serializeGame } from './index';
+import { resolvePlayer } from '@/utils/playerIdentity';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -9,14 +10,23 @@ export default async function handler(req, res) {
   }
 
   const { id } = req.query;
-  const { carName, userId } = req.body || {};
+  const { carName } = req.body || {};
 
   if (!carName || typeof carName !== 'string' || !carName.trim()) {
     return res.status(400).json({ error: 'carName required' });
   }
-  if (!userId || typeof userId !== 'string') {
-    return res.status(400).json({ error: 'userId required' });
+
+  // Session first, body only as a guest fallback.
+  //
+  // This matters more here than anywhere else in the app: the re-join below is
+  // idempotent by userId and returns the EXISTING car for a match. With the id
+  // read straight from the body, supplying someone else's id handed you their
+  // car — their tiles, their progress, their score.
+  const player = await resolvePlayer(req, res);
+  if (!player) {
+    return res.status(400).json({ error: 'Could not identify player' });
   }
+  const userId = player.id;
 
   await dbConnect();
 

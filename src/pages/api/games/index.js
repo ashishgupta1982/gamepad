@@ -14,7 +14,7 @@ export default async function handler(req, res) {
 
   if (req.method === 'GET') {
     try {
-      const games = await Game.find({ userId: session.user.email })
+      const games = await Game.find({ userId: session.user.id })
         .sort({ updatedAt: -1 });
       return res.status(200).json({ games });
     } catch (error) {
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
       }
 
       const gameData = {
-        userId: session.user.email,
+        userId: session.user.id,
         gameType,
         players: players.map(name => ({ name, scores: [] })),
         status: 'active'

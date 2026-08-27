@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 import AppHeader from '@/components/layout/AppHeader';
 import DartsHome from '@/components/darts/DartsHome';
 import GameModeSelector from '@/components/darts/GameModeSelector';
@@ -12,10 +13,12 @@ import KillerGame from '@/components/darts/KillerGame';
 import DartsGameOver from '@/components/darts/DartsGameOver';
 import RulesModal from '@/components/darts/RulesModal';
 import { CRICKET_TARGETS, GAME_MODES } from '@/data/dartsConstants';
+import GuestNotice from '@/components/game/GuestNotice';
 
 // Screens: loading, home, mode-select, setup, playing, game-over
 export default function DartsPage() {
   const router = useRouter();
+  const { status } = useSession();
   const [screen, setScreen] = useState('loading');
   const [games, setGames] = useState([]);
   const [currentGame, setCurrentGame] = useState(null);
@@ -34,6 +37,15 @@ export default function DartsPage() {
   const [showRules, setShowRules] = useState(false);
 
   const fetchGames = useCallback(async () => {
+    // /api/games is account-scoped and 401s for a guest, so there is nothing to
+    // ask for. Skipping the call is not just tidiness — it is what keeps the
+    // guest path free of a failed request on every visit to the home screen.
+    if (status !== 'authenticated') {
+      setGames([]);
+      setPreviousNames([]);
+      setScreen('home');
+      return;
+    }
     try {
       const res = await fetch('/api/games?gameType=darts');
       if (res.ok) {
@@ -56,15 +68,34 @@ export default function DartsPage() {
       console.error('Failed to fetch games:', err);
     }
     setScreen('home');
-  }, []);
+  }, [status]);
 
   useEffect(() => {
     fetchGames();
   }, [fetchGames]);
 
   const createGame = async (config) => {
+    const players = playerNames;
+
+    // Guest: a local game object, never persisted. Same `_id: 'guest'` sentinel
+    // Scrabble and Quiz already use, so all three games now agree.
+    //
+    // Without this, Start Game was a dead button for anyone signed out: the POST
+    // 401'd, createGame returned null, and `if (game) setScreen('playing')`
+    // simply never fired. Nothing was logged to the user and nothing moved.
+    if (status !== 'authenticated') {
+      const localGame = {
+        _id: 'guest',
+        gameType: 'darts',
+        players: players.map((p) => (typeof p === 'string' ? { name: p } : p)),
+        dartsConfig: config,
+        status: 'active',
+      };
+      setCurrentGame(localGame);
+      return localGame;
+    }
+
     try {
-      const players = playerNames;
       const res = await fetch('/api/games', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -87,7 +118,7 @@ export default function DartsPage() {
   };
 
   const updateGame = async (updates) => {
-    if (!currentGame?._id) return;
+    if (!currentGame?._id || currentGame._id === 'guest') return;
     try {
       await fetch(`/api/games/${currentGame._id}`, {
         method: 'PATCH',
@@ -244,6 +275,7 @@ export default function DartsPage() {
 
         {screen === 'setup' && (
           <div className="max-w-lg mx-auto">
+            <GuestNotice className="mb-4" />
             <button
               onClick={() => setScreen('mode-select')}
               className="mb-4 text-red-500 hover:text-red-600 font-semibold text-sm"

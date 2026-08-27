@@ -2,6 +2,7 @@ import dbConnect from '@/lib/mongodb';
 import Game from '@/models/Game';
 import { findCar } from '@/lib/travelBingo';
 import { serializeGame } from './index';
+import { resolvePlayer } from '@/utils/playerIdentity';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -32,6 +33,13 @@ export default async function handler(req, res) {
 
   const car = findCar(game, carId);
   if (!car) return res.status(404).json({ error: 'Car not found' });
+
+  // Submissions overwrite the car's whole list, so without this any
+  // participant could wipe or rewrite another car's suggestions.
+  const player = await resolvePlayer(req, res);
+  if (!player || car.userId !== player.id) {
+    return res.status(403).json({ error: 'You can only submit items for your own car' });
+  }
 
   car.submittedItems = cleaned;
   await game.save();

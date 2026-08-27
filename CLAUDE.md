@@ -4,7 +4,7 @@ Family game launcher: Scrabble Scorer, Quiz, Darts, Travel Bingo. Next.js 15 (Pa
 
 > **Active work:** `REDESIGN-PLAN.md` at the repo root is the agreed plan to
 > realign GamePad with the Aspiro suite (shared `@aspiro/auth`) and redesign it
-> mobile-first. **Phases 0-3 are done.** Read the plan before starting anything,
+> mobile-first. **Phases 0-4 are done.** Read the plan before starting anything,
 > so you pick up at the right phase rather than re-deciding settled questions.
 
 ## Quick Commands
@@ -60,8 +60,8 @@ src/
 │   ├── ClaudeChat.js
 ├── models/                       # Mongoose
 ├── hooks/                        # useQuizRoom, useQuizScoring, useQuizTimer, useWakeLock
-├── lib/                          # auth, brand, cn, mongodb, mongodb-adapter, travelBingo
-├── utils/                        # authHelper, rateLimiter
+├── lib/                          # auth, brand, cn, identity, mongodb, mongodb-adapter, travelBingo
+├── utils/                        # authHelper, playerIdentity, rateLimiter
 ├── data/                         # games (launcher metadata), quizConstants, dartsConstants
 └── styles/globals.css            # design tokens + base layer + utilities
 ```
@@ -90,10 +90,10 @@ One document per game session. `gameType` enum: `scrabble-scorer | quiz | darts 
 
 Pre-save hook updates `updatedAt`.
 
-> **`Game.userId` holds an email address**, while `quiz/rooms` and `quiz/stats`
-> use `session.user.id`. That inconsistency is known and is Phase 4 of the
-> redesign plan — it moves to `session.user.id` with **no backfill**. Don't
-> "fix" half of it in passing.
+> **`Game.userId` is `session.user.id`** for a signed-in owner, or a
+> `guest_…` id for a Travel Bingo game created by a guest. It used to hold an
+> **email**; that moved in Phase 4 with **no backfill**, so games saved before
+> then are orphaned by design.
 
 ### `QuizRoom` (src/models/QuizRoom.js)
 
@@ -247,6 +247,35 @@ without an account.
 - A signed-out visitor gets **no** empty "your games" shell. An empty state for
   something you never opted into reads as a nag.
 
+## Identity & the save contract
+
+**One rule, all four games: guest = local only, signed in = saved.**
+
+| | |
+|---|---|
+| `lib/identity.js` | client. `getPlayerIdentity(session)` and `guestIdForRequest(session)`. Guest ids live in `localStorage` under `gamepad:guestId` and look like `guest_<base36>` |
+| `utils/playerIdentity.js` | **server, authoritative.** `resolvePlayer(req, res)` |
+
+**`resolvePlayer` is the security boundary — do not bypass it.** When a session
+exists it wins unconditionally and any body field is ignored. A client-supplied
+id is consulted only when there is no session, and must match
+`/^guest_[a-z0-9]{4,48}$/` — which is what makes it structurally incapable of
+naming a Mongo ObjectId, and therefore a real account.
+
+This replaced routes that read identity straight from the request body. See the
+Phase 4 notes in `REDESIGN-PLAN.md` for what that allowed.
+
+- **Guests still play everything**, including multiplayer Travel Bingo — those
+  games live on the server against a join code. What a guest does not get is
+  *history*, because there is no account to attribute it to.
+- Local, unsaved games use the sentinel `_id: 'guest'`. All of Scrabble, Quiz and
+  Darts use it; never PATCH or DELETE a game with that id.
+- **There is no guest→account adoption.** Saving starts at sign-in. That was
+  already the de facto behaviour, and is now the stated one.
+- `game/GuestNotice` says so before the game starts. Mount it on any new game's
+  setup screen — it renders nothing for a signed-in user and nothing while the
+  session is loading.
+
 ## Realtime (Quiz)
 
 Multi-device quiz uses SSE, not WebSockets. Client opens `GET /api/quiz/rooms/[roomCode]/stream`; server polls the room and pushes when `stateVersion` increments. Players submit answers via `POST /api/quiz/rooms/[roomCode]/answer`. Hook: `src/hooks/useQuizRoom.js`.
@@ -306,6 +335,7 @@ The app has a real public identity — don't reintroduce skeleton defaults when 
 - Last gameplay feature: Travel Bingo (`45a5fbb`, 2026-05-02)
 - Since then: brand/SEO pass, git sync guide, Travel Bingo photo feature removed (`60ad439`)
 - 2026-08-27: redesign plan agreed; **Phase 0** landed — design tokens, fonts, mobile base layer, config-bug fixes, doc accuracy
+- 2026-08-27: **Phase 4** landed — one identity, `session.user.id` ownership, Travel Bingo authorisation fixed, Darts guest play fixed
 - 2026-08-27: **Phase 3** landed — landing page rebuilt as a public launcher
 - 2026-08-27: **Phase 2** landed — design system, one app shell, shared keypad/turn primitives
 - 2026-08-27: **Phase 1** landed — migrated to `@aspiro/auth` v0.7.1; email/password added alongside Google; GamePad is no longer the suite's odd one out

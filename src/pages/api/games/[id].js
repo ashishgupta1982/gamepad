@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     try {
       const game = await Game.findOne({
         _id: id,
-        userId: session.user.email
+        userId: session.user.id
       });
 
       if (!game) {
@@ -37,7 +37,7 @@ export default async function handler(req, res) {
 
       const game = await Game.findOne({
         _id: id,
-        userId: session.user.email
+        userId: session.user.id
       });
 
       if (!game) {
@@ -73,7 +73,7 @@ export default async function handler(req, res) {
     try {
       const game = await Game.findOneAndDelete({
         _id: id,
-        userId: session.user.email
+        userId: session.user.id
       });
 
       if (!game) {

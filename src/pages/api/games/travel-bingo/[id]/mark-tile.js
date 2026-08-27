@@ -2,6 +2,7 @@ import dbConnect from '@/lib/mongodb';
 import Game from '@/models/Game';
 import { findCar } from '@/lib/travelBingo';
 import { serializeGame } from './index';
+import { resolvePlayer } from '@/utils/playerIdentity';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -27,6 +28,13 @@ export default async function handler(req, res) {
 
   const car = findCar(game, carId);
   if (!car) return res.status(404).json({ error: 'Car not found' });
+
+  // A carId alone was enough to mark a tile, so any participant could fill in
+  // a rival car's card — and marking a tile is what decides the winner.
+  const player = await resolvePlayer(req, res);
+  if (!player || car.userId !== player.id) {
+    return res.status(403).json({ error: 'You can only mark tiles on your own card' });
+  }
 
   const tile = car.card.find(t => t.tileId === tileId);
   if (!tile) return res.status(404).json({ error: 'Tile not found' });
