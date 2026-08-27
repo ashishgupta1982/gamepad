@@ -1,70 +1,81 @@
-import { SpellCheck, Brain, Target, Car } from 'lucide-react';
-
 // The four games, in one place.
 //
-// The launcher used to hold this inline as emoji plus a Tailwind gradient
-// string, with a handleGameClick that was a four-branch if/else mapping each id
-// to the route named after it. Both are here now, so adding a fifth game is one
-// entry rather than an edit in three places.
+// ─── On emoji ──────────────────────────────────────────────────────────────
 //
-// `tone` is a per-game token from globals.css, not a gradient. Gradients were
-// doing the work of identity while carrying none of it: five of them, all
-// unrelated to the brand, chosen to look lively rather than to tell one game
-// apart from another at a glance.
+// These are DELIBERATELY emoji, not icons from the lucide set the rest of the
+// app uses. A brief detour replaced them with flat monochrome glyphs and the
+// launcher immediately stopped looking like a games app — a family game
+// launcher wants the colour and the depth, and the platform emoji are the
+// cheapest way to get artwork that already looks three-dimensional.
 //
-// The meta lines are checked against the code, not invented: Scrabble's setup
-// offers 1-4 players, Darts ships four modes in dartsConstants, Quiz has 16
-// categories in quizConstants and runs same-device or multi-device by room code.
+// The general rule still stands everywhere else: emoji are not UI affordances.
+// Back arrows, the settings gear and the close button stay lucide, because those
+// have to read as controls and must scale, recolour and carry an aria-label.
+// These four are illustration, which is a different job.
+//
+// The meta pills ("1-4 players", "16 categories") that used to sit under each
+// description are gone. They were clutter on a four-item launcher: nobody
+// chooses between Darts and Travel Bingo on player count, and the detail is one
+// tap away inside each game anyway.
 export const GAMES = [
   {
     id: 'scrabble-scorer',
     name: 'Scrabble Scorer',
     href: '/games/scrabble-scorer',
-    icon: SpellCheck,
+    emoji: '🎲',
     tone: 'scrabble',
-    description:
-      'Running totals, per-round scores and end-of-game awards. You bring the board.',
-    meta: ['1-4 players', 'No sign-in needed'],
+    description: 'Running totals, round scores and end-of-game awards.',
   },
   {
     id: 'quiz',
     name: 'Quiz',
     href: '/games/quiz',
-    icon: Brain,
+    emoji: '🧠',
     tone: 'quiz',
-    description:
-      'Play on one phone, or everyone joins on their own with a room code.',
-    meta: ['16 categories', 'Same device or multi'],
+    description: 'One phone, or everyone joins with a room code.',
   },
   {
     id: 'darts',
     name: 'Darts Scorer',
     href: '/games/darts',
-    icon: Target,
+    emoji: '🎯',
     tone: 'darts',
-    description:
-      'X01, Cricket, Around the Clock and Killer — with checkout suggestions from 170.',
-    meta: ['4 modes', 'Checkout helper'],
+    description: 'X01, Cricket, Around the Clock and Killer.',
   },
   {
     id: 'travel-bingo',
     name: 'Travel Bingo',
     href: '/games/travel-bingo',
-    icon: Car,
+    emoji: '🚗',
     tone: 'bingo',
-    description:
-      'Every car gets its own card. Share a join code and race to fill it on the road.',
-    meta: ['2+ cars', 'Join by code'],
+    description: 'Every car gets a card. Spot it before they do.',
   },
 ];
 
 // Written out rather than interpolated — Tailwind only generates classes it can
-// literally see, so `bg-game-${tone}` would emit nothing and render unstyled.
+// literally see, so `from-game-${tone}` would emit nothing and the tile would
+// render with no background at all.
 export const GAME_TONES = {
-  scrabble: { bg: 'bg-game-scrabble', text: 'text-game-scrabble', soft: 'bg-game-scrabble/10' },
-  quiz: { bg: 'bg-game-quiz', text: 'text-game-quiz', soft: 'bg-game-quiz/10' },
-  darts: { bg: 'bg-game-darts', text: 'text-game-darts', soft: 'bg-game-darts/10' },
-  bingo: { bg: 'bg-game-bingo', text: 'text-game-bingo', soft: 'bg-game-bingo/10' },
+  scrabble: {
+    gradient: 'bg-gradient-to-br from-game-scrabble to-game-scrabble-deep',
+    soft: 'bg-game-scrabble/10',
+    text: 'text-game-scrabble',
+  },
+  quiz: {
+    gradient: 'bg-gradient-to-br from-game-quiz to-game-quiz-deep',
+    soft: 'bg-game-quiz/10',
+    text: 'text-game-quiz',
+  },
+  darts: {
+    gradient: 'bg-gradient-to-br from-game-darts to-game-darts-deep',
+    soft: 'bg-game-darts/10',
+    text: 'text-game-darts',
+  },
+  bingo: {
+    gradient: 'bg-gradient-to-br from-game-bingo to-game-bingo-deep',
+    soft: 'bg-game-bingo/10',
+    text: 'text-game-bingo',
+  },
 };
 
 // gameType on a Game document -> the entry above. Used to label saved games.

@@ -2,10 +2,9 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useSession, signIn } from 'next-auth/react';
-import { ChevronRight, Play, Save, Trophy, Users, History } from 'lucide-react';
+import { Play, Save, Trophy, Users, History } from 'lucide-react';
 import { SignInDialog } from '@aspiro/auth/ui';
 import AppHeader from '@/components/layout/AppHeader';
-import { Badge } from '@/components/ui/badge';
 import { GAMES, GAME_TONES, GAME_BY_TYPE } from '@/data/games';
 import { BRAND } from '@/lib/brand';
 import { cn } from '@/lib/cn';
@@ -20,40 +19,40 @@ import { cn } from '@/lib/cn';
 
 function GameCard({ game }) {
   const tone = GAME_TONES[game.tone];
-  const Icon = game.icon;
 
   return (
     <Link
       href={game.href}
-      className="press flex h-full items-start gap-4 rounded-lg border border-border bg-card p-4 shadow-sm transition-colors hover:border-border/60 hover:bg-muted/40"
+      className={cn(
+        'press relative flex h-full min-h-[136px] flex-col overflow-hidden rounded-2xl p-4',
+        'text-white shadow-lg ring-1 ring-inset ring-white/20',
+        tone.gradient,
+      )}
     >
+      {/* A soft highlight in the top corner. Without it a two-stop gradient on a
+          flat rectangle still reads flat; this is what gives the tile the sense
+          of being lit from somewhere. */}
       <span
-        className={cn(
-          'flex h-12 w-12 shrink-0 items-center justify-center rounded-lg',
-          tone.soft,
-        )}
-      >
-        <Icon className={cn('h-6 w-6', tone.text)} aria-hidden="true" />
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-white/15 blur-2xl"
+      />
+
+      {/* The emoji sits on white rather than directly on the colour. Platform
+          emoji carry their own palette, and dropping a multicoloured glyph
+          straight onto a saturated tile muddies both — the white plate reads as
+          an app icon and lets the artwork keep its own colours. */}
+      <span className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-3xl leading-none shadow-sm">
+        <span aria-hidden="true">{game.emoji}</span>
       </span>
 
-      <span className="min-w-0 flex-1">
-        <span className="flex items-center gap-2">
-          <span className="font-display text-lg font-semibold text-foreground">{game.name}</span>
+      <span className="relative mt-auto pt-4">
+        <span className="block font-display text-xl font-semibold leading-tight">
+          {game.name}
         </span>
-        <span className="mt-0.5 block text-sm leading-relaxed text-muted-foreground">
+        <span className="mt-1 block text-sm leading-snug text-white/90">
           {game.description}
         </span>
-        <span className="mt-2 flex flex-wrap gap-1.5">
-          {game.meta.map((m) => (
-            <Badge key={m}>{m}</Badge>
-          ))}
-        </span>
       </span>
-
-      <ChevronRight
-        className="mt-3 h-5 w-5 shrink-0 text-muted-foreground/60"
-        aria-hidden="true"
-      />
     </Link>
   );
 }
@@ -79,7 +78,6 @@ function ContinueStrip({ games }) {
           const meta = GAME_BY_TYPE[g.gameType];
           if (!meta) return null;
           const tone = GAME_TONES[meta.tone];
-          const Icon = meta.icon;
           const names = (g.players || []).map((p) => p.name).filter(Boolean);
 
           return (
@@ -90,11 +88,12 @@ function ContinueStrip({ games }) {
               >
                 <span
                   className={cn(
-                    'flex h-9 w-9 shrink-0 items-center justify-center rounded-lg',
+                    'flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-lg leading-none',
                     tone.soft,
                   )}
+                  aria-hidden="true"
                 >
-                  <Icon className={cn('h-4 w-4', tone.text)} aria-hidden="true" />
+                  {meta.emoji}
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-sm font-semibold text-foreground">

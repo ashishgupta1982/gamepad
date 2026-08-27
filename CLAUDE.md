@@ -302,8 +302,15 @@ Helpers in `src/lib/travelBingo.js`: `generateJoinCode`, `generateId`, `findCar`
   classes** (`bg-brand`, not `bg-orange-600`) in anything new or touched.
 - Existing game screens still hardcode orange/amber/teal inline — that is the
   debt Phases 5-8 clear, game by game. Don't bulk-rewrite them ad hoc.
-- Icons: `lucide-react` (already a dependency). **Emoji are not icons** — they
-  are fine in copy, not as UI affordances.
+- Icons: `lucide-react` for **UI affordances** — back arrows, the settings gear,
+  the close button. Those must read as controls and carry an `aria-label`.
+- **The four game emoji on the launcher are deliberate and are not icons.** They
+  are illustration. A pass replaced them with flat monochrome lucide glyphs and
+  the launcher stopped looking like a games app — a family game launcher wants
+  the colour and depth that platform emoji already have. Don't "fix" them back.
+- **No meta pills on the launcher tiles.** Player counts and category counts were
+  tried and removed: clutter on a four-item screen, and nobody picks between
+  Darts and Travel Bingo on player count.
 - Mobile-first. The phone gets passed around a table: primary actions belong at
   the bottom, nothing may depend on hover, and touch targets are 44px minimum.
 - Each game owns its component folder under `src/components/<game>/` — no

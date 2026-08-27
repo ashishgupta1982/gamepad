@@ -48,11 +48,19 @@
   --warning: 38 92% 42%;
   --warning-foreground: 0 0% 100%;
 
-  /* Per-game identity colours */
+  /* Per-game identity colours, each with a deeper end for the launcher tiles.
+     The pair makes a gradient with real depth rather than a flat block — the
+     difference between "a coloured rectangle" and "a thing you want to press".
+     Every base is at or below 52% lightness, so white text clears 4.5:1 on all
+     four. */
   --game-scrabble: 271 65% 48%;
+  --game-scrabble-deep: 276 68% 36%;
   --game-quiz: 231 62% 52%;
+  --game-quiz-deep: 236 66% 40%;
   --game-darts: 0 72% 48%;
+  --game-darts-deep: 6 74% 37%;
   --game-bingo: 168 70% 34%;
+  --game-bingo-deep: 172 76% 25%;
 
   --radius: 0.875rem;
 }

@@ -87,10 +87,10 @@ export default {
         // on the launcher and its header in play, so a player can tell at a
         // glance which game the phone is currently showing.
         game: {
-          scrabble: token('game-scrabble'),
-          quiz: token('game-quiz'),
-          darts: token('game-darts'),
-          bingo: token('game-bingo'),
+          scrabble: { DEFAULT: token('game-scrabble'), deep: token('game-scrabble-deep') },
+          quiz: { DEFAULT: token('game-quiz'), deep: token('game-quiz-deep') },
+          darts: { DEFAULT: token('game-darts'), deep: token('game-darts-deep') },
+          bingo: { DEFAULT: token('game-bingo'), deep: token('game-bingo-deep') },
         },
       },
 
