@@ -29,14 +29,9 @@ export default function ProgressFeed({ cars, onTileClick }) {
             className="flex gap-3 cursor-pointer hover:bg-slate-50 p-2 -mx-2 rounded-lg"
             onClick={() => onTileClick && onTileClick(car, tile)}
           >
-            {tile.photoUrl ? (
-              /* eslint-disable-next-line @next/next/no-img-element */
-              <img src={tile.photoUrl} alt="" className="w-14 h-14 rounded-lg object-cover flex-shrink-0" />
-            ) : (
-              <div className="w-14 h-14 rounded-lg bg-emerald-100 flex items-center justify-center text-2xl flex-shrink-0">
-                ✓
-              </div>
-            )}
+            <div className="w-14 h-14 rounded-lg bg-emerald-100 flex items-center justify-center text-2xl flex-shrink-0">
+              ✓
+            </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm">
                 <span className="font-bold text-emerald-700">{car.name}</span>

@@ -176,12 +176,12 @@ export default function TravelBingoPage() {
     }
   };
 
-  const handleMarkFound = async ({ tileId, photoUrl, caption }) => {
+  const handleMarkFound = async ({ tileId, caption }) => {
     if (!game?._id || !myCarId) return;
     const res = await fetch(`/api/games/travel-bingo/${game._id}/mark-tile`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ carId: myCarId, tileId, photoUrl, caption, found: true }),
+      body: JSON.stringify({ carId: myCarId, tileId, caption, found: true }),
     });
     if (!res.ok) throw new Error((await res.json())?.error || 'Save failed');
     const { game: updated } = await res.json();
@@ -377,7 +377,6 @@ export default function TravelBingoPage() {
           tile={openTile?.tile}
           ownerCar={openTile?.ownerCar}
           myCarId={myCarId}
-          gameId={game?._id}
           onClose={() => setOpenTile(null)}
           onMarkFound={handleMarkFound}
           onUnmark={handleUnmark}

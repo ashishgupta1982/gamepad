@@ -111,7 +111,6 @@ const GameSchema = new mongoose.Schema({
         category: String,
         found: { type: Boolean, default: false },
         foundAt: Date,
-        photoUrl: String,
         caption: String,
         comments: [{
           commentId: String,

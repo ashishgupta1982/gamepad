@@ -1,25 +1,21 @@
 import { useEffect, useState } from 'react';
-import PhotoUpload from './PhotoUpload';
 
 export default function TileDetailModal({
   open,
   tile,
   ownerCar,
   myCarId,
-  gameId,
   onClose,
   onMarkFound,
   onUnmark,
   onAddComment,
 }) {
-  const [photoUrl, setPhotoUrl] = useState('');
   const [caption, setCaption] = useState('');
   const [commentDraft, setCommentDraft] = useState('');
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
     if (tile) {
-      setPhotoUrl(tile.photoUrl || '');
       setCaption(tile.caption || '');
       setCommentDraft('');
     }
@@ -34,7 +30,7 @@ export default function TileDetailModal({
   const handleMark = async () => {
     setBusy(true);
     try {
-      await onMarkFound({ tileId: tile.tileId, photoUrl, caption });
+      await onMarkFound({ tileId: tile.tileId, caption });
       onClose();
     } finally {
       setBusy(false);
@@ -80,17 +76,11 @@ export default function TileDetailModal({
               <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">
                 Mark as found
               </p>
-              <PhotoUpload
-                gameId={gameId}
-                carId={myCarId}
-                photoUrl={photoUrl}
-                onChange={setPhotoUrl}
-              />
               <textarea
                 value={caption}
                 onChange={(e) => setCaption(e.target.value.slice(0, 280))}
                 placeholder="Add a caption (optional)"
-                className="w-full mt-3 px-3 py-2 text-sm border-2 border-slate-200 rounded-xl focus:outline-none focus:border-emerald-400"
+                className="w-full px-3 py-2 text-sm border-2 border-slate-200 rounded-xl focus:outline-none focus:border-emerald-400"
                 rows={2}
               />
               <button
@@ -108,10 +98,6 @@ export default function TileDetailModal({
               <p className="text-xs font-semibold uppercase tracking-wider text-emerald-700 mb-2">
                 Spotted ✓
               </p>
-              {tile.photoUrl && (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img src={tile.photoUrl} alt={tile.label} className="w-full max-h-64 object-cover rounded-xl mb-2" />
-              )}
               {tile.caption && <p className="text-sm text-slate-700 italic">&ldquo;{tile.caption}&rdquo;</p>}
               {isOwner && (
                 <button

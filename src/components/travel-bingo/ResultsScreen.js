@@ -3,14 +3,6 @@ export default function ResultsScreen({ game, myCarId, onPlayAgain }) {
   const winnerId = game?.travelBingoConfig?.winnerCarId;
   const winner = cars.find(c => c.carId === winnerId);
 
-  const allFinds = [];
-  for (const car of cars) {
-    for (const tile of car.card || []) {
-      if (tile.found && tile.photoUrl) allFinds.push({ car, tile });
-    }
-  }
-  allFinds.sort((a, b) => new Date(b.tile.foundAt) - new Date(a.tile.foundAt));
-
   return (
     <div className="max-w-3xl mx-auto px-4 pt-4 pb-12">
       <div className="bg-gradient-to-br from-amber-100 via-emerald-50 to-teal-100 rounded-3xl shadow-md p-6 text-center border border-amber-200">
@@ -46,26 +38,6 @@ export default function ResultsScreen({ game, myCarId, onPlayAgain }) {
           })}
         </ul>
       </div>
-
-      {allFinds.length > 0 && (
-        <div className="mt-5 bg-white rounded-2xl shadow-md p-4 border border-emerald-100">
-          <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">
-            Trip photo gallery ({allFinds.length})
-          </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-            {allFinds.map(({ car, tile }) => (
-              <div key={`${car.carId}-${tile.tileId}`} className="relative rounded-xl overflow-hidden aspect-square">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={tile.photoUrl} alt={tile.label} className="w-full h-full object-cover" />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-2">
-                  <p className="text-white text-xs font-semibold">{tile.label}</p>
-                  <p className="text-white/80 text-[10px]">{car.name}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
 
       <button
         onClick={onPlayAgain}

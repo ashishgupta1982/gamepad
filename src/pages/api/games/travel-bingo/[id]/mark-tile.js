@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   }
 
   const { id } = req.query;
-  const { carId, tileId, photoUrl, caption, found = true } = req.body || {};
+  const { carId, tileId, caption, found = true } = req.body || {};
 
   if (!carId || !tileId) {
     return res.status(400).json({ error: 'carId and tileId required' });
@@ -34,7 +34,6 @@ export default async function handler(req, res) {
   tile.found = Boolean(found);
   if (found) {
     tile.foundAt = new Date();
-    if (photoUrl && typeof photoUrl === 'string') tile.photoUrl = photoUrl.slice(0, 500);
     if (caption && typeof caption === 'string') tile.caption = caption.slice(0, 280);
   } else {
     tile.foundAt = undefined;

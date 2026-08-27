@@ -33,10 +33,6 @@ export default function BingoCard({ car, onTileClick, interactive = false, highl
               ${highlightTileId === tile.tileId ? 'ring-2 ring-amber-400' : ''}
             `}
           >
-            {tile.photoUrl && tile.found && (
-              /* eslint-disable-next-line @next/next/no-img-element */
-              <img src={tile.photoUrl} alt="" className="absolute inset-0 w-full h-full object-cover opacity-40" />
-            )}
             <span className={`relative z-10 text-[11px] sm:text-xs font-semibold leading-tight ${tile.found ? 'drop-shadow' : ''}`}>
               {tile.label}
             </span>
