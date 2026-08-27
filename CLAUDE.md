@@ -196,9 +196,11 @@ Rebuilt in Phase 0. **Read `REDESIGN-PLAN.md` §3 before changing any of it.**
 - **Brand is rust `#EA580C` + teal `#0D9488`.** Not arbitrary — `manifest.json`'s
   `theme_color`, the icons and the OG card were all built around it by the brand
   pass (`c4f1c91`). Changing it invalidates shipped assets.
-- **Fonts:** Fredoka (display) + Nunito Sans (body), wired via `next/font` in
-  `_app.js` and exposed on `:root` — *not* on a wrapper element, so portalled
-  dialogs still resolve them.
+- **Fonts:** Outfit (display) + Inter (body), wired via `next/font` in `_app.js`
+  and exposed on `:root` — *not* on a wrapper element, so portalled dialogs still
+  resolve them. Two earlier picks were rejected: Varela Round (single 400 weight,
+  no contrast for scores) and Fredoka (too bubbly — read as a children's app).
+  **Don't reach for a rounded display face here.**
 - **Per-game colours** — `game-scrabble|quiz|darts|bingo` tokens, so a player can
   tell which game the phone is showing at a glance.
 - **Mobile mechanics are in the base layer** and are load-bearing:

@@ -17,6 +17,11 @@
 // description are gone. They were clutter on a four-item launcher: nobody
 // chooses between Darts and Travel Bingo on player count, and the detail is one
 // tap away inside each game anyway.
+//
+// The descriptions are the ones that shipped in production, which read better
+// than the terse rewrite that replaced them — with one correction: Travel
+// Bingo's said "Spot it, SNAP it, win!", and the photo feature it referred to
+// was deleted in 60ad439. Prod has been advertising a feature it does not have.
 export const GAMES = [
   {
     id: 'scrabble-scorer',
@@ -24,7 +29,7 @@ export const GAMES = [
     href: '/games/scrabble-scorer',
     emoji: '🎲',
     tone: 'scrabble',
-    description: 'Running totals, round scores and end-of-game awards.',
+    description: 'Track scores for up to 4 players, with fun awards and achievements!',
   },
   {
     id: 'quiz',
@@ -32,7 +37,7 @@ export const GAMES = [
     href: '/games/quiz',
     emoji: '🧠',
     tone: 'quiz',
-    description: 'One phone, or everyone joins with a room code.',
+    description: 'Test your knowledge across 16 categories — one phone or many!',
   },
   {
     id: 'darts',
@@ -40,7 +45,7 @@ export const GAMES = [
     href: '/games/darts',
     emoji: '🎯',
     tone: 'darts',
-    description: 'X01, Cricket, Around the Clock and Killer.',
+    description: 'Score X01, Cricket, Around the Clock, Killer and more!',
   },
   {
     id: 'travel-bingo',
@@ -48,7 +53,7 @@ export const GAMES = [
     href: '/games/travel-bingo',
     emoji: '🚗',
     tone: 'bingo',
-    description: 'Every car gets a card. Spot it before they do.',
+    description: 'Road-trip bingo for the whole convoy. Spot it, tick it, win!',
   },
 ];
 
@@ -60,21 +65,25 @@ export const GAME_TONES = {
     gradient: 'bg-gradient-to-br from-game-scrabble to-game-scrabble-deep',
     soft: 'bg-game-scrabble/10',
     text: 'text-game-scrabble',
+    playHover: 'group-hover:bg-white group-hover:text-game-scrabble',
   },
   quiz: {
     gradient: 'bg-gradient-to-br from-game-quiz to-game-quiz-deep',
     soft: 'bg-game-quiz/10',
     text: 'text-game-quiz',
+    playHover: 'group-hover:bg-white group-hover:text-game-quiz',
   },
   darts: {
     gradient: 'bg-gradient-to-br from-game-darts to-game-darts-deep',
     soft: 'bg-game-darts/10',
     text: 'text-game-darts',
+    playHover: 'group-hover:bg-white group-hover:text-game-darts',
   },
   bingo: {
     gradient: 'bg-gradient-to-br from-game-bingo to-game-bingo-deep',
     soft: 'bg-game-bingo/10',
     text: 'text-game-bingo',
+    playHover: 'group-hover:bg-white group-hover:text-game-bingo',
   },
 };
 

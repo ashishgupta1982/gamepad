@@ -1,24 +1,27 @@
 import { SessionProvider } from 'next-auth/react';
 import Head from 'next/head';
-import { Fredoka, Nunito_Sans } from 'next/font/google';
+import { Outfit, Inter } from 'next/font/google';
 import '../styles/globals.css';
 
-// Display face — headings, scores, game titles.
+// Display face — headings, game names, scores.
 //
-// ui-ux-pro-max recommended Varela Round here. Rejected: it ships a single 400
-// weight, and a scoring app needs weight contrast between a player's name and
-// their score. Fredoka is the same friendly rounded geometry with a real
-// 300-700 range.
-const display = Fredoka({
+// Third choice, and the reasoning is worth keeping. ui-ux-pro-max suggested
+// Varela Round, rejected for shipping a single 400 weight when a scoring app
+// needs weight contrast. Fredoka replaced it and was rejected on sight: too
+// bubbly, reading as a children's app rather than a family one. Outfit is
+// geometric and confident with a full weight range — modern without the
+// roundness that made the last one feel juvenile.
+const display = Outfit({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-display',
   display: 'swap',
 });
 
-// Body and UI face. Rounded terminals so it sits with Fredoka, but a proper
-// text design that stays readable at 14px on a phone held across a table.
-const body = Nunito_Sans({
+// Body and UI face. Inter is the workhorse — neutral, and specifically drawn to
+// stay legible at small sizes on screen, which is the whole job on a phone held
+// across a table. Also what CookBook uses, so the suite reads as one family.
+const body = Inter({
   subsets: ['latin'],
   variable: '--font-body',
   display: 'swap',

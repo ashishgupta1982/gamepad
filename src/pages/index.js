@@ -22,67 +22,62 @@ function GameCard({ game }) {
 
   return (
     // A Link, not a <button>: it navigates, and a control that changes the URL
-    // should be an anchor so middle-click, cmd-click and "open in new tab" all
-    // work. It just has to *behave* like a button, which is what the states
-    // below are for.
+    // should be an anchor so middle-click, cmd-click and "open in new tab" work.
+    // It just has to *behave* like a button, which is what the states below do.
     //
-    // Note it does not use the shared `.press` utility. That sets `transform`
+    // Deliberately not using the shared `.press` utility. That sets `transform`
     // as a plain declaration, which would fight the hover translate at equal
-    // specificity and leave the winner down to stylesheet order. These states
-    // are all Tailwind variants instead, where the cascade is defined: active
-    // is generated after hover, so the press reliably beats the lift.
+    // specificity and leave the winner down to stylesheet order. As Tailwind
+    // variants the cascade is defined — active is generated after hover, so the
+    // press reliably beats the lift.
     <Link
       href={game.href}
       className={cn(
-        'group relative flex h-full min-h-[136px] flex-col overflow-hidden rounded-2xl p-4',
-        'text-white shadow-lg ring-1 ring-inset ring-white/20',
+        'group relative flex h-full flex-col items-center overflow-hidden rounded-2xl p-5',
+        'text-center text-white shadow-lg ring-1 ring-inset ring-white/20',
         'transition duration-200 ease-soft',
-        // Hover: lift toward the reader and light up. transform and box-shadow
-        // only — neither reflows the page, so nothing around the tile moves.
         'hover:-translate-y-1 hover:shadow-2xl hover:ring-white/40',
-        // Press: drop back down and squash. This is the tactile half.
         'active:translate-y-0 active:scale-[0.97] active:shadow-md',
-        // The lift is decoration; someone who asked for less motion gets the
-        // colour and shadow changes without the movement.
         'motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100',
         tone.gradient,
       )}
     >
       {/* A soft highlight in the top corner. Without it a two-stop gradient on a
-          flat rectangle still reads flat; this is what gives the tile the sense
-          of being lit from somewhere. */}
+          flat rectangle still reads flat; this is what makes the tile look lit. */}
       <span
         aria-hidden="true"
         className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-white/15 opacity-70 blur-2xl transition-opacity duration-200 group-hover:opacity-100"
       />
 
-      {/* The emoji sits on white rather than directly on the colour. Platform
-          emoji carry their own palette, and dropping a multicoloured glyph
-          straight onto a saturated tile muddies both — the white plate reads as
-          an app icon and lets the artwork keep its own colours. */}
-      <span className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-3xl leading-none shadow-sm transition-transform duration-200 group-hover:scale-105 motion-reduce:group-hover:scale-100">
-        <span aria-hidden="true">{game.emoji}</span>
+      {/* Straight onto the gradient, no plate behind it. The white plate tried
+          to stop the emoji's own colours fighting the tile, but it turned the
+          artwork into a favicon and cost the tile its depth — the emoji reads
+          better big and unframed, which is how it shipped originally. */}
+      <span
+        aria-hidden="true"
+        className="relative text-5xl leading-none drop-shadow-md transition-transform duration-200 group-hover:scale-110 motion-reduce:group-hover:scale-100"
+      >
+        {game.emoji}
       </span>
 
-      <span className="relative mt-auto flex items-end justify-between gap-3 pt-4">
-        <span className="min-w-0">
-          <span className="block font-display text-xl font-semibold leading-tight">
-            {game.name}
-          </span>
-          <span className="mt-1 block text-sm leading-snug text-white/90">
-            {game.description}
-          </span>
-        </span>
+      <span className="relative mt-3 block font-display text-xl font-semibold leading-tight">
+        {game.name}
+      </span>
+      <span className="relative mt-1.5 block text-sm leading-snug text-white/90">
+        {game.description}
+      </span>
 
-        {/* The explicit "this is pressable" cue. A coloured rectangle with text
-            on it is not obviously a control until something on it looks like one,
-            and on touch there is no hover to discover it with. */}
-        <span
-          aria-hidden="true"
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/25 ring-1 ring-inset ring-white/30 transition-colors duration-200 group-hover:bg-white/40"
-        >
-          <Play className="h-4 w-4 translate-x-px fill-white text-white" />
-        </span>
+      {/* Says what it does. An icon assumes the reader decodes a glyph; on a
+          launcher whose whole job is "start playing", words are cheaper. */}
+      <span
+        className={cn(
+          'relative mt-4 inline-flex items-center justify-center rounded-full px-5 py-2',
+          'border border-white/30 bg-white/20 text-sm font-semibold backdrop-blur-xs',
+          'transition-colors duration-200',
+          tone.playHover,
+        )}
+      >
+        Play Now
       </span>
     </Link>
   );

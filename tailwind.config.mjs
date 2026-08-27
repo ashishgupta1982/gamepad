@@ -96,7 +96,7 @@ export default {
 
       fontFamily: {
         // Set on :root by next/font in _app.js.
-        display: ['var(--font-display)', 'ui-rounded', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'system-ui', 'sans-serif'],
         body: ['var(--font-body)', 'system-ui', 'sans-serif'],
       },
 
