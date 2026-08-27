@@ -78,6 +78,5 @@ export const ROOM_STATUSES = {
 // SSE, so these are also what keeps the table in step.
 export const AUTO_ADVANCE = {
   REVEAL_SECONDS: 3,   // correct answer highlighted on the question
-  RESULTS_SECONDS: 5,  // who got it right, and what it was worth
-  SCORES_SECONDS: 5,   // the leaderboard
+  RESULTS_SECONDS: 6,  // points AND the leaderboard, on one screen
 };

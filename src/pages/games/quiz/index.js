@@ -581,44 +581,50 @@ Return ONLY a JSON array:
     setGamePlayers(updatedPlayers);
   };
 
-  const handleShowScoreboard = () => {
-    // Apply deferred score updates for same-device mode
-    if (!isMultiDevice && pendingScoresRef.current) {
-      const pending = pendingScoresRef.current;
-      setGamePlayers(prev => {
-        const updated = prev.map((player, idx) => {
-          const p = pending[idx];
-          if (!p) return player;
-          return { ...player, score: player.score + p.points };
-        });
-
-        // Save to DB
-        if (session && currentGame?._id !== 'guest') {
-          fetch(`/api/games/${currentGame._id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              players: updated.map(p => ({
-                name: p.name,
-                scores: p.answers.map(a => a.points),
-                roundScores: [p.score]
-              })),
-              quizConfig: { currentQuestionIndex }
-            })
-          }).catch(e => console.error('Failed to save:', e));
-        }
-
-        return updated;
+  // Same-device play defers each question's points until the results screen, so
+  // the running total at the top does not update while the answer is still on
+  // screen and give the game away.
+  const applyPendingScores = useCallback(() => {
+    if (isMultiDevice || !pendingScoresRef.current) return;
+    const pending = pendingScoresRef.current;
+    setGamePlayers((prev) => {
+      const updated = prev.map((player, idx) => {
+        const p = pending[idx];
+        if (!p) return player;
+        return { ...player, score: player.score + p.points };
       });
-      pendingScoresRef.current = null;
-    }
-    setScreen('scoreboard');
-  };
 
-  // Reveal -> points. Was the first of three Continue taps per question.
+      if (session && currentGame?._id !== 'guest') {
+        fetch(`/api/games/${currentGame._id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            players: updated.map((p) => ({
+              name: p.name,
+              scores: p.answers.map((a) => a.points),
+              roundScores: [p.score],
+            })),
+            quizConfig: { currentQuestionIndex },
+          }),
+        }).catch((e) => console.error('Failed to save:', e));
+      }
+
+      return updated;
+    });
+    pendingScoresRef.current = null;
+  }, [isMultiDevice, session, currentGame?._id, currentQuestionIndex]);
+
+  // Reveal -> one combined screen: what the question was worth, AND the
+  // standings after it.
+  //
+  // These were two separate screens with a tap between them, which made three
+  // stops per question. Points and the leaderboard answer the same question —
+  // "how did that go?" — so they belong on one screen. Two stops per question
+  // now: the answer, then this.
   const handleShowResults = useCallback(() => {
-    // The host tells the room; every other device follows this over SSE rather
-    // than running its own clock, so the table stays in step.
+    applyPendingScores();
+    // The host tells the room; every other device follows over SSE rather than
+    // running its own clock, so the table stays in step.
     if (isMultiDevice && isHost && roomCode) {
       fetch(`/api/quiz/rooms/${roomCode}`, {
         method: 'PATCH',
@@ -627,7 +633,7 @@ Return ONLY a JSON array:
       }).catch((e) => console.error('Failed to update room:', e));
     }
     setScreen('question-result');
-  }, [isMultiDevice, isHost, roomCode]);
+  }, [applyPendingScores, isMultiDevice, isHost, roomCode]);
 
   const handleNextQuestion = () => {
     const nextIdx = currentQuestionIndex + 1;
@@ -676,16 +682,11 @@ Return ONLY a JSON array:
     onAdvance: handleShowResults,
   });
 
+  // Straight from the combined results screen to the next question. There used
+  // to be a third stop between them.
   const resultsAdvance = useAutoAdvance({
     active: screen === 'question-result',
     seconds: AUTO_ADVANCE.RESULTS_SECONDS,
-    enabled: drivesRoom,
-    onAdvance: handleShowScoreboard,
-  });
-
-  const scoresAdvance = useAutoAdvance({
-    active: screen === 'scoreboard',
-    seconds: AUTO_ADVANCE.SCORES_SECONDS,
     enabled: drivesRoom,
     onAdvance: handleNextQuestion,
   });
@@ -977,7 +978,7 @@ Return ONLY a JSON array:
           </div>
         )}
 
-        <div className={`${screen === 'question' || screen === 'question-result' || screen === 'scoreboard' || screen === 'podium' ? 'pt-4' : 'pt-2'} px-4 pb-8`}>
+        <div className={`${screen === 'question' || screen === 'question-result' || screen === 'podium' ? 'pt-4' : 'pt-2'} px-4 pb-8`}>
 
           {/* ── HOME ── */}
           {screen === 'home' && (
@@ -1197,13 +1198,15 @@ Return ONLY a JSON array:
                   </button>
                 )}
                 {revealed && (
-                  <button
-                    onClick={() => setScreen('question-result')}
-                    className="px-8 py-3 bg-gradient-to-r from-brand to-brand-deep text-white font-bold
-                               rounded-xl shadow-lg hover:shadow-xl transition-all"
-                  >
-                    {currentQuestionIndex + 1 >= questions.length ? 'See Final Results' : 'Continue'}
-                  </button>
+                  <AutoAdvance
+                    secondsLeft={revealAdvance.secondsLeft}
+                    total={AUTO_ADVANCE.REVEAL_SECONDS}
+                    label={
+                      currentQuestionIndex + 1 >= questions.length ? 'Final results' : 'Scores'
+                    }
+                    onSkip={revealAdvance.advanceNow}
+                    showSkip
+                  />
                 )}
               </div>
             </div>
@@ -1278,38 +1281,27 @@ Return ONLY a JSON array:
                 questionIndex={currentQuestionIndex}
                 question={currentQuestion}
               />
+              {/* The leaderboard sits directly under the points rather than on a
+                  screen of its own. Both answer "how did that go?", so splitting
+                  them cost a stop per question and told nobody anything extra. */}
+              <div className="mt-4">
+                <LiveScoreboard
+                  players={gamePlayers}
+                  questionIndex={currentQuestionIndex}
+                  totalQuestions={questions.length}
+                  compact
+                />
+              </div>
               <div className="mt-4">
                 <AutoAdvance
                   secondsLeft={drivesRoom ? resultsAdvance.secondsLeft : null}
                   total={AUTO_ADVANCE.RESULTS_SECONDS}
-                  label="Leaderboard"
-                  onSkip={resultsAdvance.advanceNow}
-                  showSkip={drivesRoom}
-                />
-              </div>
-            </>
-          )}
-
-          {/* ── SCOREBOARD ── */}
-          {screen === 'scoreboard' && (
-            <>
-              <LiveScoreboard
-                players={gamePlayers}
-                questionIndex={currentQuestionIndex}
-                totalQuestions={questions.length}
-              />
-              {/* No "waiting for host" any more — nobody is waiting on anybody,
-                  the whole table moves on the same countdown. */}
-              <div className="mt-4">
-                <AutoAdvance
-                  secondsLeft={drivesRoom ? scoresAdvance.secondsLeft : null}
-                  total={AUTO_ADVANCE.SCORES_SECONDS}
                   label={
                     currentQuestionIndex + 1 >= questions.length
                       ? 'Final results'
                       : `Question ${currentQuestionIndex + 2}`
                   }
-                  onSkip={scoresAdvance.advanceNow}
+                  onSkip={resultsAdvance.advanceNow}
                   showSkip={drivesRoom}
                 />
               </div>

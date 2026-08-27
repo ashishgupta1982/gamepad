@@ -282,12 +282,15 @@ Phase 4 notes in `REDESIGN-PLAN.md` for what that allowed.
 
 ## Quiz internals
 
-**The quiz advances itself between questions.** A question used to need three
-Continue taps — past the reveal, past the points, past the leaderboard — which on
-a fast game round a table turned whoever held the host device into a button
-operator. `hooks/useAutoAdvance.js` + `components/quiz/AutoAdvance.jsx` replace
-all three with visible countdowns; durations are in `AUTO_ADVANCE`
+**The quiz advances itself, and a question has TWO stops, not four.** It used to
+be answer → points → leaderboard, each behind a Continue tap. Points and the
+leaderboard are now one screen — they answer the same question, "how did that
+go?" — and both stops are countdowns. `hooks/useAutoAdvance.js` +
+`components/quiz/AutoAdvance.jsx`; durations in `AUTO_ADVANCE`
 (`data/quizConstants.js`).
+
+> There is no `scoreboard` screen any more. The room status `scores` now means
+> the combined results screen. Don't reintroduce a separate leaderboard step.
 
 > **Only one device runs the clock** — the host in multi-device play, the single
 > device otherwise (`drivesRoom`). Everyone else is moved by SSE. A timer per
