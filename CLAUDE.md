@@ -4,8 +4,9 @@ Family game launcher: Scrabble Scorer, Quiz, Darts, Travel Bingo. Next.js 15 (Pa
 
 > **Active work:** `REDESIGN-PLAN.md` at the repo root is the agreed plan to
 > realign GamePad with the Aspiro suite (shared `@aspiro/auth`) and redesign it
-> mobile-first. **Phases 0-4 are done.** Read the plan before starting anything,
-> so you pick up at the right phase rather than re-deciding settled questions.
+> mobile-first. **All phases (0-8) are done.** Read the plan before starting
+> anything — it records what was decided and why, so you pick up context rather
+> than re-deciding settled questions.
 
 ## Quick Commands
 
@@ -14,6 +15,7 @@ npm run dev      # localhost:3000
 npm run build
 npm run start
 npm run lint
+npm test         # vitest
 ```
 
 > `next build` currently fails on the Windows dev machine for every Next 15 app
@@ -278,6 +280,22 @@ Phase 4 notes in `REDESIGN-PLAN.md` for what that allowed.
   setup screen — it renders nothing for a signed-in user and nothing while the
   session is loading.
 
+## Quiz internals
+
+- **`lib/quizScoring.js` is the only scoring formula.** It used to exist twice —
+  in `hooks/useQuizScoring.js` for same-device play and inline in the answer API
+  route for multi-device. They were identical by coincidence, with nothing
+  keeping them so, and a tuning change to one would have made the same quiz score
+  differently depending on how it was played. Both now call the shared module.
+- **`lib/quizRoom.js` states the room state machine** — `canTransition`,
+  `nextStatus`, `allAnswered`, `canAnswer`. The statuses were on the model but
+  the legal *transitions* lived only in the order the UI happened to call things.
+- Both are covered by `npm test`. The tests were written against the behaviour as
+  it stood **before** the reskin, so they describe what the game already did.
+- `answer.js` bumps `stateVersion` manually **and** the model's `pre('save')`
+  hook bumps it again, so an answer advances it by two. Harmless — the SSE cursor
+  only needs it to increase — but don't read it as a count of anything.
+
 ## Realtime (Quiz)
 
 Multi-device quiz uses SSE, not WebSockets. Client opens `GET /api/quiz/rooms/[roomCode]/stream`; server polls the room and pushes when `stateVersion` increments. Players submit answers via `POST /api/quiz/rooms/[roomCode]/answer`. Hook: `src/hooks/useQuizRoom.js`.
@@ -326,7 +344,7 @@ Helpers in `src/lib/travelBingo.js`: `generateJoinCode`, `generateId`, `findCar`
 - **`Game.gameType` enum is the source of truth** for which sub-config is populated. Polymorphic doc — be careful with mass projections.
 - **The viewport meta is declared once, in `_app.js`.** Seven pages each carried their own copy, which overrode it (next/head dedupes by name, page wins) and would silently drop `viewport-fit=cover`. Don't reintroduce a per-page one.
 - **`.eslintrc.json` is minimal** — lint is permissive.
-- **No tests** in the repo, and no CI. Phase 8 adds `vitest` coverage for the quiz room state machine before reskinning it.
+- **Tests are `vitest` and cover `src/lib/` only** — the quiz room state machine and the scoring formula, the two pieces that break quietly. No CI, no component or end-to-end coverage. `npm test`.
 - **`.env.local` contains live secrets** (Mongo, Google, Anthropic) and is untracked. Do not echo or paste them. The local `NEXTAUTH_SECRET` is a weak placeholder — rotate before/with the Phase 1 deploy.
 
 ## Brand & SEO surface
@@ -345,6 +363,7 @@ The app has a real public identity — don't reintroduce skeleton defaults when 
 - Since then: brand/SEO pass, git sync guide, Travel Bingo photo feature removed (`60ad439`)
 - 2026-08-27: redesign plan agreed; **Phase 0** landed — design tokens, fonts, mobile base layer, config-bug fixes, doc accuracy
 - 2026-08-27: **Phase 4** landed — one identity, `session.user.id` ownership, Travel Bingo authorisation fixed, Darts guest play fixed
+- 2026-08-27: **Phases 5-8** landed — all four games reskinned; first tests in the repo
 - 2026-08-27: **Phase 3** landed — landing page rebuilt as a public launcher
 - 2026-08-27: **Phase 2** landed — design system, one app shell, shared keypad/turn primitives
 - 2026-08-27: **Phase 1** landed — migrated to `@aspiro/auth` v0.7.1; email/password added alongside Google; GamePad is no longer the suite's odd one out
