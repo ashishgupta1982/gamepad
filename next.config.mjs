@@ -4,7 +4,7 @@ const nextConfig = {
 
   // @aspiro/auth ships plain ESM + raw JSX with no build step, so Next has to
   // compile it. Without this the first import fails the build.
-  transpilePackages: ['@aspiro/auth'],
+  transpilePackages: ['@aspiro/auth', '@aspiro/ai'],
 
   async headers() {
     return [

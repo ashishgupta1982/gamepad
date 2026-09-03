@@ -1,4 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk';
+import { getAIModel } from '../../lib/aiModels';
 import dbConnect from '../../lib/mongodb';
 import CachedResponse from '../../models/CachedResponse';
 import { checkRate, getClientIP, RATE_LIMITS } from '../../utils/rateLimiter';
@@ -94,7 +95,7 @@ export default async function handler(req, res) {
     // Call Claude API normally
     // Increase max_tokens for quiz games that need to generate multiple questions
     const message = await anthropic.messages.create({
-      model: "claude-haiku-4-5-20251001",
+      model: await getAIModel('general'),
       max_tokens: 4000,
       messages: [{
         role: "user",

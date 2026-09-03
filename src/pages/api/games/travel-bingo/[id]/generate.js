@@ -1,4 +1,5 @@
 import Anthropic from '@anthropic-ai/sdk';
+import { getAIModel } from '@/lib/aiModels';
 import dbConnect from '@/lib/mongodb';
 import Game from '@/models/Game';
 import { generateId, isHost } from '@/lib/travelBingo';
@@ -119,7 +120,7 @@ export default async function handler(req, res) {
   let parsed = null;
   try {
     const message = await anthropic.messages.create({
-      model: 'claude-haiku-4-5-20251001',
+      model: await getAIModel('travelBingo'),
       max_tokens: 3000,
       temperature: 0.7,
       messages: [{ role: 'user', content: buildPrompt(pooledItems, cars) }],
