@@ -1,5 +1,7 @@
 import { SessionProvider } from 'next-auth/react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import SessionSplashGate from '@aspiro/auth/splash';
 import { Outfit, Inter } from 'next/font/google';
 import '../styles/globals.css';
 
@@ -32,6 +34,29 @@ const body = Inter({
 const DESCRIPTION =
   'Four ready-to-play family games — Scrabble Scorer, Quiz, Darts, and Travel Bingo. No setup, no scoring headaches — play in seconds on any device.';
 const OG_IMAGE = 'https://gamepad.ashishgupta.co.uk/og-card.png';
+
+// GamePad is guest-first: every game is playable signed out, so nothing is
+// gated behind a session and there is no in-place sign-in branch here. The
+// splash covers only the two surfaces whose chrome differs by session — the
+// home page (sign-in CTA vs signed-in state) and settings — so a signed-in
+// visitor never sees the signed-out chrome flash on a cold load. Game routes
+// are deliberately uncovered: a guest should be into the game instantly.
+const SPLASH_ROUTES = ['/', '/settings'];
+
+function AppContent({ Component, pageProps }) {
+  const router = useRouter();
+  return (
+    <>
+      <SessionSplashGate
+        active={SPLASH_ROUTES.includes(router.pathname)}
+        iconSrc="/icon-192.png"
+        wordmark={<span className="font-display text-2xl font-bold text-white">GamePad</span>}
+        groundClassName="bg-orange-950"
+      />
+      <Component {...pageProps} />
+    </>
+  );
+}
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
@@ -74,7 +99,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       `}</style>
 
       <SessionProvider session={session}>
-        <Component {...pageProps} />
+        <AppContent Component={Component} pageProps={pageProps} />
       </SessionProvider>
     </>
   );
