@@ -1,6 +1,6 @@
 # Gamepad
 
-A family game launcher with four playable games: Scrabble Scorer, Quiz (Kahoot-style multi-device or same-device), Darts Scorer (X01, Cricket, Around the Clock, Killer), and Travel Bingo (road-trip photo bingo across multiple cars).
+A family game launcher with five playable games: Scrabble Scorer, Quiz (Kahoot-style multi-device or same-device), Darts Scorer (X01, Cricket, Around the Clock, Killer), Travel Bingo (road-trip bingo across multiple cars), and Egypt Explorer (a museum game for the Grand Egyptian Museum, with an AI guide and photo quests).
 
 ## Why
 
@@ -15,7 +15,7 @@ Built so the family can play games together on phones and tablets without paying
 | Auth | NextAuth.js (Google) |
 | Database | MongoDB + Mongoose |
 | Realtime | Server-Sent Events (SSE) for multi-device quiz |
-| Media | Cloudinary (Travel Bingo photo uploads) |
+| Media | None stored. Egypt Explorer hotlinks Wikimedia Commons photos and sends visitors' photos to Claude without keeping them |
 | AI | Anthropic Claude SDK (cached) |
 | Node | 22.x |
 
@@ -55,7 +55,8 @@ CLOUDINARY_API_SECRET=
 | Scrabble Scorer | `/games/scrabble-scorer` | Up to 4 players, fun awards |
 | Quiz | `/games/quiz` (`/games/quiz/join`) | Same-device or multi-device with 6-char room codes |
 | Darts | `/games/darts` | X01, Cricket, Around the Clock, Killer |
-| Travel Bingo | `/games/travel-bingo` | Multi-car road-trip bingo with photo proof |
+| Travel Bingo | `/games/travel-bingo` | Multi-car road-trip bingo |
+| Egypt Explorer | `/games/egypt-explorer` | Grand Egyptian Museum trip: stories, photo galleries, photo quests checked by Claude, quizzes, a passport of stamps, and a guide you can ask anything (sign-in for the AI parts) |
 
 ## Project Structure
 

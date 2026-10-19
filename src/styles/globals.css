@@ -64,6 +64,16 @@
   --game-darts-deep: 6 74% 37%;
   --game-bingo: 168 70% 34%;
   --game-bingo-deep: 172 76% 25%;
+  /* Egypt Explorer: tomb gold into lapis blue, the two colours of the mask. */
+  --game-egypt: 36 84% 34%;
+  --game-egypt-deep: 224 64% 28%;
+
+  /* Egypt Explorer's own surfaces. Papyrus for the story cards, lapis and gold
+     for its chrome. Scoped by use, not by file: only components/egypt uses them. */
+  --papyrus: 42 56% 93%;
+  --papyrus-foreground: 28 40% 18%;
+  --lapis: 224 64% 28%;
+  --gold: 42 88% 52%;
 
   --radius: 0.875rem;
 }

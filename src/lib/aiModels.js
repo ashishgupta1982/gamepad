@@ -14,6 +14,11 @@ const resolver = createModelResolver({
   defaults: {
     general: 'claude-haiku-4-5-20251001',   // quiz question generation via /api/claude
     travelBingo: 'claude-haiku-4-5-20251001', // board generation
+    // Egypt Explorer's guide and photo quests. A tier name rather than an id, so
+    // it follows the suite's balanced model on each @aspiro/ai release. Not the
+    // fast tier: these calls read photos of museum objects, and naming the right
+    // statue is the whole job.
+    egyptGuide: 'balanced',
   },
   ttlMs: 60 * 1000,
   loadConfig: async () => {

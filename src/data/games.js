@@ -1,4 +1,4 @@
-// The four games, in one place.
+// The five games, in one place.
 //
 // ─── On emoji ──────────────────────────────────────────────────────────────
 //
@@ -55,6 +55,14 @@ export const GAMES = [
     tone: 'bingo',
     description: 'Road-trip bingo for the whole convoy. Spot it, tick it, win!',
   },
+  {
+    id: 'egypt-explorer',
+    name: 'Egypt Explorer',
+    href: '/games/egypt-explorer',
+    emoji: '🏺',
+    tone: 'egypt',
+    description: 'Explore the Grand Egyptian Museum: stories, photo quests, quizzes and a guide you can ask anything!',
+  },
 ];
 
 // Written out rather than interpolated — Tailwind only generates classes it can
@@ -84,6 +92,12 @@ export const GAME_TONES = {
     soft: 'bg-game-bingo/10',
     text: 'text-game-bingo',
     playHover: 'group-hover:bg-white group-hover:text-game-bingo',
+  },
+  egypt: {
+    gradient: 'bg-gradient-to-br from-game-egypt to-game-egypt-deep',
+    soft: 'bg-game-egypt/10',
+    text: 'text-game-egypt',
+    playHover: 'group-hover:bg-white group-hover:text-game-egypt',
   },
 };
 

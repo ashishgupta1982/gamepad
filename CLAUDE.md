@@ -1,6 +1,6 @@
 # Gamepad - AI Assistant Notes
 
-Family game launcher: Scrabble Scorer, Quiz, Darts, Travel Bingo. Next.js 15 (Pages Router) + React 19, MongoDB/Mongoose, shared `@aspiro/auth` (Google + email/password), Anthropic Claude SDK.
+Family game launcher: Scrabble Scorer, Quiz, Darts, Travel Bingo, Egypt Explorer. Next.js 15 (Pages Router) + React 19, MongoDB/Mongoose, shared `@aspiro/auth` (Google + email/password), Anthropic Claude SDK.
 
 > **Active work:** `REDESIGN-PLAN.md` at the repo root is the agreed plan to
 > realign GamePad with the Aspiro suite (shared `@aspiro/auth`) and redesign it
@@ -37,11 +37,13 @@ src/
 │   │   ├── scrabble-scorer/      # Local-only scoring
 │   │   ├── quiz/                 # index.js (host), join.js (player)
 │   │   ├── darts/                # index.js (mode picker + game)
-│   │   └── travel-bingo/         # index.js (lobby + play)
+│   │   ├── travel-bingo/         # index.js (lobby + play)
+│   │   └── egypt-explorer/       # index.js (trip, stops via ?stop=)
 │   └── api/
 │       ├── auth/                 # [...nextauth] + 6 @aspiro/auth re-exports
 │       ├── claude.js             # Cached AI chat (rate-limited)
 │       ├── user.js
+│       ├── egypt/                # guide, quest (Claude, signed in), progress
 │       ├── games/                # CRUD for Game records
 │       │   ├── index.js, [id].js
 │       │   └── travel-bingo/     # create, by-code/[code], [id]/{index,join,submit-items,generate,mark-tile,comment}
@@ -58,13 +60,14 @@ src/
 │   ├── quiz/                     # Host + player screens, lobby, podium, etc.
 │   ├── darts/                    # X01/Cricket/Clock/Killer boards + setup
 │   ├── travel-bingo/             # Card, lobby, feed
+│   ├── egypt/                    # Trip, stop, quiz, quest, guide, passport, cartouche
 │   ├── settings/
 │   ├── ClaudeChat.js
 ├── models/                       # Mongoose
-├── hooks/                        # useQuizRoom, useQuizScoring, useQuizTimer, useWakeLock
-├── lib/                          # auth, brand, cn, identity, mongodb, mongodb-adapter, travelBingo
+├── hooks/                        # useQuizRoom, useQuizScoring, useQuizTimer, useWakeLock, useEgyptProgress
+├── lib/                          # auth, brand, cn, identity, mongodb, mongodb-adapter, travelBingo, egypt/
 ├── utils/                        # authHelper, playerIdentity, rateLimiter
-├── data/                         # games (launcher metadata), quizConstants, dartsConstants
+├── data/                         # games (launcher metadata), quizConstants, dartsConstants, egypt/ (trips, photos)
 └── styles/globals.css            # design tokens + base layer + utilities
 ```
 
@@ -72,7 +75,8 @@ src/
 
 **There is no `src/config/`, no `src/context/`, and no Cloudinary anywhere.** An
 earlier revision of this file documented all three. The photo feature that used
-Cloudinary was removed in `60ad439`; nothing in GamePad uploads media now.
+Cloudinary was removed in `60ad439`; nothing in GamePad stores media. Egypt
+Explorer sends a photo to Claude and keeps nothing.
 
 ## Data Model
 
@@ -80,7 +84,7 @@ Two primary collections plus support.
 
 ### `Game` (polymorphic, src/models/Game.js)
 
-One document per game session. `gameType` enum: `scrabble-scorer | quiz | darts | travel-bingo`. Type-specific sub-documents:
+One document per game session. `gameType` enum: `scrabble-scorer | quiz | darts | travel-bingo | egypt-explorer`. Type-specific sub-documents:
 
 | Field | Used by |
 |-------|---------|
@@ -88,6 +92,7 @@ One document per game session. `gameType` enum: `scrabble-scorer | quiz | darts 
 | `quizConfig` | quiz (rounds, questions, playerStats, mode, timePerQuestion, scoringType) |
 | `dartsConfig` | darts (gameMode, startingScore, double-in/out, turns, cricketMarks, clockTargets, killerLives) |
 | `travelBingoConfig` | travel-bingo (joinCode, hostUserId, phase, cars[] with card tiles + comments, categories) |
+| `egyptConfig` | egypt-explorer (`trip`, and `progress`: the whole client state, shape owned by `lib/egypt/progress.js`) |
 | `status` | `active | completed` |
 
 Pre-save hook updates `updatedAt`.
@@ -177,6 +182,10 @@ package expects exactly those names, so don't rename them to `GOOGLE_CLIENT_ID`.
 | `ADMIN_API` | 30/min |
 | `READ_API` | 120/min |
 | `AUTH_API` | 10 / 15 min |
+
+These are burst shields: in memory, they reset on every cold start. The real
+AI budget is the durable per-account counter in `lib/egypt/ai.js` (Mongo
+`RateLimit`), used by Egypt Explorer.
 
 `/api/claude` derives its `X-RateLimit-*` headers from `RATE_LIMITS.CLAUDE_API`
 rather than hardcoding them, so the advertised limit cannot drift from the
@@ -334,9 +343,64 @@ Multi-device quiz uses SSE, not WebSockets. Client opens `GET /api/quiz/rooms/[r
 
 Helpers in `src/lib/travelBingo.js`: `generateJoinCode`, `generateId`, `findCar`, `isHost`, `carCompletion`. Uses `crypto.randomInt` with a confusable-char-free alphabet.
 
+## Egypt Explorer
+
+A family museum game, built for a holiday to Egypt, one **trip** at a time. The
+first trip is the Grand Egyptian Museum: nine stops, each with a gallery of
+photos, a story, things to look for, "did you know" facts, a photo quest and a
+quiz. Every quiz finished earns that stop's stamp in the family's passport;
+ranks go by stamps, points by person. Pitched at 10 to 14 year olds and their
+parents. Route `/games/egypt-explorer`, `?stop=<id>` for a stop (in the URL so
+the phone's back button returns to the route).
+
+- **Content is data, written and fact-checked by hand.** `src/data/egypt/gem.js`
+  holds every story, fact, quest and question, with the reasoning for each choice
+  in its header. Nothing on a card is AI-written at play time. A new trip (the
+  pyramids, Luxor) is a new data file plus one line in `src/data/egypt/index.js`;
+  the screens do not change. `progress.test.js` checks the data: answers in
+  range, every photo key real, a stamp per stop.
+- **Photos are hotlinked from Wikimedia Commons**, at Commons' 960px thumbnail
+  size, listed in `src/data/egypt/photos.js` with caption, photographer and
+  Commons page. Not copied into `public/`: about 13 MB would sit in git.
+  **"Get ready" on the trip screen saves them all on the phone** (Cache API,
+  `components/egypt/useOfflinePhotos.js`), and `public/egypt-sw.js`, a service
+  worker scoped to `/games/egypt-explorer` only, serves them from that cache, so
+  the stops work without signal. The two share the cache name; change both.
+  The CSP's `connect-src` allows the two Wikimedia hosts for that fetch.
+- **State is one plain object** (`lib/egypt/progress.js`, which owns every
+  rule and is unit-tested). **Points are never stored**: they are derived from
+  who answered what and who found which quest, so totals cannot drift.
+  `hooks/useEgyptProgress.js` keeps it in localStorage always and, signed in,
+  in a `Game` document (`gameType: 'egypt-explorer'`, `egyptConfig.{trip,
+  progress}`) via `/api/egypt/progress`, newer copy winning on load. That is
+  the save contract: guest = this phone, signed in = the account.
+- **The AI parts need sign-in; everything else works as a guest.** Ask the guide
+  (`/api/egypt/guide`: a question, a photo, or both, with the current stop as
+  context) and photo quests (`/api/egypt/quest`: Claude judges the photo against
+  the stop's `quest.target` and returns JSON). Both go through `@aspiro/ai`'s
+  `callClaude` on the `egyptGuide` workload (the `balanced` tier, because
+  naming a statue from a photo is the whole job), and both count against a
+  **durable per-account budget** (`lib/egypt/ai.js`, Mongo `RateLimit`
+  collection with a TTL index): guide 60/hour 150/day, quests 40/hour 80/day,
+  200/day across both. Prompts live in `lib/egypt/ai.js`.
+- **Photos are shrunk on the phone and never stored.** `lib/egypt/photo.js`
+  draws them to 1280px JPEG before upload (a raw phone photo is over Vercel's
+  request limit); the routes accept up to 6 MB. The camera is a file input with
+  `capture`, so no camera permission is needed and `Permissions-Policy:
+  camera=()` stays as it is.
+- **A quest the AI rejects can still be counted** by a parent ("We found it
+  really"). Reflections on glass cases should not cost a child their points.
+- **Hieroglyphs need a font**: Noto Sans Egyptian Hieroglyphs, loaded in
+  `components/egypt/fonts.js` and applied by `style` (not a CSS variable on a
+  wrapper) because the passport and guide are portalled sheets.
+  `lib/egypt/hieroglyphs.js` is the cartouche alphabet; every code point was
+  checked against Unicode's data.
+- Colours: `game-egypt` (gold into lapis) for the tile, and `papyrus`, `lapis`
+  and `gold` tokens used only under `components/egypt/`.
+
 ## Claude AI
 
-`/api/claude` is the only AI chat endpoint. Caches by base64-truncated prompt key in `CachedResponse`. No streaming. Used sparingly — the games themselves do not call Claude during play; quiz questions are static (`src/data/quizConstants.js`). Travel Bingo's `generate` route calls the SDK directly.
+`/api/claude` caches by base64-truncated prompt key in `CachedResponse`. No streaming. Quiz questions are static (`src/data/quizConstants.js`). Travel Bingo's `generate` route calls the SDK directly. **Egypt Explorer is the one game that calls Claude during play** (see above), through `@aspiro/ai/server` with its own durable budget. Models per workload are in `src/lib/aiModels.js` (`@aspiro/ai` v0.7.0).
 
 ## UI Conventions
 
@@ -346,12 +410,12 @@ Helpers in `src/lib/travelBingo.js`: `generateJoinCode`, `generateId`, `findCar`
   debt Phases 5-8 clear, game by game. Don't bulk-rewrite them ad hoc.
 - Icons: `lucide-react` for **UI affordances** — back arrows, the settings gear,
   the close button. Those must read as controls and carry an `aria-label`.
-- **The four game emoji on the launcher are deliberate and are not icons.** They
+- **The game emoji on the launcher are deliberate and are not icons.** They
   are illustration. A pass replaced them with flat monochrome lucide glyphs and
   the launcher stopped looking like a games app — a family game launcher wants
   the colour and depth that platform emoji already have. Don't "fix" them back.
 - **No meta pills on the launcher tiles.** Player counts and category counts were
-  tried and removed: clutter on a four-item screen, and nobody picks between
+  tried and removed: clutter on a short launcher, and nobody picks between
   Darts and Travel Bingo on player count.
 - Mobile-first. The phone gets passed around a table: primary actions belong at
   the bottom, nothing may depend on hover, and touch targets are 44px minimum.
@@ -366,7 +430,7 @@ Helpers in `src/lib/travelBingo.js`: `generateJoinCode`, `generateId`, `findCar`
 - **`Game.gameType` enum is the source of truth** for which sub-config is populated. Polymorphic doc — be careful with mass projections.
 - **The viewport meta is declared once, in `_app.js`.** Seven pages each carried their own copy, which overrode it (next/head dedupes by name, page wins) and would silently drop `viewport-fit=cover`. Don't reintroduce a per-page one.
 - **`.eslintrc.json` is minimal** — lint is permissive.
-- **Tests are `vitest` and cover `src/lib/` only** — the quiz room state machine and the scoring formula, the two pieces that break quietly. No CI, no component or end-to-end coverage. `npm test`.
+- **Tests are `vitest` and cover `src/lib/` only** — the quiz room state machine, the scoring formula, and Egypt Explorer's progress rules, hieroglyph spelling and trip data. No CI, no component or end-to-end coverage. `npm test`.
 - **`.env.local` contains live secrets** (Mongo, Google, Anthropic) and is untracked. Do not echo or paste them. The local `NEXTAUTH_SECRET` is a weak placeholder — rotate before/with the Phase 1 deploy.
 
 ## Brand & SEO surface
@@ -388,4 +452,5 @@ The app has a real public identity — don't reintroduce skeleton defaults when 
 - 2026-08-27: **Phases 5-8** landed — all four games reskinned; first tests in the repo
 - 2026-08-27: **Phase 3** landed — landing page rebuilt as a public launcher
 - 2026-08-27: **Phase 2** landed — design system, one app shell, shared keypad/turn primitives
+- 2026-10-19: **Egypt Explorer** added, the fifth game: the Grand Egyptian Museum trip, AI guide and photo quests; `@aspiro/ai` pin moved v0.1.0 → v0.7.0
 - 2026-08-27: **Phase 1** landed — migrated to `@aspiro/auth` v0.7.1; email/password added alongside Google; GamePad is no longer the suite's odd one out

@@ -9,7 +9,7 @@ const GameSchema = new mongoose.Schema({
   gameType: {
     type: String,
     required: true,
-    enum: ['scrabble-scorer', 'quiz', 'darts', 'travel-bingo']
+    enum: ['scrabble-scorer', 'quiz', 'darts', 'travel-bingo', 'egypt-explorer']
   },
   players: [{
     name: {
@@ -124,6 +124,13 @@ const GameSchema = new mongoose.Schema({
     }],
     categories: { type: [String], default: [] },
     winnerCarId: String
+  },
+  // Egypt Explorer: one document per family per trip. `progress` is the whole
+  // client state (lib/egypt/progress.js), stored as it is: its shape is owned and
+  // checked there, and points are derived from it rather than stored.
+  egyptConfig: {
+    trip: String,
+    progress: mongoose.Schema.Types.Mixed
   },
   status: {
     type: String,

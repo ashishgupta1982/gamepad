@@ -94,7 +94,16 @@ export default {
           quiz: { DEFAULT: token('game-quiz'), deep: token('game-quiz-deep') },
           darts: { DEFAULT: token('game-darts'), deep: token('game-darts-deep') },
           bingo: { DEFAULT: token('game-bingo'), deep: token('game-bingo-deep') },
+          egypt: { DEFAULT: token('game-egypt'), deep: token('game-egypt-deep') },
         },
+
+        // Egypt Explorer's surfaces (components/egypt only).
+        papyrus: {
+          DEFAULT: token('papyrus'),
+          foreground: token('papyrus-foreground'),
+        },
+        lapis: token('lapis'),
+        gold: token('gold'),
       },
 
       fontFamily: {

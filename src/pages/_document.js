@@ -29,7 +29,7 @@ export default function Document() {
               name: "GamePad",
               url: "https://gamepad.ashishgupta.co.uk",
               description:
-                "Four ready-to-play family games — Scrabble Scorer, Quiz, Darts, and Travel Bingo. No setup, no scoring headaches.",
+                "Five ready-to-play family games — Scrabble Scorer, Quiz, Darts, Travel Bingo and Egypt Explorer. No setup, no scoring headaches.",
             }),
           }}
         />

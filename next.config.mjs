@@ -21,7 +21,11 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline' https://accounts.google.com https://fonts.googleapis.com",
               "img-src 'self' data: blob: https: http:",
               "font-src 'self' https://fonts.gstatic.com",
-              "connect-src 'self' https://accounts.google.com https://api.anthropic.com https://oauth2.googleapis.com",
+              // Wikimedia: Egypt Explorer's "Get ready" fetches its photos into
+              // the Cache API so they show in the museum without signal
+              // (components/egypt/useOfflinePhotos.js, public/egypt-sw.js).
+              "connect-src 'self' https://accounts.google.com https://api.anthropic.com https://oauth2.googleapis.com https://thumb.wikimedia.org https://upload.wikimedia.org",
+              "worker-src 'self'",
               "frame-src 'self' https://accounts.google.com",
               "object-src 'none'",
               "base-uri 'self'",

@@ -194,7 +194,7 @@ export default function Home() {
                 : 'Pick a game'}
             </h1>
             <p className="mt-1 text-base text-muted-foreground">
-              Four games, no setup. Start playing in a tap.
+              Five games, no setup. Start playing in a tap.
             </p>
 
             <div className="mt-8">
