@@ -3,32 +3,98 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ArrowRight, Camera, BookMarked, Loader2 } from 'lucide-react';
 import GameShell from '@/components/layout/GameShell';
+import TripPicker from '@/components/egypt/TripPicker';
 import TripHome from '@/components/egypt/TripHome';
 import StopView from '@/components/egypt/StopView';
 import PlayerSetup from '@/components/egypt/PlayerSetup';
 import GuideSheet from '@/components/egypt/GuideSheet';
 import Passport from '@/components/egypt/Passport';
 import useOfflinePhotos from '@/components/egypt/useOfflinePhotos';
-import useEgyptProgress from '@/hooks/useEgyptProgress';
-import { getTrip } from '@/data/egypt';
+import useEgyptProgress, { readLocal } from '@/hooks/useEgyptProgress';
+import { TRIPS, getTrip } from '@/data/egypt';
 import { PHOTOS } from '@/data/egypt/photos';
 import {
   newProgress, setPlayers, recordAnswer, recordQuest, toggleLooked, countAsk, stopStatus,
 } from '@/lib/egypt/progress';
 
-// Egypt Explorer: a family museum game, one trip at a time.
+// Egypt Explorer: a family game for days out in Egypt, one trip at a time.
 //
-// Which stop is showing lives in the URL (?stop=boat), so the phone's back
-// button goes back to the route, and a stop can be shared or reopened.
-// Everything else is in the progress object (lib/egypt/progress.js), saved by
+// Which trip and stop are showing live in the URL (?trip=giza&stop=sphinx), so
+// the phone's back button walks back through them and a stop can be shared or
+// reopened. No trip means the trip picker. A link with only ?stop= dates from
+// when the GEM was the only trip, so it still opens the GEM. Everything else is
+// in each trip's progress object (lib/egypt/progress.js), saved by
 // useEgyptProgress.
-const TRIP_ID = 'gem';
 const PATH = '/games/egypt-explorer';
+const DESCRIPTION =
+  'A family game for the Grand Egyptian Museum and the pyramids of Giza: stories, photo quests, quizzes and a guide you can ask anything.';
+
+/** The explorers from whichever other trip this phone played most recently. */
+function namesFromOtherTrips(tripId) {
+  const latest = TRIPS.filter((t) => t.id !== tripId)
+    .map((t) => readLocal(t.id))
+    .filter((p) => p?.players?.length)
+    .sort((a, b) => String(b.updatedAt).localeCompare(String(a.updatedAt)))[0];
+  return latest ? latest.players.map((p) => p.name) : [];
+}
+
+function Loading() {
+  return (
+    <GameShell title="Egypt Explorer">
+      <div className="flex min-h-[50dvh] items-center justify-center text-muted-foreground">
+        <Loader2 className="h-6 w-6 animate-spin" aria-label="Loading" />
+      </div>
+    </GameShell>
+  );
+}
 
 export default function EgyptExplorer() {
   const router = useRouter();
-  const trip = getTrip(TRIP_ID);
-  const { progress, ready, update } = useEgyptProgress(TRIP_ID);
+  const tripParam = typeof router.query.trip === 'string' ? router.query.trip : null;
+  const stopParam = typeof router.query.stop === 'string' ? router.query.stop : null;
+  const trip = getTrip(tripParam || (stopParam ? 'gem' : null));
+
+  // In every state, including the server render (which never knows the
+  // query), so a shared link still has a title.
+  const head = (
+    <Head>
+      <title>{trip ? `${trip.name} · Egypt Explorer` : 'Egypt Explorer · GamePad'}</title>
+      <meta name="description" content={trip ? trip.description : DESCRIPTION} />
+    </Head>
+  );
+
+  if (!router.isReady) {
+    return (
+      <>
+        {head}
+        <Loading />
+      </>
+    );
+  }
+
+  if (!trip) {
+    return (
+      <>
+        {head}
+        <GameShell title="Egypt Explorer" onBack={() => router.push('/')}>
+          <TripPicker
+            trips={TRIPS}
+            onPick={(id) => router.push({ pathname: PATH, query: { trip: id } }, undefined, { shallow: true })}
+          />
+        </GameShell>
+      </>
+    );
+  }
+
+  // Keyed by trip, so changing trip starts the guide chat and the screens afresh.
+  return <TripGame key={trip.id} trip={trip} stopId={stopParam} />;
+}
+
+function TripGame({ trip, stopId }) {
+  const router = useRouter();
+  const { progress, ready, update } = useEgyptProgress(trip.id);
+  // Only rendered in the browser (the router is ready), so localStorage is there.
+  const [carried] = useState(() => namesFromOtherTrips(trip.id));
 
   const [editing, setEditing] = useState(false);
   const [guideOpen, setGuideOpen] = useState(false);
@@ -41,13 +107,12 @@ export default function EgyptExplorer() {
   }, [trip]);
   const offline = useOfflinePhotos(photoUrls);
 
-  const stopId = typeof router.query.stop === 'string' ? router.query.stop : null;
   const stopIndex = trip.stops.findIndex((s) => s.id === stopId);
   const stop = stopIndex >= 0 ? trip.stops[stopIndex] : null;
 
   const openStop = useCallback(
-    (id) => router.push({ pathname: PATH, query: id ? { stop: id } : {} }, undefined, { shallow: true }),
-    [router],
+    (id) => router.push({ pathname: PATH, query: id ? { trip: trip.id, stop: id } : { trip: trip.id } }, undefined, { shallow: true }),
+    [router, trip.id],
   );
 
   // A new stop starts at the top. GameShell's <main> is the scrolling element.
@@ -57,12 +122,10 @@ export default function EgyptExplorer() {
 
   const askGuide = () => setGuideOpen(true);
 
-  // In every state, including the server render, which is always the loading
-  // one (progress lives in localStorage), so a shared link still has a title.
   const head = (
     <Head>
-      <title>{stop ? `${stop.title} · Egypt Explorer` : 'Egypt Explorer · GamePad'}</title>
-      <meta name="description" content="A family game for the Grand Egyptian Museum: stories, photo quests, quizzes and a guide you can ask anything." />
+      <title>{stop ? `${stop.title} · Egypt Explorer` : `${trip.name} · Egypt Explorer`}</title>
+      <meta name="description" content={trip.description} />
     </Head>
   );
 
@@ -70,11 +133,7 @@ export default function EgyptExplorer() {
     return (
       <>
         {head}
-        <GameShell title="Egypt Explorer">
-          <div className="flex min-h-[50dvh] items-center justify-center text-muted-foreground">
-            <Loader2 className="h-6 w-6 animate-spin" aria-label="Loading" />
-          </div>
-        </GameShell>
+        <Loading />
       </>
     );
   }
@@ -87,10 +146,11 @@ export default function EgyptExplorer() {
     body = (
       <PlayerSetup
         trip={trip}
-        initial={editing ? progress.players.map((p) => p.name) : []}
+        editing={editing}
+        initial={editing ? progress.players.map((p) => p.name) : carried}
         onCancel={editing ? () => setEditing(false) : null}
         onDone={(names) => {
-          update((p) => (p ? setPlayers(p, names) : newProgress(TRIP_ID, names)));
+          update((p) => (p ? setPlayers(p, names) : newProgress(trip.id, names)));
           setEditing(false);
         }}
       />
@@ -177,8 +237,8 @@ export default function EgyptExplorer() {
       {head}
 
       <GameShell
-        title={stop ? stop.title : 'Egypt Explorer'}
-        onBack={() => (stop ? openStop(null) : router.push('/'))}
+        title={stop ? stop.title : trip.shortName}
+        onBack={() => (stop ? openStop(null) : router.push(PATH, undefined, { shallow: true }))}
         actions={actions}
         keepAwake={!!stop}
       >
@@ -202,7 +262,7 @@ export default function EgyptExplorer() {
           trip={trip}
           progress={progress}
           onOpenStop={openStop}
-          onReset={() => update((p) => newProgress(TRIP_ID, p.players.map((x) => x.name)))}
+          onReset={() => update((p) => newProgress(trip.id, p.players.map((x) => x.name)))}
         />
       )}
     </>

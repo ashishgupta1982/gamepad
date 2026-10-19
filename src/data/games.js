@@ -61,7 +61,7 @@ export const GAMES = [
     href: '/games/egypt-explorer',
     emoji: '🏺',
     tone: 'egypt',
-    description: 'Explore the Grand Egyptian Museum: stories, photo quests, quizzes and a guide you can ask anything!',
+    description: 'Explore the Grand Egyptian Museum and the pyramids of Giza: stories, photo quests, quizzes and a guide you can ask anything!',
   },
 ];
 

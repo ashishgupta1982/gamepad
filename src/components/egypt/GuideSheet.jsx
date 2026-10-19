@@ -108,7 +108,7 @@ export default function GuideSheet({ open, onOpenChange, trip, stop, messages, s
               <div className="rounded-xl bg-papyrus p-4 text-papyrus-foreground">
                 <p className="font-display text-lg font-semibold">Ask me anything</p>
                 <p className="mt-1 text-sm leading-relaxed">
-                  Who made it, what it was for, how they built it. Or take a photo of anything in the museum, or pick one from your photos, and I’ll tell you what it is.
+                  Who made it, what it was for, how they built it. Or take a photo of anything {trip.around}, or pick one from your photos, and I’ll tell you what it is.
                 </p>
               </div>
             )}

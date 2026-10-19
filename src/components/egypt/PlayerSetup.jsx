@@ -6,12 +6,13 @@ import Photo from './Photo';
 import { HIERO_STYLE } from './fonts';
 import { cleanNames, MAX_PLAYERS } from '@/lib/egypt/progress';
 
-// "Who's exploring?" Names only: the quiz takes turns round them and the
-// passport keeps their points. Editing later keeps everyone's points
-// (progress.js setPlayers matches by name).
-export default function PlayerSetup({ trip, initial = [], onDone, onCancel }) {
+// "Who's exploring?" Names only: the passport keeps their points. Editing later
+// keeps everyone's points (progress.js setPlayers matches by name). Starting a
+// second trip fills in the names from the first, ready to change.
+export default function PlayerSetup({ trip, initial = [], editing = false, onDone, onCancel }) {
   const [names, setNames] = useState(initial.length ? initial : ['', '']);
   const clean = cleanNames(names);
+  const carried = !editing && initial.length > 0;
 
   const set = (i, v) => setNames((n) => n.map((x, k) => (k === i ? v : x)));
   const remove = (i) => setNames((n) => (n.length > 1 ? n.filter((_, k) => k !== i) : n));
@@ -24,7 +25,9 @@ export default function PlayerSetup({ trip, initial = [], onDone, onCancel }) {
         <div className="absolute inset-x-0 bottom-0 p-4 text-white">
           <span className="text-3xl leading-none text-gold" style={HIERO_STYLE} aria-hidden="true">𓋹𓂀𓆣</span>
           <h2 className="mt-1 font-display text-2xl font-semibold">Who’s exploring?</h2>
-          <p className="text-sm text-white/85">Add everyone in the family. The quiz takes turns round you.</p>
+          <p className="text-sm text-white/85">
+            {carried ? `${trip.name}: the same explorers as last time? Change anyone you like.` : 'Add everyone in the family. Each of you scores your own points.'}
+          </p>
         </div>
       </div>
 
@@ -71,7 +74,7 @@ export default function PlayerSetup({ trip, initial = [], onDone, onCancel }) {
           onClick={() => onDone(clean)}
           className="bg-lapis hover:bg-lapis/90"
         >
-          {initial.length ? 'Save explorers' : 'Start exploring'}
+          {editing ? 'Save explorers' : 'Start exploring'}
         </Button>
         {onCancel && (
           <Button variant="ghost" fullWidth onClick={onCancel}>

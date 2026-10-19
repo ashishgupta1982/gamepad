@@ -22,9 +22,18 @@ export const GEM = {
   name: 'Grand Egyptian Museum',
   shortName: 'The GEM',
   place: 'Giza, next to the pyramids',
+  tagline: 'Ramesses the Great, Tutankhamun’s treasures and Khufu’s boat.',
+  description: 'A family game for the Grand Egyptian Museum: stories, photo quests, quizzes and a guide you can ask anything.',
   cover: 'cover',
   intro:
     'The biggest museum in the world for a single civilisation, opened in November 2025. More than 100,000 objects, and for the first time every one of Tutankhamun’s treasures together. Nine stops, nine stamps. Ready?',
+  // What the guide is told about where the family is (lib/egypt/ai.js).
+  setting: 'They are indoors, walking round the museum’s halls and galleries.',
+  around: 'in the museum',
+  ready: {
+    title: 'Get ready for the museum',
+    todo: 'Save all the photos on this phone now, on Wi-Fi, so the stops still work if there’s no signal inside.',
+  },
   stops: [
     {
       id: 'obelisk',

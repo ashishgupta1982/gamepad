@@ -15,7 +15,8 @@ import { isProgress, newer } from '@/lib/egypt/progress';
 const key = (trip) => `gamepad:egypt:${trip}`;
 const SAVE_DELAY = 1500;
 
-function readLocal(trip) {
+/** This phone's saved progress for a trip, or null. Browser only. */
+export function readLocal(trip) {
   try {
     const raw = window.localStorage.getItem(key(trip));
     const parsed = raw ? JSON.parse(raw) : null;

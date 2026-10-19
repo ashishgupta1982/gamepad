@@ -1,14 +1,16 @@
 import { Check, ChevronRight, CloudDownload, Loader2, Star, Users } from 'lucide-react';
 import Photo from './Photo';
 import Stamp from './Stamp';
+import TripMap from './TripMap';
 import { stopStatus, stampCount, rankFor, scores } from '@/lib/egypt/progress';
 import { cn } from '@/lib/cn';
 
 // The trip screen: where you are, how the family is doing, and the route.
 //
-// The stops are a suggested route, not a locked path. A museum on a busy day
-// does not let you go in order, so every stop is open from the start and the
-// route just says where the next unstamped one is.
+// The stops are a suggested route, not a locked path. A museum on a busy day,
+// or a plateau with a bus timetable, does not let you go in order, so every
+// stop is open from the start and the route just says where the next unstamped
+// one is. A trip with a `map` (Giza) shows it above the list.
 export default function TripHome({ trip, progress, offline, onOpenStop, onOpenPassport, onEditPlayers }) {
   const stamps = stampCount(progress, trip);
   const rank = rankFor(stamps);
@@ -65,11 +67,9 @@ export default function TripHome({ trip, progress, offline, onOpenStop, onOpenPa
           <div className="flex items-start gap-3">
             <CloudDownload className="mt-0.5 h-5 w-5 shrink-0 text-lapis" aria-hidden="true" />
             <div className="min-w-0 flex-1">
-              <p className="font-semibold text-foreground">Get ready for the museum</p>
+              <p className="font-semibold text-foreground">{trip.ready.title}</p>
               <p className="mt-0.5 text-sm text-muted-foreground">
-                {offline.done
-                  ? 'All the photos are saved on this phone, so the stops work without signal.'
-                  : 'Save all the photos on this phone now, on Wi-Fi, so the stops still work if there’s no signal inside.'}
+                {offline.done ? 'All the photos are saved on this phone, so the stops work without signal.' : trip.ready.todo}
               </p>
               {offline.error && <p className="mt-1 text-sm text-destructive">{offline.error}</p>}
             </div>
@@ -92,6 +92,11 @@ export default function TripHome({ trip, progress, offline, onOpenStop, onOpenPa
         <h2 id="route-heading" className="mb-3 font-display text-xl font-semibold text-foreground">
           The route
         </h2>
+        {trip.map && (
+          <div className="mb-4">
+            <TripMap trip={trip} progress={progress} onOpenStop={onOpenStop} />
+          </div>
+        )}
         <ol className="relative space-y-3 before:absolute before:bottom-6 before:left-[27px] before:top-6 before:w-0.5 before:bg-gold/40">
           {trip.stops.map((stop, i) => {
             const status = stopStatus(progress, stop);

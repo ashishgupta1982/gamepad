@@ -5,6 +5,8 @@ import Stamp from './Stamp';
 import QuestCard from './QuestCard';
 import QuizCard from './QuizCard';
 import CartoucheMaker from './CartoucheMaker';
+import HowBig from './HowBig';
+import PyramidMaths from './PyramidMaths';
 import { stopStatus, POINTS } from '@/lib/egypt/progress';
 import { cn } from '@/lib/cn';
 
@@ -49,6 +51,8 @@ export default function StopView({ trip, stop, index, progress, onAnswer, onQues
       </section>
 
       {stop.kind === 'cartouche' && <CartoucheMaker players={progress.players} />}
+      {stop.kind === 'scale' && <HowBig />}
+      {stop.kind === 'builder' && <PyramidMaths />}
 
       <section aria-labelledby={`look-${stop.id}`}>
         <h2 id={`look-${stop.id}`} className="flex items-center gap-2 font-display text-lg font-semibold text-foreground">

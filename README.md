@@ -1,6 +1,6 @@
 # Gamepad
 
-A family game launcher with five playable games: Scrabble Scorer, Quiz (Kahoot-style multi-device or same-device), Darts Scorer (X01, Cricket, Around the Clock, Killer), Travel Bingo (road-trip bingo across multiple cars), and Egypt Explorer (a museum game for the Grand Egyptian Museum, with an AI guide and photo quests).
+A family game launcher with five playable games: Scrabble Scorer, Quiz (Kahoot-style multi-device or same-device), Darts Scorer (X01, Cricket, Around the Clock, Killer), Travel Bingo (road-trip bingo across multiple cars), and Egypt Explorer (a game for days out in Egypt, the Grand Egyptian Museum and the Pyramids of Giza so far, with an AI guide and photo quests).
 
 ## Why
 
@@ -56,7 +56,7 @@ CLOUDINARY_API_SECRET=
 | Quiz | `/games/quiz` (`/games/quiz/join`) | Same-device or multi-device with 6-char room codes |
 | Darts | `/games/darts` | X01, Cricket, Around the Clock, Killer |
 | Travel Bingo | `/games/travel-bingo` | Multi-car road-trip bingo |
-| Egypt Explorer | `/games/egypt-explorer` | Grand Egyptian Museum trip: stories, photo galleries, photo quests checked by Claude, quizzes, a passport of stamps, and a guide you can ask anything |
+| Egypt Explorer | `/games/egypt-explorer` | Two trips, the Grand Egyptian Museum and the Pyramids of Giza: stories, photo galleries, photo quests checked by Claude, quizzes, hands-on activities, a passport of stamps per trip, and a guide you can ask anything |
 
 ## Project Structure
 

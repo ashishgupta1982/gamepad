@@ -38,7 +38,7 @@ src/
 │   │   ├── quiz/                 # index.js (host), join.js (player)
 │   │   ├── darts/                # index.js (mode picker + game)
 │   │   ├── travel-bingo/         # index.js (lobby + play)
-│   │   └── egypt-explorer/       # index.js (trip, stops via ?stop=)
+│   │   └── egypt-explorer/       # index.js (trip picker, ?trip= and &stop=)
 │   └── api/
 │       ├── auth/                 # [...nextauth] + 6 @aspiro/auth re-exports
 │       ├── claude.js             # Cached AI chat (rate-limited)
@@ -60,7 +60,7 @@ src/
 │   ├── quiz/                     # Host + player screens, lobby, podium, etc.
 │   ├── darts/                    # X01/Cricket/Clock/Killer boards + setup
 │   ├── travel-bingo/             # Card, lobby, feed
-│   ├── egypt/                    # Trip, stop, quiz, quest, guide, passport, cartouche
+│   ├── egypt/                    # Trip picker, trip, map, stop, quiz, quest, guide, passport, activities
 │   ├── settings/
 │   ├── ClaudeChat.js
 ├── models/                       # Mongoose
@@ -345,24 +345,36 @@ Helpers in `src/lib/travelBingo.js`: `generateJoinCode`, `generateId`, `findCar`
 
 ## Egypt Explorer
 
-A family museum game, built for a holiday to Egypt, one **trip** at a time. The
-first trip is the Grand Egyptian Museum: nine stops, each with a gallery of
-photos, a story, things to look for, "did you know" facts, a photo quest and a
-quiz. Every quiz finished earns that stop's stamp in the family's passport;
-ranks go by stamps, points by person. Pitched at 10 to 14 year olds and their
-parents. Route `/games/egypt-explorer`, `?stop=<id>` for a stop (in the URL so
-the phone's back button returns to the route).
+A family game for days out on a holiday to Egypt, one **trip** at a time. Two
+trips so far: the **Grand Egyptian Museum** (`gem`) and the **Pyramids of Giza**
+(`giza`). Each has nine stops, each with a gallery of photos, a story, things to
+look for, "did you know" facts, a photo quest and a quiz. Every quiz finished
+earns that stop's stamp in the trip's passport; ranks go by stamps, points by
+person. Pitched at 10 to 14 year olds and their parents. Route
+`/games/egypt-explorer` opens a trip picker; `?trip=<id>` opens a trip and
+`&stop=<id>` a stop (in the URL so the phone's back button walks back). A bare
+`?stop=` link opens the GEM, from before there were two trips.
 
 - **Content is data, written and fact-checked by hand.** `src/data/egypt/gem.js`
-  holds every story, fact, quest and question, with the reasoning for each choice
-  in its header. Nothing on a card is AI-written at play time. A new trip (the
-  pyramids, Luxor) is a new data file plus one line in `src/data/egypt/index.js`;
-  the screens do not change. `progress.test.js` checks the data: answers in
-  range, every photo key real, a stamp per stop.
+  and `giza.js` hold every story, fact, quest and question, with the sources and
+  reasoning in each header, plus what the guide is told about the setting
+  (`setting`, indoors or out). Nothing on a card is AI-written at play time. A
+  new trip (Luxor, a Nile day) is a new data file plus one line in
+  `src/data/egypt/index.js`; the screens do not change. `trips.test.js` checks
+  every trip: answers in range, every photo key real, one hieroglyph stamp per
+  stop, enough stops for the top rank, map pins for every stop.
+- **A stop's `kind` adds an activity**: `cartouche` (your name in hieroglyphs,
+  GEM), `scale` (how many of you stacked up to reach the top of the Great
+  Pyramid, `HowBig.jsx`) and `builder` (blocks a day for a chosen build time,
+  `PyramidMaths.jsx`). A trip with a `map` (Giza) gets a schematic plan with a
+  pin per stop (`TripMap.jsx`), in metres from the Great Pyramid, north up.
+- **Explorers carry over.** Starting a second trip fills in the names from the
+  last one played on this phone; each trip still keeps its own progress.
 - **Photos are hotlinked from Wikimedia Commons**, at Commons' 960px thumbnail
-  size, listed in `src/data/egypt/photos.js` with caption, photographer and
-  Commons page. Not copied into `public/`: about 13 MB would sit in git.
-  **"Get ready" on the trip screen saves them all on the phone** (Cache API,
+  size, listed in `src/data/egypt/photos.js` (one list for every trip, so a trip
+  can borrow another's photo) with caption, photographer and Commons page. Not
+  copied into `public/`: about 30 MB would sit in git.
+  **"Get ready" on the trip screen saves that trip's photos on the phone** (Cache API,
   `components/egypt/useOfflinePhotos.js`), and `public/egypt-sw.js`, a service
   worker scoped to `/games/egypt-explorer` only, serves them from that cache, so
   the stops work without signal. The two share the cache name; change both.
@@ -432,7 +444,7 @@ the phone's back button returns to the route).
 - **`Game.gameType` enum is the source of truth** for which sub-config is populated. Polymorphic doc — be careful with mass projections.
 - **The viewport meta is declared once, in `_app.js`.** Seven pages each carried their own copy, which overrode it (next/head dedupes by name, page wins) and would silently drop `viewport-fit=cover`. Don't reintroduce a per-page one.
 - **`.eslintrc.json` is minimal** — lint is permissive.
-- **Tests are `vitest` and cover `src/lib/` only** — the quiz room state machine, the scoring formula, and Egypt Explorer's progress rules, hieroglyph spelling and trip data. No CI, no component or end-to-end coverage. `npm test`.
+- **Tests are `vitest` and cover `src/lib/` and `src/data/egypt/`** — the quiz room state machine, the scoring formula, and Egypt Explorer's progress rules, hieroglyph spelling and every trip's data. No CI, no component or end-to-end coverage. `npm test`.
 - **`.env.local` contains live secrets** (Mongo, Google, Anthropic) and is untracked. Do not echo or paste them. The local `NEXTAUTH_SECRET` is a weak placeholder — rotate before/with the Phase 1 deploy.
 
 ## Brand & SEO surface
@@ -455,4 +467,5 @@ The app has a real public identity — don't reintroduce skeleton defaults when 
 - 2026-08-27: **Phase 3** landed — landing page rebuilt as a public launcher
 - 2026-08-27: **Phase 2** landed — design system, one app shell, shared keypad/turn primitives
 - 2026-10-19: **Egypt Explorer** added, the fifth game: the Grand Egyptian Museum trip, AI guide and photo quests; `@aspiro/ai` pin moved v0.1.0 → v0.7.0
+- 2026-10-19: Egypt Explorer's second trip, **the Pyramids of Giza**, with a trip picker, a plateau map and two new activities
 - 2026-08-27: **Phase 1** landed — migrated to `@aspiro/auth` v0.7.1; email/password added alongside Google; GamePad is no longer the suite's odd one out
