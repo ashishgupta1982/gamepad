@@ -38,6 +38,25 @@ const PATH = '/games/egypt-explorer';
 const DESCRIPTION =
   'A family game for the Grand Egyptian Museum and the pyramids of Giza: stories, photo quests, quizzes and a guide you can ask anything.';
 
+// The link preview in a chat app (the link gets sent round the family). This
+// page is static, so a crawler only ever sees it without a trip or stop;
+// these replace _app's GamePad preview by key. The photo is Giza's cover,
+// hotlinked from Wikimedia like every other photo here.
+const SHARE_URL = `https://gamepad.ashishgupta.co.uk${PATH}`;
+const SHARE_TITLE = 'Egypt Explorer · GamePad';
+const SHARE_IMAGE = PHOTOS.gizaCover;
+const sharePreview = [
+  <meta key="og:url" property="og:url" content={SHARE_URL} />,
+  <meta key="og:title" property="og:title" content={SHARE_TITLE} />,
+  <meta key="og:description" property="og:description" content={DESCRIPTION} />,
+  <meta key="og:image" property="og:image" content={SHARE_IMAGE.src} />,
+  <meta key="og:image:width" property="og:image:width" content={String(SHARE_IMAGE.w)} />,
+  <meta key="og:image:height" property="og:image:height" content={String(SHARE_IMAGE.h)} />,
+  <meta key="twitter:title" name="twitter:title" content={SHARE_TITLE} />,
+  <meta key="twitter:description" name="twitter:description" content={DESCRIPTION} />,
+  <meta key="twitter:image" name="twitter:image" content={SHARE_IMAGE.src} />,
+];
+
 function Loading() {
   return (
     <GameShell title="Egypt Explorer">
@@ -62,6 +81,7 @@ export default function EgyptExplorer() {
     <Head>
       <title>{trip ? `${trip.name} · Egypt Explorer` : 'Egypt Explorer · GamePad'}</title>
       <meta name="description" content={trip ? trip.description : DESCRIPTION} />
+      {sharePreview}
     </Head>
   );
 

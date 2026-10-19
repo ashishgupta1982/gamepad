@@ -1,6 +1,8 @@
 import { Users } from 'lucide-react';
 import { HIERO_STYLE } from './fonts';
+import GuestNotice from '@/components/game/GuestNotice';
 import { PlayerList } from './PlayerSwitch';
+import { SIGN_IN } from './PlayerSetup';
 
 // "Who's playing on this phone?" Asked once per phone, after the family is
 // set up. Each phone remembers its own answer; the header changes it later.
@@ -15,6 +17,10 @@ export default function WhoAreYou({ players, onPick, onEditFamily }) {
           Switch with the name at the top.
         </p>
       </div>
+
+      <GuestNotice signInHref={SIGN_IN} action="Sign in">
+        Not signed in, so your scores stay on this phone. To play with the family on other phones, sign in to the family account.
+      </GuestNotice>
 
       <PlayerList players={players} me={null} onPick={onPick} />
 

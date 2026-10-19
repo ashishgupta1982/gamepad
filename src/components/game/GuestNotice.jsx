@@ -14,7 +14,9 @@ import { cn } from '@/lib/cn';
 // Renders nothing at all for a signed-in user, and nothing while the session is
 // still loading — a notice that flashes "not saved" at someone whose session is
 // half a second from resolving is worse than no notice.
-export default function GuestNotice({ className, children }) {
+// `signInHref` lets a game send the reader back to itself after signing in
+// (signin.js honours `?callbackUrl=`); `action` replaces the link's words.
+export default function GuestNotice({ className, children, signInHref = '/signin', action = 'Sign in to keep it' }) {
   const { status } = useSession();
 
   if (status !== 'unauthenticated') return null;
@@ -29,8 +31,8 @@ export default function GuestNotice({ className, children }) {
       <Info className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />
       <p className="text-sm leading-relaxed text-muted-foreground">
         {children || 'Playing as a guest — this game won’t be saved.'}{' '}
-        <Link href="/signin" className="font-semibold text-brand underline-offset-2 hover:underline">
-          Sign in to keep it
+        <Link href={signInHref} className="font-semibold text-brand underline-offset-2 hover:underline">
+          {action}
         </Link>
       </p>
     </div>

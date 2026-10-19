@@ -6,6 +6,9 @@ import Photo from './Photo';
 import { HIERO_STYLE } from './fonts';
 import { cleanNames, MAX_PLAYERS } from '@/lib/egypt/progress';
 
+// Signing in from here comes back to the game (signin.js `callbackUrl`).
+export const SIGN_IN = `/signin?callbackUrl=${encodeURIComponent('/games/egypt-explorer')}`;
+
 // "Who's exploring?" The family, once, for every trip and every phone on the
 // account. Names only: points go with the name (progress.js playerId), so
 // fixing a spelling later starts that person afresh, and putting a name back
@@ -34,7 +37,9 @@ export default function PlayerSetup({ cover, initial = [], editing = false, onDo
         </div>
       </div>
 
-      <GuestNotice>Playing as a guest: your progress stays on this phone.</GuestNotice>
+      <GuestNotice signInHref={SIGN_IN} action="Sign in first">
+        Playing with the family on other phones? Everyone signs in to the same account, so the scores add up together.
+      </GuestNotice>
 
       <ul className="space-y-2">
         {names.map((name, i) => (

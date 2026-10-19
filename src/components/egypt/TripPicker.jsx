@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { ChevronRight } from 'lucide-react';
 import Photo from './Photo';
+import GuestNotice from '@/components/game/GuestNotice';
 import { HIERO_STYLE } from './fonts';
+import { SIGN_IN } from './PlayerSetup';
 import { readLocal } from '@/hooks/useEgyptProgress';
 import { stampCount, scores, mergeProgress, normalise } from '@/lib/egypt/progress';
 
@@ -43,6 +45,10 @@ export default function TripPicker({ trips, me, players, onPick }) {
           Each trip has its own route, stamps and passport, and everyone in the family plays every stop for themselves.
         </p>
       </div>
+
+      <GuestNotice signInHref={SIGN_IN} action="Sign in">
+        Not signed in, so your scores stay on this phone. To play with the family on other phones, sign in to the family account.
+      </GuestNotice>
 
       <ul className="space-y-4">
         {trips.map((trip) => {

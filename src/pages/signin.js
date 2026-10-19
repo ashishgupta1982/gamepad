@@ -52,8 +52,16 @@ export default function SignIn() {
     if (!code) setOpen(true);
   }, [router.isReady, code]);
 
+  // `?callbackUrl=/games/egypt-explorer` sends a provider sign-in back to that
+  // page instead of the launcher, so a link into a game can say "sign in, then
+  // carry on". Paths on this site only: anything else would make this page an
+  // open redirect. (Email and password sign-in is @aspiro/auth's own panel,
+  // which always lands on "/".)
+  const back = typeof router.query.callbackUrl === 'string' ? router.query.callbackUrl : '';
+  const returnTo = back.startsWith('/') && !back.startsWith('//') && !back.startsWith('/\\') ? back : null;
+
   const handleSignIn = (provider, callbackUrl) =>
-    signIn(provider, { callbackUrl: callbackUrl || '/' });
+    signIn(provider, { callbackUrl: returnTo || callbackUrl || '/' });
 
   return (
     <>
