@@ -64,13 +64,25 @@ export default function EgyptExplorer() {
   const askGuide = () => setGuideOpen(true);
   const openSignIn = () => setSignInOpen(true);
 
+  // In every state, including the server render, which is always the loading
+  // one (progress lives in localStorage), so a shared link still has a title.
+  const head = (
+    <Head>
+      <title>{stop ? `${stop.title} · Egypt Explorer` : 'Egypt Explorer · GamePad'}</title>
+      <meta name="description" content="A family game for the Grand Egyptian Museum: stories, photo quests, quizzes and a guide you can ask anything." />
+    </Head>
+  );
+
   if (!ready) {
     return (
-      <GameShell title="Egypt Explorer">
-        <div className="flex min-h-[50dvh] items-center justify-center text-muted-foreground">
-          <Loader2 className="h-6 w-6 animate-spin" aria-label="Loading" />
-        </div>
-      </GameShell>
+      <>
+        {head}
+        <GameShell title="Egypt Explorer">
+          <div className="flex min-h-[50dvh] items-center justify-center text-muted-foreground">
+            <Loader2 className="h-6 w-6 animate-spin" aria-label="Loading" />
+          </div>
+        </GameShell>
+      </>
     );
   }
 
@@ -171,10 +183,7 @@ export default function EgyptExplorer() {
 
   return (
     <>
-      <Head>
-        <title>{stop ? `${stop.title} · Egypt Explorer` : 'Egypt Explorer · GamePad'}</title>
-        <meta name="description" content="A family game for the Grand Egyptian Museum: stories, photo quests, quizzes and a guide you can ask anything." />
-      </Head>
+      {head}
 
       <GameShell
         title={stop ? stop.title : 'Egypt Explorer'}
