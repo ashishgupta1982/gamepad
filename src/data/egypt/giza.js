@@ -90,7 +90,7 @@ export const GIZA = {
       facts: [
         'Its four sides face north, south, east and west almost exactly: on average they are out by only about a tenth of a degree.',
         'Visitors used to climb to the top for the view, hauled up by local guides. Climbing it is banned now.',
-        'You saw these pyramids from the window at the top of the GEM’s Grand Staircase, about 2 kilometres away.',
+        'The window at the top of the GEM’s Grand Staircase looks straight out at these pyramids, about 2 kilometres away.',
       ],
       quest: {
         title: 'Pinch the pyramid',
@@ -201,7 +201,7 @@ export const GIZA = {
         'The three small pyramids along the east side of the Great Pyramid were built for royal women of Khufu’s family: his queens, and perhaps his mother. They are ruined now, but each was once a smooth, pointed pyramid of its own.',
         'In 1925 an American expedition’s photographer was setting up nearby when one leg of his tripod slipped into the ground. It had broken through plaster hiding the top of a shaft 27 metres deep. At the bottom was the burial of Queen Hetepheres, Khufu’s mother: gold-covered furniture, jewellery and a sealed alabaster sarcophagus. When it was opened in 1927, it was empty.',
         'The black floor near here is basalt, all that is left of Khufu’s own temple, where priests made offerings to the dead king.',
-        'Pits shaped like boats were cut into the rock around the pyramid. In 1954 one on the south side was found still sealed, with a real boat inside, taken apart into 1,224 pieces of cedar. It took 14 years to put it back together. It is the boat you saw at the Grand Egyptian Museum.',
+        'Pits shaped like boats were cut into the rock around the pyramid. In 1954 one on the south side was found still sealed, with a real boat inside, taken apart into 1,224 pieces of cedar. It took 14 years to put it back together, and today it is in the Grand Egyptian Museum: stop 7 on the GEM trip.',
       ],
       lookFor: [
         'The black basalt floor of Khufu’s temple',
