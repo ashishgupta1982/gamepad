@@ -5,12 +5,13 @@ import Stamp from './Stamp';
 import { nextPlayer, stopStatus, POINTS } from '@/lib/egypt/progress';
 import { cn } from '@/lib/cn';
 
-// The stop's quiz, one question at a time, round the table.
+// The stop's quiz, one question at a time.
 //
-// Whose turn it is comes from progress.js `nextPlayer`, but a tap on another
-// name hands the question to them: the right person to answer is often just
-// whoever is holding the phone. An answer is final (no second go), and the
-// explanation always shows, right or wrong, because the "why" is the learning.
+// Who starts comes from progress.js `nextPlayer`, and they keep the quiz from
+// question to question until someone taps another name: the right person to
+// answer is usually just whoever is holding the phone. An answer is final (no
+// second go), and the explanation always shows, right or wrong, because the
+// "why" is the learning.
 const LETTERS = ['A', 'B', 'C', 'D', 'E'];
 
 export default function QuizCard({ stop, progress, onAnswer }) {
@@ -66,11 +67,9 @@ export default function QuizCard({ stop, progress, onAnswer }) {
     setRevealed(choice);
     onAnswer(index, choice, who);
   };
-  // By now the answer is in `progress`, so nextPlayer has already moved on:
-  // the new question goes to whoever's turn it is.
+  // The same player carries on; `who` only changes when a name is tapped.
   const next = () => {
     setRevealed(null);
-    setWho(nextPlayer(progress)?.id);
     setIndex((i) => i + 1);
   };
   const correct = revealed === q.answer;
