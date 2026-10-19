@@ -14,7 +14,7 @@ import { cn } from '@/lib/cn';
 //
 // If the guide is not convinced, a parent can count it anyway: glass cases,
 // crowds and reflections should not cost anyone their points.
-export default function QuestCard({ trip, stop, progress, signedIn, onSignIn, onRecord }) {
+export default function QuestCard({ trip, stop, progress, onRecord }) {
   const quest = progress.stops[stop.id]?.quest;
   const input = useRef(null);
   const [photo, setPhoto] = useState(null);
@@ -96,15 +96,7 @@ export default function QuestCard({ trip, stop, progress, signedIn, onSignIn, on
           </div>
         )}
 
-        {!signedIn ? (
-          <div className="mt-4 rounded-xl border border-dashed border-border p-3 text-sm text-muted-foreground">
-            The guide checks quest photos, so this needs you signed in.
-            <button type="button" onClick={onSignIn} className="ml-1 font-semibold text-lapis underline-offset-2 hover:underline">
-              Sign in
-            </button>
-          </div>
-        ) : (
-          <>
+        <>
             <input ref={input} type="file" accept="image/*" capture="environment" className="hidden" onChange={pick} />
 
             {photo && (
@@ -190,8 +182,7 @@ export default function QuestCard({ trip, stop, progress, signedIn, onSignIn, on
                 {done ? 'Take another' : 'Take the photo'}
               </button>
             )}
-          </>
-        )}
+        </>
       </div>
     </section>
   );

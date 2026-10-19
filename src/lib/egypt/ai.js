@@ -8,20 +8,40 @@ import {
 import dbConnect from '@/lib/mongodb';
 import RateLimit from '@/models/RateLimit';
 
-// Per account. A family day in the museum is perhaps 40 to 80 questions and a
-// dozen photo quests, so these leave plenty of room for that and stop a leaked
-// session from running up a bill. `claude-total` is the ceiling across both, so
-// switching between them buys nothing.
+// The guide and the quests are open to everyone, signed in or not, so these
+// counters are what stand between a public URL and the Claude bill. Two levels:
+//
+//   per requester: the account when signed in, otherwise the connection's IP.
+//     A family day in the museum is perhaps 40 to 80 questions and a dozen
+//     photo quests, which these leave plenty of room for. `claude-total` is the
+//     ceiling across both, so switching between them buys nothing.
+//   site-wide: every Egypt Explorer AI call, whoever makes it. Far above what
+//     one family uses; it is there so a script hammering the page stops at a
+//     known cost (under £10 a day at the balanced tier, where a photo question
+//     is well under a penny) instead of an unknown one.
 const counter = createWindowedCounter({
   count: createMongoCounter({ model: RateLimit, connect: dbConnect }),
   buckets: {
     'egypt-guide': { hour: 60, day: 150 },
     'egypt-quest': { hour: 40, day: 80 },
     'claude-total': { hour: 80, day: 200 },
+    'egypt-site': { hour: 400, day: 1500 },
   },
 });
 
-export const checkEgyptBudget = createClaudeRateLimit({ counter });
+const checkRequester = createClaudeRateLimit({ counter });
+
+/** Who a call counts against: the account, or the connection for a guest. */
+export function requesterId(user, ip) {
+  return user?.id ? `user:${user.id}` : `ip:${ip || 'unknown'}`;
+}
+
+/** The requester's own budget, then the site-wide one. */
+export async function checkEgyptBudget(requester, bucket) {
+  const own = await checkRequester(requester, bucket);
+  if (!own.allowed) return own;
+  return counter.check('everyone', 'egypt-site');
+}
 
 const IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
 // The client shrinks photos to 1280px JPEG (lib/egypt/photo.js), which lands at

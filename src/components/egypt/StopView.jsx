@@ -11,7 +11,7 @@ import { cn } from '@/lib/cn';
 // One stop: a big photo, the story, things to spot, the photo quest and the
 // quiz. One scrolling page rather than steps, because in a museum you read a
 // bit, look up, wander, and come back; a wizard would fight that.
-export default function StopView({ trip, stop, index, progress, signedIn, onSignIn, onAnswer, onQuest, onLook }) {
+export default function StopView({ trip, stop, index, progress, onAnswer, onQuest, onLook }) {
   const status = stopStatus(progress, stop);
   const looked = progress.stops[stop.id]?.looked || [];
   const [hero, ...more] = stop.photos;
@@ -102,8 +102,6 @@ export default function StopView({ trip, stop, index, progress, signedIn, onSign
         trip={trip}
         stop={stop}
         progress={progress}
-        signedIn={signedIn}
-        onSignIn={onSignIn}
         onRecord={onQuest}
       />
 

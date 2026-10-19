@@ -23,7 +23,7 @@ const SUGGESTIONS = [
   'What’s the strangest thing about ancient Egypt?',
 ];
 
-export default function GuideSheet({ open, onOpenChange, trip, stop, signedIn, onSignIn, messages, setMessages, onAsked }) {
+export default function GuideSheet({ open, onOpenChange, trip, stop, messages, setMessages, onAsked }) {
   const [text, setText] = useState('');
   const [photo, setPhoto] = useState(null);
   const [busy, setBusy] = useState(false);
@@ -138,19 +138,7 @@ export default function GuideSheet({ open, onOpenChange, trip, stop, signedIn, o
             )}
           </div>
 
-          {!signedIn ? (
-            <div className="border-t border-border p-4 pb-safe">
-              <p className="text-sm text-muted-foreground">The guide uses AI, so it needs you signed in. Everything else works as a guest.</p>
-              <button
-                type="button"
-                onClick={onSignIn}
-                className="press mt-3 flex min-h-touch w-full items-center justify-center rounded-lg bg-lapis px-4 text-base font-semibold text-white"
-              >
-                Sign in to ask the guide
-              </button>
-            </div>
-          ) : (
-            <div className="border-t border-border bg-card px-3 pt-2 pb-safe">
+          <div className="border-t border-border bg-card px-3 pt-2 pb-safe">
               {!messages.length && !photo && (
                 <div className="scroll-contain -mx-3 mb-2 flex gap-2 overflow-x-auto px-3">
                   {SUGGESTIONS.map((s) => (
@@ -217,7 +205,6 @@ export default function GuideSheet({ open, onOpenChange, trip, stop, signedIn, o
                 </button>
               </form>
             </div>
-          )}
         </DialogPrimitive.Content>
       </DialogPrimitive.Portal>
     </DialogPrimitive.Root>

@@ -374,15 +374,17 @@ the phone's back button returns to the route).
   in a `Game` document (`gameType: 'egypt-explorer'`, `egyptConfig.{trip,
   progress}`) via `/api/egypt/progress`, newer copy winning on load. That is
   the save contract: guest = this phone, signed in = the account.
-- **The AI parts need sign-in; everything else works as a guest.** Ask the guide
+- **Everything is open to guests, the AI parts included.** Ask the guide
   (`/api/egypt/guide`: a question, a photo, or both, with the current stop as
   context) and photo quests (`/api/egypt/quest`: Claude judges the photo against
   the stop's `quest.target` and returns JSON). Both go through `@aspiro/ai`'s
   `callClaude` on the `egyptGuide` workload (the `balanced` tier, because
   naming a statue from a photo is the whole job), and both count against a
-  **durable per-account budget** (`lib/egypt/ai.js`, Mongo `RateLimit`
-  collection with a TTL index): guide 60/hour 150/day, quests 40/hour 80/day,
-  200/day across both. Prompts live in `lib/egypt/ai.js`.
+  **durable budget** (`lib/egypt/ai.js`, Mongo `RateLimit` collection with a
+  TTL index), per account when signed in and per IP otherwise: guide 60/hour
+  150/day, quests 40/hour 80/day, 200/day across both. A site-wide ceiling
+  (1,500/day, every caller together) bounds the bill on a public URL, since
+  there is no sign-in to stop a script. Prompts live in `lib/egypt/ai.js`.
 - **Photos are shrunk on the phone and never stored.** `lib/egypt/photo.js`
   draws them to 1280px JPEG before upload (a raw phone photo is over Vercel's
   request limit); the routes accept up to 6 MB. The camera is a file input with
@@ -400,7 +402,7 @@ the phone's back button returns to the route).
 
 ## Claude AI
 
-`/api/claude` caches by base64-truncated prompt key in `CachedResponse`. No streaming. Quiz questions are static (`src/data/quizConstants.js`). Travel Bingo's `generate` route calls the SDK directly. **Egypt Explorer is the one game that calls Claude during play** (see above), through `@aspiro/ai/server` with its own durable budget. Models per workload are in `src/lib/aiModels.js` (`@aspiro/ai` v0.7.0).
+`/api/claude` caches by base64-truncated prompt key in `CachedResponse`. No streaming. Quiz questions are static (`src/data/quizConstants.js`). Travel Bingo's `generate` route calls the SDK directly. **Egypt Explorer is the one game that calls Claude during play** (see above), through `@aspiro/ai/server` with its own durable budget, and with no sign-in. Models per workload are in `src/lib/aiModels.js` (`@aspiro/ai` v0.7.0).
 
 ## UI Conventions
 

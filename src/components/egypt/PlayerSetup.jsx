@@ -28,7 +28,7 @@ export default function PlayerSetup({ trip, initial = [], onDone, onCancel }) {
         </div>
       </div>
 
-      <GuestNotice>Playing as a guest: progress stays on this phone, and the guide needs you signed in.</GuestNotice>
+      <GuestNotice>Playing as a guest: your progress stays on this phone.</GuestNotice>
 
       <ul className="space-y-2">
         {names.map((name, i) => (

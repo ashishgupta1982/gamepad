@@ -1,8 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useSession, signIn } from 'next-auth/react';
-import { SignInDialog } from '@aspiro/auth/ui';
 import { ArrowRight, Camera, BookMarked, Loader2 } from 'lucide-react';
 import GameShell from '@/components/layout/GameShell';
 import TripHome from '@/components/egypt/TripHome';
@@ -17,7 +15,6 @@ import { PHOTOS } from '@/data/egypt/photos';
 import {
   newProgress, setPlayers, recordAnswer, recordQuest, toggleLooked, countAsk, stopStatus,
 } from '@/lib/egypt/progress';
-import { BRAND } from '@/lib/brand';
 
 // Egypt Explorer: a family museum game, one trip at a time.
 //
@@ -30,15 +27,12 @@ const PATH = '/games/egypt-explorer';
 
 export default function EgyptExplorer() {
   const router = useRouter();
-  const { status } = useSession();
-  const signedIn = status === 'authenticated';
   const trip = getTrip(TRIP_ID);
   const { progress, ready, update } = useEgyptProgress(TRIP_ID);
 
   const [editing, setEditing] = useState(false);
   const [guideOpen, setGuideOpen] = useState(false);
   const [passportOpen, setPassportOpen] = useState(false);
-  const [signInOpen, setSignInOpen] = useState(false);
   const [messages, setMessages] = useState([]);
 
   const photoUrls = useMemo(() => {
@@ -62,7 +56,6 @@ export default function EgyptExplorer() {
   }, [stopId]);
 
   const askGuide = () => setGuideOpen(true);
-  const openSignIn = () => setSignInOpen(true);
 
   // In every state, including the server render, which is always the loading
   // one (progress lives in localStorage), so a shared link still has a title.
@@ -110,8 +103,6 @@ export default function EgyptExplorer() {
         stop={stop}
         index={stopIndex}
         progress={progress}
-        signedIn={signedIn}
-        onSignIn={openSignIn}
         onAnswer={(qIndex, choice, by) => update((p) => recordAnswer(p, stop, qIndex, choice, by))}
         onQuest={(result) => update((p) => recordQuest(p, stop.id, result))}
         onLook={(i) => update((p) => toggleLooked(p, stop.id, i))}
@@ -199,8 +190,6 @@ export default function EgyptExplorer() {
         onOpenChange={setGuideOpen}
         trip={trip}
         stop={stop}
-        signedIn={signedIn}
-        onSignIn={() => { setGuideOpen(false); openSignIn(); }}
         messages={messages}
         setMessages={setMessages}
         onAsked={() => update((p) => (p ? countAsk(p) : p))}
@@ -216,16 +205,6 @@ export default function EgyptExplorer() {
           onReset={() => update((p) => newProgress(TRIP_ID, p.players.map((x) => x.name)))}
         />
       )}
-
-      <SignInDialog
-        open={signInOpen}
-        onOpenChange={setSignInOpen}
-        title="Sign in to ask the guide"
-        description="The guide and the photo quests use AI, so they need an account. Your trip is saved to it too."
-        appleEnabled={process.env.NEXT_PUBLIC_APPLE_ENABLED === 'true'}
-        accent={BRAND.colour}
-        onSignIn={(provider, callbackUrl) => signIn(provider, { callbackUrl: callbackUrl || router.asPath })}
-      />
     </>
   );
 }

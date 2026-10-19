@@ -2,16 +2,16 @@ import { callClaude, textOf, rateLimitResponse } from '@aspiro/ai/server';
 import { getAIModel } from '@/lib/aiModels';
 import { getAuthenticatedUser } from '@/utils/authHelper';
 import { checkRate, getClientIP, RATE_LIMITS } from '@/utils/rateLimiter';
-import { checkEgyptBudget, guideSystem, imageBlock } from '@/lib/egypt/ai';
+import { checkEgyptBudget, requesterId, guideSystem, imageBlock } from '@/lib/egypt/ai';
 import { getTrip, getStop } from '@/data/egypt';
 
 // Ask the guide: a question, a photo, or both, with the last few turns of the
 // conversation so a follow-up ("why?") makes sense.
 //
-// Signed in only. Every other GamePad feature works as a guest, but this one
-// spends money per call on a public URL, so it needs an account to count
-// against (lib/egypt/ai.js has the daily budget). The photo is sent straight to
-// Claude and never stored.
+// Open to everyone, signed in or not. It spends money per call on a public URL,
+// so every call counts against a durable budget, per account or per connection
+// and site-wide (lib/egypt/ai.js). The photo is sent straight to Claude and
+// never stored.
 //
 // POST { trip, stopId?, messages: [{ role: 'user'|'assistant', text }], image? }
 //   image is a data URL for the LAST user message only.
@@ -30,7 +30,6 @@ export default async function handler(req, res) {
   if (!burst.allowed) return res.status(429).json({ error: RATE_LIMITS.CLAUDE_API.message });
 
   const user = await getAuthenticatedUser(req, res);
-  if (!user) return res.status(401).json({ error: 'Sign in to ask the guide.' });
 
   const { trip: tripId, stopId, messages, image } = req.body || {};
   const trip = getTrip(tripId);
@@ -54,7 +53,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: err.message });
   }
 
-  const verdict = await checkEgyptBudget(user.id, 'egypt-guide');
+  const verdict = await checkEgyptBudget(requesterId(user, getClientIP(req)), 'egypt-guide');
   if (!verdict.allowed) return rateLimitResponse(res, verdict, 'questions to the guide');
 
   const apiMessages = turns.map((m, i) => {

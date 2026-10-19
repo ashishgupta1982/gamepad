@@ -2,7 +2,7 @@ import { callClaude, textOf, extractJson, rateLimitResponse } from '@aspiro/ai/s
 import { getAIModel } from '@/lib/aiModels';
 import { getAuthenticatedUser } from '@/utils/authHelper';
 import { checkRate, getClientIP, RATE_LIMITS } from '@/utils/rateLimiter';
-import { checkEgyptBudget, questSystem, imageBlock } from '@/lib/egypt/ai';
+import { checkEgyptBudget, requesterId, questSystem, imageBlock } from '@/lib/egypt/ai';
 import { getTrip, getStop } from '@/data/egypt';
 
 // A photo quest: did they find it? Claude looks at the photo against the
@@ -11,6 +11,8 @@ import { getTrip, getStop } from '@/data/egypt';
 // The verdict is advice, not a lock. The client lets a parent count a find the
 // AI did not accept (lib/egypt/progress.js recordQuest, `override`), because a
 // reflection on a glass case should not cost a ten-year-old their points.
+//
+// Open to everyone, on the same budget as the guide (lib/egypt/ai.js).
 //
 // POST { trip, stopId, image } -> { found, confidence, says }
 
@@ -25,7 +27,6 @@ export default async function handler(req, res) {
   if (!burst.allowed) return res.status(429).json({ error: RATE_LIMITS.CLAUDE_API.message });
 
   const user = await getAuthenticatedUser(req, res);
-  if (!user) return res.status(401).json({ error: 'Sign in to check photo quests.' });
 
   const { trip: tripId, stopId, image } = req.body || {};
   const trip = getTrip(tripId);
@@ -40,7 +41,7 @@ export default async function handler(req, res) {
   }
   if (!photo) return res.status(400).json({ error: 'Take a photo first.' });
 
-  const verdict = await checkEgyptBudget(user.id, 'egypt-quest');
+  const verdict = await checkEgyptBudget(requesterId(user, getClientIP(req)), 'egypt-quest');
   if (!verdict.allowed) return rateLimitResponse(res, verdict, 'photo quests');
 
   try {
