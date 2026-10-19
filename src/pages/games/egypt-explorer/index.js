@@ -7,36 +7,36 @@ import TripPicker from '@/components/egypt/TripPicker';
 import TripHome from '@/components/egypt/TripHome';
 import StopView from '@/components/egypt/StopView';
 import PlayerSetup from '@/components/egypt/PlayerSetup';
+import PlayerSwitch from '@/components/egypt/PlayerSwitch';
+import WhoAreYou from '@/components/egypt/WhoAreYou';
 import GuideSheet from '@/components/egypt/GuideSheet';
 import Passport from '@/components/egypt/Passport';
 import useOfflinePhotos from '@/components/egypt/useOfflinePhotos';
-import useEgyptProgress, { readLocal } from '@/hooks/useEgyptProgress';
+import useEgyptProgress from '@/hooks/useEgyptProgress';
+import useEgyptFamily from '@/hooks/useEgyptFamily';
 import { TRIPS, getTrip } from '@/data/egypt';
 import { PHOTOS } from '@/data/egypt/photos';
 import {
-  newProgress, setPlayers, recordAnswer, recordQuest, toggleLooked, countAsk, stopStatus,
+  newProgress, withPlayers, recordAnswer, recordQuest, toggleLooked, countAsk, stopStatus, nextStop,
 } from '@/lib/egypt/progress';
 
 // Egypt Explorer: a family game for days out in Egypt, one trip at a time.
 //
+// Before any trip: the family (everyone playing, set up once for every trip and
+// every phone on the account, hooks/useEgyptFamily.js), then who is playing on
+// THIS phone. That name sits in the header from then on, and everything done
+// counts for them; tapping it hands the phone to someone else. Each person
+// plays every stop for themselves, so a family can play on one phone, passing
+// it round, or on a phone each, signed in to the same account, with the scores
+// merging as they go (hooks/useEgyptProgress.js).
+//
 // Which trip and stop are showing live in the URL (?trip=giza&stop=sphinx), so
 // the phone's back button walks back through them and a stop can be shared or
 // reopened. No trip means the trip picker. A link with only ?stop= dates from
-// when the GEM was the only trip, so it still opens the GEM. Everything else is
-// in each trip's progress object (lib/egypt/progress.js), saved by
-// useEgyptProgress.
+// when the GEM was the only trip, so it still opens the GEM.
 const PATH = '/games/egypt-explorer';
 const DESCRIPTION =
   'A family game for the Grand Egyptian Museum and the pyramids of Giza: stories, photo quests, quizzes and a guide you can ask anything.';
-
-/** The explorers from whichever other trip this phone played most recently. */
-function namesFromOtherTrips(tripId) {
-  const latest = TRIPS.filter((t) => t.id !== tripId)
-    .map((t) => readLocal(t.id))
-    .filter((p) => p?.players?.length)
-    .sort((a, b) => String(b.updatedAt).localeCompare(String(a.updatedAt)))[0];
-  return latest ? latest.players.map((p) => p.name) : [];
-}
 
 function Loading() {
   return (
@@ -50,6 +50,8 @@ function Loading() {
 
 export default function EgyptExplorer() {
   const router = useRouter();
+  const family = useEgyptFamily();
+  const [editingFamily, setEditingFamily] = useState(false);
   const tripParam = typeof router.query.trip === 'string' ? router.query.trip : null;
   const stopParam = typeof router.query.stop === 'string' ? router.query.stop : null;
   const trip = getTrip(tripParam || (stopParam ? 'gem' : null));
@@ -63,7 +65,7 @@ export default function EgyptExplorer() {
     </Head>
   );
 
-  if (!router.isReady) {
+  if (!router.isReady || !family.ready) {
     return (
       <>
         {head}
@@ -72,13 +74,55 @@ export default function EgyptExplorer() {
     );
   }
 
-  if (!trip) {
+  if (!family.players.length || editingFamily) {
+    return (
+      <>
+        {head}
+        <GameShell title="Egypt Explorer" onBack={() => (editingFamily ? setEditingFamily(false) : router.push('/'))}>
+          <PlayerSetup
+            cover={(trip || TRIPS[0]).cover}
+            editing={editingFamily}
+            initial={family.players.map((p) => p.name)}
+            onCancel={editingFamily ? () => setEditingFamily(false) : null}
+            onDone={(names) => {
+              family.setFamily(names);
+              setEditingFamily(false);
+            }}
+          />
+        </GameShell>
+      </>
+    );
+  }
+
+  if (!family.me) {
     return (
       <>
         {head}
         <GameShell title="Egypt Explorer" onBack={() => router.push('/')}>
+          <WhoAreYou players={family.players} onPick={family.setMe} onEditFamily={() => setEditingFamily(true)} />
+        </GameShell>
+      </>
+    );
+  }
+
+  const playingAs = (
+    <PlayerSwitch
+      players={family.players}
+      me={family.me}
+      onPick={family.setMe}
+      onEditFamily={() => setEditingFamily(true)}
+    />
+  );
+
+  if (!trip) {
+    return (
+      <>
+        {head}
+        <GameShell title="Egypt Explorer" onBack={() => router.push('/')} headerAside={playingAs}>
           <TripPicker
             trips={TRIPS}
+            me={family.me}
+            players={family.players}
             onPick={(id) => router.push({ pathname: PATH, query: { trip: id } }, undefined, { shallow: true })}
           />
         </GameShell>
@@ -87,19 +131,32 @@ export default function EgyptExplorer() {
   }
 
   // Keyed by trip, so changing trip starts the guide chat and the screens afresh.
-  return <TripGame key={trip.id} trip={trip} stopId={stopParam} />;
+  return (
+    <TripGame
+      key={trip.id}
+      trip={trip}
+      stopId={stopParam}
+      me={family.me}
+      players={family.players}
+      headerAside={playingAs}
+    />
+  );
 }
 
-function TripGame({ trip, stopId }) {
+function TripGame({ trip, stopId, me, players, headerAside }) {
   const router = useRouter();
-  const { progress, ready, update } = useEgyptProgress(trip.id);
-  // Only rendered in the browser (the router is ready), so localStorage is there.
-  const [carried] = useState(() => namesFromOtherTrips(trip.id));
+  const { progress: saved, ready, update } = useEgyptProgress(trip.id);
 
-  const [editing, setEditing] = useState(false);
   const [guideOpen, setGuideOpen] = useState(false);
   const [passportOpen, setPassportOpen] = useState(false);
   const [messages, setMessages] = useState([]);
+
+  // Nothing saved yet reads as a fresh trip; the first change saves one.
+  const progress = useMemo(() => saved || newProgress(trip.id, players), [saved, trip.id, players]);
+  const change = useCallback(
+    (fn) => update((p) => withPlayers(fn(p || newProgress(trip.id, players)), players)),
+    [update, trip.id, players],
+  );
 
   const photoUrls = useMemo(() => {
     const ids = new Set([trip.cover, ...trip.stops.flatMap((s) => [...s.photos, ...s.quiz.map((q) => q.photo).filter(Boolean)])]);
@@ -138,24 +195,9 @@ function TripGame({ trip, stopId }) {
     );
   }
 
-  const needsPlayers = !progress || !progress.players.length || editing;
-
   let body;
   let actions = null;
-  if (needsPlayers) {
-    body = (
-      <PlayerSetup
-        trip={trip}
-        editing={editing}
-        initial={editing ? progress.players.map((p) => p.name) : carried}
-        onCancel={editing ? () => setEditing(false) : null}
-        onDone={(names) => {
-          update((p) => (p ? setPlayers(p, names) : newProgress(trip.id, names)));
-          setEditing(false);
-        }}
-      />
-    );
-  } else if (stop) {
+  if (stop) {
     const next = trip.stops[stopIndex + 1];
     body = (
       <StopView
@@ -163,9 +205,11 @@ function TripGame({ trip, stopId }) {
         stop={stop}
         index={stopIndex}
         progress={progress}
-        onAnswer={(qIndex, choice, by) => update((p) => recordAnswer(p, stop, qIndex, choice, by))}
-        onQuest={(result) => update((p) => recordQuest(p, stop.id, result))}
-        onLook={(i) => update((p) => toggleLooked(p, stop.id, i))}
+        me={me}
+        players={players}
+        onAnswer={(qIndex, choice) => change((p) => recordAnswer(p, stop, qIndex, choice, me))}
+        onQuest={(result) => change((p) => recordQuest(p, stop.id, me, result))}
+        onLook={(i) => change((p) => toggleLooked(p, stop.id, me, i))}
       />
     );
     actions = (
@@ -187,15 +231,16 @@ function TripGame({ trip, stopId }) {
       </div>
     );
   } else {
-    const upNext = trip.stops.find((s) => !stopStatus(progress, s).stamped);
+    const upNext = nextStop(progress, trip, me);
     body = (
       <TripHome
         trip={trip}
         progress={progress}
+        me={me}
+        players={players}
         offline={offline}
         onOpenStop={openStop}
         onOpenPassport={() => setPassportOpen(true)}
-        onEditPlayers={() => setEditing(true)}
       />
     );
     actions = (
@@ -215,7 +260,7 @@ function TripGame({ trip, stopId }) {
             className="press flex min-h-[52px] items-center justify-center gap-2 rounded-xl bg-lapis px-4 text-base font-semibold text-white"
           >
             <span className="truncate">
-              {stopStatus(progress, upNext).started ? 'Carry on' : 'Go to'}: {upNext.title}
+              {stopStatus(progress, upNext, me).started ? 'Carry on' : 'Go to'}: {upNext.title}
             </span>
             <ArrowRight className="h-5 w-5 shrink-0" aria-hidden="true" />
           </button>
@@ -239,6 +284,7 @@ function TripGame({ trip, stopId }) {
       <GameShell
         title={stop ? stop.title : trip.shortName}
         onBack={() => (stop ? openStop(null) : router.push(PATH, undefined, { shallow: true }))}
+        headerAside={headerAside}
         actions={actions}
         keepAwake={!!stop}
       >
@@ -252,19 +298,18 @@ function TripGame({ trip, stopId }) {
         stop={stop}
         messages={messages}
         setMessages={setMessages}
-        onAsked={() => update((p) => (p ? countAsk(p) : p))}
+        onAsked={() => change((p) => countAsk(p))}
       />
 
-      {progress && (
-        <Passport
-          open={passportOpen}
-          onOpenChange={setPassportOpen}
-          trip={trip}
-          progress={progress}
-          onOpenStop={openStop}
-          onReset={() => update((p) => newProgress(trip.id, p.players.map((x) => x.name)))}
-        />
-      )}
+      <Passport
+        open={passportOpen}
+        onOpenChange={setPassportOpen}
+        trip={trip}
+        progress={progress}
+        me={me}
+        players={players}
+        onOpenStop={openStop}
+      />
     </>
   );
 }

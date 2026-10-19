@@ -109,10 +109,11 @@ function Feature({ f }) {
   }
 }
 
-export default function TripMap({ trip, progress, onOpenStop }) {
+// Gold pins are this phone's player's stamps; the ring is their next stop.
+export default function TripMap({ trip, progress, me, onOpenStop }) {
   const { view, features, pins } = trip.map;
   const [minX, minY, w, h] = view;
-  const next = trip.stops.find((s) => !stopStatus(progress, s).stamped);
+  const next = trip.stops.find((s) => !stopStatus(progress, s, me).stamped);
 
   return (
     <figure className="overflow-hidden rounded-2xl border border-gold/50 bg-papyrus shadow-sm">
@@ -134,7 +135,7 @@ export default function TripMap({ trip, progress, onOpenStop }) {
         {trip.stops.map((stop, i) => {
           const at = pins[stop.id];
           if (!at) return null;
-          const status = stopStatus(progress, stop);
+          const status = stopStatus(progress, stop, me);
           return (
             <button
               key={stop.id}

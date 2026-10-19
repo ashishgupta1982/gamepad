@@ -2,27 +2,29 @@ import { useState } from 'react';
 import { Check, X, ArrowRight, Award } from 'lucide-react';
 import Photo from './Photo';
 import Stamp from './Stamp';
-import { nextPlayer, stopStatus, POINTS } from '@/lib/egypt/progress';
+import { playerStop, stopStatus, POINTS } from '@/lib/egypt/progress';
 import { cn } from '@/lib/cn';
 
-// The stop's quiz, one question at a time.
-//
-// Who starts comes from progress.js `nextPlayer`, and they keep the quiz from
-// question to question until someone taps another name: the right person to
-// answer is usually just whoever is holding the phone. An answer is final (no
-// second go), and the explanation always shows, right or wrong, because the
+// The stop's quiz, one question at a time, for whoever is playing on this
+// phone (the name in the header). Everyone does every stop's quiz for
+// themselves, so it is keyed by player as well as stop (StopView): handing the
+// phone over starts the next person on their own questions. An answer is final
+// (no second go), and the explanation always shows, right or wrong, because the
 // "why" is the learning.
 const LETTERS = ['A', 'B', 'C', 'D', 'E'];
 
-export default function QuizCard({ stop, progress, onAnswer }) {
-  const status = stopStatus(progress, stop);
-  const answers = progress.stops[stop.id]?.answers || {};
+export default function QuizCard({ stop, progress, me, players, onAnswer }) {
+  const status = stopStatus(progress, stop, me);
+  const answers = playerStop(progress, me, stop.id).answers;
   const firstOpen = stop.quiz.findIndex((_, i) => !answers[i]);
   const [index, setIndex] = useState(firstOpen === -1 ? stop.quiz.length : firstOpen);
   const [revealed, setRevealed] = useState(null);
-  const [who, setWho] = useState(() => nextPlayer(progress)?.id);
 
-  const playerName = (id) => progress.players.find((p) => p.id === id)?.name || 'Someone';
+  const myName = players.find((p) => p.id === me)?.name || 'You';
+  const others = players
+    .filter((p) => p.id !== me)
+    .map((p) => ({ name: p.name, status: stopStatus(progress, stop, p.id) }))
+    .filter((x) => x.status.stamped);
 
   if (index >= stop.quiz.length) {
     return (
@@ -30,7 +32,7 @@ export default function QuizCard({ stop, progress, onAnswer }) {
         <div className="flex items-center gap-3">
           <Stamp glyph={stop.stamp} earned size="lg" className="animate-pop-in" />
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-game-egypt">Stamp earned</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-game-egypt">{myName}’s stamp</p>
             <p className="font-display text-xl font-semibold">
               {status.correct} of {status.total} right{status.perfect ? '. Perfect!' : ''}
             </p>
@@ -48,15 +50,18 @@ export default function QuizCard({ stop, progress, onAnswer }) {
                 )}
                 <span>
                   <span className="font-medium">{q.q}</span>{' '}
-                  <span className="text-papyrus-foreground/75">
-                    {q.options[q.answer]}
-                    {a ? ` · ${playerName(a.by)}` : ''}
-                  </span>
+                  <span className="text-papyrus-foreground/75">{q.options[q.answer]}</span>
                 </span>
               </li>
             );
           })}
         </ul>
+        {others.length > 0 && (
+          <p className="mt-4 border-t border-gold/40 pt-3 text-sm">
+            <span className="font-semibold">Also done here:</span>{' '}
+            {others.map((x) => `${x.name} ${x.status.correct}/${x.status.total}`).join(' · ')}
+          </p>
+        )}
       </section>
     );
   }
@@ -65,9 +70,8 @@ export default function QuizCard({ stop, progress, onAnswer }) {
   const choose = (choice) => {
     if (revealed != null) return;
     setRevealed(choice);
-    onAnswer(index, choice, who);
+    onAnswer(index, choice);
   };
-  // The same player carries on; `who` only changes when a name is tapped.
   const next = () => {
     setRevealed(null);
     setIndex((i) => i + 1);
@@ -78,7 +82,7 @@ export default function QuizCard({ stop, progress, onAnswer }) {
     <section className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm" aria-label="Quiz">
       <div className="flex items-center justify-between bg-lapis px-4 py-2.5 text-white">
         <span className="flex items-center gap-2 text-sm font-semibold">
-          <Award className="h-4 w-4 text-gold" aria-hidden="true" /> Quiz
+          <Award className="h-4 w-4 text-gold" aria-hidden="true" /> {myName}’s quiz
         </span>
         <span className="tnum text-sm text-white/80">
           {index + 1} of {stop.quiz.length}
@@ -86,28 +90,7 @@ export default function QuizCard({ stop, progress, onAnswer }) {
       </div>
 
       <div className="p-4">
-        {progress.players.length > 1 && (
-          <div className="-mx-1 mb-3 flex flex-wrap gap-1.5" role="radiogroup" aria-label="Who is answering">
-            {progress.players.map((p) => (
-              <button
-                key={p.id}
-                type="button"
-                role="radio"
-                aria-checked={who === p.id}
-                disabled={revealed != null}
-                onClick={() => setWho(p.id)}
-                className={cn(
-                  'press min-h-[36px] rounded-full px-3 text-sm font-semibold transition-colors',
-                  who === p.id ? 'bg-gold text-lapis' : 'bg-muted text-muted-foreground',
-                )}
-              >
-                {p.name}
-              </button>
-            ))}
-          </div>
-        )}
-        <p className="text-xs font-semibold uppercase tracking-wide text-game-egypt">{playerName(who)}’s question</p>
-        <h3 className="mt-1 font-display text-xl font-semibold leading-snug text-foreground">{q.q}</h3>
+        <h3 className="font-display text-xl font-semibold leading-snug text-foreground">{q.q}</h3>
 
         {q.photo && <Photo id={q.photo} fill className="mt-3 aspect-[16/9] rounded-xl" />}
 
@@ -147,7 +130,7 @@ export default function QuizCard({ stop, progress, onAnswer }) {
         {revealed != null && (
           <div className="mt-4 animate-slide-up rounded-xl bg-papyrus p-3 text-papyrus-foreground">
             <p className="font-display text-lg font-semibold">
-              {correct ? `Yes! +${POINTS.correct} to ${playerName(who)}` : 'Not quite.'}
+              {correct ? `Yes! +${POINTS.correct} to ${myName}` : 'Not quite.'}
             </p>
             <p className="mt-1 text-sm leading-relaxed">{q.why}</p>
             <button

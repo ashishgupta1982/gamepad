@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import { Camera, Images, Loader2, Star, RotateCcw, Lightbulb } from 'lucide-react';
 import { photoToDataUrl } from '@/lib/egypt/photo';
 import { postJson } from '@/lib/egypt/request';
-import { nextPlayer, POINTS } from '@/lib/egypt/progress';
+import { playerStop, questFinders, POINTS } from '@/lib/egypt/progress';
 import { cn } from '@/lib/cn';
 
 // The stop's photo quest: find a thing, photograph it, the guide checks it.
@@ -15,19 +15,24 @@ import { cn } from '@/lib/cn';
 // turns getUserMedia off) and works the same on iOS and Android. The photo is
 // shrunk on the phone (lib/egypt/photo.js) and sent once; it is not kept.
 //
+// Everyone does every quest for themselves, so it counts for whoever is
+// playing on this phone (the name in the header), and the card is keyed by
+// player as well as stop (StopView).
+//
 // If the guide is not convinced, a parent can count it anyway: glass cases,
 // crowds and reflections should not cost anyone their points.
-export default function QuestCard({ trip, stop, progress, onRecord }) {
-  const quest = progress.stops[stop.id]?.quest;
+export default function QuestCard({ trip, stop, progress, me, players, onRecord }) {
+  const quest = playerStop(progress, me, stop.id).quest;
   const input = useRef(null);
   const library = useRef(null);
   const [photo, setPhoto] = useState(null);
-  const [who, setWho] = useState(() => nextPlayer(progress)?.id);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const [result, setResult] = useState(null);
 
-  const playerName = (id) => progress.players.find((p) => p.id === id)?.name || 'Someone';
+  const nameOf = (id) => players.find((p) => p.id === id)?.name;
+  const myName = nameOf(me) || 'You';
+  const others = questFinders(progress, stop.id).filter((id) => id !== me).map(nameOf).filter(Boolean);
 
   const pick = async (e) => {
     const file = e.target.files?.[0];
@@ -49,7 +54,7 @@ export default function QuestCard({ trip, stop, progress, onRecord }) {
       const data = await postJson('/api/egypt/quest', { trip: trip.id, stopId: stop.id, image: photo });
       setResult(data);
       if (data.found) {
-        onRecord({ by: who, found: true, says: data.says });
+        onRecord({ found: true, says: data.says });
         setPhoto(null);
       }
     } catch (err) {
@@ -60,7 +65,7 @@ export default function QuestCard({ trip, stop, progress, onRecord }) {
   };
 
   const countAnyway = () => {
-    onRecord({ by: who, found: false, override: true, says: result?.says || '' });
+    onRecord({ found: false, override: true, says: result?.says || '' });
     setPhoto(null);
     setResult(null);
   };
@@ -88,10 +93,17 @@ export default function QuestCard({ trip, stop, progress, onRecord }) {
           <div className="mt-4 rounded-xl bg-papyrus p-3 text-papyrus-foreground">
             <p className="flex items-center gap-2 font-display text-lg font-semibold">
               <Star className="h-5 w-5 fill-gold text-gold" aria-hidden="true" />
-              Found by {playerName(quest.by)}{quest.override ? ' (counted by the grown-ups)' : ''}
+              {myName} found it{quest.override ? ' (counted by the grown-ups)' : ''}
             </p>
             {quest.says && <p className="mt-1 text-sm leading-relaxed">{quest.says}</p>}
           </div>
+        )}
+
+        {others.length > 0 && (
+          <p className="mt-3 flex items-center gap-1.5 text-sm text-muted-foreground">
+            <Star className="h-4 w-4 shrink-0 fill-gold text-gold" aria-hidden="true" />
+            Also found by {others.join(', ')}
+          </p>
         )}
 
         <>
@@ -101,28 +113,6 @@ export default function QuestCard({ trip, stop, progress, onRecord }) {
             {photo && (
               <div className="mt-4 space-y-3">
                 <img src={photo} alt="Your quest photo" className="max-h-80 w-full rounded-xl object-cover" />
-                {progress.players.length > 1 && (
-                  <div>
-                    <p className="mb-1.5 text-sm font-semibold text-foreground">Who found it?</p>
-                    <div className="flex flex-wrap gap-1.5" role="radiogroup" aria-label="Who found it">
-                      {progress.players.map((p) => (
-                        <button
-                          key={p.id}
-                          type="button"
-                          role="radio"
-                          aria-checked={who === p.id}
-                          onClick={() => setWho(p.id)}
-                          className={cn(
-                            'press min-h-[36px] rounded-full px-3 text-sm font-semibold',
-                            who === p.id ? 'bg-gold text-lapis' : 'bg-muted text-muted-foreground',
-                          )}
-                        >
-                          {p.name}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
                 {!result && (
                   <button
                     type="button"
@@ -162,7 +152,7 @@ export default function QuestCard({ trip, stop, progress, onRecord }) {
 
             {result?.found && !photo && (
               <p className="mt-3 animate-pop-in text-center font-display text-lg font-semibold text-success">
-                Found it! +{POINTS.quest} to {playerName(who)}
+                Found it! +{POINTS.quest} to {myName}
               </p>
             )}
 

@@ -38,12 +38,12 @@ src/
 │   │   ├── quiz/                 # index.js (host), join.js (player)
 │   │   ├── darts/                # index.js (mode picker + game)
 │   │   ├── travel-bingo/         # index.js (lobby + play)
-│   │   └── egypt-explorer/       # index.js (trip picker, ?trip= and &stop=)
+│   │   └── egypt-explorer/       # index.js (family, who is playing, trip picker, ?trip= and &stop=)
 │   └── api/
 │       ├── auth/                 # [...nextauth] + 6 @aspiro/auth re-exports
 │       ├── claude.js             # Cached AI chat (rate-limited)
 │       ├── user.js
-│       ├── egypt/                # guide, quest (Claude, signed in), progress
+│       ├── egypt/                # guide, quest (Claude), progress (merged per save), family
 │       ├── games/                # CRUD for Game records
 │       │   ├── index.js, [id].js
 │       │   └── travel-bingo/     # create, by-code/[code], [id]/{index,join,submit-items,generate,mark-tile,comment}
@@ -63,8 +63,8 @@ src/
 │   ├── egypt/                    # Trip picker, trip, map, stop, quiz, quest, guide, passport, activities
 │   ├── settings/
 │   ├── ClaudeChat.js
-├── models/                       # Mongoose
-├── hooks/                        # useQuizRoom, useQuizScoring, useQuizTimer, useWakeLock, useEgyptProgress
+├── models/                       # Mongoose (Game, EgyptFamily, ...)
+├── hooks/                        # useQuizRoom, useQuizScoring, useQuizTimer, useWakeLock, useEgyptProgress, useEgyptFamily
 ├── lib/                          # auth, brand, cn, identity, mongodb, mongodb-adapter, travelBingo, egypt/
 ├── utils/                        # authHelper, playerIdentity, rateLimiter
 ├── data/                         # games (launcher metadata), quizConstants, dartsConstants, egypt/ (trips, photos)
@@ -92,7 +92,7 @@ One document per game session. `gameType` enum: `scrabble-scorer | quiz | darts 
 | `quizConfig` | quiz (rounds, questions, playerStats, mode, timePerQuestion, scoringType) |
 | `dartsConfig` | darts (gameMode, startingScore, double-in/out, turns, cricketMarks, clockTargets, killerLives) |
 | `travelBingoConfig` | travel-bingo (joinCode, hostUserId, phase, cars[] with card tiles + comments, categories) |
-| `egyptConfig` | egypt-explorer (`trip`, and `progress`: the whole client state, shape owned by `lib/egypt/progress.js`) |
+| `egyptConfig` | egypt-explorer (`trip`; `progress`, the whole client state, shape owned by `lib/egypt/progress.js`; `rev`, bumped per save; `v1Backup`, the record before version 2) |
 | `status` | `active | completed` |
 
 Pre-save hook updates `updatedAt`.
@@ -348,10 +348,12 @@ Helpers in `src/lib/travelBingo.js`: `generateJoinCode`, `generateId`, `findCar`
 A family game for days out on a holiday to Egypt, one **trip** at a time. Two
 trips so far: the **Grand Egyptian Museum** (`gem`) and the **Pyramids of Giza**
 (`giza`). Each has nine stops, each with a gallery of photos, a story, things to
-look for, "did you know" facts, a photo quest and a quiz. Every quiz finished
-earns that stop's stamp in the trip's passport; ranks go by stamps, points by
-person. Pitched at 10 to 14 year olds and their parents. Route
-`/games/egypt-explorer` opens a trip picker; `?trip=<id>` opens a trip and
+look for, "did you know" facts, a photo quest and a quiz. **Everyone plays every
+stop for themselves**: each person's quiz earns their own stamp, each person's
+photo quest their own points. The family's rank counts a stop once somebody has
+answered each of its questions. Pitched at 10 to 14 year olds and their
+parents. Route `/games/egypt-explorer` asks for the family (once), then who is
+playing on this phone, then opens a trip picker; `?trip=<id>` opens a trip and
 `&stop=<id>` a stop (in the URL so the phone's back button walks back). A bare
 `?stop=` link opens the GEM, from before there were two trips.
 
@@ -368,8 +370,15 @@ person. Pitched at 10 to 14 year olds and their parents. Route
   Pyramid, `HowBig.jsx`) and `builder` (blocks a day for a chosen build time,
   `PyramidMaths.jsx`). A trip with a `map` (Giza) gets a schematic plan with a
   pin per stop (`TripMap.jsx`), in metres from the Great Pyramid, north up.
-- **Explorers carry over.** Starting a second trip fills in the names from the
-  last one played on this phone; each trip still keeps its own progress.
+- **The family, and who is playing.** The family is one list for every trip,
+  on the phone and, signed in, on the account (`EgyptFamily` model,
+  `/api/egypt/family`, `hooks/useEgyptFamily.js`; newest edit wins). Each
+  phone remembers which of them is holding it (`gamepad:egypt:me`), shown in
+  the header on every screen (`PlayerSwitch.jsx`, via `GameShell`'s
+  `headerAside`); tap it to hand the phone over. A player's id is made from
+  their name (`progress.js playerId`), so phones agree on ids without talking,
+  and **renaming someone starts them afresh**. An account that played before
+  the list existed gets one worked out from its latest trip.
 - **Photos are hotlinked from Wikimedia Commons**, at Commons' 960px thumbnail
   size, listed in `src/data/egypt/photos.js` (one list for every trip, so a trip
   can borrow another's photo) with caption, photographer and Commons page. Not
@@ -379,13 +388,29 @@ person. Pitched at 10 to 14 year olds and their parents. Route
   worker scoped to `/games/egypt-explorer` only, serves them from that cache, so
   the stops work without signal. The two share the cache name; change both.
   The CSP's `connect-src` allows the two Wikimedia hosts for that fetch.
-- **State is one plain object** (`lib/egypt/progress.js`, which owns every
-  rule and is unit-tested). **Points are never stored**: they are derived from
-  who answered what and who found which quest, so totals cannot drift.
-  `hooks/useEgyptProgress.js` keeps it in localStorage always and, signed in,
-  in a `Game` document (`gameType: 'egypt-explorer'`, `egyptConfig.{trip,
-  progress}`) via `/api/egypt/progress`, newer copy winning on load. That is
-  the save contract: guest = this phone, signed in = the account.
+- **State is one plain object per trip** (`lib/egypt/progress.js`, which owns
+  every rule and is unit-tested), version 2: `play[playerId][stopId]` holds
+  each person's answers, quest and ticks. **Points are never stored**: they are
+  derived from that record, so totals cannot drift. `hooks/useEgyptProgress.js`
+  keeps it in localStorage always and, signed in, in a `Game` document
+  (`gameType: 'egypt-explorer'`, `egyptConfig.{trip, progress}`) via
+  `/api/egypt/progress`. That is the save contract: guest = this phone, signed
+  in = the account.
+- **Several phones play on one account at once, so saves MERGE, never
+  overwrite** (`mergeProgress`: answers and quests added together, the first
+  answer to a question standing, ticks from whichever copy changed last). The
+  route merges each save into the stored copy under an optimistic `rev` check
+  and returns the result; each phone merges that back, and refreshes every 30
+  seconds while a trip is open, so everyone's points move during the day.
+  Because a merge only adds, **there is no "start the trip again"**: a reset on
+  one phone would come straight back from the others.
+- **Version 1** (the GEM's first day, 2026-10-19) kept one answer per question
+  for the whole family. `upgrade` moves each answer and quest to whoever gave
+  it, so their points stand and everyone else can still play that question;
+  its "look closely" ticks had no owner and stay in `shared`, counting to the
+  family total only. The original is kept in `egyptConfig.v1Backup` and in
+  localStorage under `gamepad:egypt:<trip>:v1`. The route also accepts a v1
+  save, from a phone still running the old page.
 - **Everything is open to guests, the AI parts included.** Ask the guide
   (`/api/egypt/guide`: a question, a photo, or both, with the current stop as
   context) and photo quests (`/api/egypt/quest`: Claude judges the photo against
@@ -444,7 +469,7 @@ person. Pitched at 10 to 14 year olds and their parents. Route
 - **`Game.gameType` enum is the source of truth** for which sub-config is populated. Polymorphic doc — be careful with mass projections.
 - **The viewport meta is declared once, in `_app.js`.** Seven pages each carried their own copy, which overrode it (next/head dedupes by name, page wins) and would silently drop `viewport-fit=cover`. Don't reintroduce a per-page one.
 - **`.eslintrc.json` is minimal** — lint is permissive.
-- **Tests are `vitest` and cover `src/lib/` and `src/data/egypt/`** — the quiz room state machine, the scoring formula, and Egypt Explorer's progress rules, hieroglyph spelling and every trip's data. No CI, no component or end-to-end coverage. `npm test`.
+- **Tests are `vitest` and cover `src/lib/` and `src/data/egypt/`** — the quiz room state machine, the scoring formula, and Egypt Explorer's progress rules (merging several phones' saves, upgrading version 1), hieroglyph spelling and every trip's data. No CI, no component or end-to-end coverage. `npm test`.
 - **`.env.local` contains live secrets** (Mongo, Google, Anthropic) and is untracked. Do not echo or paste them. The local `NEXTAUTH_SECRET` is a weak placeholder — rotate before/with the Phase 1 deploy.
 
 ## Brand & SEO surface
@@ -468,4 +493,5 @@ The app has a real public identity — don't reintroduce skeleton defaults when 
 - 2026-08-27: **Phase 2** landed — design system, one app shell, shared keypad/turn primitives
 - 2026-10-19: **Egypt Explorer** added, the fifth game: the Grand Egyptian Museum trip, AI guide and photo quests; `@aspiro/ai` pin moved v0.1.0 → v0.7.0
 - 2026-10-19: Egypt Explorer's second trip, **the Pyramids of Giza**, with a trip picker, a plateau map and two new activities
+- 2026-10-19: Egypt Explorer: **everyone plays every stop for themselves**, a family list for every trip and phone, who is playing in the header, and saves merged across several phones on one account (progress version 2; today's GEM record upgraded with every point kept)
 - 2026-08-27: **Phase 1** landed — migrated to `@aspiro/auth` v0.7.1; email/password added alongside Google; GamePad is no longer the suite's odd one out

@@ -56,7 +56,7 @@ CLOUDINARY_API_SECRET=
 | Quiz | `/games/quiz` (`/games/quiz/join`) | Same-device or multi-device with 6-char room codes |
 | Darts | `/games/darts` | X01, Cricket, Around the Clock, Killer |
 | Travel Bingo | `/games/travel-bingo` | Multi-car road-trip bingo |
-| Egypt Explorer | `/games/egypt-explorer` | Two trips, the Grand Egyptian Museum and the Pyramids of Giza: stories, photo galleries, photo quests checked by Claude, quizzes, hands-on activities, a passport of stamps per trip, and a guide you can ask anything |
+| Egypt Explorer | `/games/egypt-explorer` | Two trips, the Grand Egyptian Museum and the Pyramids of Giza: stories, photo galleries, photo quests checked by Claude, quizzes, hands-on activities, a passport of stamps per person per trip, scores shared across every phone signed in to the account, and a guide you can ask anything |
 
 ## Project Structure
 

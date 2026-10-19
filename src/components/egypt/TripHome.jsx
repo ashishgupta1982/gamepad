@@ -1,21 +1,26 @@
-import { Check, ChevronRight, CloudDownload, Loader2, Star, Users } from 'lucide-react';
+import { Check, ChevronRight, CloudDownload, Loader2, Star } from 'lucide-react';
 import Photo from './Photo';
 import Stamp from './Stamp';
 import TripMap from './TripMap';
 import { stopStatus, stampCount, rankFor, scores } from '@/lib/egypt/progress';
 import { cn } from '@/lib/cn';
 
-// The trip screen: where you are, how the family is doing, and the route.
+// The trip screen: where you are, how everyone is doing, and the route.
+//
+// Seen from whoever is playing on this phone (`me`): their passport, their
+// stamps on the route and the map, their next stop. The family's scores sit
+// underneath, and move as the other phones play (hooks/useEgyptProgress.js).
 //
 // The stops are a suggested route, not a locked path. A museum on a busy day,
 // or a plateau with a bus timetable, does not let you go in order, so every
 // stop is open from the start and the route just says where the next unstamped
 // one is. A trip with a `map` (Giza) shows it above the list.
-export default function TripHome({ trip, progress, offline, onOpenStop, onOpenPassport, onEditPlayers }) {
-  const stamps = stampCount(progress, trip);
+export default function TripHome({ trip, progress, me, players, offline, onOpenStop, onOpenPassport }) {
+  const stamps = stampCount(progress, trip, me);
   const rank = rankFor(stamps);
-  const { team } = scores(progress, trip);
-  const next = trip.stops.find((s) => !stopStatus(progress, s).stamped);
+  const { team, board } = scores(progress, trip, players);
+  const mine = board.find((p) => p.id === me);
+  const next = trip.stops.find((s) => !stopStatus(progress, s, me).stamped);
 
   return (
     <div className="space-y-6">
@@ -38,29 +43,42 @@ export default function TripHome({ trip, progress, offline, onOpenStop, onOpenPa
           <span className="font-display text-2xl font-bold tnum">{stamps}</span>
         </span>
         <span className="min-w-0 flex-1">
-          <span className="block text-xs font-semibold uppercase tracking-wide text-gold">Expedition passport</span>
+          <span className="block truncate text-xs font-semibold uppercase tracking-wide text-gold">
+            {mine ? `${mine.name}’s passport` : 'Your passport'}
+          </span>
           <span className="block font-display text-xl font-semibold">{rank.title}</span>
           <span className="block text-sm text-white/85">
-            {stamps} of {trip.stops.length} stamps · <span className="tnum">{team}</span> points
+            {stamps} of {trip.stops.length} stamps · <span className="tnum">{mine?.points || 0}</span> points
           </span>
         </span>
         <ChevronRight className="h-5 w-5 shrink-0 text-white/80" aria-hidden="true" />
       </button>
 
-      <div className="flex flex-wrap items-center gap-2">
-        {progress.players.map((p) => (
-          <span key={p.id} className="rounded-full bg-papyrus px-3 py-1 text-sm font-medium text-papyrus-foreground">
-            {p.name}
-          </span>
-        ))}
-        <button
-          type="button"
-          onClick={onEditPlayers}
-          className="press inline-flex min-h-touch items-center gap-1.5 rounded-full px-3 text-sm font-semibold text-lapis hover:bg-muted"
-        >
-          <Users className="h-4 w-4" aria-hidden="true" /> Edit
-        </button>
-      </div>
+      {players.length > 1 && (
+        <section aria-labelledby="family-heading">
+          <div className="mb-2 flex items-baseline justify-between gap-2">
+            <h2 id="family-heading" className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+              The family
+            </h2>
+            <span className="text-sm text-muted-foreground">
+              Total <span className="tnum font-semibold text-foreground">{team}</span>
+            </span>
+          </div>
+          <button type="button" onClick={onOpenPassport} className="press flex w-full flex-wrap gap-2 text-left" aria-label="See the leaderboard">
+            {board.map((p) => (
+              <span
+                key={p.id}
+                className={cn(
+                  'inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-medium',
+                  p.id === me ? 'bg-gold text-lapis' : 'bg-papyrus text-papyrus-foreground',
+                )}
+              >
+                {p.name} <span className="tnum font-semibold">{p.points}</span>
+              </span>
+            ))}
+          </button>
+        </section>
+      )}
 
       {offline.available && (
         <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
@@ -94,13 +112,14 @@ export default function TripHome({ trip, progress, offline, onOpenStop, onOpenPa
         </h2>
         {trip.map && (
           <div className="mb-4">
-            <TripMap trip={trip} progress={progress} onOpenStop={onOpenStop} />
+            <TripMap trip={trip} progress={progress} me={me} onOpenStop={onOpenStop} />
           </div>
         )}
         <ol className="relative space-y-3 before:absolute before:bottom-6 before:left-[27px] before:top-6 before:w-0.5 before:bg-gold/40">
           {trip.stops.map((stop, i) => {
-            const status = stopStatus(progress, stop);
+            const status = stopStatus(progress, stop, me);
             const isNext = next?.id === stop.id;
+            const othersDone = players.filter((p) => p.id !== me && stopStatus(progress, stop, p.id).stamped).map((p) => p.name);
             return (
               <li key={stop.id} className="relative">
                 <button
@@ -120,7 +139,7 @@ export default function TripHome({ trip, progress, offline, onOpenStop, onOpenPa
                     </span>
                     <span className="block truncate font-display text-base font-semibold text-foreground">{stop.title}</span>
                     <span className="block truncate text-xs text-muted-foreground">{stop.where}</span>
-                    <span className="mt-1 flex items-center gap-2 text-xs">
+                    <span className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs">
                       {status.stamped ? (
                         <span className="inline-flex items-center gap-1 font-semibold text-success">
                           <Check className="h-3.5 w-3.5" aria-hidden="true" /> Stamped · {status.correct}/{status.total}
@@ -132,6 +151,9 @@ export default function TripHome({ trip, progress, offline, onOpenStop, onOpenPa
                         <span className="inline-flex items-center gap-1 font-semibold text-gold">
                           <Star className="h-3.5 w-3.5 fill-gold" aria-hidden="true" /> Quest
                         </span>
+                      )}
+                      {othersDone.length > 0 && (
+                        <span className="truncate text-muted-foreground">Done by {othersDone.join(', ')}</span>
                       )}
                     </span>
                   </span>

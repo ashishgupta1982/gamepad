@@ -130,7 +130,12 @@ const GameSchema = new mongoose.Schema({
   // checked there, and points are derived from it rather than stored.
   egyptConfig: {
     trip: String,
-    progress: mongoose.Schema.Types.Mixed
+    progress: mongoose.Schema.Types.Mixed,
+    // Bumped on every save, so two phones saving at once cannot overwrite
+    // each other (api/egypt/progress.js).
+    rev: Number,
+    // The record as it was before everyone played for themselves (version 1).
+    v1Backup: mongoose.Schema.Types.Mixed
   },
   status: {
     type: String,

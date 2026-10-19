@@ -8,8 +8,8 @@ import { cn } from '@/lib/cn';
 // Drawn vertically, the way most royal names stand on a statue or an obelisk,
 // which also suits a phone held upright. The tie at the bottom is the knot of
 // the rope that makes the loop.
-export default function CartoucheMaker({ players }) {
-  const [name, setName] = useState(players[0]?.name || '');
+export default function CartoucheMaker({ players, me }) {
+  const [name, setName] = useState(players.find((p) => p.id === me)?.name || players[0]?.name || '');
   const [showAll, setShowAll] = useState(false);
   const signs = spellName(name);
 

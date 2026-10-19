@@ -7,15 +7,19 @@ import QuizCard from './QuizCard';
 import CartoucheMaker from './CartoucheMaker';
 import HowBig from './HowBig';
 import PyramidMaths from './PyramidMaths';
-import { stopStatus, POINTS } from '@/lib/egypt/progress';
+import { playerStop, stopStatus, POINTS } from '@/lib/egypt/progress';
 import { cn } from '@/lib/cn';
 
 // One stop: a big photo, the story, things to spot, the photo quest and the
 // quiz. One scrolling page rather than steps, because in a museum you read a
 // bit, look up, wander, and come back; a wizard would fight that.
-export default function StopView({ trip, stop, index, progress, onAnswer, onQuest, onLook }) {
-  const status = stopStatus(progress, stop);
-  const looked = progress.stops[stop.id]?.looked || [];
+//
+// Everything on it is for whoever is playing on this phone (`me`). The quest
+// and the quiz are keyed by player, so switching the name in the header starts
+// the next person on their own go.
+export default function StopView({ trip, stop, index, progress, me, players, onAnswer, onQuest, onLook }) {
+  const status = stopStatus(progress, stop, me);
+  const looked = playerStop(progress, me, stop.id).looked || [];
   const [hero, ...more] = stop.photos;
 
   return (
@@ -50,7 +54,7 @@ export default function StopView({ trip, stop, index, progress, onAnswer, onQues
         </div>
       </section>
 
-      {stop.kind === 'cartouche' && <CartoucheMaker players={progress.players} />}
+      {stop.kind === 'cartouche' && <CartoucheMaker key={me} players={players} me={me} />}
       {stop.kind === 'scale' && <HowBig />}
       {stop.kind === 'builder' && <PyramidMaths />}
 
@@ -102,14 +106,16 @@ export default function StopView({ trip, stop, index, progress, onAnswer, onQues
       </section>
 
       <QuestCard
-        key={`quest-${stop.id}`}
+        key={`quest-${stop.id}-${me}`}
         trip={trip}
         stop={stop}
         progress={progress}
+        me={me}
+        players={players}
         onRecord={onQuest}
       />
 
-      <QuizCard key={`quiz-${stop.id}`} stop={stop} progress={progress} onAnswer={onAnswer} />
+      <QuizCard key={`quiz-${stop.id}-${me}`} stop={stop} progress={progress} me={me} players={players} onAnswer={onAnswer} />
     </article>
   );
 }

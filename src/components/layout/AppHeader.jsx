@@ -25,6 +25,9 @@ export default function AppHeader({
   showBack = false,
   onBack,
   title,
+  // Something a game puts beside the account button, such as Egypt Explorer's
+  // "who is playing" switch.
+  aside,
   className,
 }) {
   const { data: session } = useSession();
@@ -75,14 +78,17 @@ export default function AppHeader({
             )}
           </div>
 
-          <button
-            type="button"
-            onClick={() => setMenuOpen(true)}
-            aria-label={isAuthenticated ? 'Account menu' : 'Menu'}
-            className="press flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand text-sm font-semibold text-brand-foreground"
-          >
-            {initial}
-          </button>
+          <div className="flex shrink-0 items-center gap-2">
+            {aside}
+            <button
+              type="button"
+              onClick={() => setMenuOpen(true)}
+              aria-label={isAuthenticated ? 'Account menu' : 'Menu'}
+              className="press flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand text-sm font-semibold text-brand-foreground"
+            >
+              {initial}
+            </button>
+          </div>
         </div>
       </nav>
 

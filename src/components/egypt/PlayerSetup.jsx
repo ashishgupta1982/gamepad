@@ -6,10 +6,11 @@ import Photo from './Photo';
 import { HIERO_STYLE } from './fonts';
 import { cleanNames, MAX_PLAYERS } from '@/lib/egypt/progress';
 
-// "Who's exploring?" Names only: the passport keeps their points. Editing later
-// keeps everyone's points (progress.js setPlayers matches by name). Starting a
-// second trip fills in the names from the first, ready to change.
-export default function PlayerSetup({ trip, initial = [], editing = false, onDone, onCancel }) {
+// "Who's exploring?" The family, once, for every trip and every phone on the
+// account. Names only: points go with the name (progress.js playerId), so
+// fixing a spelling later starts that person afresh, and putting a name back
+// brings their points back.
+export default function PlayerSetup({ cover, initial = [], editing = false, onDone, onCancel }) {
   const [names, setNames] = useState(initial.length ? initial : ['', '']);
   const clean = cleanNames(names);
   const carried = !editing && initial.length > 0;
@@ -20,13 +21,15 @@ export default function PlayerSetup({ trip, initial = [], editing = false, onDon
   return (
     <div className="space-y-5">
       <div className="relative overflow-hidden rounded-2xl">
-        <Photo id={trip.cover} fill eager className="aspect-[16/10]" />
+        <Photo id={cover} fill eager className="aspect-[16/10]" />
         <div className="absolute inset-0 bg-gradient-to-t from-lapis via-lapis/50 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 p-4 text-white">
           <span className="text-3xl leading-none text-gold" style={HIERO_STYLE} aria-hidden="true">𓋹𓂀𓆣</span>
           <h2 className="mt-1 font-display text-2xl font-semibold">Who’s exploring?</h2>
           <p className="text-sm text-white/85">
-            {carried ? `${trip.name}: the same explorers as last time? Change anyone you like.` : 'Add everyone in the family. Each of you scores your own points.'}
+            {carried
+              ? 'The same explorers as last time? Change anyone you like.'
+              : 'Everyone in the family, once, for every trip. Each of you then picks your own name and scores your own points.'}
           </p>
         </div>
       </div>
@@ -66,6 +69,12 @@ export default function PlayerSetup({ trip, initial = [], editing = false, onDon
         </Button>
       )}
 
+      {(editing || carried) && (
+        <p className="text-sm text-muted-foreground">
+          Points stay with the name, so a new spelling starts that person from zero.
+        </p>
+      )}
+
       <div className="flex flex-col gap-2">
         <Button
           fullWidth
@@ -74,7 +83,7 @@ export default function PlayerSetup({ trip, initial = [], editing = false, onDon
           onClick={() => onDone(clean)}
           className="bg-lapis hover:bg-lapis/90"
         >
-          {editing ? 'Save explorers' : 'Start exploring'}
+          {editing ? 'Save the family' : 'Start exploring'}
         </Button>
         {onCancel && (
           <Button variant="ghost" fullWidth onClick={onCancel}>

@@ -23,6 +23,7 @@ export default function GameShell({
   title,
   showBack = true,
   onBack,
+  headerAside,
   actions,
   children,
   className,
@@ -36,7 +37,7 @@ export default function GameShell({
 
   return (
     <div className={cn('flex min-h-dvh flex-col bg-background', className)}>
-      <AppHeader showBack={showBack} onBack={onBack} title={title} />
+      <AppHeader showBack={showBack} onBack={onBack} title={title} aside={headerAside} />
 
       <main className={cn('scroll-contain flex-1 overflow-y-auto px-4 py-4', bodyClassName)}>
         <div className="mx-auto w-full max-w-3xl">{children}</div>
