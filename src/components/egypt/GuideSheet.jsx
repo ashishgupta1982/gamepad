@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element -- previews of the family's own photos (data URLs) */
 import { useEffect, useRef, useState } from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
-import { Camera, Loader2, Send, X } from 'lucide-react';
+import { Camera, Images, Loader2, Send, X } from 'lucide-react';
 import { photoToDataUrl } from '@/lib/egypt/photo';
 import { postJson } from '@/lib/egypt/request';
 import { HIERO_STYLE } from './fonts';
@@ -30,6 +30,7 @@ export default function GuideSheet({ open, onOpenChange, trip, stop, messages, s
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const fileInput = useRef(null);
+  const library = useRef(null);
   const list = useRef(null);
 
   useEffect(() => {
@@ -107,7 +108,7 @@ export default function GuideSheet({ open, onOpenChange, trip, stop, messages, s
               <div className="rounded-xl bg-papyrus p-4 text-papyrus-foreground">
                 <p className="font-display text-lg font-semibold">Ask me anything</p>
                 <p className="mt-1 text-sm leading-relaxed">
-                  Who made it, what it was for, how they built it. Or take a photo of anything in the museum and I’ll tell you what it is.
+                  Who made it, what it was for, how they built it. Or take a photo of anything in the museum, or pick one from your photos, and I’ll tell you what it is.
                 </p>
               </div>
             )}
@@ -166,6 +167,8 @@ export default function GuideSheet({ open, onOpenChange, trip, stop, messages, s
                 }}
               >
                 <input ref={fileInput} type="file" accept="image/*" capture="environment" className="hidden" onChange={pick} />
+                {/* No `capture`: on an iPhone this one opens the photo library. */}
+                <input ref={library} type="file" accept="image/*" className="hidden" onChange={pick} />
                 <button
                   type="button"
                   onClick={() => fileInput.current?.click()}
@@ -173,6 +176,14 @@ export default function GuideSheet({ open, onOpenChange, trip, stop, messages, s
                   className="press flex min-h-touch min-w-touch shrink-0 items-center justify-center rounded-full bg-gold text-lapis"
                 >
                   <Camera className="h-5 w-5" aria-hidden="true" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => library.current?.click()}
+                  aria-label="Choose a photo from your library"
+                  className="press flex min-h-touch min-w-touch shrink-0 items-center justify-center rounded-full border-2 border-gold/60 text-lapis"
+                >
+                  <Images className="h-5 w-5" aria-hidden="true" />
                 </button>
                 <label htmlFor="guide-question" className="sr-only">Your question</label>
                 <textarea

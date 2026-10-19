@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element -- previews a local photo (data URL) */
 import { useRef, useState } from 'react';
-import { Camera, Loader2, Star, RotateCcw, Lightbulb } from 'lucide-react';
+import { Camera, Images, Loader2, Star, RotateCcw, Lightbulb } from 'lucide-react';
 import { photoToDataUrl } from '@/lib/egypt/photo';
 import { postJson } from '@/lib/egypt/request';
 import { nextPlayer, POINTS } from '@/lib/egypt/progress';
@@ -8,8 +8,10 @@ import { cn } from '@/lib/cn';
 
 // The stop's photo quest: find a thing, photograph it, the guide checks it.
 //
-// The camera is a plain file input with `capture`, which opens the phone's own
-// camera app. That needs no camera permission (GamePad's Permissions-Policy
+// Two plain file inputs: one with `capture`, which opens the phone's own
+// camera app, and one without, which on an iPhone opens the photo library (for
+// a photo already taken, or a better one from earlier). Neither needs camera
+// permission (GamePad's Permissions-Policy
 // turns getUserMedia off) and works the same on iOS and Android. The photo is
 // shrunk on the phone (lib/egypt/photo.js) and sent once; it is not kept.
 //
@@ -18,6 +20,7 @@ import { cn } from '@/lib/cn';
 export default function QuestCard({ trip, stop, progress, onRecord }) {
   const quest = progress.stops[stop.id]?.quest;
   const input = useRef(null);
+  const library = useRef(null);
   const [photo, setPhoto] = useState(null);
   const [who, setWho] = useState(() => nextPlayer(progress)?.id);
   const [busy, setBusy] = useState(false);
@@ -93,6 +96,7 @@ export default function QuestCard({ trip, stop, progress, onRecord }) {
 
         <>
             <input ref={input} type="file" accept="image/*" capture="environment" className="hidden" onChange={pick} />
+            <input ref={library} type="file" accept="image/*" className="hidden" onChange={pick} />
 
             {photo && (
               <div className="mt-4 space-y-3">
@@ -165,17 +169,26 @@ export default function QuestCard({ trip, stop, progress, onRecord }) {
             {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
 
             {!photo && (
-              <button
-                type="button"
-                onClick={() => input.current?.click()}
-                className={cn(
-                  'press mt-4 flex min-h-[52px] w-full items-center justify-center gap-2 rounded-xl px-4 text-base font-semibold',
-                  done ? 'border-2 border-border text-foreground' : 'bg-lapis text-white',
-                )}
-              >
-                <Camera className="h-5 w-5" aria-hidden="true" />
-                {done ? 'Take another' : 'Take the photo'}
-              </button>
+              <div className="mt-4 grid grid-cols-[1fr_auto] gap-2">
+                <button
+                  type="button"
+                  onClick={() => input.current?.click()}
+                  className={cn(
+                    'press flex min-h-[52px] items-center justify-center gap-2 rounded-xl px-4 text-base font-semibold',
+                    done ? 'border-2 border-border text-foreground' : 'bg-lapis text-white',
+                  )}
+                >
+                  <Camera className="h-5 w-5" aria-hidden="true" />
+                  {done ? 'Take another' : 'Take the photo'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => library.current?.click()}
+                  className="press flex min-h-[52px] items-center justify-center gap-2 rounded-xl border-2 border-lapis/30 px-4 text-base font-semibold text-lapis"
+                >
+                  <Images className="h-5 w-5" aria-hidden="true" /> From photos
+                </button>
+              </div>
             )}
         </>
       </div>
