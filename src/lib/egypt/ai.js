@@ -37,10 +37,20 @@ export function requesterId(user, ip) {
 }
 
 /** The requester's own budget, then the site-wide one. */
+//
+// If the counter itself fails (a database blip on a cold start, seen once in
+// production), the call goes ahead: a family in a museum gets their answer, and
+// the failure is logged. The budget is a guard against abuse, not a reason for
+// the game to break.
 export async function checkEgyptBudget(requester, bucket) {
-  const own = await checkRequester(requester, bucket);
-  if (!own.allowed) return own;
-  return counter.check('everyone', 'egypt-site');
+  try {
+    const own = await checkRequester(requester, bucket);
+    if (!own.allowed) return own;
+    return await counter.check('everyone', 'egypt-site');
+  } catch (err) {
+    console.error('[egypt-budget] counter failed, allowing the call:', err.message);
+    return { allowed: true };
+  }
 }
 
 const IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
@@ -67,7 +77,7 @@ const WHO =
 
 const VOICE = [
   'Write in British English, warmly and vividly, like a brilliant museum guide who loves this stuff. Never babyish: these are bright children and their parents.',
-  'Keep it short, because it is read on a phone in a crowded gallery: two to four sentences, under 90 words, unless they ask for more. One surprising detail beats a list of facts.',
+  'Keep it short, because it is read on a phone in a crowded gallery: two to four sentences, about 90 words, unless they ask for more, in which case say as much as is useful. One surprising detail beats a list of facts.',
   'Plain text only. No markdown, no headings, no bullet points, no emoji.',
   'Be accurate. If you are not sure, say so plainly and say what would tell them (a museum label, a member of staff). Never invent a museum object, a gallery location, opening times or prices.',
   'Mummies, tombs and battles are fine to talk about, without gore.',

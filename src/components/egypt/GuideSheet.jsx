@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { Camera, Loader2, Send, X } from 'lucide-react';
 import { photoToDataUrl } from '@/lib/egypt/photo';
+import { postJson } from '@/lib/egypt/request';
 import { HIERO_STYLE } from './fonts';
 import { cn } from '@/lib/cn';
 
@@ -59,18 +60,12 @@ export default function GuideSheet({ open, onOpenChange, trip, stop, messages, s
     setBusy(true);
     setError('');
     try {
-      const res = await fetch('/api/egypt/guide', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          trip: trip.id,
-          stopId: stop?.id,
-          messages: history.map(({ role, text: t }) => ({ role, text: t })),
-          image: mine.image,
-        }),
+      const data = await postJson('/api/egypt/guide', {
+        trip: trip.id,
+        stopId: stop?.id,
+        messages: history.map(({ role, text: t }) => ({ role, text: t })),
+        image: mine.image,
       });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error || 'The guide could not answer. Try again.');
       setMessages([...history, { role: 'assistant', text: data.reply }]);
       onAsked();
     } catch (err) {
@@ -191,7 +186,7 @@ export default function GuideSheet({ open, onOpenChange, trip, stop, messages, s
                     }
                   }}
                   rows={1}
-                  maxLength={600}
+                  maxLength={2000}
                   placeholder={photo ? 'What would you like to know?' : 'Ask a question…'}
                   className="max-h-28 min-h-touch flex-1 resize-none rounded-2xl border border-input bg-background px-3.5 py-2.5 text-base focus:border-lapis focus:outline-none"
                 />

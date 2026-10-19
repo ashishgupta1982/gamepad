@@ -2,6 +2,7 @@
 import { useRef, useState } from 'react';
 import { Camera, Loader2, Star, RotateCcw, Lightbulb } from 'lucide-react';
 import { photoToDataUrl } from '@/lib/egypt/photo';
+import { postJson } from '@/lib/egypt/request';
 import { nextPlayer, POINTS } from '@/lib/egypt/progress';
 import { cn } from '@/lib/cn';
 
@@ -42,13 +43,7 @@ export default function QuestCard({ trip, stop, progress, onRecord }) {
     setBusy(true);
     setError('');
     try {
-      const res = await fetch('/api/egypt/quest', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ trip: trip.id, stopId: stop.id, image: photo }),
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error || 'Something went wrong. Try again.');
+      const data = await postJson('/api/egypt/quest', { trip: trip.id, stopId: stop.id, image: photo });
       setResult(data);
       if (data.found) {
         onRecord({ by: who, found: true, says: data.says });

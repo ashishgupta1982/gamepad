@@ -16,8 +16,11 @@ import { getTrip, getStop } from '@/data/egypt';
 //
 // POST { trip, stopId, image } -> { found, confidence, says }
 
+// maxDuration: a long answer about a photo can take longer than the platform's
+// 10 second default, which fails as a timeout before Claude has finished.
 export const config = {
   api: { bodyParser: { sizeLimit: '6mb' } },
+  maxDuration: 60,
 };
 
 export default async function handler(req, res) {
@@ -26,7 +29,9 @@ export default async function handler(req, res) {
   const burst = checkRate(getClientIP(req), 'CLAUDE_API');
   if (!burst.allowed) return res.status(429).json({ error: RATE_LIMITS.CLAUDE_API.message });
 
-  const user = await getAuthenticatedUser(req, res);
+  // Only used to count the call against an account; a session lookup that
+  // fails just counts it against the connection instead.
+  const user = await getAuthenticatedUser(req, res).catch(() => null);
 
   const { trip: tripId, stopId, image } = req.body || {};
   const trip = getTrip(tripId);
@@ -37,6 +42,7 @@ export default async function handler(req, res) {
   try {
     photo = imageBlock(image);
   } catch (err) {
+    console.warn('[egypt-quest] photo refused:', err.message);
     return res.status(400).json({ error: err.message });
   }
   if (!photo) return res.status(400).json({ error: 'Take a photo first.' });
@@ -47,8 +53,9 @@ export default async function handler(req, res) {
   try {
     const response = await callClaude(
       {
-        model: await getAIModel('egyptGuide'),
-        max_tokens: 500,
+        // The model lookup reads Mongo; a blip there falls back to the tier name.
+        model: await getAIModel('egyptGuide').catch(() => 'balanced'),
+        max_tokens: 1200,
         system: questSystem(trip, stop),
         messages: [{ role: 'user', content: [photo, { type: 'text', text: 'Here is our photo for the quest. Did we find it?' }] }],
       },
