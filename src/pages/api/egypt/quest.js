@@ -8,9 +8,8 @@ import { getTrip, getStop } from '@/data/egypt';
 // A photo quest: did they find it? Claude looks at the photo against the
 // stop's `quest.target` and returns a verdict plus a few words to the family.
 //
-// The verdict is advice, not a lock. The client lets a parent count a find the
-// AI did not accept (lib/egypt/progress.js recordQuest, `override`), because a
-// reflection on a glass case should not cost a ten-year-old their points.
+// The verdict is final: only a find the AI accepts scores. A parent override
+// ("We found it really") was taken out on 2026-10-20 (lib/egypt/progress.js).
 //
 // Open to everyone, on the same budget as the guide (lib/egypt/ai.js).
 //

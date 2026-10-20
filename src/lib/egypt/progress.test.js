@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import {
   newFamily, newerFamily, isFamily, playerId, cleanNames, newProgress, withPlayers,
   recordAnswer, recordQuest, toggleLooked, stopStatus, stampCount, familyStamped, familyStampCount,
-  rankFor, nextStop, questFinders, scores, isProgress, upgrade, mergeProgress, sameProgress, POINTS, EPOCH,
+  rankFor, nextStop, questFinders, scores, isProgress, upgrade, normalise, mergeProgress, sameProgress, POINTS, EPOCH,
 } from './progress';
 import { GEM } from '@/data/egypt/gem';
 import { PHOTOS } from '@/data/egypt/photos';
@@ -87,13 +87,32 @@ describe('everyone plays every stop', () => {
 });
 
 describe('quests and looking', () => {
-  it('scores a found quest, and a parent override, to each finder', () => {
+  it('scores a found quest to each finder', () => {
     let p = start();
-    p = recordQuest(p, 'obelisk', mia, { found: false, override: true });
+    p = recordQuest(p, 'obelisk', mia, { found: true, says: 'Yes' });
     p = recordQuest(p, 'obelisk', ash, { found: true, says: 'Yes' });
-    expect(p.play[mia].obelisk.quest.found).toBe(true);
     expect(questFinders(p, 'obelisk')).toEqual([mia, ash]);
     expect(scores(p, GEM, family.players).team).toBe(2 * POINTS.quest);
+  });
+
+  it('cannot be counted over the guide', () => {
+    const p = recordQuest(start(), 'obelisk', mia, { found: false, override: true });
+    expect(p.play[mia].obelisk.quest.found).toBe(false);
+    expect(scores(p, GEM, family.players).team).toBe(0);
+  });
+
+  // Saved before 2026-10-20, when a parent could count a find the guide turned down.
+  it('drops a quest a parent counted, and its points, wherever it was saved', () => {
+    const counted = { found: true, override: true, says: 'Not quite', at: '2026-10-19T09:00:00.000Z' };
+    const real = { found: true, says: 'Yes', at: '2026-10-19T10:00:00.000Z' };
+    const saved = { ...start(), play: { [mia]: { obelisk: { answers: {}, quest: counted, looked: [] } }, [ash]: { obelisk: { answers: {}, quest: real, looked: [] } } } };
+    const p = normalise(saved);
+    expect(p.play[mia].obelisk.quest).toBe(null);
+    expect(questFinders(p, 'obelisk')).toEqual([ash]);
+    expect(scores(p, GEM, family.players).team).toBe(POINTS.quest);
+    // A phone still holding the old copy cannot merge it back in.
+    expect(mergeProgress(p, saved).play[mia].obelisk.quest).toBe(null);
+    expect(mergeProgress(saved, p).play[mia].obelisk.quest).toBe(null);
   });
 
   it('a quest the guide did not accept scores nothing', () => {

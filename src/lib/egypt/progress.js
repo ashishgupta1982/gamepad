@@ -25,7 +25,7 @@
 //       [playerId]: {
 //         [stopId]: {
 //           answers: { [questionIndex]: { choice, correct } },
-//           quest:   { found, override, says, at } | null,
+//           quest:   { found, says, at } | null,
 //           looked:  [lookForIndex], lookedAt,
 //         },
 //       },
@@ -44,6 +44,12 @@
 // Points are never stored. They are worked out from what happened, so a scoring
 // change applies to a trip already under way and the totals can never drift
 // from the record.
+//
+// A photo quest counts only when the guide accepted the photo. Until
+// 2026-10-20 a parent could count one the guide turned down ("We found it
+// really", stored as `override`). That was taken out, and cleanStop drops any
+// quest it counted, so those points went from every trip at once, on every
+// phone and on the server, and the player can find it again with a real photo.
 
 export const POINTS = {
   correct: 10, // a quiz question answered right
@@ -155,16 +161,11 @@ export function recordAnswer(progress, stop, qIndex, choice, pid) {
   }));
 }
 
-/**
- * Record a player's photo quest. `found` is the guide's verdict; `override` is
- * a parent saying "we definitely found it" when the photo did not convince the
- * AI. Both score: the point is that they looked, not that the camera was
- * perfect.
- */
-export function recordQuest(progress, stopId, pid, { found, override = false, says = '' }) {
+/** Record a player's photo quest. `found` is the guide's verdict, and it is final. */
+export function recordQuest(progress, stopId, pid, { found, says = '' }) {
   if (!pid) return progress;
   return withPlayerStop(progress, pid, stopId, () => ({
-    quest: { found: !!found || !!override, override: !!override, says: String(says).slice(0, 600), at: now() },
+    quest: { found: !!found, says: String(says).slice(0, 600), at: now() },
   }));
 }
 
@@ -306,9 +307,9 @@ export function upgrade(p) {
       const mine = isObj(a) && put(a.by, stopId);
       if (mine) mine.answers[q] = { choice: a.choice, correct: !!a.correct };
     }
-    const quest = isObj(s.quest) && s.quest.found ? s.quest : null;
+    const quest = isObj(s.quest) && s.quest.found && !s.quest.override ? s.quest : null;
     const mine = quest && put(quest.by, stopId);
-    if (mine) mine.quest = { found: true, override: !!quest.override, says: String(quest.says || ''), at: String(quest.at || updatedAt) };
+    if (mine) mine.quest = { found: true, says: String(quest.says || ''), at: String(quest.at || updatedAt) };
     if (Array.isArray(s.looked) && s.looked.length) shared[stopId] = { looked: [...s.looked] };
   }
   return {
@@ -331,8 +332,9 @@ function cleanStop(s) {
   for (const [q, a] of Object.entries(isObj(s.answers) ? s.answers : {})) {
     if (isObj(a) && /^\d+$/.test(q)) answers[q] = { choice: a.choice, correct: !!a.correct };
   }
-  const quest = isObj(s.quest)
-    ? { found: !!s.quest.found, override: !!s.quest.override, says: String(s.quest.says || '').slice(0, 600), at: String(s.quest.at || '') }
+  // A quest a parent counted over the guide's verdict no longer counts (see the top).
+  const quest = isObj(s.quest) && !s.quest.override
+    ? { found: !!s.quest.found, says: String(s.quest.says || '').slice(0, 600), at: String(s.quest.at || '') }
     : null;
   const out = { answers, quest, looked: ints(s.looked) };
   if (typeof s.lookedAt === 'string') out.lookedAt = s.lookedAt;

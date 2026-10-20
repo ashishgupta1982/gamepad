@@ -19,8 +19,8 @@ import { cn } from '@/lib/cn';
 // playing on this phone (the name in the header), and the card is keyed by
 // player as well as stop (StopView).
 //
-// If the guide is not convinced, a parent can count it anyway: glass cases,
-// crowds and reflections should not cost anyone their points.
+// The guide's verdict is final. If it is not convinced, the player tries again
+// with a new photo; there is no way to count it anyway.
 export default function QuestCard({ trip, stop, progress, me, players, onRecord }) {
   const quest = playerStop(progress, me, stop.id).quest;
   const input = useRef(null);
@@ -64,12 +64,6 @@ export default function QuestCard({ trip, stop, progress, me, players, onRecord 
     }
   };
 
-  const countAnyway = () => {
-    onRecord({ found: false, override: true, says: result?.says || '' });
-    setPhoto(null);
-    setResult(null);
-  };
-
   const done = quest?.found;
 
   return (
@@ -93,7 +87,7 @@ export default function QuestCard({ trip, stop, progress, me, players, onRecord 
           <div className="mt-4 rounded-xl bg-papyrus p-3 text-papyrus-foreground">
             <p className="flex items-center gap-2 font-display text-lg font-semibold">
               <Star className="h-5 w-5 fill-gold text-gold" aria-hidden="true" />
-              {myName} found it{quest.override ? ' (counted by the grown-ups)' : ''}
+              {myName} found it
             </p>
             {quest.says && <p className="mt-1 text-sm leading-relaxed">{quest.says}</p>}
           </div>
@@ -141,10 +135,10 @@ export default function QuestCard({ trip, stop, progress, me, players, onRecord 
                   </button>
                   <button
                     type="button"
-                    onClick={countAnyway}
-                    className="press flex min-h-touch items-center justify-center rounded-lg border-2 border-lapis/30 px-3 text-sm font-semibold text-lapis"
+                    onClick={() => library.current?.click()}
+                    className="press flex min-h-touch items-center justify-center gap-1.5 rounded-lg border-2 border-lapis/30 px-3 text-sm font-semibold text-lapis"
                   >
-                    We found it really
+                    <Images className="h-4 w-4" aria-hidden="true" /> From photos
                   </button>
                 </div>
               </div>

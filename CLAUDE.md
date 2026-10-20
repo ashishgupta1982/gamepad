@@ -427,8 +427,13 @@ playing on this phone, then opens a trip picker; `?trip=<id>` opens a trip and
   request limit); the routes accept up to 6 MB. The camera is a file input with
   `capture`, so no camera permission is needed and `Permissions-Policy:
   camera=()` stays as it is.
-- **A quest the AI rejects can still be counted** by a parent ("We found it
-  really"). Reflections on glass cases should not cost a child their points.
+- **A quest counts only when the guide accepts the photo.** A parent could
+  count one it turned down ("We found it really", stored as `override`) until
+  2026-10-20, when it was taken out. `normalise` drops any quest an override
+  counted, so those points went from every trip on every phone and the server
+  at once, the stored record clears on its next save, and the player can find
+  it again with a real photo. Don't remove a find in the database alone: a
+  phone's old copy would merge it straight back.
 - **Hieroglyphs need a font**: Noto Sans Egyptian Hieroglyphs, loaded in
   `components/egypt/fonts.js` and applied by `style` (not a CSS variable on a
   wrapper) because the passport and guide are portalled sheets.
@@ -494,4 +499,5 @@ The app has a real public identity — don't reintroduce skeleton defaults when 
 - 2026-10-19: **Egypt Explorer** added, the fifth game: the Grand Egyptian Museum trip, AI guide and photo quests; `@aspiro/ai` pin moved v0.1.0 → v0.7.0
 - 2026-10-19: Egypt Explorer's second trip, **the Pyramids of Giza**, with a trip picker, a plateau map and two new activities
 - 2026-10-19: Egypt Explorer: **everyone plays every stop for themselves**, a family list for every trip and phone, who is playing in the header, and saves merged across several phones on one account (progress version 2; today's GEM record upgraded with every point kept)
+- 2026-10-20: Egypt Explorer: **no more "We found it really"**; a photo quest scores only when the guide accepts it, and the points from every find a parent counted were taken off
 - 2026-08-27: **Phase 1** landed — migrated to `@aspiro/auth` v0.7.1; email/password added alongside Google; GamePad is no longer the suite's odd one out
