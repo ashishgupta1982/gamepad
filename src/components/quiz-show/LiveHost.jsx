@@ -52,7 +52,8 @@ export default function LiveHost({ setup, resume, onExit }) {
     if (host) return;
     post('/api/quiz/live', { settings: { picks: setup.picks, level: setup.level, count: setup.count, timer: setup.timer } })
       .then((data) => {
-        const h = { code: data.code, hostToken: data.hostToken };
+        // `at` lets the quiz page stop offering it once the server has let it go.
+        const h = { code: data.code, hostToken: data.hostToken, at: Date.now() };
         try {
           localStorage.setItem(HOST_KEY, JSON.stringify(h));
         } catch {}
@@ -205,7 +206,7 @@ export default function LiveHost({ setup, resume, onExit }) {
           </HostBar>
         </>
       )}
-      {game.phase === 'reveal' && <RevealScreen game={game} big={big} onNext={() => act('scores')} />}
+      {game.phase === 'reveal' && <RevealScreen game={game} big={big} offset={live.offset} answeredCount={answered} onNext={() => act('scores')} />}
       {game.phase === 'scores' && <ScoresScreen game={game} big={big} onNext={() => act('next')} />}
       {game.phase === 'finished' && (
         <FinalScreen game={game} big={big}>

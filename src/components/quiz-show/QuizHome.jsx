@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { motion } from 'motion/react';
-import { ArrowLeft, Trash2 } from 'lucide-react';
+import { ArrowLeft, Trash2, X } from 'lucide-react';
 import MuteButton from '@/components/arcade/MuteButton';
 import { play } from '@/components/arcade/sfx';
 import { useSeenPlayers } from './data';
@@ -10,7 +10,7 @@ import { Marquee, SHOW_FONT } from './ui';
 
 // The quiz's front door. The room only leads here; carrying on, starting,
 // joining and looking back are all chosen here (Ash, 2026-10-21).
-export default function QuizHome({ resume, onResume, onStart, onJoin, onHistory, onBack }) {
+export default function QuizHome({ resume, onResume, onDismissResume, onStart, onJoin, onHistory, onBack }) {
   const { status } = useSession();
   return (
     <div className="mx-auto flex min-h-dvh max-w-xl flex-col px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-[max(1rem,env(safe-area-inset-top))]">
@@ -32,7 +32,20 @@ export default function QuizHome({ resume, onResume, onStart, onJoin, onHistory,
           widest line, and a one-line subtitle pushed the buttons off a phone. */}
       <div className="mt-auto grid grid-cols-1 gap-3 pt-10">
         {resume && (
-          <BigChoice emoji="▶️" title="Carry on" text={resume} tone="bg-violet-500 text-white [--toy-edge:theme(colors.violet.800)]" onClick={onResume} />
+          <div className="relative">
+            <BigChoice emoji="▶️" title="Carry on" text={resume} tone="bg-violet-500 pr-14 text-white [--toy-edge:theme(colors.violet.800)]" onClick={onResume} />
+            <button
+              type="button"
+              onClick={() => {
+                play('back');
+                onDismissResume();
+              }}
+              aria-label="Forget this game"
+              className="press absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-black/25 text-white"
+            >
+              <X className="h-5 w-5" aria-hidden="true" />
+            </button>
+          </div>
         )}
         <BigChoice emoji="🎬" title="Start a quiz" text="Just you, shout it out, or everyone on their phones" tone="bg-amber-300 text-amber-950 [--toy-edge:theme(colors.amber.600)]" onClick={onStart} />
         <BigChoice emoji="📱" title="Join a quiz" text="Got a code on someone’s screen?" tone="bg-sky-400 text-sky-950 [--toy-edge:theme(colors.sky.700)]" onClick={onJoin} />

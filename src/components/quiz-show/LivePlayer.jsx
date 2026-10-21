@@ -124,7 +124,7 @@ export default function LivePlayer({ initialCode = '', onLeave }) {
         </Centre>
       )}
       {game.phase === 'question' && <QuestionScreen game={game} me={me.id} offset={live.offset} onAnswer={answerIt} />}
-      {game.phase === 'reveal' && <RevealScreen game={game} me={me.id} />}
+      {game.phase === 'reveal' && <RevealScreen game={game} me={me.id} offset={live.offset} />}
       {game.phase === 'scores' && <PlayerScores game={game} me={me} />}
       {game.phase === 'finished' && (
         <FinalScreen game={game} me={me.id}>

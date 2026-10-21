@@ -66,12 +66,13 @@ export function GetReady({ game, title = 'Quiz Night', waitingFor = false }) {
 
 function QuestionHeader({ game, big }) {
   const q = currentQuestion(game);
+  // pr-12 keeps the count clear of the close button that floats top right.
   return (
-    <div className="flex items-center justify-between gap-3">
-      <span className={cn('rounded-full bg-black/30 px-3 py-1 font-bold ring-1 ring-white/20', big ? 'text-lg' : 'text-sm')}>
+    <div className="flex min-w-0 items-center justify-between gap-3 pr-12">
+      <span className={cn('min-w-0 truncate rounded-full bg-black/30 px-3 py-1 font-bold ring-1 ring-white/20', big ? 'text-lg' : 'text-sm')}>
         {q?.category || 'Quiz'}
       </span>
-      <span className={cn('rounded-full bg-amber-300 px-3 py-1 text-amber-950', big ? 'text-2xl' : 'text-lg')} style={SHOW_FONT}>
+      <span className={cn('shrink-0 rounded-full bg-amber-300 px-3 py-1 text-amber-950', big ? 'text-2xl' : 'text-lg')} style={SHOW_FONT}>
         {game.index + 1} / {game.settings.count}
       </span>
     </div>
@@ -107,6 +108,18 @@ function QuestionMedia({ media, big, small }) {
   );
 }
 
+// The question and its reveal share one frame, so the four answers never move
+// (Ash, 2026-10-21: they used to jump when the answer came up). The page is
+// exactly the screen's height: the header and clock at the top, the answers
+// at the bottom, and the white card takes what is between, scrolling inside
+// itself if a picture and the text need more. Everything that changes between
+// the two screens (locked in, the explanation, the result, the thumbs, Next,
+// the quizmaster's "who got it right?") lives inside the card.
+const FRAME = 'mx-auto flex h-dvh flex-col gap-4 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-[max(1rem,env(safe-area-inset-top))]';
+const CARD = 'flex min-h-0 flex-1 flex-col overflow-y-auto rounded-[2rem] bg-white px-5 text-center text-[#241a45] shadow-[0_8px_0_rgba(0,0,0,0.25)]';
+// my-auto centres the card's contents while they fit, and lets them scroll from the top when they do not.
+const CARD_BODY = 'my-auto flex w-full flex-col items-center gap-3';
+
 /**
  * The question. `me` is the player answering on this device (solo, or a phone
  * in multi); without it the answers are display only (shout, the big screen).
@@ -117,7 +130,7 @@ export function QuestionScreen({ game, me, onAnswer, big = false, offset = 0, an
   const picked = mine ? mine.option : null;
   if (!q) return null;
   return (
-    <div className={cn('mx-auto flex min-h-dvh flex-col gap-4 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-[max(1rem,env(safe-area-inset-top))]', big ? 'max-w-5xl gap-6 py-8' : 'max-w-xl')}>
+    <div className={cn(FRAME, big ? 'max-w-5xl gap-6 py-8' : 'max-w-xl')}>
       <QuestionHeader game={game} big={big} />
       <Clock endsAt={game.endsAt} total={game.settings.timer * 1000} offset={offset} running={game.phase === 'question'} />
       <motion.div
@@ -125,12 +138,19 @@ export function QuestionScreen({ game, me, onAnswer, big = false, offset = 0, an
         initial={{ rotateX: -70, opacity: 0, y: -20 }}
         animate={{ rotateX: 0, opacity: 1, y: 0 }}
         transition={{ type: 'spring', stiffness: 200, damping: 18 }}
-        className={cn('flex flex-1 flex-col items-center justify-center gap-4 rounded-[2rem] bg-white px-5 text-center text-[#241a45] shadow-[0_8px_0_rgba(0,0,0,0.25)]', q.media ? 'py-5' : 'py-8')}
+        className={CARD}
       >
-        <QuestionMedia media={q.media} big={big} />
-        <h2 className={cn('leading-tight', big ? 'text-6xl' : q.media ? 'text-2xl' : 'text-3xl')} style={SHOW_FONT}>
-          {q.question}
-        </h2>
+        <div className={cn(CARD_BODY, q.media ? 'py-5' : 'py-8')}>
+          <QuestionMedia media={q.media} big={big} />
+          <h2 className={cn('leading-tight', big ? 'text-6xl' : q.media ? 'text-2xl' : 'text-3xl')} style={SHOW_FONT}>
+            {q.question}
+          </h2>
+          {picked !== null && picked !== undefined && (
+            <p className="text-lg text-[#6b6390]" style={SHOW_FONT}>
+              Locked in!
+            </p>
+          )}
+        </div>
       </motion.div>
       {answeredCount != null && (
         <p className="text-center text-xl" style={SHOW_FONT}>
@@ -151,20 +171,17 @@ export function QuestionScreen({ game, me, onAnswer, big = false, offset = 0, an
             : null
         }
       />
-      {picked !== null && picked !== undefined && (
-        <p className="text-center text-lg text-white/85" style={SHOW_FONT}>
-          Locked in!
-        </p>
-      )}
     </div>
   );
 }
 
 /**
- * The answer, with what each player made of it. In shout mode, `onJudge` turns
- * the players into buttons for the quizmaster to tap.
+ * The answer, with what each player made of it, in the question's frame. In
+ * shout mode, `onJudge` turns the players into buttons for the quizmaster to
+ * tap. `answeredCount` (the big screen) keeps the line under the card, now
+ * saying how many got it right.
  */
-export function RevealScreen({ game, me, big = false, onJudge, onNext, rate = false }) {
+export function RevealScreen({ game, me, big = false, onJudge, onNext, rate = false, offset = 0, answeredCount }) {
   const q = currentQuestion(game);
   const mine = me ? game.players.find((p) => p.id === me)?.answers[game.index] : null;
   const [right, setRight] = useState([]);
@@ -185,73 +202,83 @@ export function RevealScreen({ game, me, big = false, onJudge, onNext, rate = fa
 
   if (!q) return null;
   const counts = [0, 0, 0, 0];
+  let gotIt = 0;
   for (const p of game.players) {
     const a = p.answers[game.index];
     if (a && Number.isInteger(a.option)) counts[a.option] += 1;
+    if (a?.correct) gotIt += 1;
   }
   const judging = game.mode === 'shout' && onJudge && !game.judged;
 
   return (
-    <div className={cn('mx-auto flex min-h-dvh flex-col gap-4 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-[max(1rem,env(safe-area-inset-top))]', big ? 'max-w-5xl gap-6 py-8' : 'max-w-xl')}>
+    <div className={cn(FRAME, big ? 'max-w-5xl gap-6 py-8' : 'max-w-xl')}>
       <QuestionHeader game={game} big={big} />
-      <div className="rounded-[2rem] bg-white px-5 py-5 text-center text-[#241a45] shadow-[0_8px_0_rgba(0,0,0,0.25)]">
-        <QuestionMedia media={q.media} big={big} small />
-        <h2 className={cn('leading-tight', big ? 'text-4xl' : 'text-2xl', q.media && 'mt-3')} style={SHOW_FONT}>
-          {q.question}
-        </h2>
-        {q.explanation && <p className={cn('mt-2 font-semibold text-[#6b6390]', big ? 'text-xl' : 'text-sm')}>{q.explanation}</p>}
-      </div>
-      <AnswerTiles options={q.options} big={big} reveal correct={q.correctAnswer} picked={mine?.option ?? null} counts={game.mode === 'shout' ? null : counts} />
+      <Clock endsAt={game.endsAt} total={game.settings.timer * 1000} offset={offset} running={false} sound={false} />
+      <div className={CARD}>
+        <div className={cn(CARD_BODY, 'py-5')}>
+          <QuestionMedia media={q.media} big={big} small />
+          <h2 className={cn('leading-tight', big ? 'text-4xl' : 'text-xl')} style={SHOW_FONT}>
+            {q.question}
+          </h2>
+          {q.explanation && <p className={cn('font-semibold text-[#6b6390]', big ? 'text-xl' : 'text-sm')}>{q.explanation}</p>}
 
-      {mine && (
-        <motion.div
-          initial={{ scale: 0.4, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.35, type: 'spring', stiffness: 400, damping: 15 }}
-          className={cn('mx-auto rounded-3xl px-6 py-3 text-center text-3xl shadow-lg', mine.correct ? 'bg-emerald-500' : 'bg-rose-500')}
-          style={SHOW_FONT}
-        >
-          {mine.correct ? `+${mine.points}` : mine.option === null ? 'Too slow!' : 'Not this time'}
-        </motion.div>
-      )}
+          {mine && (
+            <motion.div
+              initial={{ scale: 0.4, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.35, type: 'spring', stiffness: 400, damping: 15 }}
+              className={cn('rounded-3xl px-6 py-2 text-3xl text-white shadow-lg', mine.correct ? 'bg-emerald-500' : 'bg-rose-500')}
+              style={SHOW_FONT}
+            >
+              {mine.correct ? `+${mine.points}` : mine.option === null ? 'Too slow!' : 'Not this time'}
+            </motion.div>
+          )}
 
-      {judging && (
-        <div className="mt-auto rounded-3xl bg-black/35 p-3 ring-1 ring-white/20">
-          <p className="mb-2 text-center text-xl" style={SHOW_FONT}>
-            Who got it right?
-          </p>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-            {game.players.map((p) => {
-              const on = right.includes(p.id);
-              return (
-                <button
-                  key={p.id}
-                  type="button"
-                  onClick={() => {
-                    play(on ? 'unstamp' : 'correct');
-                    setRight((r) => (on ? r.filter((x) => x !== p.id) : [...r, p.id]));
-                  }}
-                  aria-pressed={on}
-                  className={cn('toy flex items-center gap-2 rounded-2xl p-2 text-left', on ? 'bg-emerald-400 text-emerald-950 [--toy-edge:theme(colors.emerald.700)]' : 'bg-white/90 text-[#241a45] [--toy-edge:rgba(0,0,0,0.25)]')}
-                >
-                  <Avatar player={p} size={36} />
-                  <span className="min-w-0 flex-1 truncate text-lg" style={SHOW_FONT}>{p.name}</span>
-                  {on && <span aria-hidden="true">✓</span>}
-                </button>
-              );
-            })}
-          </div>
-          <ShowButton className="mt-3" onClick={() => onJudge(right)}>
-            {right.length ? `Score it (${right.length})` : 'Nobody got it'}
-          </ShowButton>
+          {judging && (
+            <div className="w-full rounded-3xl bg-[#f1eefb] p-3">
+              <p className="mb-2 text-xl" style={SHOW_FONT}>
+                Who got it right?
+              </p>
+              <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+                {game.players.map((p) => {
+                  const on = right.includes(p.id);
+                  return (
+                    <button
+                      key={p.id}
+                      type="button"
+                      onClick={() => {
+                        play(on ? 'unstamp' : 'correct');
+                        setRight((r) => (on ? r.filter((x) => x !== p.id) : [...r, p.id]));
+                      }}
+                      aria-pressed={on}
+                      className={cn('toy flex min-w-0 items-center gap-2 rounded-2xl p-2 text-left', on ? 'bg-emerald-400 text-emerald-950 [--toy-edge:theme(colors.emerald.700)]' : 'bg-white text-[#241a45] [--toy-edge:rgba(0,0,0,0.15)]')}
+                    >
+                      <Avatar player={p} size={36} />
+                      <span className="min-w-0 flex-1 truncate text-lg" style={SHOW_FONT}>{p.name}</span>
+                      {on && <span aria-hidden="true">✓</span>}
+                    </button>
+                  );
+                })}
+              </div>
+              <ShowButton className="mt-3" onClick={() => onJudge(right)}>
+                {right.length ? `Score it (${right.length})` : 'Nobody got it'}
+              </ShowButton>
+            </div>
+          )}
+          {rate && !judging && <RateQuestion key={q.id} id={q.id} onCard />}
+          {onNext && !judging && (
+            <ShowButton className="w-full" onClick={onNext}>
+              Next
+            </ShowButton>
+          )}
         </div>
+      </div>
+      {answeredCount != null && (
+        <p className="text-center text-xl" style={SHOW_FONT}>
+          {gotIt} of {game.players.length} got it right
+        </p>
       )}
-      {rate && !judging && <RateQuestion key={q.id} id={q.id} />}
-      {onNext && !judging && (
-        <ShowButton className="mt-auto" onClick={onNext}>
-          Next
-        </ShowButton>
-      )}
+      <AnswerTiles options={q.options} big={big} reveal correct={q.correctAnswer} picked={mine?.option ?? null} counts={game.mode === 'shout' ? null : counts} />
     </div>
   );
 }
@@ -264,7 +291,7 @@ export function RevealScreen({ game, me, big = false, onJudge, onNext, rate = fa
  * Each phone votes once a question and can change its mind
  * (components/quiz-show/data.js#rateQuestion).
  */
-export function RateQuestion({ id }) {
+export function RateQuestion({ id, onCard = false }) {
   const [mine, setMine] = useState(() => myVote(id) || {});
   if (!id) return null;
   const thumb = (vote) => {
@@ -280,7 +307,7 @@ export function RateQuestion({ id }) {
       aria-pressed={mine.vote === vote}
       className={cn(
         'press flex h-12 w-14 items-center justify-center rounded-2xl text-2xl ring-2',
-        mine.vote === vote ? (vote === 'up' ? 'bg-emerald-400 ring-emerald-200' : 'bg-rose-400 ring-rose-200') : 'bg-white/15 ring-white/30',
+        mine.vote === vote ? (vote === 'up' ? 'bg-emerald-400 ring-emerald-200' : 'bg-rose-400 ring-rose-200') : onCard ? 'bg-[#f1eefb] ring-[#d9d2f2]' : 'bg-white/15 ring-white/30',
       )}
     >
       {face}
@@ -289,7 +316,7 @@ export function RateQuestion({ id }) {
   return (
     <div className="flex flex-col items-center gap-2">
       <div className="flex items-center gap-3">
-        <span className="text-lg text-white/90" style={SHOW_FONT}>
+        <span className={cn('text-lg', onCard ? 'text-[#241a45]' : 'text-white/90')} style={SHOW_FONT}>
           {mine.vote ? 'Thanks!' : 'Good question?'}
         </span>
         {thumbButton('up', '👍', 'Good question')}
@@ -303,7 +330,7 @@ export function RateQuestion({ id }) {
             play('tap');
             setMine(rateQuestion(id, { wrong: true }));
           }}
-          className="press rounded-full bg-black/30 px-3 py-1.5 text-sm font-bold text-white ring-1 ring-white/30 disabled:opacity-70"
+          className={cn('press rounded-full px-3 py-1.5 text-sm font-bold ring-1 disabled:opacity-70', onCard ? 'bg-[#f1eefb] text-[#241a45] ring-[#d9d2f2]' : 'bg-black/30 text-white ring-white/30')}
         >
           {mine.wrong ? 'Flagged, thanks: we’ll check it' : 'The answer’s wrong'}
         </button>
