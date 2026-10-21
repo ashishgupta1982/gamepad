@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { X } from 'lucide-react';
 import { play } from '@/components/arcade/sfx';
-import { addQuestions, answer, createGame, judge, next, start, standings, tick } from '@/lib/quiz/machine';
+import { addQuestions, answer, createGame, judge, next, reveal, start, standings, tick } from '@/lib/quiz/machine';
 import { levelById } from '@/lib/quiz/catalogue';
 import { fetchQuestions, rememberSeen } from './data';
 import { FinalScreen, GetReady, QuestionScreen, RevealScreen, ScoresScreen, categoryLabel } from './screens';
@@ -147,7 +147,15 @@ export default function LocalGame({ setup, resume, onExit, onNewQuiz }) {
         </div>
       )}
 
-      {game.phase === 'question' && <QuestionScreen game={game} me={me} onAnswer={me ? (i) => setGame((g) => answer(g, me, i, Date.now())) : null} />}
+      {game.phase === 'question' && (
+        <QuestionScreen
+          game={game}
+          me={me}
+          onAnswer={me ? (i) => setGame((g) => answer(g, me, i, Date.now())) : null}
+          // Shout: nobody answers on the phone, so the quizmaster says when everyone has.
+          onRevealNow={game.mode === 'shout' ? () => setGame((g) => reveal(g, Date.now())) : null}
+        />
+      )}
 
       {game.phase === 'reveal' && (
         <RevealScreen

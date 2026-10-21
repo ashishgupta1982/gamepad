@@ -124,7 +124,7 @@ const CARD_BODY = 'my-auto flex w-full flex-col items-center gap-3';
  * The question. `me` is the player answering on this device (solo, or a phone
  * in multi); without it the answers are display only (shout, the big screen).
  */
-export function QuestionScreen({ game, me, onAnswer, big = false, offset = 0, answeredCount }) {
+export function QuestionScreen({ game, me, onAnswer, onRevealNow, big = false, offset = 0, answeredCount }) {
   const q = currentQuestion(game);
   const mine = me ? game.players.find((p) => p.id === me)?.answers[game.index] : undefined;
   const picked = mine ? mine.option : null;
@@ -149,6 +149,20 @@ export function QuestionScreen({ game, me, onAnswer, big = false, offset = 0, an
             <p className="text-lg text-[#6b6390]" style={SHOW_FONT}>
               Locked in!
             </p>
+          )}
+          {/* Shout: everyone has shouted, so no need to wait for the clock. */}
+          {onRevealNow && (
+            <button
+              type="button"
+              onClick={() => {
+                play('tap');
+                onRevealNow();
+              }}
+              className="toy mt-1 rounded-2xl bg-violet-600 px-5 py-2.5 text-lg text-white [--toy-edge:theme(colors.violet.800)]"
+              style={SHOW_FONT}
+            >
+              All answers in: show the answer
+            </button>
           )}
         </div>
       </motion.div>
