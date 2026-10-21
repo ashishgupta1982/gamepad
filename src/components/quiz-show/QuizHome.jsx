@@ -5,6 +5,7 @@ import { motion } from 'motion/react';
 import { ArrowLeft, Trash2 } from 'lucide-react';
 import MuteButton from '@/components/arcade/MuteButton';
 import { play } from '@/components/arcade/sfx';
+import { useSeenPlayers } from './data';
 import { Marquee, SHOW_FONT } from './ui';
 
 // The quiz's front door. The room only leads here; carrying on, starting,
@@ -39,7 +40,43 @@ export default function QuizHome({ resume, onResume, onStart, onJoin, onHistory,
           <BigChoice emoji="🏆" title="Your quizzes" text="Winners and scores from past games" tone="bg-white/95 text-[#241a45] [--toy-edge:rgba(0,0,0,0.25)]" onClick={onHistory} />
         )}
       </div>
+      <Remembered />
     </div>
+  );
+}
+
+// Who this account remembers questions for, so nobody gets one twice, and the
+// easy reset: forgetting a name lets their questions come round again.
+function Remembered() {
+  const { players, forget } = useSeenPlayers();
+  const [busy, setBusy] = useState('');
+  if (!players.length) return null;
+  return (
+    <section className="mt-6 rounded-3xl bg-black/30 p-4 ring-1 ring-white/15">
+      <h2 className="text-xl" style={SHOW_FONT}>No repeats for</h2>
+      <p className="text-sm font-semibold text-white/75">Each player is kept from questions they have had before. Forget someone to let theirs come round again.</p>
+      <ul className="mt-3 space-y-2">
+        {players.map((p) => (
+          <li key={p.name} className="flex min-w-0 items-center gap-3">
+            <span className="min-w-0 flex-1 truncate text-lg" style={SHOW_FONT}>{p.name}</span>
+            <span className="shrink-0 text-sm font-semibold text-white/70">{p.count} seen</span>
+            <button
+              type="button"
+              disabled={!!busy}
+              onClick={async () => {
+                if (!window.confirm(`Forget the questions ${p.name} has seen?`)) return;
+                setBusy(p.name);
+                await forget(p.name).catch(() => {});
+                setBusy('');
+              }}
+              className="press shrink-0 rounded-full bg-white/90 px-3 py-1 text-sm font-bold text-[#241a45] disabled:opacity-50"
+            >
+              {busy === p.name ? 'Forgetting…' : 'Forget'}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
 

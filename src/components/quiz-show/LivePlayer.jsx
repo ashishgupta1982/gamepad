@@ -6,7 +6,7 @@ import { play } from '@/components/arcade/sfx';
 import { standings } from '@/lib/quiz/machine';
 import useLive, { post } from './useLive';
 import { AVATARS, COLORS } from './Setup';
-import { FinalScreen, QuestionScreen, RevealScreen } from './screens';
+import { FinalScreen, QuestionScreen, RateQuestion, RevealScreen } from './screens';
 import { Avatar, Leaderboard, Marquee, SHOW_FONT, ShowButton } from './ui';
 
 // A player's phone in a multi-phone quiz: join with the code, then answer.
@@ -155,6 +155,8 @@ function PlayerScores({ game, me }) {
         <p className="text-2xl" style={SHOW_FONT}>{mine.score} points</p>
       </div>
       <Leaderboard rows={rows.slice(0, 5)} highlight={me.id} gained={gained} />
+      {/* Each player rates on their own phone; the big screen does not. */}
+      {game.questions[game.index] && <RateQuestion key={game.questions[game.index].id} id={game.questions[game.index].id} />}
     </div>
   );
 }

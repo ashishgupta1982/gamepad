@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Tv, X } from 'lucide-react';
 import { play } from '@/components/arcade/sfx';
-import { rememberAsked, fetchQuestions } from './data';
+import { fetchQuestions, rememberSeen } from './data';
 import { saveResult } from './LocalGame';
 import useLive, { post } from './useLive';
 import { FinalScreen, GetReady, QuestionScreen, RevealScreen, ScoresScreen } from './screens';
@@ -37,6 +37,8 @@ export default function LiveHost({ setup, resume, onExit }) {
   const live = useLive(host?.code);
   const game = live.game;
   const writing = useRef(false);
+  const sentRef = useRef([]); // the questions sent to this game, in order
+  const [attempt, setAttempt] = useState(0); // bumped by "Try again"
   const seenPlayers = useRef(0);
   const [big, setBig] = useState(false);
   const [counting, setCounting] = useState(false); // the 3-2-1 before the first question
@@ -69,25 +71,29 @@ export default function LiveHost({ setup, resume, onExit }) {
     }
   };
 
-  // The questions, written while people join: a few first, then the rest.
+  // The questions, fetched once the host presses Start (Ash, 2026-10-21): by
+  // then everyone has joined, so whatever any of them has seen before on a
+  // signed-in account is left out. From the bank this takes about a second,
+  // inside the 3-2-1. A few first, then the rest.
   useEffect(() => {
     if (!host || !game || writing.current) return;
+    if (game.phase === 'ready' && !counting) return;
     const have = game.questionsReady || 0;
     if (have >= game.settings.count || game.phase === 'finished') return;
     writing.current = true;
     (async () => {
       try {
         let got = have;
-        const sent = [];
+        const sent = sentRef.current;
+        const players = game.players.map((p) => p.name);
         while (got < game.settings.count) {
           const want = got === 0 ? Math.min(FIRST_BATCH, game.settings.count) : game.settings.count - got;
-          const qs = await fetchQuestions({ picks: game.settings.picks, level: game.settings.level, count: want, exclude: sent });
+          const qs = await fetchQuestions({ picks: game.settings.picks, level: game.settings.level, count: want, exclude: sent, players });
           if (!qs.length) throw new Error('No questions came back.');
           await act('questions', { questions: qs });
           sent.push(...qs);
           got += qs.length;
         }
-        rememberAsked(sent);
       } catch (err) {
         setError(err.message || 'Could not write the questions. Try again?');
       } finally {
@@ -95,7 +101,7 @@ export default function LiveHost({ setup, resume, onExit }) {
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [host, game?.questionsReady, game?.phase]);
+  }, [host, game?.questionsReady, game?.phase, counting, attempt]);
 
   // A pop for each player who joins.
   useEffect(() => {
@@ -112,11 +118,18 @@ export default function LiveHost({ setup, resume, onExit }) {
     try {
       localStorage.setItem(HOST_KEY, JSON.stringify(h));
     } catch {}
-    if (status === 'authenticated') saveResult(game).catch(() => {});
+    if (status === 'authenticated') {
+      saveResult(game).catch(() => {});
+      rememberSeen(game.players.map((p) => p.name), sentRef.current);
+    }
   }, [game, host, status]);
 
   const end = async () => {
     if (game && game.phase !== 'finished' && !window.confirm('End the quiz for everyone?')) return;
+    // The questions already played still count as seen.
+    if (game && game.phase !== 'finished' && game.index >= 0 && status === 'authenticated') {
+      rememberSeen(game.players.map((p) => p.name), sentRef.current.slice(0, game.index + 1));
+    }
     if (game && game.phase !== 'finished') await act('end');
     clearHost();
     onExit();
@@ -169,7 +182,21 @@ export default function LiveHost({ setup, resume, onExit }) {
           onRemove={(id) => act('remove', { playerId: id })}
         />
       )}
-      {game.phase === 'loading' && <GetReady game={game} waitingFor />}
+      {game.phase === 'loading' && !error && <GetReady game={game} waitingFor />}
+      {game.phase === 'loading' && error && (
+        <div className="flex min-h-dvh flex-col items-center justify-center gap-4 px-6 text-center">
+          <p className="text-2xl" style={SHOW_FONT}>{error}</p>
+          <ShowButton
+            className="max-w-xs"
+            onClick={() => {
+              setError('');
+              setAttempt((a) => a + 1);
+            }}
+          >
+            Try again
+          </ShowButton>
+        </div>
+      )}
       {game.phase === 'question' && (
         <>
           <QuestionScreen game={game} big={big} offset={live.offset} answeredCount={answered} />
@@ -210,7 +237,6 @@ function Lobby({ game, code, big, error, onStart, onRemove }) {
       alive = false;
     };
   }, [url]);
-  const ready = game.questionsReady > 0;
   return (
     <div className={big ? 'mx-auto grid min-h-dvh max-w-6xl grid-cols-2 items-center gap-10 px-8 py-10' : 'mx-auto flex min-h-dvh max-w-xl flex-col gap-5 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-[max(1.25rem,env(safe-area-inset-top))]'}>
       <div className="flex flex-col items-center gap-5 text-center">
@@ -245,8 +271,9 @@ function Lobby({ game, code, big, error, onStart, onRemove }) {
           </AnimatePresence>
         </ul>
         {error && <p className="text-center font-semibold text-rose-200">{error}</p>}
-        <ShowButton onClick={onStart} disabled={!game.players.length || !ready}>
-          {!ready ? 'Writing the questions…' : game.players.length ? 'Start the quiz!' : 'Waiting for players'}
+        {/* The questions are fetched once Start is pressed, for the players who joined. */}
+        <ShowButton onClick={onStart} disabled={!game.players.length}>
+          {game.players.length ? 'Start the quiz!' : 'Waiting for players'}
         </ShowButton>
       </div>
     </div>

@@ -84,6 +84,8 @@ for (const d of docs) {
   const had = inBank.get(d.fingerprint);
   if (!had) fresh.push(d);
   else if (FIELDS.some((f) => (f === 'media' ? !same(plainMedia(had.media), plainMedia(d.media)) : !same(had[f], d[f])))) changed.push(d);
+  // Retired, but back in a file: it comes back into play.
+  else if (had.status === 'retired') changed.push(d);
 }
 const inFiles = new Set(docs.map((d) => d.fingerprint));
 const gone = [...inBank.values()].filter((d) => !inFiles.has(d.fingerprint) && d.status !== 'retired');
@@ -103,7 +105,9 @@ if (!apply) {
 } else {
   if (toAdd.length) console.log(`Added ${(await QuizQuestion.insertMany(toAdd, { ordered: false })).length}.`);
   for (const d of changed) {
-    const set = Object.fromEntries(FIELDS.map((f) => [f, d[f] ?? null]));
+    // Corrected, so back in play: a question the thumbs sent to review (or one
+    // retired) is served again, and its "wrong answer" flags are cleared.
+    const set = { ...Object.fromEntries(FIELDS.map((f) => [f, d[f] ?? null])), status: 'active', 'stats.wrong': 0 };
     await QuizQuestion.updateOne({ fingerprint: d.fingerprint }, { $set: set });
   }
   if (changed.length) console.log(`Updated ${changed.length}.`);

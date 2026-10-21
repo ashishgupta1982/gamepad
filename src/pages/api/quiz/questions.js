@@ -5,6 +5,7 @@ import { requesterId } from '@/lib/egypt/ai';
 import { LEVELS, MIXED, topicsFor } from '@/lib/quiz/catalogue';
 import { categoriesOf, fromBank, interleave, share } from '@/lib/quiz/bank';
 import { draw, markServed, store } from '@/lib/quiz/bankStore';
+import { seenBy } from '@/lib/quiz/seenStore';
 import { balancePositions } from '@/lib/quiz/questions';
 import { checkQuizBudget, writeForBank, writeQuestions } from '@/lib/quiz/writer';
 
@@ -17,8 +18,11 @@ import { checkQuizBudget, writeForBank, writeQuestions } from '@/lib/quiz/writer
 //   level:  a LEVELS id;
 //   count:  how many, 1 to 20 (a game asks for a few first, so it can start,
 //           then the rest while it plays);
-//   avoid:  fingerprints of questions already played, which are left out;
-//   recent: recent question texts, which the writer is told to steer away from
+//   avoid:  question ids already in this game, which are left out;
+//   recent: their texts, which the writer is told to steer away from;
+//   players: the names playing. On a signed-in account, whatever any of them
+//           has seen before is left out too (models/QuizSeen.js), so Dad gets
+//           no repeats while Mum on her own still can. Guests have no memory.
 // }
 // → { questions: [{id, question, options, correctAnswer, category, explanation, media?}] }
 //
@@ -37,7 +41,7 @@ export default async function handler(req, res) {
   const burst = checkRate(getClientIP(req), 'CLAUDE_API');
   if (!burst.allowed) return res.status(429).json({ error: RATE_LIMITS.CLAUDE_API.message });
 
-  const { picks, level, count, avoid, recent } = req.body || {};
+  const { picks, level, count, avoid, recent, players } = req.body || {};
   const n = Math.round(Number(count));
   if (!(n >= 1 && n <= 20)) return res.status(400).json({ error: 'Ask for between 1 and 20 questions.' });
   if (!LEVELS.some((l) => l.id === level)) return res.status(400).json({ error: 'Unknown level.' });
@@ -48,16 +52,16 @@ export default async function handler(req, res) {
   // Shuffled, so when a batch is smaller than the picks (the first is 3) it is
   // not always the first picks that get questions.
   slots.sort(() => Math.random() - 0.5);
-  const avoidList = (Array.isArray(avoid) ? avoid : []).filter((x) => typeof x === 'string' && x.length < 16).slice(-500);
+  const user = await getAuthenticatedUser(req, res).catch(() => null);
+  const seenBefore = user?.email ? await seenBy(user.email, players).catch(() => []) : [];
+  const avoidList = [...seenBefore, ...(Array.isArray(avoid) ? avoid : []).filter((x) => typeof x === 'string' && x.length < 16).slice(-100)];
   const recentList = (Array.isArray(recent) ? recent : []).filter((x) => typeof x === 'string').map((x) => x.slice(0, 140)).slice(-30);
 
   // The AI budget is checked once, and only if something has to be written.
   let budget = null;
   const mayWrite = () => {
     if (!budget) {
-      budget = getAuthenticatedUser(req, res)
-        .catch(() => null)
-        .then((user) => checkQuizBudget(requesterId(user, getClientIP(req))));
+      budget = checkQuizBudget(requesterId(user, getClientIP(req)));
     }
     return budget.then((verdict) => {
       if (!verdict.allowed) throw Object.assign(new Error('Over the question budget'), { verdict });

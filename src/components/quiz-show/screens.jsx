@@ -5,6 +5,7 @@ import { buzz, celebrate } from '@/components/arcade/feedback';
 import { transformUrl } from '@aspiro/media';
 import { IMAGE_PRESETS } from '@aspiro/media/presets';
 import { pickName } from '@/lib/quiz/catalogue';
+import { myVote, rateQuestion } from './data';
 import { currentQuestion, standings } from '@/lib/quiz/machine';
 import { cn } from '@/lib/cn';
 import { AnswerTiles, Avatar, Clock, Leaderboard, Marquee, Podium, SHOW_FONT, ShowButton } from './ui';
@@ -163,7 +164,7 @@ export function QuestionScreen({ game, me, onAnswer, big = false, offset = 0, an
  * The answer, with what each player made of it. In shout mode, `onJudge` turns
  * the players into buttons for the quizmaster to tap.
  */
-export function RevealScreen({ game, me, big = false, onJudge, onNext }) {
+export function RevealScreen({ game, me, big = false, onJudge, onNext, rate = false }) {
   const q = currentQuestion(game);
   const mine = me ? game.players.find((p) => p.id === me)?.answers[game.index] : null;
   const [right, setRight] = useState([]);
@@ -245,6 +246,7 @@ export function RevealScreen({ game, me, big = false, onJudge, onNext }) {
           </ShowButton>
         </div>
       )}
+      {rate && !judging && <RateQuestion key={q.id} id={q.id} />}
       {onNext && !judging && (
         <ShowButton className="mt-auto" onClick={onNext}>
           Next
@@ -254,8 +256,64 @@ export function RevealScreen({ game, me, big = false, onJudge, onNext }) {
   );
 }
 
+/**
+ * "Good question?" with a thumb up and down, like Outsmarted, shown once the
+ * answer is known: on the reveal in solo, on the scores in shout, and on each
+ * player's phone in a multi-phone game (never on the big screen). A thumb
+ * down offers one more tap, "The answer's wrong", the flag that matters most.
+ * Each phone votes once a question and can change its mind
+ * (components/quiz-show/data.js#rateQuestion).
+ */
+export function RateQuestion({ id }) {
+  const [mine, setMine] = useState(() => myVote(id) || {});
+  if (!id) return null;
+  const thumb = (vote) => {
+    if (mine.vote === vote) return;
+    play('tap');
+    setMine(rateQuestion(id, { vote }));
+  };
+  const thumbButton = (vote, face, label) => (
+    <button
+      type="button"
+      onClick={() => thumb(vote)}
+      aria-label={label}
+      aria-pressed={mine.vote === vote}
+      className={cn(
+        'press flex h-12 w-14 items-center justify-center rounded-2xl text-2xl ring-2',
+        mine.vote === vote ? (vote === 'up' ? 'bg-emerald-400 ring-emerald-200' : 'bg-rose-400 ring-rose-200') : 'bg-white/15 ring-white/30',
+      )}
+    >
+      {face}
+    </button>
+  );
+  return (
+    <div className="flex flex-col items-center gap-2">
+      <div className="flex items-center gap-3">
+        <span className="text-lg text-white/90" style={SHOW_FONT}>
+          {mine.vote ? 'Thanks!' : 'Good question?'}
+        </span>
+        {thumbButton('up', '👍', 'Good question')}
+        {thumbButton('down', '👎', 'Not a good question')}
+      </div>
+      {mine.vote === 'down' && (
+        <button
+          type="button"
+          disabled={mine.wrong}
+          onClick={() => {
+            play('tap');
+            setMine(rateQuestion(id, { wrong: true }));
+          }}
+          className="press rounded-full bg-black/30 px-3 py-1.5 text-sm font-bold text-white ring-1 ring-white/30 disabled:opacity-70"
+        >
+          {mine.wrong ? 'Flagged, thanks: we’ll check it' : 'The answer’s wrong'}
+        </button>
+      )}
+    </div>
+  );
+}
+
 /** The race between questions. `before` is the scores at the previous screen, for the "+points". */
-export function ScoresScreen({ game, me, big = false, onNext }) {
+export function ScoresScreen({ game, me, big = false, onNext, rate = false }) {
   const rows = standings(game);
   const gained = {};
   for (const p of game.players) gained[p.id] = p.answers[game.index]?.points || 0;
@@ -266,6 +324,7 @@ export function ScoresScreen({ game, me, big = false, onNext }) {
         {last ? 'Final scores coming…' : 'The scores'}
       </h2>
       <Leaderboard rows={rows} highlight={me} gained={gained} />
+      {rate && game.questions[game.index] && <RateQuestion key={game.questions[game.index].id} id={game.questions[game.index].id} />}
       {onNext && (
         <ShowButton className="mt-auto" onClick={onNext}>
           {last ? 'And the winner is…' : 'Next question'}

@@ -111,3 +111,14 @@ export function readSeedFile(json, name = 'file') {
 }
 
 export const bankCategoryIds = () => CATEGORIES.filter((c) => c.id !== MIXED.id).map((c) => c.id);
+
+/**
+ * Whether the thumbs say a question should stop being served: two "the
+ * answer's wrong" flags, or at least five votes with seven in ten of them
+ * down. It goes to 'review' rather than away, so it can be looked at and
+ * fixed (a seed question fixed in its file comes back on the next import).
+ */
+export function needsReview({ up = 0, down = 0, wrong = 0 } = {}) {
+  const votes = up + down;
+  return wrong >= 2 || (votes >= 5 && down >= 0.7 * votes);
+}

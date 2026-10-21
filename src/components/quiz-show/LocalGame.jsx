@@ -4,7 +4,7 @@ import { X } from 'lucide-react';
 import { play } from '@/components/arcade/sfx';
 import { addQuestions, answer, createGame, judge, next, start, standings, tick } from '@/lib/quiz/machine';
 import { levelById } from '@/lib/quiz/catalogue';
-import { fetchQuestions, rememberAsked } from './data';
+import { fetchQuestions, rememberSeen } from './data';
 import { FinalScreen, GetReady, QuestionScreen, RevealScreen, ScoresScreen, categoryLabel } from './screens';
 import { SHOW_FONT, ShowButton } from './ui';
 
@@ -65,7 +65,7 @@ export default function LocalGame({ setup, resume, onExit, onNewQuiz }) {
       let g = gameRef.current;
       while (g.questions.length < g.settings.count) {
         const want = g.questions.length === 0 ? Math.min(FIRST_BATCH, g.settings.count) : g.settings.count - g.questions.length;
-        const qs = await fetchQuestions({ picks: g.settings.picks, level: g.settings.level, count: want, exclude: g.questions });
+        const qs = await fetchQuestions({ picks: g.settings.picks, level: g.settings.level, count: want, exclude: g.questions, players: g.players.map((p) => p.name) });
         if (!qs.length) throw new Error('No questions came back. Try again?');
         setGame((cur) => addQuestions(cur, qs, Date.now()));
         g = { ...g, questions: [...g.questions, ...qs] };
@@ -93,13 +93,15 @@ export default function LocalGame({ setup, resume, onExit, onNewQuiz }) {
     return () => clearTimeout(t);
   }, [game.phase, haveQuestions]);
 
-  // At the end: remember the questions so they do not come back, and keep the
-  // result in a signed-in player's history.
+  // At the end, for a signed-in account: remember who saw which questions, so
+  // they do not come back for those players, and keep the result in history.
   useEffect(() => {
     if (game.phase !== 'finished' || saved.current) return;
     saved.current = true;
-    rememberAsked(game.questions);
-    if (status === 'authenticated') saveResult(game).catch(() => {});
+    if (status === 'authenticated') {
+      rememberSeen(game.players.map((p) => p.name), game.questions);
+      saveResult(game).catch(() => {});
+    }
     try {
       localStorage.setItem(LOCAL_KEY, JSON.stringify({ game, recorded: true, at: Date.now() }));
     } catch {}
@@ -107,6 +109,10 @@ export default function LocalGame({ setup, resume, onExit, onNewQuiz }) {
 
   const quit = () => {
     if (game.phase !== 'finished' && !window.confirm('End this quiz? Scores so far will be lost.')) return;
+    // The questions already played still count as seen.
+    if (game.phase !== 'finished' && game.index >= 0 && status === 'authenticated') {
+      rememberSeen(game.players.map((p) => p.name), game.questions.slice(0, game.index + 1));
+    }
     clearLocal();
     onExit();
   };
@@ -149,10 +155,11 @@ export default function LocalGame({ setup, resume, onExit, onNewQuiz }) {
           me={me}
           onJudge={game.mode === 'shout' ? (ids) => setGame((g) => judge(g, ids, Date.now())) : null}
           onNext={game.mode === 'solo' ? () => setGame((g) => next(g, Date.now())) : null}
+          rate={game.mode === 'solo'}
         />
       )}
 
-      {game.phase === 'scores' && <ScoresScreen game={game} me={me} onNext={() => setGame((g) => next(g, Date.now()))} />}
+      {game.phase === 'scores' && <ScoresScreen game={game} me={me} onNext={() => setGame((g) => next(g, Date.now()))} rate />}
 
       {game.phase === 'finished' && (
         <FinalScreen game={game} me={me}>

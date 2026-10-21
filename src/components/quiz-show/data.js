@@ -2,11 +2,12 @@ import { useCallback, useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { MAX_CUSTOM, normaliseCustomList } from '@/lib/quiz/catalogue';
 
-// The quiz's client-side data: questions from the server, the memory of what
-// has been asked, and the player's custom categories.
+// The quiz's client-side data: questions from the server, the memory of who
+// has seen what, the thumbs, and the player's custom categories.
 
-const SEEN_KEY = 'quiz:seen';
 const CUSTOM_KEY = 'quiz:categories';
+// The thumbs this phone has given, so it votes once a question.
+const VOTES_KEY = 'quiz:votes';
 
 function read(key, fallback) {
   try {
@@ -24,18 +25,6 @@ function write(key, value) {
 
 const makeId = () => `c_${Math.random().toString(36).slice(2, 10)}${Date.now().toString(36).slice(-4)}`;
 
-/** What has been asked on this device: fingerprints to filter, recent texts to steer away from. */
-export function seenMemory() {
-  const s = read(SEEN_KEY, { fps: [], texts: [] });
-  return { avoid: (s.fps || []).slice(-500), recent: (s.texts || []).slice(-30) };
-}
-export function rememberAsked(questions) {
-  const s = read(SEEN_KEY, { fps: [], texts: [] });
-  const fps = [...(s.fps || []), ...questions.map((q) => q.id)];
-  const texts = [...(s.texts || []), ...questions.map((q) => q.question.slice(0, 120))];
-  write(SEEN_KEY, { fps: fps.slice(-500), texts: texts.slice(-60) });
-}
-
 /** A game's picks as the question route takes them: built-in ids, custom categories whole. */
 export const picksForServer = (picks) =>
   (picks || []).map((p) => (typeof p === 'string' ? p : { name: p.name, description: p.description }));
@@ -43,10 +32,10 @@ export const picksForServer = (picks) =>
 /**
  * Ask the server for questions. Throws with a message fit to show.
  * `exclude` are questions already in this game, so a second batch cannot
- * repeat the first.
+ * repeat the first. `players` are the names playing: on a signed-in account
+ * the server also leaves out whatever any of them has seen before.
  */
-export async function fetchQuestions({ picks, level, count, exclude = [] }) {
-  const { avoid, recent } = seenMemory();
+export async function fetchQuestions({ picks, level, count, exclude = [], players = [] }) {
   const res = await fetch('/api/quiz/questions', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -54,13 +43,69 @@ export async function fetchQuestions({ picks, level, count, exclude = [] }) {
       picks: picksForServer(picks),
       level,
       count,
-      avoid: [...avoid, ...exclude.map((q) => q.id)],
-      recent: [...recent, ...exclude.map((q) => q.question.slice(0, 120))].slice(-30),
+      avoid: exclude.map((q) => q.id),
+      recent: exclude.map((q) => q.question.slice(0, 120)).slice(-30),
+      players,
     }),
   });
   const data = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(data.error || 'Could not get the questions. Try again?');
   return data.questions || [];
+}
+
+/**
+ * Add a game's questions to each player's memory, on a signed-in account
+ * (models/QuizSeen.js). Called at the end, or for the questions played so far
+ * when a game is ended early. Never in the way of the game.
+ */
+export function rememberSeen(names, questions) {
+  const ids = (questions || []).filter(Boolean).map((q) => q.id);
+  if (!ids.length || !names?.length) return;
+  fetch('/api/quiz/seen', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ names, ids }),
+  }).catch(() => {});
+}
+
+/** The players this account remembers, and forgetting one. Signed in only. */
+export function useSeenPlayers() {
+  const { status } = useSession();
+  const [players, setPlayers] = useState([]);
+  useEffect(() => {
+    if (status !== 'authenticated') return;
+    fetch('/api/quiz/seen')
+      .then((r) => (r.ok ? r.json() : { players: [] }))
+      .then((d) => setPlayers(d.players || []))
+      .catch(() => {});
+  }, [status]);
+  const forget = useCallback(async (name) => {
+    const res = await fetch('/api/quiz/seen', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name }) });
+    if (!res.ok) throw new Error('Could not do that just now. Try again?');
+    setPlayers((await res.json()).players || []);
+  }, []);
+  return { players: status === 'authenticated' ? players : [], forget };
+}
+
+/** This phone's vote on a question: 'up', 'down', or undefined; `wrong` once flagged. */
+export const myVote = (id) => read(VOTES_KEY, {})[id];
+
+/**
+ * A thumb, or "the answer's wrong". Remembered on the phone (the last few
+ * hundred), so each phone votes once and can change its mind.
+ */
+export function rateQuestion(id, { vote, wrong } = {}) {
+  const all = read(VOTES_KEY, {});
+  const had = all[id] || {};
+  const next = { ...had, ...(vote ? { vote } : {}), ...(wrong ? { wrong: true } : {}) };
+  const keys = Object.keys(all).filter((k) => k !== id).slice(-300);
+  write(VOTES_KEY, { ...Object.fromEntries(keys.map((k) => [k, all[k]])), [id]: next });
+  fetch('/api/quiz/rate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(wrong ? { id, wrong: true } : { id, vote, from: had.vote }),
+  }).catch(() => {});
+  return next;
 }
 
 /**
