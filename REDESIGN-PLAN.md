@@ -1,7 +1,8 @@
 # GamePad — the toy-box arcade rebuild
 
 **Status:** agreed with Ash 2026-10-21. Phase 1 (Travel Bingo) live 2026-10-21.
-Phase 2 (the games room) built.
+Phase 2 (the games room) live 2026-10-21. **Quiz moved up to Phase 3** at
+Ash's request (it was last); Darts and Scrabble follow it.
 **Replaces** the August realignment plan, which is finished (every phase landed
 2026-08-27; it is in git history at `934d2e5:REDESIGN-PLAN.md`). The decisions
 from it that still bind are carried forward in §6.
@@ -30,7 +31,10 @@ fixes on the way through.
 |---|---|
 | Look | **Toy-box arcade**: bright, chunky, tiles that look like toys and bounce and wobble. Not a dark neon cabinet. |
 | Landing layout | **Every game visible at once, no swiping.** Then, from the mock-ups: **a games room** where each game is an object (Phase 2). |
-| Quiz | Keeps **both** modes: one phone passed round, and multi-phone. Adds a **TV mode**. |
+| Quiz | **Three modes** (Ash, 2026-10-21): **solo** (one player, on their own); **shout** (one screen shows the question, everyone shouts, the quizmaster taps who got it right); **multi-phone** (everyone answers on their own phone). Plus a **TV mode**. |
+| Quiz difficulty | Chosen **per game**, by age and difficulty. **Everyone in a game gets the same questions.** |
+| Quiz resume | **Kept, and made reliable**: a lost connection, a reload or a dropped phone must not lose a game in action. Signed-in players can **delete old games**. |
+| Quiz look | **A game show**: studio, lights, stings, fanfares. Higgsfield for the art. Upgraded massively, Ash's word. |
 | TV mode | **Quiz only.** Not Darts. |
 | Sound | **On by default, with a mute switch** that is remembered. Vibration where the phone supports it. |
 | Games | All five stay. |
@@ -120,40 +124,18 @@ cycles through the quiz's answer shapes. Where the art came from is in
 `src/data/gamesRoom.js`. The brand colour stays: the wordmark is ink and orange
 on the room's ceiling.
 
-### Phase 3 — Darts
+### Phase 3 — Quiz, with TV mode *(moved up from last, 2026-10-21)*
 
-Keep: the checkout chart and rules text (`dartsConstants.js`), `getCheckout`,
-the Cricket marks and points rules (pulled into one pure reducer that undo
-replays; it is written twice today), the `dartsConfig` shape.
-
-Rebuild: **tap the dartboard** (segment, then ring) instead of typing; three
-dart slots fill as you throw; the suggested checkout lights up on the board; a
-spoken "ONE HUNDRED AND EIGHTY!" (`speechSynthesis`); a buzzer and shake on a
-bust; Killer lives as hearts; scores large enough to read from the oche.
-
-Fixes: **Cricket never saves for a signed-in player** (its darts are objects;
-the schema says `darts: [Number]`, so the save is rejected and the 500 is never
-shown); Killer and Clock turn fields dropped on save; double-in not enforced;
-undo after a won leg; the game-over screen always crowning row 0; the progress
-bar assuming 501.
-
-### Phase 4 — Scrabble
-
-Keep: `lib/scrabble.js` (standings with shared places, turn extremes, next
-player), the single write path, `/api/games`.
-
-Rebuild: tile-style number entry; the total rolling up; rows overtaking each
-other with an **OVERTAKE!** banner; a **+50** key for using all seven tiles; a
-big undo for the last score; a pass-the-phone card; a podium with awards (best
-word, wooden spoon) at the end, where today there is no end screen at all.
-Word challenge from a bundled word list, instant and offline, in place of the
-Claude call.
-
-Fixes: editing a turn can save the wrong value over another (uncontrolled
-inputs keyed by position); out-of-order saves; the word sent to Claude
-unescaped.
-
-### Phase 5 — Quiz, with TV mode *(last: the riskiest)*
+The decisions are in §2. Built in this order: the question engine and the
+shared rules first (the parts everything else rests on), then the screens,
+then TV mode. The detail below is from the first review; the 2026-10-21 look at
+question creation added: questions are generated in the browser and sent
+through the open `/api/claude` proxy on the fastest model, parsed out of free
+text with a regex, never validated (count, distinct options, answer index),
+never shuffled (so the answer's position is the model's habit), never
+de-duplicated across games; custom categories are strings like
+`custom:Name: description` that a colon breaks, saved only for signed-in
+players, with no edit, and the picker is written twice (setup and next round).
 
 Keep: `quizScoring.js` and `quizRoom.js` with their 34 tests, the `QuizRoom`
 model, the safe projection that hides the answer until reveal, auto-advance,
@@ -177,6 +159,39 @@ can be lost on concurrent saves; a guest's leaderboard shows every household's
 names; the SSE stream polls Mongo every second and the join page opens two.
 Replace the 1,393-line `index.js` and the duplicate join flow with one host and
 one player path.
+
+### Phase 4 — Darts
+
+Keep: the checkout chart and rules text (`dartsConstants.js`), `getCheckout`,
+the Cricket marks and points rules (pulled into one pure reducer that undo
+replays; it is written twice today), the `dartsConfig` shape.
+
+Rebuild: **tap the dartboard** (segment, then ring) instead of typing; three
+dart slots fill as you throw; the suggested checkout lights up on the board; a
+spoken "ONE HUNDRED AND EIGHTY!" (`speechSynthesis`); a buzzer and shake on a
+bust; Killer lives as hearts; scores large enough to read from the oche.
+
+Fixes: **Cricket never saves for a signed-in player** (its darts are objects;
+the schema says `darts: [Number]`, so the save is rejected and the 500 is never
+shown); Killer and Clock turn fields dropped on save; double-in not enforced;
+undo after a won leg; the game-over screen always crowning row 0; the progress
+bar assuming 501.
+
+### Phase 5 — Scrabble
+
+Keep: `lib/scrabble.js` (standings with shared places, turn extremes, next
+player), the single write path, `/api/games`.
+
+Rebuild: tile-style number entry; the total rolling up; rows overtaking each
+other with an **OVERTAKE!** banner; a **+50** key for using all seven tiles; a
+big undo for the last score; a pass-the-phone card; a podium with awards (best
+word, wooden spoon) at the end, where today there is no end screen at all.
+Word challenge from a bundled word list, instant and offline, in place of the
+Claude call.
+
+Fixes: editing a turn can save the wrong value over another (uncontrolled
+inputs keyed by position); out-of-order saves; the word sent to Claude
+unescaped.
 
 ### Phase 6 — Egypt Explorer, lightly
 
