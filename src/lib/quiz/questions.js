@@ -31,13 +31,34 @@ export function checkQuestion(raw) {
   else if (typeof raw.correctAnswer === 'number') correct = raw.correctAnswer;
   if (!(correct >= 0 && correct < 4)) return null;
 
+  const media = checkMedia(raw.media);
   return {
     question,
     options,
     correctAnswer: correct,
     category: tidy(raw.category, 60),
     explanation: tidy(raw.explanation, MAX_EXPLANATION),
+    ...(media ? { media } : {}),
   };
+}
+
+/**
+ * A question's picture ({kind:'image', src, alt, credit}) or emoji clue
+ * ({kind:'emoji', text}), checked; null when there is none or it will not do.
+ * A picture is one of ours (/quiz/…) or on https.
+ */
+export function checkMedia(raw) {
+  if (!raw || typeof raw !== 'object') return null;
+  if (raw.kind === 'emoji') {
+    const text = tidy(raw.text, 40);
+    return text ? { kind: 'emoji', text } : null;
+  }
+  if (raw.kind === 'image') {
+    const src = String(raw.src ?? '').trim();
+    if (src.length > 500 || !/^(https:\/\/|\/quiz\/)/.test(src)) return null;
+    return { kind: 'image', src, alt: tidy(raw.alt, 160), credit: tidy(raw.credit, 160) };
+  }
+  return null;
 }
 
 /** The same question with its options in a fresh order. `random` is injectable for tests. */

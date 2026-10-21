@@ -76,6 +76,33 @@ function QuestionHeader({ game, big }) {
 }
 
 /**
+ * A question's picture or emoji clue (lib/quiz/questions.js#checkMedia). A
+ * picture carries its credit, which some Wikimedia licences require. `small`
+ * is the reveal, where it is a reminder rather than the clue.
+ */
+function QuestionMedia({ media, big, small }) {
+  if (!media) return null;
+  if (media.kind === 'emoji') {
+    return (
+      <p className={cn('leading-none tracking-wide', small ? 'text-4xl' : big ? 'text-8xl' : 'text-6xl')} aria-label={`Clue: ${media.text}`}>
+        {media.text}
+      </p>
+    );
+  }
+  return (
+    <figure className="w-full">
+      <img
+        src={media.src}
+        alt={media.alt || ''}
+        draggable={false}
+        className={cn('mx-auto w-auto select-none rounded-2xl object-contain shadow-[0_3px_0_rgba(0,0,0,0.15)]', small ? 'max-h-[16dvh]' : big ? 'max-h-[40dvh]' : 'max-h-[30dvh]')}
+      />
+      {media.credit && !small && <figcaption className="mt-1 text-[10px] font-semibold text-[#6b6390]">{media.credit}</figcaption>}
+    </figure>
+  );
+}
+
+/**
  * The question. `me` is the player answering on this device (solo, or a phone
  * in multi); without it the answers are display only (shout, the big screen).
  */
@@ -93,9 +120,10 @@ export function QuestionScreen({ game, me, onAnswer, big = false, offset = 0, an
         initial={{ rotateX: -70, opacity: 0, y: -20 }}
         animate={{ rotateX: 0, opacity: 1, y: 0 }}
         transition={{ type: 'spring', stiffness: 200, damping: 18 }}
-        className="flex flex-1 items-center justify-center rounded-[2rem] bg-white px-5 py-8 text-center text-[#241a45] shadow-[0_8px_0_rgba(0,0,0,0.25)]"
+        className={cn('flex flex-1 flex-col items-center justify-center gap-4 rounded-[2rem] bg-white px-5 text-center text-[#241a45] shadow-[0_8px_0_rgba(0,0,0,0.25)]', q.media ? 'py-5' : 'py-8')}
       >
-        <h2 className={cn('leading-tight', big ? 'text-6xl' : 'text-3xl')} style={SHOW_FONT}>
+        <QuestionMedia media={q.media} big={big} />
+        <h2 className={cn('leading-tight', big ? 'text-6xl' : q.media ? 'text-2xl' : 'text-3xl')} style={SHOW_FONT}>
           {q.question}
         </h2>
       </motion.div>
@@ -162,7 +190,8 @@ export function RevealScreen({ game, me, big = false, onJudge, onNext }) {
     <div className={cn('mx-auto flex min-h-dvh flex-col gap-4 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-[max(1rem,env(safe-area-inset-top))]', big ? 'max-w-5xl gap-6 py-8' : 'max-w-xl')}>
       <QuestionHeader game={game} big={big} />
       <div className="rounded-[2rem] bg-white px-5 py-5 text-center text-[#241a45] shadow-[0_8px_0_rgba(0,0,0,0.25)]">
-        <h2 className={cn('leading-tight', big ? 'text-4xl' : 'text-2xl')} style={SHOW_FONT}>
+        <QuestionMedia media={q.media} big={big} small />
+        <h2 className={cn('leading-tight', big ? 'text-4xl' : 'text-2xl', q.media && 'mt-3')} style={SHOW_FONT}>
           {q.question}
         </h2>
         {q.explanation && <p className={cn('mt-2 font-semibold text-[#6b6390]', big ? 'text-xl' : 'text-sm')}>{q.explanation}</p>}

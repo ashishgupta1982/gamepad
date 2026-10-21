@@ -13,9 +13,12 @@ const CONFIG_KEY = 'aiModels';
 const resolver = createModelResolver({
   defaults: {
     general: 'claude-haiku-4-5-20251001',   // /api/claude: Scrabble's word check, until Phase 5 replaces it
-    // Quiz questions (api/quiz/questions). The balanced tier, not the fast one:
-    // a wrong answer spoils a quiz, and the fast model gets more facts wrong.
-    quiz: 'balanced',
+    // Quiz questions (api/quiz/questions): topping up the question bank and a
+    // player's own categories. Sonnet 5.5, pinned rather than the balanced tier
+    // (still Sonnet 5 in @aspiro/ai 0.7.0), at the same price. Not the fast
+    // tier: a wrong answer spoils a quiz. It thinks by default, which
+    // lib/quiz/writer.js allows for.
+    quiz: 'claude-sonnet-5-5',
     travelBingo: 'claude-haiku-4-5-20251001', // board generation
     // Egypt Explorer's guide and photo quests. A tier name rather than an id, so
     // it follows the suite's balanced model on each @aspiro/ai release. Not the
