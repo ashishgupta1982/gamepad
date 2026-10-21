@@ -6,7 +6,7 @@ import AccountMenu from '@/components/layout/AccountMenu';
 import MuteButton from '@/components/arcade/MuteButton';
 import { play } from '@/components/arcade/sfx';
 import { GAMES, GAME_BY_TYPE } from '@/data/games';
-import { CUPBOARD_SHELVES, DART, DARTBOARD_BULL, GAME_ACTIONS, PLANE, ROOM, ROOM_OBJECTS, TV_SCREEN } from '@/data/gamesRoom';
+import { CUPBOARD_SHELVES, DART, DARTBOARD_BULL, PLANE, ROOM, ROOM_OBJECTS, TV_SCREEN } from '@/data/gamesRoom';
 import { cn } from '@/lib/cn';
 
 // The home page as a room (REDESIGN-PLAN.md, Phase 2). Every game is an object
@@ -44,7 +44,7 @@ const BUTTON_TONES = {
   'egypt-explorer': 'bg-game-egypt-deep text-white [--toy-edge:theme(colors.slate.900)]',
 };
 
-export default function GamesRoom({ active = {}, isGuest, onSignIn }) {
+export default function GamesRoom({ isGuest, onSignIn }) {
   const reduce = useReducedMotion();
   const stageRef = useRef(null);
   const [stage, setStage] = useState({ width: 0, height: 0 });
@@ -182,11 +182,11 @@ export default function GamesRoom({ active = {}, isGuest, onSignIn }) {
           </div>
         </div>
 
-        <AnimatePresence>{inCupboard && <Shelves key="shelves" active={active} onPick={(id) => { play('tap'); setFocus(id); }} reduce={reduce} />}</AnimatePresence>
+        <AnimatePresence>{inCupboard && <Shelves key="shelves" onPick={(id) => { play('tap'); setFocus(id); }} reduce={reduce} />}</AnimatePresence>
 
         <AnimatePresence>
           {game && (
-            <GameCard key={game.id} game={game} active={active[game.id]} isGuest={isGuest} onSignIn={onSignIn} reduce={reduce} />
+            <GameCard key={game.id} game={game} isGuest={isGuest} onSignIn={onSignIn} reduce={reduce} />
           )}
         </AnimatePresence>
       </div>
@@ -302,7 +302,7 @@ function TvScreen({ reduce, glyphPx }) {
 }
 
 // Inside the cupboard: shelves of game boxes, drawn over the zoomed picture.
-function Shelves({ active, onPick, reduce }) {
+function Shelves({ onPick, reduce }) {
   return (
     <motion.div
       className="absolute inset-x-[8%] bottom-[31%] top-[16%] z-10 grid grid-rows-2 gap-3 rounded-3xl bg-[#8a5a2b] p-3 shadow-[inset_0_0_0_8px_#6b4420,0_20px_40px_-10px_rgba(0,0,0,0.5)]"
@@ -332,10 +332,7 @@ function Shelves({ active, onPick, reduce }) {
                 className={cn('flex h-[88%] flex-1 flex-col justify-between rounded-lg p-2.5 text-left shadow-[4px_4px_0_rgba(0,0,0,0.3)]', BUTTON_TONES[id])}
               >
                 <span className="text-3xl" aria-hidden="true">{g.emoji}</span>
-                <span>
-                  <span className="block font-display text-lg font-extrabold leading-tight">{g.name}</span>
-                  {active[id] && <span className="text-xs font-bold opacity-90">Game in progress</span>}
-                </span>
+                <span className="block font-display text-lg font-extrabold leading-tight">{g.name}</span>
               </motion.button>
             );
           })}
@@ -345,10 +342,10 @@ function Shelves({ active, onPick, reduce }) {
   );
 }
 
-// The card that rises once the camera has arrived.
-function GameCard({ game, active, isGuest, onSignIn, reduce }) {
-  const actions = (GAME_ACTIONS[game.id] || [{ label: 'Play', href: game.href, primary: true }]).filter((a) => a.when !== 'active' || active);
-  const [main, ...rest] = actions;
+// The card that rises once the camera has arrived. The room is only the way
+// in (Ash, 2026-10-21): carrying on, starting and joining are chosen inside
+// each game, so the card has one button.
+function GameCard({ game, isGuest, onSignIn, reduce }) {
   return (
     <motion.div
       role="dialog"
@@ -364,35 +361,16 @@ function GameCard({ game, active, isGuest, onSignIn, reduce }) {
         <div className="min-w-0 flex-1">
           <h2 className="font-display text-2xl font-extrabold leading-tight">{game.name}</h2>
           <p className="mt-0.5 text-sm leading-snug text-[#6b6390]">{game.description}</p>
-          {active?.detail && <p className="mt-1 text-sm font-bold text-[#241a45]">{active.detail}</p>}
         </div>
       </div>
 
-      <div className="mt-4 grid gap-2.5">
-        {main && (
-          <Link
-            href={main.href}
-            onClick={() => play('tap')}
-            className={cn('toy flex min-h-[54px] items-center justify-center rounded-2xl font-display text-xl font-extrabold', BUTTON_TONES[game.id])}
-          >
-            {main.label}
-          </Link>
-        )}
-        {rest.length > 0 && (
-        <div className="flex gap-2.5">
-          {rest.map((a) => (
-            <Link
-              key={a.label}
-              href={a.href}
-              onClick={() => play('tap')}
-              className="toy flex min-h-touch flex-1 items-center justify-center rounded-2xl bg-white px-3 text-center font-bold text-[#241a45] ring-2 ring-inset ring-[#ece6ff] [--toy-edge:#d9d2f2]"
-            >
-              {a.label}
-            </Link>
-          ))}
-        </div>
-        )}
-      </div>
+      <Link
+        href={game.href}
+        onClick={() => play('tap')}
+        className={cn('toy mt-4 flex min-h-[54px] items-center justify-center rounded-2xl font-display text-xl font-extrabold', BUTTON_TONES[game.id])}
+      >
+        Open {game.name}
+      </Link>
 
       {isGuest && (
         <button type="button" onClick={onSignIn} className="mt-3 w-full text-center text-sm font-semibold text-brand">

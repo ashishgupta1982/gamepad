@@ -6,8 +6,9 @@ import { cn } from '@/lib/cn';
 
 // Two big buttons, then one short form. A join link (?code=) skips straight to
 // the join form with the code filled in.
-export default function StartScreen({ onCreate, onJoin, busy, initialCode = '', initialMode = null }) {
-  const [mode, setMode] = useState(initialCode ? 'join' : initialMode); // null | 'create' | 'join'
+// `resume` is the game this phone was last in, offered first as "Carry on".
+export default function StartScreen({ onCreate, onJoin, busy, initialCode = '', resume = null, onResume }) {
+  const [mode, setMode] = useState(initialCode ? 'join' : null); // null | 'create' | 'join'
   const [name, setName] = useState('');
   const [code, setCode] = useState(initialCode.toUpperCase().slice(0, 6));
   const [error, setError] = useState('');
@@ -49,6 +50,19 @@ export default function StartScreen({ onCreate, onJoin, busy, initialCode = '', 
 
       {!mode && (
         <div className="mt-8 grid gap-4">
+          {resume && (
+            <BigButton onClick={onResume} className="bg-violet-500 text-white [--toy-edge:theme(colors.violet.700)]">
+              <span className="text-3xl" aria-hidden="true">{resume.phase === 'completed' ? '🏆' : '▶️'}</span>
+              <span className="min-w-0">
+                <span className="block text-2xl">{resume.phase === 'completed' ? 'See the results' : 'Carry on'}</span>
+                <span className="block truncate text-sm font-semibold opacity-85">
+                  {resume.name} · code {resume.code}
+                  {resume.phase === 'playing' && ` · ${resume.found} of 9 stamped`}
+                  {resume.phase === 'submission' && ' · still picking'}
+                </span>
+              </span>
+            </BigButton>
+          )}
           <BigButton onClick={() => choose('create')} className="bg-game-bingo text-white [--toy-edge:hsl(var(--game-bingo-deep))]">
             <span className="text-3xl" aria-hidden="true">🏁</span>
             <span>
@@ -105,7 +119,7 @@ export default function StartScreen({ onCreate, onJoin, busy, initialCode = '', 
               onChange={(e) => setName(e.target.value.slice(0, 30))}
               placeholder="e.g. Back seat, or The Smiths"
               className="w-full rounded-2xl border-2 border-border bg-muted/40 px-4 py-3 text-lg focus:border-game-bingo focus:outline-none"
-              autoFocus={mode === 'create' || !!initialCode || initialMode === 'join'}
+              autoFocus={mode === 'create' || !!initialCode}
             />
           </label>
 

@@ -54,26 +54,3 @@ export const DART = { src: '/home/dart.webp', width: 4.4 };
 
 // The TV's screen, for its flicker.
 export const TV_SCREEN = [39.6, 72.8, 16, 7];
-
-// The choices on each game's card. `when` hides an action unless it applies:
-//   'active'  a game in progress to carry on (see pages/index.js)
-export const GAME_ACTIONS = {
-  'travel-bingo': [
-    { label: 'Carry on', href: '/games/travel-bingo', when: 'active', primary: true },
-    { label: 'Start a game', href: '/games/travel-bingo?start=new', primary: true },
-    { label: 'Join a game', href: '/games/travel-bingo?start=join' },
-  ],
-  quiz: [
-    { label: 'Host a quiz', href: '/games/quiz', primary: true },
-    { label: 'Join a quiz', href: '/games/quiz/join' },
-  ],
-  darts: [
-    { label: 'Carry on', href: '/games/darts', when: 'active', primary: true },
-    { label: 'New game', href: '/games/darts', primary: true },
-  ],
-  'scrabble-scorer': [
-    { label: 'Carry on', href: '/games/scrabble-scorer', when: 'active', primary: true },
-    { label: 'New game', href: '/games/scrabble-scorer', primary: true },
-  ],
-  'egypt-explorer': [{ label: 'Open the trip', href: '/games/egypt-explorer', primary: true }],
-};

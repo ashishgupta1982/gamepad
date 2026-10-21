@@ -62,6 +62,19 @@ async function post(url, body) {
   return data;
 }
 
+// What the start screen says about the game this phone can carry on.
+function summarise({ game, carId }) {
+  const cfg = game.travelBingoConfig;
+  const car = cfg.cars.find((c) => c.carId === carId);
+  return {
+    name: car?.name || 'Your team',
+    code: cfg.joinCode,
+    phase: cfg.phase,
+    found: car?.card?.filter((t) => t.found).length || 0,
+    cars: cfg.cars.length,
+  };
+}
+
 // A copy of the game with one tile on one car changed.
 function withTile(game, carId, tileId, patch) {
   const cfg = game.travelBingoConfig;
@@ -87,6 +100,7 @@ function TravelBingo() {
   const [dealing, setDealing] = useState(false);
   const [view, setView] = useState('card'); // 'card' | 'convoy' | 'feed'
   const [open, setOpen] = useState(null); // { carId, tileId }
+  const [resumable, setResumable] = useState(null); // { game, carId }: the game this phone was in
 
   const gameRef = useRef(null);
   const myCarRef = useRef(null);
@@ -148,19 +162,26 @@ function TravelBingo() {
     [receive],
   );
 
-  // Resume the game this phone was in, unless the games room sent us here to
-  // start or join a different one (?start=new or ?start=join).
+  // The game this phone was last in, offered as "Carry on" on the start screen
+  // rather than jumped into: carrying on, starting and joining are all chosen
+  // here, in the game (Ash, 2026-10-21).
   useEffect(() => {
-    if (authStatus === 'loading' || !router.isReady) return;
-    if (router.query.start === 'new' || router.query.start === 'join') stored('clear');
+    if (authStatus === 'loading') return;
     const s = stored('get');
-    if (s?.gameId && s?.carId) {
-      myCarRef.current = s.carId;
-      setMyCarId(s.carId);
-      fetchGame(s.gameId).catch(() => stored('clear'));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [authStatus, router.isReady]);
+    if (!s?.gameId || !s?.carId) return;
+    fetch(`/api/games/travel-bingo/${s.gameId}`)
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error('gone'))))
+      .then(({ game: g }) => setResumable({ game: g, carId: s.carId }))
+      .catch(() => stored('clear'));
+  }, [authStatus]);
+
+  const carryOn = () => {
+    if (!resumable) return;
+    play('tap');
+    enter(resumable.game._id, resumable.carId);
+    setGame(resumable.game);
+    fetchGame(resumable.game._id).catch(() => {});
+  };
 
   const gameId = game?._id;
   const phase = game?.travelBingoConfig?.phase;
@@ -181,9 +202,6 @@ function TravelBingo() {
   }, [gameId, phase, fetchGame]);
 
   const enter = (id, carId) => {
-    // Drop ?start=new / ?start=join, so a reload resumes this game rather than
-    // clearing it to start another.
-    if (router.query.start) router.replace('/games/travel-bingo', undefined, { shallow: true });
     stored('set', { gameId: id, carId });
     myCarRef.current = carId;
     setMyCarId(carId);
@@ -364,6 +382,7 @@ function TravelBingo() {
 
   const reset = () => {
     stored('clear');
+    setResumable(null);
     gameRef.current = null;
     myCarRef.current = null;
     setGameState(null);
@@ -425,7 +444,8 @@ function TravelBingo() {
             onJoin={handleJoin}
             busy={busy}
             initialCode={typeof router.query.code === 'string' ? router.query.code : ''}
-            initialMode={router.query.start === 'join' ? 'join' : router.query.start === 'new' ? 'create' : null}
+            resume={resumable && summarise(resumable)}
+            onResume={carryOn}
           />
         )}
 
