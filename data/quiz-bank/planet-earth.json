@@ -1,0 +1,503 @@
+{
+  "category": "planet-earth",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which natural light show is this?",
+      "options": [
+        "The northern lights",
+        "A rainbow",
+        "A meteor shower",
+        "Lightning"
+      ],
+      "answer": "The northern lights",
+      "explanation": "The northern lights glow when tiny particles from the Sun crash into gases high above the Earth, and on clear nights they can sometimes be seen from Scotland.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Aurora",
+        "alt": "Glowing green ribbons across a night sky above snow",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615302/GamePad/quiz/aurora.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:Aurora_borealis_over_Eielson_Air_Force_Base,_Alaska.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "What is this, floating in the sea?",
+      "options": [
+        "An iceberg",
+        "A glacier",
+        "A snowdrift",
+        "A frozen waterfall"
+      ],
+      "answer": "An iceberg",
+      "explanation": "Only about a tenth of an iceberg shows above the water, which is why we say something is just 'the tip of the iceberg'.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Iceberg",
+        "alt": "A huge white block in blue water, seen above and below the surface",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615303/GamePad/quiz/iceberg.jpg",
+        "credit": "Photo: AWeith, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Iceberg_in_the_Arctic_with_its_underside_exposed.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "What kind of weather is this?",
+      "options": [
+        "A tornado",
+        "A hurricane",
+        "A sandstorm",
+        "A blizzard"
+      ],
+      "answer": "A tornado",
+      "explanation": "A tornado is a spinning column of air that reaches all the way down from a thundercloud to the ground.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Tornado",
+        "alt": "A dark, stormy sky over flat farmland",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615305/GamePad/quiz/tornado.jpg",
+        "credit": "Photo: Justin Hobson (Justin1569 at English Wikipedia), CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:F5_tornado_Elie_Manitoba_2007.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "What do we call melted rock when it pours out of a volcano?",
+      "options": [
+        "Lava",
+        "Magma",
+        "Ash",
+        "Steam"
+      ],
+      "answer": "Lava",
+      "explanation": "Underground it is called magma; once it pours out of a volcano, it becomes lava.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What do we call balls of ice that fall from storm clouds?",
+      "options": [
+        "Hail",
+        "Sleet",
+        "Snow",
+        "Frost"
+      ],
+      "answer": "Hail",
+      "explanation": "Hailstones grow layer by layer while strong winds inside a storm cloud hold them up, until they get too heavy and fall.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Why do you see lightning before you hear thunder?",
+      "options": [
+        "Light travels faster than sound",
+        "Thunder happens later",
+        "Clouds hold back the sound",
+        "Lightning is closer to us"
+      ],
+      "answer": "Light travels faster than sound",
+      "explanation": "Count the seconds between flash and rumble: every three seconds means the storm is about a kilometre away.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the name for a giant sea wave, usually caused by an earthquake under the sea?",
+      "options": [
+        "A tsunami",
+        "A monsoon",
+        "A typhoon",
+        "A whirlpool"
+      ],
+      "answer": "A tsunami",
+      "explanation": "Tsunami is a Japanese word that means 'harbour wave'.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What mainly causes the tides to go in and out?",
+      "options": [
+        "The pull of the Moon",
+        "The wind",
+        "Rain filling the sea",
+        "Underwater volcanoes"
+      ],
+      "answer": "The pull of the Moon",
+      "explanation": "The Moon's gravity tugs on the oceans, and most beaches get two high tides a day.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "How can you tell how old a tree is after it has been cut down?",
+      "options": [
+        "Count the rings in its trunk",
+        "Measure its height",
+        "Count its branches",
+        "Weigh its leaves"
+      ],
+      "answer": "Count the rings in its trunk",
+      "explanation": "Most trees grow one ring a year: pale wood in spring and darker wood later in the summer.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which mountain range is Mount Everest in?",
+      "options": [
+        "The Himalayas",
+        "The Andes",
+        "The Alps",
+        "The Rockies"
+      ],
+      "answer": "The Himalayas",
+      "explanation": "The Himalayas are still slowly getting taller as India pushes into the rest of Asia.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What do we call a scientist who studies the weather?",
+      "options": [
+        "A meteorologist",
+        "A geologist",
+        "An astronomer",
+        "A volcanologist"
+      ],
+      "answer": "A meteorologist",
+      "explanation": "Meteorologists study weather, not meteors; the word comes from Greek for 'things high in the air'.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which type of rock forms when hot melted rock cools and hardens?",
+      "options": [
+        "Igneous",
+        "Sedimentary",
+        "Metamorphic",
+        "Fossil"
+      ],
+      "answer": "Igneous",
+      "explanation": "Granite and basalt are both igneous rocks.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Antarctica is the world's largest what?",
+      "options": [
+        "Desert",
+        "Forest",
+        "Swamp",
+        "Grassland"
+      ],
+      "answer": "Desert",
+      "explanation": "A desert is anywhere that gets very little rain or snow, and Antarctica gets so little that it is the biggest desert on Earth.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is a geyser?",
+      "options": [
+        "A hot spring that shoots water into the air",
+        "A cave full of crystals",
+        "A frozen waterfall",
+        "A volcano under the sea"
+      ],
+      "answer": "A hot spring that shoots water into the air",
+      "explanation": "Water deep underground gets heated by hot rock until it bursts up through the surface in a fountain of steam and water.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which is the biggest kind of tree in the world, by the amount of wood in it?",
+      "options": [
+        "Giant sequoia",
+        "English oak",
+        "Baobab",
+        "Monkey puzzle"
+      ],
+      "answer": "Giant sequoia",
+      "explanation": "The biggest giant sequoia, called General Sherman, grows in California and is thought to be over 2,000 years old.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which natural wonder is this?",
+      "options": [
+        "Great Blue Hole",
+        "Crater Lake",
+        "Blue Lagoon",
+        "Lake Hillier"
+      ],
+      "answer": "Great Blue Hole",
+      "explanation": "The Great Blue Hole, off the coast of Belize, is a giant underwater sinkhole more than 300 metres across and about 125 metres deep.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Great_Blue_Hole",
+        "alt": "A dark, round patch of deep water in a turquoise reef, seen from the air",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615306/GamePad/quiz/great-blue-hole.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:Great_Blue_Hole.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which famous geyser is this?",
+      "options": [
+        "Old Faithful",
+        "Strokkur",
+        "Great Geysir",
+        "Steamboat Geyser"
+      ],
+      "answer": "Old Faithful",
+      "explanation": "Old Faithful, in Yellowstone, erupts about every hour or two, so regularly that rangers can predict it.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Old_Faithful",
+        "alt": "A tall plume of water and steam rising from the ground",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615308/GamePad/quiz/old-faithful.jpg",
+        "credit": "Photo: Dietmar Rabich, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Yellowstone_National_Park_(WY,_USA),_Old_Faithful_Geyser_--_2022_--_2599.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which natural wonder is this?",
+      "options": [
+        "Pamukkale",
+        "Cappadocia",
+        "Salar de Uyuni",
+        "Plitvice Lakes"
+      ],
+      "answer": "Pamukkale",
+      "explanation": "Pamukkale, in south-western Turkey, means 'cotton castle' in Turkish, and its white terraces were built up by minerals left behind by warm spring water.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Pamukkale",
+        "alt": "White stepped terraces holding pale blue pools",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615309/GamePad/quiz/pamukkale.jpg",
+        "credit": "Photo: Biologg, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Pamukkale,_Denizli_2026_68.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "In which country is Eyjafjallajökull, the volcano whose 2010 eruption grounded flights across Europe?",
+      "options": [
+        "Iceland",
+        "Norway",
+        "Italy",
+        "Greenland"
+      ],
+      "answer": "Iceland",
+      "explanation": "Its ash cloud closed much of Europe's airspace for days in April 2010.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the name for the spot on the Earth's surface directly above where an earthquake starts?",
+      "options": [
+        "The epicentre",
+        "The hypocentre",
+        "The fault line",
+        "The crater"
+      ],
+      "answer": "The epicentre",
+      "explanation": "The point deep underground where the rock first breaks is the hypocentre, or focus, and the epicentre sits right above it.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which is the largest hot desert in the world?",
+      "options": [
+        "Sahara",
+        "Arabian",
+        "Kalahari",
+        "Gobi"
+      ],
+      "answer": "Sahara",
+      "explanation": "The Sahara is roughly the size of the United States.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the name for the fan-shaped area of land at the mouth of a river like the Nile?",
+      "options": [
+        "A delta",
+        "An estuary",
+        "A meander",
+        "An oxbow"
+      ],
+      "answer": "A delta",
+      "explanation": "It is named after the Greek letter delta, a triangle, which the mouth of the Nile resembles.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What name is given to the horseshoe of volcanoes and earthquake zones around the Pacific Ocean?",
+      "options": [
+        "The Ring of Fire",
+        "The Rim of Ash",
+        "The Pacific Belt",
+        "The Lava Loop"
+      ],
+      "answer": "The Ring of Fire",
+      "explanation": "Most of the world's active volcanoes that rise above sea level are found along the Ring of Fire.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the deepest known point in the world's oceans?",
+      "options": [
+        "Challenger Deep",
+        "Puerto Rico Trench",
+        "Java Trench",
+        "Molloy Deep"
+      ],
+      "answer": "Challenger Deep",
+      "explanation": "Challenger Deep, in the Mariana Trench, is nearly 11 km down, deeper than Mount Everest is tall.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What does the Beaufort scale measure?",
+      "options": [
+        "Wind speed",
+        "Earthquake strength",
+        "Rainfall",
+        "Air pressure"
+      ],
+      "answer": "Wind speed",
+      "explanation": "It runs from 0, calm, to 12, hurricane force.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What was the name of the supercontinent that began breaking up about 200 million years ago?",
+      "options": [
+        "Pangaea",
+        "Rodinia",
+        "Atlantis",
+        "Zealandia"
+      ],
+      "answer": "Pangaea",
+      "explanation": "Pangaea's break-up is why the coasts of South America and Africa fit together like jigsaw pieces.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which mineral is the softest on the Mohs scale, at number 1?",
+      "options": [
+        "Talc",
+        "Gypsum",
+        "Calcite",
+        "Quartz"
+      ],
+      "answer": "Talc",
+      "explanation": "Talc is soft enough to scratch with a fingernail, while diamond sits at the top, at 10.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What name is given to the boundary between the Earth's crust and the mantle below it?",
+      "options": [
+        "The Moho",
+        "The Gutenberg discontinuity",
+        "The Lehmann discontinuity",
+        "The tropopause"
+      ],
+      "answer": "The Moho",
+      "explanation": "It is named after the Croatian scientist Andrija Mohorovičić, which is why everyone calls it the Moho.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which mineral makes up most of the sand on a typical British beach?",
+      "options": [
+        "Quartz",
+        "Calcite",
+        "Halite",
+        "Gypsum"
+      ],
+      "answer": "Quartz",
+      "explanation": "Quartz is hard and does not dissolve, so it survives long after the rest of a rock has worn away.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which country is Angel Falls, the world's highest uninterrupted waterfall?",
+      "options": [
+        "Venezuela",
+        "Brazil",
+        "Colombia",
+        "Peru"
+      ],
+      "answer": "Venezuela",
+      "explanation": "Its water drops nearly a kilometre, so far that much of it turns to mist before reaching the bottom.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}

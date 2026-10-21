@@ -1,0 +1,305 @@
+{
+  "category": "holidays",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Diwali is often called the festival of what?",
+      "options": ["Lights", "Colours", "Harvest", "Kites"],
+      "answer": "Lights",
+      "explanation": "Families light small clay lamps called diyas, and there are often fireworks too.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "On Bonfire Night, people remember a plot to blow up which building?",
+      "options": ["The Houses of Parliament", "The Tower of London", "Buckingham Palace", "Westminster Abbey"],
+      "answer": "The Houses of Parliament",
+      "explanation": "Guy Fawkes was caught on 5 November with barrels of gunpowder hidden under Parliament.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "For how many nights is Hanukkah celebrated?",
+      "options": ["Eight", "Seven", "Twelve", "Five"],
+      "answer": "Eight",
+      "explanation": "One more candle is lit on the menorah each night, until all eight are burning.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In the Chinese zodiac, each year is named after one of how many animals?",
+      "options": ["12", "10", "8", "20"],
+      "answer": "12",
+      "explanation": "The twelve animals take turns, starting with the Rat and ending with the Pig.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which royal helped make Christmas trees popular in Britain in the 1840s?",
+      "options": ["Prince Albert", "King Henry VIII", "Queen Elizabeth I", "King Charles II"],
+      "answer": "Prince Albert",
+      "explanation": "Queen Victoria's German husband loved Christmas trees, and a picture of the royal family round one in 1848 started a craze.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Before pumpkins, which vegetable did people in Ireland and Scotland carve into Halloween lanterns?",
+      "options": ["Turnips", "Potatoes", "Carrots", "Cabbages"],
+      "answer": "Turnips",
+      "explanation": "Turnips are much harder to carve than pumpkins, which took over once the tradition reached America.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the festival that marks the end of Ramadan called?",
+      "options": ["Eid al-Fitr", "Eid al-Adha", "Diwali", "Vaisakhi"],
+      "answer": "Eid al-Fitr",
+      "explanation": "Eid al-Fitr traditionally begins when the new crescent moon is seen, with prayers, new clothes, presents and big family meals.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "During Ramadan, many Muslims do not eat or drink during which part of the day?",
+      "options": ["From dawn to sunset", "From sunset to dawn", "Only in the morning", "Only at weekends"],
+      "answer": "From dawn to sunset",
+      "explanation": "The fast is broken each evening at sunset with a meal called iftar, often starting with dates.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which day, just before Lent begins, is famous for pancakes?",
+      "options": ["Shrove Tuesday", "Maundy Thursday", "Good Friday", "Palm Sunday"],
+      "answer": "Shrove Tuesday",
+      "explanation": "Pancakes used up the eggs, milk and butter before Lent, and some towns still hold pancake races.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which Australian animal is sometimes used there instead of the Easter Bunny?",
+      "options": ["Bilby", "Kangaroo", "Koala", "Wombat"],
+      "answer": "Bilby",
+      "explanation": "The bilby is a threatened animal with big rabbit-like ears, and chocolate Easter bilbies help raise money to protect it.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which country has given London the giant Christmas tree in Trafalgar Square every year since 1947?",
+      "options": ["Norway", "Sweden", "Denmark", "Finland"],
+      "answer": "Norway",
+      "explanation": "The tree is a thank-you from the people of Oslo for Britain's help during the Second World War.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "On which date do many Orthodox Christians, such as in Russia and Serbia, celebrate Christmas Day?",
+      "options": ["7 January", "6 January", "1 January", "24 December"],
+      "answer": "7 January",
+      "explanation": "These churches follow the old Julian calendar, which is now 13 days behind the one most of us use.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What colour are the envelopes of money given as presents at Chinese New Year?",
+      "options": ["Red", "Gold", "Green", "White"],
+      "answer": "Red",
+      "explanation": "Red is a lucky colour in Chinese culture, so the envelopes, lanterns and decorations are red too.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "The Day of the Dead, with colourful sugar skulls and marigolds, is a famous festival in which country?",
+      "options": ["Mexico", "Spain", "Brazil", "Peru"],
+      "answer": "Mexico",
+      "explanation": "Families build bright altars to remember loved ones who have died, and it is a happy celebration rather than a sad one.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Thanksgiving in the USA always falls on which day of the week?",
+      "options": ["Thursday", "Monday", "Friday", "Sunday"],
+      "answer": "Thursday",
+      "explanation": "It is held on the fourth Thursday of November, usually with a big roast turkey.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which year did the Gunpowder Plot take place?",
+      "options": ["1605", "1588", "1642", "1666"],
+      "answer": "1605",
+      "explanation": "The plotters planned to kill King James I at the State Opening of Parliament on 5 November 1605.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "For Sikhs, Diwali coincides with Bandi Chhor Divas, which marks the release from prison of which Guru?",
+      "options": ["Guru Hargobind", "Guru Nanak", "Guru Gobind Singh", "Guru Arjan"],
+      "answer": "Guru Hargobind",
+      "explanation": "Guru Hargobind returned to Amritsar, where the Golden Temple was lit up to welcome him.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Hanukkah marks the rededication of the Temple in which city?",
+      "options": ["Jerusalem", "Babylon", "Alexandria", "Damascus"],
+      "answer": "Jerusalem",
+      "explanation": "Tradition says one day's oil kept the Temple lamp burning for eight days, which is why Hanukkah lasts eight nights.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Hindu festival is known for throwing brightly coloured powder to welcome spring?",
+      "options": ["Holi", "Navratri", "Pongal", "Raksha Bandhan"],
+      "answer": "Holi",
+      "explanation": "Holi is celebrated at a full moon, usually in March, and the night before, bonfires are lit for Holika Dahan.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the name for the 40 days before Easter in the Christian calendar?",
+      "options": ["Lent", "Advent", "Epiphany", "Pentecost"],
+      "answer": "Lent",
+      "explanation": "Lent begins on Ash Wednesday and recalls the Bible story of the 40 days Jesus spent in the desert.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Eid al-Adha falls during the annual pilgrimage to which city?",
+      "options": ["Mecca", "Medina", "Jerusalem", "Cairo"],
+      "answer": "Mecca",
+      "explanation": "Eid al-Adha falls during the Hajj, the pilgrimage every Muslim who is able is asked to make at least once.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which country did the Christmas cracker begin?",
+      "options": ["England", "Germany", "France", "USA"],
+      "answer": "England",
+      "explanation": "The London sweet maker Tom Smith invented it in the 1840s, and the bang was added later.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is New Year's Eve called in Scotland?",
+      "options": ["Hogmanay", "Ceilidh", "Up Helly Aa", "Beltane"],
+      "answer": "Hogmanay",
+      "explanation": "In first-footing, the first visitor after midnight brings gifts such as coal, shortbread or whisky for luck.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Christmas carol was first performed in Oberndorf, Austria, on Christmas Eve 1818?",
+      "options": ["Silent Night", "O Holy Night", "Away in a Manger", "O Come, All Ye Faithful"],
+      "answer": "Silent Night",
+      "explanation": "Joseph Mohr wrote the words and Franz Xaver Gruber the tune, and it was first sung with a guitar.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Jewish festival marks the start of the new year?",
+      "options": ["Rosh Hashanah", "Yom Kippur", "Passover", "Purim"],
+      "answer": "Rosh Hashanah",
+      "explanation": "A ram's horn called a shofar is blown, and apples dipped in honey wish everyone a sweet year.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Chinese New Year in 2025 began the Year of which animal?",
+      "options": ["Snake", "Horse", "Rabbit", "Dragon"],
+      "answer": "Snake",
+      "explanation": "The Snake followed the Year of the Dragon in 2024, and was followed by the Horse in 2026.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Whose saint's day is celebrated in Wales on 1 March?",
+      "options": ["St David", "St Andrew", "St Patrick", "St George"],
+      "answer": "St David",
+      "explanation": "St David is the patron saint of Wales, and people wear daffodils or leeks on his day.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "According to Dutch tradition, Sinterklaas arrives each November by steamboat from which country?",
+      "options": ["Spain", "Turkey", "Germany", "Finland"],
+      "answer": "Spain",
+      "explanation": "Sinterklaas brings presents on the evening of 5 December, the eve of St Nicholas's Day.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In Italian folklore, which kindly witch brings presents to children on the eve of Epiphany?",
+      "options": ["La Befana", "Baba Yaga", "Krampus", "Frau Holle"],
+      "answer": "La Befana",
+      "explanation": "On the night of 5 January she flies on her broomstick, leaving sweets for good children and coal for naughty ones.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which festival, created in 1966, is celebrated in the USA from 26 December to 1 January?",
+      "options": ["Kwanzaa", "Juneteenth", "Boxing Day", "Twelfth Night"],
+      "answer": "Kwanzaa",
+      "explanation": "Kwanzaa celebrates African American culture, with a candle lit on each of its seven days.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}

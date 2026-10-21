@@ -18,8 +18,8 @@
         "kind": "image",
         "wiki": "Statue_of_Liberty",
         "alt": "A famous statue",
-        "src": "/quiz/pics/statue-of-liberty.webp",
-        "credit": "Photo: AskALotl, public domain (Wikimedia Commons)",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615287/GamePad/quiz/statue-of-liberty.jpg",
+        "credit": "",
         "source": "https://commons.wikimedia.org/wiki/File:Front_view_of_Statue_of_Liberty_(cropped).jpg"
       }
     },
@@ -40,8 +40,8 @@
         "kind": "image",
         "wiki": "Sydney_Opera_House",
         "alt": "A famous building by the water",
-        "src": "/quiz/pics/sydney-opera-house.webp",
-        "credit": "Photo: Bernard Spragg. NZ from Christchurch, New Zealand, public domain (Wikimedia Commons)",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615289/GamePad/quiz/sydney-opera-house.jpg",
+        "credit": "",
         "source": "https://commons.wikimedia.org/wiki/File:Sydney_Australia._(21339175489).jpg"
       }
     },
@@ -90,7 +90,7 @@
         "kind": "image",
         "wiki": "Great_Wall_of_China",
         "alt": "A long wall across hills",
-        "src": "/quiz/pics/great-wall-of-china.webp",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615290/GamePad/quiz/great-wall-of-china.jpg",
         "credit": "Photo: Severin.stalder, CC BY-SA 3.0 (Wikimedia Commons)",
         "source": "https://commons.wikimedia.org/wiki/File:The_Great_Wall_of_China_at_Jinshanling-edit.jpg"
       }
@@ -112,7 +112,7 @@
         "kind": "image",
         "wiki": "Al-Khazneh",
         "alt": "A building carved into a rock face",
-        "src": "/quiz/pics/al-khazneh.webp",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615292/GamePad/quiz/al-khazneh.jpg",
         "credit": "Photo: Susanahajer, CC BY-SA 3.0 (Wikimedia Commons)",
         "source": "https://commons.wikimedia.org/wiki/File:Al_khazneh.jpg"
       }
@@ -162,7 +162,7 @@
         "kind": "image",
         "wiki": "Angkor_Wat",
         "alt": "A large stone temple",
-        "src": "/quiz/pics/angkor-wat.webp",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615293/GamePad/quiz/angkor-wat.jpg",
         "credit": "Photo: Bjørn Christian Tørrissen, CC BY-SA 4.0 (Wikimedia Commons)",
         "source": "https://commons.wikimedia.org/wiki/File:Angkor_Wat.jpg"
       }
@@ -180,6 +180,346 @@
       "explanation": "The statue stands on top of Corcovado mountain and was finished in 1931.",
       "family": true,
       "difficulty": 1
+    },
+    {
+      "band": "kids",
+      "question": "Which famous building is this?",
+      "options": [
+        "The Taj Mahal",
+        "Hagia Sophia",
+        "The Blue Mosque",
+        "The Golden Temple"
+      ],
+      "answer": "The Taj Mahal",
+      "explanation": "The emperor Shah Jahan built the Taj Mahal in memory of his wife, Mumtaz Mahal.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Taj_Mahal",
+        "alt": "A white marble building with a large dome",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615295/GamePad/quiz/taj-mahal.jpg",
+        "credit": "Photo: Yann; edited by Jim Carter, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Taj_Mahal_(Edited).jpeg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "In which city is this ancient building?",
+      "options": [
+        "Rome",
+        "Athens",
+        "Istanbul",
+        "Naples"
+      ],
+      "answer": "Rome",
+      "explanation": "The Colosseum could hold at least 50,000 people, who came to watch shows and games.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Colosseum",
+        "alt": "A huge ancient stone arena",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615296/GamePad/quiz/colosseum.jpg",
+        "credit": "Photo: FeaturedPics, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Colosseo_2020.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "The Golden Gate Bridge is in which American city?",
+      "options": [
+        "San Francisco",
+        "Los Angeles",
+        "New York",
+        "Seattle"
+      ],
+      "answer": "San Francisco",
+      "explanation": "The bridge's colour is called International Orange, partly chosen so that it shows up in fog.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "How many presidents' faces are carved into Mount Rushmore?",
+      "options": [
+        "Four",
+        "Three",
+        "Five",
+        "Six"
+      ],
+      "answer": "Four",
+      "explanation": "Washington, Jefferson, Theodore Roosevelt and Lincoln each have a face about 18 metres tall.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which country is Machu Picchu, the ancient Inca city high in the mountains?",
+      "options": [
+        "Peru",
+        "Mexico",
+        "Chile",
+        "Bolivia"
+      ],
+      "answer": "Peru",
+      "explanation": "Machu Picchu was built in the 1400s, but the outside world only heard much about it in 1911.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which country is the Grand Canyon?",
+      "options": [
+        "United States",
+        "Mexico",
+        "Canada",
+        "Australia"
+      ],
+      "answer": "United States",
+      "explanation": "The Colorado River took millions of years to carve out the Grand Canyon.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which city would you find the statue of the Little Mermaid?",
+      "options": [
+        "Copenhagen",
+        "Oslo",
+        "Stockholm",
+        "Amsterdam"
+      ],
+      "answer": "Copenhagen",
+      "explanation": "The statue is based on a fairy tale by the Danish writer Hans Christian Andersen.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What are the giant stone statues on Easter Island called?",
+      "options": [
+        "Moai",
+        "Totems",
+        "Sphinxes",
+        "Gargoyles"
+      ],
+      "answer": "Moai",
+      "explanation": "The Rapa Nui people carved close to a thousand moai, mostly from the island's volcanic rock.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which is the only one of the Seven Wonders of the Ancient World still standing?",
+      "options": [
+        "The Great Pyramid of Giza",
+        "The Hanging Gardens of Babylon",
+        "The Colossus of Rhodes",
+        "The Lighthouse of Alexandria"
+      ],
+      "answer": "The Great Pyramid of Giza",
+      "explanation": "The Great Pyramid was the tallest building in the world for about 3,800 years.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which city is the giant skyscraper called the Burj Khalifa?",
+      "options": [
+        "Dubai",
+        "Abu Dhabi",
+        "Doha",
+        "Riyadh"
+      ],
+      "answer": "Dubai",
+      "explanation": "The Burj Khalifa is about 828 metres tall, more than twice the height of London's Shard.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which city is the Sagrada Família, the church designed by Antoni Gaudí?",
+      "options": [
+        "Barcelona",
+        "Madrid",
+        "Seville",
+        "Valencia"
+      ],
+      "answer": "Barcelona",
+      "explanation": "Work on the Sagrada Família began way back in 1882.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which country is this castle?",
+      "options": [
+        "Germany",
+        "Austria",
+        "Switzerland",
+        "France"
+      ],
+      "answer": "Germany",
+      "explanation": "Neuschwanstein was built for King Ludwig II of Bavaria, and it inspired Disney's Sleeping Beauty Castle.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Neuschwanstein_Castle",
+        "alt": "A white castle on a wooded hillside",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615298/GamePad/quiz/neuschwanstein-castle.jpg",
+        "credit": "Photo: Thomas Wolf, www.foto-tw.de, CC BY-SA 3.0 de (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Schloss_Neuschwanstein_2013.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "This stepped pyramid stands in which ancient city?",
+      "options": [
+        "Chichen Itza",
+        "Teotihuacan",
+        "Tikal",
+        "Palenque"
+      ],
+      "answer": "Chichen Itza",
+      "explanation": "At the spring and autumn equinoxes, shadows on El Castillo's steps look like a serpent sliding down.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Chichen_Itza",
+        "alt": "A stepped stone pyramid",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615299/GamePad/quiz/chichen-itza.jpg",
+        "credit": "Photo: Daniel Schwen, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Chichen_Itza_3.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "In which city is this cathedral?",
+      "options": [
+        "Moscow",
+        "St Petersburg",
+        "Kyiv",
+        "Istanbul"
+      ],
+      "answer": "Moscow",
+      "explanation": "St Basil's Cathedral was built on Red Square between 1555 and 1561 on the orders of Ivan the Terrible.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Saint_Basil's_Cathedral",
+        "alt": "A church with colourful onion domes",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615301/GamePad/quiz/saint-basil-s-cathedral.jpg",
+        "credit": "Photo: Tsy1980, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Saint_Basil%27s_Cathedral_in_Moscow.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "The Parthenon in Athens was built as a temple to which goddess?",
+      "options": [
+        "Athena",
+        "Hera",
+        "Aphrodite",
+        "Artemis"
+      ],
+      "answer": "Athena",
+      "explanation": "The Parthenon stands on the Acropolis and was dedicated in 438 BC.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which city is the Hagia Sophia?",
+      "options": [
+        "Istanbul",
+        "Athens",
+        "Cairo",
+        "Jerusalem"
+      ],
+      "answer": "Istanbul",
+      "explanation": "Finished in 537, it was the largest cathedral in the world for nearly a thousand years.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "The Golden Temple, the holiest shrine of Sikhism, is in which Indian city?",
+      "options": [
+        "Amritsar",
+        "Delhi",
+        "Jaipur",
+        "Agra"
+      ],
+      "answer": "Amritsar",
+      "explanation": "Its community kitchen serves free meals to tens of thousands of visitors every day.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "The Terracotta Army was made to guard the tomb of which Chinese emperor?",
+      "options": [
+        "Qin Shi Huang",
+        "Kublai Khan",
+        "Emperor Wu of Han",
+        "Puyi"
+      ],
+      "answer": "Qin Shi Huang",
+      "explanation": "Farmers digging a well found the first figures in 1974, and no two soldiers' faces are quite the same.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which city is the Brandenburg Gate?",
+      "options": [
+        "Berlin",
+        "Munich",
+        "Vienna",
+        "Hamburg"
+      ],
+      "answer": "Berlin",
+      "explanation": "On top stands the Quadriga, a statue of a chariot pulled by four horses.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Table Mountain looks down over which city?",
+      "options": [
+        "Cape Town",
+        "Johannesburg",
+        "Durban",
+        "Nairobi"
+      ],
+      "answer": "Cape Town",
+      "explanation": "The layer of cloud that often covers its flat top is known as the 'tablecloth'.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
     }
   ]
 }

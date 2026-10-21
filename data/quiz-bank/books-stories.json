@@ -1,0 +1,312 @@
+{
+  "category": "books-stories",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "In Roald Dahl's The BFG, what does the giant catch in his net and blow into children's bedrooms?",
+      "options": ["Dreams", "Stars", "Snowflakes", "Fireflies"],
+      "answer": "Dreams",
+      "explanation": "The BFG keeps the dreams he catches in jars, and blows the good ones in through children's windows with a long trumpet.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Who owns the chocolate factory in Charlie and the Chocolate Factory?",
+      "options": ["Willy Wonka", "Grandpa Joe", "Augustus Gloop", "Mr Bucket"],
+      "answer": "Willy Wonka",
+      "explanation": "Wonka hid just five Golden Tickets in his chocolate bars, and Charlie found the very last one.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In The Lion, the Witch and the Wardrobe, which sweet does the White Witch tempt Edmund with?",
+      "options": ["Turkish Delight", "Toffee", "Fudge", "Marzipan"],
+      "answer": "Turkish Delight",
+      "explanation": "It was enchanted Turkish Delight, so the more Edmund ate, the more he wanted.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Matilda, what is the name of the fearsome head teacher?",
+      "options": ["Miss Trunchbull", "Miss Honey", "Mrs Wormwood", "Miss Spider"],
+      "answer": "Miss Trunchbull",
+      "explanation": "Roald Dahl tells us Miss Trunchbull once threw the hammer for Britain at the Olympics.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which book do these emoji describe?",
+      "options": ["James and the Giant Peach", "The Very Hungry Caterpillar", "Charlotte's Web", "Fantastic Mr Fox"],
+      "answer": "James and the Giant Peach",
+      "explanation": "James travels across the ocean in a giant peach with a centipede, an earthworm, a spider and other huge minibeasts.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🍑👦🐛🕷️🌊" }
+    },
+    {
+      "band": "kids",
+      "question": "Which book do these emoji describe?",
+      "options": ["Winnie-the-Pooh", "Paddington", "The Gruffalo's Child", "We're Going on a Bear Hunt"],
+      "answer": "Winnie-the-Pooh",
+      "explanation": "In the very first story Pooh floats up to a bees' nest on a balloon, pretending to be a little black rain cloud.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🧸🍯🐝🎈" }
+    },
+    {
+      "band": "kids",
+      "question": "Which book do these emoji describe?",
+      "options": ["The Gruffalo", "The Wind in the Willows", "Fantastic Mr Fox", "Room on the Broom"],
+      "answer": "The Gruffalo",
+      "explanation": "The clever mouse tricks a fox, an owl and a snake, and then the Gruffalo himself.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🐭🌲🦊🦉🐍" }
+    },
+    {
+      "band": "kids",
+      "question": "Which book do these emoji describe?",
+      "options": ["Peter Pan", "Treasure Island", "Alice's Adventures in Wonderland", "The Jungle Book"],
+      "answer": "Peter Pan",
+      "explanation": "The crocodile swallowed a clock, so Captain Hook can hear it ticking as it comes after him.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🧚🏴‍☠️🐊⏰" }
+    },
+    {
+      "band": "kids",
+      "question": "In David Walliams' Gangsta Granny, what does Ben's granny tell him she secretly used to be?",
+      "options": ["A jewel thief", "A spy", "A pirate", "A racing driver"],
+      "answer": "A jewel thief",
+      "explanation": "Granny says she was the international jewel thief known as the Black Cat, and the pair plan to steal the Crown Jewels.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which Jacqueline Wilson character lives in a children's home she calls the Dumping Ground?",
+      "options": ["Tracy Beaker", "Hetty Feather", "Matilda Wormwood", "Pippi Longstocking"],
+      "answer": "Tracy Beaker",
+      "explanation": "Tracy first appeared in The Story of Tracy Beaker in 1991.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Alice's Adventures in Wonderland, who holds a never-ending tea party with the March Hare and the Dormouse?",
+      "options": ["The Mad Hatter", "The Cheshire Cat", "The Queen of Hearts", "The White Rabbit"],
+      "answer": "The Mad Hatter",
+      "explanation": "In the book the Hatter has quarrelled with Time, so it is always six o'clock and always teatime.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which fairy-tale character leaves a trail of breadcrumbs in the forest, only for the birds to eat them?",
+      "options": ["Hansel", "Jack", "Little Red Riding Hood", "Goldilocks"],
+      "answer": "Hansel",
+      "explanation": "The first time, Hansel dropped shiny white pebbles instead, which worked much better.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Roald Dahl's The Twits, what does Mr Twit smear on the branches of the Big Dead Tree to catch birds?",
+      "options": ["Hugtight glue", "Honey", "Strawberry jam", "Treacle"],
+      "answer": "Hugtight glue",
+      "explanation": "The glue was so sticky that any bird landing on the tree could not fly away, ready for the Twits' Bird Pie.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Michael Morpurgo's War Horse, what is the name of the horse?",
+      "options": ["Joey", "Black Beauty", "Champion", "Shadow"],
+      "answer": "Joey",
+      "explanation": "The whole story is told by Joey himself, who is sent to France in the First World War.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Treasure Island, what is the name of Long John Silver's parrot?",
+      "options": ["Captain Flint", "Polly", "Jolly Roger", "Captain Hook"],
+      "answer": "Captain Flint",
+      "explanation": "The parrot is named after the pirate whose treasure everyone is hunting, and squawks 'Pieces of eight!'",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which novel begins 'It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife'?",
+      "options": ["Pride and Prejudice", "Emma", "Sense and Sensibility", "Jane Eyre"],
+      "answer": "Pride and Prejudice",
+      "explanation": "Jane Austen published it in 1813, having first called it First Impressions.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Charles Dickens character says, 'Please, sir, I want some more'?",
+      "options": ["Oliver Twist", "David Copperfield", "Pip", "Tiny Tim"],
+      "answer": "Oliver Twist",
+      "explanation": "Oliver asks for a second bowl of gruel in the workhouse, and is punished for it.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which Italian city is Shakespeare's Romeo and Juliet set?",
+      "options": ["Verona", "Venice", "Padua", "Florence"],
+      "answer": "Verona",
+      "explanation": "Shakespeare liked Verona enough to open The Two Gentlemen of Verona there too.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which novel gave the world the phrases 'Big Brother' and 'Room 101'?",
+      "options": ["Nineteen Eighty-Four", "Brave New World", "Animal Farm", "Fahrenheit 451"],
+      "answer": "Nineteen Eighty-Four",
+      "explanation": "George Orwell published it in 1949.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which book do these emoji describe?",
+      "options": ["The Wonderful Wizard of Oz", "Alice's Adventures in Wonderland", "The Secret Garden", "The Lion, the Witch and the Wardrobe"],
+      "answer": "The Wonderful Wizard of Oz",
+      "explanation": "In L. Frank Baum's book Dorothy's magic shoes are silver; the 1939 film made them ruby.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🌪️👧🐶🦁🧙‍♂️" }
+    },
+    {
+      "band": "adults",
+      "question": "In Moby-Dick, what is the name of the captain obsessed with hunting the white whale?",
+      "options": ["Captain Ahab", "Captain Nemo", "Captain Bligh", "Captain Haddock"],
+      "answer": "Captain Ahab",
+      "explanation": "The novel opens with one of the most famous lines in literature: 'Call me Ishmael.'",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which book do these emoji describe?",
+      "options": ["Robinson Crusoe", "Around the World in Eighty Days", "Lord of the Flies", "Gulliver's Travels"],
+      "answer": "Robinson Crusoe",
+      "explanation": "In Daniel Defoe's 1719 novel the shipwrecked Crusoe is stunned to find a single human footprint in the sand.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🚢🏝️🧔🦜👣" }
+    },
+    {
+      "band": "adults",
+      "question": "Which book do these emoji describe?",
+      "options": ["Frankenstein", "Dracula", "The Picture of Dorian Gray", "The Invisible Man"],
+      "answer": "Frankenstein",
+      "explanation": "Mary Shelley began writing it aged just 18, during a stormy summer by Lake Geneva in 1816.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🧪⚡🧟👨‍🔬" }
+    },
+    {
+      "band": "adults",
+      "question": "Which of the Brontë siblings wrote Wuthering Heights?",
+      "options": ["Emily", "Charlotte", "Anne", "Branwell"],
+      "answer": "Emily",
+      "explanation": "It was Emily Brontë's only novel, published in 1847 under the name Ellis Bell.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In Tolkien's The Hobbit, what is the name of the dragon?",
+      "options": ["Smaug", "Glaurung", "Ancalagon", "Fafnir"],
+      "answer": "Smaug",
+      "explanation": "Smaug sleeps on a vast hoard of treasure under the Lonely Mountain.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which Shakespeare play does a character cry 'Out, damned spot!'?",
+      "options": ["Macbeth", "Hamlet", "Othello", "King Lear"],
+      "answer": "Macbeth",
+      "explanation": "Lady Macbeth says it while sleepwalking, trying to scrub her guilt from her hands.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which novel is narrated by Nick Carraway?",
+      "options": ["The Great Gatsby", "The Catcher in the Rye", "Tender Is the Night", "Of Mice and Men"],
+      "answer": "The Great Gatsby",
+      "explanation": "F. Scott Fitzgerald published it in 1925; Nick is Gatsby's neighbour on Long Island.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "George Eliot was the pen name of which writer?",
+      "options": ["Mary Ann Evans", "Elizabeth Gaskell", "Charlotte Brontë", "Fanny Burney"],
+      "answer": "Mary Ann Evans",
+      "explanation": "Mary Ann Evans wrote Middlemarch and Silas Marner under her male pen name.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In Bram Stoker's Dracula, at which English seaside town does the Count come ashore?",
+      "options": ["Whitby", "Scarborough", "Brighton", "Dover"],
+      "answer": "Whitby",
+      "explanation": "He leaps from a wrecked ship in the shape of a large dog; Stoker had holidayed in Whitby in 1890.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who wrote the nonsense poem The Owl and the Pussy-cat?",
+      "options": ["Edward Lear", "Lewis Carroll", "Hilaire Belloc", "A. A. Milne"],
+      "answer": "Edward Lear",
+      "explanation": "The pair go to sea in a beautiful pea-green boat and dine on mince and slices of quince.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}

@@ -1,0 +1,483 @@
+{
+  "category": "star-wars",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which Star Wars character do these emoji describe?",
+      "options": [
+        "R2-D2",
+        "BB-8",
+        "C-3PO",
+        "K-2SO"
+      ],
+      "answer": "R2-D2",
+      "explanation": "R2-D2 talks in beeps and whistles, which C-3PO translates.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🤖🔵⚪"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which Star Wars character do these emoji describe?",
+      "options": [
+        "Yoda",
+        "Jabba the Hutt",
+        "Admiral Ackbar",
+        "Chewbacca"
+      ],
+      "answer": "Yoda",
+      "explanation": "Yoda was 900 years old when he died in Return of the Jedi.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🟢👂🧓"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which Star Wars character do these emoji describe?",
+      "options": [
+        "Chewbacca",
+        "Han Solo",
+        "Lando Calrissian",
+        "Admiral Ackbar"
+      ],
+      "answer": "Chewbacca",
+      "explanation": "Chewbacca is a Wookiee from the planet Kashyyyk.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🐻🏹🚀"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which Star Wars character do these emoji describe?",
+      "options": [
+        "Darth Vader",
+        "Darth Maul",
+        "Boba Fett",
+        "Emperor Palpatine"
+      ],
+      "answer": "Darth Vader",
+      "explanation": "Darth Vader's deep voice was provided by the actor James Earl Jones.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🖤😷🔴⚔️"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "What colour is Mace Windu's lightsaber?",
+      "options": [
+        "Purple",
+        "Green",
+        "Blue",
+        "Red"
+      ],
+      "answer": "Purple",
+      "explanation": "Samuel L. Jackson has said he asked for a purple one so he could spot himself in a huge battle scene.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the name of Han Solo's ship?",
+      "options": [
+        "The Millennium Falcon",
+        "The Ghost",
+        "The Razor Crest",
+        "Slave I"
+      ],
+      "answer": "The Millennium Falcon",
+      "explanation": "Han boasts that it made the Kessel Run in less than twelve parsecs.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which desert planet does Luke Skywalker grow up on?",
+      "options": [
+        "Tatooine",
+        "Jakku",
+        "Hoth",
+        "Endor"
+      ],
+      "answer": "Tatooine",
+      "explanation": "Tatooine has two suns.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Who is Luke Skywalker's twin sister?",
+      "options": [
+        "Princess Leia",
+        "Rey",
+        "Padmé Amidala",
+        "Jyn Erso"
+      ],
+      "answer": "Princess Leia",
+      "explanation": "Luke and Leia were split up as babies to keep them hidden.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "On which forest moon do the furry Ewoks live?",
+      "options": [
+        "Endor",
+        "Dagobah",
+        "Kashyyyk",
+        "Yavin 4"
+      ],
+      "answer": "Endor",
+      "explanation": "The Ewoks help the Rebels beat the Empire in Return of the Jedi.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In The Mandalorian, what is the real name of the little green character fans called Baby Yoda?",
+      "options": [
+        "Grogu",
+        "Yaddle",
+        "Babu Frik",
+        "Nubs"
+      ],
+      "answer": "Grogu",
+      "explanation": "His name is revealed in the second series of The Mandalorian.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "On which icy planet do the Rebels hide at the start of The Empire Strikes Back?",
+      "options": [
+        "Hoth",
+        "Tatooine",
+        "Naboo",
+        "Bespin"
+      ],
+      "answer": "Hoth",
+      "explanation": "Luke rides a Tauntaun across Hoth's snowy plains.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "C-3PO says he is fluent in over how many forms of communication?",
+      "options": [
+        "Six million",
+        "Six hundred",
+        "Six thousand",
+        "Sixty million"
+      ],
+      "answer": "Six million",
+      "explanation": "Even so, he cannot always understand what R2-D2 is grumbling about.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is Kylo Ren's real name?",
+      "options": [
+        "Ben Solo",
+        "Ben Kenobi",
+        "Cal Kestis",
+        "Poe Dameron"
+      ],
+      "answer": "Ben Solo",
+      "explanation": "He is the son of Han Solo and Princess Leia.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which film do we first meet Rey?",
+      "options": [
+        "The Force Awakens",
+        "The Last Jedi",
+        "The Rise of Skywalker",
+        "Rogue One"
+      ],
+      "answer": "The Force Awakens",
+      "explanation": "She is a scavenger on the desert planet Jakku.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which Jedi Master trains Obi-Wan Kenobi in The Phantom Menace?",
+      "options": [
+        "Qui-Gon Jinn",
+        "Mace Windu",
+        "Count Dooku",
+        "Ki-Adi-Mundi"
+      ],
+      "answer": "Qui-Gon Jinn",
+      "explanation": "Qui-Gon also discovers the young Anakin Skywalker on Tatooine.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Star Wars film do these emoji describe?",
+      "options": [
+        "The Empire Strikes Back",
+        "Return of the Jedi",
+        "A New Hope",
+        "Attack of the Clones"
+      ],
+      "answer": "The Empire Strikes Back",
+      "explanation": "It's the film where Darth Vader tells Luke, 'I am your father.'",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "❄️🟢👨‍👦"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which Star Wars film do these emoji describe?",
+      "options": [
+        "Return of the Jedi",
+        "A New Hope",
+        "The Phantom Menace",
+        "Rogue One"
+      ],
+      "answer": "Return of the Jedi",
+      "explanation": "The second Death Star is destroyed at the end of the film.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🧸🌲💥"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which Star Wars TV show do these emoji describe?",
+      "options": [
+        "The Mandalorian",
+        "Andor",
+        "Ahsoka",
+        "Obi-Wan Kenobi"
+      ],
+      "answer": "The Mandalorian",
+      "explanation": "Pedro Pascal plays the helmeted bounty hunter.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🪖👶🟢"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Who composed the music for the Star Wars films?",
+      "options": [
+        "John Williams",
+        "Hans Zimmer",
+        "James Horner",
+        "Howard Shore"
+      ],
+      "answer": "John Williams",
+      "explanation": "He scored all nine films of the Skywalker saga.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In The Empire Strikes Back, how does Han Solo reply when Leia says 'I love you'?",
+      "options": [
+        "I know",
+        "I love you too",
+        "Me too",
+        "Never tell me the odds"
+      ],
+      "answer": "I know",
+      "explanation": "The director Irvin Kershner said the script had Han say 'I love you too', and Harrison Ford came up with 'I know' on set.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which actor played Obi-Wan Kenobi in the prequel trilogy?",
+      "options": [
+        "Ewan McGregor",
+        "Alec Guinness",
+        "Liam Neeson",
+        "Hayden Christensen"
+      ],
+      "answer": "Ewan McGregor",
+      "explanation": "Sir Alec Guinness played the older Obi-Wan in the original 1977 film.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which year was the first Star Wars film released in the United States?",
+      "options": [
+        "1977",
+        "1975",
+        "1980",
+        "1983"
+      ],
+      "answer": "1977",
+      "explanation": "It was later renamed Episode IV: A New Hope.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In The Rise of Skywalker, who is revealed to be Rey's grandfather?",
+      "options": [
+        "Emperor Palpatine",
+        "Obi-Wan Kenobi",
+        "Luke Skywalker",
+        "Han Solo"
+      ],
+      "answer": "Emperor Palpatine",
+      "explanation": "Even so, she chooses to call herself Rey Skywalker at the end.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which planet does the Death Star destroy in A New Hope?",
+      "options": [
+        "Alderaan",
+        "Yavin 4",
+        "Coruscant",
+        "Naboo"
+      ],
+      "answer": "Alderaan",
+      "explanation": "Alderaan was Princess Leia's home planet.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which famous line does Admiral Ackbar shout in Return of the Jedi?",
+      "options": [
+        "It's a trap!",
+        "I have a bad feeling about this",
+        "Never tell me the odds",
+        "Do or do not, there is no try"
+      ],
+      "answer": "It's a trap!",
+      "explanation": "Ackbar's voice came from Erik Bauersfeld, a radio actor who made it up on the spot after looking at a photo of the character.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What was Finn's stormtrooper number in The Force Awakens?",
+      "options": [
+        "FN-2187",
+        "TK-421",
+        "CT-7567",
+        "FN-1824"
+      ],
+      "answer": "FN-2187",
+      "explanation": "Poe Dameron decides he needs a proper name and calls him Finn.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which bounty hunter does Han Solo shoot in the Mos Eisley cantina?",
+      "options": [
+        "Greedo",
+        "Bossk",
+        "IG-88",
+        "Dengar"
+      ],
+      "answer": "Greedo",
+      "explanation": "Fans still argue about whether Han shot first.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the Mandalorian's real name?",
+      "options": [
+        "Din Djarin",
+        "Cad Bane",
+        "Jango Fett",
+        "Paz Vizsla"
+      ],
+      "answer": "Din Djarin",
+      "explanation": "His name is revealed in the first series' finale.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In Return of the Jedi, which beast does Luke fight beneath Jabba the Hutt's throne room?",
+      "options": [
+        "The Rancor",
+        "The Sarlacc",
+        "The Wampa",
+        "The Dianoga"
+      ],
+      "answer": "The Rancor",
+      "explanation": "The Wampa is the snow beast that grabs Luke on Hoth.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In The Phantom Menace, what are the tiny life forms in living cells that are linked to the Force?",
+      "options": [
+        "Midi-chlorians",
+        "Kyber crystals",
+        "Nanites",
+        "Spice"
+      ],
+      "answer": "Midi-chlorians",
+      "explanation": "Obi-Wan finds Anakin's count is over 20,000, higher than even Master Yoda's.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}

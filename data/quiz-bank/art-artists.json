@@ -1,0 +1,535 @@
+{
+  "category": "art-artists",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "What is this famous painting called?",
+      "options": [
+        "Mona Lisa",
+        "Girl with a Pearl Earring",
+        "The Laughing Cavalier",
+        "Lady with an Ermine"
+      ],
+      "answer": "Mona Lisa",
+      "explanation": "Leonardo da Vinci painted it, and it hangs in the Louvre in Paris behind bulletproof glass.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Mona_Lisa",
+        "alt": "A portrait of a woman with folded hands and a calm smile",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615238/GamePad/quiz/mona-lisa.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:Mona_Lisa.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Who painted this?",
+      "options": [
+        "Vincent van Gogh",
+        "Claude Monet",
+        "Pablo Picasso",
+        "Paul Cézanne"
+      ],
+      "answer": "Vincent van Gogh",
+      "explanation": "This is The Starry Night, painted in 1889 and inspired by the view from his window in the south of France.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "The_Starry_Night",
+        "alt": "A swirling blue night sky above a small village",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615240/GamePad/quiz/the-starry-night.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "What is this famous picture called?",
+      "options": [
+        "The Great Wave off Kanagawa",
+        "The Fighting Temeraire",
+        "Impression, Sunrise",
+        "Storm on the Sea of Galilee"
+      ],
+      "answer": "The Great Wave off Kanagawa",
+      "explanation": "The Japanese artist Hokusai made it as a woodblock print around 1831, so thousands of copies could be printed.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "The_Great_Wave_off_Kanagawa",
+        "alt": "A huge curling wave towering over small boats, with a mountain far behind",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615241/GamePad/quiz/the-great-wave-off-kanagawa.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:Tsunami_by_hokusai_19th_century.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "What is this famous painting called?",
+      "options": [
+        "The Scream",
+        "The Kiss",
+        "Water Lilies",
+        "The Persistence of Memory"
+      ],
+      "answer": "The Scream",
+      "explanation": "Edvard Munch from Norway made several versions of it, in paint and in pastel.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "The_Scream",
+        "alt": "A figure on a bridge holding its face under a fiery orange sky",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615243/GamePad/quiz/the-scream.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:Edvard_Munch,_1893,_The_Scream,_oil,_tempera_and_pastel_on_cardboard,_91_x_73_cm,_National_Gallery_of_Norway.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Who painted this?",
+      "options": [
+        "Claude Monet",
+        "Pierre-Auguste Renoir",
+        "Edgar Degas",
+        "Henri Matisse"
+      ],
+      "answer": "Claude Monet",
+      "explanation": "Monet's Impression, Sunrise gave the whole Impressionist movement its name.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Impression,_Sunrise",
+        "alt": "A misty harbour with a red sun rising",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615244/GamePad/quiz/impression-sunrise.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:Monet_-_Impression,_Sunrise.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which two colours of paint mix to make orange?",
+      "options": [
+        "Red and yellow",
+        "Blue and yellow",
+        "Red and blue",
+        "Yellow and white"
+      ],
+      "answer": "Red and yellow",
+      "explanation": "Blue and yellow make green, and red and blue make purple.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In painting, what are red, yellow and blue known as?",
+      "options": [
+        "Primary colours",
+        "Secondary colours",
+        "Pastel colours",
+        "Neutral colours"
+      ],
+      "answer": "Primary colours",
+      "explanation": "You can mix almost any colour from the three primaries, but you cannot mix the primaries themselves.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which artist painted the ceiling of the Sistine Chapel at the Vatican?",
+      "options": [
+        "Michelangelo",
+        "Leonardo da Vinci",
+        "Raphael",
+        "Donatello"
+      ],
+      "answer": "Michelangelo",
+      "explanation": "He spent about four years on it, working from scaffolding high above the floor.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the giant steel sculpture with outstretched wings that stands beside the A1 at Gateshead?",
+      "options": [
+        "The Angel of the North",
+        "The Kelpies",
+        "Another Place",
+        "Dream"
+      ],
+      "answer": "The Angel of the North",
+      "explanation": "Antony Gormley's angel is 20 metres tall, with wings 54 metres across.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which artist is famous for paintings of Campbell's soup tins?",
+      "options": [
+        "Andy Warhol",
+        "Roy Lichtenstein",
+        "David Hockney",
+        "Henri Rousseau"
+      ],
+      "answer": "Andy Warhol",
+      "explanation": "Warhol painted 32 canvases, one for each flavour of Campbell's soup on sale at the time.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What do we call a painting of objects such as fruit, flowers or jugs arranged on a table?",
+      "options": [
+        "A still life",
+        "A landscape",
+        "A portrait",
+        "A mural"
+      ],
+      "answer": "A still life",
+      "explanation": "Still life paintings were hugely popular in the Netherlands in the 1600s.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which artist dripped and splashed paint onto huge canvases laid on the floor, earning the nickname 'Jack the Dripper'?",
+      "options": [
+        "Jackson Pollock",
+        "Mark Rothko",
+        "Joan Miró",
+        "Wassily Kandinsky"
+      ],
+      "answer": "Jackson Pollock",
+      "explanation": "Pollock walked round his canvases, flicking and pouring paint from sticks and cans.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which artist made colourful paper cut-outs, like The Snail, when he was too ill to stand and paint?",
+      "options": [
+        "Henri Matisse",
+        "Pablo Picasso",
+        "Paul Klee",
+        "Georges Braque"
+      ],
+      "answer": "Henri Matisse",
+      "explanation": "Matisse called it 'drawing with scissors', cutting shapes from paper his assistants had painted.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which artist is famous for busy scenes of northern English towns full of 'matchstick men'?",
+      "options": [
+        "L. S. Lowry",
+        "J. M. W. Turner",
+        "John Constable",
+        "Thomas Gainsborough"
+      ],
+      "answer": "L. S. Lowry",
+      "explanation": "Lowry painted the mills and streets around Salford and Manchester.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Pablo Picasso helped invent which art style, which shows things as blocky shapes seen from several sides at once?",
+      "options": [
+        "Cubism",
+        "Impressionism",
+        "Pop Art",
+        "Surrealism"
+      ],
+      "answer": "Cubism",
+      "explanation": "He developed it with his friend Georges Braque in Paris, starting around 1907.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who painted this?",
+      "options": [
+        "Johannes Vermeer",
+        "Frans Hals",
+        "Jan van Eyck",
+        "Pieter de Hooch"
+      ],
+      "answer": "Johannes Vermeer",
+      "explanation": "This is Girl with a Pearl Earring, from around 1665; it hangs in the Mauritshuis in The Hague.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Girl_with_a_Pearl_Earring",
+        "alt": "A girl in a blue and yellow headscarf glancing over her shoulder",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615246/GamePad/quiz/girl-with-a-pearl-earring.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:1665_Girl_with_a_Pearl_Earring.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Who painted this?",
+      "options": [
+        "J. M. W. Turner",
+        "John Constable",
+        "Thomas Gainsborough",
+        "James McNeill Whistler"
+      ],
+      "answer": "J. M. W. Turner",
+      "explanation": "The Fighting Temeraire was voted Britain's greatest painting in a 2005 Radio 4 poll and appears on the £20 note.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "The_Fighting_Temeraire",
+        "alt": "An old sailing warship pulled by a small steam tug at sunset",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615248/GamePad/quiz/the-fighting-temeraire.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:The_Fighting_Temeraire,_JMW_Turner,_National_Gallery.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "What is this painting by John Constable called?",
+      "options": [
+        "The Hay Wain",
+        "Flatford Mill",
+        "The Cornfield",
+        "Salisbury Cathedral from the Bishop's Grounds"
+      ],
+      "answer": "The Hay Wain",
+      "explanation": "Constable painted it in 1821 on the River Stour in Suffolk, near Flatford Mill.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "The_Hay_Wain",
+        "alt": "A horse-drawn cart standing in a shallow river beside a cottage",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615249/GamePad/quiz/the-hay-wain.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:John_Constable_-_The_Hay_Wain_(1821).jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Who painted this?",
+      "options": [
+        "Rembrandt van Rijn",
+        "Peter Paul Rubens",
+        "Anthony van Dyck",
+        "Diego Velázquez"
+      ],
+      "answer": "Rembrandt van Rijn",
+      "explanation": "The Night Watch got its name from darkened varnish; the scene is actually set in daytime.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "The_Night_Watch",
+        "alt": "A company of armed men stepping out of shadow, led by a captain in black",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615251/GamePad/quiz/the-night-watch.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:La_ronda_de_noche,_por_Rembrandt_van_Rijn.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Who painted this?",
+      "options": [
+        "Gustav Klimt",
+        "Egon Schiele",
+        "Alphonse Mucha",
+        "Edvard Munch"
+      ],
+      "answer": "Gustav Klimt",
+      "explanation": "Klimt used real gold leaf on The Kiss, which hangs in the Belvedere in Vienna.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "The_Kiss_(Klimt)",
+        "alt": "A couple embracing, wrapped in robes covered with gold patterns",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615252/GamePad/quiz/the-kiss-klimt.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:The_Kiss_-_Gustav_Klimt_-_Google_Cultural_Institute.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "In which city is the Prado art museum?",
+      "options": [
+        "Madrid",
+        "Barcelona",
+        "Lisbon",
+        "Seville"
+      ],
+      "answer": "Madrid",
+      "explanation": "Its treasures include Velázquez's Las Meninas.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which artist painted Guernica in 1937?",
+      "options": [
+        "Pablo Picasso",
+        "Salvador Dalí",
+        "Joan Miró",
+        "Francisco Goya"
+      ],
+      "answer": "Pablo Picasso",
+      "explanation": "It shows the bombing of the Basque town of Guernica during the Spanish Civil War.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which surrealist painted the melting clocks of The Persistence of Memory?",
+      "options": [
+        "Salvador Dalí",
+        "René Magritte",
+        "Max Ernst",
+        "Giorgio de Chirico"
+      ],
+      "answer": "Salvador Dalí",
+      "explanation": "The painting is surprisingly small, only about 24 by 33 centimetres.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which British street artist's Girl with Balloon shredded itself moments after selling at auction in 2018?",
+      "options": [
+        "Banksy",
+        "Damien Hirst",
+        "Tracey Emin",
+        "Grayson Perry"
+      ],
+      "answer": "Banksy",
+      "explanation": "Renamed Love is in the Bin, the half-shredded work sold again in 2021 for over £18 million.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which art movement took its name from a critic mocking a Monet painting in 1874?",
+      "options": [
+        "Impressionism",
+        "Fauvism",
+        "Cubism",
+        "Pointillism"
+      ],
+      "answer": "Impressionism",
+      "explanation": "Critic Louis Leroy seized on the title of Monet's Impression, Sunrise.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which sculptor created The Thinker?",
+      "options": [
+        "Auguste Rodin",
+        "Michelangelo",
+        "Henry Moore",
+        "Gian Lorenzo Bernini"
+      ],
+      "answer": "Auguste Rodin",
+      "explanation": "It began as a figure of the poet Dante for a huge bronze doorway called The Gates of Hell.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which British artist is famous for My Bed, her own unmade bed shown at the Tate Gallery in 1999?",
+      "options": [
+        "Tracey Emin",
+        "Rachel Whiteread",
+        "Bridget Riley",
+        "Sarah Lucas"
+      ],
+      "answer": "Tracey Emin",
+      "explanation": "My Bed was shortlisted for the 1999 Turner Prize and sold in 2014 for over £2.5 million.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which precious blue pigment did Renaissance painters make from crushed lapis lazuli?",
+      "options": [
+        "Ultramarine",
+        "Prussian blue",
+        "Cobalt blue",
+        "Cerulean"
+      ],
+      "answer": "Ultramarine",
+      "explanation": "It could cost more than gold, so painters often saved it for the robes of the Virgin Mary.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who painted The Laughing Cavalier?",
+      "options": [
+        "Frans Hals",
+        "Peter Paul Rubens",
+        "Anthony van Dyck",
+        "Diego Velázquez"
+      ],
+      "answer": "Frans Hals",
+      "explanation": "Despite the name, the cavalier is only smiling; he hangs in the Wallace Collection in London.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which artist pioneered pointillism, painting with thousands of tiny dots?",
+      "options": [
+        "Georges Seurat",
+        "Paul Cézanne",
+        "Paul Gauguin",
+        "Henri de Toulouse-Lautrec"
+      ],
+      "answer": "Georges Seurat",
+      "explanation": "His A Sunday Afternoon on the Island of La Grande Jatte took about two years to paint.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}

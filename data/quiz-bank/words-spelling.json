@@ -1,0 +1,455 @@
+{
+  "category": "words-spelling",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which is the correct spelling of the word meaning 'needed'?",
+      "options": [
+        "Necessary",
+        "Neccessary",
+        "Necesary",
+        "Neccesary"
+      ],
+      "answer": "Necessary",
+      "explanation": "A handy tip: a shirt has one collar and two sleeves, so necessary has one c and two s's.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which is the correct spelling of the word meaning 'apart'?",
+      "options": [
+        "Separate",
+        "Seperate",
+        "Separete",
+        "Seperete"
+      ],
+      "answer": "Separate",
+      "explanation": "Remember there is 'a rat' hiding in sep-a-rat-e.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which is the correct spelling of the word for the steady beat in music?",
+      "options": [
+        "Rhythm",
+        "Rythm",
+        "Rhythym",
+        "Rhythem"
+      ],
+      "answer": "Rhythm",
+      "explanation": "Rhythm has no a, e, i, o or u at all: the y does the job of a vowel.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the opposite of 'generous'?",
+      "options": [
+        "Mean",
+        "Kind",
+        "Rich",
+        "Brave"
+      ],
+      "answer": "Mean",
+      "explanation": "Generous comes from a Latin word meaning 'of noble birth'.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "If something costs 'an arm and a leg', what does that mean?",
+      "options": [
+        "It is very expensive",
+        "It is very dangerous",
+        "It is very tiring",
+        "It is very cheap"
+      ],
+      "answer": "It is very expensive",
+      "explanation": "Nobody really pays with their arms and legs; it just means the price is painfully high.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What does it mean to 'let the cat out of the bag'?",
+      "options": [
+        "Give away a secret",
+        "Start an argument",
+        "Make a big mess",
+        "Run away fast"
+      ],
+      "answer": "Give away a secret",
+      "explanation": "Once a secret is out, just like a cat, it is very hard to get back in the bag.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What does 'nocturnal' mean?",
+      "options": [
+        "Active at night",
+        "Living in water",
+        "Eating only plants",
+        "Sleeping all winter"
+      ],
+      "answer": "Active at night",
+      "explanation": "Owls, bats, badgers and hedgehogs are all nocturnal.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "The word 'dinosaur' comes from Greek words meaning what?",
+      "options": [
+        "Terrible lizard",
+        "Giant bird",
+        "Ancient dragon",
+        "Huge tooth"
+      ],
+      "answer": "Terrible lizard",
+      "explanation": "The scientist Richard Owen made up the name in the 1840s.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What do you call a word that reads the same backwards and forwards, like 'level'?",
+      "options": [
+        "A palindrome",
+        "An anagram",
+        "An acronym",
+        "A synonym"
+      ],
+      "answer": "A palindrome",
+      "explanation": "Kayak, noon and even the name Hannah are palindromes too.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which letter is used most often in written English?",
+      "options": [
+        "E",
+        "A",
+        "S",
+        "T"
+      ],
+      "answer": "E",
+      "explanation": "E turns up as roughly one in every eight letters you read.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which word uses exactly the same letters as 'listen'?",
+      "options": [
+        "Silent",
+        "Lesson",
+        "Little",
+        "Linens"
+      ],
+      "answer": "Silent",
+      "explanation": "Tinsel and enlist are made from the very same six letters too.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "The word 'shampoo' comes from a Hindi word that meant what?",
+      "options": [
+        "To press or massage",
+        "To wash",
+        "Soap",
+        "Bubbles"
+      ],
+      "answer": "To press or massage",
+      "explanation": "In 1814 Sake Dean Mahomed opened baths in Brighton offering 'shampooing', a massage with Indian oils.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What does 'tri' mean at the start of words like triangle and tricycle?",
+      "options": [
+        "Three",
+        "Two",
+        "Four",
+        "Many"
+      ],
+      "answer": "Three",
+      "explanation": "A triceratops has three horns, and a triathlon has three sports.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which of these words comes first in alphabetical order?",
+      "options": [
+        "Ballad",
+        "Ballet",
+        "Balloon",
+        "Ballot"
+      ],
+      "answer": "Ballad",
+      "explanation": "They all start 'ball', so it comes down to the fifth letter, and a comes before e and o.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which of these words is a verb, a doing word?",
+      "options": [
+        "Jump",
+        "Happy",
+        "Elephant",
+        "Quickly"
+      ],
+      "answer": "Jump",
+      "explanation": "Happy is an adjective, elephant is a noun and quickly is an adverb.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which is the correct spelling of the word for a place to stay?",
+      "options": [
+        "Accommodation",
+        "Accomodation",
+        "Acommodation",
+        "Acomodation"
+      ],
+      "answer": "Accommodation",
+      "explanation": "It has room for two c's and two m's.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which is the correct spelling of the word for a thousand years?",
+      "options": [
+        "Millennium",
+        "Millenium",
+        "Milennium",
+        "Milenium"
+      ],
+      "answer": "Millennium",
+      "explanation": "Two l's and two n's: it comes from the Latin mille, a thousand, and annus, a year.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which is the correct spelling of the word for a printed list of questions?",
+      "options": [
+        "Questionnaire",
+        "Questionaire",
+        "Questionnair",
+        "Questionairre"
+      ],
+      "answer": "Questionnaire",
+      "explanation": "Two n's, then the French ending -aire.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "The word 'robot' first appeared in a 1920 play by which Czech writer?",
+      "options": [
+        "Karel Čapek",
+        "Franz Kafka",
+        "Milan Kundera",
+        "Václav Havel"
+      ],
+      "answer": "Karel Čapek",
+      "explanation": "His brother Josef suggested the word, from the Czech robota, meaning forced labour.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What does the Latin phrase 'carpe diem' mean?",
+      "options": [
+        "Seize the day",
+        "Count the days",
+        "Day by day",
+        "Happy days"
+      ],
+      "answer": "Seize the day",
+      "explanation": "It comes from a poem by the Roman poet Horace.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the name for a word made by blending two others, like 'brunch' or 'smog'?",
+      "options": [
+        "A portmanteau",
+        "A palindrome",
+        "An oxymoron",
+        "Onomatopoeia"
+      ],
+      "answer": "A portmanteau",
+      "explanation": "Lewis Carroll first used it this way in Through the Looking-Glass, where Humpty Dumpty says 'slithy' means lithe and slimy.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is arachnophobia a fear of?",
+      "options": [
+        "Spiders",
+        "Heights",
+        "Open spaces",
+        "Small spaces"
+      ],
+      "answer": "Spiders",
+      "explanation": "It comes from Arachne, a weaver in Greek myth who was turned into a spider.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which of these phrases is an oxymoron?",
+      "options": [
+        "Deafening silence",
+        "Bright sunshine",
+        "Loud thunder",
+        "Freezing ice"
+      ],
+      "answer": "Deafening silence",
+      "explanation": "An oxymoron puts opposites together, and the word itself joins the Greek for 'sharp' and 'foolish'.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What does 'sesquipedalian' describe?",
+      "options": [
+        "Using long words",
+        "Walking on stilts",
+        "Speaking too quickly",
+        "Being very old-fashioned"
+      ],
+      "answer": "Using long words",
+      "explanation": "It is Latin for 'a foot and a half long', from the poet Horace's joke about long words.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "The word 'salary' comes from the Latin for which everyday substance?",
+      "options": [
+        "Salt",
+        "Silver",
+        "Bread",
+        "Wine"
+      ],
+      "answer": "Salt",
+      "explanation": "Latin salarium comes from sal, salt, though whether Roman soldiers were really paid in salt is doubtful.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the collective noun for a group of owls?",
+      "options": [
+        "A parliament",
+        "A murder",
+        "A pride",
+        "A gaggle"
+      ],
+      "answer": "A parliament",
+      "explanation": "A murder is a group of crows, a pride is lions and a gaggle is geese.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "The word 'bungalow' comes from a Hindi word meaning 'in the style of' which region?",
+      "options": [
+        "Bengal",
+        "Bavaria",
+        "Burgundy",
+        "Bangkok"
+      ],
+      "answer": "Bengal",
+      "explanation": "The Hindi bangla meant 'of Bengal', used for a single-storey house with a veranda.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What does 'once in a blue moon' mean?",
+      "options": [
+        "Very rarely",
+        "At midnight",
+        "Never",
+        "Every month"
+      ],
+      "answer": "Very rarely",
+      "explanation": "One kind of blue moon, a second full moon in the same calendar month, comes round only every two or three years.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the '&' symbol called?",
+      "options": [
+        "Ampersand",
+        "Asterisk",
+        "Octothorpe",
+        "Interrobang"
+      ],
+      "answer": "Ampersand",
+      "explanation": "It began as a squashed-together 'et', Latin for 'and'.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "The word 'clue' originally meant what?",
+      "options": [
+        "A ball of thread",
+        "A footprint",
+        "A key",
+        "A riddle"
+      ],
+      "answer": "A ball of thread",
+      "explanation": "In Greek myth Theseus used a ball of thread, a clew, to find his way out of the Minotaur's labyrinth.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}

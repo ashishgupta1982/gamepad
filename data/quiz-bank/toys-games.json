@@ -1,0 +1,305 @@
+{
+  "category": "toys-games",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which country does LEGO come from?",
+      "options": ["Denmark", "Sweden", "Germany", "Netherlands"],
+      "answer": "Denmark",
+      "explanation": "LEGO began in the Danish town of Billund, where there is now a LEGOLAND park.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "The name LEGO comes from two words meaning what?",
+      "options": ["Play well", "Build big", "Little bricks", "Have fun"],
+      "answer": "Play well",
+      "explanation": "It is short for leg godt, which is Danish for play well.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In chess, which piece can only ever move diagonally?",
+      "options": ["Bishop", "Rook", "Knight", "Queen"],
+      "answer": "Bishop",
+      "explanation": "Because it only moves diagonally, a bishop stays on the same colour square for the whole game.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "How many squares are there on a chessboard?",
+      "options": ["64", "49", "81", "100"],
+      "answer": "64",
+      "explanation": "A chessboard has eight rows of eight squares, alternating light and dark.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which country was the Rubik's Cube invented?",
+      "options": ["Hungary", "Japan", "Russia", "USA"],
+      "answer": "Hungary",
+      "explanation": "Erno Rubik was a design teacher in Budapest, and he first called his puzzle the Magic Cube.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which is the most expensive property on a UK Monopoly board?",
+      "options": ["Mayfair", "Park Lane", "Oxford Street", "Bond Street"],
+      "answer": "Mayfair",
+      "explanation": "Mayfair costs 400 pounds to buy, the most of any square on the board.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Snakes and Ladders was first played in which country?",
+      "options": ["India", "China", "Egypt", "England"],
+      "answer": "India",
+      "explanation": "In India it was a game about good and bad deeds, where ladders were good deeds and snakes were bad ones.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "When Mr Potato Head first went on sale in 1952, what did children push its pieces into?",
+      "options": ["A real potato", "A plastic potato", "A lump of clay", "A foam ball"],
+      "answer": "A real potato",
+      "explanation": "The kit was just eyes, noses, mouths and ears, and a plastic potato body was not included until 1964.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the name of Barbie's boyfriend?",
+      "options": ["Ken", "Kevin", "Keith", "Kyle"],
+      "answer": "Ken",
+      "explanation": "Ken first appeared in 1961, two years after Barbie.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which game is played by throwing a small ball and scooping up little metal star-shaped pieces?",
+      "options": ["Jacks", "Marbles", "Tiddlywinks", "Dominoes"],
+      "answer": "Jacks",
+      "explanation": "Long ago the game was played with small animal bones or stones, which is why it is also called knucklebones.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "How many dots are there altogether on a normal six-sided dice?",
+      "options": ["21", "18", "24", "36"],
+      "answer": "21",
+      "explanation": "One plus two plus three plus four plus five plus six makes 21, and opposite sides always add up to seven.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In the card game UNO, how many cards does each player start with?",
+      "options": ["7", "5", "8", "10"],
+      "answer": "7",
+      "explanation": "Each player gets seven cards, and you must shout UNO when you are down to your last one.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Teddy bears are named after which American president?",
+      "options": ["Theodore Roosevelt", "Abraham Lincoln", "George Washington", "John F. Kennedy"],
+      "answer": "Theodore Roosevelt",
+      "explanation": "President Theodore Roosevelt, known as Teddy, refused to shoot a bear on a hunting trip, and a toy maker named a bear after him.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Scrabble, which two letters are worth the most points?",
+      "options": ["Q and Z", "X and J", "K and V", "J and Q"],
+      "answer": "Q and Z",
+      "explanation": "Q and Z score 10 points each, while J and X score 8.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which toy was invented by an engineer who watched a spring tumble off a shelf?",
+      "options": ["Slinky", "Yo-yo", "Pogo stick", "Jack-in-the-box"],
+      "answer": "Slinky",
+      "explanation": "Richard James saw a spring keep moving after it fell, and the Slinky went on sale in 1945.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which year did Erno Rubik invent his famous cube?",
+      "options": ["1974", "1980", "1968", "1985"],
+      "answer": "1974",
+      "explanation": "He made the first one in 1974, and it took him about a month to solve it himself.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "On the UK Monopoly board, what colour is the set that includes Trafalgar Square?",
+      "options": ["Red", "Orange", "Yellow", "Green"],
+      "answer": "Red",
+      "explanation": "Trafalgar Square shares the red set with the Strand and Fleet Street.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Monopoly grew out of which earlier game, patented by Lizzie Magie in 1904?",
+      "options": ["The Landlord's Game", "The Banker's Game", "Property Ladder", "The Rent Game"],
+      "answer": "The Landlord's Game",
+      "explanation": "Lizzie Magie designed it to show the unfairness of landlords growing rich from rents.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which year was Barbie launched?",
+      "options": ["1959", "1949", "1965", "1972"],
+      "answer": "1959",
+      "explanation": "Barbie was launched at the American International Toy Fair in New York in March 1959.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which chess opening begins with the moves e4 e5, Nf3 Nc6, Bb5?",
+      "options": ["Ruy Lopez", "Sicilian Defence", "French Defence", "Queen's Gambit"],
+      "answer": "Ruy Lopez",
+      "explanation": "It is named after a 16th-century Spanish priest, which is why it is also called the Spanish Opening.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who beat Boris Spassky in Reykjavik in 1972 to become world chess champion?",
+      "options": ["Bobby Fischer", "Garry Kasparov", "Anatoly Karpov", "Mikhail Tal"],
+      "answer": "Bobby Fischer",
+      "explanation": "Fischer's win, at the height of the Cold War, was dubbed the Match of the Century.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which IBM computer beat Garry Kasparov at chess in 1997?",
+      "options": ["Deep Blue", "Watson", "AlphaZero", "Big Red"],
+      "answer": "Deep Blue",
+      "explanation": "It was the first time a computer had beaten a reigning world champion in a full match.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the board game Cluedo called in the USA?",
+      "options": ["Clue", "Suspect", "Whodunit", "Mystery"],
+      "answer": "Clue",
+      "explanation": "Cluedo was invented in Birmingham by Anthony Pratt, its name a mix of clue and Ludo.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which country was Trivial Pursuit invented?",
+      "options": ["Canada", "USA", "UK", "Australia"],
+      "answer": "Canada",
+      "explanation": "Two friends in Montreal came up with it in 1979 after finding pieces missing from their Scrabble set.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which talking toy, a huge hit in 1998, seemed to learn English as time went on?",
+      "options": ["Furby", "Tamagotchi", "Bop It", "Tickle Me Elmo"],
+      "answer": "Furby",
+      "explanation": "Each Furby started out speaking its own language, Furbish, and was programmed to use more English over time.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "The Tamagotchi digital pet came from which country?",
+      "options": ["Japan", "South Korea", "USA", "China"],
+      "answer": "Japan",
+      "explanation": "Bandai launched it in Japan in 1996, and its name blends the Japanese for egg and watch.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which word game was invented by an out-of-work architect, Alfred Mosher Butts?",
+      "options": ["Scrabble", "Boggle", "Bananagrams", "Upwords"],
+      "answer": "Scrabble",
+      "explanation": "Butts worked out how many of each letter to include by counting letters in newspapers, including the New York Times.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which construction toy was patented in 1901 by Frank Hornby of Liverpool?",
+      "options": ["Meccano", "LEGO", "K'Nex", "Stickle Bricks"],
+      "answer": "Meccano",
+      "explanation": "Hornby first called it Mechanics Made Easy, and later went on to make his famous model trains.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "How many pieces does each player start with in backgammon?",
+      "options": ["15", "12", "16", "20"],
+      "answer": "15",
+      "explanation": "Each side has 15 checkers to race round the board and bear off.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "The name Jenga comes from a Swahili word meaning what?",
+      "options": ["Build", "Tower", "Fall", "Balance"],
+      "answer": "Build",
+      "explanation": "Its British inventor, Leslie Scott, grew up speaking Swahili in Tanzania and named it after kujenga, to build.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}

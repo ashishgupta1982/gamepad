@@ -1,0 +1,535 @@
+{
+  "category": "animals",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which animal is this?",
+      "options": [
+        "Axolotl",
+        "Gecko",
+        "Seahorse",
+        "Mudskipper"
+      ],
+      "answer": "Axolotl",
+      "explanation": "Axolotls can regrow lost legs, and in the wild they live only in the lakes and canals around Mexico City.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Axolotl",
+        "alt": "A small water creature with feathery gills",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615212/GamePad/quiz/axolotl.jpg",
+        "credit": "Photo: LoKiLeCh, CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Axolotl_ganz.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which animal is this?",
+      "options": [
+        "Red panda",
+        "Fox",
+        "Raccoon",
+        "Lemur"
+      ],
+      "answer": "Red panda",
+      "explanation": "Despite its name, the red panda is not a close relative of the giant panda, and it spends most of its life up in the trees.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Red_panda",
+        "alt": "A furry animal with a stripy tail",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615213/GamePad/quiz/red-panda.jpg",
+        "credit": "Photo: Sunuwargr, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Red_Panda,_Gentle_Tree-Dweller_of_the_Himalayas.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which animal is this?",
+      "options": [
+        "Capybara",
+        "Beaver",
+        "Guinea pig",
+        "Wombat"
+      ],
+      "answer": "Capybara",
+      "explanation": "The capybara is the biggest rodent in the world, and it loves to wallow in water.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Capybara",
+        "alt": "A large brown animal with a blunt nose",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615215/GamePad/quiz/capybara.jpg",
+        "credit": "Photo: Giles Laurent, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Capybaracropped.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which bird is this?",
+      "options": [
+        "Puffin",
+        "Penguin",
+        "Toucan",
+        "Kingfisher"
+      ],
+      "answer": "Puffin",
+      "explanation": "Puffins dig burrows to nest in on cliff tops, including around the coasts of Britain.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Atlantic_puffin",
+        "alt": "A black and white seabird with a colourful beak",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615216/GamePad/quiz/atlantic-puffin.jpg",
+        "credit": "Photo: Charles J. Sharp, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Puffin_(Fratercula_arctica).jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which animal is this?",
+      "options": [
+        "Platypus",
+        "Otter",
+        "Beaver",
+        "Mole"
+      ],
+      "answer": "Platypus",
+      "explanation": "The platypus is one of the very few mammals that lay eggs.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Platypus",
+        "alt": "A furry animal swimming in water",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615218/GamePad/quiz/platypus.jpg",
+        "credit": "Photo: Charles J. Sharp, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Duck-billed_platypus_(Ornithorhynchus_anatinus)_Scottsdale.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "What is a baby kangaroo called?",
+      "options": [
+        "A joey",
+        "A cub",
+        "A kit",
+        "A calf"
+      ],
+      "answer": "A joey",
+      "explanation": "A newborn joey is about the size of a jellybean, and it crawls straight into its mother's pouch.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What does a giant panda spend most of its day eating?",
+      "options": [
+        "Bamboo",
+        "Eucalyptus leaves",
+        "Fish",
+        "Berries"
+      ],
+      "answer": "Bamboo",
+      "explanation": "A giant panda can spend more than ten hours a day munching bamboo.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "How many hearts does an octopus have?",
+      "options": [
+        "Three",
+        "One",
+        "Two",
+        "Eight"
+      ],
+      "answer": "Three",
+      "explanation": "Two of its hearts pump blood through its gills, and the third pumps it round the rest of its body.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What colour is a polar bear's skin under its fur?",
+      "options": [
+        "Black",
+        "White",
+        "Pink",
+        "Grey"
+      ],
+      "answer": "Black",
+      "explanation": "Under its thick coat a polar bear has black skin, and its hairs are actually see-through rather than white.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which bird can fly backwards?",
+      "options": [
+        "Hummingbird",
+        "Kingfisher",
+        "Swallow",
+        "Owl"
+      ],
+      "answer": "Hummingbird",
+      "explanation": "Hummingbirds beat their wings so fast that they can hover in one spot, and even fly backwards.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is a group of lions called?",
+      "options": [
+        "A pride",
+        "A pack",
+        "A herd",
+        "A flock"
+      ],
+      "answer": "A pride",
+      "explanation": "The lionesses in a pride do most of the hunting, often working together as a team.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What does a snake use its flicking tongue for?",
+      "options": [
+        "To smell",
+        "To hear",
+        "To drink",
+        "To cool down"
+      ],
+      "answer": "To smell",
+      "explanation": "Its tongue picks up smells from the air and carries them to a special sensing spot in the roof of its mouth.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the biggest animal alive today?",
+      "options": [
+        "Blue whale",
+        "African elephant",
+        "Whale shark",
+        "Giraffe"
+      ],
+      "answer": "Blue whale",
+      "explanation": "A fully grown blue whale can be longer than a tennis court.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which farm animal has a stomach split into four parts?",
+      "options": [
+        "Cow",
+        "Pig",
+        "Horse",
+        "Chicken"
+      ],
+      "answer": "Cow",
+      "explanation": "The four parts of a cow's stomach help it break down tough grass, and it brings food back up to chew again as cud.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which bird lays the biggest eggs?",
+      "options": [
+        "Ostrich",
+        "Emu",
+        "Eagle",
+        "Swan"
+      ],
+      "answer": "Ostrich",
+      "explanation": "One ostrich egg weighs about as much as two dozen hen's eggs.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which animal is this?",
+      "options": [
+        "Okapi",
+        "Bongo",
+        "Tapir",
+        "Kudu"
+      ],
+      "answer": "Okapi",
+      "explanation": "Despite its zebra-striped legs, the okapi's closest living relative is the giraffe.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Okapi",
+        "alt": "A brown forest animal with striped legs",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615221/GamePad/quiz/okapi.jpg",
+        "credit": "Photo: Daniel Jolivet, CC BY 2.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Saint-Aignan_(Loir-et-Cher)._Okapi.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which animal is this?",
+      "options": [
+        "Aye-aye",
+        "Tarsier",
+        "Slow loris",
+        "Bush baby"
+      ],
+      "answer": "Aye-aye",
+      "explanation": "The aye-aye taps on trees with its long, thin middle finger to find grubs, and it lives only on Madagascar.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Aye-aye",
+        "alt": "A wide-eyed animal with large ears clinging to a branch",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615222/GamePad/quiz/aye-aye.jpg",
+        "credit": "Photo: nomis-simon, CC BY 2.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Wild_aye_aye.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which bird is this?",
+      "options": [
+        "Shoebill",
+        "Marabou stork",
+        "Pelican",
+        "Grey heron"
+      ],
+      "answer": "Shoebill",
+      "explanation": "The shoebill is a huge, slow-moving bird of African swamps, named for its bill shaped like a big clog.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Shoebill",
+        "alt": "A tall grey bird with an enormous bill",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615224/GamePad/quiz/shoebill.jpg",
+        "credit": "Photo: Bob Owen, CC BY 2.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Balaeniceps_rex_-Ueno_Zoo,_Tokyo,_Japan-8a.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which animal is this?",
+      "options": [
+        "Saiga antelope",
+        "Chamois",
+        "Gerenuk",
+        "Springbok"
+      ],
+      "answer": "Saiga antelope",
+      "explanation": "The saiga's big, drooping nose filters out dust in summer and warms up icy air in winter on the steppes of Central Asia.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Saiga_antelope",
+        "alt": "A pale antelope with an unusual drooping nose",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615226/GamePad/quiz/saiga-antelope.jpg",
+        "credit": "Photo: Andrey Giljov, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Saiga_antelope_at_the_Stepnoi_Sanctuary.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which animal is this?",
+      "options": [
+        "Komodo dragon",
+        "Marine iguana",
+        "Gila monster",
+        "Frilled lizard"
+      ],
+      "answer": "Komodo dragon",
+      "explanation": "The Komodo dragon is the largest lizard alive today, found on just a handful of Indonesian islands.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Komodo_dragon",
+        "alt": "A large lizard walking on the ground",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615227/GamePad/quiz/komodo-dragon.jpg",
+        "credit": "Photo: James Jolokia (james1203), CC BY 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:202306_Varanus_komodoensis.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "What is the collective noun for a group of crows?",
+      "options": [
+        "A murder",
+        "A parliament",
+        "An unkindness",
+        "A charm"
+      ],
+      "answer": "A murder",
+      "explanation": "A parliament is a group of owls, an unkindness is ravens, and a charm is goldfinches.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which bird has the longest wingspan of any living bird?",
+      "options": [
+        "Wandering albatross",
+        "Andean condor",
+        "Golden eagle",
+        "Mute swan"
+      ],
+      "answer": "Wandering albatross",
+      "explanation": "A wandering albatross can have wings more than three metres from tip to tip, and it glides for hours without flapping.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is a male bee called?",
+      "options": [
+        "A drone",
+        "A worker",
+        "A soldier",
+        "A buck"
+      ],
+      "answer": "A drone",
+      "explanation": "Drones have no sting and do not gather nectar or pollen; their main job is to mate with a queen.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which part of the world do narwhals live?",
+      "options": [
+        "The Arctic",
+        "The Antarctic",
+        "The Amazon",
+        "The Indian Ocean"
+      ],
+      "answer": "The Arctic",
+      "explanation": "A narwhal's famous tusk is really a long spiral tooth that can grow longer than two metres.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "The tuatara, a reptile with a light-sensing 'third eye' on top of its head, lives in the wild only in which country?",
+      "options": [
+        "New Zealand",
+        "Australia",
+        "Madagascar",
+        "Indonesia"
+      ],
+      "answer": "New Zealand",
+      "explanation": "The tuatara is the last survivor of a group of reptiles that lived alongside the dinosaurs.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which is the fastest bird in a hunting dive?",
+      "options": [
+        "Peregrine falcon",
+        "Golden eagle",
+        "Common swift",
+        "Gannet"
+      ],
+      "answer": "Peregrine falcon",
+      "explanation": "Diving after prey, a peregrine falcon can top 300 km/h, faster than any other animal.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which animal's young are called elvers?",
+      "options": [
+        "Eel",
+        "Otter",
+        "Elephant",
+        "Seal"
+      ],
+      "answer": "Eel",
+      "explanation": "Young European eels drift thousands of miles from the Sargasso Sea before swimming up rivers as elvers.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which mammal has the longest pregnancy?",
+      "options": [
+        "Elephant",
+        "Blue whale",
+        "Giraffe",
+        "Rhinoceros"
+      ],
+      "answer": "Elephant",
+      "explanation": "An elephant calf takes about 22 months to arrive, nearly two years.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which tiny animal is better known by the nickname 'water bear'?",
+      "options": [
+        "Tardigrade",
+        "Krill",
+        "Water flea",
+        "Copepod"
+      ],
+      "answer": "Tardigrade",
+      "explanation": "Tardigrades, usually about half a millimetre long, can survive being dried out, frozen and even exposed to open space.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is a female fox called?",
+      "options": [
+        "A vixen",
+        "A jill",
+        "A sow",
+        "A doe"
+      ],
+      "answer": "A vixen",
+      "explanation": "Red foxes have learned to live in towns and cities all over Britain.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    }
+  ]
+}

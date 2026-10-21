@@ -1,0 +1,305 @@
+{
+  "category": "sport-mix",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "In tennis, what is a score of zero called?",
+      "options": ["Love", "Nil", "Duck", "Zip"],
+      "answer": "Love",
+      "explanation": "Nobody is quite sure where it comes from, and in cricket a score of zero is called a duck.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which Grand Slam tennis tournament is played on grass in London?",
+      "options": ["Wimbledon", "The US Open", "The French Open", "The Australian Open"],
+      "answer": "Wimbledon",
+      "explanation": "Players at Wimbledon have to dress almost entirely in white.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In cricket, how many balls are bowled in a normal over?",
+      "options": ["6", "4", "8", "10"],
+      "answer": "6",
+      "explanation": "After each over, a different bowler takes over from the other end.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which British driver won the Formula 1 world championship in 2008 and again in 2014?",
+      "options": ["Lewis Hamilton", "Jenson Button", "Nigel Mansell", "Damon Hill"],
+      "answer": "Lewis Hamilton",
+      "explanation": "Hamilton won his first title with McLaren and his second with Mercedes.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which sport do teams slide heavy stones across the ice while team-mates sweep in front of them?",
+      "options": ["Curling", "Ice hockey", "Bobsleigh", "Speed skating"],
+      "answer": "Curling",
+      "explanation": "Britain's women won Olympic curling gold in 2002 with a last stone nicknamed the 'Stone of Destiny'.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "How many players does each side have on the pitch in a rugby union match?",
+      "options": ["15", "13", "11", "7"],
+      "answer": "15",
+      "explanation": "Rugby league teams have 13 players, and rugby sevens has, of course, seven.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In darts, what is the highest score you can get with three darts?",
+      "options": ["180", "150", "100", "200"],
+      "answer": "180",
+      "explanation": "You need all three darts in the treble 20, which is worth 60 each.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In snooker, how many points is the black ball worth?",
+      "options": ["7", "5", "10", "6"],
+      "answer": "7",
+      "explanation": "The black is the most valuable ball on the table; the pink is worth 6.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "England's women won the 2025 Rugby World Cup at Twickenham. What is the team's nickname?",
+      "options": ["The Red Roses", "The Lionesses", "The White Roses", "The Thorns"],
+      "answer": "The Red Roses",
+      "explanation": "They beat Canada 33–13 in front of more than 81,000 fans, a record crowd for women's rugby.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In 2021, which British 18-year-old won the US Open tennis after starting in the qualifying rounds?",
+      "options": ["Emma Raducanu", "Katie Boulter", "Heather Watson", "Johanna Konta"],
+      "answer": "Emma Raducanu",
+      "explanation": "She won all ten of her matches without losing a single set.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "How many players from each team are on the court in a game of netball?",
+      "options": ["7", "5", "6", "9"],
+      "answer": "7",
+      "explanation": "Each player wears a bib with letters, like GS for goal shooter, showing where they are allowed to go.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In golf, what is it called when you finish a hole in one shot fewer than par?",
+      "options": ["A birdie", "An eagle", "A bogey", "An albatross"],
+      "answer": "A birdie",
+      "explanation": "Two under par is an eagle, and three under is an albatross.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "How many hurdles do the runners jump in a 110m hurdles race?",
+      "options": ["10", "8", "12", "6"],
+      "answer": "10",
+      "explanation": "Women run the 100m hurdles, and they also jump ten.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "England and Australia play cricket for a tiny trophy known as what?",
+      "options": ["The Ashes", "The Embers", "The Urn Cup", "The Wisden Trophy"],
+      "answer": "The Ashes",
+      "explanation": "The little urn is said to hold the ashes of a burnt cricket bail, from England's tour of 1882–83.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Keely Hodgkinson won Olympic gold in 2024 in which running race?",
+      "options": ["800m", "1,500m", "400m", "5,000m"],
+      "answer": "800m",
+      "explanation": "That is two laps of the track, and she had won silver in the same race in Tokyo.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In snooker, how many points is a 'maximum break'?",
+      "options": ["147", "150", "140", "160"],
+      "answer": "147",
+      "explanation": "It takes all 15 reds, each followed by the black, then all six colours in order.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In 2013, who became the first British man to win the Wimbledon singles since Fred Perry in 1936?",
+      "options": ["Andy Murray", "Tim Henman", "Greg Rusedski", "Cameron Norrie"],
+      "answer": "Andy Murray",
+      "explanation": "Murray beat Novak Djokovic in straight sets in the final, then won Wimbledon again in 2016.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Jonny Wilkinson's late drop goal won England the 2003 Rugby World Cup final against which country?",
+      "options": ["Australia", "New Zealand", "France", "South Africa"],
+      "answer": "Australia",
+      "explanation": "He kicked it with his weaker right foot in the last minute of extra time in Sydney.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which golfer won the 1997 Masters aged 21, by a record 12 strokes?",
+      "options": ["Tiger Woods", "Phil Mickelson", "Ernie Els", "Rory McIlroy"],
+      "answer": "Tiger Woods",
+      "explanation": "He became the youngest Masters champion and the first of African-American heritage.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "By the end of 2025, which man had won the most Grand Slam tennis singles titles?",
+      "options": ["Novak Djokovic", "Rafael Nadal", "Roger Federer", "Pete Sampras"],
+      "answer": "Novak Djokovic",
+      "explanation": "Djokovic moved past Rafael Nadal's total of 22 when he won the 2023 French Open, and finished 2025 with 24.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which country won the first Rugby World Cup, in 1987?",
+      "options": ["New Zealand", "Australia", "France", "England"],
+      "answer": "New Zealand",
+      "explanation": "The All Blacks beat France in the final in Auckland; New Zealand co-hosted with Australia.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In darts, what is the fewest number of darts needed to finish a game of 501?",
+      "options": ["9", "6", "12", "10"],
+      "answer": "9",
+      "explanation": "A nine-darter is the perfect leg, usually two 180s followed by a 141 checkout.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which British driver won the 1996 Formula 1 title, as his father had in 1962 and 1968?",
+      "options": ["Damon Hill", "Nigel Mansell", "Jackie Stewart", "James Hunt"],
+      "answer": "Damon Hill",
+      "explanation": "Damon and Graham Hill were the first father and son both to become Formula 1 world champions.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Australian batsman finished his Test career with an average of 99.94?",
+      "options": ["Don Bradman", "Ricky Ponting", "Steve Smith", "Greg Chappell"],
+      "answer": "Don Bradman",
+      "explanation": "He needed just four runs in his final innings in 1948 to average 100, but was out second ball for a duck.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which year did Virginia Wade win the Wimbledon singles, in the Queen's Silver Jubilee summer?",
+      "options": ["1977", "1969", "1973", "1981"],
+      "answer": "1977",
+      "explanation": "The Queen was in the Royal Box to watch her lift the trophy.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In 2021, who became the first woman to ride the winner of the Grand National?",
+      "options": ["Rachael Blackmore", "Hollie Doyle", "Bryony Frost", "Katie Walsh"],
+      "answer": "Rachael Blackmore",
+      "explanation": "She won on Minella Times, a few weeks after becoming the leading jockey at the Cheltenham Festival.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Roger Bannister ran the first mile in under four minutes in 1954 in which city?",
+      "options": ["Oxford", "Cambridge", "London", "Edinburgh"],
+      "answer": "Oxford",
+      "explanation": "He ran 3 minutes 59.4 seconds at the Iffley Road track.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "At which Scottish course was the very first Open Championship played, in 1860?",
+      "options": ["Prestwick", "St Andrews", "Muirfield", "Carnoustie"],
+      "answer": "Prestwick",
+      "explanation": "Only eight golfers took part, and the prize was a red leather belt rather than a claret jug.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who became the first Formula 1 world champion, in 1950?",
+      "options": ["Giuseppe Farina", "Juan Manuel Fangio", "Alberto Ascari", "Stirling Moss"],
+      "answer": "Giuseppe Farina",
+      "explanation": "Farina drove for Alfa Romeo and won the very first championship race, at Silverstone.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In December 2019, who became the first woman to win a match at the PDC World Darts Championship?",
+      "options": ["Fallon Sherrock", "Lisa Ashton", "Beau Greaves", "Anastasia Dobromyslova"],
+      "answer": "Fallon Sherrock",
+      "explanation": "She beat Ted Evetts at Alexandra Palace, then won again to reach the third round.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}

@@ -13,17 +13,19 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "quiz:import": "node --no-warnings --env-file=.env.local scripts/import-quiz-bank.mjs",
-    "quiz:images": "node --no-warnings scripts/quiz-images.mjs"
+    "quiz:images": "node --no-warnings --env-file=.env.local scripts/quiz-images.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.36.3",
     "@aspiro/ai": "https://github.com/ashishgupta1982/aspiro-ai/archive/refs/tags/v0.7.0.tar.gz",
     "@aspiro/auth": "https://github.com/ashishgupta1982/aspiro-auth/archive/refs/tags/v0.8.0.tar.gz",
+    "@aspiro/media": "https://github.com/ashishgupta1982/aspiro-media/archive/refs/tags/v0.6.0.tar.gz",
     "@next-auth/mongodb-adapter": "^1.1.3",
     "@radix-ui/react-dialog": "^1.1.23",
     "bcryptjs": "^3.0.3",
     "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.1",
+    "cloudinary": "^2.11.0",
     "clsx": "^2.1.1",
     "cookie": "^1.1.1",
     "jsonwebtoken": "^9.0.3",

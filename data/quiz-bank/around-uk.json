@@ -1,0 +1,502 @@
+{
+  "category": "around-uk",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which famous prehistoric monument is this?",
+      "options": [
+        "Stonehenge",
+        "Avebury",
+        "Callanish Stones",
+        "Castlerigg"
+      ],
+      "answer": "Stonehenge",
+      "explanation": "Some of Stonehenge's smaller 'bluestones' were brought all the way from the Preseli Hills in Wales.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Stonehenge",
+        "alt": "A ring of huge standing stones",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615229/GamePad/quiz/stonehenge.jpg",
+        "credit": "Photo: garethwiscombe, CC BY 2.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Stonehenge2007_07_30.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which famous landmark is this?",
+      "options": [
+        "The Giant's Causeway",
+        "Fingal's Cave",
+        "The Old Man of Hoy",
+        "Durdle Door"
+      ],
+      "answer": "The Giant's Causeway",
+      "explanation": "Its 40,000 or so stone columns were made by cooling lava, though legend says a giant called Finn McCool built it.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Giant's_Causeway",
+        "alt": "Rocks shaped like columns beside the sea",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615231/GamePad/quiz/giant-s-causeway.jpg",
+        "credit": "Photo: code poet on flickr., CC BY-SA 2.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Causeway-code_poet-4.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "What is the capital city of Wales?",
+      "options": [
+        "Cardiff",
+        "Swansea",
+        "Newport",
+        "Bangor"
+      ],
+      "answer": "Cardiff",
+      "explanation": "Cardiff only officially became the capital of Wales in 1955.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which is the highest mountain in the UK?",
+      "options": [
+        "Ben Nevis",
+        "Snowdon",
+        "Scafell Pike",
+        "Slieve Donard"
+      ],
+      "answer": "Ben Nevis",
+      "explanation": "Ben Nevis, in the Scottish Highlands, is 1,345 metres high, and its top is often hidden in cloud.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which is the longest river in the UK?",
+      "options": [
+        "River Severn",
+        "River Thames",
+        "River Trent",
+        "River Tay"
+      ],
+      "answer": "River Severn",
+      "explanation": "The Severn starts in the Welsh mountains and flows past Shrewsbury, Worcester and Gloucester.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the national animal of Scotland?",
+      "options": [
+        "Unicorn",
+        "Lion",
+        "Stag",
+        "Golden eagle"
+      ],
+      "answer": "Unicorn",
+      "explanation": "A unicorn appears on Scotland's royal coat of arms.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which London bridge can lift up in the middle to let tall ships through?",
+      "options": [
+        "Tower Bridge",
+        "London Bridge",
+        "Westminster Bridge",
+        "Millennium Bridge"
+      ],
+      "answer": "Tower Bridge",
+      "explanation": "Tower Bridge still lifts its roadway hundreds of times a year.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which is the biggest lake in the UK by area?",
+      "options": [
+        "Lough Neagh",
+        "Loch Lomond",
+        "Loch Ness",
+        "Windermere"
+      ],
+      "answer": "Lough Neagh",
+      "explanation": "Lough Neagh in Northern Ireland is so big that five of the country's six counties touch its shores.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What colour is the dragon on the flag of Wales?",
+      "options": [
+        "Red",
+        "Green",
+        "Gold",
+        "White"
+      ],
+      "answer": "Red",
+      "explanation": "The red dragon, Y Ddraig Goch in Welsh, sits on a background of green and white.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which nation's flag is this?",
+      "options": [
+        "Scotland",
+        "England",
+        "Wales",
+        "Northern Ireland"
+      ],
+      "answer": "Scotland",
+      "explanation": "Scotland's white cross on blue is called the Saltire, the cross of St Andrew.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "flag": "gb-sct",
+        "alt": "A national flag",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615232/GamePad/quiz/flag-gb-sct.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "In which city is the Cavern Club, where the Beatles played?",
+      "options": [
+        "Liverpool",
+        "Manchester",
+        "Leeds",
+        "Birmingham"
+      ],
+      "answer": "Liverpool",
+      "explanation": "The Beatles played at the Cavern Club nearly 300 times before they became world famous.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which county do people chase a cheese down a steep hill every year?",
+      "options": [
+        "Gloucestershire",
+        "Somerset",
+        "Cheshire",
+        "Yorkshire"
+      ],
+      "answer": "Gloucestershire",
+      "explanation": "Racers chase a big round Double Gloucester down Cooper's Hill, which is so steep that most of them tumble.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "On Bonfire Night, we remember a plot to blow up which building?",
+      "options": [
+        "The Houses of Parliament",
+        "The Tower of London",
+        "Buckingham Palace",
+        "Westminster Abbey"
+      ],
+      "answer": "The Houses of Parliament",
+      "explanation": "Guy Fawkes was caught guarding barrels of gunpowder under the House of Lords in 1605.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which sea lies between Great Britain and Ireland?",
+      "options": [
+        "Irish Sea",
+        "North Sea",
+        "Norwegian Sea",
+        "English Channel"
+      ],
+      "answer": "Irish Sea",
+      "explanation": "Ferries cross the Irish Sea every day between ports such as Holyhead and Dublin.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Who built Hadrian's Wall across the north of England?",
+      "options": [
+        "The Romans",
+        "The Vikings",
+        "The Normans",
+        "The Saxons"
+      ],
+      "answer": "The Romans",
+      "explanation": "The wall stretched about 73 miles, all the way from one coast to the other.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which famous bridge is this?",
+      "options": [
+        "Forth Bridge",
+        "Tay Bridge",
+        "Menai Bridge",
+        "Humber Bridge"
+      ],
+      "answer": "Forth Bridge",
+      "explanation": "The Forth Bridge opened in 1890, and 'painting the Forth Bridge' has come to mean a job that never ends.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Forth_Bridge",
+        "alt": "A red railway bridge over a wide stretch of water",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615233/GamePad/quiz/forth-bridge.jpg",
+        "credit": "Photo: MrMasterKeyboard, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Forth_Bridge_2022.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which Scottish castle is this?",
+      "options": [
+        "Eilean Donan",
+        "Urquhart Castle",
+        "Dunnottar Castle",
+        "Stirling Castle"
+      ],
+      "answer": "Eilean Donan",
+      "explanation": "It sits on a little island where three sea lochs meet, and was rebuilt from ruins in the early 1900s.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Eilean_Donan",
+        "alt": "A stone castle on a small island linked by a bridge",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615235/GamePad/quiz/eilean-donan.jpg",
+        "credit": "Photo: Diliff, CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Eilean_Donan_Castle,_Scotland_-_Jan_2011.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "In which city is this bridge?",
+      "options": [
+        "Bristol",
+        "Bath",
+        "Newcastle",
+        "Glasgow"
+      ],
+      "answer": "Bristol",
+      "explanation": "Isambard Kingdom Brunel designed it, but it was not finished until 1864, five years after his death.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Clifton_Suspension_Bridge",
+        "alt": "A suspension bridge high above a gorge",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615237/GamePad/quiz/clifton-suspension-bridge.jpg",
+        "credit": "Photo: Gothick, CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Clifton_Suspension_Bridge-9350.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "What is the only city in Cornwall?",
+      "options": [
+        "Truro",
+        "Penzance",
+        "Falmouth",
+        "Bodmin"
+      ],
+      "answer": "Truro",
+      "explanation": "Truro was made a city in 1877, and its cathedral was finished in 1910.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which English county is nicknamed 'God's Own County'?",
+      "options": [
+        "Yorkshire",
+        "Devon",
+        "Cornwall",
+        "Kent"
+      ],
+      "answer": "Yorkshire",
+      "explanation": "Yorkshire was historically England's largest county, divided into three Ridings.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "People from which English city are known as Brummies?",
+      "options": [
+        "Birmingham",
+        "Bristol",
+        "Bradford",
+        "Brighton"
+      ],
+      "answer": "Birmingham",
+      "explanation": "The nickname comes from 'Brummagem', an old local name for Birmingham.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the highest mountain in Northern Ireland?",
+      "options": [
+        "Slieve Donard",
+        "Slieve Gullion",
+        "Slemish",
+        "Divis"
+      ],
+      "answer": "Slieve Donard",
+      "explanation": "Slieve Donard rises straight up from the sea at Newcastle, County Down, in the Mourne Mountains.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Skara Brae, a Stone Age village older than the pyramids of Giza, is on which Scottish islands?",
+      "options": [
+        "Orkney",
+        "Shetland",
+        "Outer Hebrides",
+        "Inner Hebrides"
+      ],
+      "answer": "Orkney",
+      "explanation": "Its stone houses, still with their stone beds and dressers, were uncovered by a great storm in 1850.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which town on the Welsh border is famous as the 'Town of Books'?",
+      "options": [
+        "Hay-on-Wye",
+        "Tenby",
+        "Llandudno",
+        "Conwy"
+      ],
+      "answer": "Hay-on-Wye",
+      "explanation": "Hay-on-Wye is packed with second-hand bookshops and holds a famous literature festival every year.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which is the smallest city in the UK by population?",
+      "options": [
+        "St Davids",
+        "Wells",
+        "Ely",
+        "St Asaph"
+      ],
+      "answer": "St Davids",
+      "explanation": "St Davids in Pembrokeshire has fewer than 2,000 people, but it is a city thanks to its cathedral.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Scafell Pike, England's highest mountain, is in which county?",
+      "options": [
+        "Cumbria",
+        "Northumberland",
+        "Lancashire",
+        "Yorkshire"
+      ],
+      "answer": "Cumbria",
+      "explanation": "Scafell Pike is 978 metres high, and nearby Wastwater is England's deepest lake.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Up Helly Aa, a fire festival that ends with a burning Viking longship, is held on which islands?",
+      "options": [
+        "Shetland",
+        "Orkney",
+        "Isle of Man",
+        "Anglesey"
+      ],
+      "answer": "Shetland",
+      "explanation": "In Lerwick, hundreds of torch-carrying 'guizers' set fire to a replica Viking galley.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Scottish town has Scotland's oldest university?",
+      "options": [
+        "St Andrews",
+        "Glasgow",
+        "Aberdeen",
+        "Edinburgh"
+      ],
+      "answer": "St Andrews",
+      "explanation": "The University of St Andrews was founded around 1413, making it the third oldest in the English-speaking world.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which English city did the Romans call Eboracum?",
+      "options": [
+        "York",
+        "Chester",
+        "Bath",
+        "Lincoln"
+      ],
+      "answer": "York",
+      "explanation": "The Vikings later called it Jorvik, which over time became York.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "The Olney pancake race, said to date back to 1445, is run in which county?",
+      "options": [
+        "Buckinghamshire",
+        "Bedfordshire",
+        "Northamptonshire",
+        "Hertfordshire"
+      ],
+      "answer": "Buckinghamshire",
+      "explanation": "Runners must wear an apron and a head covering, and toss their pancake at the start and again at the finish.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}

@@ -72,6 +72,172 @@
       "difficulty": 2
     },
     {
+      "band": "kids",
+      "question": "Which planet is this?",
+      "options": [
+        "Saturn",
+        "Jupiter",
+        "Uranus",
+        "Neptune"
+      ],
+      "answer": "Saturn",
+      "explanation": "Saturn is so light for its size that it would float, if you could find a bath big enough.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Saturn",
+        "alt": "A pale golden planet seen from space",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615310/GamePad/quiz/saturn.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:Saturn_global_view_from_Cassini,_rings_open_Better_Colour.png"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which planet is this?",
+      "options": [
+        "Neptune",
+        "Earth",
+        "Jupiter",
+        "Mercury"
+      ],
+      "answer": "Neptune",
+      "explanation": "Neptune has the fastest winds in the Solar System, blowing at more than 2,000 km/h.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Neptune",
+        "alt": "A pale blue planet against black space",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615312/GamePad/quiz/neptune.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:Neptune_Voyager2_color_calibrated.png"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "What is the name of the galaxy we live in?",
+      "options": [
+        "The Milky Way",
+        "Andromeda",
+        "The Whirlpool",
+        "The Sombrero"
+      ],
+      "answer": "The Milky Way",
+      "explanation": "On a really dark night you can see the Milky Way as a faint, glowing band across the sky.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which British astronaut ran the London Marathon on a treadmill in space in 2016?",
+      "options": [
+        "Tim Peake",
+        "Michael Foale",
+        "Piers Sellers",
+        "Helen Sharman"
+      ],
+      "answer": "Tim Peake",
+      "explanation": "Tim Peake ran it strapped to a treadmill aboard the International Space Station, while the real race went on below.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is at the centre of our Solar System?",
+      "options": [
+        "The Sun",
+        "The Earth",
+        "Jupiter",
+        "The Moon"
+      ],
+      "answer": "The Sun",
+      "explanation": "The Sun holds more than 99% of all the stuff in the Solar System.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Roughly how long does the Moon take to travel once round the Earth?",
+      "options": [
+        "About a month",
+        "About a day",
+        "About a week",
+        "About a year"
+      ],
+      "answer": "About a month",
+      "explanation": "It takes about 27 days, and the word 'month' comes from the same old word as 'Moon'.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Why does the Moon seem to change shape during the month?",
+      "options": [
+        "We see different amounts of its sunlit side",
+        "Earth's shadow covers part of it",
+        "Clouds hide part of it",
+        "It really changes shape"
+      ],
+      "answer": "We see different amounts of its sunlit side",
+      "explanation": "Half the Moon is always lit by the Sun; as it travels round us, we see more or less of that bright half.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which planet did NASA's Perseverance rover land on in 2021?",
+      "options": [
+        "Mars",
+        "Venus",
+        "Mercury",
+        "Jupiter"
+      ],
+      "answer": "Mars",
+      "explanation": "Perseverance even carried a small helicopter called Ingenuity, the first aircraft to make a powered flight on another planet.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Astronauts on the International Space Station see which of these about 16 times every day?",
+      "options": [
+        "A sunrise",
+        "A full moon",
+        "A solar eclipse",
+        "A rainbow"
+      ],
+      "answer": "A sunrise",
+      "explanation": "The space station zooms round the Earth about every 90 minutes, so the Sun rises and sets again and again.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "How many planets are there in our Solar System?",
+      "options": [
+        "Eight",
+        "Seven",
+        "Nine",
+        "Ten"
+      ],
+      "answer": "Eight",
+      "explanation": "Pluto was counted as the ninth planet until 2006, when it was renamed a dwarf planet.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
       "band": "adults",
       "question": "Who was the first person to travel into space?",
       "options": [
@@ -140,6 +306,180 @@
       "explanation": "Venus is hotter than Mercury, even though it is further from the Sun, because its thick carbon dioxide atmosphere traps the heat.",
       "family": true,
       "difficulty": 2
+    },
+    {
+      "band": "adults",
+      "question": "Which moon is this?",
+      "options": [
+        "Io",
+        "Europa",
+        "Ganymede",
+        "Callisto"
+      ],
+      "answer": "Io",
+      "explanation": "Io is the most volcanic world in the Solar System, squeezed and heated by Jupiter's gravity.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Io_(moon)",
+        "alt": "A yellow and orange speckled moon",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615314/GamePad/quiz/io-moon.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:Io_highest_resolution_natural_color.png"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which dwarf planet is this, photographed close up by New Horizons in 2015?",
+      "options": [
+        "Pluto",
+        "Ceres",
+        "Eris",
+        "Makemake"
+      ],
+      "answer": "Pluto",
+      "explanation": "The pale, heart-shaped plain on Pluto is named Tombaugh Regio, after Clyde Tombaugh, who discovered Pluto in 1930.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Pluto",
+        "alt": "A small icy world with a pale patch",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615315/GamePad/quiz/pluto.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:Pluto_in_True_Color_-_High-Res.png"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which moon is this?",
+      "options": [
+        "Titan",
+        "Triton",
+        "Europa",
+        "Io"
+      ],
+      "answer": "Titan",
+      "explanation": "Titan is the only moon with a thick atmosphere, and it has lakes of liquid methane and ethane.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Titan_(moon)",
+        "alt": "A hazy orange moon",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615318/GamePad/quiz/titan-moon.jpg",
+        "credit": "Photo: NASA/JPL-Caltech/SSI/Kevin M. Gill, CC BY 2.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Titan_in_true_color_by_Kevin_M._Gill.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which planet takes longer to spin once on its axis than to travel once round the Sun?",
+      "options": [
+        "Venus",
+        "Mercury",
+        "Mars",
+        "Neptune"
+      ],
+      "answer": "Venus",
+      "explanation": "Venus takes about 243 Earth days to spin once, but only about 225 to orbit the Sun, and it spins backwards too.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which is the nearest star to the Sun?",
+      "options": [
+        "Proxima Centauri",
+        "Sirius",
+        "Betelgeuse",
+        "Polaris"
+      ],
+      "answer": "Proxima Centauri",
+      "explanation": "Proxima Centauri is about 4.2 light years away, so the light we see from it left more than four years ago.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which planet's largest moon, Triton, orbits in the opposite direction to the planet's spin?",
+      "options": [
+        "Neptune",
+        "Uranus",
+        "Saturn",
+        "Jupiter"
+      ],
+      "answer": "Neptune",
+      "explanation": "Triton is the only large moon that orbits backwards, a clue that Neptune probably captured it.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who was the first woman in space, in 1963?",
+      "options": [
+        "Valentina Tereshkova",
+        "Sally Ride",
+        "Svetlana Savitskaya",
+        "Helen Sharman"
+      ],
+      "answer": "Valentina Tereshkova",
+      "explanation": "Valentina Tereshkova orbited the Earth 48 times in Vostok 6.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which gas makes up most of the Sun?",
+      "options": [
+        "Hydrogen",
+        "Helium",
+        "Oxygen",
+        "Carbon dioxide"
+      ],
+      "answer": "Hydrogen",
+      "explanation": "In the Sun's core, hydrogen is fused into helium, and that is what makes it shine.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What was the name of the NASA programme that landed people on the Moon?",
+      "options": [
+        "Apollo",
+        "Gemini",
+        "Mercury",
+        "Artemis"
+      ],
+      "answer": "Apollo",
+      "explanation": "Twelve astronauts walked on the Moon during the Apollo missions between 1969 and 1972.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which astronomer discovered Uranus in 1781?",
+      "options": [
+        "William Herschel",
+        "Edmond Halley",
+        "Isaac Newton",
+        "Galileo Galilei"
+      ],
+      "answer": "William Herschel",
+      "explanation": "Herschel spotted it from his garden in Bath and wanted to name it after King George III.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
     }
   ]
 }

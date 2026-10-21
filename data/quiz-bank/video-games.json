@@ -1,0 +1,313 @@
+{
+  "category": "video-games",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which game do these emoji describe?",
+      "options": ["Minecraft", "Roblox", "Terraria", "Fortnite"],
+      "answer": "Minecraft",
+      "explanation": "Minecraft was first created by a Swedish programmer called Markus Persson, known as Notch.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "⛏️💎🟩🐷" }
+    },
+    {
+      "band": "kids",
+      "question": "In Minecraft, which green mob creeps up on you and explodes?",
+      "options": ["A Creeper", "A Zombie", "An Enderman", "A Skeleton"],
+      "answer": "A Creeper",
+      "explanation": "Creepers sneak up silently and hiss just before they go bang.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the name of Sonic the Hedgehog's two-tailed fox friend?",
+      "options": ["Tails", "Knuckles", "Shadow", "Amy"],
+      "answer": "Tails",
+      "explanation": "Tails can fly by spinning his two tails like a helicopter.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Minecraft, which block do you need to build a Nether portal?",
+      "options": ["Obsidian", "Diamond", "Bedrock", "Netherrack"],
+      "answer": "Obsidian",
+      "explanation": "Obsidian forms where water meets lava, and only a diamond or netherite pickaxe can mine it.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which game do these emoji describe?",
+      "options": ["Fortnite", "Apex Legends", "PUBG", "Fall Guys"],
+      "answer": "Fortnite",
+      "explanation": "Every Fortnite Battle Royale match starts with players jumping out of the Battle Bus.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🚌🪂🏝️" }
+    },
+    {
+      "band": "kids",
+      "question": "Which game do these emoji describe?",
+      "options": ["Mario Kart", "Crash Team Racing", "Sonic & Sega All-Stars Racing", "Rocket League"],
+      "answer": "Mario Kart",
+      "explanation": "Banana skins and green shells have been in Mario Kart since the very first game in 1992.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🍄🏎️🍌🐢" }
+    },
+    {
+      "band": "kids",
+      "question": "In Pokémon, what does Charmander become when it first evolves?",
+      "options": ["Charmeleon", "Charizard", "Squirtle", "Bulbasaur"],
+      "answer": "Charmeleon",
+      "explanation": "Charmeleon then evolves again into the mighty Charizard.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Among Us, what are the sneaky players trying to sabotage the ship called?",
+      "options": ["Impostors", "Traitors", "Spies", "Villains"],
+      "answer": "Impostors",
+      "explanation": "The Crewmates must finish their tasks or vote the Impostors off the ship.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which game do these emoji describe?",
+      "options": ["Angry Birds", "Flappy Bird", "Crossy Road", "Cut the Rope"],
+      "answer": "Angry Birds",
+      "explanation": "The birds are cross because the green pigs stole their eggs.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "😠🐦🐷🥚" }
+    },
+    {
+      "band": "kids",
+      "question": "In The Legend of Zelda games, what is the name of the hero you play as?",
+      "options": ["Link", "Zelda", "Ganon", "Navi"],
+      "answer": "Link",
+      "explanation": "Lots of people think the hero is called Zelda, but she is the princess.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which game do you play a naughty goose causing chaos in an English village?",
+      "options": ["Untitled Goose Game", "Goat Simulator", "Stardew Valley", "Animal Crossing"],
+      "answer": "Untitled Goose Game",
+      "explanation": "Untitled Goose Game was made by a small team called House House in Melbourne, Australia.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Animal Crossing: New Horizons, who sells you your island getaway and your house loan?",
+      "options": ["Tom Nook", "Isabelle", "K.K. Slider", "Blathers"],
+      "answer": "Tom Nook",
+      "explanation": "Tom Nook is a tanuki, a kind of Japanese raccoon dog.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "How many ghosts chase Pac-Man around the maze?",
+      "options": ["Four", "Three", "Five", "Six"],
+      "answer": "Four",
+      "explanation": "They are called Blinky, Pinky, Inky and Clyde.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Tetris, what are the falling pieces called?",
+      "options": ["Tetrominoes", "Blocklets", "Pixels", "Bricks"],
+      "answer": "Tetrominoes",
+      "explanation": "Every Tetris piece is made of four squares, which is where the name comes from.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "EA's football games used to be called FIFA. What are they called now?",
+      "options": ["EA Sports FC", "eFootball", "Football Manager", "Rocket League"],
+      "answer": "EA Sports FC",
+      "explanation": "The games were called FIFA for 30 years until the name changed in 2023.",
+      "family": false,
+      "difficulty": 3,
+      "dated": true
+    },
+    {
+      "band": "adults",
+      "question": "Which company created Sonic the Hedgehog?",
+      "options": ["Sega", "Nintendo", "Atari", "Capcom"],
+      "answer": "Sega",
+      "explanation": "Sonic was created in 1991 as Sega's speedy answer to Nintendo's Mario.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which year was the original Pac-Man arcade game released?",
+      "options": ["1980", "1978", "1982", "1984"],
+      "answer": "1980",
+      "explanation": "Creator Toru Iwatani has said a pizza with a slice missing was partly the inspiration for Pac-Man's shape.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What was Mario called in the original 1981 Donkey Kong arcade game?",
+      "options": ["Jumpman", "Hammerman", "Stanley", "Little Mac"],
+      "answer": "Jumpman",
+      "explanation": "In Donkey Kong, Mario was a carpenter, not yet a plumber.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Master Chief is the hero of which video game series?",
+      "options": ["Halo", "Gears of War", "Call of Duty", "Destiny"],
+      "answer": "Halo",
+      "explanation": "Halo: Combat Evolved launched alongside the first Xbox in 2001.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which arcade game do these emoji describe?",
+      "options": ["Space Invaders", "Asteroids", "Missile Command", "Defender"],
+      "answer": "Space Invaders",
+      "explanation": "Taito's Space Invaders was a massive arcade hit when it came out in 1978.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "👾👾👾⬅️➡️" }
+    },
+    {
+      "band": "adults",
+      "question": "Which arcade game do these emoji describe?",
+      "options": ["Frogger", "Crossy Road", "Paperboy", "Q*bert"],
+      "answer": "Frogger",
+      "explanation": "Konami's Frogger came out in 1981, decades before Crossy Road borrowed the idea.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🐸🚗🚗🪵" }
+    },
+    {
+      "band": "adults",
+      "question": "Which game do these emoji describe?",
+      "options": ["Snake", "Bejeweled", "Doodle Jump", "Angry Birds"],
+      "answer": "Snake",
+      "explanation": "Snake came built into Nokia mobile phones from 1997.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "📱🐍🍎" }
+    },
+    {
+      "band": "adults",
+      "question": "Which game do these emoji describe?",
+      "options": ["The Sims", "SimCity", "Stardew Valley", "Animal Crossing"],
+      "answer": "The Sims",
+      "explanation": "Every Sim has a green diamond, called a plumbob, floating over their head.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🏠👪💎" }
+    },
+    {
+      "band": "adults",
+      "question": "Lara Croft is the heroine of which video game series?",
+      "options": ["Tomb Raider", "Uncharted", "Resident Evil", "Prince of Persia"],
+      "answer": "Tomb Raider",
+      "explanation": "The first Tomb Raider, in 1996, was made by Core Design in Derby.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which handheld console, launched in 1989, came with Tetris in the box in the UK and America?",
+      "options": ["Game Boy", "Game Gear", "Atari Lynx", "Nintendo DS"],
+      "answer": "Game Boy",
+      "explanation": "Tetris and the Game Boy turned out to be one of the most successful pairings in gaming.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which tech giant bought Minecraft's maker, Mojang, in 2014?",
+      "options": ["Microsoft", "Google", "Apple", "Sony"],
+      "answer": "Microsoft",
+      "explanation": "Microsoft paid about 2.5 billion dollars for Mojang.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "The Grand Theft Auto series began at DMA Design in which Scottish city?",
+      "options": ["Dundee", "Edinburgh", "Glasgow", "Aberdeen"],
+      "answer": "Dundee",
+      "explanation": "DMA Design also made Lemmings, and later became Rockstar North in Edinburgh.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which game do you inherit your grandfather's old farm near Pelican Town?",
+      "options": ["Stardew Valley", "FarmVille", "Harvest Moon", "Animal Crossing"],
+      "answer": "Stardew Valley",
+      "explanation": "Stardew Valley was made almost entirely by one person, Eric Barone.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What was the Sega Mega Drive called in North America?",
+      "options": ["Genesis", "Saturn", "Dreamcast", "Master System"],
+      "answer": "Genesis",
+      "explanation": "Saturn and Dreamcast were later Sega consoles, and the Master System came before.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Sports Interactive's Championship Manager series carried on under which new name from 2004?",
+      "options": ["Football Manager", "EA Sports FC", "Pro Evolution Soccer", "Sensible Soccer"],
+      "answer": "Football Manager",
+      "explanation": "The studio kept making the game but lost the Championship Manager name to its publisher, Eidos.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}

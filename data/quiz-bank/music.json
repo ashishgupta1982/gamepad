@@ -1,0 +1,313 @@
+{
+  "category": "music",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "How many strings does a standard guitar have?",
+      "options": ["Six", "Four", "Five", "Eight"],
+      "answer": "Six",
+      "explanation": "A normal guitar has six strings, while most bass guitars have four.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which musical do these emoji describe?",
+      "options": ["Wicked", "Matilda", "Annie", "Hamilton"],
+      "answer": "Wicked",
+      "explanation": "Wicked tells the story of Elphaba, the green-skinned girl who becomes the Wicked Witch of the West.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🧙‍♀️💚🧹" }
+    },
+    {
+      "band": "kids",
+      "question": "Which musical do these emoji describe?",
+      "options": ["Matilda", "Annie", "Oliver!", "School of Rock"],
+      "answer": "Matilda",
+      "explanation": "The songs in Matilda the Musical were written by the comedian Tim Minchin.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "📚👧✨🏫" }
+    },
+    {
+      "band": "kids",
+      "question": "Which musical film do these emoji describe?",
+      "options": ["The Greatest Showman", "Moulin Rouge!", "Mamma Mia!", "Hairspray"],
+      "answer": "The Greatest Showman",
+      "explanation": "Hugh Jackman plays the circus showman P.T. Barnum.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🎪🎩🐘" }
+    },
+    {
+      "band": "kids",
+      "question": "Which song do these emoji describe?",
+      "options": ["Watermelon Sugar", "Sugar, Sugar", "Strawberry Swing", "Peaches"],
+      "answer": "Watermelon Sugar",
+      "explanation": "Harry Styles won a Grammy for Watermelon Sugar.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🍉🍬" }
+    },
+    {
+      "band": "kids",
+      "question": "Which singer's fans call themselves Swifties?",
+      "options": ["Taylor Swift", "Ariana Grande", "Olivia Rodrigo", "Dua Lipa"],
+      "answer": "Taylor Swift",
+      "explanation": "Swifties love swapping friendship bracelets at Taylor Swift's concerts.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which band was Harry Styles in before he went solo?",
+      "options": ["One Direction", "The Wanted", "JLS", "Busted"],
+      "answer": "One Direction",
+      "explanation": "One Direction were put together on The X Factor in 2010.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which section of the orchestra does the trumpet belong to?",
+      "options": ["Brass", "Woodwind", "Strings", "Percussion"],
+      "answer": "Brass",
+      "explanation": "Brass players make their sound by buzzing their lips into the mouthpiece.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which woodwind instrument is held out sideways to play?",
+      "options": ["The flute", "The clarinet", "The oboe", "The recorder"],
+      "answer": "The flute",
+      "explanation": "Modern flutes are made of metal, but they still count as woodwind.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which musical is about a boy from a mining town who wants to be a ballet dancer?",
+      "options": ["Billy Elliot", "Oliver!", "Joseph and the Amazing Technicolor Dreamcoat", "Les Misérables"],
+      "answer": "Billy Elliot",
+      "explanation": "Elton John wrote the music for Billy Elliot the Musical.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Who had a huge hit with the song 'Espresso' in 2024?",
+      "options": ["Sabrina Carpenter", "Olivia Rodrigo", "Billie Eilish", "Dua Lipa"],
+      "answer": "Sabrina Carpenter",
+      "explanation": "Before she was a pop star, Sabrina Carpenter acted in the Disney Channel show Girl Meets World.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Ed Sheeran's song 'Castle on the Hill' is about the English county he grew up in. Which is it?",
+      "options": ["Suffolk", "Cornwall", "Kent", "Devon"],
+      "answer": "Suffolk",
+      "explanation": "The castle in the song is Framlingham Castle, near where he grew up.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which instrument usually has 47 strings and seven pedals?",
+      "options": ["The harp", "The cello", "The double bass", "The sitar"],
+      "answer": "The harp",
+      "explanation": "The pedals change the notes of the strings so the harp can play in any key.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In written music, how many lines make up a stave?",
+      "options": ["Five", "Four", "Six", "Seven"],
+      "answer": "Five",
+      "explanation": "Notes sit on the five lines and in the spaces between them.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In music, what does 'forte' tell you to do?",
+      "options": ["Play loudly", "Play quietly", "Play quickly", "Play slowly"],
+      "answer": "Play loudly",
+      "explanation": "Piano means quietly, so the pianoforte is really the 'quiet-loud'.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which song was the UK Christmas number one in both 1975 and 1991?",
+      "options": ["Bohemian Rhapsody", "Do They Know It's Christmas?", "Mull of Kintyre", "Merry Xmas Everybody"],
+      "answer": "Bohemian Rhapsody",
+      "explanation": "It went back to number one after Freddie Mercury died in November 1991.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which band had hits with 'Wonderwall' and 'Don't Look Back in Anger'?",
+      "options": ["Oasis", "Blur", "Pulp", "The Verve"],
+      "answer": "Oasis",
+      "explanation": "Oasis were led by the Manchester brothers Liam and Noel Gallagher.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which musical do these emoji describe?",
+      "options": ["Mamma Mia!", "Grease", "Hairspray", "Jersey Boys"],
+      "answer": "Mamma Mia!",
+      "explanation": "Mamma Mia! is set on a Greek island and built entirely from ABBA songs.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🇬🇷👰🎶" }
+    },
+    {
+      "band": "adults",
+      "question": "Which song do these emoji describe?",
+      "options": ["Purple Rain", "November Rain", "Purple Haze", "Singin' in the Rain"],
+      "answer": "Purple Rain",
+      "explanation": "Prince's song also gave its name to his 1984 film.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🟣🌧️" }
+    },
+    {
+      "band": "adults",
+      "question": "Which song do these emoji describe?",
+      "options": ["Rocket Man", "Space Oddity", "Starman", "Man on the Moon"],
+      "answer": "Rocket Man",
+      "explanation": "Elton John and Bernie Taupin released Rocket Man in 1972.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🚀👨🎹" }
+    },
+    {
+      "band": "adults",
+      "question": "Which song do these emoji describe?",
+      "options": ["Bridge over Troubled Water", "Under the Bridge", "Smoke on the Water", "Waterloo"],
+      "answer": "Bridge over Troubled Water",
+      "explanation": "It was Simon & Garfunkel's huge hit of 1970.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🌉🌊😟" }
+    },
+    {
+      "band": "adults",
+      "question": "In which year did ABBA win the Eurovision Song Contest with 'Waterloo'?",
+      "options": ["1974", "1972", "1976", "1978"],
+      "answer": "1974",
+      "explanation": "ABBA won at the Dome in Brighton.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Andrew Lloyd Webber musical features the song 'Memory'?",
+      "options": ["Cats", "Evita", "The Phantom of the Opera", "Starlight Express"],
+      "answer": "Cats",
+      "explanation": "Cats is based on T.S. Eliot's poems in Old Possum's Book of Practical Cats.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Sting was the lead singer of which band?",
+      "options": ["The Police", "Dire Straits", "Genesis", "The Jam"],
+      "answer": "The Police",
+      "explanation": "Sting got his nickname from a black and yellow striped jumper he liked to wear.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Adele's albums 19, 21, 25 and 30 are named after what?",
+      "options": ["Her age at the time", "The number of songs", "Her house number", "The year they came out"],
+      "answer": "Her age at the time",
+      "explanation": "Each title is roughly how old she was while she was making that album.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Liverpool hosted the 2023 Eurovision Song Contest on behalf of which country?",
+      "options": ["Ukraine", "Sweden", "Italy", "The Netherlands"],
+      "answer": "Ukraine",
+      "explanation": "Ukraine won in 2022, and the UK, who came second with Sam Ryder, hosted in its place.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who was the Beatles' drummer before Ringo Starr?",
+      "options": ["Pete Best", "Stuart Sutcliffe", "Brian Epstein", "Billy Preston"],
+      "answer": "Pete Best",
+      "explanation": "Pete Best was replaced in 1962, just weeks before the band recorded their first single.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What was David Bowie's real surname?",
+      "options": ["Jones", "Smith", "Taylor", "Brown"],
+      "answer": "Jones",
+      "explanation": "David Jones changed his name to avoid being confused with Davy Jones of the Monkees.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which composer wrote The Four Seasons, a set of four violin concertos?",
+      "options": ["Antonio Vivaldi", "George Frideric Handel", "Joseph Haydn", "Johann Sebastian Bach"],
+      "answer": "Antonio Vivaldi",
+      "explanation": "Vivaldi was a priest in Venice, nicknamed the Red Priest because of his red hair.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is another name for the timpani?",
+      "options": ["Kettledrums", "Snare drums", "Bongos", "Tom-toms"],
+      "answer": "Kettledrums",
+      "explanation": "Timpani are big bowl-shaped drums, usually made of copper, that can be tuned to play different notes.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}

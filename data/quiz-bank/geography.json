@@ -1,0 +1,495 @@
+{
+  "category": "geography",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which is the largest ocean on Earth?",
+      "options": [
+        "Pacific Ocean",
+        "Atlantic Ocean",
+        "Indian Ocean",
+        "Arctic Ocean"
+      ],
+      "answer": "Pacific Ocean",
+      "explanation": "The Pacific is so big that all the land on Earth could fit inside it.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "On which continent is the Sahara Desert?",
+      "options": [
+        "Africa",
+        "Asia",
+        "Australia",
+        "South America"
+      ],
+      "answer": "Africa",
+      "explanation": "The Sahara is nearly as big as the whole of the United States.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which famous mountain is this?",
+      "options": [
+        "Mount Fuji",
+        "Mount Everest",
+        "Kilimanjaro",
+        "Matterhorn"
+      ],
+      "answer": "Mount Fuji",
+      "explanation": "Mount Fuji is Japan's highest mountain, and it is actually a volcano.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Mount_Fuji",
+        "alt": "A snow-capped mountain",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615272/GamePad/quiz/mount-fuji.jpg",
+        "credit": "Photo: Suicasmo, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:View_of_Mount_Fuji_from_%C5%8Cwakudani_20211202.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which river flows through Egypt?",
+      "options": [
+        "Nile",
+        "Amazon",
+        "Ganges",
+        "Danube"
+      ],
+      "answer": "Nile",
+      "explanation": "Most of Egypt is desert, so almost everyone there lives close to the Nile.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which continent is almost completely covered in ice?",
+      "options": [
+        "Antarctica",
+        "Europe",
+        "Asia",
+        "North America"
+      ],
+      "answer": "Antarctica",
+      "explanation": "About nine tenths of all the ice on Earth is in Antarctica.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which country is this giant rock?",
+      "options": [
+        "Australia",
+        "South Africa",
+        "United States",
+        "Brazil"
+      ],
+      "answer": "Australia",
+      "explanation": "Uluru is sacred to the Anangu, the Aboriginal people of the area, and it seems to change colour at sunset.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Uluru",
+        "alt": "A huge red rock in a flat landscape",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615273/GamePad/quiz/uluru.jpg",
+        "credit": "Photo: Ek2030372672, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:ULURU.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Mount Everest sits on the border between Nepal and which other country?",
+      "options": [
+        "China",
+        "India",
+        "Bhutan",
+        "Pakistan"
+      ],
+      "answer": "China",
+      "explanation": "The border between Nepal and China runs right over the top of Everest.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which is the smallest of the world's five oceans?",
+      "options": [
+        "Arctic Ocean",
+        "Southern Ocean",
+        "Indian Ocean",
+        "Atlantic Ocean"
+      ],
+      "answer": "Arctic Ocean",
+      "explanation": "Much of the Arctic Ocean is covered in sea ice for most of the year.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which country is shaped like a boot?",
+      "options": [
+        "Italy",
+        "Greece",
+        "Spain",
+        "Portugal"
+      ],
+      "answer": "Italy",
+      "explanation": "Italy's boot even looks as if it is about to kick a ball: the island of Sicily.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Most of the Amazon rainforest is in which country?",
+      "options": [
+        "Brazil",
+        "Peru",
+        "Colombia",
+        "Mexico"
+      ],
+      "answer": "Brazil",
+      "explanation": "About 60 per cent of the Amazon rainforest is in Brazil.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which is the biggest country in the world by area?",
+      "options": [
+        "Russia",
+        "Canada",
+        "China",
+        "United States"
+      ],
+      "answer": "Russia",
+      "explanation": "Russia is so wide that it stretches across 11 time zones.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which famous waterfall is this?",
+      "options": [
+        "Victoria Falls",
+        "Niagara Falls",
+        "Angel Falls",
+        "Iguazu Falls"
+      ],
+      "answer": "Victoria Falls",
+      "explanation": "Local people call Victoria Falls 'the smoke that thunders' because of its huge clouds of spray.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Victoria_Falls",
+        "alt": "A wide waterfall with clouds of spray",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615275/GamePad/quiz/victoria-falls.jpg",
+        "credit": "Photo: Diego Delso, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Cataratas_Victoria,_Zambia-Zimbabue,_2018-07-27,_DD_04.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Turkey is partly in which two continents?",
+      "options": [
+        "Europe and Asia",
+        "Europe and Africa",
+        "Asia and Africa",
+        "Asia and Australia"
+      ],
+      "answer": "Europe and Asia",
+      "explanation": "The city of Istanbul is split between Europe and Asia by a narrow strip of sea called the Bosphorus.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the name of the imaginary line around the middle of the Earth?",
+      "options": [
+        "The Equator",
+        "The Prime Meridian",
+        "The Tropic of Cancer",
+        "The Arctic Circle"
+      ],
+      "answer": "The Equator",
+      "explanation": "The country of Ecuador is named after the equator, which runs through it.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Mount Etna is a volcano on which island?",
+      "options": [
+        "Sicily",
+        "Sardinia",
+        "Crete",
+        "Corsica"
+      ],
+      "answer": "Sicily",
+      "explanation": "Etna is one of the most active volcanoes in the world and erupts often.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "The River Danube flows into which sea?",
+      "options": [
+        "Black Sea",
+        "Caspian Sea",
+        "Adriatic Sea",
+        "Baltic Sea"
+      ],
+      "answer": "Black Sea",
+      "explanation": "On its way to the Black Sea the Danube passes through four capitals: Vienna, Bratislava, Budapest and Belgrade.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Lake Titicaca lies on the border between Peru and which country?",
+      "options": [
+        "Bolivia",
+        "Chile",
+        "Ecuador",
+        "Argentina"
+      ],
+      "answer": "Bolivia",
+      "explanation": "At about 3,800 metres up, Titicaca is often called the highest navigable lake in the world.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which country has the longest coastline in the world?",
+      "options": [
+        "Canada",
+        "Norway",
+        "Indonesia",
+        "Russia"
+      ],
+      "answer": "Canada",
+      "explanation": "Canada's coastline is over 200,000 kilometres long, thanks largely to its thousands of Arctic islands.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which country is completely surrounded by South Africa?",
+      "options": [
+        "Lesotho",
+        "Eswatini",
+        "Botswana",
+        "Namibia"
+      ],
+      "answer": "Lesotho",
+      "explanation": "Lesotho is also the only country in the world that lies entirely above 1,000 metres.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "The Atacama, one of the driest deserts on Earth, is mostly in which country?",
+      "options": [
+        "Chile",
+        "Mexico",
+        "Namibia",
+        "Australia"
+      ],
+      "answer": "Chile",
+      "explanation": "NASA has tested Mars rovers in the Atacama because its soil is so like the surface of Mars.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which is the deepest lake in the world?",
+      "options": [
+        "Lake Baikal",
+        "Lake Tanganyika",
+        "Lake Superior",
+        "Caspian Sea"
+      ],
+      "answer": "Lake Baikal",
+      "explanation": "Siberia's Lake Baikal holds about a fifth of all the unfrozen fresh water on the Earth's surface.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "The Strait of Gibraltar separates Spain from which country?",
+      "options": [
+        "Morocco",
+        "Algeria",
+        "Tunisia",
+        "Portugal"
+      ],
+      "answer": "Morocco",
+      "explanation": "At its narrowest the strait is only about 14 kilometres wide, so on a clear day you can see Africa from Europe.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which mountain is this?",
+      "options": [
+        "Matterhorn",
+        "Mont Blanc",
+        "Eiger",
+        "K2"
+      ],
+      "answer": "Matterhorn",
+      "explanation": "The Matterhorn's famous pyramid peak sits on the border between Switzerland and Italy.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Matterhorn",
+        "alt": "A steep, pointed mountain peak",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615276/GamePad/quiz/matterhorn.jpg",
+        "credit": "Photo: chil, on Camptocamp.org Derivative work:Zacharie Grossen, CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Matterhorn_from_Domh%C3%BCtte_-_2.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "In which country is this mountain, the highest in Africa?",
+      "options": [
+        "Tanzania",
+        "Kenya",
+        "Uganda",
+        "Ethiopia"
+      ],
+      "answer": "Tanzania",
+      "explanation": "Kilimanjaro is a dormant volcano, and its summit, Uhuru Peak, is 5,895 metres high.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Mount_Kilimanjaro",
+        "alt": "A snow-topped mountain rising above grassland",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615277/GamePad/quiz/mount-kilimanjaro.jpg",
+        "credit": "Photo: Sergey Pesterev, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Kilimanjaro_from_Amboseli.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Mount Kosciuszko is the highest mountain on which continent's mainland?",
+      "options": [
+        "Australia",
+        "South America",
+        "Africa",
+        "Antarctica"
+      ],
+      "answer": "Australia",
+      "explanation": "It was named by the Polish explorer Paul Strzelecki after the Polish-Lithuanian hero Tadeusz Kościuszko.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "The shores of which body of water are the lowest land on Earth?",
+      "options": [
+        "Dead Sea",
+        "Caspian Sea",
+        "Lake Assal",
+        "Salton Sea"
+      ],
+      "answer": "Dead Sea",
+      "explanation": "The Dead Sea is so salty that swimmers float on it without even trying.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which river carries more water than any other in the world?",
+      "options": [
+        "Amazon",
+        "Nile",
+        "Congo",
+        "Yangtze"
+      ],
+      "answer": "Amazon",
+      "explanation": "The Amazon pours about a fifth of all the fresh water that rivers carry into the world's oceans.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Greenland is a self-governing part of which country?",
+      "options": [
+        "Denmark",
+        "Norway",
+        "Iceland",
+        "Canada"
+      ],
+      "answer": "Denmark",
+      "explanation": "Greenland is the largest island in the world that is not a continent.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "The River Ganges flows into which body of water?",
+      "options": [
+        "Bay of Bengal",
+        "Arabian Sea",
+        "Red Sea",
+        "Persian Gulf"
+      ],
+      "answer": "Bay of Bengal",
+      "explanation": "Its delta, shared with the Brahmaputra, is the largest river delta in the world.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "The Mekong River reaches the sea in which country?",
+      "options": [
+        "Vietnam",
+        "Cambodia",
+        "Thailand",
+        "Myanmar"
+      ],
+      "answer": "Vietnam",
+      "explanation": "In Vietnam the Mekong splits into so many channels that it is called the River of Nine Dragons.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}

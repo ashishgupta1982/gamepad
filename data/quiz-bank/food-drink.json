@@ -1,0 +1,495 @@
+{
+  "category": "food-drink",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which country is this famous food from?",
+      "options": [
+        "Japan",
+        "China",
+        "Thailand",
+        "India"
+      ],
+      "answer": "Japan",
+      "explanation": "Sushi is rice seasoned with vinegar, often topped or rolled with fish, and it is one of Japan's best-known foods.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Sushi",
+        "alt": "A platter of small bite-sized pieces of food",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615263/GamePad/quiz/sushi.jpg",
+        "credit": "Photo: chidorian from Japan, CC BY-SA 2.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Sushi_platter.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which country does this dish come from?",
+      "options": [
+        "Spain",
+        "Italy",
+        "Mexico",
+        "Greece"
+      ],
+      "answer": "Spain",
+      "explanation": "Paella comes from Valencia in Spain and is cooked in a wide, shallow pan that shares its name.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Paella",
+        "alt": "A wide, shallow pan of yellow rice with meat and beans",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615265/GamePad/quiz/paella.jpg",
+        "credit": "Photo: Jan Harenburg, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:01_Paella_Valenciana_original.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which country do these come from?",
+      "options": [
+        "Mexico",
+        "Spain",
+        "Brazil",
+        "India"
+      ],
+      "answer": "Mexico",
+      "explanation": "A taco is a small corn or wheat tortilla folded around a filling, and tacos are one of Mexico's favourite street foods.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Taco",
+        "alt": "Folded flatbreads with fillings on a plate",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615266/GamePad/quiz/taco.jpg",
+        "credit": "Photo: Larry Miller, CC BY-SA 2.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:001_Tacos_de_carnitas,_carne_asada_y_al_pastor.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which fruit is mashed up to make guacamole?",
+      "options": [
+        "Avocado",
+        "Cucumber",
+        "Kiwi",
+        "Green pepper"
+      ],
+      "answer": "Avocado",
+      "explanation": "Guacamole goes back to the Aztecs of Mexico, and its name comes from their word ahuacamolli, meaning avocado sauce.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which nut is ground up to make marzipan?",
+      "options": [
+        "Almond",
+        "Peanut",
+        "Walnut",
+        "Hazelnut"
+      ],
+      "answer": "Almond",
+      "explanation": "Marzipan is mostly ground almonds and sugar, and in Britain it sits under the icing on many Christmas cakes.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Brussels sprouts are named after a city in which country?",
+      "options": [
+        "Belgium",
+        "France",
+        "Germany",
+        "Netherlands"
+      ],
+      "answer": "Belgium",
+      "explanation": "Brussels is the capital of Belgium, where sprouts were grown hundreds of years ago.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which kind of bean is used to make baked beans?",
+      "options": [
+        "Haricot beans",
+        "Kidney beans",
+        "Broad beans",
+        "Runner beans"
+      ],
+      "answer": "Haricot beans",
+      "explanation": "Baked beans are small white haricot beans, usually cooked in a tomato sauce.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What tiny living things turn milk into yoghurt?",
+      "options": [
+        "Bacteria",
+        "Yeast",
+        "Mould",
+        "Algae"
+      ],
+      "answer": "Bacteria",
+      "explanation": "Friendly bacteria feed on the sugar in milk and make it thick and tangy.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which fruit is dried to make a prune?",
+      "options": [
+        "Plum",
+        "Grape",
+        "Apricot",
+        "Fig"
+      ],
+      "answer": "Plum",
+      "explanation": "A prune is a dried plum, while a raisin is a dried grape.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Chocolate is made from the beans of which tree?",
+      "options": [
+        "Cacao tree",
+        "Coffee tree",
+        "Coconut palm",
+        "Vanilla tree"
+      ],
+      "answer": "Cacao tree",
+      "explanation": "Cacao beans grow inside big pods that sprout straight out of the tree's trunk.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which fruit has its seeds on the outside?",
+      "options": [
+        "Strawberry",
+        "Raspberry",
+        "Kiwi",
+        "Blackberry"
+      ],
+      "answer": "Strawberry",
+      "explanation": "Each tiny yellow pip on a strawberry is really a little fruit of its own, with a seed inside.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which continent did potatoes first come from?",
+      "options": [
+        "South America",
+        "Europe",
+        "Asia",
+        "Africa"
+      ],
+      "answer": "South America",
+      "explanation": "People in the Andes mountains grew potatoes for thousands of years before they reached Europe in the 1500s.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is Wensleydale?",
+      "options": [
+        "A cheese",
+        "A sausage",
+        "A cake",
+        "A biscuit"
+      ],
+      "answer": "A cheese",
+      "explanation": "Wensleydale is a crumbly cheese from Yorkshire, and it is Wallace's favourite in the Wallace and Gromit films.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which pasta's name means little strings in Italian?",
+      "options": [
+        "Spaghetti",
+        "Penne",
+        "Lasagne",
+        "Ravioli"
+      ],
+      "answer": "Spaghetti",
+      "explanation": "Spago is Italian for string, so spaghetti are little strings.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Haggis is a traditional dish from which country?",
+      "options": [
+        "Scotland",
+        "Wales",
+        "Ireland",
+        "England"
+      ],
+      "answer": "Scotland",
+      "explanation": "Haggis is eaten with neeps and tatties on Burns Night, which is 25 January.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which country does this noodle soup come from?",
+      "options": [
+        "Vietnam",
+        "Thailand",
+        "China",
+        "Cambodia"
+      ],
+      "answer": "Vietnam",
+      "explanation": "Pho is a Vietnamese broth with rice noodles and herbs, often eaten for breakfast.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Pho",
+        "alt": "A bowl of noodle soup with meatballs and herbs",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615268/GamePad/quiz/pho.jpg",
+        "credit": "Photo: SerraKnightz, CC BY 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Bowl_of_Meatball_pho.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which country does this dish come from?",
+      "options": [
+        "Korea",
+        "Japan",
+        "China",
+        "Vietnam"
+      ],
+      "answer": "Korea",
+      "explanation": "Bibimbap means mixed rice, and it is often served sizzling in a hot stone bowl.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Bibimbap",
+        "alt": "Rice topped with vegetables and an egg in a stone bowl",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615270/GamePad/quiz/bibimbap.jpg",
+        "credit": "Photo: Sous Chef, CC BY 2.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Dolsot-bibimbap.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which spice comes from the dried stigmas of a crocus flower?",
+      "options": [
+        "Saffron",
+        "Turmeric",
+        "Paprika",
+        "Cardamom"
+      ],
+      "answer": "Saffron",
+      "explanation": "Each crocus gives only three stigmas, picked by hand, which is why saffron is the world's most expensive spice.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which American city was Coca-Cola first sold, in 1886?",
+      "options": [
+        "Atlanta",
+        "Chicago",
+        "New York",
+        "Nashville"
+      ],
+      "answer": "Atlanta",
+      "explanation": "The pharmacist John Pemberton created it in Atlanta, and it was first sold at a soda fountain there.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which spirit is the base of a mojito?",
+      "options": [
+        "Rum",
+        "Gin",
+        "Vodka",
+        "Tequila"
+      ],
+      "answer": "Rum",
+      "explanation": "The mojito comes from Cuba and mixes white rum with lime, sugar, mint and soda water.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which country grows more coffee than any other?",
+      "options": [
+        "Brazil",
+        "Colombia",
+        "Vietnam",
+        "Ethiopia"
+      ],
+      "answer": "Brazil",
+      "explanation": "Brazil has been the world's biggest coffee grower for over 150 years, producing around a third of the world's coffee.",
+      "family": true,
+      "difficulty": 1,
+      "dated": true
+    },
+    {
+      "band": "adults",
+      "question": "Which fish is one of the ingredients of Worcestershire sauce?",
+      "options": [
+        "Anchovies",
+        "Sardines",
+        "Mackerel",
+        "Tuna"
+      ],
+      "answer": "Anchovies",
+      "explanation": "Lea and Perrins have been making it in Worcester since the 1830s, with fermented anchovies in the recipe.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which vegetable gives borscht its deep red colour?",
+      "options": [
+        "Beetroot",
+        "Red cabbage",
+        "Red pepper",
+        "Tomato"
+      ],
+      "answer": "Beetroot",
+      "explanation": "Borscht is a beetroot soup eaten across Eastern Europe, often with a spoonful of soured cream.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which pastry is used to make profiteroles and eclairs?",
+      "options": [
+        "Choux",
+        "Filo",
+        "Puff",
+        "Shortcrust"
+      ],
+      "answer": "Choux",
+      "explanation": "Choux pastry puffs up hollow in the oven because the water in it turns to steam.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Italian cheese is traditionally made from water buffalo milk?",
+      "options": [
+        "Mozzarella",
+        "Parmesan",
+        "Gorgonzola",
+        "Pecorino"
+      ],
+      "answer": "Mozzarella",
+      "explanation": "Mozzarella di bufala from Campania is made with buffalo milk, though most mozzarella today uses cow's milk.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What does the Scoville scale measure?",
+      "options": [
+        "The heat of chilli peppers",
+        "The sugar in fruit",
+        "The saltiness of cheese",
+        "The acidity of wine"
+      ],
+      "answer": "The heat of chilli peppers",
+      "explanation": "It is named after the American pharmacist Wilbur Scoville, who devised it in 1912.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which nuts are used in a traditional pesto from Genoa?",
+      "options": [
+        "Pine nuts",
+        "Walnuts",
+        "Almonds",
+        "Cashews"
+      ],
+      "answer": "Pine nuts",
+      "explanation": "Pesto alla genovese is basil, pine nuts, garlic, cheese and olive oil, traditionally pounded in a mortar.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which chocolate bar was launched by Rowntree's in 1935 as Chocolate Crisp?",
+      "options": [
+        "KitKat",
+        "Twix",
+        "Aero",
+        "Crunchie"
+      ],
+      "answer": "KitKat",
+      "explanation": "It was made in York and renamed Kit Kat Chocolate Crisp two years later.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which tea is flavoured with oil of bergamot?",
+      "options": [
+        "Earl Grey",
+        "Darjeeling",
+        "Assam",
+        "Lapsang souchong"
+      ],
+      "answer": "Earl Grey",
+      "explanation": "Bergamot is a citrus fruit, and the tea is named after the 2nd Earl Grey, Prime Minister in the 1830s.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Stilton cheese cannot legally be made in the village of Stilton, which lies in which county?",
+      "options": [
+        "Cambridgeshire",
+        "Leicestershire",
+        "Derbyshire",
+        "Nottinghamshire"
+      ],
+      "answer": "Cambridgeshire",
+      "explanation": "Its protected status allows only Derbyshire, Leicestershire and Nottinghamshire, so the village it is named after misses out.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}

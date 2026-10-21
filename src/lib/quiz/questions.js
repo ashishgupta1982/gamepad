@@ -45,7 +45,7 @@ export function checkQuestion(raw) {
 /**
  * A question's picture ({kind:'image', src, alt, credit}) or emoji clue
  * ({kind:'emoji', text}), checked; null when there is none or it will not do.
- * A picture is one of ours (/quiz/…) or on https.
+ * A picture is on https (in practice Cloudinary, through @aspiro/media).
  */
 export function checkMedia(raw) {
   if (!raw || typeof raw !== 'object') return null;
@@ -55,7 +55,7 @@ export function checkMedia(raw) {
   }
   if (raw.kind === 'image') {
     const src = String(raw.src ?? '').trim();
-    if (src.length > 500 || !/^(https:\/\/|\/quiz\/)/.test(src)) return null;
+    if (src.length > 500 || !/^https:\/\//.test(src)) return null;
     return { kind: 'image', src, alt: tidy(raw.alt, 160), credit: tidy(raw.credit, 160) };
   }
   return null;

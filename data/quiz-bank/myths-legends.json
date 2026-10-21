@@ -1,0 +1,305 @@
+{
+  "category": "myths-legends",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which Norse god carried a mighty hammer called Mjölnir?",
+      "options": ["Thor", "Odin", "Loki", "Freyr"],
+      "answer": "Thor",
+      "explanation": "Thursday is named after Thor, which makes it Thor's day.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which Greek god ruled the sea?",
+      "options": ["Poseidon", "Hades", "Apollo", "Hermes"],
+      "answer": "Poseidon",
+      "explanation": "Poseidon carried a trident, a spear with three prongs, and could stir up storms and earthquakes.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What was the name of King Arthur's famous sword?",
+      "options": ["Excalibur", "Durendal", "Joyeuse", "Gram"],
+      "answer": "Excalibur",
+      "explanation": "In many tellings it was given to Arthur by the Lady of the Lake.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What did Icarus's father use to make wings for them both?",
+      "options": ["Feathers and wax", "Leaves and string", "Paper and glue", "Silk and wood"],
+      "answer": "Feathers and wax",
+      "explanation": "Icarus flew too close to the Sun, the wax melted, and he fell into the sea.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "How did the Greek soldiers finally get inside the city of Troy?",
+      "options": ["Hidden inside a wooden horse", "Through a secret tunnel", "Over the walls on ladders", "Dressed up as merchants"],
+      "answer": "Hidden inside a wooden horse",
+      "explanation": "That is why a sneaky trick, or a harmful computer program disguised as something harmless, is called a Trojan horse.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which Greek hero went into the labyrinth to face the Minotaur?",
+      "options": ["Theseus", "Perseus", "Hercules", "Jason"],
+      "answer": "Theseus",
+      "explanation": "Princess Ariadne gave him a ball of thread so he could find his way back out.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Greek myths, what was the monster Medusa's hair made of?",
+      "options": ["Snakes", "Fire", "Seaweed", "Gold"],
+      "answer": "Snakes",
+      "explanation": "Anyone who looked straight at Medusa was turned to stone.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which forest did Robin Hood and his Merry Men hide?",
+      "options": ["Sherwood Forest", "Epping Forest", "The New Forest", "The Forest of Dean"],
+      "answer": "Sherwood Forest",
+      "explanation": "Sherwood's giant Major Oak is said to have been the outlaws' hideout.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which hero had to complete twelve impossible tasks, called labours?",
+      "options": ["Hercules", "Achilles", "Odysseus", "Perseus"],
+      "answer": "Hercules",
+      "explanation": "Hercules is the Roman name; the Greeks called him Heracles.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What shape was the table where King Arthur's knights sat?",
+      "options": ["Round", "Square", "Long and narrow", "Triangular"],
+      "answer": "Round",
+      "explanation": "A round table has no head, so no knight could claim the most important seat.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Greek myth, what was left inside after Pandora let all the troubles out into the world?",
+      "options": ["Hope", "Love", "Luck", "Gold"],
+      "answer": "Hope",
+      "explanation": "All the bad things flew out, but Hope stayed behind.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which trickster god in Norse myths could change his shape?",
+      "options": ["Loki", "Thor", "Odin", "Baldur"],
+      "answer": "Loki",
+      "explanation": "Loki could turn himself into all sorts of creatures, from a salmon to a fly.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which Greek hero led the Argonauts on their quest for the Golden Fleece?",
+      "options": ["Jason", "Theseus", "Perseus", "Odysseus"],
+      "answer": "Jason",
+      "explanation": "His crew were called the Argonauts because their ship was named the Argo.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Egyptian myths, which god had the head of a jackal?",
+      "options": ["Anubis", "Horus", "Thoth", "Ra"],
+      "answer": "Anubis",
+      "explanation": "Anubis watched over the dead and was the god of making mummies.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "The ancient Egyptian god Ra was the god of what?",
+      "options": ["The Sun", "The sea", "The wind", "The harvest"],
+      "answer": "The Sun",
+      "explanation": "The Egyptians pictured Ra sailing across the sky in a boat every day.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Greek goddess sprang fully grown from the head of Zeus?",
+      "options": ["Athena", "Aphrodite", "Artemis", "Hera"],
+      "answer": "Athena",
+      "explanation": "Her sacred bird, the owl, is still a symbol of wisdom today.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who was the Roman version of Hermes, the messenger of the Greek gods?",
+      "options": ["Mercury", "Vulcan", "Neptune", "Janus"],
+      "answer": "Mercury",
+      "explanation": "Mercury, the speediest planet, is named after the speedy messenger god.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who was King Arthur's queen?",
+      "options": ["Guinevere", "Morgan le Fay", "Isolde", "Elaine"],
+      "answer": "Guinevere",
+      "explanation": "Her name comes from the Welsh Gwenhwyfar.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which of Robin Hood's men was jokingly named for being very big?",
+      "options": ["Little John", "Will Scarlet", "Much the Miller's Son", "Alan-a-Dale"],
+      "answer": "Little John",
+      "explanation": "In a famous ballad, he first meets Robin by beating him in a quarterstaff fight on a narrow bridge.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Whose was the face that launched a thousand ships?",
+      "options": ["Helen of Troy", "Penelope", "Andromache", "Cassandra"],
+      "answer": "Helen of Troy",
+      "explanation": "The famous line comes from Christopher Marlowe's play Doctor Faustus.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who was the ferryman who carried the souls of the dead into the Greek underworld?",
+      "options": ["Charon", "Hermes", "Thanatos", "Hypnos"],
+      "answer": "Charon",
+      "explanation": "The Greeks sometimes buried their dead with a coin to pay his fare.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Greek hero blinded the Cyclops Polyphemus?",
+      "options": ["Odysseus", "Achilles", "Jason", "Perseus"],
+      "answer": "Odysseus",
+      "explanation": "He had told the Cyclops his name was Nobody, so when Polyphemus cried that Nobody was hurting him, no one came to help.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In legend, to which island was King Arthur carried after his last battle?",
+      "options": ["Avalon", "Lyonesse", "Tír na nÓg", "Hy-Brasil"],
+      "answer": "Avalon",
+      "explanation": "In 1191 the monks of Glastonbury claimed to have found Arthur's grave.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Titan was punished by Zeus for giving fire to humans?",
+      "options": ["Prometheus", "Atlas", "Cronus", "Hyperion"],
+      "answer": "Prometheus",
+      "explanation": "Atlas, another Titan, got a different punishment: holding up the sky.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which musician went down to the underworld to bring back his wife, Eurydice?",
+      "options": ["Orpheus", "Narcissus", "Adonis", "Endymion"],
+      "answer": "Orpheus",
+      "explanation": "He was told not to look back until they reached daylight, and he could not resist.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In Egyptian myth, which god was killed by his brother Set and brought back to life by Isis?",
+      "options": ["Osiris", "Horus", "Ra", "Ptah"],
+      "answer": "Osiris",
+      "explanation": "Osiris became king of the underworld and is often painted with green skin.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What was the name of Odin's eight-legged horse?",
+      "options": ["Sleipnir", "Gullfaxi", "Grani", "Hrímfaxi"],
+      "answer": "Sleipnir",
+      "explanation": "Sleipnir's mother was, of all people, the shape-shifting god Loki.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In Norse myth, which god is killed by the wolf Fenrir at Ragnarök?",
+      "options": ["Odin", "Thor", "Tyr", "Freyr"],
+      "answer": "Odin",
+      "explanation": "Tyr had lost a hand to Fenrir when the gods tricked the wolf into being tied up.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In Egyptian belief, what was a dead person's heart weighed against in the afterlife?",
+      "options": ["A feather", "A golden coin", "A scarab beetle", "A grain of sand"],
+      "answer": "A feather",
+      "explanation": "The feather belonged to Ma'at, the goddess of truth and justice.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Norse god guards Bifröst, the rainbow bridge to Asgard?",
+      "options": ["Heimdall", "Baldur", "Freyr", "Bragi"],
+      "answer": "Heimdall",
+      "explanation": "He will blow his horn, Gjallarhorn, to warn the gods that Ragnarök has begun.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}

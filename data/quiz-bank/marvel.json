@@ -1,0 +1,483 @@
+{
+  "category": "marvel",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which superhero do these emoji describe?",
+      "options": [
+        "Spider-Man",
+        "Ant-Man",
+        "Black Widow",
+        "Venom"
+      ],
+      "answer": "Spider-Man",
+      "explanation": "Peter Parker got his powers from the bite of a special spider.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🕷️🕸️🎒"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which superhero do these emoji describe?",
+      "options": [
+        "Batman",
+        "Superman",
+        "Black Panther",
+        "The Flash"
+      ],
+      "answer": "Batman",
+      "explanation": "Batman has no superpowers at all, just gadgets, training and a very cool car.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🦇🌃🚗"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which superhero do these emoji describe?",
+      "options": [
+        "Thor",
+        "Storm",
+        "Hulk",
+        "Loki"
+      ],
+      "answer": "Thor",
+      "explanation": "Thor's hammer is called Mjolnir, and only the worthy can lift it.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🔨⚡🌩️"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which superhero do these emoji describe?",
+      "options": [
+        "Captain America",
+        "Captain Marvel",
+        "Iron Man",
+        "Wonder Woman"
+      ],
+      "answer": "Captain America",
+      "explanation": "Steve Rogers was turned into a super-soldier by a special serum during the Second World War.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🛡️⭐🇺🇸"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "What is the name of Superman's home planet?",
+      "options": [
+        "Krypton",
+        "Asgard",
+        "Titan",
+        "Xandar"
+      ],
+      "answer": "Krypton",
+      "explanation": "Kryptonite, a glowing rock from his home planet, is the one thing that weakens him.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What colour is the Hulk in the Marvel films?",
+      "options": [
+        "Green",
+        "Grey",
+        "Blue",
+        "Purple"
+      ],
+      "answer": "Green",
+      "explanation": "In his very first comic, in 1962, the Hulk was grey.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is Iron Man's real name?",
+      "options": [
+        "Tony Stark",
+        "Bruce Banner",
+        "Steve Rogers",
+        "Peter Parker"
+      ],
+      "answer": "Tony Stark",
+      "explanation": "Tony Stark is a genius inventor who builds his own suits of armour.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which hidden African country does Black Panther rule?",
+      "options": [
+        "Wakanda",
+        "Sokovia",
+        "Latveria",
+        "Genosha"
+      ],
+      "answer": "Wakanda",
+      "explanation": "Wakanda hides its amazing technology by pretending to be a poor farming country.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What does Wonder Woman's golden lasso force people to do?",
+      "options": [
+        "Tell the truth",
+        "Fall asleep",
+        "Freeze still",
+        "Forget everything"
+      ],
+      "answer": "Tell the truth",
+      "explanation": "It's called the Lasso of Truth.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which villain wants all six Infinity Stones for his golden gauntlet?",
+      "options": [
+        "Thanos",
+        "Ultron",
+        "Loki",
+        "Red Skull"
+      ],
+      "answer": "Thanos",
+      "explanation": "With all six stones, he snaps his fingers at the end of Avengers: Infinity War.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In the Spider-Man films starring Tom Holland, what is the name of Peter Parker's best friend?",
+      "options": [
+        "Ned",
+        "Harry",
+        "Flash",
+        "Miles"
+      ],
+      "answer": "Ned",
+      "explanation": "Ned finds out Peter's secret when he spots him in his Spider-Man suit.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In the X-Men comics and films, which metal covers Wolverine's skeleton and claws?",
+      "options": [
+        "Adamantium",
+        "Vibranium",
+        "Titanium",
+        "Uru"
+      ],
+      "answer": "Adamantium",
+      "explanation": "In the Marvel world, adamantium is almost impossible to break.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is Captain Marvel's real name in the 2019 Marvel film?",
+      "options": [
+        "Carol Danvers",
+        "Natasha Romanoff",
+        "Wanda Maximoff",
+        "Jessica Jones"
+      ],
+      "answer": "Carol Danvers",
+      "explanation": "Her cat, Goose, turns out to be an alien called a Flerken.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the name of S.H.I.E.L.D.'s giant flying aircraft carrier in The Avengers?",
+      "options": [
+        "The Helicarrier",
+        "The Quinjet",
+        "The Milano",
+        "The Benatar"
+      ],
+      "answer": "The Helicarrier",
+      "explanation": "It stays in the air using four enormous rotors.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the name of Batman's loyal butler?",
+      "options": [
+        "Alfred",
+        "Jarvis",
+        "Lucius",
+        "Gordon"
+      ],
+      "answer": "Alfred",
+      "explanation": "Alfred Pennyworth has looked after Bruce Wayne since he was a boy.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which superhero do these emoji describe?",
+      "options": [
+        "Hawkeye",
+        "Green Arrow",
+        "Black Widow",
+        "Falcon"
+      ],
+      "answer": "Hawkeye",
+      "explanation": "Clint Barton is played by Jeremy Renner in the Marvel films.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🏹🎯💜"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which superhero do these emoji describe?",
+      "options": [
+        "Doctor Strange",
+        "Doctor Doom",
+        "Scarlet Witch",
+        "Loki"
+      ],
+      "answer": "Doctor Strange",
+      "explanation": "In the films he guards the Time Stone inside the Eye of Agamotto.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🔮⏳🧙‍♂️"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which Batman villain do these emoji describe?",
+      "options": [
+        "The Joker",
+        "The Riddler",
+        "The Penguin",
+        "Two-Face"
+      ],
+      "answer": "The Joker",
+      "explanation": "The Joker first appeared in Batman #1 in 1940.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🃏😂🟣"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which actor played Tony Stark in the Marvel films?",
+      "options": [
+        "Robert Downey Jr.",
+        "Chris Evans",
+        "Chris Hemsworth",
+        "Jeremy Renner"
+      ],
+      "answer": "Robert Downey Jr.",
+      "explanation": "As he snaps his fingers in Avengers: Endgame, Tony says 'I am Iron Man', the same words that end his very first film.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which year did Iron Man launch the Marvel Cinematic Universe?",
+      "options": [
+        "2008",
+        "2005",
+        "2010",
+        "2012"
+      ],
+      "answer": "2008",
+      "explanation": "Its after-credits scene introduced Nick Fury and the Avengers Initiative.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In the first Iron Man film, what is the name of Tony Stark's computer assistant?",
+      "options": [
+        "J.A.R.V.I.S.",
+        "F.R.I.D.A.Y.",
+        "Ultron",
+        "Vision"
+      ],
+      "answer": "J.A.R.V.I.S.",
+      "explanation": "J.A.R.V.I.S. later becomes part of Vision in Avengers: Age of Ultron.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which newspaper does Clark Kent work for?",
+      "options": [
+        "The Daily Planet",
+        "The Daily Bugle",
+        "The Gotham Gazette",
+        "The Metropolis Star"
+      ],
+      "answer": "The Daily Planet",
+      "explanation": "Lois Lane is a star reporter there too.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In the comics, what was Wolverine's birth name?",
+      "options": [
+        "James Howlett",
+        "Scott Summers",
+        "Wade Wilson",
+        "Remy LeBeau"
+      ],
+      "answer": "James Howlett",
+      "explanation": "He has gone by the name Logan for most of his long life.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which writer co-created Spider-Man with the artist Steve Ditko?",
+      "options": [
+        "Stan Lee",
+        "Jack Kirby",
+        "Bob Kane",
+        "Chris Claremont"
+      ],
+      "answer": "Stan Lee",
+      "explanation": "Spider-Man first appeared in Amazing Fantasy #15 in 1962.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In Avengers: Infinity War, which Infinity Stone is hidden on the planet Vormir?",
+      "options": [
+        "The Soul Stone",
+        "The Time Stone",
+        "The Mind Stone",
+        "The Reality Stone"
+      ],
+      "answer": "The Soul Stone",
+      "explanation": "It can only be won by giving up someone you love.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the name of the axe Thor gets in Avengers: Infinity War?",
+      "options": [
+        "Stormbreaker",
+        "Gungnir",
+        "Hofund",
+        "Mjolnir"
+      ],
+      "answer": "Stormbreaker",
+      "explanation": "It was forged on Nidavellir by the dwarf king Eitri.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which DC hero is secretly Barry Allen?",
+      "options": [
+        "The Flash",
+        "Green Lantern",
+        "Aquaman",
+        "Cyborg"
+      ],
+      "answer": "The Flash",
+      "explanation": "In the comics he gets his speed when lightning hits a shelf of chemicals in his lab.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who played Bruce Banner in The Avengers (2012)?",
+      "options": [
+        "Mark Ruffalo",
+        "Edward Norton",
+        "Eric Bana",
+        "Bill Bixby"
+      ],
+      "answer": "Mark Ruffalo",
+      "explanation": "Edward Norton had played the part in The Incredible Hulk four years earlier.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the name of Thanos's home world in the Marvel films?",
+      "options": [
+        "Titan",
+        "Xandar",
+        "Sakaar",
+        "Knowhere"
+      ],
+      "answer": "Titan",
+      "explanation": "In Infinity War, some of the Avengers fight him there among its ruins.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What name does Peter Quill call himself in Guardians of the Galaxy?",
+      "options": [
+        "Star-Lord",
+        "Space Ranger",
+        "Captain Cosmos",
+        "Nova"
+      ],
+      "answer": "Star-Lord",
+      "explanation": "He keeps his mum's mixtape, Awesome Mix Vol. 1, playing on an old Walkman.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    }
+  ]
+}

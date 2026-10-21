@@ -1,0 +1,455 @@
+{
+  "category": "human-body",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "What is the largest organ of the human body?",
+      "options": [
+        "The skin",
+        "The liver",
+        "The lungs",
+        "The brain"
+      ],
+      "answer": "The skin",
+      "explanation": "Your skin is constantly making new cells and shedding old ones, so it is always renewing itself.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Roughly how many bones are there in an adult human body?",
+      "options": [
+        "206",
+        "106",
+        "306",
+        "56"
+      ],
+      "answer": "206",
+      "explanation": "Babies are born with around 300 bones, and many of them join together as they grow.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Where in your body is the smallest bone?",
+      "options": [
+        "In your ear",
+        "In your nose",
+        "In your little toe",
+        "In your little finger"
+      ],
+      "answer": "In your ear",
+      "explanation": "The stirrup bone, deep inside your ear, is about the size of a grain of rice.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which gas does your body need from the air you breathe in?",
+      "options": [
+        "Oxygen",
+        "Carbon dioxide",
+        "Helium",
+        "Hydrogen"
+      ],
+      "answer": "Oxygen",
+      "explanation": "Your lungs pass oxygen into your blood, which carries it to every part of your body.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which part of your blood helps a cut stop bleeding?",
+      "options": [
+        "Platelets",
+        "Red blood cells",
+        "White blood cells",
+        "Plasma"
+      ],
+      "answer": "Platelets",
+      "explanation": "Platelets rush to a cut and clump together to plug the gap, which is how a scab begins.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "How many sets of teeth do people grow in their lives?",
+      "options": [
+        "Two",
+        "One",
+        "Three",
+        "Four"
+      ],
+      "answer": "Two",
+      "explanation": "Your 20 milk teeth are replaced by up to 32 adult teeth.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the hardest thing in the human body?",
+      "options": [
+        "Tooth enamel",
+        "Bone",
+        "Fingernail",
+        "Hair"
+      ],
+      "answer": "Tooth enamel",
+      "explanation": "Enamel, the shiny outer layer of your teeth, is even harder than bone.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "About how many times a minute does a resting adult's heart beat?",
+      "options": [
+        "About 70",
+        "About 7",
+        "About 700",
+        "About 7,000"
+      ],
+      "answer": "About 70",
+      "explanation": "That adds up to around 100,000 heartbeats every single day.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which part of your eye makes your pupil smaller in bright light?",
+      "options": [
+        "The iris",
+        "The retina",
+        "The lens",
+        "The eyelid"
+      ],
+      "answer": "The iris",
+      "explanation": "Your iris is the coloured part of your eye, and it makes the pupil shrink in bright light and grow in the dark.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which sense helps you taste your food more than any other?",
+      "options": [
+        "Smell",
+        "Hearing",
+        "Touch",
+        "Sight"
+      ],
+      "answer": "Smell",
+      "explanation": "That is why food tastes of very little when you have a blocked nose.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the name of your thigh bone, the longest bone in your body?",
+      "options": [
+        "Femur",
+        "Tibia",
+        "Humerus",
+        "Fibula"
+      ],
+      "answer": "Femur",
+      "explanation": "Your femur is about a quarter as long as you are tall.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What does your stomach use to help break down food?",
+      "options": [
+        "Acid",
+        "Salt",
+        "Oil",
+        "Sugar"
+      ],
+      "answer": "Acid",
+      "explanation": "Your stomach makes a strong acid, and a layer of slimy mucus stops it from digesting itself.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which bones make a cage that protects your heart and lungs?",
+      "options": [
+        "Your ribs",
+        "Your spine",
+        "Your hips",
+        "Your skull"
+      ],
+      "answer": "Your ribs",
+      "explanation": "Most people have 12 pairs of ribs.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "When you get goosebumps, what are tiny muscles in your skin doing?",
+      "options": [
+        "Making your hairs stand up",
+        "Pushing out sweat",
+        "Squeezing your veins",
+        "Stretching your skin"
+      ],
+      "answer": "Making your hairs stand up",
+      "explanation": "Furry animals do it to trap warm air or look bigger; for us it is a leftover from our hairier ancestors.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which muscle suddenly tightening causes a hiccup?",
+      "options": [
+        "The diaphragm",
+        "The heart",
+        "The tongue",
+        "The stomach"
+      ],
+      "answer": "The diaphragm",
+      "explanation": "The diaphragm jerks, and the 'hic' is the sound of your vocal cords snapping shut.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the medical name for the voice box?",
+      "options": [
+        "Larynx",
+        "Pharynx",
+        "Trachea",
+        "Oesophagus"
+      ],
+      "answer": "Larynx",
+      "explanation": "The bump at the front of the throat called the Adam's apple is part of the larynx.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which organ produces insulin?",
+      "options": [
+        "Pancreas",
+        "Liver",
+        "Kidneys",
+        "Spleen"
+      ],
+      "answer": "Pancreas",
+      "explanation": "Insulin, made in the pancreas, lets the body's cells take in sugar from the blood.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which vitamin does your skin make when it is exposed to sunlight?",
+      "options": [
+        "Vitamin D",
+        "Vitamin C",
+        "Vitamin A",
+        "Vitamin B12"
+      ],
+      "answer": "Vitamin D",
+      "explanation": "Vitamin D helps the body absorb calcium, which keeps bones and teeth strong.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the medical name for the kneecap?",
+      "options": [
+        "Patella",
+        "Tibia",
+        "Fibula",
+        "Scapula"
+      ],
+      "answer": "Patella",
+      "explanation": "The patella sits inside a tendon in front of the knee joint, protecting it.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who developed the first vaccine, against smallpox, in 1796?",
+      "options": [
+        "Edward Jenner",
+        "Louis Pasteur",
+        "Joseph Lister",
+        "Alexander Fleming"
+      ],
+      "answer": "Edward Jenner",
+      "explanation": "Jenner noticed that milkmaids who caught cowpox seemed safe from smallpox, and the word vaccine comes from the Latin for cow.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the medical name for the collarbone?",
+      "options": [
+        "Clavicle",
+        "Scapula",
+        "Sternum",
+        "Humerus"
+      ],
+      "answer": "Clavicle",
+      "explanation": "The clavicle is one of the most commonly broken bones, often in a fall onto an outstretched arm.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "People with which blood group are known as universal donors of red blood cells?",
+      "options": [
+        "O negative",
+        "AB positive",
+        "A negative",
+        "B positive"
+      ],
+      "answer": "O negative",
+      "explanation": "O negative red cells can be given to almost anyone, which is why hospitals use them in emergencies.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which is the heaviest organ inside the human body?",
+      "options": [
+        "Liver",
+        "Brain",
+        "Heart",
+        "Kidneys"
+      ],
+      "answer": "Liver",
+      "explanation": "The liver weighs about 1.5 kg and can grow back after part of it is removed.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the name of the protein in red blood cells that carries oxygen?",
+      "options": [
+        "Haemoglobin",
+        "Keratin",
+        "Collagen",
+        "Insulin"
+      ],
+      "answer": "Haemoglobin",
+      "explanation": "Haemoglobin contains iron, which is what gives blood its red colour.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Roughly how much of an adult's body weight is water?",
+      "options": [
+        "About 60%",
+        "About 30%",
+        "About 85%",
+        "About 15%"
+      ],
+      "answer": "About 60%",
+      "explanation": "Even your bones are made partly of water.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which English doctor first described how blood circulates round the body, in 1628?",
+      "options": [
+        "William Harvey",
+        "Edward Jenner",
+        "Joseph Lister",
+        "Thomas Sydenham"
+      ],
+      "answer": "William Harvey",
+      "explanation": "Harvey showed that the heart pumps the same blood round and round the body in a loop.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Roughly how long is the small intestine in an adult?",
+      "options": [
+        "About 6 metres",
+        "About 60 cm",
+        "About 1.5 metres",
+        "About 25 metres"
+      ],
+      "answer": "About 6 metres",
+      "explanation": "Coiled up inside you, the small intestine is far longer than you are tall.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which part of the brain mainly controls balance and coordination?",
+      "options": [
+        "Cerebellum",
+        "Cerebrum",
+        "Hypothalamus",
+        "Medulla"
+      ],
+      "answer": "Cerebellum",
+      "explanation": "Cerebellum means 'little brain', and it sits at the back of the head, under the main part of the brain.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which part of the body contains the most bones?",
+      "options": [
+        "The hands",
+        "The feet",
+        "The skull",
+        "The spine"
+      ],
+      "answer": "The hands",
+      "explanation": "Your two hands contain 54 bones between them, more than a quarter of all the bones in your body.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which glands produce tears?",
+      "options": [
+        "Lacrimal glands",
+        "Salivary glands",
+        "Thyroid glands",
+        "Adrenal glands"
+      ],
+      "answer": "Lacrimal glands",
+      "explanation": "The lacrimal glands sit above the outer corner of each eye and keep it moist with every blink.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}

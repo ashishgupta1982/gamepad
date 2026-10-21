@@ -1,0 +1,519 @@
+{
+  "category": "ancient-world",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which famous ancient statue is this?",
+      "options": [
+        "The Great Sphinx",
+        "The Colossus of Rhodes",
+        "The Statue of Zeus",
+        "The Lion of Babylon"
+      ],
+      "answer": "The Great Sphinx",
+      "explanation": "The Sphinx has a lion's body and a king's head, and was carved straight out of the rock of the Giza plateau.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Great_Sphinx_of_Giza",
+        "alt": "A huge stone statue in the desert with a pyramid behind it",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615199/GamePad/quiz/great-sphinx-of-giza.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:Sphinx_with_the_third_pyramid.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which young pharaoh's golden mask is this?",
+      "options": [
+        "Tutankhamun",
+        "Ramesses II",
+        "Khufu",
+        "Akhenaten"
+      ],
+      "answer": "Tutankhamun",
+      "explanation": "Howard Carter found his tomb in 1922, and the mask contains more than 10 kilograms of gold.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Mask_of_Tutankhamun",
+        "alt": "A gleaming gold and blue striped mask",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615200/GamePad/quiz/mask-of-tutankhamun.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:CairoEgMuseumTaaMaskMostlyPhotographed.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which ancient monument is this?",
+      "options": [
+        "The Great Pyramid of Giza",
+        "The Step Pyramid of Djoser",
+        "The Pyramid of the Sun",
+        "El Castillo at Chichen Itza"
+      ],
+      "answer": "The Great Pyramid of Giza",
+      "explanation": "The Great Pyramid is the only one of the Seven Wonders of the Ancient World still standing.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Great_Pyramid_of_Giza",
+        "alt": "A huge stone pyramid in the desert",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615202/GamePad/quiz/great-pyramid-of-giza.jpg",
+        "credit": "Photo: Douwe C. van der Zee, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Great_Pyramid_of_Giza_-_Pyramid_of_Khufu.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which famous Roman building is this?",
+      "options": [
+        "The Pantheon",
+        "The Colosseum",
+        "The Circus Maximus",
+        "The Parthenon"
+      ],
+      "answer": "The Pantheon",
+      "explanation": "The Pantheon's dome is nearly 1,900 years old and is still the largest unreinforced concrete dome in the world.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Pantheon,_Rome",
+        "alt": "An ancient building with a columned porch",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615204/GamePad/quiz/pantheon-rome.jpg",
+        "credit": "Photo: NikonZ7II, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Pantheon_(Rome)_-_Right_side_and_front.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "What were the Vikings' long, narrow wooden ships called?",
+      "options": [
+        "Longships",
+        "Galleons",
+        "Triremes",
+        "Junks"
+      ],
+      "answer": "Longships",
+      "explanation": "Their shallow hulls let Vikings sail far up rivers as well as across the open sea.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which river was the lifeline of ancient Egypt?",
+      "options": [
+        "The Nile",
+        "The Amazon",
+        "The Tigris",
+        "The Danube"
+      ],
+      "answer": "The Nile",
+      "explanation": "Every summer the Nile flooded and left behind rich black mud, perfect for growing crops.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What did the ancient Egyptians write on, made from a reed that grew by the river?",
+      "options": [
+        "Papyrus",
+        "Parchment",
+        "Bamboo",
+        "Bark"
+      ],
+      "answer": "Papyrus",
+      "explanation": "Our word paper comes from papyrus.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What do we call the picture writing used in ancient Egypt?",
+      "options": [
+        "Hieroglyphs",
+        "Runes",
+        "Cuneiform",
+        "Ogham"
+      ],
+      "answer": "Hieroglyphs",
+      "explanation": "For centuries nobody could read them, until the Rosetta Stone helped crack the code in the 1820s.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which Roman emperor ordered a wall to be built right across northern England?",
+      "options": [
+        "Hadrian",
+        "Julius Caesar",
+        "Nero",
+        "Augustus"
+      ],
+      "answer": "Hadrian",
+      "explanation": "Hadrian's Wall ran for about 73 miles, from coast to coast.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Where were the first Olympic Games held, in ancient Greece?",
+      "options": [
+        "Olympia",
+        "Athens",
+        "Sparta",
+        "Troy"
+      ],
+      "answer": "Olympia",
+      "explanation": "The first games are traditionally dated to 776 BC, and winners were crowned with olive leaves.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What were ancient Egyptian mummies wrapped in?",
+      "options": [
+        "Linen bandages",
+        "Paper",
+        "Palm leaves",
+        "Wool"
+      ],
+      "answer": "Linen bandages",
+      "explanation": "Lucky charms called amulets were often tucked in between the layers of linen.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What did the Romans call Britain?",
+      "options": [
+        "Britannia",
+        "Gallia",
+        "Hispania",
+        "Germania"
+      ],
+      "answer": "Britannia",
+      "explanation": "Britannia later became the helmeted figure who has appeared on British coins for centuries.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which English city did the Vikings call Jorvik?",
+      "options": [
+        "York",
+        "London",
+        "Lincoln",
+        "Chester"
+      ],
+      "answer": "York",
+      "explanation": "Archaeologists in York have dug up Viking houses, leather shoes and even a 20-centimetre lump of fossilised Viking poo.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which hard stone did Stone Age people chip into sharp tools and arrowheads?",
+      "options": [
+        "Flint",
+        "Chalk",
+        "Marble",
+        "Sandstone"
+      ],
+      "answer": "Flint",
+      "explanation": "Flint breaks with edges sharp enough to cut meat and scrape animal skins.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What was a Roman army officer in charge of around 80 soldiers called?",
+      "options": [
+        "A centurion",
+        "A gladiator",
+        "A senator",
+        "A consul"
+      ],
+      "answer": "A centurion",
+      "explanation": "Despite the name, which comes from the Latin for a hundred, a centurion's unit usually had about 80 men.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which famous ancient object is this?",
+      "options": [
+        "The Rosetta Stone",
+        "The Code of Hammurabi",
+        "The Cyrus Cylinder",
+        "The Behistun Inscription"
+      ],
+      "answer": "The Rosetta Stone",
+      "explanation": "It carries the same decree in hieroglyphs, Demotic and ancient Greek, which is what let scholars finally read hieroglyphs.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Rosetta_Stone",
+        "alt": "A dark slab of stone covered in carved writing",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615205/GamePad/quiz/rosetta-stone.jpg",
+        "credit": "Photo: Hans Hillewaert, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Rosetta_Stone.JPG"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which ancient temple is this?",
+      "options": [
+        "The Parthenon",
+        "The Pantheon",
+        "The Temple of Hephaestus",
+        "The Temple of Poseidon at Sounion"
+      ],
+      "answer": "The Parthenon",
+      "explanation": "It was built in the 5th century BC for Athena, the patron goddess of Athens.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Parthenon",
+        "alt": "A ruined marble temple with columns on top of a hill",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615207/GamePad/quiz/parthenon.jpg",
+        "credit": "Photo: Steve Swayne, CC BY 2.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:The_Parthenon_in_Athens.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which queen of the Iceni led a great revolt against the Romans in Britain?",
+      "options": [
+        "Boudica",
+        "Cartimandua",
+        "Zenobia",
+        "Cleopatra"
+      ],
+      "answer": "Boudica",
+      "explanation": "Her army burned the Roman towns at Colchester, London and St Albans.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which emperor was ruling Rome when much of the city burned in AD 64?",
+      "options": [
+        "Nero",
+        "Caligula",
+        "Claudius",
+        "Tiberius"
+      ],
+      "answer": "Nero",
+      "explanation": "The story that he fiddled while Rome burned cannot be true: the fiddle had not been invented yet.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which ancient Greek city-state took boys away from home at the age of seven to train as soldiers?",
+      "options": [
+        "Sparta",
+        "Athens",
+        "Corinth",
+        "Thebes"
+      ],
+      "answer": "Sparta",
+      "explanation": "The tough Spartan training was called the agoge, and it lasted well into a boy's teens.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which pharaoh was the Great Pyramid of Giza built for?",
+      "options": [
+        "Khufu",
+        "Khafre",
+        "Menkaure",
+        "Djoser"
+      ],
+      "answer": "Khufu",
+      "explanation": "For more than 3,800 years it was the tallest structure ever built by people.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What did the Romans call their town of London?",
+      "options": [
+        "Londinium",
+        "Eboracum",
+        "Deva",
+        "Camulodunum"
+      ],
+      "answer": "Londinium",
+      "explanation": "The Romans founded it within a few years of their invasion in AD 43 and built the first London Bridge.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Greek philosopher was tutor to the young Alexander the Great?",
+      "options": [
+        "Aristotle",
+        "Plato",
+        "Socrates",
+        "Pythagoras"
+      ],
+      "answer": "Aristotle",
+      "explanation": "Aristotle had studied under Plato, who had himself been a pupil of Socrates.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Carthaginian general crossed the Alps with war elephants to attack Rome?",
+      "options": [
+        "Hannibal",
+        "Hamilcar",
+        "Hasdrubal",
+        "Scipio"
+      ],
+      "answer": "Hannibal",
+      "explanation": "He made the crossing in 218 BC, though few of his elephants survived for long in Italy.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Viking explorer is said in the sagas to have reached North America around the year 1000?",
+      "options": [
+        "Leif Erikson",
+        "Erik the Red",
+        "Harald Hardrada",
+        "Ragnar Lothbrok"
+      ],
+      "answer": "Leif Erikson",
+      "explanation": "Norse remains at L'Anse aux Meadows in Newfoundland, with wood cut in 1021, prove Vikings reached the Americas almost 500 years before Columbus.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Whose tomb do these clay figures guard?",
+      "options": [
+        "Qin Shi Huang",
+        "Kublai Khan",
+        "Emperor Wu of Han",
+        "Genghis Khan"
+      ],
+      "answer": "Qin Shi Huang",
+      "explanation": "Farmers digging a well near Xi'an stumbled on the first figures in 1974.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Terracotta_Army",
+        "alt": "Rows of life-size clay figures standing in a pit",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615209/GamePad/quiz/terracotta-army.jpg",
+        "credit": "Photo: xiquinhosilva, CC BY 2.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:51714-Terracota-Army.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "In which country is this Roman aqueduct bridge?",
+      "options": [
+        "France",
+        "Spain",
+        "Italy",
+        "Turkey"
+      ],
+      "answer": "France",
+      "explanation": "The Pont du Gard was built in the 1st century AD to carry water to the city of Nîmes.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Pont_du_Gard",
+        "alt": "A three-tiered stone bridge of arches over a river",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615210/GamePad/quiz/pont-du-gard.jpg",
+        "credit": "Photo: Benh LIEU SONG (Flickr), CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Pont_du_Gard_BLS.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which Roman town was buried by Vesuvius in AD 79 along with Pompeii?",
+      "options": [
+        "Herculaneum",
+        "Ostia",
+        "Paestum",
+        "Capua"
+      ],
+      "answer": "Herculaneum",
+      "explanation": "Herculaneum lay under about 20 metres of volcanic material, which preserved wooden beams and furniture.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which year did Vikings raid the monastery on Lindisfarne, often seen as the start of the Viking Age in Britain?",
+      "options": [
+        "AD 793",
+        "AD 866",
+        "AD 597",
+        "AD 1066"
+      ],
+      "answer": "AD 793",
+      "explanation": "The attack on Holy Island, off the Northumberland coast, shocked the whole of Christian Europe.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Stone Age village in Orkney was uncovered when a great storm stripped away the sand in 1850?",
+      "options": [
+        "Skara Brae",
+        "Jarlshof",
+        "Maeshowe",
+        "Brodgar"
+      ],
+      "answer": "Skara Brae",
+      "explanation": "Its houses still have their stone beds and dressers, and the village is older than the Great Pyramid.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}

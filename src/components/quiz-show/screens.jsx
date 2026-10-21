@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { play } from '@/components/arcade/sfx';
 import { buzz, celebrate } from '@/components/arcade/feedback';
+import { transformUrl } from '@aspiro/media';
+import { IMAGE_PRESETS } from '@aspiro/media/presets';
 import { pickName } from '@/lib/quiz/catalogue';
 import { currentQuestion, standings } from '@/lib/quiz/machine';
 import { cn } from '@/lib/cn';
@@ -77,8 +79,10 @@ function QuestionHeader({ game, big }) {
 
 /**
  * A question's picture or emoji clue (lib/quiz/questions.js#checkMedia). A
- * picture carries its credit, which some Wikimedia licences require. `small`
- * is the reveal, where it is a reminder rather than the clue.
+ * picture is on Cloudinary and is sized for the phone by @aspiro/media
+ * (transformUrl with the hero preset: capped width, automatic format and
+ * quality). It carries its credit, which some Wikimedia licences require.
+ * `small` is the reveal, where it is a reminder rather than the clue.
  */
 function QuestionMedia({ media, big, small }) {
   if (!media) return null;
@@ -92,7 +96,7 @@ function QuestionMedia({ media, big, small }) {
   return (
     <figure className="w-full">
       <img
-        src={media.src}
+        src={transformUrl(media.src, IMAGE_PRESETS.hero)}
         alt={media.alt || ''}
         draggable={false}
         className={cn('mx-auto w-auto select-none rounded-2xl object-contain shadow-[0_3px_0_rgba(0,0,0,0.15)]', small ? 'max-h-[16dvh]' : big ? 'max-h-[40dvh]' : 'max-h-[30dvh]')}

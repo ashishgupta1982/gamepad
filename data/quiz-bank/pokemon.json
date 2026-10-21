@@ -1,0 +1,483 @@
+{
+  "category": "pokemon",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which Pokémon do these emoji describe?",
+      "options": [
+        "Pikachu",
+        "Pachirisu",
+        "Dedenne",
+        "Emolga"
+      ],
+      "answer": "Pikachu",
+      "explanation": "Pikachu has been Ash's partner since the very first episode.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "⚡🐭🧢"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which Pokémon do these emoji describe?",
+      "options": [
+        "Jigglypuff",
+        "Clefairy",
+        "Togepi",
+        "Snorlax"
+      ],
+      "answer": "Jigglypuff",
+      "explanation": "In the show Jigglypuff gets cross when its audience falls asleep and scribbles on their faces.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🎤🎈💤"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which Pokémon do these emoji describe?",
+      "options": [
+        "Psyduck",
+        "Farfetch'd",
+        "Ducklett",
+        "Wingull"
+      ],
+      "answer": "Psyduck",
+      "explanation": "When Psyduck's headache gets bad enough, it unleashes powerful psychic attacks.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🦆🤕"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which Pokémon do these emoji describe?",
+      "options": [
+        "Charmander",
+        "Cyndaquil",
+        "Torchic",
+        "Growlithe"
+      ],
+      "answer": "Charmander",
+      "explanation": "The flame on Charmander's tail burns brightly when it is healthy.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🦎🔥"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "What type of Pokémon is Squirtle?",
+      "options": [
+        "Water",
+        "Ice",
+        "Grass",
+        "Normal"
+      ],
+      "answer": "Water",
+      "explanation": "Squirtle is one of the three starter Pokémon in Pokémon Red and Blue.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which Pokémon does Magikarp evolve into?",
+      "options": [
+        "Gyarados",
+        "Seaking",
+        "Milotic",
+        "Dragonair"
+      ],
+      "answer": "Gyarados",
+      "explanation": "Weak, splashing Magikarp grows into the fearsome Gyarados.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the name of the gadget that tells Ash all about each Pokémon he meets?",
+      "options": [
+        "A Pokédex",
+        "A PokéNav",
+        "A Poké Ball",
+        "A Pokétch"
+      ],
+      "answer": "A Pokédex",
+      "explanation": "Professor Oak gives Ash his Pokédex in the very first episode.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which of Eevee's evolutions is a Fire type?",
+      "options": [
+        "Flareon",
+        "Jolteon",
+        "Vaporeon",
+        "Umbreon"
+      ],
+      "answer": "Flareon",
+      "explanation": "Eevee becomes Flareon when it is given a Fire Stone.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which type of move is super effective against Fire-type Pokémon?",
+      "options": [
+        "Water",
+        "Grass",
+        "Ice",
+        "Bug"
+      ],
+      "answer": "Water",
+      "explanation": "Water puts out fire, so Water moves do double damage.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which Pokémon travels with Jessie and James in Team Rocket?",
+      "options": [
+        "Meowth",
+        "Persian",
+        "Purrloin",
+        "Skitty"
+      ],
+      "answer": "Meowth",
+      "explanation": "Team Rocket's Meowth taught himself to walk on two legs and talk like a human.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the name of Ash's rival in the first Pokémon series?",
+      "options": [
+        "Gary",
+        "Brock",
+        "Tracey",
+        "Max"
+      ],
+      "answer": "Gary",
+      "explanation": "Gary is Professor Oak's grandson.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which Pokémon is number 001 in the National Pokédex?",
+      "options": [
+        "Bulbasaur",
+        "Pikachu",
+        "Mew",
+        "Arceus"
+      ],
+      "answer": "Bulbasaur",
+      "explanation": "Bulbasaur is the Grass and Poison starter from the Kanto region.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What colour is a shiny Charizard?",
+      "options": [
+        "Black",
+        "Gold",
+        "Blue",
+        "Pink"
+      ],
+      "answer": "Black",
+      "explanation": "Shiny Pokémon are rare colour versions, and since Pokémon Ruby and Sapphire a shiny Charizard has been black instead of orange.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Mewtwo was created by scientists from the genes of which Pokémon?",
+      "options": [
+        "Mew",
+        "Ditto",
+        "Celebi",
+        "Jirachi"
+      ],
+      "answer": "Mew",
+      "explanation": "In Pokémon Red and Blue, old diaries in the Pokémon Mansion on Cinnabar Island tell how Mewtwo was made.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In the show, which town does Ash come from?",
+      "options": [
+        "Pallet Town",
+        "Viridian City",
+        "Pewter City",
+        "Cerulean City"
+      ],
+      "answer": "Pallet Town",
+      "explanation": "Pallet Town is also where you start your adventure in Pokémon Red and Blue.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Pokémon do these emoji describe?",
+      "options": [
+        "Gengar",
+        "Duskull",
+        "Banette",
+        "Phantump"
+      ],
+      "answer": "Gengar",
+      "explanation": "Haunter evolves into Gengar when it is traded.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "👻💜😁"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which Pokémon do these emoji describe?",
+      "options": [
+        "Alakazam",
+        "Hypno",
+        "Mr. Mime",
+        "Espeon"
+      ],
+      "answer": "Alakazam",
+      "explanation": "Kadabra holds one spoon, and its evolution Alakazam holds two.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🥄🥄🧠"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which Pokémon do these emoji describe?",
+      "options": [
+        "Onix",
+        "Ekans",
+        "Seviper",
+        "Golem"
+      ],
+      "answer": "Onix",
+      "explanation": "Brock, the Pewter City Gym Leader, relies on his giant rock snake.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🪨🐍"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "In which year were the first Pokémon games, Red and Green, released in Japan?",
+      "options": [
+        "1996",
+        "1994",
+        "1998",
+        "1999"
+      ],
+      "answer": "1996",
+      "explanation": "They reached the UK as Pokémon Red and Blue in 1999.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "How many Pokémon were in the original Red and Blue Pokédex?",
+      "options": [
+        "151",
+        "150",
+        "100",
+        "251"
+      ],
+      "answer": "151",
+      "explanation": "Mew was the secret extra, number 151.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which company develops the main series of Pokémon games?",
+      "options": [
+        "Game Freak",
+        "HAL Laboratory",
+        "Rare",
+        "Capcom"
+      ],
+      "answer": "Game Freak",
+      "explanation": "Pokémon's creator Satoshi Tajiri dreamed it up from his childhood love of collecting bugs.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Pokémon type was added in Pokémon X and Y?",
+      "options": [
+        "Fairy",
+        "Dark",
+        "Steel",
+        "Dragon"
+      ],
+      "answer": "Fairy",
+      "explanation": "Fairy-type Pokémon are completely immune to Dragon moves.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who is the Gym Leader of Cerulean City?",
+      "options": [
+        "Misty",
+        "Erika",
+        "Sabrina",
+        "Brock"
+      ],
+      "answer": "Misty",
+      "explanation": "Misty specialises in Water-type Pokémon.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Pokémon does Machoke evolve into when it is traded?",
+      "options": [
+        "Machamp",
+        "Hitmonlee",
+        "Conkeldurr",
+        "Primeape"
+      ],
+      "answer": "Machamp",
+      "explanation": "Machamp has four arms.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Legendary bird is an Ice and Flying type?",
+      "options": [
+        "Articuno",
+        "Zapdos",
+        "Moltres",
+        "Lugia"
+      ],
+      "answer": "Articuno",
+      "explanation": "Zapdos and Moltres complete the trio of Legendary birds.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which year was Pokémon Go released?",
+      "options": [
+        "2016",
+        "2014",
+        "2018",
+        "2012"
+      ],
+      "answer": "2016",
+      "explanation": "It was made by Niantic.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which region of Pokémon Sword and Shield is based on Great Britain?",
+      "options": [
+        "Galar",
+        "Kalos",
+        "Alola",
+        "Paldea"
+      ],
+      "answer": "Galar",
+      "explanation": "Its Gym battles are held in huge football-style stadiums.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In the anime, who does Ash beat in the final to become World Champion?",
+      "options": [
+        "Leon",
+        "Cynthia",
+        "Lance",
+        "Steven"
+      ],
+      "answer": "Leon",
+      "explanation": "Leon was the long-unbeaten Champion of the Galar region.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Legendary Pokémon is on the box of Pokémon Silver?",
+      "options": [
+        "Lugia",
+        "Ho-Oh",
+        "Suicune",
+        "Celebi"
+      ],
+      "answer": "Lugia",
+      "explanation": "Ho-Oh is on the box of Pokémon Gold.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is Ash's surname in the English version of the anime?",
+      "options": [
+        "Ketchum",
+        "Oak",
+        "Waterflower",
+        "Birch"
+      ],
+      "answer": "Ketchum",
+      "explanation": "In Japan he is called Satoshi, after the creator of Pokémon.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    }
+  ]
+}

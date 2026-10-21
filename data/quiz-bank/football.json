@@ -1,0 +1,305 @@
+{
+  "category": "football",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "How many players does each team have on the pitch at the start of a football match?",
+      "options": ["11", "10", "9", "12"],
+      "answer": "11",
+      "explanation": "That is ten outfield players plus one goalkeeper.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What colour card does a referee show to send a player off?",
+      "options": ["Red", "Yellow", "Green", "Blue"],
+      "answer": "Red",
+      "explanation": "Red and yellow cards were first used at the 1970 World Cup in Mexico.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the nickname of the England women's football team?",
+      "options": ["The Lionesses", "The Red Roses", "The Tigresses", "The Golden Girls"],
+      "answer": "The Lionesses",
+      "explanation": "The name is a nod to the three lions on the England badge, which is why the men's team is called the Three Lions.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is it called when one player scores three goals in a single match?",
+      "options": ["A hat-trick", "A treble", "A triple", "A full house"],
+      "answer": "A hat-trick",
+      "explanation": "The phrase is thought to come from cricket, where a bowler who took three wickets with three balls was once given a new hat.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which country did Lionel Messi captain to victory at the 2022 World Cup?",
+      "options": ["Argentina", "Brazil", "Spain", "Portugal"],
+      "answer": "Argentina",
+      "explanation": "Argentina beat France on penalties after a thrilling 3–3 draw in the final in Qatar.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which club plays its home games at Anfield?",
+      "options": ["Liverpool", "Everton", "Manchester United", "Newcastle United"],
+      "answer": "Liverpool",
+      "explanation": "Funnily enough, Anfield was Everton's home first, until they moved out in 1892 and Liverpool were formed to play there.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which club is nicknamed 'the Gunners'?",
+      "options": ["Arsenal", "Chelsea", "Tottenham Hotspur", "West Ham United"],
+      "answer": "Arsenal",
+      "explanation": "Arsenal were founded in 1886 by workers at the Royal Arsenal, a weapons factory in Woolwich.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In 2025, England's women kept their European title by beating which country in the final?",
+      "options": ["Spain", "Germany", "France", "Netherlands"],
+      "answer": "Spain",
+      "explanation": "The final in Basel finished 1–1, and Chloe Kelly scored the winning penalty in the shoot-out.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which football ground is nicknamed 'the Theatre of Dreams'?",
+      "options": ["Old Trafford", "Anfield", "Wembley", "The Emirates Stadium"],
+      "answer": "Old Trafford",
+      "explanation": "Manchester United legend Sir Bobby Charlton gave Old Trafford its famous nickname.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What does VAR stand for in football?",
+      "options": ["Video Assistant Referee", "Video Action Replay", "Visual Aid for Referees", "Video Assessment Review"],
+      "answer": "Video Assistant Referee",
+      "explanation": "The VAR team watches replays on screens and can tell the referee to take another look.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In March 2023, who became the England men's team's all-time top goalscorer?",
+      "options": ["Harry Kane", "Raheem Sterling", "Marcus Rashford", "Jack Grealish"],
+      "answer": "Harry Kane",
+      "explanation": "Kane scored a penalty against Italy for his 54th England goal, one more than Wayne Rooney's old record.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which country hosted the men's World Cup in 1966 and won it?",
+      "options": ["England", "West Germany", "Brazil", "Italy"],
+      "answer": "England",
+      "explanation": "England beat West Germany 4–2 at Wembley, with Geoff Hurst scoring a hat-trick.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "How far from the goal line is the penalty spot?",
+      "options": ["12 yards", "10 yards", "15 yards", "18 yards"],
+      "answer": "12 yards",
+      "explanation": "Twelve yards is about 11 metres, roughly the length of a double-decker bus.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which country hosted the very first World Cup, in 1930?",
+      "options": ["Uruguay", "Brazil", "Italy", "England"],
+      "answer": "Uruguay",
+      "explanation": "Uruguay hosted it and won it too, beating Argentina 4–2 in the final.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Where was the 2023 Women's World Cup held?",
+      "options": ["Australia and New Zealand", "Canada", "France", "Japan and South Korea"],
+      "answer": "Australia and New Zealand",
+      "explanation": "It was the first Women's World Cup with two host countries, and Spain beat England in the final in Sydney.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "By the end of the 2022 tournament, which country had won the men's World Cup the most times?",
+      "options": ["Brazil", "Germany", "Italy", "Argentina"],
+      "answer": "Brazil",
+      "explanation": "Brazil won it five times: in 1958, 1962, 1970, 1994 and 2002.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who managed England's women to European Championship titles in both 2022 and 2025?",
+      "options": ["Sarina Wiegman", "Phil Neville", "Emma Hayes", "Hope Powell"],
+      "answer": "Sarina Wiegman",
+      "explanation": "Wiegman had already won the Euros with her home country, the Netherlands, in 2017.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which club won the Premier League in 2015–16, having started the season as 5000–1 outsiders?",
+      "options": ["Leicester City", "Tottenham Hotspur", "West Ham United", "Southampton"],
+      "answer": "Leicester City",
+      "explanation": "Claudio Ranieri's side finished ten points clear in one of the greatest upsets in sporting history.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who scored the 'Hand of God' goal against England at the 1986 World Cup?",
+      "options": ["Diego Maradona", "Pelé", "Zico", "Michel Platini"],
+      "answer": "Diego Maradona",
+      "explanation": "Four minutes later he scored a dazzling solo goal that fans later voted the Goal of the Century.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which country beat England in the final of Euro 2020, played at Wembley in 2021?",
+      "options": ["Italy", "Spain", "Denmark", "France"],
+      "answer": "Italy",
+      "explanation": "The final ended 1–1 and Italy won the penalty shoot-out 3–2.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What nickname was given to Arsenal's side that went the whole 2003–04 Premier League season unbeaten?",
+      "options": ["The Invincibles", "The Untouchables", "The Immortals", "The Galácticos"],
+      "answer": "The Invincibles",
+      "explanation": "They won 26 and drew 12 of their 38 league games.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "By the end of the 2024–25 season, who was the Premier League's all-time top goalscorer?",
+      "options": ["Alan Shearer", "Harry Kane", "Wayne Rooney", "Thierry Henry"],
+      "answer": "Alan Shearer",
+      "explanation": "Shearer scored 260 Premier League goals for Blackburn Rovers and Newcastle United.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Under the laws of the game, you cannot be offside if a team-mate plays the ball straight to you from which of these?",
+      "options": ["A throw-in", "A free kick", "A header", "A cross"],
+      "answer": "A throw-in",
+      "explanation": "There is no offside straight from a throw-in, a goal kick or a corner.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What was introduced in 1992 to stop goalkeepers picking up a deliberate kick from a team-mate?",
+      "options": ["The back-pass rule", "The six-second rule", "The golden goal", "The sin bin"],
+      "answer": "The back-pass rule",
+      "explanation": "It followed a cagey, time-wasting 1990 World Cup that had very few goals.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In 1968, which became the first English club to win the European Cup?",
+      "options": ["Manchester United", "Liverpool", "Nottingham Forest", "Leeds United"],
+      "answer": "Manchester United",
+      "explanation": "They beat Benfica 4–1 after extra time at Wembley, ten years after the Munich air disaster.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "At the 1990 World Cup, which country knocked England out on penalties in the semi-final?",
+      "options": ["West Germany", "Argentina", "Italy", "Netherlands"],
+      "answer": "West Germany",
+      "explanation": "It was the night of Paul Gascoigne's tears, and West Germany went on to win the final.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which country won the first Women's World Cup, held in China in 1991?",
+      "options": ["United States", "Norway", "Germany", "China"],
+      "answer": "United States",
+      "explanation": "The USA beat Norway 2–1 in the final in Guangzhou.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Sergio Agüero's last-gasp goal in May 2012 won Manchester City the title in a 3–2 win against which side?",
+      "options": ["Queens Park Rangers", "Sunderland", "Stoke City", "Wigan Athletic"],
+      "answer": "Queens Park Rangers",
+      "explanation": "It was City's first league title in 44 years, snatched from Manchester United on goal difference.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which French referee became the first woman to referee a men's World Cup match, in 2022?",
+      "options": ["Stéphanie Frappart", "Kateryna Monzul", "Bibiana Steinhaus", "Rebecca Welch"],
+      "answer": "Stéphanie Frappart",
+      "explanation": "She took charge of Costa Rica against Germany in Qatar, with two women as her assistants.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Roughly how many fans watched England beat Germany in the Women's Euro 2022 final at Wembley?",
+      "options": ["About 87,000", "About 50,000", "About 65,000", "About 100,000"],
+      "answer": "About 87,000",
+      "explanation": "The crowd of 87,192 was a record for any European Championship match, men's or women's.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}

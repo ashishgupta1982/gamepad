@@ -18,7 +18,7 @@
         "kind": "image",
         "flag": "br",
         "alt": "A national flag",
-        "src": "/quiz/flags/br.svg",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615176/GamePad/quiz/flag-br.png",
         "credit": ""
       }
     },
@@ -39,7 +39,7 @@
         "kind": "image",
         "flag": "ca",
         "alt": "A national flag",
-        "src": "/quiz/flags/ca.svg",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615177/GamePad/quiz/flag-ca.png",
         "credit": ""
       }
     },
@@ -88,7 +88,7 @@
         "kind": "image",
         "flag": "np",
         "alt": "A national flag",
-        "src": "/quiz/flags/np.svg",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615178/GamePad/quiz/flag-np.png",
         "credit": ""
       }
     },
@@ -109,7 +109,7 @@
         "kind": "image",
         "flag": "kz",
         "alt": "A national flag",
-        "src": "/quiz/flags/kz.svg",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615179/GamePad/quiz/flag-kz.png",
         "credit": ""
       }
     },
@@ -172,9 +172,344 @@
         "kind": "image",
         "flag": "lk",
         "alt": "A national flag",
-        "src": "/quiz/flags/lk.svg",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615180/GamePad/quiz/flag-lk.png",
         "credit": ""
       }
+    },
+    {
+      "band": "kids",
+      "question": "Which country's flag is this?",
+      "options": [
+        "Japan",
+        "China",
+        "South Korea",
+        "Bangladesh"
+      ],
+      "answer": "Japan",
+      "explanation": "Japan's flag is called the Hinomaru, which means 'circle of the sun'.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "flag": "jp",
+        "alt": "A national flag",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615181/GamePad/quiz/flag-jp.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which country's flag is this?",
+      "options": [
+        "Jamaica",
+        "Ghana",
+        "Kenya",
+        "South Africa"
+      ],
+      "answer": "Jamaica",
+      "explanation": "Jamaica's flag uses just three colours: black, green and gold.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "flag": "jm",
+        "alt": "A national flag",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615182/GamePad/quiz/flag-jm.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "What is the capital city of Spain?",
+      "options": [
+        "Madrid",
+        "Barcelona",
+        "Seville",
+        "Valencia"
+      ],
+      "answer": "Madrid",
+      "explanation": "Madrid sits almost exactly in the middle of Spain.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the capital city of the United States?",
+      "options": [
+        "Washington, D.C.",
+        "New York",
+        "Los Angeles",
+        "Chicago"
+      ],
+      "answer": "Washington, D.C.",
+      "explanation": "The 'D.C.' stands for District of Columbia, which is not part of any state.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which capital city has a whole country, Vatican City, inside it?",
+      "options": [
+        "Rome",
+        "Paris",
+        "Madrid",
+        "Athens"
+      ],
+      "answer": "Rome",
+      "explanation": "Vatican City is the smallest country in the world, and it sits entirely inside Rome.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the capital city of India?",
+      "options": [
+        "New Delhi",
+        "Mumbai",
+        "Kolkata",
+        "Bangalore"
+      ],
+      "answer": "New Delhi",
+      "explanation": "Before New Delhi, the capital of British India was Calcutta, which is now called Kolkata.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the capital city of Russia?",
+      "options": [
+        "Moscow",
+        "St Petersburg",
+        "Novosibirsk",
+        "Sochi"
+      ],
+      "answer": "Moscow",
+      "explanation": "Moscow's Kremlin is a fortress whose walls are more than 2 kilometres long.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Nairobi is the capital city of which country?",
+      "options": [
+        "Kenya",
+        "Uganda",
+        "Tanzania",
+        "Ethiopia"
+      ],
+      "answer": "Kenya",
+      "explanation": "Nairobi has a national park right next to the city, where giraffes graze with skyscrapers behind them.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the capital city of China?",
+      "options": [
+        "Beijing",
+        "Shanghai",
+        "Hong Kong",
+        "Shenzhen"
+      ],
+      "answer": "Beijing",
+      "explanation": "Beijing's name means 'northern capital'.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Lima is the capital city of which country?",
+      "options": [
+        "Peru",
+        "Chile",
+        "Bolivia",
+        "Colombia"
+      ],
+      "answer": "Peru",
+      "explanation": "Lima was founded by the Spanish explorer Francisco Pizarro in 1535.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which country's flag is this?",
+      "options": [
+        "South Korea",
+        "Japan",
+        "Taiwan",
+        "Mongolia"
+      ],
+      "answer": "South Korea",
+      "explanation": "South Korea's flag has a red and blue yin-yang circle surrounded by four black trigrams.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "flag": "kr",
+        "alt": "A national flag",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615183/GamePad/quiz/flag-kr.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which country's flag is this?",
+      "options": [
+        "Bhutan",
+        "Myanmar",
+        "Laos",
+        "Mongolia"
+      ],
+      "answer": "Bhutan",
+      "explanation": "The white dragon is the Druk, or Thunder Dragon, and the Bhutanese call their country Druk Yul, the Land of the Thunder Dragon.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "flag": "bt",
+        "alt": "A national flag",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615184/GamePad/quiz/flag-bt.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which country's flag is this?",
+      "options": [
+        "Cyprus",
+        "Malta",
+        "Greece",
+        "Kosovo"
+      ],
+      "answer": "Cyprus",
+      "explanation": "The island on Cyprus's flag is copper-coloured, a nod to the copper the island was famous for in ancient times.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "flag": "cy",
+        "alt": "A national flag",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615186/GamePad/quiz/flag-cy.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "What is the capital of Brazil?",
+      "options": [
+        "Brasília",
+        "Rio de Janeiro",
+        "São Paulo",
+        "Salvador"
+      ],
+      "answer": "Brasília",
+      "explanation": "Brasília was built from scratch in the late 1950s and took over from Rio de Janeiro as the capital in 1960.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the capital of Switzerland?",
+      "options": [
+        "Bern",
+        "Zurich",
+        "Geneva",
+        "Basel"
+      ],
+      "answer": "Bern",
+      "explanation": "Swiss law never actually names a capital; Bern is officially the 'federal city'.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the capital of Morocco?",
+      "options": [
+        "Rabat",
+        "Casablanca",
+        "Marrakesh",
+        "Fez"
+      ],
+      "answer": "Rabat",
+      "explanation": "Casablanca is Morocco's biggest city, but the king and the government are based in Rabat.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "La Paz is Bolivia's seat of government, but which city is its official capital under the constitution?",
+      "options": [
+        "Sucre",
+        "Santa Cruz",
+        "Cochabamba",
+        "Potosí"
+      ],
+      "answer": "Sucre",
+      "explanation": "La Paz, at around 3,600 metres, is the highest seat of government in the world.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the capital of Pakistan?",
+      "options": [
+        "Islamabad",
+        "Karachi",
+        "Lahore",
+        "Rawalpindi"
+      ],
+      "answer": "Islamabad",
+      "explanation": "Islamabad was purpose-built as the capital in the 1960s, taking over from Karachi, with nearby Rawalpindi standing in while it was built.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which is the most northerly capital city of an independent country?",
+      "options": [
+        "Reykjavik",
+        "Oslo",
+        "Helsinki",
+        "Tallinn"
+      ],
+      "answer": "Reykjavik",
+      "explanation": "Iceland's capital takes its name from the steam of its hot springs: Reykjavik means 'smoky bay'.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the capital of Myanmar?",
+      "options": [
+        "Naypyidaw",
+        "Yangon",
+        "Mandalay",
+        "Bagan"
+      ],
+      "answer": "Naypyidaw",
+      "explanation": "Myanmar moved its government from Yangon to the brand-new city of Naypyidaw in 2005 and 2006.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
     }
   ]
 }

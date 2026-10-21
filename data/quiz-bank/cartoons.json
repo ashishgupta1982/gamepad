@@ -1,0 +1,487 @@
+{
+  "category": "cartoons",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "What breed of dog is Bluey?",
+      "options": [
+        "A Blue Heeler",
+        "A Border Collie",
+        "A Labrador",
+        "A Dalmatian"
+      ],
+      "answer": "A Blue Heeler",
+      "explanation": "Blue Heelers are Australian cattle dogs, and Bluey is made in Brisbane.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the name of Bluey's little sister?",
+      "options": [
+        "Bingo",
+        "Muffin",
+        "Socks",
+        "Chloe"
+      ],
+      "answer": "Bingo",
+      "explanation": "Bingo is a Red Heeler, which is why she is orange rather than blue.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which cartoon do these emoji describe?",
+      "options": [
+        "SpongeBob SquarePants",
+        "Octonauts",
+        "The Penguins of Madagascar",
+        "Peppa Pig"
+      ],
+      "answer": "SpongeBob SquarePants",
+      "explanation": "SpongeBob lives in a pineapple under the sea in Bikini Bottom.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🧽🍍🌊"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "What is the name of Peppa Pig's little brother?",
+      "options": [
+        "George",
+        "Richard",
+        "Pedro",
+        "Danny"
+      ],
+      "answer": "George",
+      "explanation": "George goes everywhere with his favourite toy, Mr Dinosaur.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Paw Patrol, what is the name of the boy who leads the pups?",
+      "options": [
+        "Ryder",
+        "Alex",
+        "Jake",
+        "Carlos"
+      ],
+      "answer": "Ryder",
+      "explanation": "Ryder sends the pups out on their missions from the Lookout in Adventure Bay.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which cartoon do these emoji describe?",
+      "options": [
+        "Hey Duggee",
+        "Bluey",
+        "Paw Patrol",
+        "Peppa Pig"
+      ],
+      "answer": "Hey Duggee",
+      "explanation": "Duggee runs the Squirrel Club, where the Squirrels earn a badge for every activity.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🐕🏅🐿️"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "In The Amazing World of Gumball, what kind of animal is Gumball?",
+      "options": [
+        "A cat",
+        "A rabbit",
+        "A dog",
+        "A fish"
+      ],
+      "answer": "A cat",
+      "explanation": "Gumball's brother Darwin started out as the family's pet goldfish, until he grew legs.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which cheese does Wallace love most in Wallace and Gromit?",
+      "options": [
+        "Wensleydale",
+        "Cheddar",
+        "Stilton",
+        "Red Leicester"
+      ],
+      "answer": "Wensleydale",
+      "explanation": "Wensleydale comes from the Yorkshire Dales, and Wallace cannot get enough of it.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which cartoon do these emoji describe?",
+      "options": [
+        "Pokémon",
+        "Digimon",
+        "Yu-Gi-Oh!",
+        "Beyblade"
+      ],
+      "answer": "Pokémon",
+      "explanation": "Pikachu is an Electric-type Pokémon, and Poké Balls are red and white.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "⚡🐭🔴⚪"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which cartoon character lives in the Welsh village of Pontypandy?",
+      "options": [
+        "Fireman Sam",
+        "Postman Pat",
+        "Bob the Builder",
+        "Thomas the Tank Engine"
+      ],
+      "answer": "Fireman Sam",
+      "explanation": "Fireman Sam first appeared on TV in 1987, and Postman Pat lives in Greendale.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which city does Miraculous: Tales of Ladybug and Cat Noir take place?",
+      "options": [
+        "Paris",
+        "London",
+        "Rome",
+        "New York"
+      ],
+      "answer": "Paris",
+      "explanation": "Marinette, who is secretly Ladybug, lives above her parents' bakery in Paris.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Phineas and Ferb, what kind of animal is Perry, the secret agent pet?",
+      "options": [
+        "A platypus",
+        "A beaver",
+        "An otter",
+        "A duck"
+      ],
+      "answer": "A platypus",
+      "explanation": "Perry the Platypus is secretly Agent P, always foiling the evil Dr Doofenshmirtz.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which Teenage Mutant Ninja Turtle wears a blue mask?",
+      "options": [
+        "Leonardo",
+        "Raphael",
+        "Donatello",
+        "Michelangelo"
+      ],
+      "answer": "Leonardo",
+      "explanation": "Leonardo leads the team and fights with two swords called katanas.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which cartoon do these emoji describe?",
+      "options": [
+        "The Smurfs",
+        "The Moomins",
+        "Fraggle Rock",
+        "The Wombles"
+      ],
+      "answer": "The Smurfs",
+      "explanation": "The little blue Smurfs live in mushroom houses and were created by a Belgian artist called Peyo.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🔵🍄🏘️"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "In Avatar: The Last Airbender, which element did Aang first learn to bend?",
+      "options": [
+        "Air",
+        "Water",
+        "Earth",
+        "Fire"
+      ],
+      "answer": "Air",
+      "explanation": "Aang is an Air Nomad, and as the Avatar he has to master all four elements.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In The Simpsons, what is the name of Homer's favourite bar?",
+      "options": [
+        "Moe's Tavern",
+        "The Drunken Clam",
+        "Paddy's Pub",
+        "Cheers"
+      ],
+      "answer": "Moe's Tavern",
+      "explanation": "The Drunken Clam is the bar in Family Guy, and Paddy's Pub is in It's Always Sunny in Philadelphia.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Beatle narrated the first series of Thomas the Tank Engine & Friends in 1984?",
+      "options": [
+        "Ringo Starr",
+        "Paul McCartney",
+        "George Harrison",
+        "John Lennon"
+      ],
+      "answer": "Ringo Starr",
+      "explanation": "Ringo narrated the first two series, and also played Mr Conductor in America.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In Danger Mouse, what is the name of DM's nervous hamster sidekick?",
+      "options": [
+        "Penfold",
+        "Greenback",
+        "Stiletto",
+        "Colonel K"
+      ],
+      "answer": "Penfold",
+      "explanation": "In the original series Danger Mouse was voiced by David Jason and Penfold by Terry Scott.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which cartoon character's catchphrase is 'Yabba dabba doo!'?",
+      "options": [
+        "Fred Flintstone",
+        "Barney Rubble",
+        "Yogi Bear",
+        "Top Cat"
+      ],
+      "answer": "Fred Flintstone",
+      "explanation": "Fred lives in Bedrock with Wilma, and Barney Rubble is his next-door neighbour.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which cartoon do these emoji describe?",
+      "options": [
+        "Scooby-Doo",
+        "Inspector Gadget",
+        "The Real Ghostbusters",
+        "Casper"
+      ],
+      "answer": "Scooby-Doo",
+      "explanation": "The gang solve their mysteries driving around in a van called the Mystery Machine.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🐕👻🚐🥪"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which children's TV show do these emoji describe?",
+      "options": [
+        "The Magic Roundabout",
+        "Camberwick Green",
+        "Hector's House",
+        "Bagpuss"
+      ],
+      "answer": "The Magic Roundabout",
+      "explanation": "The show began in France, and the BBC wrote its own English stories to go with the pictures.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🎠🐌🐕"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which children's TV show do these emoji describe?",
+      "options": [
+        "Postman Pat",
+        "Fireman Sam",
+        "Bob the Builder",
+        "Thomas the Tank Engine"
+      ],
+      "answer": "Postman Pat",
+      "explanation": "Pat delivers the post around Greendale with his black and white cat, Jess.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "📮🐈🚐"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which cartoon do these emoji describe?",
+      "options": [
+        "Futurama",
+        "The Jetsons",
+        "Rick and Morty",
+        "Lost in Space"
+      ],
+      "answer": "Futurama",
+      "explanation": "Fry, a pizza delivery boy, is accidentally frozen and wakes up a thousand years later.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🧊🍕🚀🤖"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Who provided the voices of Bugs Bunny, Daffy Duck and Porky Pig for decades?",
+      "options": [
+        "Mel Blanc",
+        "Tex Avery",
+        "Chuck Jones",
+        "Walt Disney"
+      ],
+      "answer": "Mel Blanc",
+      "explanation": "Mel Blanc was known as the Man of a Thousand Voices.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the name of Popeye's girlfriend?",
+      "options": [
+        "Olive Oyl",
+        "Betty Boop",
+        "Daisy Duck",
+        "Wilma"
+      ],
+      "answer": "Olive Oyl",
+      "explanation": "Olive Oyl was in the comic strip for nearly ten years before Popeye turned up in 1929.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In The Clangers, how do the little knitted Clangers talk to each other?",
+      "options": [
+        "In whistles",
+        "In squeaks",
+        "In clicks",
+        "In hums"
+      ],
+      "answer": "In whistles",
+      "explanation": "Their voices were played on swanee whistles, following the rhythm of scripts written in English.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which fictional town is Family Guy set?",
+      "options": [
+        "Quahog",
+        "Springfield",
+        "Langley Falls",
+        "Arlen"
+      ],
+      "answer": "Quahog",
+      "explanation": "Quahog is in Rhode Island, Langley Falls is American Dad's town and Arlen is in King of the Hill.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which cartoon did Dick Dastardly and Muttley cheat their way through every race?",
+      "options": [
+        "Wacky Races",
+        "Top Cat",
+        "Hong Kong Phooey",
+        "The Banana Splits"
+      ],
+      "answer": "Wacky Races",
+      "explanation": "For all his cheating, Dick Dastardly never won a single race.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which cartoon hero shouted 'By the power of Grayskull!'?",
+      "options": [
+        "He-Man",
+        "Lion-O",
+        "Captain Planet",
+        "BraveStarr"
+      ],
+      "answer": "He-Man",
+      "explanation": "Prince Adam becomes He-Man, the most powerful man in the universe, on the planet Eternia.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Wallace and Gromit film introduced the villainous penguin Feathers McGraw?",
+      "options": [
+        "The Wrong Trousers",
+        "A Close Shave",
+        "A Grand Day Out",
+        "The Curse of the Were-Rabbit"
+      ],
+      "answer": "The Wrong Trousers",
+      "explanation": "Feathers McGraw disguises himself as a chicken with a red rubber glove on his head.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}

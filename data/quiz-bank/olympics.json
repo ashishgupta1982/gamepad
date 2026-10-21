@@ -1,0 +1,305 @@
+{
+  "category": "olympics",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "How many rings are on the Olympic flag?",
+      "options": ["5", "4", "6", "7"],
+      "answer": "5",
+      "explanation": "Pierre de Coubertin, who founded the modern Games, designed the rings in 1913.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which city hosted the 2012 Olympic Games?",
+      "options": ["London", "Paris", "Beijing", "Rio de Janeiro"],
+      "answer": "London",
+      "explanation": "London became the first city to host the Summer Olympics three times, after 1908 and 1948.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which country were the ancient Olympic Games held?",
+      "options": ["Greece", "Italy", "Egypt", "Turkey"],
+      "answer": "Greece",
+      "explanation": "They took place at Olympia, in honour of the god Zeus.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which country did the sprinter Usain Bolt run for?",
+      "options": ["Jamaica", "United States", "Trinidad and Tobago", "Canada"],
+      "answer": "Jamaica",
+      "explanation": "Bolt ran the 100 metres in 9.58 seconds in Berlin in 2009.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Months before each Olympics, how is the Olympic flame lit at Olympia in Greece?",
+      "options": ["By the Sun's rays, using a curved mirror", "With a match from the last host city", "By a bolt of lightning", "With an electric spark"],
+      "answer": "By the Sun's rays, using a curved mirror",
+      "explanation": "The mirror focuses sunlight onto a torch until it bursts into flame.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which sport did Tom Daley win Olympic gold at the Tokyo Games?",
+      "options": ["Diving", "Swimming", "Gymnastics", "Trampolining"],
+      "answer": "Diving",
+      "explanation": "He won the synchronised 10m platform with Matty Lee, then knitted a little pouch to keep his medal in.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "The Paris 2024 medals each had a small piece of iron from which famous landmark?",
+      "options": ["The Eiffel Tower", "The Arc de Triomphe", "Notre-Dame Cathedral", "The Louvre"],
+      "answer": "The Eiffel Tower",
+      "explanation": "The iron had been removed from the tower during repairs and was cut into hexagons, the shape of France.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which Olympic sport would you use a pommel horse?",
+      "options": ["Gymnastics", "Equestrian", "Modern pentathlon", "Polo"],
+      "answer": "Gymnastics",
+      "explanation": "Despite the name there is no horse at all, just a padded box with two handles on top.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which sport, with dancers called B-boys and B-girls, joined the Olympics at Paris 2024?",
+      "options": ["Breaking", "Skateboarding", "Parkour", "Cheerleading"],
+      "answer": "Breaking",
+      "explanation": "Breaking is a style of street dance that began in New York in the 1970s.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "How long is an Olympic swimming pool?",
+      "options": ["50 metres", "25 metres", "100 metres", "40 metres"],
+      "answer": "50 metres",
+      "explanation": "That means a 100m race is exactly one length there and back.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "By the end of the Paris 2024 Games, who had won the most Olympic medals in history?",
+      "options": ["Michael Phelps", "Usain Bolt", "Simone Biles", "Mo Farah"],
+      "answer": "Michael Phelps",
+      "explanation": "The American swimmer won 28 medals, 23 of them gold.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which Paralympic sport do players wear eye shades and throw a ball with bells inside?",
+      "options": ["Goalball", "Boccia", "Sitting volleyball", "Wheelchair rugby"],
+      "answer": "Goalball",
+      "explanation": "The crowd has to stay silent during play so the players can hear the ball coming.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "The Paralympic movement began in 1948 with an archery contest at which English hospital?",
+      "options": ["Stoke Mandeville", "Great Ormond Street", "Addenbrooke's", "St Thomas'"],
+      "answer": "Stoke Mandeville",
+      "explanation": "Dr Ludwig Guttmann held it for injured ex-service men and women on the day the 1948 London Olympics opened.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which British athlete won gold in the heptathlon at London 2012?",
+      "options": ["Jessica Ennis", "Katarina Johnson-Thompson", "Denise Lewis", "Kelly Holmes"],
+      "answer": "Jessica Ennis",
+      "explanation": "On 'Super Saturday' Ennis, Greg Rutherford and Mo Farah all won gold within about 45 minutes.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "To the nearest mile, how long is an Olympic marathon?",
+      "options": ["26 miles", "13 miles", "20 miles", "30 miles"],
+      "answer": "26 miles",
+      "explanation": "The odd distance of 26.2 miles comes from the 1908 London Games, when the race started at Windsor Castle.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which city hosted the first modern Olympic Games, in 1896?",
+      "options": ["Athens", "Paris", "London", "Rome"],
+      "answer": "Athens",
+      "explanation": "Around 240 athletes took part, all of them men.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Sir Steve Redgrave won gold at five Olympics in a row in which sport?",
+      "options": ["Rowing", "Sailing", "Canoeing", "Cycling"],
+      "answer": "Rowing",
+      "explanation": "His golds came at every Games from Los Angeles 1984 to Sydney 2000.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which event would an athlete perform the 'Fosbury Flop'?",
+      "options": ["High jump", "Pole vault", "Long jump", "Triple jump"],
+      "answer": "High jump",
+      "explanation": "Dick Fosbury won gold going over the bar backwards in 1968, and almost every high jumper now copies him.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who won the 5,000m and 10,000m double at both London 2012 and Rio 2016?",
+      "options": ["Mo Farah", "Kenenisa Bekele", "Haile Gebrselassie", "Eliud Kipchoge"],
+      "answer": "Mo Farah",
+      "explanation": "Only one man before him, Finland's Lasse Virén in the 1970s, had won the double at two Games in a row.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "The Paris 2024 opening ceremony was held mostly on which river?",
+      "options": ["The Seine", "The Loire", "The Rhône", "The Marne"],
+      "answer": "The Seine",
+      "explanation": "The athletes sailed along the river on boats instead of marching into a stadium.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "How many gold medals did Jesse Owens win at the 1936 Berlin Olympics?",
+      "options": ["4", "3", "5", "2"],
+      "answer": "4",
+      "explanation": "He won the 100m, 200m, long jump and 4x100m relay.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which city became the first to host both the Summer and the Winter Olympics?",
+      "options": ["Beijing", "Tokyo", "Los Angeles", "Sapporo"],
+      "answer": "Beijing",
+      "explanation": "Beijing held the Summer Games in 2008 and the Winter Games in 2022.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which gymnast scored the first perfect 10 in Olympic history, in 1976?",
+      "options": ["Nadia Comăneci", "Olga Korbut", "Larisa Latynina", "Mary Lou Retton"],
+      "answer": "Nadia Comăneci",
+      "explanation": "The scoreboard could not show a 10, so it read 1.00 instead.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which year did London host the 'Austerity Games', its second Olympics?",
+      "options": ["1948", "1908", "1936", "1956"],
+      "answer": "1948",
+      "explanation": "No new venues were built, and athletes stayed in RAF camps and colleges.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Bob Beamon's astonishing long jump at the 1968 Olympics came at altitude in which city?",
+      "options": ["Mexico City", "Munich", "Tokyo", "Rome"],
+      "answer": "Mexico City",
+      "explanation": "He beat the world record by 55 centimetres, with a leap of 8.90 metres.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which two events did Kelly Holmes win at the Athens Olympics in 2004?",
+      "options": ["800m and 1,500m", "1,500m and 5,000m", "400m and 800m", "5,000m and 10,000m"],
+      "answer": "800m and 1,500m",
+      "explanation": "She was 34, and the first Briton to win both since Albert Hill in 1920.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Tanni Grey-Thompson won 11 Paralympic gold medals in which sport?",
+      "options": ["Wheelchair racing", "Swimming", "Wheelchair tennis", "Archery"],
+      "answer": "Wheelchair racing",
+      "explanation": "She also won the London Marathon's wheelchair race six times.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Dame Sarah Storey won her first Paralympic medals in 1992, aged 14, in which sport?",
+      "options": ["Swimming", "Cycling", "Athletics", "Rowing"],
+      "answer": "Swimming",
+      "explanation": "She switched to cycling in 2005 and went on to win many more golds on the bike.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which British sprinter won the 100m at Barcelona 1992, aged 32?",
+      "options": ["Linford Christie", "Allan Wells", "Darren Campbell", "Colin Jackson"],
+      "answer": "Linford Christie",
+      "explanation": "That made him the oldest Olympic 100m champion by more than four years.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which event, won for Britain by City of London Police officers in 1908 and 1920, was once part of the Olympics?",
+      "options": ["Tug of war", "Water polo", "Hockey", "Rowing eights"],
+      "answer": "Tug of war",
+      "explanation": "Tug of war was dropped after 1920, so the City of London Police are sometimes called the reigning champions.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}

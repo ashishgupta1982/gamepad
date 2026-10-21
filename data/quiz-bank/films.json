@@ -84,6 +84,164 @@
       }
     },
     {
+      "band": "kids",
+      "question": "In Despicable Me, what are Gru's little yellow helpers called?",
+      "options": [
+        "Minions",
+        "Rabbids",
+        "Oompa-Loompas",
+        "Trolls"
+      ],
+      "answer": "Minions",
+      "explanation": "The Minions chatter away in their own silly language, made from bits of lots of real ones.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which film do these emoji describe?",
+      "options": [
+        "Kung Fu Panda",
+        "Turning Red",
+        "Madagascar",
+        "Zootropolis"
+      ],
+      "answer": "Kung Fu Panda",
+      "explanation": "Po is a noodle-loving panda who becomes the Dragon Warrior.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🐼🥋🥟"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which country did Paddington Bear come from before he arrived in London?",
+      "options": [
+        "Peru",
+        "Brazil",
+        "Mexico",
+        "Chile"
+      ],
+      "answer": "Peru",
+      "explanation": "He came from darkest Peru, where his Aunt Lucy raised him, and stowed away to London living on marmalade.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Who plays Willy Wonka in the 2023 film Wonka?",
+      "options": [
+        "Timothée Chalamet",
+        "Tom Holland",
+        "Johnny Depp",
+        "Gene Wilder"
+      ],
+      "answer": "Timothée Chalamet",
+      "explanation": "Gene Wilder played Wonka in 1971 and Johnny Depp in 2005.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Inside Out 2, which new emotion tries to take charge of Riley's mind?",
+      "options": [
+        "Anxiety",
+        "Envy",
+        "Ennui",
+        "Embarrassment"
+      ],
+      "answer": "Anxiety",
+      "explanation": "Anxiety turns up with Envy, Ennui and Embarrassment when Riley turns 13.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Shrek, who does Donkey fall in love with?",
+      "options": [
+        "Dragon",
+        "Fiona",
+        "Gingy",
+        "The Fairy Godmother"
+      ],
+      "answer": "Dragon",
+      "explanation": "Donkey and Dragon later have babies who are part donkey and part dragon.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Moana, what is the name of the very silly rooster?",
+      "options": [
+        "Heihei",
+        "Pua",
+        "Tamatoa",
+        "Sina"
+      ],
+      "answer": "Heihei",
+      "explanation": "Heihei stows away on Moana's boat, while Pua the pig stays at home.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In How to Train Your Dragon, what kind of dragon is Toothless?",
+      "options": [
+        "A Night Fury",
+        "A Deadly Nadder",
+        "A Gronckle",
+        "A Monstrous Nightmare"
+      ],
+      "answer": "A Night Fury",
+      "explanation": "Nobody on Berk had ever seen a Night Fury until Hiccup found Toothless.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In the film Sing, what kind of animal is the theatre owner Buster Moon?",
+      "options": [
+        "A koala",
+        "A gorilla",
+        "A porcupine",
+        "A pig"
+      ],
+      "answer": "A koala",
+      "explanation": "Buster Moon puts on a singing competition to save his theatre.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which film do these emoji describe?",
+      "options": [
+        "Luca",
+        "Coco",
+        "Onward",
+        "Elemental"
+      ],
+      "answer": "Luca",
+      "explanation": "Luca is a young sea monster who looks human on dry land and dreams of riding a Vespa around Italy.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🌊👦🛵🇮🇹"
+      }
+    },
+    {
       "band": "adults",
       "question": "Which film won the very first Academy Award for Best Picture?",
       "options": [
@@ -160,6 +318,164 @@
         "kind": "emoji",
         "text": "🦖🏝️🧬"
       }
+    },
+    {
+      "band": "adults",
+      "question": "Who played Captain Jack Sparrow in the Pirates of the Caribbean films?",
+      "options": [
+        "Johnny Depp",
+        "Orlando Bloom",
+        "Geoffrey Rush",
+        "Javier Bardem"
+      ],
+      "answer": "Johnny Depp",
+      "explanation": "Johnny Depp was nominated for the Best Actor Oscar for the very first film.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which film do these emoji describe?",
+      "options": [
+        "The Wizard of Oz",
+        "Mary Poppins",
+        "Chitty Chitty Bang Bang",
+        "The Sound of Music"
+      ],
+      "answer": "The Wizard of Oz",
+      "explanation": "Dorothy's ruby slippers were silver in L. Frank Baum's original book.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🌪️👠🦁🌈"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which film do these emoji describe?",
+      "options": [
+        "Back to the Future",
+        "Bill & Ted's Excellent Adventure",
+        "The Time Machine",
+        "Looper"
+      ],
+      "answer": "Back to the Future",
+      "explanation": "Doc Brown's DeLorean has to hit 88 miles per hour to travel through time.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "⏰🚗⚡🔙"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which composer wrote the music for Star Wars, Jaws and Superman?",
+      "options": [
+        "John Williams",
+        "Hans Zimmer",
+        "Howard Shore",
+        "Jerry Goldsmith"
+      ],
+      "answer": "John Williams",
+      "explanation": "John Williams has been nominated for more than 50 Oscars.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Danny Boyle film won the Oscar for Best Picture?",
+      "options": [
+        "Slumdog Millionaire",
+        "Trainspotting",
+        "28 Days Later",
+        "127 Hours"
+      ],
+      "answer": "Slumdog Millionaire",
+      "explanation": "Slumdog Millionaire won eight Oscars in 2009, including Best Director for Boyle.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the name of Black Panther's African homeland?",
+      "options": [
+        "Wakanda",
+        "Zamunda",
+        "Genovia",
+        "Latveria"
+      ],
+      "answer": "Wakanda",
+      "explanation": "Zamunda is the kingdom from Coming to America, and Genovia is from The Princess Diaries.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which city is the 1971 Michael Caine film Get Carter mostly set?",
+      "options": [
+        "Newcastle",
+        "Manchester",
+        "Liverpool",
+        "Glasgow"
+      ],
+      "answer": "Newcastle",
+      "explanation": "Caine plays a London gangster who goes home to Newcastle after his brother's death.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which actor played James Bond in the most official Eon Bond films?",
+      "options": [
+        "Roger Moore",
+        "Sean Connery",
+        "Daniel Craig",
+        "Pierce Brosnan"
+      ],
+      "answer": "Roger Moore",
+      "explanation": "Roger Moore made seven, from Live and Let Die to A View to a Kill.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which is the only Alfred Hitchcock film to win the Oscar for Best Picture?",
+      "options": [
+        "Rebecca",
+        "Psycho",
+        "Vertigo",
+        "Rear Window"
+      ],
+      "answer": "Rebecca",
+      "explanation": "Rebecca won in 1941, but Hitchcock himself never won a competitive Oscar for directing.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In Casablanca, what is the name of the pianist at Rick's café?",
+      "options": [
+        "Sam",
+        "Louis",
+        "Victor",
+        "Ugarte"
+      ],
+      "answer": "Sam",
+      "explanation": "Nobody in the film actually says 'Play it again, Sam': Ilsa says 'Play it, Sam'.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
     }
   ]
 }

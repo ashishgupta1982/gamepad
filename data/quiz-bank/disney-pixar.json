@@ -1,0 +1,487 @@
+{
+  "category": "disney-pixar",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which Disney film do these emoji describe?",
+      "options": [
+        "The Little Mermaid",
+        "Moana",
+        "Luca",
+        "Finding Dory"
+      ],
+      "answer": "The Little Mermaid",
+      "explanation": "Ariel's father, King Triton, rules the sea with a golden trident.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🧜‍♀️🦀🔱"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which Disney film do these emoji describe?",
+      "options": [
+        "Up",
+        "Coco",
+        "Inside Out",
+        "Soul"
+      ],
+      "answer": "Up",
+      "explanation": "Carl ties thousands of balloons to his house and flies it all the way to South America.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🎈🏠👴"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which Disney film do these emoji describe?",
+      "options": [
+        "Ratatouille",
+        "Bolt",
+        "Zootropolis",
+        "Turning Red"
+      ],
+      "answer": "Ratatouille",
+      "explanation": "Remy the rat dreams of becoming a top chef in Paris.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🐀👨‍🍳🇫🇷"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which Disney film do these emoji describe?",
+      "options": [
+        "Cars",
+        "Planes",
+        "Toy Story 2",
+        "The Incredibles"
+      ],
+      "answer": "Cars",
+      "explanation": "Lightning McQueen's racing number is 95.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🚗⚡🏁"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "In Moana, what kind of animal is Heihei?",
+      "options": [
+        "A rooster",
+        "A pig",
+        "A crab",
+        "A turtle"
+      ],
+      "answer": "A rooster",
+      "explanation": "Pua the pig stays at home, but Heihei the rooster ends up on the boat with Moana.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Toy Story, what is the name of the boy who owns Woody and Buzz?",
+      "options": [
+        "Andy",
+        "Sid",
+        "Bonnie",
+        "Max"
+      ],
+      "answer": "Andy",
+      "explanation": "Andy writes his name on the bottom of Woody's boot.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Inside Out, which emotion is blue?",
+      "options": [
+        "Sadness",
+        "Fear",
+        "Disgust",
+        "Anger"
+      ],
+      "answer": "Sadness",
+      "explanation": "Joy is yellow, Anger is red, Disgust is green and Fear is purple.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Monsters, Inc., what do the monsters collect from children to power their city?",
+      "options": [
+        "Screams",
+        "Dreams",
+        "Tears",
+        "Giggles"
+      ],
+      "answer": "Screams",
+      "explanation": "By the end they discover that laughter is ten times more powerful than screams.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Aladdin, what is the name of Aladdin's pet monkey?",
+      "options": [
+        "Abu",
+        "Iago",
+        "Rajah",
+        "Pascal"
+      ],
+      "answer": "Abu",
+      "explanation": "Iago is Jafar's parrot and Rajah is Princess Jasmine's tiger.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Coco, what does Miguel dream of becoming?",
+      "options": [
+        "A musician",
+        "A footballer",
+        "A shoemaker",
+        "A painter"
+      ],
+      "answer": "A musician",
+      "explanation": "His family have made shoes for generations and have banned music completely.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Encanto, which member of the Madrigal family could see the future?",
+      "options": [
+        "Bruno",
+        "Camilo",
+        "Isabela",
+        "Luisa"
+      ],
+      "answer": "Bruno",
+      "explanation": "Nobody was supposed to talk about Bruno, which gave the film its biggest hit song.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In The Lion King, what is the name of Simba's wicked uncle?",
+      "options": [
+        "Scar",
+        "Rafiki",
+        "Zazu",
+        "Mufasa"
+      ],
+      "answer": "Scar",
+      "explanation": "Scar's three hyena helpers are called Shenzi, Banzai and Ed.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Beauty and the Beast, what has Lumière been turned into?",
+      "options": [
+        "A candlestick",
+        "A clock",
+        "A teapot",
+        "A wardrobe"
+      ],
+      "answer": "A candlestick",
+      "explanation": "Cogsworth is the clock and Mrs Potts is the teapot.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In The Incredibles, what is Mr Incredible's real name?",
+      "options": [
+        "Bob Parr",
+        "Lucius Best",
+        "Buddy Pine",
+        "Rick Dicker"
+      ],
+      "answer": "Bob Parr",
+      "explanation": "Lucius Best is Frozone, and Buddy Pine grows up to become the villain Syndrome.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Tangled, what is the name of Rapunzel's chameleon?",
+      "options": [
+        "Pascal",
+        "Maximus",
+        "Sven",
+        "Meeko"
+      ],
+      "answer": "Pascal",
+      "explanation": "Maximus is the palace horse who ends up as Flynn Rider's unlikely friend.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which was the first full-length feature film made entirely with computer animation?",
+      "options": [
+        "Toy Story",
+        "A Bug's Life",
+        "Antz",
+        "Shrek"
+      ],
+      "answer": "Toy Story",
+      "explanation": "Pixar made it for Disney, and it came out in 1995.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Disney film do these emoji describe?",
+      "options": [
+        "Fantasia",
+        "Steamboat Willie",
+        "Bedknobs and Broomsticks",
+        "The Sword in the Stone"
+      ],
+      "answer": "Fantasia",
+      "explanation": "Mickey's Sorcerer's Apprentice scene is set to music by the French composer Paul Dukas.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🐭🧹🪣🎶"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which Disney film do these emoji describe?",
+      "options": [
+        "Dumbo",
+        "The Jungle Book",
+        "Bambi",
+        "Pinocchio"
+      ],
+      "answer": "Dumbo",
+      "explanation": "A 'magic' feather from the crows gives Dumbo the courage to fly, but it was his ears all along.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🐘👂🎪"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which Disney film do these emoji describe?",
+      "options": [
+        "Mulan",
+        "Raya and the Last Dragon",
+        "Brave",
+        "Pocahontas"
+      ],
+      "answer": "Mulan",
+      "explanation": "Mushu, the little dragon, is voiced by Eddie Murphy in the 1998 film.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🐉🦗⚔️"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which Disney film do these emoji describe?",
+      "options": [
+        "Lilo & Stitch",
+        "Moana",
+        "Treasure Planet",
+        "Lightyear"
+      ],
+      "answer": "Lilo & Stitch",
+      "explanation": "Stitch's official name is Experiment 626.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "👽🌺🏄"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "In Up, what is the name of the talking dog who joins Carl and Russell?",
+      "options": [
+        "Dug",
+        "Alpha",
+        "Bolt",
+        "Slinky"
+      ],
+      "answer": "Dug",
+      "explanation": "His special collar turns his thoughts into words.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Disney film features the song 'The Bare Necessities'?",
+      "options": [
+        "The Jungle Book",
+        "Robin Hood",
+        "The Aristocats",
+        "The Lion King"
+      ],
+      "answer": "The Jungle Book",
+      "explanation": "Baloo the bear sings it to Mowgli to teach him to relax.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who wrote and sang 'You've Got a Friend in Me' for Toy Story?",
+      "options": [
+        "Randy Newman",
+        "Elton John",
+        "Phil Collins",
+        "Lin-Manuel Miranda"
+      ],
+      "answer": "Randy Newman",
+      "explanation": "He later won an Oscar for 'If I Didn't Have You' from Monsters, Inc.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Hamilton creator wrote the songs for Encanto?",
+      "options": [
+        "Lin-Manuel Miranda",
+        "Alan Menken",
+        "Robert Lopez",
+        "Randy Newman"
+      ],
+      "answer": "Lin-Manuel Miranda",
+      "explanation": "He also wrote 'How Far I'll Go' for Moana.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which year was Snow White and the Seven Dwarfs first released?",
+      "options": [
+        "1937",
+        "1928",
+        "1945",
+        "1950"
+      ],
+      "answer": "1937",
+      "explanation": "It was Disney's first full-length animated feature.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In Toy Story 3, what is the name of the strawberry-scented bear who runs Sunnyside Daycare?",
+      "options": [
+        "Lotso",
+        "Stinky Pete",
+        "Zurg",
+        "Gabby Gabby"
+      ],
+      "answer": "Lotso",
+      "explanation": "His full name is Lots-o'-Huggin' Bear.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In Ratatouille, what is the name of the fearsome food critic?",
+      "options": [
+        "Anton Ego",
+        "Auguste Gusteau",
+        "Skinner",
+        "Alfredo Linguini"
+      ],
+      "answer": "Anton Ego",
+      "explanation": "A simple plate of ratatouille wins him over by reminding him of his mother's cooking.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which was the first animated film nominated for the Oscar for Best Picture?",
+      "options": [
+        "Beauty and the Beast",
+        "The Lion King",
+        "Snow White and the Seven Dwarfs",
+        "Up"
+      ],
+      "answer": "Beauty and the Beast",
+      "explanation": "It was nominated in 1992; Up became the second in 2010.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the name of the hopping desk lamp in Pixar's logo?",
+      "options": [
+        "Luxo Jr.",
+        "Wally B.",
+        "Geri",
+        "Lumi"
+      ],
+      "answer": "Luxo Jr.",
+      "explanation": "Luxo Jr. first starred in Pixar's 1986 short film of the same name.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In The Incredibles, what does costume designer Edna Mode refuse to put on a superhero suit?",
+      "options": [
+        "A cape",
+        "A mask",
+        "Boots",
+        "A belt"
+      ],
+      "answer": "A cape",
+      "explanation": "'No capes!' she insists, listing all the heroes they got into trouble.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    }
+  ]
+}

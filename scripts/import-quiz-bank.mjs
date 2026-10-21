@@ -68,14 +68,50 @@ if (!process.env.MONGODB_URI) {
   process.exit(1);
 }
 await mongoose.connect(process.env.MONGODB_URI);
-const existing = new Set((await QuizQuestion.find({ fingerprint: { $in: docs.map((d) => d.fingerprint) } }, { fingerprint: 1 }).lean()).map((d) => d.fingerprint));
-const fresh = docs.filter((d) => !existing.has(d.fingerprint));
-console.log(`${existing.size} already in the bank, ${fresh.length} new.`);
+
+// What the files say, against what the bank holds. A seed question corrected
+// in its file (an option, the explanation, a tag) is updated in place, its
+// stats kept. One whose wording changed has a new fingerprint, so it arrives
+// as new, and the old wording, no longer in any file, is retired. Questions
+// the writer added during play are never touched.
+const FIELDS = ['question', 'options', 'correctAnswer', 'explanation', 'category', 'band', 'family', 'difficulty', 'dated', 'media'];
+const same = (a, b) => JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
+const plainMedia = (m) => (m?.kind ? Object.fromEntries(Object.entries(m).filter(([, v]) => v !== undefined && v !== '')) : null);
+const inBank = new Map((await QuizQuestion.find({ source: 'seed' }).lean()).map((d) => [d.fingerprint, d]));
+const fresh = [];
+const changed = [];
+for (const d of docs) {
+  const had = inBank.get(d.fingerprint);
+  if (!had) fresh.push(d);
+  else if (FIELDS.some((f) => (f === 'media' ? !same(plainMedia(had.media), plainMedia(d.media)) : !same(had[f], d[f])))) changed.push(d);
+}
+const inFiles = new Set(docs.map((d) => d.fingerprint));
+const gone = [...inBank.values()].filter((d) => !inFiles.has(d.fingerprint) && d.status !== 'retired');
+// A new seed question may already be in the bank from the writer: it is left as it is.
+const fromWriter = new Set((await QuizQuestion.find({ fingerprint: { $in: fresh.map((d) => d.fingerprint) } }, { fingerprint: 1 }).lean()).map((d) => d.fingerprint));
+const toAdd = fresh.filter((d) => !fromWriter.has(d.fingerprint));
+
+console.log(`\nThe bank: ${inBank.size} seed questions now.`);
+console.log(`  ${toAdd.length} to add${fromWriter.size ? ` (${fromWriter.size} more already there from the writer, left alone)` : ''}`);
+console.log(`  ${changed.length} to update in place`);
+for (const d of changed) console.log(`    ~ ${d.category}: ${d.question.slice(0, 70)}`);
+console.log(`  ${gone.length} to retire (no longer in any file)`);
+for (const d of gone) console.log(`    - ${d.category}: ${d.question.slice(0, 70)}`);
 
 if (!apply) {
-  console.log('Dry run: nothing written. Add --apply to add the new ones.');
-} else if (fresh.length) {
-  const made = await QuizQuestion.insertMany(fresh, { ordered: false });
-  console.log(`Added ${made.length} questions to the bank.`);
+  console.log('\nDry run: nothing written. Add --apply to do it.');
+} else {
+  if (toAdd.length) console.log(`Added ${(await QuizQuestion.insertMany(toAdd, { ordered: false })).length}.`);
+  for (const d of changed) {
+    const set = Object.fromEntries(FIELDS.map((f) => [f, d[f] ?? null]));
+    await QuizQuestion.updateOne({ fingerprint: d.fingerprint }, { $set: set });
+  }
+  if (changed.length) console.log(`Updated ${changed.length}.`);
+  if (gone.length) {
+    await QuizQuestion.updateMany({ fingerprint: { $in: gone.map((d) => d.fingerprint) } }, { $set: { status: 'retired' } });
+    console.log(`Retired ${gone.length}.`);
+  }
 }
+const live = await QuizQuestion.countDocuments({ status: 'active' });
+console.log(`\nActive questions in the bank${apply ? '' : ' today'}: ${live}.`);
 await mongoose.disconnect();

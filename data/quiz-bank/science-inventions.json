@@ -1,0 +1,455 @@
+{
+  "category": "science-inventions",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Who was granted the first patent for the telephone, in 1876?",
+      "options": [
+        "Alexander Graham Bell",
+        "Thomas Edison",
+        "Guglielmo Marconi",
+        "Nikola Tesla"
+      ],
+      "answer": "Alexander Graham Bell",
+      "explanation": "Bell was born in Edinburgh, and his first words down the line were to his assistant, Mr Watson.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is H2O better known as?",
+      "options": [
+        "Water",
+        "Salt",
+        "Air",
+        "Sugar"
+      ],
+      "answer": "Water",
+      "explanation": "Each tiny piece of water is two hydrogen atoms joined to one oxygen atom.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What force pulls things down towards the ground?",
+      "options": [
+        "Gravity",
+        "Magnetism",
+        "Friction",
+        "Electricity"
+      ],
+      "answer": "Gravity",
+      "explanation": "Gravity is why a dropped ball falls, and it also keeps the Moon going round the Earth.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "At what temperature does pure water boil at sea level?",
+      "options": [
+        "100°C",
+        "50°C",
+        "75°C",
+        "150°C"
+      ],
+      "answer": "100°C",
+      "explanation": "High up a mountain, water boils at a lower temperature, so tea made there is not as hot.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which famous scientist came up with the equation E = mc²?",
+      "options": [
+        "Albert Einstein",
+        "Isaac Newton",
+        "Stephen Hawking",
+        "Charles Darwin"
+      ],
+      "answer": "Albert Einstein",
+      "explanation": "Einstein's equation shows that a tiny amount of matter holds a huge amount of energy.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which gas do plants take in from the air to make their food?",
+      "options": [
+        "Carbon dioxide",
+        "Oxygen",
+        "Nitrogen",
+        "Helium"
+      ],
+      "answer": "Carbon dioxide",
+      "explanation": "Plants use the energy in sunlight to turn carbon dioxide and water into sugar, giving out oxygen as they go.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What do we call a material that lets electricity flow through it easily?",
+      "options": [
+        "A conductor",
+        "An insulator",
+        "A magnet",
+        "A battery"
+      ],
+      "answer": "A conductor",
+      "explanation": "Metals like copper are great conductors, which is why they are used inside electric wires.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which metal is a liquid at room temperature?",
+      "options": [
+        "Mercury",
+        "Iron",
+        "Aluminium",
+        "Copper"
+      ],
+      "answer": "Mercury",
+      "explanation": "Mercury was once widely used in thermometers because it expands evenly as it warms up.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which of these would a magnet pick up?",
+      "options": [
+        "A steel paperclip",
+        "A plastic spoon",
+        "A wooden pencil",
+        "An aluminium can"
+      ],
+      "answer": "A steel paperclip",
+      "explanation": "Magnets attract iron and most kinds of steel, which is mostly iron, but not aluminium.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What do we call it when a liquid slowly turns into a gas, like a puddle drying up in the sun?",
+      "options": [
+        "Evaporation",
+        "Condensation",
+        "Melting",
+        "Freezing"
+      ],
+      "answer": "Evaporation",
+      "explanation": "The water in a puddle does not vanish: it rises into the air as an invisible gas called water vapour.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Who showed, using a prism, that white light is made of all the colours of the rainbow?",
+      "options": [
+        "Isaac Newton",
+        "Albert Einstein",
+        "Galileo Galilei",
+        "Thomas Edison"
+      ],
+      "answer": "Isaac Newton",
+      "explanation": "Newton split sunlight into a rainbow with a glass prism, then mixed the colours back into white light.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which tiny part of an atom has a negative electric charge?",
+      "options": [
+        "Electron",
+        "Proton",
+        "Neutron",
+        "Nucleus"
+      ],
+      "answer": "Electron",
+      "explanation": "Electrons whizz around the nucleus at the centre of an atom, and electricity in a wire is a flow of electrons.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which kitchen gadget did Percy Spencer invent after, so the story goes, a sweet melted in his pocket?",
+      "options": [
+        "Microwave oven",
+        "Toaster",
+        "Fridge",
+        "Kettle"
+      ],
+      "answer": "Microwave oven",
+      "explanation": "He was working on radar equipment in the 1940s, and his invention used the same kind of waves to heat food.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Sound travels fastest through which of these?",
+      "options": [
+        "Steel",
+        "Air",
+        "Water",
+        "Rubber"
+      ],
+      "answer": "Steel",
+      "explanation": "Sound travels more than 15 times faster through steel than through air.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the chemical symbol for gold?",
+      "options": [
+        "Au",
+        "Go",
+        "Gd",
+        "Ag"
+      ],
+      "answer": "Au",
+      "explanation": "Au comes from aurum, the Latin word for gold; Ag is silver.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Scottish engineer gave the first public demonstration of television, in 1926?",
+      "options": [
+        "John Logie Baird",
+        "James Watt",
+        "Robert Watson-Watt",
+        "Alexander Fleming"
+      ],
+      "answer": "John Logie Baird",
+      "explanation": "Baird showed moving pictures to scientists in a room in Soho, London.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which gas makes up most of Earth's atmosphere?",
+      "options": [
+        "Nitrogen",
+        "Oxygen",
+        "Argon",
+        "Carbon dioxide"
+      ],
+      "answer": "Nitrogen",
+      "explanation": "About 78% of the air is nitrogen, and only about 21% is oxygen.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who set out three laws of motion in 1687?",
+      "options": [
+        "Isaac Newton",
+        "Galileo Galilei",
+        "Johannes Kepler",
+        "Robert Hooke"
+      ],
+      "answer": "Isaac Newton",
+      "explanation": "Newton published them in his book Principia, along with his law of gravity.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the common name for sodium chloride?",
+      "options": [
+        "Table salt",
+        "Baking soda",
+        "Bleach",
+        "Chalk"
+      ],
+      "answer": "Table salt",
+      "explanation": "Sodium on its own reacts fiercely with water, yet joined to chlorine it is what we sprinkle on chips.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who worked out the double helix structure of DNA with Francis Crick in 1953?",
+      "options": [
+        "James Watson",
+        "Linus Pauling",
+        "Charles Darwin",
+        "Gregor Mendel"
+      ],
+      "answer": "James Watson",
+      "explanation": "Their model leaned heavily on X-ray images made in Rosalind Franklin's laboratory.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which chemical element has the symbol K?",
+      "options": [
+        "Potassium",
+        "Krypton",
+        "Calcium",
+        "Phosphorus"
+      ],
+      "answer": "Potassium",
+      "explanation": "K comes from kalium, the Latin name for potassium.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which RAF officer patented his design for a jet engine in 1930?",
+      "options": [
+        "Frank Whittle",
+        "Barnes Wallis",
+        "Christopher Cockerell",
+        "Isambard Kingdom Brunel"
+      ],
+      "answer": "Frank Whittle",
+      "explanation": "Whittle was only 22 when he filed it, and in the 1930s Germany's Hans von Ohain developed a jet engine of his own.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which unit is electrical resistance measured?",
+      "options": [
+        "Ohm",
+        "Watt",
+        "Volt",
+        "Ampere"
+      ],
+      "answer": "Ohm",
+      "explanation": "It is named after the German physicist Georg Ohm.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In the equation E = mc², what does the c stand for?",
+      "options": [
+        "The speed of light",
+        "The charge of an electron",
+        "The mass of the Sun",
+        "Degrees Celsius"
+      ],
+      "answer": "The speed of light",
+      "explanation": "Because the speed of light is so huge, and it is squared, a tiny mass holds an enormous amount of energy.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Italian scientist invented the electric battery, in about 1800?",
+      "options": [
+        "Alessandro Volta",
+        "Luigi Galvani",
+        "Guglielmo Marconi",
+        "Enrico Fermi"
+      ],
+      "answer": "Alessandro Volta",
+      "explanation": "His battery was a stack of metal discs separated by brine-soaked cloth, and the volt is named after him.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Russian chemist published a periodic table in 1869, leaving gaps for elements not yet discovered?",
+      "options": [
+        "Dmitri Mendeleev",
+        "John Dalton",
+        "Antoine Lavoisier",
+        "Niels Bohr"
+      ],
+      "answer": "Dmitri Mendeleev",
+      "explanation": "Mendeleev predicted the properties of the missing elements, and three of them were found within the next twenty years.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who invented the mercury thermometer in 1714?",
+      "options": [
+        "Daniel Gabriel Fahrenheit",
+        "Anders Celsius",
+        "Lord Kelvin",
+        "Galileo Galilei"
+      ],
+      "answer": "Daniel Gabriel Fahrenheit",
+      "explanation": "Fahrenheit's temperature scale is still used every day in the United States.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which chemical element is named after the Greek word for the Sun?",
+      "options": [
+        "Helium",
+        "Selenium",
+        "Hydrogen",
+        "Sodium"
+      ],
+      "answer": "Helium",
+      "explanation": "Helium was first spotted in the light of the Sun in 1868, years before it was found on Earth; selenium is named after the Moon.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is absolute zero, to the nearest degree Celsius?",
+      "options": [
+        "−273°C",
+        "−100°C",
+        "−173°C",
+        "−373°C"
+      ],
+      "answer": "−273°C",
+      "explanation": "Absolute zero is the coldest anything can possibly be, and it is 0 on the Kelvin scale.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which scientist first used the word 'cell' for the tiny units of living things, in his 1665 book Micrographia?",
+      "options": [
+        "Robert Hooke",
+        "Isaac Newton",
+        "Robert Boyle",
+        "Michael Faraday"
+      ],
+      "answer": "Robert Hooke",
+      "explanation": "Looking at a thin slice of cork under his microscope, Hooke saw rows of tiny box-like spaces and called them cells, a word meaning small rooms.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}

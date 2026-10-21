@@ -56,8 +56,8 @@ describe('the question bank', () => {
     expect(q).toMatchObject({ id: doc.fingerprint, category: 'Space', media: { kind: 'emoji', text: '🪐' } });
   });
 
-  it('keeps only pictures that are ours or on https', () => {
-    expect(checkMedia({ kind: 'image', src: '/quiz/flags/fr.svg', alt: 'A flag' })).toMatchObject({ kind: 'image', src: '/quiz/flags/fr.svg' });
+  it('keeps only pictures on https', () => {
+    expect(checkMedia({ kind: 'image', src: '/quiz/flags/fr.svg', alt: 'A flag' })).toBeNull();
     expect(checkMedia({ kind: 'image', src: 'https://res.cloudinary.com/x/a.webp', credit: 'Photo: A. Person, CC BY-SA 4.0' })).toBeTruthy();
     expect(checkMedia({ kind: 'image', src: 'javascript:alert(1)' })).toBeNull();
     expect(checkMedia({ kind: 'image', src: 'http://example.com/a.jpg' })).toBeNull();

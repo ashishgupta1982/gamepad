@@ -1,0 +1,313 @@
+{
+  "category": "tv",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which TV show do these emoji describe?",
+      "options": ["Doctor Who", "Stranger Things", "Lost in Space", "Thunderbirds"],
+      "answer": "Doctor Who",
+      "explanation": "The Doctor's TARDIS looks like an old blue police box, but it is much bigger on the inside.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🟦📞⏳🪛" }
+    },
+    {
+      "band": "kids",
+      "question": "In Doctor Who, which planet does the Doctor come from?",
+      "options": ["Gallifrey", "Skaro", "Mondas", "Trenzalore"],
+      "answer": "Gallifrey",
+      "explanation": "The Doctor is a Time Lord from Gallifrey, while Skaro is the home planet of the Daleks.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What colour is Blue Peter's top badge, its very highest honour?",
+      "options": ["Gold", "Silver", "Green", "Orange"],
+      "answer": "Gold",
+      "explanation": "Blue Peter has been giving out its famous badges since 1963.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "On The Great British Bake Off, what title goes to the best baker each week?",
+      "options": ["Star Baker", "Top Chef", "Master Baker", "Baker of the Week"],
+      "answer": "Star Baker",
+      "explanation": "A handshake from Paul Hollywood is the other prize every baker hopes for.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which BBC show pairs celebrities with professional dancers?",
+      "options": ["Strictly Come Dancing", "Dancing on Ice", "The Masked Singer", "Britain's Got Talent"],
+      "answer": "Strictly Come Dancing",
+      "explanation": "The winning couple lifts the glittering Glitterball trophy.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which TV show do these emoji describe?",
+      "options": ["The Masked Singer", "The Voice UK", "Lip Sync Battle", "Stars in Their Eyes"],
+      "answer": "The Masked Singer",
+      "explanation": "The panel try to guess which celebrity is hiding inside each costume.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🎭🎤🕵️" }
+    },
+    {
+      "band": "kids",
+      "question": "Which BBC programme has been bringing the news to children since 1972?",
+      "options": ["Newsround", "Newsbeat", "Countryfile", "Blue Peter"],
+      "answer": "Newsround",
+      "explanation": "Newsbeat is the news on Radio 1, while Newsround was made just for children.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which presenting pair host I'm a Celebrity... Get Me Out of Here!?",
+      "options": ["Ant and Dec", "Dick and Dom", "Mel and Sue", "Sam and Mark"],
+      "answer": "Ant and Dec",
+      "explanation": "Ant and Dec first met as child actors on the BBC drama Byker Grove.",
+      "family": true,
+      "difficulty": 1,
+      "dated": true
+    },
+    {
+      "band": "kids",
+      "question": "Which wildlife presenter goes looking for the world's deadliest animals on Deadly 60?",
+      "options": ["Steve Backshall", "Chris Packham", "David Attenborough", "Gordon Buchanan"],
+      "answer": "Steve Backshall",
+      "explanation": "Steve Backshall has tracked down sharks, snakes and spiders for the show.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "On Britain's Got Talent, what can a judge press to send an act straight through to the live shows?",
+      "options": ["The Golden Buzzer", "The Red Button", "The Silver Bell", "The Star Switch"],
+      "answer": "The Golden Buzzer",
+      "explanation": "Gold confetti pours down when someone gets the Golden Buzzer.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which TV show do these emoji describe?",
+      "options": ["Horrible Histories", "Operation Ouch!", "Deadly 60", "Art Attack"],
+      "answer": "Horrible Histories",
+      "explanation": "The show is based on the Horrible Histories books by Terry Deary.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🏰🤢📜😂" }
+    },
+    {
+      "band": "kids",
+      "question": "Which TV show do these emoji describe?",
+      "options": ["Wednesday", "Stranger Things", "Goosebumps", "The Worst Witch"],
+      "answer": "Wednesday",
+      "explanation": "Wednesday Addams plays the cello and is helped by Thing, a hand with a mind of its own.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🖤✋🎻🏫" }
+    },
+    {
+      "band": "kids",
+      "question": "On Gladiators, what is the name of the final race that decides who wins each show?",
+      "options": ["The Eliminator", "The Wall", "Duel", "Powerball"],
+      "answer": "The Eliminator",
+      "explanation": "The Wall, Duel and Powerball are all events too, but the Eliminator always comes last.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "On The Traitors, what are the players who are not Traitors called?",
+      "options": ["Faithfuls", "Loyals", "Innocents", "Honests"],
+      "answer": "Faithfuls",
+      "explanation": "The Faithfuls try to spot the Traitors and vote them out at the Round Table.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "On Taskmaster, who is the Taskmaster's loyal assistant?",
+      "options": ["Alex Horne", "Rob Beckett", "Romesh Ranganathan", "Joe Lycett"],
+      "answer": "Alex Horne",
+      "explanation": "Alex Horne invented Taskmaster, and Greg Davies is the Taskmaster himself.",
+      "family": false,
+      "difficulty": 3,
+      "dated": true
+    },
+    {
+      "band": "adults",
+      "question": "Which sitcom follows the Trotter family of Peckham?",
+      "options": ["Only Fools and Horses", "Steptoe and Son", "Citizen Smith", "Minder"],
+      "answer": "Only Fools and Horses",
+      "explanation": "Del Boy and Rodney sold dodgy goods out of a yellow three-wheeled van.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which TV show do these emoji describe?",
+      "options": ["Game of Thrones", "The Witcher", "Vikings", "The Last Kingdom"],
+      "answer": "Game of Thrones",
+      "explanation": "Much of Game of Thrones was filmed in Northern Ireland.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🐉👑❄️🗡️" }
+    },
+    {
+      "band": "adults",
+      "question": "Which TV show do these emoji describe?",
+      "options": ["Friends", "Seinfeld", "How I Met Your Mother", "Frasier"],
+      "answer": "Friends",
+      "explanation": "The six friends spent years on the orange sofa at the Central Perk coffee shop.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "☕🛋️👫👫👫" }
+    },
+    {
+      "band": "adults",
+      "question": "Which TV show do these emoji describe?",
+      "options": ["Peaky Blinders", "Boardwalk Empire", "Ripper Street", "Taboo"],
+      "answer": "Peaky Blinders",
+      "explanation": "Peaky Blinders follows the Shelby family's gang in Birmingham just after the First World War.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🧢🪒🥃🏭" }
+    },
+    {
+      "band": "adults",
+      "question": "Which TV show do these emoji describe?",
+      "options": ["Downton Abbey", "Upstairs, Downstairs", "Call the Midwife", "The Crown"],
+      "answer": "Downton Abbey",
+      "explanation": "Downton Abbey was filmed at Highclere Castle in Hampshire.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🏰🎩🫖👗" }
+    },
+    {
+      "band": "adults",
+      "question": "In which English seaside town is Fawlty Towers set?",
+      "options": ["Torquay", "Brighton", "Bournemouth", "Scarborough"],
+      "answer": "Torquay",
+      "explanation": "John Cleese based Basil on a rude hotel owner he met while staying in Torquay.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who sat beside Alexander Armstrong on Pointless from its start in 2009?",
+      "options": ["Richard Osman", "Stephen Fry", "Jimmy Carr", "Sandi Toksvig"],
+      "answer": "Richard Osman",
+      "explanation": "Richard Osman went on to write the Thursday Murder Club novels.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which programme was the first ever shown on Channel 4, in November 1982?",
+      "options": ["Countdown", "Brookside", "The Tube", "Channel 4 News"],
+      "answer": "Countdown",
+      "explanation": "Countdown went out on the channel's opening afternoon, hosted by Richard Whiteley.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who became the first woman to play the Doctor in the main Doctor Who series?",
+      "options": ["Jodie Whittaker", "Billie Piper", "Karen Gillan", "Michelle Gomez"],
+      "answer": "Jodie Whittaker",
+      "explanation": "Jodie Whittaker became the Thirteenth Doctor at Christmas 2017, though Joanna Lumley had played a comedy Doctor for Comic Relief in 1999.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In Line of Duty, what is the name of the anti-corruption unit?",
+      "options": ["AC-12", "CID", "SO19", "The Sweeney"],
+      "answer": "AC-12",
+      "explanation": "AC-12's boss Ted Hastings gave us the line 'Now we're sucking diesel'.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which fictional town is Coronation Street set?",
+      "options": ["Weatherfield", "Walford", "Borchester", "Holby"],
+      "answer": "Weatherfield",
+      "explanation": "Walford is home to EastEnders and Holby to Casualty.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which TV detective's theme tune spells out his name in Morse code?",
+      "options": ["Inspector Morse", "Lewis", "Frost", "Taggart"],
+      "answer": "Inspector Morse",
+      "explanation": "Composer Barrington Pheloung tapped out M-O-R-S-E in the rhythm of the theme.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Mastermind host made the line 'I've started, so I'll finish' famous?",
+      "options": ["Magnus Magnusson", "John Humphrys", "Bamber Gascoigne", "Clive Myrie"],
+      "answer": "Magnus Magnusson",
+      "explanation": "Magnus Magnusson was the first host of Mastermind, from 1972 to 1997.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In the British version of The Office, what is the name of the paper company?",
+      "options": ["Wernham Hogg", "Dunder Mifflin", "Reynholm Industries", "Sterling Cooper"],
+      "answer": "Wernham Hogg",
+      "explanation": "Dunder Mifflin is the paper company in the American version.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "On The Chase, which quizzer is known as 'The Beast'?",
+      "options": ["Mark Labbett", "Shaun Wallace", "Paul Sinha", "Anne Hegerty"],
+      "answer": "Mark Labbett",
+      "explanation": "The other chasers have included The Dark Destroyer, The Sinnerman and The Governess.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}

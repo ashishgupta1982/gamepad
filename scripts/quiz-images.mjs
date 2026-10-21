@@ -1,28 +1,34 @@
-// Fetch the pictures for the seed questions in data/quiz-bank/*.json.
+// Fetch the pictures for the seed questions in data/quiz-bank/*.json and put
+// them on Cloudinary, through @aspiro/media.
 //
-//   npm run quiz:images
+//   npm run quiz:images                      every file
+//   npm run quiz:images -- landmarks.json    just these
 //
 // A question's picture is written as a hint, and this fills in the rest:
 //   {kind:'image', flag:'br'}          the national flag, from flagcdn.com
-//                                      (public domain), saved as an SVG
+//                                      (public domain), turned into a PNG
 //   {kind:'image', wiki:'Angkor_Wat'}  the lead photo of that English
-//                                      Wikipedia article, saved as a WebP at
-//                                      most 960px wide, with its credit and
-//                                      licence from Wikimedia Commons
-// Files go to public/quiz/flags and public/quiz/pics, served as /quiz/…, and
-// `src` and `credit` are written back into the seed file. A picture already
-// fetched (its `src` file exists) is skipped, so it is safe to run again.
-import { access, mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+//                                      Wikipedia article, at most 1280px,
+//                                      with its credit and licence from
+//                                      Wikimedia Commons
+// Each goes up with @aspiro/media's uploadBuffer to the app's own folder,
+// GamePad/quiz (no user's folder: these belong to the app), under a fixed id,
+// so running it again replaces a picture rather than adding a copy. The
+// delivery URL and the credit are written back into the seed file as `src`
+// and `credit`; the question screen sizes it with transformUrl. A picture
+// already on Cloudinary is skipped. Needs the CLOUDINARY_* variables, which
+// npm run quiz:images reads from .env.local.
+import { readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
+import { isCloudinaryUrl } from '@aspiro/media';
+import { isCloudinaryConfigured, uploadBuffer } from '@aspiro/media/server';
 
-const ROOT = path.resolve('.');
-const SEED = path.join(ROOT, 'data/quiz-bank');
-const PUBLIC = path.join(ROOT, 'public');
+const SEED = path.resolve('data/quiz-bank');
+const FOLDER = 'GamePad/quiz';
 // Wikimedia asks every client to say who it is.
 const HEADERS = { 'User-Agent': 'GamePadQuizSeed/1.0 (https://github.com/ashishgupta1982/gamepad)' };
 
-const exists = (p) => access(p).then(() => true, () => false);
 const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const plain = (html) =>
   String(html ?? '')
@@ -33,52 +39,55 @@ const plain = (html) =>
     .replace(/\s+/g, ' ')
     .trim();
 
-async function getJson(url) {
+async function download(url) {
   const res = await fetch(url, { headers: HEADERS });
   if (!res.ok) throw new Error(`${res.status} for ${url}`);
-  return res.json();
+  return Buffer.from(await res.arrayBuffer());
 }
+const getJson = async (url) => JSON.parse((await download(url)).toString('utf8'));
 
 async function flag(code) {
-  const rel = `/quiz/flags/${code}.svg`;
-  const file = path.join(PUBLIC, rel);
-  if (!(await exists(file))) {
-    const res = await fetch(`https://flagcdn.com/${code}.svg`, { headers: HEADERS });
-    if (!res.ok) throw new Error(`no flag for ${code} (${res.status})`);
-    await mkdir(path.dirname(file), { recursive: true });
-    await writeFile(file, Buffer.from(await res.arrayBuffer()));
-  }
-  return { src: rel, credit: '' };
+  const svg = await download(`https://flagcdn.com/${code}.svg`);
+  const png = await sharp(svg, { density: 300 }).resize({ width: 1200, withoutEnlargement: false }).png().toBuffer();
+  return { bytes: png, format: 'png', publicId: `flag-${code}`, credit: '' };
 }
 
 async function wiki(title) {
-  const rel = `/quiz/pics/${slug(title)}.webp`;
-  const file = path.join(PUBLIC, rel);
   // The article's lead image, then that file's licence on Commons.
   const page = await getJson(`https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&piprop=name&redirects=1&titles=${encodeURIComponent(title)}`);
   const name = Object.values(page.query?.pages || {})[0]?.pageimage;
   if (!name) throw new Error(`no lead image on ${title}`);
   const info = await getJson(
-    `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=960&titles=${encodeURIComponent(`File:${name}`)}`,
+    `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=1280&titles=${encodeURIComponent(`File:${name}`)}`,
   );
   const ii = Object.values(info.query?.pages || {})[0]?.imageinfo?.[0];
   if (!ii) throw new Error(`no image info for ${name}`);
   const meta = ii.extmetadata || {};
-  const artist = plain(meta.Artist?.value) || 'Unknown';
+  const artist = plain(meta.Artist?.value).replace(/^photo:\s*/i, '') || 'Unknown';
   const licence = plain(meta.LicenseShortName?.value) || 'see Wikimedia Commons';
   const publicDomain = /public domain|pd|cc0/i.test(licence);
-  if (!(await exists(file))) {
-    const res = await fetch(ii.thumburl || ii.url, { headers: HEADERS });
-    if (!res.ok) throw new Error(`could not download ${name} (${res.status})`);
-    await mkdir(path.dirname(file), { recursive: true });
-    await sharp(Buffer.from(await res.arrayBuffer())).rotate().resize({ width: 960, height: 960, fit: 'inside', withoutEnlargement: true }).webp({ quality: 78 }).toFile(file);
-  }
-  const credit = publicDomain ? `Photo: ${artist.slice(0, 80)}, public domain (Wikimedia Commons)` : `Photo: ${artist.slice(0, 80)}, ${licence} (Wikimedia Commons)`;
-  return { src: rel, credit, source: ii.descriptionurl };
+  const jpg = await sharp(await download(ii.thumburl || ii.url))
+    .rotate()
+    .resize({ width: 1280, height: 1280, fit: 'inside', withoutEnlargement: true })
+    .flatten({ background: '#ffffff' })
+    .jpeg({ quality: 88 })
+    .toBuffer();
+  // Public domain needs no credit, and leaving it off matters: for an old
+  // painting Commons names the painter as the artist, so "Who painted this?"
+  // would be answered underneath the picture.
+  const credit = publicDomain ? '' : `Photo: ${artist.slice(0, 80)}, ${licence} (Wikimedia Commons)`;
+  return { bytes: jpg, format: 'jpg', publicId: slug(title), credit, source: ii.descriptionurl };
 }
 
-const files = (await readdir(SEED)).filter((f) => f.endsWith('.json')).sort();
-let fetched = 0;
+if (!isCloudinaryConfigured()) {
+  console.log('The CLOUDINARY_* variables are not set: run through npm run quiz:images, which reads .env.local.');
+  process.exit(1);
+}
+
+// Named files only (npm run quiz:images -- geography.json landmarks.json), or all of them.
+const only = process.argv.slice(2).filter((a) => a.endsWith('.json'));
+const files = (await readdir(SEED)).filter((f) => f.endsWith('.json') && (!only.length || only.includes(f))).sort();
+let done = 0;
 let failed = 0;
 for (const f of files) {
   const p = path.join(SEED, f);
@@ -87,13 +96,18 @@ for (const f of files) {
   for (const q of json.questions || []) {
     const m = q.media;
     if (m?.kind !== 'image' || (!m.flag && !m.wiki)) continue;
-    if (m.src && (await exists(path.join(PUBLIC, m.src)))) continue;
+    if (isCloudinaryUrl(m.src)) continue;
     try {
       const got = m.flag ? await flag(m.flag) : await wiki(m.wiki);
-      Object.assign(m, got);
+      // Gently, so Wikipedia does not start turning requests away.
+      await new Promise((r) => setTimeout(r, 300));
+      const up = await uploadBuffer(got.bytes, { folder: FOLDER, publicId: got.publicId, format: got.format, overwrite: true, invalidate: true });
+      m.src = up.url;
+      m.credit = got.credit;
+      if (got.source) m.source = got.source;
       changed = true;
-      fetched += 1;
-      console.log(`${f}: ${m.flag || m.wiki} → ${got.src}${got.credit ? `  (${got.credit})` : ''}`);
+      done += 1;
+      console.log(`${f}: ${m.flag || m.wiki} → ${up.publicId} (${Math.round(up.bytes / 1024)} KB)${got.credit ? `  ${got.credit}` : ''}`);
     } catch (err) {
       failed += 1;
       console.log(`${f}: ${m.flag || m.wiki} FAILED: ${err.message}`);
@@ -101,4 +115,4 @@ for (const f of files) {
   }
   if (changed) await writeFile(p, `${JSON.stringify(json, null, 2)}\n`);
 }
-console.log(`\n${fetched} fetched, ${failed} failed.`);
+console.log(`\n${done} on Cloudinary, ${failed} failed.`);

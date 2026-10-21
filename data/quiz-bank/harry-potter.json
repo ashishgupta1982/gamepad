@@ -140,6 +140,330 @@
       "explanation": "Snape's mother was Eileen Prince, so he called himself the Half-Blood Prince.",
       "family": false,
       "difficulty": 2
+    },
+    {
+      "band": "kids",
+      "question": "Which Harry Potter book do these emoji describe?",
+      "options": [
+        "The Goblet of Fire",
+        "The Philosopher's Stone",
+        "The Chamber of Secrets",
+        "The Order of the Phoenix"
+      ],
+      "answer": "The Goblet of Fire",
+      "explanation": "In the first task of the Triwizard Tournament, Harry has to get past a Hungarian Horntail dragon.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🔥🏆🐉"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which Harry Potter book do these emoji describe?",
+      "options": [
+        "The Chamber of Secrets",
+        "The Half-Blood Prince",
+        "The Deathly Hallows",
+        "The Prisoner of Azkaban"
+      ],
+      "answer": "The Chamber of Secrets",
+      "explanation": "The entrance to the Chamber is hidden in Moaning Myrtle's bathroom.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🐍🚽📓"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which Harry Potter book do these emoji describe?",
+      "options": [
+        "The Prisoner of Azkaban",
+        "The Goblet of Fire",
+        "The Order of the Phoenix",
+        "The Philosopher's Stone"
+      ],
+      "answer": "The Prisoner of Azkaban",
+      "explanation": "Hermione's Time-Turner helps her and Harry save both Buckbeak and Sirius.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🐕⏳🦅"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "What is the name of Ron's pet rat?",
+      "options": [
+        "Scabbers",
+        "Trevor",
+        "Crookshanks",
+        "Fang"
+      ],
+      "answer": "Scabbers",
+      "explanation": "Scabbers turns out to be Peter Pettigrew in disguise.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the name of Hagrid's huge three-headed dog?",
+      "options": [
+        "Fluffy",
+        "Fang",
+        "Norbert",
+        "Buckbeak"
+      ],
+      "answer": "Fluffy",
+      "explanation": "Fluffy falls fast asleep as soon as he hears music.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What do witches and wizards call a person with no magic?",
+      "options": [
+        "A Muggle",
+        "A Squib",
+        "An Auror",
+        "An Animagus"
+      ],
+      "answer": "A Muggle",
+      "explanation": "In America, as Fantastic Beasts shows, they're called No-Majs.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which wizard sweets come with a collectable card of a famous witch or wizard?",
+      "options": [
+        "Chocolate Frogs",
+        "Bertie Bott's Every Flavour Beans",
+        "Fizzing Whizzbees",
+        "Cauldron Cakes"
+      ],
+      "answer": "Chocolate Frogs",
+      "explanation": "Harry's very first card, on the Hogwarts Express, is of Albus Dumbledore.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which wizarding family did Dobby the house-elf serve before Harry set him free?",
+      "options": [
+        "The Malfoys",
+        "The Blacks",
+        "The Weasleys",
+        "The Crouches"
+      ],
+      "answer": "The Malfoys",
+      "explanation": "Harry tricks Lucius Malfoy into handing Dobby a sock, which sets him free.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the name of the joke shop Fred and George Weasley open in Diagon Alley?",
+      "options": [
+        "Weasleys' Wizard Wheezes",
+        "Zonko's Joke Shop",
+        "Gambol and Japes",
+        "Honeydukes"
+      ],
+      "answer": "Weasleys' Wizard Wheezes",
+      "explanation": "Harry gave the twins his Triwizard winnings to help them start it.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What does the Mirror of Erised show the person looking into it?",
+      "options": [
+        "Their deepest wish",
+        "Their future",
+        "Their worst fear",
+        "Their true face"
+      ],
+      "answer": "Their deepest wish",
+      "explanation": "Erised is 'desire' written backwards.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the name of the baby dragon Hagrid hatches in his hut?",
+      "options": [
+        "Norbert",
+        "Buckbeak",
+        "Aragog",
+        "Fang"
+      ],
+      "answer": "Norbert",
+      "explanation": "Norbert is a Norwegian Ridgeback, won as an egg in a game of cards.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Harry Potter character do these emoji describe?",
+      "options": [
+        "Remus Lupin",
+        "Sirius Black",
+        "Peter Pettigrew",
+        "Nymphadora Tonks"
+      ],
+      "answer": "Remus Lupin",
+      "explanation": "Lupin hands out chocolate to help people recover after meeting a Dementor.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🐺🌕🍫"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which Harry Potter book do these emoji describe?",
+      "options": [
+        "The Deathly Hallows",
+        "The Goblet of Fire",
+        "The Philosopher's Stone",
+        "The Prisoner of Azkaban"
+      ],
+      "answer": "The Deathly Hallows",
+      "explanation": "Harry, Ron and Hermione break into Gringotts and escape on the back of a dragon.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🦌🗡️🏦🐉"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which magical vehicle do these emoji describe?",
+      "options": [
+        "The Knight Bus",
+        "The Hogwarts Express",
+        "The flying Ford Anglia",
+        "The Beauxbatons carriage"
+      ],
+      "answer": "The Knight Bus",
+      "explanation": "It turns up for any stranded witch or wizard who sticks out their wand hand.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🚌💜🌙"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "What form does Hermione's Patronus take?",
+      "options": [
+        "An otter",
+        "A doe",
+        "A hare",
+        "A cat"
+      ],
+      "answer": "An otter",
+      "explanation": "Luna's Patronus is a hare, and Snape's is a doe, like Lily's.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In the books, what was the name of Lord Voldemort's mother?",
+      "options": [
+        "Merope Gaunt",
+        "Eileen Prince",
+        "Ariana Dumbledore",
+        "Kendra Dumbledore"
+      ],
+      "answer": "Merope Gaunt",
+      "explanation": "She was a descendant of Salazar Slytherin.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which of Voldemort's Horcruxes was the first to be destroyed?",
+      "options": [
+        "Tom Riddle's diary",
+        "Marvolo Gaunt's ring",
+        "Slytherin's locket",
+        "Hufflepuff's cup"
+      ],
+      "answer": "Tom Riddle's diary",
+      "explanation": "Harry stabbed it with a Basilisk fang in the Chamber of Secrets.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What must you say to make the Marauder's Map appear?",
+      "options": [
+        "I solemnly swear that I am up to no good",
+        "Mischief managed",
+        "I must not tell lies",
+        "Alohomora"
+      ],
+      "answer": "I solemnly swear that I am up to no good",
+      "explanation": "'Mischief managed' wipes it blank again.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In the books, which subject does the ghost Professor Binns teach?",
+      "options": [
+        "History of Magic",
+        "Divination",
+        "Astronomy",
+        "Muggle Studies"
+      ],
+      "answer": "History of Magic",
+      "explanation": "He is the only ghost on the Hogwarts teaching staff.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the name of Harry's younger son?",
+      "options": [
+        "Albus Severus",
+        "James Sirius",
+        "Albus Remus",
+        "Severus Arthur"
+      ],
+      "answer": "Albus Severus",
+      "explanation": "He is named after two Hogwarts headmasters, Dumbledore and Snape.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
     }
   ]
 }

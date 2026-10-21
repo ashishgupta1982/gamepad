@@ -1,0 +1,503 @@
+{
+  "category": "dinosaurs",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which dinosaur is this?",
+      "options": [
+        "Triceratops",
+        "Stegosaurus",
+        "Ankylosaurus",
+        "Iguanodon"
+      ],
+      "answer": "Triceratops",
+      "explanation": "Triceratops lived right at the end of the age of dinosaurs, alongside Tyrannosaurus rex.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Triceratops",
+        "alt": "A large four-legged dinosaur skeleton",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615254/GamePad/quiz/triceratops.jpg",
+        "credit": "Photo: Source: Allie_Caulfield Derivative: User:MathKnight, CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:LA-Triceratops_mount-2.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which dinosaur is this?",
+      "options": [
+        "Diplodocus",
+        "Brachiosaurus",
+        "Iguanodon",
+        "Allosaurus"
+      ],
+      "answer": "Diplodocus",
+      "explanation": "A copy of a Diplodocus skeleton, nicknamed Dippy, greeted visitors to London's Natural History Museum for decades.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Diplodocus",
+        "alt": "A very long dinosaur skeleton in a museum hall",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615256/GamePad/quiz/diplodocus.jpg",
+        "credit": "Photo: ScottRobertAnselmo, CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:CM_Diplodocus.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which dinosaur is this?",
+      "options": [
+        "Tyrannosaurus rex",
+        "Allosaurus",
+        "Spinosaurus",
+        "Velociraptor"
+      ],
+      "answer": "Tyrannosaurus rex",
+      "explanation": "The biggest T. rex tooth ever found was about 30 cm long, roots and all, longer than a banana.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Tyrannosaurus",
+        "alt": "A huge dinosaur skeleton standing on two legs",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615257/GamePad/quiz/tyrannosaurus.jpg",
+        "credit": "Photo: ScottRobertAnselmo, CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Tyrannosaurus_Rex_Holotype.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which of these animals was already around at the time of the dinosaurs?",
+      "options": [
+        "Sharks",
+        "Woolly mammoths",
+        "Sabre-toothed cats",
+        "Gorillas"
+      ],
+      "answer": "Sharks",
+      "explanation": "Sharks were swimming in the seas long before the first dinosaurs appeared, and they are still here today.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which dinosaur had two rows of big plates along its back and spikes on its tail?",
+      "options": [
+        "Stegosaurus",
+        "Triceratops",
+        "Diplodocus",
+        "Velociraptor"
+      ],
+      "answer": "Stegosaurus",
+      "explanation": "Stegosaurus lived around 150 million years ago, about 80 million years before T. rex.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What do we call a scientist who studies fossils?",
+      "options": [
+        "A palaeontologist",
+        "An archaeologist",
+        "A geologist",
+        "A zoologist"
+      ],
+      "answer": "A palaeontologist",
+      "explanation": "Palaeontologists study ancient life, while archaeologists study the things people left behind.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which dinosaur's name means 'swift thief'?",
+      "options": [
+        "Velociraptor",
+        "Oviraptor",
+        "Deinonychus",
+        "Compsognathus"
+      ],
+      "answer": "Velociraptor",
+      "explanation": "Real Velociraptors were about the size of a turkey and covered in feathers.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What did long-necked dinosaurs like Brachiosaurus eat?",
+      "options": [
+        "Plants",
+        "Fish",
+        "Other dinosaurs",
+        "Insects"
+      ],
+      "answer": "Plants",
+      "explanation": "Their long necks let them reach leaves high up in the treetops.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Roughly when did the last of the giant dinosaurs die out?",
+      "options": [
+        "About 66 million years ago",
+        "About 6 million years ago",
+        "About 660 million years ago",
+        "About 66,000 years ago"
+      ],
+      "answer": "About 66 million years ago",
+      "explanation": "A huge asteroid crashed into the Earth at about that time, and most scientists think that is what wiped them out.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which animals alive today are descended from dinosaurs?",
+      "options": [
+        "Birds",
+        "Lizards",
+        "Crocodiles",
+        "Frogs"
+      ],
+      "answer": "Birds",
+      "explanation": "Birds are living dinosaurs, so a robin on your bird table is a distant cousin of T. rex.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which of these prehistoric reptiles could fly?",
+      "options": [
+        "Pteranodon",
+        "Plesiosaurus",
+        "Ichthyosaurus",
+        "Mosasaurus"
+      ],
+      "answer": "Pteranodon",
+      "explanation": "Pteranodon soared over the seas at the time of the dinosaurs, but it was a pterosaur, not a dinosaur.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which dinosaur had a heavy bony club on the end of its tail?",
+      "options": [
+        "Ankylosaurus",
+        "Stegosaurus",
+        "Triceratops",
+        "Parasaurolophus"
+      ],
+      "answer": "Ankylosaurus",
+      "explanation": "Ankylosaurus was covered in bony armour, like a living tank.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which young fossil hunter found amazing fossils on the beach at Lyme Regis in the early 1800s?",
+      "options": [
+        "Mary Anning",
+        "Marie Curie",
+        "Ada Lovelace",
+        "Florence Nightingale"
+      ],
+      "answer": "Mary Anning",
+      "explanation": "Mary Anning was only about 12 when she helped dig up the skeleton of an ichthyosaur, a giant sea reptile.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which dinosaur had a long, hollow crest on its head that it may have used to make honking calls?",
+      "options": [
+        "Parasaurolophus",
+        "Pachycephalosaurus",
+        "Triceratops",
+        "Iguanodon"
+      ],
+      "answer": "Parasaurolophus",
+      "explanation": "Air passing through the tubes inside its crest may have made a deep, trumpeting sound.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which country were the bones of the first dinosaur ever given a scientific name found?",
+      "options": [
+        "England",
+        "USA",
+        "China",
+        "Argentina"
+      ],
+      "answer": "England",
+      "explanation": "Megalosaurus, named in 1824 from bones found in Oxfordshire, was the first dinosaur ever given a scientific name.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which prehistoric animal is this famous fossil?",
+      "options": [
+        "Archaeopteryx",
+        "Pterodactylus",
+        "Microraptor",
+        "Compsognathus"
+      ],
+      "answer": "Archaeopteryx",
+      "explanation": "The first Archaeopteryx skeletons were found in Germany in the 1860s and 1870s, with feathered wings but also teeth and a long bony tail.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Archaeopteryx",
+        "alt": "A fossil skeleton pressed into pale stone",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615259/GamePad/quiz/archaeopteryx.jpg",
+        "credit": "Photo: H. Raab (User: Vesta), CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Archaeopteryx_lithographica_(Berlin_specimen).jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which dinosaur is this?",
+      "options": [
+        "Brachiosaurus",
+        "Diplodocus",
+        "Apatosaurus",
+        "Argentinosaurus"
+      ],
+      "answer": "Brachiosaurus",
+      "explanation": "Unlike most long-necked dinosaurs, Brachiosaurus had front legs longer than its back legs, a bit like a giraffe.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Brachiosaurus",
+        "alt": "A tall dinosaur skeleton with a very long neck",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615260/GamePad/quiz/brachiosaurus.jpg",
+        "credit": "Photo: Matt Wedel, CC BY 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Brachiosaurus_mount.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which dinosaur is this?",
+      "options": [
+        "Iguanodon",
+        "Hadrosaurus",
+        "Megalosaurus",
+        "Allosaurus"
+      ],
+      "answer": "Iguanodon",
+      "explanation": "Early reconstructions put Iguanodon's spiky thumb on its nose, mistaking it for a horn.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Iguanodon",
+        "alt": "A tall dinosaur skeleton in a museum hall",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615262/GamePad/quiz/iguanodon.jpg",
+        "credit": "Photo: Ben2, CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Iguanodon_de_Bernissart_IRSNB_01.JPG"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "In which geological period did Tyrannosaurus rex live?",
+      "options": [
+        "Cretaceous",
+        "Jurassic",
+        "Triassic",
+        "Permian"
+      ],
+      "answer": "Cretaceous",
+      "explanation": "Despite the film title, T. rex lived in the Late Cretaceous, more than 70 million years after the Jurassic ended.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which was the earliest of the three periods of the age of dinosaurs?",
+      "options": [
+        "Triassic",
+        "Jurassic",
+        "Cretaceous",
+        "Carboniferous"
+      ],
+      "answer": "Triassic",
+      "explanation": "The first dinosaurs appeared in the Triassic, followed by the Jurassic and then the Cretaceous.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which scientist coined the word 'dinosaur'?",
+      "options": [
+        "Richard Owen",
+        "Charles Darwin",
+        "Gideon Mantell",
+        "William Buckland"
+      ],
+      "answer": "Richard Owen",
+      "explanation": "Richard Owen came up with the name in the early 1840s, and later campaigned for London's Natural History Museum.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is thought to have made Spinosaurus unusual among giant meat-eating dinosaurs?",
+      "options": [
+        "It ate mostly fish",
+        "It ate only plants",
+        "It could glide",
+        "It laid no eggs"
+      ],
+      "answer": "It ate mostly fish",
+      "explanation": "Spinosaurus had a long, crocodile-like snout and probably spent much of its time hunting in rivers.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "The Chicxulub crater, left by the asteroid linked to the dinosaurs' extinction, is in which country?",
+      "options": [
+        "Mexico",
+        "USA",
+        "Brazil",
+        "Australia"
+      ],
+      "answer": "Mexico",
+      "explanation": "The crater, more than 150 km wide, lies buried under the Yucatan Peninsula and the sea beside it.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the name for a fossilised dinosaur dropping?",
+      "options": [
+        "Coprolite",
+        "Gastrolith",
+        "Ammonite",
+        "Trilobite"
+      ],
+      "answer": "Coprolite",
+      "explanation": "Coprolites can reveal what a dinosaur ate, right down to crushed bones and bits of plant.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What are the gastroliths found with some dinosaur skeletons?",
+      "options": [
+        "Stomach stones",
+        "Fossil eggs",
+        "Footprints",
+        "Baby teeth"
+      ],
+      "answer": "Stomach stones",
+      "explanation": "Some plant-eating dinosaurs swallowed stones, which may have helped grind up food in their stomachs.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which dinosaur's name means 'tyrant lizard king'?",
+      "options": [
+        "Tyrannosaurus rex",
+        "Allosaurus",
+        "Giganotosaurus",
+        "Albertosaurus"
+      ],
+      "answer": "Tyrannosaurus rex",
+      "explanation": "Rex is Latin for king, and T. rex is one of the very few dinosaurs that most people know by its full scientific name.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Giganotosaurus, one of the largest meat-eating dinosaurs ever found, was discovered in which country?",
+      "options": [
+        "Argentina",
+        "Mongolia",
+        "Canada",
+        "Morocco"
+      ],
+      "answer": "Argentina",
+      "explanation": "It was found in Patagonia in 1993, and its name means 'giant southern lizard'.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which dinosaur had a thick, bony dome on top of its head?",
+      "options": [
+        "Pachycephalosaurus",
+        "Parasaurolophus",
+        "Protoceratops",
+        "Psittacosaurus"
+      ],
+      "answer": "Pachycephalosaurus",
+      "explanation": "Its name means 'thick-headed lizard', and its dome of bone could be more than 20 cm thick.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which island is often called the dinosaur capital of Britain?",
+      "options": [
+        "Isle of Wight",
+        "Anglesey",
+        "Isle of Man",
+        "Jersey"
+      ],
+      "answer": "Isle of Wight",
+      "explanation": "Dinosaur bones and footprints still wash out of the Isle of Wight's crumbling cliffs after winter storms.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Roughly how long ago did the first dinosaurs appear?",
+      "options": [
+        "About 230 million years ago",
+        "About 66 million years ago",
+        "About 500 million years ago",
+        "About 1 billion years ago"
+      ],
+      "answer": "About 230 million years ago",
+      "explanation": "Dinosaurs then lived on Earth for more than 160 million years before the giant ones died out.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    }
+  ]
+}

@@ -1,0 +1,305 @@
+{
+  "category": "modern-history",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which nurse became known as the Lady with the Lamp?",
+      "options": ["Florence Nightingale", "Mary Seacole", "Edith Cavell", "Elizabeth Fry"],
+      "answer": "Florence Nightingale",
+      "explanation": "She cared for soldiers in the Crimean War and later set up a school for nurses in London.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which year did the Titanic sink on its very first voyage?",
+      "options": ["1912", "1905", "1921", "1898"],
+      "answer": "1912",
+      "explanation": "The Titanic hit an iceberg in the North Atlantic on its way from Southampton to New York.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Who made the first powered aeroplane flight, in 1903?",
+      "options": ["The Wright brothers", "The Montgolfier brothers", "Alcock and Brown", "The Lumière brothers"],
+      "answer": "The Wright brothers",
+      "explanation": "That very first flight lasted just 12 seconds.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which year did the First World War end?",
+      "options": ["1918", "1914", "1939", "1945"],
+      "answer": "1918",
+      "explanation": "The fighting stopped at 11 o'clock on 11 November 1918, which is why we remember it on Remembrance Day.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Who was Britain's Prime Minister for most of the Second World War?",
+      "options": ["Winston Churchill", "Neville Chamberlain", "Clement Attlee", "David Lloyd George"],
+      "answer": "Winston Churchill",
+      "explanation": "Churchill became Prime Minister in May 1940.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What did Alexander Fleming discover in 1928?",
+      "options": ["Penicillin", "X-rays", "Insulin", "Vaccines"],
+      "answer": "Penicillin",
+      "explanation": "He came back from holiday to find mould had killed the germs on a dish he had left out.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What were children called who were sent from cities to the countryside to keep safe in the Second World War?",
+      "options": ["Evacuees", "Refugees", "Cadets", "Pioneers"],
+      "answer": "Evacuees",
+      "explanation": "Evacuees carried a gas mask in a box and wore a label with their name on it.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Whose refusal to give up her bus seat in 1955 started the Montgomery bus boycott?",
+      "options": ["Rosa Parks", "Harriet Tubman", "Maya Angelou", "Ruby Bridges"],
+      "answer": "Rosa Parks",
+      "explanation": "The boycott in Alabama lasted over a year and helped end segregation on the city's buses.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which city did a wall dividing the city in two come down in 1989?",
+      "options": ["Berlin", "Vienna", "Warsaw", "Prague"],
+      "answer": "Berlin",
+      "explanation": "The Berlin Wall had split the city for 28 years.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What did people in Britain celebrate with street parties on 8 May 1945?",
+      "options": ["The end of the war in Europe", "The first Moon landing", "The Queen's coronation", "Women getting the vote"],
+      "answer": "The end of the war in Europe",
+      "explanation": "8 May is VE Day, which stands for Victory in Europe.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Who was the first person to reach the South Pole?",
+      "options": ["Roald Amundsen", "Robert Falcon Scott", "Ernest Shackleton", "Robert Peary"],
+      "answer": "Roald Amundsen",
+      "explanation": "Amundsen's Norwegian team got there in December 1911, about five weeks before Scott's.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Who was the first woman to fly solo across the Atlantic?",
+      "options": ["Amelia Earhart", "Amy Johnson", "Bessie Coleman", "Jean Batten"],
+      "answer": "Amelia Earhart",
+      "explanation": "In 1932 she landed in a field in Northern Ireland, surprising a farm worker.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which engineer designed the Clifton Suspension Bridge and the Great Western Railway?",
+      "options": ["Isambard Kingdom Brunel", "George Stephenson", "Thomas Telford", "James Watt"],
+      "answer": "Isambard Kingdom Brunel",
+      "explanation": "Brunel was famous for his tall stovepipe hat as well as his bridges, ships and railways.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Who founded the Women's Social and Political Union to win women the vote?",
+      "options": ["Emmeline Pankhurst", "Millicent Fawcett", "Emily Davison", "Nancy Astor"],
+      "answer": "Emmeline Pankhurst",
+      "explanation": "Her campaigners became known as the suffragettes.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which steam locomotive won the Rainhill Trials in 1829?",
+      "options": ["Rocket", "Puffing Billy", "Flying Scotsman", "Mallard"],
+      "answer": "Rocket",
+      "explanation": "Rocket reached about 30 miles an hour, which was astonishingly fast at the time.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which ship carried Charles Darwin around the world?",
+      "options": ["HMS Beagle", "HMS Endeavour", "HMS Bounty", "HMS Victory"],
+      "answer": "HMS Beagle",
+      "explanation": "The voyage, from 1831 to 1836, lasted almost five years.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which scientist was the first person to win Nobel Prizes in two different sciences?",
+      "options": ["Marie Curie", "Lise Meitner", "Rosalind Franklin", "Dorothy Hodgkin"],
+      "answer": "Marie Curie",
+      "explanation": "She won for physics in 1903 and for chemistry in 1911.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which canal opened in 1869, linking the Mediterranean with the Red Sea?",
+      "options": ["The Suez Canal", "The Panama Canal", "The Kiel Canal", "The Corinth Canal"],
+      "answer": "The Suez Canal",
+      "explanation": "It saved ships the long voyage around the southern tip of Africa.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which country did Britain fight in the Falklands War of 1982?",
+      "options": ["Argentina", "Chile", "Spain", "Uruguay"],
+      "answer": "Argentina",
+      "explanation": "The war lasted 74 days, from April to June 1982.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who invented the World Wide Web in 1989?",
+      "options": ["Tim Berners-Lee", "Alan Turing", "Bill Gates", "Charles Babbage"],
+      "answer": "Tim Berners-Lee",
+      "explanation": "He was working at CERN, near Geneva, which made the Web's software free for anyone to use in 1993.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which treaty, signed in 1919, ended the First World War between Germany and the Allies?",
+      "options": ["The Treaty of Versailles", "The Treaty of Trianon", "The Treaty of Brest-Litovsk", "The Treaty of Utrecht"],
+      "answer": "The Treaty of Versailles",
+      "explanation": "It was signed in the Hall of Mirrors exactly five years after the assassination of Archduke Franz Ferdinand.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What was the codename for the Allied invasion of Normandy in 1944?",
+      "options": ["Operation Overlord", "Operation Market Garden", "Operation Barbarossa", "Operation Dynamo"],
+      "answer": "Operation Overlord",
+      "explanation": "The landings began on D-Day, 6 June 1944.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which leader walked to the sea at Dandi in the Salt March of 1930?",
+      "options": ["Mahatma Gandhi", "Jawaharlal Nehru", "Muhammad Ali Jinnah", "Sardar Patel"],
+      "answer": "Mahatma Gandhi",
+      "explanation": "He walked about 240 miles to make salt from seawater, defying the British tax on salt.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which year was Nelson Mandela released from prison?",
+      "options": ["1990", "1985", "1994", "1979"],
+      "answer": "1990",
+      "explanation": "He had spent 27 years in prison, and four years later he became South Africa's first Black president.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which supersonic airliner made its last passenger flights in 2003?",
+      "options": ["Concorde", "The Tupolev Tu-144", "The de Havilland Comet", "The Vickers VC10"],
+      "answer": "Concorde",
+      "explanation": "Concorde could cross the Atlantic in about three and a half hours.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which year did women in the UK win the vote on the same terms as men?",
+      "options": ["1928", "1918", "1945", "1902"],
+      "answer": "1928",
+      "explanation": "In 1918 some women over 30 got the vote, and the 1928 Act lowered the age to 21, the same as for men.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who was the first woman to take her seat as an MP in the House of Commons?",
+      "options": ["Nancy Astor", "Constance Markievicz", "Margaret Bondfield", "Ellen Wilkinson"],
+      "answer": "Nancy Astor",
+      "explanation": "Constance Markievicz was elected first, in 1918, but as a Sinn Féin member she refused to take her seat.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which engineer invented the bouncing bomb used in the Dambusters raid?",
+      "options": ["Barnes Wallis", "Frank Whittle", "R. J. Mitchell", "Guy Gibson"],
+      "answer": "Barnes Wallis",
+      "explanation": "He tried out the idea by skimming marbles across a tub of water in his garden.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which year did the Great Exhibition open in the Crystal Palace in Hyde Park?",
+      "options": ["1851", "1837", "1862", "1880"],
+      "answer": "1851",
+      "explanation": "The Crystal Palace was later moved to Sydenham in south London, where it burned down in 1936.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "At which country house did Alan Turing and others break German codes in the Second World War?",
+      "options": ["Bletchley Park", "Chequers", "Chartwell", "Blenheim Palace"],
+      "answer": "Bletchley Park",
+      "explanation": "Its wartime work stayed secret until the 1970s.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}

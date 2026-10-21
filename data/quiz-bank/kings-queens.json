@@ -1,0 +1,503 @@
+{
+  "category": "kings-queens",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which famous king is this?",
+      "options": [
+        "Henry VIII",
+        "Richard III",
+        "Charles I",
+        "William the Conqueror"
+      ],
+      "answer": "Henry VIII",
+      "explanation": "Henry VIII married six times, and he also built up the navy, including the warship Mary Rose.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Henry_VIII",
+        "alt": "A painting of a broad-shouldered man in rich clothes and a flat cap",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615279/GamePad/quiz/henry-viii.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:After_Hans_Holbein_the_Younger_-_Portrait_of_Henry_VIII_-_Google_Art_Project.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which queen is this?",
+      "options": [
+        "Queen Victoria",
+        "Elizabeth I",
+        "Queen Anne",
+        "Mary II"
+      ],
+      "answer": "Queen Victoria",
+      "explanation": "Victoria became queen at just 18 and reigned for 63 years.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Queen_Victoria",
+        "alt": "An old photograph of an older woman wearing a small crown and veil",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615280/GamePad/quiz/queen-victoria.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:Queen_Victoria_by_Bassano.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Who won the Battle of Hastings in 1066 and became King of England?",
+      "options": [
+        "William the Conqueror",
+        "Harold Godwinson",
+        "Alfred the Great",
+        "Richard the Lionheart"
+      ],
+      "answer": "William the Conqueror",
+      "explanation": "William was Duke of Normandy, and the Bayeux Tapestry tells the story of his invasion.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which queen reigned for 70 years, from 1952 to 2022?",
+      "options": [
+        "Elizabeth II",
+        "Victoria",
+        "Elizabeth I",
+        "Anne"
+      ],
+      "answer": "Elizabeth II",
+      "explanation": "Her reign of 70 years and 214 days is the longest of any British king or queen.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which London building are the Crown Jewels kept?",
+      "options": [
+        "The Tower of London",
+        "Buckingham Palace",
+        "Westminster Abbey",
+        "The British Museum"
+      ],
+      "answer": "The Tower of London",
+      "explanation": "They are guarded by the Yeoman Warders, better known as Beefeaters.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which famous French ruler is this?",
+      "options": [
+        "Napoleon",
+        "Louis XIV",
+        "Charlemagne",
+        "Louis XVI"
+      ],
+      "answer": "Napoleon",
+      "explanation": "Napoleon crowned himself Emperor of the French in 1804.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Napoleon",
+        "alt": "A painting of a man in uniform standing with his hand tucked into his jacket",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615282/GamePad/quiz/napoleon.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:Jacques-Louis_David_-_The_Emperor_Napoleon_in_His_Study_at_the_Tuileries_-_Google_Art_Project.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which English king was nicknamed the Lionheart?",
+      "options": [
+        "Richard I",
+        "Henry II",
+        "John",
+        "Edward I"
+      ],
+      "answer": "Richard I",
+      "explanation": "Richard spent only about six months of his ten-year reign actually in England.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which church has almost every English and British coronation taken place since 1066?",
+      "options": [
+        "Westminster Abbey",
+        "St Paul's Cathedral",
+        "Canterbury Cathedral",
+        "York Minster"
+      ],
+      "answer": "Westminster Abbey",
+      "explanation": "The abbey's Coronation Chair has been used at coronations for more than 700 years.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Cleopatra was the last ruler of which ancient kingdom?",
+      "options": [
+        "Egypt",
+        "Greece",
+        "Persia",
+        "Babylon"
+      ],
+      "answer": "Egypt",
+      "explanation": "Cleopatra lived closer in time to the Moon landing than to the building of the Great Pyramid.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which queen was on the throne when the Spanish Armada sailed against England in 1588?",
+      "options": [
+        "Elizabeth I",
+        "Mary I",
+        "Victoria",
+        "Anne"
+      ],
+      "answer": "Elizabeth I",
+      "explanation": "English fireships and fierce storms broke up the Armada, and many of its ships never made it home.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In a famous story, which king let some cakes burn while hiding from the Vikings?",
+      "options": [
+        "Alfred the Great",
+        "Cnut",
+        "Harold",
+        "Edward the Confessor"
+      ],
+      "answer": "Alfred the Great",
+      "explanation": "Nobody knows if the story is true, but Alfred did go on to beat the Vikings at the Battle of Edington in 878.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In a famous story, which Scottish king was inspired to keep trying by watching a spider spin its web?",
+      "options": [
+        "Robert the Bruce",
+        "Macbeth",
+        "James IV",
+        "Malcolm III"
+      ],
+      "answer": "Robert the Bruce",
+      "explanation": "He went on to win a great victory over the English at the Battle of Bannockburn in 1314.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which king agreed to Magna Carta in 1215?",
+      "options": [
+        "King John",
+        "Richard I",
+        "Henry III",
+        "Edward I"
+      ],
+      "answer": "King John",
+      "explanation": "John did not sign it: he set his royal seal on it at Runnymede, beside the River Thames.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which royal family did Elizabeth I belong to?",
+      "options": [
+        "The Tudors",
+        "The Stuarts",
+        "The Windsors",
+        "The Plantagenets"
+      ],
+      "answer": "The Tudors",
+      "explanation": "She was the last Tudor monarch, and after her the crown passed to James VI of Scotland.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which royal castle is often called the largest lived-in castle in the world?",
+      "options": [
+        "Windsor Castle",
+        "Balmoral Castle",
+        "Caernarfon Castle",
+        "Warwick Castle"
+      ],
+      "answer": "Windsor Castle",
+      "explanation": "Kings and queens have lived at Windsor for more than 900 years.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which monarch is this?",
+      "options": [
+        "Elizabeth I",
+        "Mary I",
+        "Mary, Queen of Scots",
+        "Lady Jane Grey"
+      ],
+      "answer": "Elizabeth I",
+      "explanation": "She never married and was called the Virgin Queen, which is how the American state of Virginia got its name.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Elizabeth_I",
+        "alt": "A painting of a pale woman with red hair in a jewelled gown and ruff",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615283/GamePad/quiz/elizabeth-i.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:Darnley_stage_3.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which French king is this?",
+      "options": [
+        "Louis XIV",
+        "Louis XIII",
+        "Louis XV",
+        "Louis XVI"
+      ],
+      "answer": "Louis XIV",
+      "explanation": "This is Louis XIV, the Sun King, who reigned for 72 years, even longer than Elizabeth II.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Louis_XIV",
+        "alt": "A painting of a king in a long curly wig and robes",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615285/GamePad/quiz/louis-xiv.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:Louis_XIV_of_France.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Whose remains were found under a car park in Leicester in 2012?",
+      "options": [
+        "Richard III",
+        "Henry VI",
+        "Edward V",
+        "Richard II"
+      ],
+      "answer": "Richard III",
+      "explanation": "He was the last English king to die in battle, at Bosworth in 1485.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who was the first Tudor king?",
+      "options": [
+        "Henry VII",
+        "Henry VIII",
+        "Edward IV",
+        "Henry VI"
+      ],
+      "answer": "Henry VII",
+      "explanation": "He married Elizabeth of York, joining the red rose of Lancaster with the white rose of York in the Tudor rose.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which king led the English army at the Battle of Agincourt in 1415?",
+      "options": [
+        "Henry V",
+        "Henry IV",
+        "Edward III",
+        "Richard II"
+      ],
+      "answer": "Henry V",
+      "explanation": "Shakespeare gives him the famous band of brothers speech just before the battle.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which king is this?",
+      "options": [
+        "Charles I",
+        "Charles II",
+        "James I",
+        "James II"
+      ],
+      "answer": "Charles I",
+      "explanation": "Charles I was the only English king to be put on trial and executed, in 1649.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Charles_I_of_England",
+        "alt": "A painting of a man with long hair and a pointed beard",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792615286/GamePad/quiz/charles-i-of-england.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:King_Charles_I_after_original_by_van_Dyck.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Who is known as the Nine Days' Queen?",
+      "options": [
+        "Lady Jane Grey",
+        "Matilda",
+        "Anne of Cleves",
+        "Mary I"
+      ],
+      "answer": "Lady Jane Grey",
+      "explanation": "She was proclaimed queen in July 1553 but was soon pushed aside by Mary I.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which king changed the royal family's name to Windsor in 1917?",
+      "options": [
+        "George V",
+        "Edward VII",
+        "George VI",
+        "Edward VIII"
+      ],
+      "answer": "George V",
+      "explanation": "He dropped the German-sounding Saxe-Coburg and Gotha in the middle of the First World War.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Russian tsar founded the city of St Petersburg in 1703?",
+      "options": [
+        "Peter the Great",
+        "Ivan the Terrible",
+        "Catherine the Great",
+        "Nicholas II"
+      ],
+      "answer": "Peter the Great",
+      "explanation": "As a young tsar he travelled to Holland and worked in a shipyard under a false name to learn shipbuilding.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which king brought the crowns of England and Scotland together in 1603?",
+      "options": [
+        "James VI and I",
+        "Charles I",
+        "Henry VII",
+        "William III"
+      ],
+      "answer": "James VI and I",
+      "explanation": "He had already been James VI of Scotland for almost 36 years when he became James I of England.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Mughal emperor built the Taj Mahal?",
+      "options": [
+        "Shah Jahan",
+        "Akbar",
+        "Babur",
+        "Aurangzeb"
+      ],
+      "answer": "Shah Jahan",
+      "explanation": "He built it as a tomb for his beloved wife, Mumtaz Mahal.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who was the last monarch of the House of Stuart?",
+      "options": [
+        "Anne",
+        "Mary II",
+        "William III",
+        "James II"
+      ],
+      "answer": "Anne",
+      "explanation": "None of Anne's children outlived her, so under the Act of Settlement the crown passed to her Protestant German cousin, George of Hanover.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Buckingham Palace became the monarch's official London home at the start of whose reign?",
+      "options": [
+        "Victoria",
+        "George III",
+        "George IV",
+        "William IV"
+      ],
+      "answer": "Victoria",
+      "explanation": "George III bought it in 1761 as a family home, but it only became the monarch's official London residence when Victoria moved in, in 1837.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the block of sandstone placed in the Coronation Chair when a monarch is crowned?",
+      "options": [
+        "The Stone of Destiny",
+        "The Blarney Stone",
+        "The London Stone",
+        "The King Stone"
+      ],
+      "answer": "The Stone of Destiny",
+      "explanation": "Students took it from Westminster Abbey on Christmas Day 1950, and since 1996 it has been kept in Scotland, coming south only for coronations.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which English king was nicknamed Longshanks and the Hammer of the Scots?",
+      "options": [
+        "Edward I",
+        "Edward II",
+        "Edward III",
+        "Henry II"
+      ],
+      "answer": "Edward I",
+      "explanation": "When his tomb was opened in 1774, his body measured about 6 feet 2 inches, very tall for his day.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}
