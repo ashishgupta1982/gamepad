@@ -24,11 +24,12 @@ export const ROOM = {
 
 // Hotspots: left, top, width, height, in % of the picture.
 export const ROOM_OBJECTS = [
-  { id: 'travel-bingo', label: 'Travel Bingo', box: [23.6, 28.7, 46.9, 17] },
-  { id: 'egypt-explorer', label: 'Egypt Explorer', box: [69, 23, 31, 29] },
-  { id: 'darts', label: 'Darts', box: [4.6, 54.7, 20.8, 14.3] },
-  { id: 'quiz', label: 'Quiz', box: [35, 70.5, 28.5, 17.5] },
-  { id: 'cupboard', label: 'Board games', box: [72, 65.8, 26.5, 23.9] },
+// `delay` staggers the halos' pulses so they do not throb in unison.
+  { id: 'travel-bingo', label: 'Travel Bingo', box: [23.6, 28.7, 46.9, 17], delay: 0 },
+  { id: 'egypt-explorer', label: 'Egypt Explorer', box: [69, 23, 31, 29], delay: 0.4 },
+  { id: 'darts', label: 'Darts', box: [4.6, 54.7, 20.8, 14.3], delay: 0.8 },
+  { id: 'quiz', label: 'Quiz', box: [35, 70.5, 28.5, 17.5], delay: 1.2 },
+  { id: 'cupboard', label: 'Board games', box: [72, 65.8, 26.5, 23.9], delay: 1.6 },
 ];
 
 // What lives in the cupboard. A null id is an empty space on the shelf.

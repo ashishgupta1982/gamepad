@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
@@ -15,9 +15,9 @@ import { cn } from '@/lib/cn';
 //
 // The room is one picture with a few things layered on top so they can move by
 // themselves: the plane sways on its strings, a dart lands in the board now and
-// then, and the TV flickers through the quiz's answer shapes. Nothing else is
-// drawn over the picture: name labels show for a few seconds on arrival and
-// whenever the empty room is tapped, then fade (Ash: no stickers covering it).
+// then, and the TV flickers through the quiz's answer shapes. Each object has a
+// small name label beside it and a soft pulsing halo saying it can be tapped
+// (Ash, 2026-10-21); nothing bigger is drawn over the picture.
 
 const pct = (n) => `${n}%`;
 const box = ([l, t, w, h]) => ({ left: pct(l), top: pct(t), width: pct(w), height: pct(h) });
@@ -49,9 +49,7 @@ export default function GamesRoom({ active = {}, isGuest, onSignIn }) {
   const stageRef = useRef(null);
   const [stage, setStage] = useState({ width: 0, height: 0 });
   const [focus, setFocus] = useState(null); // null | an object id | a game id inside the cupboard
-  const [labels, setLabels] = useState(true);
   const pushed = useRef(false);
-  const labelTimer = useRef(null);
 
   useLayoutEffect(() => {
     const el = stageRef.current;
@@ -62,16 +60,6 @@ export default function GamesRoom({ active = {}, isGuest, onSignIn }) {
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
-
-  const flashLabels = useCallback((ms) => {
-    setLabels(true);
-    clearTimeout(labelTimer.current);
-    labelTimer.current = setTimeout(() => setLabels(false), ms);
-  }, []);
-  useEffect(() => {
-    flashLabels(3500);
-    return () => clearTimeout(labelTimer.current);
-  }, [flashLabels]);
 
   // The phone's back button steps out of the room's zoom rather than leaving
   // the site: each zoom from the room is one history entry.
@@ -91,7 +79,6 @@ export default function GamesRoom({ active = {}, isGuest, onSignIn }) {
       window.history.pushState({ gamesRoom: id }, '');
       pushed.current = true;
     }
-    setLabels(false);
     setFocus(id);
   };
 
@@ -142,7 +129,6 @@ export default function GamesRoom({ active = {}, isGuest, onSignIn }) {
             height={ROOM.height}
             alt=""
             draggable={false}
-            onClick={() => !zoomed && flashLabels(2500)}
             className="absolute inset-0 h-full w-full select-none"
           />
 
@@ -160,10 +146,26 @@ export default function GamesRoom({ active = {}, isGuest, onSignIn }) {
               className="group absolute rounded-3xl focus-visible:outline focus-visible:outline-4 focus-visible:outline-white"
               style={box(o.box)}
             >
+              {/* The halo: a soft ring pulsing out from the object's middle. */}
+              <span
+                aria-hidden="true"
+                className={cn(
+                  'pointer-events-none absolute left-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white/90 bg-white/25 transition-opacity duration-300',
+                  zoomed ? 'opacity-0' : 'opacity-100',
+                )}
+              >
+                {!reduce && !zoomed && (
+                  <motion.span
+                    className="absolute inset-0 rounded-full border-2 border-white"
+                    animate={{ scale: [1, 2.4], opacity: [0.9, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: 'easeOut', delay: o.delay }}
+                  />
+                )}
+              </span>
               <span
                 className={cn(
-                  'pointer-events-none absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#241a45]/85 px-2.5 py-1 text-[11px] font-extrabold text-white shadow-[0_3px_0_rgba(0,0,0,0.25)] transition-opacity duration-500',
-                  labels && !zoomed ? 'opacity-100' : 'opacity-0 group-focus-visible:opacity-100',
+                  'pointer-events-none absolute -bottom-2.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#241a45]/70 px-2 py-0.5 text-[10px] font-bold text-white transition-opacity duration-300',
+                  zoomed ? 'opacity-0' : 'opacity-100',
                 )}
               >
                 {o.label}
@@ -200,7 +202,7 @@ export default function GamesRoom({ active = {}, isGuest, onSignIn }) {
 
         <AnimatePresence>
           {game && (
-            <GameCard key={game.id} game={game} active={active[game.id]} isGuest={isGuest} onSignIn={onSignIn} onBack={back} reduce={reduce} />
+            <GameCard key={game.id} game={game} active={active[game.id]} isGuest={isGuest} onSignIn={onSignIn} reduce={reduce} />
           )}
         </AnimatePresence>
       </div>
@@ -360,7 +362,7 @@ function Shelves({ active, onPick, reduce }) {
 }
 
 // The card that rises once the camera has arrived.
-function GameCard({ game, active, isGuest, onSignIn, onBack, reduce }) {
+function GameCard({ game, active, isGuest, onSignIn, reduce }) {
   const actions = (GAME_ACTIONS[game.id] || [{ label: 'Play', href: game.href, primary: true }]).filter((a) => a.when !== 'active' || active);
   const [main, ...rest] = actions;
   return (
@@ -392,14 +394,8 @@ function GameCard({ game, active, isGuest, onSignIn, onBack, reduce }) {
             {main.label}
           </Link>
         )}
+        {rest.length > 0 && (
         <div className="flex gap-2.5">
-          <button
-            type="button"
-            onClick={onBack}
-            className="toy flex min-h-touch flex-none items-center justify-center rounded-2xl bg-[#ece6ff] px-4 font-bold text-[#241a45] [--toy-edge:#cfc5f5]"
-          >
-            Room
-          </button>
           {rest.map((a) => (
             <Link
               key={a.label}
@@ -411,6 +407,7 @@ function GameCard({ game, active, isGuest, onSignIn, onBack, reduce }) {
             </Link>
           ))}
         </div>
+        )}
       </div>
 
       {isGuest && (
