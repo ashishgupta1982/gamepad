@@ -1,17 +1,19 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { ArrowLeft } from 'lucide-react';
 import AccountMenu from '@/components/layout/AccountMenu';
 import MuteButton from '@/components/arcade/MuteButton';
 import { play } from '@/components/arcade/sfx';
 import { GAMES, GAME_BY_TYPE } from '@/data/games';
-import { CUPBOARD_SHELVES, DART, DARTBOARD_BULL, PLANE, ROOM, ROOM_OBJECTS, TV_SCREEN } from '@/data/gamesRoom';
+import { CUPBOARD, DART, DARTBOARD_BULL, PLANE, ROOM, ROOM_OBJECTS, TV_SCREEN } from '@/data/gamesRoom';
 import { cn } from '@/lib/cn';
 
 // The home page as a room (REDESIGN-PLAN.md, Phase 2). Every game is an object
 // in it; tapping one pushes the camera in and a card rises with that game's
-// choices. The cupboard opens onto shelves of board-game boxes.
+// choices. The cupboard's doors swing open onto shelves of board-game boxes,
+// and tapping a box goes straight into its game (Ash, 2026-10-21).
 //
 // The room is one picture with a few things layered on top so they can move by
 // themselves: the plane sways on its strings, a dart lands in the board now and
@@ -48,7 +50,8 @@ export default function GamesRoom({ isGuest, onSignIn }) {
   const reduce = useReducedMotion();
   const stageRef = useRef(null);
   const [stage, setStage] = useState({ width: 0, height: 0 });
-  const [focus, setFocus] = useState(null); // null | an object id | a game id inside the cupboard
+  const router = useRouter();
+  const [focus, setFocus] = useState(null); // null | an object id
   const pushed = useRef(false);
 
   useLayoutEffect(() => {
@@ -96,15 +99,10 @@ export default function GamesRoom({ isGuest, onSignIn }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [focus]);
 
-  // Empty shelf spaces are null in CUPBOARD_SHELVES, so a null focus (the
-  // whole room) must never be looked up there: it matched, and the page opened
-  // zoomed into the cupboard.
-  const inCupboard = !!focus && (focus === 'cupboard' || CUPBOARD_SHELVES.flat().includes(focus));
-  const cameraTarget = inCupboard ? 'cupboard' : focus;
-  const target = ROOM_OBJECTS.find((o) => o.id === cameraTarget);
-  const camera =
-    target && stage.width ? cameraFor(target.box, stage, cameraTarget === 'cupboard' ? 0.95 : 0.8) : { x: 0, y: 0, scale: 1 };
-  const game = focus && focus !== 'cupboard' ? GAME_BY_TYPE[focus] : null;
+  const inCupboard = focus === 'cupboard';
+  const target = ROOM_OBJECTS.find((o) => o.id === focus);
+  const camera = target && stage.width ? cameraFor(target.box, stage, inCupboard ? 0.95 : 0.8) : { x: 0, y: 0, scale: 1 };
+  const game = focus && !inCupboard ? GAME_BY_TYPE[focus] : null;
   const zoomed = !!focus;
 
   return (
@@ -182,7 +180,9 @@ export default function GamesRoom({ isGuest, onSignIn }) {
           </div>
         </div>
 
-        <AnimatePresence>{inCupboard && <Shelves key="shelves" onPick={(id) => { play('tap'); setFocus(id); }} reduce={reduce} />}</AnimatePresence>
+        <AnimatePresence>
+          {inCupboard && <Cupboard key="cupboard" onOpen={(g) => setTimeout(() => router.push(g.href), reduce ? 0 : 650)} reduce={reduce} />}
+        </AnimatePresence>
 
         <AnimatePresence>
           {game && (
@@ -301,44 +301,125 @@ function TvScreen({ reduce, glyphPx }) {
   );
 }
 
-// Inside the cupboard: shelves of game boxes, drawn over the zoomed picture.
-function Shelves({ onPick, reduce }) {
+// Inside the cupboard: its doors swing open onto the shelves, and each game
+// is a box on them. Tapping a box lifts it off the shelf, its lid comes up,
+// and the game opens; there is no card in between.
+function Cupboard({ onOpen, reduce }) {
+  const [opening, setOpening] = useState(null);
+  const open = (g) => {
+    if (opening) return;
+    play('pop');
+    setOpening(g.id);
+    onOpen(g);
+  };
   return (
     <motion.div
-      className="absolute inset-x-[8%] bottom-[31%] top-[16%] z-10 grid grid-rows-2 gap-3 rounded-3xl bg-[#8a5a2b] p-3 shadow-[inset_0_0_0_8px_#6b4420,0_20px_40px_-10px_rgba(0,0,0,0.5)]"
-      initial={{ opacity: 0, scale: 0.9 }}
+      className="absolute left-[7%] top-[13%] z-10 aspect-[3/4] w-[86%] [perspective:900px]"
+      initial={{ opacity: 0, scale: 0.92 }}
       animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={reduce ? { duration: 0 } : { delay: 0.5, type: 'spring', stiffness: 260, damping: 20 }}
+      exit={{ opacity: 0, scale: 0.92 }}
+      transition={reduce ? { duration: 0 } : { delay: 0.35, type: 'spring', stiffness: 260, damping: 22 }}
     >
-      {CUPBOARD_SHELVES.map((row, r) => (
-        <div key={r} className="flex items-end gap-2 rounded border-b-[10px] border-[#5a3818] px-1.5 pb-2">
-          {row.map((id, c) => {
-            const g = id && GAME_BY_TYPE[id];
-            if (!g) {
-              return (
-                <div key={c} className="flex h-[78%] flex-1 items-end rounded-lg bg-[repeating-linear-gradient(135deg,#c9b79d_0_8px,#bba98e_8px_16px)] p-2 text-xs font-bold text-[#5a4a35]">
-                  Room for another game
-                </div>
-              );
-            }
-            return (
-              <motion.button
-                key={c}
-                type="button"
-                onClick={() => onPick(id)}
-                whileHover={{ y: -6, rotate: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className={cn('flex h-[88%] flex-1 flex-col justify-between rounded-lg p-2.5 text-left shadow-[4px_4px_0_rgba(0,0,0,0.3)]', BUTTON_TONES[id])}
-              >
-                <span className="text-3xl" aria-hidden="true">{g.emoji}</span>
-                <span className="block font-display text-lg font-extrabold leading-tight">{g.name}</span>
-              </motion.button>
-            );
-          })}
-        </div>
-      ))}
+      <div className="absolute inset-0 overflow-hidden rounded-3xl shadow-[0_0_0_4px_rgba(255,255,255,0.6),0_24px_48px_-12px_rgba(0,0,0,0.6)]">
+        <img src={CUPBOARD.src} alt="" draggable={false} className="absolute inset-0 h-full w-full select-none" />
+      </div>
+
+      {CUPBOARD.boxes.map(({ id, box: b }) => {
+        const g = GAME_BY_TYPE[id];
+        return g ? <GameBox key={id} game={g} style={box(b)} opening={opening === id} onOpen={() => open(g)} /> : null;
+      })}
+
+      <div
+        className="pointer-events-none absolute -rotate-2 rounded-md bg-[#fffaf2] px-2 py-0.5 text-[11px] font-bold text-[#6b4420] shadow-[2px_2px_0_rgba(0,0,0,0.25)]"
+        style={{ left: pct(CUPBOARD.comingSoon[0]), top: pct(CUPBOARD.comingSoon[1]) }}
+      >
+        More games coming soon
+      </div>
+
+      {!reduce && <Doors />}
     </motion.div>
+  );
+}
+
+// The closed doors over the arched opening, swinging out of the way once the
+// camera has arrived, as the door sound plays. The picture's own open doors
+// are behind them.
+function Doors() {
+  const [l, t, w, h] = CUPBOARD.doors;
+  const door = 'pointer-events-none absolute border-[5px] border-[#d58c47] bg-gradient-to-b from-[#2b6f70] to-[#1d4f51] shadow-[inset_0_0_0_3px_#b8722f]';
+  const swing = (deg) => ({
+    initial: { rotateY: 0, opacity: 1 },
+    animate: { rotateY: deg, opacity: 0 },
+    transition: { rotateY: { delay: 0.55, duration: 0.6, ease: [0.3, 0, 0.2, 1] }, opacity: { delay: 1, duration: 0.2 } },
+  });
+  return (
+    <>
+      <motion.div
+        className={door}
+        style={{ left: pct(l), top: pct(t), width: pct(w / 2), height: pct(h), transformOrigin: 'left center', borderTopLeftRadius: '100% 28%' }}
+        {...swing(-100)}
+      >
+        <span className="absolute right-1.5 top-1/2 h-3 w-3 rounded-full bg-[#f0b35e] shadow" />
+      </motion.div>
+      <motion.div
+        className={door}
+        style={{ left: pct(l + w / 2), top: pct(t), width: pct(w / 2), height: pct(h), transformOrigin: 'right center', borderTopRightRadius: '100% 28%' }}
+        {...swing(100)}
+      >
+        <span className="absolute left-1.5 top-1/2 h-3 w-3 rounded-full bg-[#f0b35e] shadow" />
+      </motion.div>
+    </>
+  );
+}
+
+// A board-game box standing on the shelf: the lid spells the game in letter
+// tiles, with a sticker. Opening lifts the box, then its lid.
+function GameBox({ game, style, opening, onOpen }) {
+  const [first, ...rest] = game.name.split(' ');
+  return (
+    <motion.button
+      type="button"
+      aria-label={`Open ${game.name}`}
+      onClick={onOpen}
+      className="absolute origin-bottom"
+      style={style}
+      initial={{ rotate: -3 }}
+      animate={opening ? { y: '-14%', scale: 1.08, rotate: 0 } : { rotate: -3 }}
+      whileHover={opening ? undefined : { y: -6, rotate: -1 }}
+      whileTap={opening ? undefined : { scale: 0.96 }}
+      transition={{ type: 'spring', stiffness: 320, damping: 18 }}
+    >
+      {/* The box itself; its inside shows once the lid comes up. */}
+      <div className="absolute inset-0 rounded-lg bg-[#f3e2bf] shadow-[5px_5px_0_hsl(var(--game-scrabble-deep)),0_14px_20px_-8px_rgba(0,0,0,0.55)]">
+        <div className="absolute inset-[10%] grid grid-cols-4 gap-[6%] opacity-80">
+          {Array.from({ length: 8 }, (_, i) => (
+            <span key={i} className="rounded-sm bg-[#f8eed8] shadow-[1px_1px_0_#b89a68]" />
+          ))}
+        </div>
+      </div>
+      {/* The lid. */}
+      <motion.div
+        className="absolute inset-0 flex flex-col items-center justify-center gap-[6%] rounded-lg bg-game-scrabble px-[6%] shadow-[inset_0_0_0_3px_rgba(255,255,255,0.25)]"
+        animate={opening ? { y: '-62%', rotate: -10 } : { y: 0, rotate: 0 }}
+        transition={{ delay: opening ? 0.15 : 0, type: 'spring', stiffness: 260, damping: 16 }}
+      >
+        <span className="flex w-full justify-center gap-[2%]">
+          {first.toUpperCase().split('').map((ch, i) => (
+            <span
+              key={i}
+              className="flex aspect-square flex-1 items-center justify-center rounded-[3px] bg-[#f6e7c4] font-display text-[clamp(8px,2.6vw,14px)] font-extrabold leading-none text-[#3b2a16] shadow-[1px_1.5px_0_#a9875a]"
+            >
+              {ch}
+            </span>
+          ))}
+        </span>
+        <span className="font-display text-[clamp(14px,4.4vw,24px)] font-extrabold leading-none text-white drop-shadow-[0_2px_0_rgba(0,0,0,0.25)]">{rest.join(' ')}</span>
+        <span className="absolute -right-2 -top-2 flex h-9 w-9 rotate-12 flex-col items-center justify-center rounded-full bg-amber-300 text-[8px] font-extrabold leading-[1.05] text-amber-950 shadow-[1px_2px_0_rgba(0,0,0,0.25)]">
+          <span className="text-[10px]">2–4</span>
+          players
+        </span>
+      </motion.div>
+    </motion.button>
   );
 }
 

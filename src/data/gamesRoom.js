@@ -12,8 +12,8 @@
 //
 // Every game is an object in the room: the plane is travel, the dartboard is
 // darts, the TV is the quiz (it is the TV mode's screen), the map with the gold
-// pyramid is Egypt Explorer, and board games live in the cupboard, which opens
-// onto shelves of boxes. A new board game is a new box; a new kind of game is a
+// pyramid is Egypt Explorer, and board games live in the cupboard, whose doors
+// swing open onto shelves of boxes; tapping a box opens its game. A new board game is a new box; a new kind of game is a
 // new object. Game names, links and copy come from data/games.js.
 
 export const ROOM = {
@@ -31,11 +31,18 @@ export const ROOM_OBJECTS = [
   { id: 'cupboard', label: 'Board games', box: [72, 65.8, 26.5, 23.9] },
 ];
 
-// What lives in the cupboard. A null id is an empty space on the shelf.
-export const CUPBOARD_SHELVES = [
-  ['scrabble-scorer', null],
-  [null, null],
-];
+// Inside the cupboard (public/home/cupboard.webp, 3:4; Higgsfield Seedream
+// 4.5, job 9f21339d, 2026-10-21): shelves already dressed with dice, cards, a
+// jigsaw and chess pieces, which are only picture. The game boxes are drawn on
+// top so they can be tapped; a new board game is a new entry in `boxes`, in
+// % of the cupboard picture. The top shelf's left two thirds is left empty for
+// them, and `doors` is the arched opening the closed doors cover.
+export const CUPBOARD = {
+  src: '/home/cupboard.webp',
+  boxes: [{ id: 'scrabble-scorer', box: [20, 19.5, 36, 27] }],
+  comingSoon: [21, 50.8],
+  doors: [14.5, 8, 69.5, 81],
+};
 
 // The hanging plane, layered over the room so it can sway on its strings.
 export const PLANE = {
