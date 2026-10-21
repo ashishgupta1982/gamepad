@@ -16,8 +16,8 @@ import { cn } from '@/lib/cn';
 // The room is one picture with a few things layered on top so they can move by
 // themselves: the plane sways on its strings, a dart lands in the board now and
 // then, and the TV flickers through the quiz's answer shapes. Each object has a
-// small name label beside it and a soft pulsing halo saying it can be tapped
-// (Ash, 2026-10-21); nothing bigger is drawn over the picture.
+// small name label (Ash, 2026-10-21). A pulsing halo was tried and taken off:
+// it spoiled the picture, and the labels say enough.
 
 const pct = (n) => `${n}%`;
 const box = ([l, t, w, h]) => ({ left: pct(l), top: pct(t), width: pct(w), height: pct(h) });
@@ -146,22 +146,6 @@ export default function GamesRoom({ active = {}, isGuest, onSignIn }) {
               className="group absolute rounded-3xl focus-visible:outline focus-visible:outline-4 focus-visible:outline-white"
               style={box(o.box)}
             >
-              {/* The halo: a soft ring pulsing out from the object's middle. */}
-              <span
-                aria-hidden="true"
-                className={cn(
-                  'pointer-events-none absolute left-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white/90 bg-white/25 transition-opacity duration-300',
-                  zoomed ? 'opacity-0' : 'opacity-100',
-                )}
-              >
-                {!reduce && !zoomed && (
-                  <motion.span
-                    className="absolute inset-0 rounded-full border-2 border-white"
-                    animate={{ scale: [1, 2.4], opacity: [0.9, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: 'easeOut', delay: o.delay }}
-                  />
-                )}
-              </span>
               <span
                 className={cn(
                   'pointer-events-none absolute -bottom-2.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#241a45]/70 px-2 py-0.5 text-[10px] font-bold text-white transition-opacity duration-300',
