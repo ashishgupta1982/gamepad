@@ -77,12 +77,17 @@ export default async function handler(req, res) {
       const drawn = await draw({ categories, level, count: want, avoid: avoidList });
       const got = drawn.map((d) => fromBank(d));
       if (got.length >= want) return got;
-      // The bank is short here: write more into one of the pick's categories.
+      // The bank is short here: write more, spread over up to three of the
+      // pick's categories so a Mixed bag is still mixed.
       await mayWrite();
-      const category = categories[Math.floor(Math.random() * categories.length)];
-      const fresh = await writeForBank({ category, level, count: want - got.length, avoid: [...avoidList, ...got.map((q) => q.id)], recent: recentList });
+      const short = want - got.length;
+      const chosen = [...categories].sort(() => Math.random() - 0.5).slice(0, Math.min(3, short));
+      const counts = share(short, chosen.length);
+      const avoidNow = [...avoidList, ...got.map((q) => q.id)];
+      const written = await Promise.all(chosen.map((category, k) => writeForBank({ category, level, count: counts[k], avoid: avoidNow, recent: recentList })));
+      const fresh = written.flat();
       await store(fresh).catch((err) => console.error('[quiz-questions] could not keep new questions:', err.message));
-      return [...got, ...fresh.slice(0, want - got.length).map((d) => fromBank(d))];
+      return [...got, ...interleave(written).slice(0, short).map((d) => fromBank(d))];
     }),
   );
 
