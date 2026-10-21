@@ -2,11 +2,12 @@
 
 Family game launcher: Scrabble Scorer, Quiz, Darts, Travel Bingo, Egypt Explorer. Next.js 15 (Pages Router) + React 19, MongoDB/Mongoose, shared `@aspiro/auth` (Google + email/password), Anthropic Claude SDK.
 
-> **Active work:** `REDESIGN-PLAN.md` at the repo root is the agreed plan to
-> realign GamePad with the Aspiro suite (shared `@aspiro/auth`) and redesign it
-> mobile-first. **All phases (0-8) are done.** Read the plan before starting
-> anything — it records what was decided and why, so you pick up context rather
-> than re-deciding settled questions.
+> **Active work:** `REDESIGN-PLAN.md` at the repo root is the agreed plan
+> (2026-10-21) to rebuild GamePad as a **toy-box arcade**: a new landing page and
+> every older game rebuilt on a shared arcade kit, Travel Bingo first. Read it
+> before starting anything — it records Ash's decisions and what each game keeps,
+> so you pick up context rather than re-deciding settled questions. (The August
+> realignment plan it replaced is finished.)
 
 ## Quick Commands
 
