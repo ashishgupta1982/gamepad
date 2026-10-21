@@ -12,7 +12,6 @@ const CONFIG_KEY = 'aiModels';
 
 const resolver = createModelResolver({
   defaults: {
-    general: 'claude-haiku-4-5-20251001',   // /api/claude: Scrabble's word check, until Phase 5 replaces it
     // Quiz questions (api/quiz/questions): topping up the question bank and a
     // player's own categories. Sonnet 5.5, pinned rather than the balanced tier
     // (still Sonnet 5 in @aspiro/ai 0.7.0), at the same price. Not the fast

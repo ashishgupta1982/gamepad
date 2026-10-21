@@ -56,7 +56,7 @@ export const RATE_LIMITS = {
  * Exported because @aspiro/auth takes it as config — the package rate-limits the
  * auth routes using the host app's limiter rather than shipping a second one.
  * It was defined here but not exported for a long time, which is why
- * /api/claude ended up carrying a duplicate copy.
+ * the old /api/claude route (retired 2026-10-21) carried a duplicate copy.
  *
  * @param {Object} req - Express request object
  * @returns {string} - Client IP address
