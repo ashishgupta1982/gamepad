@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { AnimatePresence, motion } from 'motion/react';
-import { Tv, X } from 'lucide-react';
+import { Share, Tv, X } from 'lucide-react';
 import { play } from '@/components/arcade/sfx';
 import { fetchQuestions, rememberSeen } from './data';
 import { saveResult } from './LocalGame';
@@ -225,6 +225,45 @@ function HostBar({ children }) {
 }
 
 // The lobby: how to join, who has, and the start button.
+// Send the invite (Ash, 2026-10-21): copies it, and opens the phone's share
+// sheet, which has WhatsApp, Messages and the rest; WhatsApp gets its own
+// button too. Both start in the tap itself, as Safari only opens the share
+// sheet straight from one.
+function ShareInvite({ code, url }) {
+  const [copied, setCopied] = useState(false);
+  const text = `Join our quiz on GamePad! Tap the link, or open GamePad, Quiz, Join and type the code ${code}.`;
+  const share = () => {
+    play('tap');
+    navigator.clipboard
+      ?.writeText(`${text}
+${url}`)
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2500);
+      })
+      .catch(() => {});
+    if (navigator.share) navigator.share({ title: 'Quiz Night on GamePad', text, url }).catch(() => {});
+  };
+  return (
+    <div className="mt-3 flex justify-center gap-2">
+      <button type="button" onClick={share} className="toy flex items-center gap-2 rounded-2xl bg-violet-600 px-4 py-2 font-bold text-white [--toy-edge:theme(colors.violet.800)]">
+        <Share className="h-4 w-4" aria-hidden="true" />
+        {copied ? 'Copied!' : 'Share invite'}
+      </button>
+      <a
+        href={`https://wa.me/?text=${encodeURIComponent(`${text}
+${url}`)}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => play('tap')}
+        className="toy flex items-center gap-2 rounded-2xl bg-[#25d366] px-4 py-2 font-bold text-[#073b1c] [--toy-edge:#128c3e]"
+      >
+        WhatsApp
+      </a>
+    </div>
+  );
+}
+
 function Lobby({ game, code, big, error, onStart, onRemove }) {
   const [qr, setQr] = useState(null);
   const url = typeof window !== 'undefined' ? `${window.location.origin}/games/quiz/join?code=${code}` : '';
@@ -247,6 +286,7 @@ function Lobby({ game, code, big, error, onStart, onRemove }) {
           <p className={big ? 'mt-1 text-7xl tracking-[0.15em]' : 'mt-1 text-5xl tracking-[0.15em]'} style={SHOW_FONT}>{code}</p>
           {qr && <img src={qr} alt={`QR code to join quiz ${code}`} className={big ? 'mx-auto mt-3 h-56 w-56' : 'mx-auto mt-3 h-40 w-40'} />}
           <p className="mt-2 text-sm font-semibold text-[#6b6390]">Scan it, or go to GamePad → Quiz → Join</p>
+          <ShareInvite code={code} url={url} />
         </div>
         {big && (
           <p className="flex items-center gap-2 text-white/80">
