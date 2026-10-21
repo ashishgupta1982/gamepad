@@ -203,10 +203,17 @@ fixes the out-of-order saves. The word check is the ENABLE list bundled in
 `public/scrabble/words.txt`, so `/api/claude`, its last caller gone, was
 deleted with `CachedResponse` and the unused `ClaudeChat`.
 
-### Phase 6 — Egypt Explorer, lightly
+### Phase 6 — Egypt Explorer, lightly *(done 2026-10-21)*
 
 It keeps its own world. It takes the new launcher tile and the shared
 celebrations, and nothing else changes.
+
+As built: `components/egypt/moments.js` plays the kit at Egypt's real moments
+(an answer, a look-closely tick, a quest accepted, a stamp, a new rank, the
+last stamp of a trip), with a mute switch beside who is playing. It had no
+celebration code of its own to replace. On the home screen it is World
+Explorer, whose front page (`/games/world-explorer`, places in
+`data/worldExplorer.js`) goes straight to Egypt until a second place exists.
 
 ## 5. Verifying
 

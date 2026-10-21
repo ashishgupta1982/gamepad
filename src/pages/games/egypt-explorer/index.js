@@ -12,12 +12,17 @@ import WhoAreYou from '@/components/egypt/WhoAreYou';
 import GuideSheet from '@/components/egypt/GuideSheet';
 import Passport from '@/components/egypt/Passport';
 import useOfflinePhotos from '@/components/egypt/useOfflinePhotos';
+import * as moments from '@/components/egypt/moments';
+import { BannerProvider, useBanner } from '@/components/arcade/Banner';
+import MuteButton from '@/components/arcade/MuteButton';
 import useEgyptProgress from '@/hooks/useEgyptProgress';
 import useEgyptFamily from '@/hooks/useEgyptFamily';
 import { TRIPS, getTrip } from '@/data/egypt';
 import { PHOTOS } from '@/data/egypt/photos';
+import { PLACES, WORLD_EXPLORER } from '@/data/worldExplorer';
 import {
   newProgress, withPlayers, recordAnswer, recordQuest, toggleLooked, countAsk, stopStatus, nextStop,
+  playerStop, stampCount, POINTS,
 } from '@/lib/egypt/progress';
 
 // Egypt Explorer: a family game for days out in Egypt, one trip at a time.
@@ -35,6 +40,10 @@ import {
 // reopened. No trip means the trip picker. A link with only ?stop= dates from
 // when the GEM was the only trip, so it still opens the GEM.
 const PATH = '/games/egypt-explorer';
+// While Egypt is World Explorer's only place, its front page sends players
+// straight here, so back goes to the games room; with a second place it goes
+// to the front page and its picker.
+const BACK_TO = PLACES.length > 1 ? WORLD_EXPLORER : '/';
 const DESCRIPTION =
   'A family game for the Grand Egyptian Museum and the pyramids of Giza: stories, photo quests, quizzes and a guide you can ask anything.';
 
@@ -67,7 +76,7 @@ function Loading() {
   );
 }
 
-export default function EgyptExplorer() {
+function EgyptExplorer() {
   const router = useRouter();
   const family = useEgyptFamily();
   const [editingFamily, setEditingFamily] = useState(false);
@@ -98,7 +107,7 @@ export default function EgyptExplorer() {
     return (
       <>
         {head}
-        <GameShell title="Egypt Explorer" onBack={() => (editingFamily ? setEditingFamily(false) : router.push('/'))}>
+        <GameShell title="Egypt Explorer" onBack={() => (editingFamily ? setEditingFamily(false) : router.push(BACK_TO))}>
           <PlayerSetup
             cover={(trip || TRIPS[0]).cover}
             editing={editingFamily}
@@ -118,27 +127,31 @@ export default function EgyptExplorer() {
     return (
       <>
         {head}
-        <GameShell title="Egypt Explorer" onBack={() => router.push('/')}>
+        <GameShell title="Egypt Explorer" onBack={() => router.push(BACK_TO)}>
           <WhoAreYou players={family.players} onPick={family.setMe} onEditFamily={() => setEditingFamily(true)} />
         </GameShell>
       </>
     );
   }
 
+  // The shared sound switch sits beside who is playing, as in the other games.
   const playingAs = (
-    <PlayerSwitch
-      players={family.players}
-      me={family.me}
-      onPick={family.setMe}
-      onEditFamily={() => setEditingFamily(true)}
-    />
+    <div className="flex items-center">
+      <MuteButton />
+      <PlayerSwitch
+        players={family.players}
+        me={family.me}
+        onPick={family.setMe}
+        onEditFamily={() => setEditingFamily(true)}
+      />
+    </div>
   );
 
   if (!trip) {
     return (
       <>
         {head}
-        <GameShell title="Egypt Explorer" onBack={() => router.push('/')} headerAside={playingAs}>
+        <GameShell title="Egypt Explorer" onBack={() => router.push(BACK_TO)} headerAside={playingAs}>
           <TripPicker
             trips={TRIPS}
             me={family.me}
@@ -163,8 +176,20 @@ export default function EgyptExplorer() {
   );
 }
 
+// The banner lives above every screen, so a stamp's message survives the
+// quiz card re-rendering under it.
+export default function EgyptExplorerPage() {
+  return (
+    <BannerProvider>
+      <EgyptExplorer />
+    </BannerProvider>
+  );
+}
+
 function TripGame({ trip, stopId, me, players, headerAside }) {
   const router = useRouter();
+  const banner = useBanner();
+  const myName = players.find((p) => p.id === me)?.name || 'You';
   const { progress: saved, ready, update } = useEgyptProgress(trip.id);
 
   const [guideOpen, setGuideOpen] = useState(false);
@@ -227,9 +252,29 @@ function TripGame({ trip, stopId, me, players, headerAside }) {
         progress={progress}
         me={me}
         players={players}
-        onAnswer={(qIndex, choice) => change((p) => recordAnswer(p, stop, qIndex, choice, me))}
-        onQuest={(result) => change((p) => recordQuest(p, stop.id, me, result))}
-        onLook={(i) => change((p) => toggleLooked(p, stop.id, me, i))}
+        onAnswer={(qIndex, choice) => {
+          // An answer is final, so only the first one makes a sound.
+          if (!playerStop(progress, me, stop.id).answers[qIndex]) moments.answered(choice === stop.quiz[qIndex]?.answer);
+          change((p) => recordAnswer(p, stop, qIndex, choice, me));
+        }}
+        onStamp={() => {
+          const s = stopStatus(progress, stop, me);
+          moments.stamped(banner, {
+            name: myName,
+            stamps: stampCount(progress, trip, me),
+            total: trip.stops.length,
+            correct: s.correct,
+            questions: s.total,
+          });
+        }}
+        onQuest={(result) => {
+          if (result.found) moments.questFound(banner, { name: myName, points: POINTS.quest });
+          change((p) => recordQuest(p, stop.id, me, result));
+        }}
+        onLook={(i) => {
+          moments.looked(!(playerStop(progress, me, stop.id).looked || []).includes(i));
+          change((p) => toggleLooked(p, stop.id, me, i));
+        }}
       />
     );
     actions = (

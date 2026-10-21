@@ -39,6 +39,7 @@ src/
 │   │   ├── quiz/                 # index.js (home, setup, solo/shout, multi host), join.js (a player's phone)
 │   │   ├── darts/                # index.js (home, setup, play)
 │   │   ├── travel-bingo/         # index.js (lobby + play)
+│   │   ├── world-explorer/       # index.js: the places (data/worldExplorer.js); with only one, it opens it
 │   │   └── egypt-explorer/       # index.js (family, who is playing, trip picker, ?trip= and &stop=)
 │   └── api/
 │       ├── auth/                 # [...nextauth] + 6 @aspiro/auth re-exports
@@ -61,13 +62,13 @@ src/
 │   ├── darts/                    # the tappable Dartboard, scoreboards, setup, play, game over, saving (store.js)
 │   ├── scrabble/                 # home, setup, play (tile keypad, pass-the-phone, history), word check, game over, saving (store.js)
 │   ├── travel-bingo/             # Card, lobby, feed
-│   ├── egypt/                    # Trip picker, trip, map, stop, quiz, quest, guide, passport, activities
+│   ├── egypt/                    # Trip picker, trip, map, stop, quiz, quest, guide, passport, activities, moments (celebrations)
 │   ├── settings/
 ├── models/                       # Mongoose (Game, EgyptFamily, ...)
 ├── hooks/                        # useWakeLock, useEgyptProgress, useEgyptFamily
 ├── lib/                          # auth, brand, cn, identity, mongodb, mongodb-adapter, travelBingo, darts/, scrabble/, quiz/, egypt/
 ├── utils/                        # authHelper, playerIdentity, rateLimiter
-├── data/                         # games (launcher metadata), gamesRoom (the home page's room), bingoPacks, dartsConstants, egypt/ (trips, photos)
+├── data/                         # games (launcher metadata), gamesRoom (the home page's room), bingoPacks, dartsConstants, worldExplorer (the places), egypt/ (trips, photos)
 └── styles/globals.css            # design tokens + base layer + utilities
 ```
 
@@ -341,6 +342,18 @@ Rebuilt 2026-10-21 (`REDESIGN-PLAN.md`, Phase 5): a scorer for the table, two to
 
 Helpers in `src/lib/travelBingo.js`: `generateJoinCode`, `generateId`, `findCar`, `isHost`, `carCompletion`. Uses `crypto.randomInt` with a confusable-char-free alphabet.
 
+## World Explorer
+
+The home screen's **World Explorer** (`data/games.js`; its id is still
+`egypt-explorer`, so saved games and the room's pyramid match) opens
+`/games/world-explorer`, a front page listing the places in
+`src/data/worldExplorer.js`. A new place is a new entry there plus its own trip
+pages. **While there is one place, the page `router.replace`s straight to it**
+and shows nothing first, so there is no extra tap; a second entry turns the
+picker on (big toy cards over the games room's pyramid corner, blurred). Egypt's
+back button follows the same rule (`BACK_TO`): the games room today, the front
+page once there are two places. The sitemap lists neither page.
+
 ## Egypt Explorer
 
 A family game for days out on a holiday to Egypt, one **trip** at a time. Two
@@ -437,6 +450,16 @@ playing on this phone, then opens a trip picker; `?trip=<id>` opens a trip and
   wrapper) because the passport and guide are portalled sheets.
   `lib/egypt/hieroglyphs.js` is the cartouche alphabet; every code point was
   checked against Unicode's data.
+- **Celebrations are the shared arcade kit** (`components/egypt/moments.js`,
+  Phase 6), the one part of the redesign Egypt took; its look is unchanged. A
+  quiz answer: the right or wrong sound and a buzz. A look-closely tick: a pop.
+  A quest the guide accepts: a fanfare, small confetti and a *Found it! +20*
+  banner. A stamp, celebrated on *Get the stamp* (after the last "why", not on
+  the last answer): the stamp sound and a *Stamped!* banner, with small
+  confetti for a perfect quiz; a new rank, confetti and a big banner with its
+  title; the last stamp of the trip, the big confetti and *EVERY STAMP!*.
+  Confetti in gold, lapis and papyrus. The sound switch (`MuteButton`) sits
+  beside who is playing in the header; `BannerProvider` wraps the page.
 - Colours: `game-egypt` (gold into lapis) for the tile, and `papyrus`, `lapis`
   and `gold` tokens used only under `components/egypt/`.
 
@@ -498,3 +521,4 @@ The app has a real public identity — don't reintroduce skeleton defaults when 
 - 2026-10-19: Egypt Explorer: **everyone plays every stop for themselves**, a family list for every trip and phone, who is playing in the header, and saves merged across several phones on one account (progress version 2; today's GEM record upgraded with every point kept)
 - 2026-10-20: Egypt Explorer: **no more "We found it really"**; a photo quest scores only when the guide accepts it, and the points from every find a parent counted were taken off
 - 2026-08-27: **Phase 1** landed — migrated to `@aspiro/auth` v0.7.1; email/password added alongside Google; GamePad is no longer the suite's odd one out
+- 2026-10-21: Egypt Explorer takes the shared celebrations (Phase 6); **World Explorer** gets a front page and a places registry, which goes straight to Egypt while it is the only place

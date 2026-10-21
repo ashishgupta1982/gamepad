@@ -59,9 +59,12 @@ export const GAMES = [
   },
   {
     id: 'egypt-explorer',
-    // Likewise: inside it is Egypt Explorer, the first of the places.
+    // Likewise: inside it is Egypt Explorer, the first of the places. The
+    // id stays, for saved games and the room's hotspot; the link is World
+    // Explorer's front page, which goes straight to Egypt while it is the only
+    // place (data/worldExplorer.js).
     name: 'World Explorer',
-    href: '/games/egypt-explorer',
+    href: '/games/world-explorer',
     emoji: '🏺',
     tone: 'egypt',
     description: 'Explore the Grand Egyptian Museum and the pyramids of Giza: stories, photo quests, quizzes and a guide you can ask anything!',

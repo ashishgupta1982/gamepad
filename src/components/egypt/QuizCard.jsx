@@ -13,7 +13,7 @@ import { cn } from '@/lib/cn';
 // "why" is the learning.
 const LETTERS = ['A', 'B', 'C', 'D', 'E'];
 
-export default function QuizCard({ stop, progress, me, players, onAnswer }) {
+export default function QuizCard({ stop, progress, me, players, onAnswer, onStamp }) {
   const status = stopStatus(progress, stop, me);
   const answers = playerStop(progress, me, stop.id).answers;
   const firstOpen = stop.quiz.findIndex((_, i) => !answers[i]);
@@ -75,6 +75,9 @@ export default function QuizCard({ stop, progress, me, players, onAnswer }) {
   const next = () => {
     setRevealed(null);
     setIndex((i) => i + 1);
+    // The stamp is earned with the last answer, but celebrated here, once the
+    // player has read the last "why" and turned the page to it.
+    if (index + 1 >= stop.quiz.length) onStamp?.();
   };
   const correct = revealed === q.answer;
 

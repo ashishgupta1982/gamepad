@@ -17,7 +17,7 @@ import { cn } from '@/lib/cn';
 // Everything on it is for whoever is playing on this phone (`me`). The quest
 // and the quiz are keyed by player, so switching the name in the header starts
 // the next person on their own go.
-export default function StopView({ trip, stop, index, progress, me, players, onAnswer, onQuest, onLook }) {
+export default function StopView({ trip, stop, index, progress, me, players, onAnswer, onStamp, onQuest, onLook }) {
   const status = stopStatus(progress, stop, me);
   const looked = playerStop(progress, me, stop.id).looked || [];
   const [hero, ...more] = stop.photos;
@@ -115,7 +115,7 @@ export default function StopView({ trip, stop, index, progress, me, players, onA
         onRecord={onQuest}
       />
 
-      <QuizCard key={`quiz-${stop.id}-${me}`} stop={stop} progress={progress} me={me} players={players} onAnswer={onAnswer} />
+      <QuizCard key={`quiz-${stop.id}-${me}`} stop={stop} progress={progress} me={me} players={players} onAnswer={onAnswer} onStamp={onStamp} />
     </article>
   );
 }
