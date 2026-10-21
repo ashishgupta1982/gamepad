@@ -327,7 +327,7 @@ Rebuilt 2026-10-21 (`REDESIGN-PLAN.md`, Phase 5): a scorer for the table, two to
 - **Play, `components/scrabble/Play.jsx`**: the scoreboard sorted best first (cards move when someone overtakes, with an **OVERTAKE!** banner), whose go it is, a keypad of cream tiles (the corner number is the Scrabble value of the digit name's first letter), **+50** for using all seven tiles, an optional word for the turn, Pass, Undo, and a "pass the phone" card after each turn (switchable in Setup, `scrabble:handoff`). A player's card opens their turns, read-only. 50 or more, or a bingo, gets a fanfare. End game (the flag) confirms, then the podium and awards; "Back to the game" reopens it.
 - **Word check, `components/scrabble/WordCheck.jsx`**: offline, against `public/scrabble/words.txt`, the public-domain ENABLE list (172,823 words). Fetched the first time the checker opens, then kept in memory as a `Set`. It is not Collins or TWL (no QI, ZA), and the sheet says so.
 - **Saving, `components/scrabble/store.js`**: the Darts pattern. The match goes to the device after every turn (`scrabble:match`), so a reload offers "Carry on" (with an X to forget it); a signed-in player's goes to `/api/games` a moment later as `scrabbleConfig.match`, one save at a time, keyed by match id.
-- The backdrop `public/scrabble/table.webp` is Higgsfield art: a lamp-lit table from above, racks round the edge, the middle left clear.
+- The backdrop `public/scrabble/table.webp` is Higgsfield art (Seedream 4.5, job 0a8639ef, 2026-10-21): a lamp-lit table from above, racks round the edge, the middle left clear.
 
 ## Travel Bingo Flow
 
