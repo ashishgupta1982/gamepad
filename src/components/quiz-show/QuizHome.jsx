@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { motion } from 'motion/react';
-import { ArrowLeft, Trash2, X } from 'lucide-react';
+import { ArrowLeft, ChevronDown, Trash2, X } from 'lucide-react';
 import MuteButton from '@/components/arcade/MuteButton';
 import { play } from '@/components/arcade/sfx';
 import { useSeenPlayers } from './data';
@@ -59,36 +59,47 @@ export default function QuizHome({ resume, onResume, onDismissResume, onStart, o
 }
 
 // Who this account remembers questions for, so nobody gets one twice, and the
-// easy reset: forgetting a name lets their questions come round again.
+// easy reset: forgetting a name lets their questions come round again. Folded
+// to one line until opened (Ash, 2026-10-21: it was too prominent).
 function Remembered() {
   const { players, forget } = useSeenPlayers();
   const [busy, setBusy] = useState('');
+  const [open, setOpen] = useState(false);
   if (!players.length) return null;
   return (
-    <section className="mt-6 rounded-3xl bg-black/30 p-4 ring-1 ring-white/15">
-      <h2 className="text-xl" style={SHOW_FONT}>No repeats for</h2>
-      <p className="text-sm font-semibold text-white/75">Each player is kept from questions they have had before. Forget someone to let theirs come round again.</p>
-      <ul className="mt-3 space-y-2">
-        {players.map((p) => (
-          <li key={p.name} className="flex min-w-0 items-center gap-3">
-            <span className="min-w-0 flex-1 truncate text-lg" style={SHOW_FONT}>{p.name}</span>
-            <span className="shrink-0 text-sm font-semibold text-white/70">{p.count} seen</span>
-            <button
-              type="button"
-              disabled={!!busy}
-              onClick={async () => {
-                if (!window.confirm(`Forget the questions ${p.name} has seen?`)) return;
-                setBusy(p.name);
-                await forget(p.name).catch(() => {});
-                setBusy('');
-              }}
-              className="press shrink-0 rounded-full bg-white/90 px-3 py-1 text-sm font-bold text-[#241a45] disabled:opacity-50"
-            >
-              {busy === p.name ? 'Forgetting…' : 'Forget'}
-            </button>
-          </li>
-        ))}
-      </ul>
+    <section className="mt-5 rounded-2xl bg-black/25 ring-1 ring-white/10">
+      <button type="button" onClick={() => setOpen(!open)} aria-expanded={open} className="flex w-full min-w-0 items-center gap-2 px-4 py-2.5 text-left">
+        <span className="min-w-0 flex-1 truncate text-sm font-bold text-white/85">
+          No repeats for {players.length === 1 ? players[0].name : `${players.length} players`}
+        </span>
+        <ChevronDown className={`h-4 w-4 shrink-0 text-white/70 transition-transform ${open ? 'rotate-180' : ''}`} aria-hidden="true" />
+      </button>
+      {open && (
+        <div className="px-4 pb-4">
+          <p className="text-sm font-semibold text-white/75">Each player is kept from questions they have had before. Forget someone to let theirs come round again.</p>
+          <ul className="mt-3 space-y-2">
+            {players.map((p) => (
+              <li key={p.name} className="flex min-w-0 items-center gap-3">
+                <span className="min-w-0 flex-1 truncate text-lg" style={SHOW_FONT}>{p.name}</span>
+                <span className="shrink-0 text-sm font-semibold text-white/70">{p.count} seen</span>
+                <button
+                  type="button"
+                  disabled={!!busy}
+                  onClick={async () => {
+                    if (!window.confirm(`Forget the questions ${p.name} has seen?`)) return;
+                    setBusy(p.name);
+                    await forget(p.name).catch(() => {});
+                    setBusy('');
+                  }}
+                  className="press shrink-0 rounded-full bg-white/90 px-3 py-1 text-sm font-bold text-[#241a45] disabled:opacity-50"
+                >
+                  {busy === p.name ? 'Forgetting…' : 'Forget'}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </section>
   );
 }

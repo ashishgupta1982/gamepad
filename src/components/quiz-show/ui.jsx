@@ -239,3 +239,37 @@ export function ShowButton({ className, children, ...props }) {
     </button>
   );
 }
+
+/**
+ * Names this account has played under, as pills to tap instead of typing
+ * (Ash, 2026-10-21). `isOn(name)` marks the ones already in; `onPick(name)`
+ * adds or takes off. Nothing shows for a guest or an account with no names.
+ */
+export function NamePills({ names, isOn, onPick, label = 'Played before' }) {
+  if (!names?.length) return null;
+  return (
+    <div className="mt-3">
+      <p className="mb-1.5 text-sm font-bold text-white/80">{label}</p>
+      <div className="flex flex-wrap gap-2">
+        {names.map((n) => {
+          const on = isOn(n);
+          return (
+            <button
+              key={n}
+              type="button"
+              onClick={() => onPick(n)}
+              aria-pressed={on}
+              className={cn(
+                'press flex items-center gap-1 rounded-full px-3 py-1.5 text-base font-bold',
+                on ? 'bg-amber-300 text-amber-950 ring-2 ring-inset ring-amber-500' : 'bg-white/90 text-[#241a45]',
+              )}
+            >
+              {on ? '✓ ' : '+ '}
+              {n}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}

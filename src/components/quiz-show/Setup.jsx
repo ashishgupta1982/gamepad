@@ -7,8 +7,9 @@ import { play } from '@/components/arcade/sfx';
 import { AVATARS, COLORS, makePlayer } from '@/components/arcade/players';
 import { GROUP_PREFIX, GROUPS, LEVELS, MIXED, QUESTION_COUNTS, TIMERS, hasPick, keyOf, pickName, surprisePicks, togglePick } from '@/lib/quiz/catalogue';
 import { cn } from '@/lib/cn';
-import { fetchQuestions, useCustomCategories } from './data';
-import { Avatar, SHOW_FONT, ShowButton } from './ui';
+import { fetchQuestions, useCustomCategories, useSeenPlayers } from './data';
+import { nameKey } from '@/lib/quiz/seen';
+import { Avatar, NamePills, SHOW_FONT, ShowButton } from './ui';
 
 // Setting up a quiz: how you're playing, who's playing, what about, and for
 // whom. One step per screen, big targets, Back and Next at the bottom.
@@ -26,6 +27,7 @@ const MODES = [
 export default function Setup({ initial, onStart, onCancel }) {
   const { data: session } = useSession();
   const custom = useCustomCategories();
+  const known = useSeenPlayers().players.map((p) => p.name);
   const [step, setStep] = useState(initial?.mode ? 1 : 0);
   const [mode, setMode] = useState(initial?.mode || null);
   const [players, setPlayers] = useState(initial?.players || [makePlayer(0, session?.user?.name?.split(' ')[0])]);
@@ -42,6 +44,21 @@ export default function Setup({ initial, onStart, onCancel }) {
     play('tap');
     if (step + d < 0) return onCancel();
     setStep(step + d);
+  };
+
+  // A name from the account's pills: in solo it becomes the player; in shout it
+  // fills the first unnamed seat ("Player 2") or joins as a new player, and a
+  // second tap takes them off.
+  const isIn = (n) => players.some((p) => nameKey(p.name) === nameKey(n));
+  const pickName = (n) => {
+    play('tap');
+    if (mode === 'solo') return setPlayers((ps) => [{ ...ps[0], name: n }]);
+    setPlayers((ps) => {
+      if (ps.some((p) => nameKey(p.name) === nameKey(n))) return ps.length > 1 ? ps.filter((p) => nameKey(p.name) !== nameKey(n)) : ps;
+      const blank = ps.findIndex((p) => !p.name.trim() || /^Player \d+$/.test(p.name.trim()));
+      if (blank >= 0) return ps.map((p, i) => (i === blank ? { ...p, name: n } : p));
+      return ps.length >= MAX_PLAYERS ? ps : [...ps, makePlayer(ps.length, n)];
+    });
   };
 
   const toggle = (p) => {
@@ -137,6 +154,7 @@ export default function Setup({ initial, onStart, onCancel }) {
                   </li>
                 ))}
               </ul>
+              <NamePills names={known} isOn={isIn} onPick={pickName} label={mode === 'solo' ? 'Who’s this? Tap a name' : 'Played before: tap to add'} />
               {mode === 'shout' && players.length < MAX_PLAYERS && (
                 <button
                   type="button"

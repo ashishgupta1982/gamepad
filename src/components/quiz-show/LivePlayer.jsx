@@ -7,7 +7,9 @@ import { standings } from '@/lib/quiz/machine';
 import useLive, { post } from './useLive';
 import { AVATARS, COLORS } from './Setup';
 import { FinalScreen, QuestionScreen, RateQuestion, RevealScreen } from './screens';
-import { Avatar, Leaderboard, Marquee, SHOW_FONT, ShowButton } from './ui';
+import { nameKey } from '@/lib/quiz/seen';
+import { useSeenPlayers } from './data';
+import { Avatar, Leaderboard, Marquee, NamePills, SHOW_FONT, ShowButton } from './ui';
 
 // A player's phone in a multi-phone quiz: join with the code, then answer.
 // The pass from joining is kept on the phone, so a dropped connection or a
@@ -166,6 +168,8 @@ const ordinal = (n) => (n % 100 >= 11 && n % 100 <= 13 ? 'th' : ['th', 'st', 'nd
 function JoinForm({ initialCode, defaultName, onBack, onJoined }) {
   const [code, setCode] = useState(initialCode.toUpperCase().slice(0, 6));
   const [name, setName] = useState(defaultName);
+  // On a signed-in phone, the names this account has played under.
+  const known = useSeenPlayers().players.map((p) => p.name);
   const [avatar, setAvatar] = useState(() => AVATARS[Math.floor(Math.random() * AVATARS.length)]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
@@ -217,6 +221,15 @@ function JoinForm({ initialCode, defaultName, onBack, onJoined }) {
           onChange={(e) => setName(e.target.value.slice(0, 20))}
           className="w-full rounded-2xl bg-white px-4 py-3 text-2xl text-[#241a45] outline-none ring-4 ring-transparent focus:ring-amber-300"
           style={SHOW_FONT}
+        />
+        <NamePills
+          names={known}
+          isOn={(n) => nameKey(n) === nameKey(name)}
+          onPick={(n) => {
+            play('tap');
+            setName(n);
+          }}
+          label="Or tap who you are"
         />
       </label>
       <div>
