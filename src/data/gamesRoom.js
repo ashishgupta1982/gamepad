@@ -24,8 +24,8 @@ export const ROOM = {
 
 // Hotspots: left, top, width, height, in % of the picture.
 export const ROOM_OBJECTS = [
-  { id: 'travel-bingo', label: 'Travel Bingo', box: [23.6, 28.7, 46.9, 17] },
-  { id: 'egypt-explorer', label: 'Egypt Explorer', box: [69, 23, 31, 29] },
+  { id: 'travel-bingo', label: 'Travel Games', box: [23.6, 28.7, 46.9, 17] },
+  { id: 'egypt-explorer', label: 'World Explorer', box: [69, 23, 31, 29] },
   { id: 'darts', label: 'Darts', box: [4.6, 54.7, 20.8, 14.3] },
   { id: 'quiz', label: 'Quiz', box: [35, 70.5, 28.5, 17.5] },
   { id: 'cupboard', label: 'Board games', box: [72, 65.8, 26.5, 23.9] },
