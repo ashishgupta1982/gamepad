@@ -1,7 +1,7 @@
 {
   "name": "GamePad",
   "short_name": "GamePad",
-  "description": "Five ready-to-play family games — Scrabble Scorer, Quiz, Darts, Travel Bingo and Egypt Explorer.",
+  "description": "Family games for the table, the car and the sofa: a quiz show, darts, Scrabble scoring, travel games and more.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

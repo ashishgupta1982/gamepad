@@ -33,7 +33,8 @@ const body = Inter({
 // Site-wide defaults. Pages set their own <title> via next/head, which dedupes against
 // these (page wins); pages without a description inherit this one.
 const DESCRIPTION =
-  'Five ready-to-play family games — Scrabble Scorer, Quiz, Darts, Travel Bingo and Egypt Explorer. No setup, no scoring headaches — play in seconds on any device.';
+  // No count of games, so it stays true as games are added.
+  'Family games for the table, the car and the sofa: a quiz show, darts, Scrabble scoring, travel games and more. No setup, play in seconds on any device.';
 const OG_IMAGE = 'https://gamepad.ashishgupta.co.uk/og-card.png';
 
 // GamePad is guest-first: every game is playable signed out, so nothing is
