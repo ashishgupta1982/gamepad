@@ -56,6 +56,13 @@ describe('the question bank', () => {
     expect(q).toMatchObject({ id: doc.fingerprint, category: 'Space', media: { kind: 'emoji', text: '🪐' } });
   });
 
+  it('knows a picture question by its picture, whatever the upload version', () => {
+    const at = (v) => toBank(raw({ question: 'Which country’s flag is this?', media: { kind: 'image', src: `https://res.cloudinary.com/x/image/upload/${v}/GamePad/quiz/flag-br.png` } }), { category: 'flags-capitals', band: 'kids' });
+    expect(at('v1').fingerprint).toBe(at('v2').fingerprint);
+    const other = toBank(raw({ question: 'Which country’s flag is this?', media: { kind: 'image', src: 'https://res.cloudinary.com/x/image/upload/v1/GamePad/quiz/flag-ca.png' } }), { category: 'flags-capitals', band: 'kids' });
+    expect(other.fingerprint).not.toBe(at('v1').fingerprint);
+  });
+
   it('keeps only pictures on https', () => {
     expect(checkMedia({ kind: 'image', src: '/quiz/flags/fr.svg', alt: 'A flag' })).toBeNull();
     expect(checkMedia({ kind: 'image', src: 'https://res.cloudinary.com/x/a.webp', credit: 'Photo: A. Person, CC BY-SA 4.0' })).toBeTruthy();

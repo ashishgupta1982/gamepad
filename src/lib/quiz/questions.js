@@ -93,7 +93,13 @@ export function fingerprint(questionText) {
  */
 export function questionKey(q) {
   // fingerprint keeps letters and digits only, so emoji go in as code points.
-  const clue = q.media?.kind === 'emoji' ? [...q.media.text].map((c) => c.codePointAt(0).toString(36)).join(' ') : q.media?.src || '';
+  // A picture counts by its name, not its version: Cloudinary puts the upload
+  // version in the URL (/v1792615199/), and re-uploading the same picture
+  // must not turn the question into a new one.
+  const clue =
+    q.media?.kind === 'emoji'
+      ? [...q.media.text].map((c) => c.codePointAt(0).toString(36)).join(' ')
+      : String(q.media?.src || '').split(/[?#]/)[0].replace(/\/v\d+\//, '/');
   return fingerprint(`${q.question} ${clue}`);
 }
 
