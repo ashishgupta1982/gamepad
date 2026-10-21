@@ -35,7 +35,7 @@ export const GRACE_MS = 1500;
 export function createGame({ mode, settings, players = [], questions = [] }) {
   if (!MODES.includes(mode)) throw new Error(`Unknown quiz mode: ${mode}`);
   return {
-    v: 1,
+    v: 2, // 2: the grouped categories and two bands (2026-10-21); older saves are dropped
     mode,
     settings: { count: 10, timer: 20, level: 'family', picks: [], ...settings },
     questions: questions.slice(0, settings?.count ?? 10),

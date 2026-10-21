@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { play } from '@/components/arcade/sfx';
 import { buzz, celebrate } from '@/components/arcade/feedback';
-import { categoryById } from '@/lib/quiz/catalogue';
+import { pickName } from '@/lib/quiz/catalogue';
 import { currentQuestion, standings } from '@/lib/quiz/machine';
 import { cn } from '@/lib/cn';
 import { AnswerTiles, Avatar, Clock, Leaderboard, Marquee, Podium, SHOW_FONT, ShowButton } from './ui';
@@ -281,4 +281,4 @@ export function FinalScreen({ game, me, big = false, children }) {
   );
 }
 
-export const categoryLabel = (pick) => (typeof pick === 'string' ? categoryById(pick)?.name || pick : pick.name);
+export const categoryLabel = pickName;

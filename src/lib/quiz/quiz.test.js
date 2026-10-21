@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { cleanCustomCategory, fromLegacy, normaliseCustomList, topicsFor } from './catalogue';
+import { CATEGORIES, MAX_TOPICS, cleanCustomCategory, fromLegacy, normaliseCustomList, pickName, surprisePicks, togglePick, topicsFor } from './catalogue';
 import { acceptQuestions, balancePositions, checkQuestion, fingerprint, shuffleOptions } from './questions';
 import {
   addPlayer, addQuestions, allAnswered, answer, createGame, due, finish, judge, next, reveal, standings, start, tick, toScores,
@@ -43,7 +43,45 @@ describe('custom categories', () => {
       expect.objectContaining({ name: 'Geography' }),
       { name: 'Trains', brief: 'steam engines' },
     ]);
-    expect(topicsFor([])).toEqual([expect.objectContaining({ name: 'General Knowledge' })]);
+    expect(topicsFor([])).toEqual([expect.objectContaining({ name: 'Mixed bag' })]);
+    expect(topicsFor(['group:sport'])).toEqual([{ name: 'Sport', brief: 'a mix of Football, Olympics, Sport Mix' }]);
+  });
+
+  it('names every pick, and keeps category ids unique', () => {
+    expect(pickName('group:big-worlds')).toBe('Big Worlds');
+    expect(pickName('dinosaurs')).toBe('Dinosaurs');
+    expect(pickName({ id: 'c_trains0001', name: 'Trains' })).toBe('Trains');
+    const ids = CATEGORIES.map((c) => c.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    expect(ids).toHaveLength(36);
+  });
+
+  it('picks: Mixed bag alone, whole groups, and one category out of a group', () => {
+    expect(togglePick(['mixed'], 'space')).toEqual(['space']);
+    expect(togglePick(['space', 'football'], 'mixed')).toEqual(['mixed']);
+    expect(togglePick(['space'], 'space')).toEqual(['mixed']);
+    // A whole group replaces its categories.
+    expect(togglePick(['space', 'football'], 'group:science')).toEqual(['football', 'group:science']);
+    // One category off a picked group leaves the rest.
+    expect(togglePick(['group:sport'], 'olympics')).toEqual(['football', 'sport-mix']);
+    // Every category of a group, one by one, becomes the group.
+    expect(togglePick(['football', 'olympics'], 'sport-mix')).toEqual(['group:sport']);
+    // Over the limit, nothing changes.
+    const full = ['films', 'tv', 'music', 'space', 'football', 'dinosaurs', 'animals', 'tv-x'].slice(0, MAX_TOPICS);
+    expect(togglePick(full, 'marvel')).toBe(full);
+    // Custom categories are objects.
+    const trains = { id: 'c_trains0001', name: 'Trains' };
+    expect(togglePick(['mixed'], trains)).toEqual([trains]);
+  });
+
+  it('Surprise me picks three categories from three groups', () => {
+    let seed = 0.37;
+    const random = () => (seed = (seed * 9301 + 0.49297) % 1);
+    const picks = surprisePicks(random);
+    expect(picks).toHaveLength(3);
+    const groups = picks.map((id) => CATEGORIES.find((c) => c.id === id)?.group);
+    expect(groups.every(Boolean)).toBe(true);
+    expect(new Set(groups).size).toBe(3);
   });
 });
 

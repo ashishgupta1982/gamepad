@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { AnimatePresence, motion } from 'motion/react';
-import { ArrowLeft, Pencil, Plus, X } from 'lucide-react';
+import { ArrowLeft, ChevronDown, Pencil, Plus, X } from 'lucide-react';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
 import { play } from '@/components/arcade/sfx';
 import { AVATARS, COLORS, makePlayer } from '@/components/arcade/players';
-import { CATEGORIES, LEVELS, QUESTION_COUNTS, TIMERS } from '@/lib/quiz/catalogue';
+import { GROUP_PREFIX, GROUPS, LEVELS, MIXED, QUESTION_COUNTS, TIMERS, hasPick, keyOf, pickName, surprisePicks, togglePick } from '@/lib/quiz/catalogue';
 import { cn } from '@/lib/cn';
 import { fetchQuestions, useCustomCategories } from './data';
 import { Avatar, SHOW_FONT, ShowButton } from './ui';
@@ -15,7 +15,6 @@ import { Avatar, SHOW_FONT, ShowButton } from './ui';
 
 // The avatars live in the arcade kit now, shared with Darts.
 export { AVATARS, COLORS, makePlayer };
-const MAX_TOPICS = 6;
 const MAX_PLAYERS = 12;
 
 const MODES = [
@@ -30,7 +29,7 @@ export default function Setup({ initial, onStart, onCancel }) {
   const [step, setStep] = useState(initial?.mode ? 1 : 0);
   const [mode, setMode] = useState(initial?.mode || null);
   const [players, setPlayers] = useState(initial?.players || [makePlayer(0, session?.user?.name?.split(' ')[0])]);
-  const [picks, setPicks] = useState(initial?.picks || ['general']);
+  const [picks, setPicks] = useState(initial?.picks || [MIXED.id]);
   const [level, setLevel] = useState(initial?.level || 'family');
   const [count, setCount] = useState(initial?.count || 10);
   const [timer, setTimer] = useState(initial?.timer || 20);
@@ -45,12 +44,10 @@ export default function Setup({ initial, onStart, onCancel }) {
     setStep(step + d);
   };
 
-  const pickKey = (p) => (typeof p === 'string' ? p : p.id);
-  const isPicked = (key) => picks.some((p) => pickKey(p) === key);
   const toggle = (p) => {
-    play('tap');
-    const key = pickKey(p);
-    setPicks((list) => (list.some((x) => pickKey(x) === key) ? list.filter((x) => pickKey(x) !== key) : list.length >= MAX_TOPICS ? list : [...list, p]));
+    const nextPicks = togglePick(picks, p);
+    play(nextPicks === picks ? 'error' : 'tap');
+    setPicks(nextPicks);
   };
 
   const finish = () => {
@@ -58,7 +55,7 @@ export default function Setup({ initial, onStart, onCancel }) {
     onStart({
       mode,
       players: mode === 'multi' ? [] : players.map((p, i) => ({ ...p, name: p.name.trim() || `Player ${i + 1}` })),
-      picks: picks.length ? picks : ['general'],
+      picks: picks.length ? picks : [MIXED.id],
       level,
       count,
       timer,
@@ -157,25 +154,8 @@ export default function Setup({ initial, onStart, onCancel }) {
           )}
 
           {at === 'topics' && (
-            <Section title="What’s it about?" sub={`Pick up to ${MAX_TOPICS}. Questions are shared out between them.`}>
-              <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
-                {CATEGORIES.map((c) => (
-                  <TopicTile key={c.id} emoji={c.emoji} name={c.name} on={isPicked(c.id)} onClick={() => toggle(c.id)} />
-                ))}
-                {custom.list.map((c) => (
-                  <TopicTile key={c.id} emoji={c.emoji} name={c.name} on={isPicked(c.id)} custom onClick={() => toggle(c)} onEdit={() => setEditing(c)} />
-                ))}
-                {!custom.full && (
-                  <button
-                    type="button"
-                    onClick={() => setEditing({ name: '', description: '', emoji: '✨' })}
-                    className="toy flex min-h-[76px] flex-col items-center justify-center gap-1 rounded-2xl border-2 border-dashed border-white/60 bg-white/10 p-2 text-white [--toy-edge:rgba(0,0,0,0.2)]"
-                  >
-                    <Plus className="h-6 w-6" aria-hidden="true" />
-                    <span className="text-sm font-bold">Your own</span>
-                  </button>
-                )}
-              </div>
+            <Section title="What’s it about?" sub="Pick a few, or a whole group. Questions are shared out between them.">
+              <TopicPicker picks={picks} custom={custom} onToggle={toggle} onSet={setPicks} onEdit={setEditing} />
             </Section>
           )}
 
@@ -229,7 +209,7 @@ export default function Setup({ initial, onStart, onCancel }) {
         onSave={async (c) => {
           const saved = await custom.upsert(c);
           const made = saved.find((x) => x.name.toLowerCase() === c.name.trim().toLowerCase());
-          if (made && !isPicked(made.id) && !c.id) setPicks((list) => (list.length >= MAX_TOPICS ? list : [...list, made]));
+          if (made && !hasPick(picks, made.id) && !c.id) setPicks((list) => togglePick(list, made));
           setPicks((list) => list.map((p) => (typeof p !== 'string' && made && p.id === made.id ? made : p)));
           setEditing(null);
         }}
@@ -240,6 +220,132 @@ export default function Setup({ initial, onStart, onCancel }) {
         }}
       />
     </div>
+  );
+}
+
+function TopicPicker({ picks, custom, onToggle, onSet, onEdit }) {
+  const [open, setOpen] = useState(null);
+  const onlyMixed = picks.length === 1 && keyOf(picks[0]) === MIXED.id;
+  const groupState = (g) => {
+    if (hasPick(picks, GROUP_PREFIX + g.id)) return 'All';
+    const n = g.categories.filter((c) => hasPick(picks, c.id)).length;
+    return n ? String(n) : null;
+  };
+
+  return (
+    <div>
+      <div className="grid grid-cols-2 gap-2.5">
+        <TopicTile emoji={MIXED.emoji} name={MIXED.name} on={onlyMixed} onClick={() => onToggle(MIXED.id)} />
+        <TopicTile
+          emoji="🎁"
+          name="Surprise me"
+          on={false}
+          onClick={() => {
+            play('pop');
+            setOpen(null);
+            onSet(surprisePicks());
+          }}
+        />
+      </div>
+
+      {/* What is picked, each one tap to take off. */}
+      <div className="mt-4 flex min-h-[36px] flex-wrap items-center gap-1.5">
+        <span className="mr-1 text-sm font-bold text-white/80">Playing:</span>
+        {picks.map((p) => (
+          <button
+            key={keyOf(p)}
+            type="button"
+            onClick={() => !onlyMixed && onToggle(p)}
+            className="flex items-center gap-1 rounded-full bg-amber-300 px-2.5 py-1 text-sm font-bold text-amber-950"
+            aria-label={onlyMixed ? pickName(p) : `Take off ${pickName(p)}`}
+          >
+            {pickName(p)}
+            {!onlyMixed && <X className="h-3.5 w-3.5" aria-hidden="true" />}
+          </button>
+        ))}
+      </div>
+
+      <ul className="mt-3 space-y-2">
+        {GROUPS.map((g) => {
+          const whole = hasPick(picks, GROUP_PREFIX + g.id);
+          return (
+            <GroupRow key={g.id} emoji={g.emoji} name={g.name} badge={groupState(g)} open={open === g.id} onOpen={() => setOpen(open === g.id ? null : g.id)}>
+              <PickChip on={whole} onClick={() => onToggle(GROUP_PREFIX + g.id)} strong>
+                Whole group
+              </PickChip>
+              {g.categories.map((c) => (
+                <PickChip key={c.id} on={whole || hasPick(picks, c.id)} onClick={() => onToggle(c.id)}>
+                  <span aria-hidden="true">{c.emoji}</span> {c.name}
+                </PickChip>
+              ))}
+            </GroupRow>
+          );
+        })}
+        <GroupRow
+          emoji="✨"
+          name="Your own"
+          badge={custom.list.filter((c) => hasPick(picks, c.id)).length || null}
+          open={open === 'custom'}
+          onOpen={() => setOpen(open === 'custom' ? null : 'custom')}
+        >
+          {custom.list.map((c) => (
+            <span key={c.id} className="flex items-center gap-1">
+              <PickChip on={hasPick(picks, c.id)} onClick={() => onToggle(c)}>
+                <span aria-hidden="true">{c.emoji}</span> {c.name}
+              </PickChip>
+              <button type="button" onClick={() => onEdit(c)} aria-label={`Edit ${c.name}`} className="press flex h-8 w-8 items-center justify-center rounded-full bg-violet-600 text-white">
+                <Pencil className="h-3.5 w-3.5" aria-hidden="true" />
+              </button>
+            </span>
+          ))}
+          {!custom.full && (
+            <button
+              type="button"
+              onClick={() => onEdit({ name: '', description: '', emoji: '✨' })}
+              className="flex items-center gap-1 rounded-full border-2 border-dashed border-[#241a45]/30 px-3 py-1.5 text-sm font-bold text-[#241a45]"
+            >
+              <Plus className="h-4 w-4" aria-hidden="true" /> Make your own
+            </button>
+          )}
+        </GroupRow>
+      </ul>
+    </div>
+  );
+}
+
+function GroupRow({ emoji, name, badge, open, onOpen, children }) {
+  return (
+    <li className="overflow-hidden rounded-2xl bg-white/95 text-[#241a45] shadow-[0_4px_0_rgba(0,0,0,0.25)]">
+      <button type="button" onClick={onOpen} aria-expanded={open} className="flex w-full items-center gap-3 px-3 py-2.5 text-left">
+        <span className="text-2xl" aria-hidden="true">{emoji}</span>
+        <span className="min-w-0 flex-1 truncate text-xl" style={SHOW_FONT}>{name}</span>
+        {badge && <span className="shrink-0 rounded-full bg-amber-300 px-2 py-0.5 text-xs font-extrabold text-amber-950">{badge}</span>}
+        <ChevronDown className={cn('h-5 w-5 shrink-0 transition-transform', open && 'rotate-180')} aria-hidden="true" />
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} transition={{ duration: 0.2 }} className="overflow-hidden">
+            <div className="flex flex-wrap gap-2 px-3 pb-3">{children}</div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </li>
+  );
+}
+
+function PickChip({ on, onClick, strong, children }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={on}
+      className={cn(
+        'flex min-h-[36px] items-center gap-1 rounded-full px-3 py-1.5 text-sm font-bold',
+        on ? 'bg-amber-300 text-amber-950 ring-2 ring-amber-500' : strong ? 'bg-violet-100 text-violet-900' : 'bg-[#f1eefb] text-[#241a45]',
+      )}
+    >
+      {children}
+    </button>
   );
 }
 
@@ -275,10 +381,9 @@ function Chip({ on, onClick, center, children }) {
   );
 }
 
-function TopicTile({ emoji, name, on, onClick, custom, onEdit }) {
+function TopicTile({ emoji, name, on, onClick }) {
   return (
-    <div className="relative">
-      <button
+    <button
         type="button"
         onClick={onClick}
         aria-pressed={on}
@@ -287,15 +392,9 @@ function TopicTile({ emoji, name, on, onClick, custom, onEdit }) {
           on ? 'bg-amber-300 text-amber-950 [--toy-edge:theme(colors.amber.600)]' : 'bg-white/95 text-[#241a45] [--toy-edge:rgba(0,0,0,0.25)]',
         )}
       >
-        <span className="text-2xl" aria-hidden="true">{emoji}</span>
-        <span className="line-clamp-2 text-sm font-bold leading-tight">{name}</span>
-      </button>
-      {custom && (
-        <button type="button" onClick={onEdit} aria-label={`Edit ${name}`} className="absolute -right-1.5 -top-1.5 flex h-7 w-7 items-center justify-center rounded-full bg-violet-600 text-white shadow">
-          <Pencil className="h-3.5 w-3.5" aria-hidden="true" />
-        </button>
-      )}
-    </div>
+      <span className="text-2xl" aria-hidden="true">{emoji}</span>
+      <span className="line-clamp-2 text-sm font-bold leading-tight">{name}</span>
+    </button>
   );
 }
 

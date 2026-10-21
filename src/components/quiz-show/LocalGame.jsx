@@ -21,7 +21,7 @@ export function loadLocal() {
   try {
     const raw = localStorage.getItem(LOCAL_KEY);
     const saved = raw ? JSON.parse(raw) : null;
-    return saved?.game?.v === 1 ? saved : null;
+    return saved?.game?.v === 2 ? saved : null;
   } catch {
     return null;
   }
