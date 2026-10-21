@@ -235,8 +235,7 @@ function ShareInvite({ code, url }) {
   const share = () => {
     play('tap');
     navigator.clipboard
-      ?.writeText(`${text}
-${url}`)
+      ?.writeText(`${text}\n${url}`)
       .then(() => {
         setCopied(true);
         setTimeout(() => setCopied(false), 2500);
@@ -251,8 +250,7 @@ ${url}`)
         {copied ? 'Copied!' : 'Share invite'}
       </button>
       <a
-        href={`https://wa.me/?text=${encodeURIComponent(`${text}
-${url}`)}`}
+        href={`https://wa.me/?text=${encodeURIComponent(`${text}\n${url}`)}`}
         target="_blank"
         rel="noopener noreferrer"
         onClick={() => play('tap')}
