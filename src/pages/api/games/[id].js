@@ -58,6 +58,8 @@ export default async function handler(req, res) {
 
       if (dartsConfig) {
         game.dartsConfig = dartsConfig;
+        // dartsConfig.match is Mixed, which Mongoose does not watch for changes.
+        game.markModified('dartsConfig');
       }
 
       game.updatedAt = Date.now();

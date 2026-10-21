@@ -70,6 +70,10 @@ const GameSchema = new mongoose.Schema({
   // Additional fields for darts game
   dartsConfig: {
     gameMode: String,
+    // The rebuilt scorer (Phase 4) saves the whole match here: its setup and
+    // the log of every dart, which replays to every score (lib/darts/rules.js).
+    // The fields below are the old scorer's, kept so its saved games still load.
+    match: mongoose.Schema.Types.Mixed,
     startingScore: Number,
     doubleOut: { type: Boolean, default: true },
     doubleIn: { type: Boolean, default: false },

@@ -45,7 +45,7 @@ export const GAMES = [
     href: '/games/darts',
     emoji: '🎯',
     tone: 'darts',
-    description: 'Score X01, Cricket, Around the Clock, Killer and more!',
+    description: 'Tap the board and it does the maths: X01, Cricket, Around the Clock and Killer.',
   },
   {
     id: 'travel-bingo',

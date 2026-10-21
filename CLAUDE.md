@@ -37,7 +37,7 @@ src/
 │   ├── games/
 │   │   ├── scrabble-scorer/      # Local-only scoring
 │   │   ├── quiz/                 # index.js (home, setup, solo/shout, multi host), join.js (a player's phone)
-│   │   ├── darts/                # index.js (mode picker + game)
+│   │   ├── darts/                # index.js (home, setup, play)
 │   │   ├── travel-bingo/         # index.js (lobby + play)
 │   │   └── egypt-explorer/       # index.js (family, who is playing, trip picker, ?trip= and &stop=)
 │   └── api/
@@ -49,17 +49,17 @@ src/
 │       │   ├── index.js, [id].js
 │       │   └── travel-bingo/     # create, by-code/[code], [id]/{index,join,submit-items,generate,mark-tile,comment}
 │       └── quiz/
-│           ├── leaderboard.js
-│           ├── stats/{index.js,[playerId].js}
-│           └── rooms/
-│               ├── index.js
-│               └── live/[code]/{index,join,answer,host}.js   # multi-phone: index.js is the poll
+│           ├── questions.js, categories.js, history.js
+│           └── live/
+│               ├── index.js              # create a multi-phone quiz
+│               └── [code]/{index,join,answer,host}.js   # index.js is the poll
 ├── components/
 │   ├── ui/                       # button, card, alert, input, badge, sheet
+│   ├── arcade/                   # sfx, feedback (buzz, confetti), Banner, MuteButton, caller (speech), players (avatars)
 │   ├── layout/                   # AppHeader, GameShell
 │   ├── game/                     # NumericKeypad, TurnIndicator
 │   ├── quiz-show/                # the quiz as a game show: setup, screens, solo/shout runner, multi host + player
-│   ├── darts/                    # X01/Cricket/Clock/Killer boards + setup
+│   ├── darts/                    # the tappable Dartboard, scoreboards, setup, play, game over, saving (store.js)
 │   ├── travel-bingo/             # Card, lobby, feed
 │   ├── egypt/                    # Trip picker, trip, map, stop, quiz, quest, guide, passport, activities
 │   ├── settings/
@@ -91,7 +91,7 @@ One document per game session. `gameType` enum: `scrabble-scorer | quiz | darts 
 |-------|---------|
 | `players[]` (name, scores[], roundScores[]) | All games |
 | `quizConfig` | quiz history: `mode` (solo, shout, multi), categories, `difficulty` (the level's name), totalQuestions, `result` (final standings). Older documents carry the pre-rebuild fields |
-| `dartsConfig` | darts (gameMode, startingScore, double-in/out, turns, cricketMarks, clockTargets, killerLives) |
+| `dartsConfig` | darts: `gameMode` and `match` (Mixed: the setup plus every dart thrown; see Darts). The other fields are the old scorer's, kept so its games still list |
 | `travelBingoConfig` | travel-bingo (joinCode, hostUserId, phase, cars[] with card tiles + comments, categories) |
 | `egyptConfig` | egypt-explorer (`trip`; `progress`, the whole client state, shape owned by `lib/egypt/progress.js`; `rev`, bumped per save; `v1Backup`, the record before version 2) |
 | `status` | `active | completed` |
@@ -278,8 +278,9 @@ Phase 4 notes in `REDESIGN-PLAN.md` for what that allowed.
 - **Guests still play everything**, including multiplayer Travel Bingo — those
   games live on the server against a join code. What a guest does not get is
   *history*, because there is no account to attribute it to.
-- Local, unsaved games use the sentinel `_id: 'guest'`. All of Scrabble, Quiz and
-  Darts use it; never PATCH or DELETE a game with that id.
+- Local, unsaved games use the sentinel `_id: 'guest'`. Scrabble uses it; never
+  PATCH or DELETE a game with that id. Darts and the Quiz keep a guest's game on
+  the device instead.
 - **There is no guest→account adoption.** Saving starts at sign-in. That was
   already the de facto behaviour, and is now the stated one.
 - `game/GuestNotice` says so before the game starts. Mount it on any new game's
@@ -295,6 +296,16 @@ Rebuilt 2026-10-21 as a game show (`REDESIGN-PLAN.md`, Phase 3). Three modes: **
 - **Custom categories are objects** `{id, name, description, emoji}` (`lib/quiz/catalogue.js`): on the account (`/api/quiz/categories`) when signed in, on the device otherwise. Old `"Name: description"` strings are read and rewritten.
 - **Multi-phone is polled, not streamed.** Each client polls `GET /api/quiz/live/[code]?v=` once a second; the server answers `same` when nothing changed, and applies the clock on every poll (`lib/quiz/live.js#change`), so the game moves on even if the host's phone goes quiet. Every write is read-apply-write guarded by `version`, retried on a clash, so answers that arrive together all count. Answer times are measured on the server. A phone is sent only the question on screen, never the answer or anyone else's pick while it is open (`project`).
 - **History**: finished quizzes for a signed-in player, `GET/POST /api/quiz/history`; delete is `DELETE /api/games/:id`.
+
+## Darts
+
+Rebuilt 2026-10-21 (`REDESIGN-PLAN.md`, Phase 4): you tap the board where each dart landed. X01 (with legs, double-in and double-out), Cricket, Around the Clock and Killer.
+
+- **One set of rules, `lib/darts/rules.js`**: a match is its setup plus a log of throws (`{n, m}` per dart, or `{t}` for an X01 visit typed as a total), and `replay(match)` works out everything else: scores, whose turn, legs, the winner, standings with shared places, stats, and the `events` the last throw caused (bust, checkout, 180s via `visit`, killer, out). Undo is popping the log, so it works after a bust, across legs and after the winning dart. Moves (`throwDart`, `enterTotal`, `endTurn`, `undo`) return a new match.
+- **The board, `components/darts/Dartboard.jsx`**: SVG, rings wider than a real board's (`lib/darts/board.js#RINGS`) so a treble takes a thumb. Press shows the region and its name, slide adjusts, lift scores; lifting off the board scores nothing (Miss is a button). It dims numbers that do not count, lights the checkout route (`lib/darts/checkout.js`: the chart for three darts, a search for fewer or for single-out) and marks Killer's numbers.
+- **Saving, `components/darts/store.js`**: the match goes to the device after every dart (`darts:match`), so a reload offers "Carry on"; a signed-in player's goes to `/api/games` a moment later as `dartsConfig.match`, one save at a time. Games saved by the old scorer have no `match`; they are listed for deleting only.
+- **The caller**, `components/arcade/caller.js`: `speechSynthesis` in en-GB calls each X01 visit, "One hundred and eighty!", bust and game shot. It follows the mute switch.
+- The backdrop `public/darts/wall.webp` is Higgsfield (job id in `components/darts/ui.jsx`).
 
 ## Travel Bingo Flow
 

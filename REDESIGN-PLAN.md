@@ -2,7 +2,8 @@
 
 **Status:** agreed with Ash 2026-10-21. Phase 1 (Travel Bingo) live 2026-10-21.
 Phase 2 (the games room) live 2026-10-21. **Quiz moved up to Phase 3** at
-Ash's request (it was last); Darts and Scrabble follow it.
+Ash's request (it was last), live 2026-10-21. Phase 4 (Darts) built 2026-10-21;
+Scrabble follows it.
 **Replaces** the August realignment plan, which is finished (every phase landed
 2026-08-27; it is in git history at `934d2e5:REDESIGN-PLAN.md`). The decisions
 from it that still bind are carried forward in §6.

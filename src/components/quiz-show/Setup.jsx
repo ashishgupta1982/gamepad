@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { ArrowLeft, Pencil, Plus, X } from 'lucide-react';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
 import { play } from '@/components/arcade/sfx';
+import { AVATARS, COLORS, makePlayer } from '@/components/arcade/players';
 import { CATEGORIES, LEVELS, QUESTION_COUNTS, TIMERS } from '@/lib/quiz/catalogue';
 import { cn } from '@/lib/cn';
 import { fetchQuestions, useCustomCategories } from './data';
@@ -12,17 +13,10 @@ import { Avatar, SHOW_FONT, ShowButton } from './ui';
 // Setting up a quiz: how you're playing, who's playing, what about, and for
 // whom. One step per screen, big targets, Back and Next at the bottom.
 
-export const AVATARS = ['🦊', '🐸', '🦉', '🐙', '🦁', '🐯', '🐻', '🦄', '🐲', '🐬', '🦋', '🐢', '🦈', '🐺', '🦜', '🐼'];
-export const COLORS = ['#e11d48', '#2563eb', '#d97706', '#16a34a', '#9333ea', '#ea580c', '#0d9488', '#db2777', '#4f46e5', '#65a30d', '#0891b2', '#c026d3'];
+// The avatars live in the arcade kit now, shared with Darts.
+export { AVATARS, COLORS, makePlayer };
 const MAX_TOPICS = 6;
 const MAX_PLAYERS = 12;
-
-export const makePlayer = (i, name) => ({
-  id: `p${Date.now().toString(36)}${i}${Math.random().toString(36).slice(2, 5)}`,
-  name: name || `Player ${i + 1}`,
-  avatar: AVATARS[i % AVATARS.length],
-  color: COLORS[i % COLORS.length],
-});
 
 const MODES = [
   { id: 'solo', emoji: '🎯', name: 'Just me', text: 'Answer on this phone against the clock.' },
