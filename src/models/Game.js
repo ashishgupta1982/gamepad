@@ -99,6 +99,9 @@ const GameSchema = new mongoose.Schema({
       enum: ['submission', 'generating', 'playing', 'completed'],
       default: 'submission'
     },
+    // When the phase went to 'generating'. A generation the platform killed
+    // leaves the phase there; this is how the route knows it is stale.
+    generatingSince: Date,
     cars: [{
       carId: String,
       name: String,

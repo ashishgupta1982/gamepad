@@ -2,249 +2,402 @@ import Head from 'next/head';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import { LogOut } from 'lucide-react';
 import GameShell from '@/components/layout/GameShell';
-import LandingScreen from '@/components/travel-bingo/LandingScreen';
-import SubmissionScreen from '@/components/travel-bingo/SubmissionScreen';
+import { BannerProvider, useBanner } from '@/components/arcade/Banner';
+import MuteButton from '@/components/arcade/MuteButton';
+import { play } from '@/components/arcade/sfx';
+import { buzz, celebrate } from '@/components/arcade/feedback';
+import StartScreen from '@/components/travel-bingo/StartScreen';
+import SetupScreen from '@/components/travel-bingo/SetupScreen';
+import DealingScreen from '@/components/travel-bingo/DealingScreen';
+import RaceTrack from '@/components/travel-bingo/RaceTrack';
 import BingoCard from '@/components/travel-bingo/BingoCard';
-import TileDetailModal from '@/components/travel-bingo/TileDetailModal';
-import Scoreboard from '@/components/travel-bingo/Scoreboard';
-import ProgressFeed from '@/components/travel-bingo/ProgressFeed';
+import TileSheet from '@/components/travel-bingo/TileSheet';
+import FeedList from '@/components/travel-bingo/FeedList';
 import ResultsScreen from '@/components/travel-bingo/ResultsScreen';
-import { getPlayerIdentity, guestIdForRequest } from '@/lib/identity';
+import { guestIdForRequest } from '@/lib/identity';
+import { MIN_POOL, newLines, rivalFinds, TILES_PER_CARD } from '@/lib/bingoRules';
+import { cn } from '@/lib/cn';
+
+// Travel Bingo, rebuilt in the toy-box arcade look (REDESIGN-PLAN.md, Phase 1).
+//
+// The server routes are unchanged in shape; what changed is the feel:
+//   - one tap stamps a tile, on screen at once, with a thunk and a buzz. The
+//     save happens behind it and is retried through patchy signal; only if it
+//     still fails is the stamp taken back, and the banner says so;
+//   - every new row, column or diagonal is a LINE! moment on the way to the
+//     full card, which is the win;
+//   - the scoreboard is a race, and another car's find arrives as a banner
+//     with a honk, from the same poll as before.
 
 const STORAGE_KEY = 'travel-bingo:active';
+const POLL_MS = 4000;
+const RETRY_DELAYS = [1500, 4000];
+const CONFETTI = ['#14b8a6', '#fbbf24', '#f43f5e', '#38bdf8', '#a78bfa'];
 
-function loadStored() {
-  if (typeof window === 'undefined') return null;
+function stored(action, value) {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : null;
-  } catch {
-    return null;
-  }
-}
-
-function saveStored(value) {
-  if (typeof window === 'undefined') return;
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(value));
+    if (action === 'get') return JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+    if (action === 'set') localStorage.setItem(STORAGE_KEY, JSON.stringify(value));
+    if (action === 'clear') localStorage.removeItem(STORAGE_KEY);
   } catch {}
+  return null;
 }
 
-function clearStored() {
-  if (typeof window === 'undefined') return;
-  try { localStorage.removeItem(STORAGE_KEY); } catch {}
+const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function post(url, body) {
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    const err = new Error(data?.error || 'Something went wrong');
+    err.status = res.status;
+    throw err;
+  }
+  return data;
 }
 
-// Identity comes from lib/identity now, not from here.
-//
-// This file used to mint its own: `user:<email>` when signed in, and a
-// `travel-bingo:guestId` otherwise. Both were wrong. The email form matched
-// nothing else in the app — every other endpoint keys on session.user.id — and
-// the guest key was per-game, so the same person was a different player in
-// Travel Bingo than anywhere else.
-//
-// The id is also no longer sent as the authoritative `userId`. The server reads
-// the session and only falls back to `guestId` when there is none, so a body
-// field can no longer name someone else's account.
+// A copy of the game with one tile on one car changed.
+function withTile(game, carId, tileId, patch) {
+  const cfg = game.travelBingoConfig;
+  return {
+    ...game,
+    travelBingoConfig: {
+      ...cfg,
+      cars: cfg.cars.map((c) =>
+        c.carId !== carId ? c : { ...c, card: c.card.map((t) => (t.tileId === tileId ? { ...t, ...patch } : t)) },
+      ),
+    },
+  };
+}
 
-export default function TravelBingoPage() {
+function TravelBingo() {
   const { data: session, status: authStatus } = useSession();
   const router = useRouter();
-  const [game, setGame] = useState(null);
+  const banner = useBanner();
+
+  const [game, setGameState] = useState(null);
   const [myCarId, setMyCarId] = useState(null);
   const [busy, setBusy] = useState(false);
-  const [generating, setGenerating] = useState(false);
-  const [activeView, setActiveView] = useState('mine'); // 'mine' | 'others' | 'feed'
-  const [openTile, setOpenTile] = useState(null); // { tile, ownerCar }
-  const [error, setError] = useState('');
-  const guestIdRef = useRef(undefined);
+  const [dealing, setDealing] = useState(false);
+  const [view, setView] = useState('card'); // 'card' | 'convoy' | 'feed'
+  const [open, setOpen] = useState(null); // { carId, tileId }
 
-  // A guest id to send alongside requests. Undefined once signed in — the
-  // server ignores it then anyway, and sending one would only invite confusion
-  // about which identity won.
+  const gameRef = useRef(null);
+  const myCarRef = useRef(null);
+  // Every local change bumps this. A poll that started before one is stale by
+  // the time it lands and is dropped, so it cannot un-stamp a tile on screen.
+  const editSeq = useRef(0);
+  const inFlight = useRef(0);
+  // The full-house fanfare is played locally the moment the ninth tile is
+  // stamped; this stops the server's 'completed' playing it a second time.
+  const celebratedWin = useRef(false);
+
+  const guestId = () => guestIdForRequest(session);
+
+  const setGame = useCallback((g) => {
+    gameRef.current = g;
+    setGameState(g);
+  }, []);
+
+  // Everything that arrives from the server comes through here, which is where
+  // the other cars' finds and the end of the game are noticed.
+  const receive = useCallback(
+    (next) => {
+      const prev = gameRef.current;
+      const me = myCarRef.current;
+      const prevPhase = prev?.travelBingoConfig?.phase;
+      const phase = next?.travelBingoConfig?.phase;
+
+      if (prev && prevPhase === 'playing') {
+        const finds = rivalFinds(prev, next, me);
+        finds.slice(-3).forEach((f) => banner.show({ title: `${f.carName} spotted`, text: f.label, tone: 'rival' }));
+        if (finds.length) {
+          play('honk');
+          buzz(20);
+        }
+      }
+      if (prev && prevPhase !== 'playing' && phase === 'playing') play('deal');
+      if (prev && prevPhase === 'playing' && phase === 'completed' && !celebratedWin.current) {
+        const winner = next.travelBingoConfig.cars.find((c) => c.carId === next.travelBingoConfig.winnerCarId);
+        celebratedWin.current = true;
+        play('win');
+        celebrate('big', CONFETTI);
+        if (winner?.carId !== me) banner.show({ title: 'BINGO!', text: `${winner?.name || 'Someone'} got the full card`, tone: 'win', big: true });
+      }
+      setGame(next);
+    },
+    [banner, setGame],
+  );
+
+  const fetchGame = useCallback(
+    async (gameId, { poll = false } = {}) => {
+      const seq = editSeq.current;
+      const res = await fetch(`/api/games/travel-bingo/${gameId}`);
+      if (!res.ok) throw new Error('Game not found');
+      const { game: next } = await res.json();
+      if (poll && (seq !== editSeq.current || inFlight.current > 0)) return null;
+      receive(next);
+      return next;
+    },
+    [receive],
+  );
+
+  // Resume the game this phone was in.
   useEffect(() => {
     if (authStatus === 'loading') return;
-    guestIdRef.current = guestIdForRequest(session);
-  }, [authStatus, session]);
-
-  // Resume from localStorage on mount
-  useEffect(() => {
-    if (authStatus === 'loading') return;
-    const stored = loadStored();
-    if (stored?.gameId && stored?.carId) {
-      setMyCarId(stored.carId);
-      fetchGame(stored.gameId).catch(() => clearStored());
+    const s = stored('get');
+    if (s?.gameId && s?.carId) {
+      myCarRef.current = s.carId;
+      setMyCarId(s.carId);
+      fetchGame(s.gameId).catch(() => stored('clear'));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authStatus]);
 
-  const fetchGame = useCallback(async (gameId) => {
-    const res = await fetch(`/api/games/travel-bingo/${gameId}`);
-    if (!res.ok) throw new Error('Game not found');
-    const data = await res.json();
-    setGame(data.game);
-    return data.game;
-  }, []);
-
-  // Polling while game active
-  useEffect(() => {
-    if (!game?._id) return;
-    const phase = game.travelBingoConfig?.phase;
-    if (phase === 'completed') return;
-    const interval = setInterval(() => {
-      fetchGame(game._id).catch(() => {});
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [game?._id, game?.travelBingoConfig?.phase, fetchGame]);
-
-  const handleCreate = async (carName) => {
-    setBusy(true);
-    setError('');
-    try {
-      const res = await fetch('/api/games/travel-bingo/create', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ hostCarName: carName, guestId: guestIdRef.current }),
-      });
-      if (!res.ok) throw new Error((await res.json())?.error || 'Failed to create');
-      const { gameId, carId } = await res.json();
-      saveStored({ gameId, carId });
-      setMyCarId(carId);
-      await fetchGame(gameId);
-    } catch (err) {
-      setError(err.message);
-      throw err;
-    } finally {
-      setBusy(false);
-    }
-  };
-
-  const handleJoin = async (code, carName) => {
-    setBusy(true);
-    setError('');
-    try {
-      const lookup = await fetch(`/api/games/travel-bingo/by-code/${code}`);
-      if (!lookup.ok) throw new Error('Game not found for that code');
-      const { gameId } = await lookup.json();
-
-      const join = await fetch(`/api/games/travel-bingo/${gameId}/join`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ carName, guestId: guestIdRef.current }),
-      });
-      if (!join.ok) throw new Error((await join.json())?.error || 'Failed to join');
-      const { carId, game: joined } = await join.json();
-      saveStored({ gameId, carId });
-      setMyCarId(carId);
-      setGame(joined);
-    } catch (err) {
-      setError(err.message);
-      throw err;
-    } finally {
-      setBusy(false);
-    }
-  };
-
-  const handleSubmitItems = async (items) => {
-    if (!game?._id || !myCarId) return;
-    const res = await fetch(`/api/games/travel-bingo/${game._id}/submit-items`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ carId: myCarId, items, guestId: guestIdRef.current }),
-    });
-    if (!res.ok) throw new Error((await res.json())?.error || 'Save failed');
-    const { game: updated } = await res.json();
-    setGame(updated);
-  };
-
-  const handleGenerate = async () => {
-    if (!game?._id) return;
-    setGenerating(true);
-    setError('');
-    try {
-      const res = await fetch(`/api/games/travel-bingo/${game._id}/generate`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ guestId: guestIdRef.current }),
-      });
-      if (!res.ok) throw new Error((await res.json())?.error || 'Generation failed');
-      const { game: updated } = await res.json();
-      setGame(updated);
-      setActiveView('mine');
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setGenerating(false);
-    }
-  };
-
-  const handleMarkFound = async ({ tileId, caption }) => {
-    if (!game?._id || !myCarId) return;
-    const res = await fetch(`/api/games/travel-bingo/${game._id}/mark-tile`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ carId: myCarId, tileId, caption, found: true, guestId: guestIdRef.current }),
-    });
-    if (!res.ok) throw new Error((await res.json())?.error || 'Save failed');
-    const { game: updated } = await res.json();
-    setGame(updated);
-  };
-
-  const handleUnmark = async ({ tileId }) => {
-    if (!game?._id || !myCarId) return;
-    const res = await fetch(`/api/games/travel-bingo/${game._id}/mark-tile`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ carId: myCarId, tileId, found: false, guestId: guestIdRef.current }),
-    });
-    if (!res.ok) throw new Error((await res.json())?.error || 'Save failed');
-    const { game: updated } = await res.json();
-    setGame(updated);
-  };
-
-  const handleAddComment = async ({ ownerCarId, tileId, text }) => {
-    if (!game?._id || !myCarId) return;
-    const res = await fetch(`/api/games/travel-bingo/${game._id}/comment`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ carId: myCarId, ownerCarId, tileId, text }),
-    });
-    if (!res.ok) throw new Error((await res.json())?.error || 'Save failed');
-    const { game: updated } = await res.json();
-    setGame(updated);
-  };
-
-  const handlePlayAgain = () => {
-    clearStored();
-    setGame(null);
-    setMyCarId(null);
-    setActiveView('mine');
-    setOpenTile(null);
-    setError('');
-  };
-
-  const handleLeave = () => {
-    if (!confirm('Leave this game? You can rejoin with the same code.')) return;
-    clearStored();
-    setGame(null);
-    setMyCarId(null);
-    setActiveView('mine');
-    setOpenTile(null);
-  };
-
-  // Compared against the player's real id — session id when signed in, guest id
-  // otherwise — not against whatever this client last sent. This is a display
-  // hint only; the server re-checks the host on every host-only action.
-  const playerId = getPlayerIdentity(session).id;
-  const isHost = !!(game && playerId && game.travelBingoConfig?.hostUserId === playerId);
-  const myCar = game?.travelBingoConfig?.cars?.find(c => c.carId === myCarId);
-  const otherCars = (game?.travelBingoConfig?.cars || []).filter(c => c.carId !== myCarId);
+  const gameId = game?._id;
   const phase = game?.travelBingoConfig?.phase;
 
-  const openTileForOwner = (car, tile) => {
-    setOpenTile({ ownerCar: car, tile });
+  // Poll while the game is live, and straight away when the phone comes back
+  // to this tab (a passenger switching to maps and back).
+  useEffect(() => {
+    if (!gameId || phase === 'completed') return undefined;
+    const tick = () => {
+      if (document.visibilityState === 'visible') fetchGame(gameId, { poll: true }).catch(() => {});
+    };
+    const t = setInterval(tick, POLL_MS);
+    document.addEventListener('visibilitychange', tick);
+    return () => {
+      clearInterval(t);
+      document.removeEventListener('visibilitychange', tick);
+    };
+  }, [gameId, phase, fetchGame]);
+
+  const enter = (id, carId) => {
+    stored('set', { gameId: id, carId });
+    myCarRef.current = carId;
+    setMyCarId(carId);
+    celebratedWin.current = false;
   };
+
+  const handleCreate = async (name) => {
+    setBusy(true);
+    try {
+      const { gameId: id, carId } = await post('/api/games/travel-bingo/create', { hostCarName: name, guestId: guestId() });
+      enter(id, carId);
+      await fetchGame(id);
+      play('deal');
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const handleJoin = async (code, name) => {
+    setBusy(true);
+    try {
+      const lookup = await fetch(`/api/games/travel-bingo/by-code/${code}`);
+      if (!lookup.ok) throw new Error('No game with that code. Check it with the other car?');
+      const { gameId: id } = await lookup.json();
+      const { carId, game: joined } = await post(`/api/games/travel-bingo/${id}/join`, { carName: name, guestId: guestId() });
+      enter(id, carId);
+      setGame(joined);
+      play('deal');
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const saveItems = async (items) => {
+    const g = gameRef.current;
+    if (!g) return;
+    const { game: next } = await post(`/api/games/travel-bingo/${g._id}/submit-items`, { carId: myCarId, items, guestId: guestId() });
+    receive(next);
+  };
+
+  const deal = async () => {
+    const g = gameRef.current;
+    if (!g) return;
+    play('tap');
+    setDealing(true);
+    try {
+      const { game: next } = await post(`/api/games/travel-bingo/${g._id}/generate`, { guestId: guestId() });
+      receive(next);
+      setView('card');
+    } catch (err) {
+      play('error');
+      banner.show({ title: 'Could not deal the cards', text: err.message, tone: 'error', hold: 3500 });
+      fetchGame(g._id).catch(() => {});
+    } finally {
+      setDealing(false);
+    }
+  };
+
+  // One tap: stamped now, saved behind it.
+  const stamp = async (tile) => {
+    const g = gameRef.current;
+    const myCar = g?.travelBingoConfig?.cars?.find((c) => c.carId === myCarId);
+    if (!myCar || tile.found) return;
+
+    editSeq.current += 1;
+    const next = withTile(g, myCarId, tile.tileId, { found: true, foundAt: new Date().toISOString() });
+    const nextCar = next.travelBingoConfig.cars.find((c) => c.carId === myCarId);
+    setGame(next);
+
+    play('stamp');
+    buzz(35);
+    const lines = newLines(myCar.card, nextCar.card);
+    const full = nextCar.card.every((t) => t.found);
+    if (full) {
+      celebratedWin.current = true;
+      setTimeout(() => {
+        play('win');
+        buzz([60, 80, 60, 80, 200]);
+        celebrate('big', CONFETTI);
+        banner.show({ title: 'BINGO!', text: 'Full card!', tone: 'win', big: true, hold: 3000 });
+      }, 250);
+    } else if (lines.length) {
+      setTimeout(() => {
+        play('line');
+        buzz([40, 60, 40]);
+        celebrate('small', CONFETTI);
+        banner.show({ title: lines.length > 1 ? `${lines.length} LINES!` : 'LINE!', tone: 'win', big: true });
+      }, 250);
+    }
+
+    inFlight.current += 1;
+    try {
+      for (let attempt = 0; ; attempt++) {
+        try {
+          const { game: saved } = await post(`/api/games/travel-bingo/${g._id}/mark-tile`, {
+            carId: myCarId,
+            tileId: tile.tileId,
+            found: true,
+            guestId: guestId(),
+          });
+          editSeq.current += 1;
+          receive(saved);
+          return;
+        } catch (err) {
+          // A 4xx will not get better by asking again; a dropped signal might.
+          if ((err.status && err.status < 500) || attempt >= RETRY_DELAYS.length) throw err;
+          await wait(RETRY_DELAYS[attempt]);
+        }
+      }
+    } catch (err) {
+      editSeq.current += 1;
+      celebratedWin.current = false;
+      setGame(withTile(gameRef.current, myCarId, tile.tileId, { found: false, foundAt: null }));
+      play('error');
+      banner.show({ title: `${tile.label} not saved`, text: 'No signal? Tap it again in a moment.', tone: 'error', hold: 3500 });
+    } finally {
+      inFlight.current -= 1;
+    }
+  };
+
+  const unmark = async (tile) => {
+    const g = gameRef.current;
+    editSeq.current += 1;
+    setGame(withTile(g, myCarId, tile.tileId, { found: false, foundAt: null, caption: '' }));
+    play('unstamp');
+    setOpen(null);
+    try {
+      const { game: saved } = await post(`/api/games/travel-bingo/${g._id}/mark-tile`, {
+        carId: myCarId,
+        tileId: tile.tileId,
+        found: false,
+        guestId: guestId(),
+      });
+      editSeq.current += 1;
+      receive(saved);
+    } catch (err) {
+      banner.show({ title: 'Could not undo that', text: err.message, tone: 'error' });
+      fetchGame(g._id).catch(() => {});
+    }
+  };
+
+  const saveCaption = async (tile, caption) => {
+    const g = gameRef.current;
+    try {
+      const { game: saved } = await post(`/api/games/travel-bingo/${g._id}/mark-tile`, {
+        carId: myCarId,
+        tileId: tile.tileId,
+        found: true,
+        caption,
+        guestId: guestId(),
+      });
+      editSeq.current += 1;
+      receive(saved);
+      play('tap');
+    } catch (err) {
+      banner.show({ title: 'Not saved', text: err.message, tone: 'error' });
+    }
+  };
+
+  const comment = async (ownerCar, tile, text) => {
+    const g = gameRef.current;
+    try {
+      const { game: saved } = await post(`/api/games/travel-bingo/${g._id}/comment`, {
+        carId: myCarId,
+        ownerCarId: ownerCar.carId,
+        tileId: tile.tileId,
+        text,
+        guestId: guestId(),
+      });
+      editSeq.current += 1;
+      receive(saved);
+      play('tap');
+    } catch (err) {
+      banner.show({ title: 'Comment not posted', text: err.message, tone: 'error' });
+      throw err;
+    }
+  };
+
+  const reset = () => {
+    stored('clear');
+    gameRef.current = null;
+    myCarRef.current = null;
+    setGameState(null);
+    setMyCarId(null);
+    setView('card');
+    setOpen(null);
+    celebratedWin.current = false;
+  };
+
+  const leave = () => {
+    if (!window.confirm('Leave this game? You can join again with the same code.')) return;
+    reset();
+  };
+
+  const cfg = game?.travelBingoConfig;
+  const cars = cfg?.cars || [];
+  const myCar = cars.find((c) => c.carId === myCarId);
+  const isHost = !!(myCarId && cfg?.hostCarId === myCarId);
+  const pool = new Set(cars.flatMap((c) => c.submittedItems || []).map((s) => s.trim().toLowerCase()).filter(Boolean));
+  const hostName = cars.find((c) => c.carId === cfg?.hostCarId)?.name || 'the host';
+
+  // The tile in the sheet, read live from the game so comments appear as they land.
+  const openCar = open && cars.find((c) => c.carId === open.carId);
+  const openTile = openCar?.card?.find((t) => t.tileId === open.tileId);
+
+  const setupActions =
+    phase === 'submission' &&
+    (isHost ? (
+      <button
+        type="button"
+        onClick={deal}
+        disabled={dealing || pool.size < MIN_POOL}
+        className="toy min-h-[56px] w-full rounded-2xl bg-game-bingo font-display text-xl font-extrabold text-white [--toy-edge:hsl(var(--game-bingo-deep))] disabled:opacity-50"
+      >
+        {dealing ? 'Dealing…' : pool.size < MIN_POOL ? `Pick ${MIN_POOL - pool.size} more to spot` : 'Deal the cards!'}
+      </button>
+    ) : (
+      <p className="py-2 text-center text-sm font-semibold text-muted-foreground">Waiting for {hostName} to deal the cards…</p>
+    ));
 
   return (
     <>
@@ -255,146 +408,116 @@ export default function TravelBingoPage() {
       <GameShell
         title="Travel Bingo"
         onBack={() => router.push('/')}
-        bodyClassName="px-0"
-        // A bingo card is watched out of a car window for long stretches
-        // between taps, which is exactly what the wake lock is for.
+        headerAside={<MuteButton />}
+        actions={setupActions || null}
+        // A card is watched out of a car window for long stretches between taps.
         keepAwake={!!game}
+        className="bg-gradient-to-b from-teal-50 to-amber-50"
       >
-
-        {!game && authStatus !== 'loading' && (
-          <LandingScreen onCreate={handleCreate} onJoin={handleJoin} busy={busy} />
+        {!game && authStatus !== 'loading' && router.isReady && (
+          <StartScreen onCreate={handleCreate} onJoin={handleJoin} busy={busy} initialCode={typeof router.query.code === 'string' ? router.query.code : ''} />
         )}
 
-        {game && phase === 'submission' && (
-          <>
-            <SubmissionScreen
-              game={game}
-              myCarId={myCarId}
-              isHost={isHost}
-              onSubmitItems={handleSubmitItems}
-              onGenerate={handleGenerate}
-              generating={generating}
-            />
-            <div className="max-w-2xl mx-auto px-4 mt-4 mb-8 text-center">
-              <p className="text-xs text-muted-foreground mb-2">
-                Game code: <span className="font-mono font-bold text-game-bingo tracking-wider">{game.travelBingoConfig.joinCode}</span>
-              </p>
-              <button onClick={handleLeave} className="text-xs text-muted-foreground hover:text-destructive underline">
-                Leave game
-              </button>
-            </div>
-          </>
-        )}
+        {game && phase === 'submission' && <SetupScreen game={game} myCarId={myCarId} onSaveItems={saveItems} />}
 
-        {game && phase === 'generating' && (
-          <div className="max-w-md mx-auto px-4 pt-12 text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-game-bingo mx-auto" />
-            <p className="mt-4 text-muted-foreground font-semibold">AI is building your bingo cards…</p>
-            <p className="text-xs text-muted-foreground mt-1">This usually takes a few seconds.</p>
-          </div>
-        )}
+        {game && phase === 'generating' && <DealingScreen since={cfg.generatingSince} isHost={isHost} onRetry={deal} />}
 
         {game && phase === 'playing' && myCar && (
-          <div className="max-w-3xl mx-auto px-4 pt-3 pb-10">
-            <div className="flex bg-card rounded-xl shadow p-1 mb-4 border border-game-bingo/30">
-              <button
-                onClick={() => setActiveView('mine')}
-                className={`flex-1 py-2 text-sm font-semibold rounded-lg transition ${
-                  activeView === 'mine' ? 'bg-game-bingo text-white shadow' : 'text-muted-foreground'
-                }`}
-              >
-                My card
-              </button>
-              <button
-                onClick={() => setActiveView('others')}
-                className={`flex-1 py-2 text-sm font-semibold rounded-lg transition ${
-                  activeView === 'others' ? 'bg-game-bingo text-white shadow' : 'text-muted-foreground'
-                }`}
-              >
-                Other cars
-              </button>
-              <button
-                onClick={() => setActiveView('feed')}
-                className={`flex-1 py-2 text-sm font-semibold rounded-lg transition ${
-                  activeView === 'feed' ? 'bg-game-bingo text-white shadow' : 'text-muted-foreground'
-                }`}
-              >
-                Live feed
-              </button>
+          <div className="space-y-4 pb-4">
+            <RaceTrack cars={cars} myCarId={myCarId} />
+
+            <div className="grid grid-cols-3 gap-1 rounded-2xl bg-white p-1 shadow-sm" role="tablist">
+              {[
+                ['card', 'My card'],
+                ['convoy', 'Other cars'],
+                ['feed', 'Finds'],
+              ].map(([id, label]) => (
+                <button
+                  key={id}
+                  type="button"
+                  role="tab"
+                  aria-selected={view === id}
+                  onClick={() => setView(id)}
+                  className={cn(
+                    'press rounded-xl py-2.5 text-sm font-bold transition-colors',
+                    view === id ? 'bg-game-bingo text-white' : 'text-muted-foreground',
+                  )}
+                >
+                  {label}
+                </button>
+              ))}
             </div>
 
-            <div className="mb-4">
-              <Scoreboard
-                cars={game.travelBingoConfig.cars}
-                winnerCarId={game.travelBingoConfig.winnerCarId}
-                myCarId={myCarId}
-              />
-            </div>
-
-            {activeView === 'mine' && (
-              <BingoCard
-                car={myCar}
-                interactive
-                onTileClick={(tile) => setOpenTile({ ownerCar: myCar, tile })}
-              />
+            {view === 'card' && (
+              <>
+                <BingoCard
+                  card={myCar.card}
+                  onTileTap={(tile) => (tile.found ? setOpen({ carId: myCarId, tileId: tile.tileId }) : stamp(tile))}
+                />
+                <p className="text-center text-sm text-muted-foreground">
+                  Tap a tile when you spot it. Tap a stamped one to add where, or undo.
+                </p>
+              </>
             )}
 
-            {activeView === 'others' && (
+            {view === 'convoy' && (
               <div className="space-y-4">
-                {otherCars.length === 0 ? (
-                  <p className="text-center text-sm text-muted-foreground">No other cars yet.</p>
-                ) : otherCars.map(c => (
-                  <BingoCard
-                    key={c.carId}
-                    car={c}
-                    interactive
-                    onTileClick={(tile) => setOpenTile({ ownerCar: c, tile })}
-                  />
-                ))}
+                {cars.filter((c) => c.carId !== myCarId).length === 0 && (
+                  <p className="rounded-3xl bg-white p-6 text-center text-muted-foreground shadow-sm">Just you on this trip.</p>
+                )}
+                {cars
+                  .filter((c) => c.carId !== myCarId)
+                  .map((c) => (
+                    <section key={c.carId} className="rounded-3xl bg-white p-3 shadow-sm">
+                      <p className="mb-2 font-display font-extrabold text-foreground">
+                        {c.name} <span className="text-sm font-bold text-muted-foreground tnum">{c.card.filter((t) => t.found).length}/{TILES_PER_CARD}</span>
+                      </p>
+                      <BingoCard card={c.card} compact onTileTap={(tile) => setOpen({ carId: c.carId, tileId: tile.tileId })} />
+                    </section>
+                  ))}
               </div>
             )}
 
-            {activeView === 'feed' && (
-              <ProgressFeed
-                cars={game.travelBingoConfig.cars}
-                onTileClick={openTileForOwner}
-              />
+            {view === 'feed' && (
+              <FeedList cars={cars} myCarId={myCarId} onOpen={(car, tile) => setOpen({ carId: car.carId, tileId: tile.tileId })} />
             )}
-
-            <div className="text-center mt-6">
-              <p className="text-xs text-muted-foreground">
-                Game code: <span className="font-mono font-bold text-game-bingo tracking-wider">{game.travelBingoConfig.joinCode}</span>
-              </p>
-              <button onClick={handleLeave} className="text-xs text-muted-foreground hover:text-destructive underline mt-1">
-                Leave game
-              </button>
-            </div>
           </div>
         )}
 
         {game && phase === 'completed' && (
-          <ResultsScreen game={game} myCarId={myCarId} onPlayAgain={handlePlayAgain} />
+          <ResultsScreen game={game} myCarId={myCarId} onNewGame={reset} onOpen={(car, tile) => setOpen({ carId: car.carId, tileId: tile.tileId })} />
         )}
 
-        {error && (
-          <div className="max-w-md mx-auto px-4 mt-3">
-            <div className="bg-destructive/10 border border-destructive/30 text-destructive text-sm rounded-lg px-3 py-2">
-              {error}
-            </div>
+        {game && phase !== 'completed' && (
+          <div className="mt-4 flex items-center justify-center gap-3 pb-2 text-xs text-muted-foreground">
+            <span>
+              Code <span className="font-mono font-bold tracking-wider text-game-bingo-deep">{cfg.joinCode}</span>
+            </span>
+            <button type="button" onClick={leave} className="press flex items-center gap-1 font-semibold hover:text-destructive">
+              <LogOut className="h-3.5 w-3.5" aria-hidden="true" /> Leave
+            </button>
           </div>
         )}
 
-        <TileDetailModal
+        <TileSheet
           open={!!openTile}
-          tile={openTile?.tile}
-          ownerCar={openTile?.ownerCar}
+          tile={openTile}
+          ownerCar={openCar}
           myCarId={myCarId}
-          onClose={() => setOpenTile(null)}
-          onMarkFound={handleMarkFound}
-          onUnmark={handleUnmark}
-          onAddComment={handleAddComment}
+          onClose={() => setOpen(null)}
+          onSaveCaption={saveCaption}
+          onUnmark={unmark}
+          onComment={comment}
         />
       </GameShell>
     </>
+  );
+}
+
+export default function TravelBingoPage() {
+  return (
+    <BannerProvider>
+      <TravelBingo />
+    </BannerProvider>
   );
 }

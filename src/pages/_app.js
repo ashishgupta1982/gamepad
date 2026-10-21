@@ -15,7 +15,8 @@ import '../styles/globals.css';
 // roundness that made the last one feel juvenile.
 const display = Outfit({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  // 800 for the arcade kit's banners and big numbers (REDESIGN-PLAN.md §3).
+  weight: ['400', '500', '600', '700', '800'],
   variable: '--font-display',
   display: 'swap',
 });

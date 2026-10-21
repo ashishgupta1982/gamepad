@@ -39,12 +39,16 @@ export default async function handler(req, res) {
   const tile = car.card.find(t => t.tileId === tileId);
   if (!tile) return res.status(404).json({ error: 'Tile not found' });
 
+  // Saving a caption on a tile already found re-sends found:true. Keep the
+  // time it was first spotted, which the feed and the results order by.
+  const wasFound = tile.found;
   tile.found = Boolean(found);
   if (found) {
-    tile.foundAt = new Date();
-    if (caption && typeof caption === 'string') tile.caption = caption.slice(0, 280);
+    if (!wasFound || !tile.foundAt) tile.foundAt = new Date();
+    if (typeof caption === 'string') tile.caption = caption.slice(0, 280);
   } else {
     tile.foundAt = undefined;
+    tile.caption = undefined;
   }
 
   // Check for win — all 9 tiles found

@@ -142,7 +142,27 @@
     transform: scale(0.96);
   }
 
-  /* Momentum scrolling inside panels without leaking to the page behind. */
+  /* The toy-box look (REDESIGN-PLAN.md): a hard edge under a tile, so it reads
+     as a chunky thing you can press, and a press that pushes it down onto that
+     edge. Set the edge colour per element with [--toy-edge:...]; it defaults to
+     a soft dark. `toy-flat` is the same edge on something that is not pressed. */
+  .toy {
+    box-shadow: 0 6px 0 0 var(--toy-edge, hsl(var(--foreground) / 0.16));
+    transition:
+      transform 120ms cubic-bezier(0.34, 1.56, 0.64, 1),
+      box-shadow 120ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .toy:active:not(:disabled) {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 0 var(--toy-edge, hsl(var(--foreground) / 0.16));
+  }
+  .toy-flat {
+    box-shadow:
+      0 5px 0 0 var(--toy-edge, hsl(var(--foreground) / 0.16)),
+      0 14px 28px -10px rgb(0 0 0 / 0.3);
+  }
+
+    /* Momentum scrolling inside panels without leaking to the page behind. */
   .scroll-contain {
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;

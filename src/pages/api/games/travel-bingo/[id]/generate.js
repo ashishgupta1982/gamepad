@@ -6,6 +6,15 @@ import { generateId, isHost } from '@/lib/travelBingo';
 import { resolvePlayer } from '@/utils/playerIdentity';
 import { checkRate } from '@/utils/rateLimiter';
 import { serializeGame } from './index';
+import { dealCards, MIN_POOL } from '@/lib/bingoRules';
+
+// The AI call can take a while; give it room before the platform kills the
+// function. If it is killed anyway, the game is left at 'generating' and the
+// stale check below lets the host try again rather than being stuck for good.
+export const config = { maxDuration: 60 };
+
+// A 'generating' phase older than this is a generation that died mid-flight.
+const STALE_GENERATING_MS = 75 * 1000;
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
@@ -95,13 +104,18 @@ export default async function handler(req, res) {
   if (!isHost(game, hostUserId)) {
     return res.status(403).json({ error: 'Only the host can generate cards' });
   }
-  if (game.travelBingoConfig.phase !== 'submission') {
-    return res.status(409).json({ error: 'Cards already generated' });
+  const phase = game.travelBingoConfig.phase;
+  const since = game.travelBingoConfig.generatingSince;
+  const stale = phase === 'generating' && (!since || Date.now() - new Date(since).getTime() > STALE_GENERATING_MS);
+  if (phase !== 'submission' && !stale) {
+    return res.status(409).json({ error: phase === 'generating' ? 'Cards are already being dealt' : 'Cards already generated' });
   }
 
+  // One car is a game too: a family in one car, each phone its own player or
+  // the whole car on one card. It used to need two.
   const cars = game.travelBingoConfig.cars || [];
-  if (cars.length < 2) {
-    return res.status(400).json({ error: 'Need at least 2 cars before generating' });
+  if (cars.length < 1) {
+    return res.status(400).json({ error: 'Need at least one car before generating' });
   }
 
   const pooledItems = Array.from(new Set(
@@ -109,12 +123,12 @@ export default async function handler(req, res) {
       .map(s => s.trim())
       .filter(Boolean)
   ));
-  if (pooledItems.length < 9) {
-    return res.status(400).json({ error: 'Need at least 9 items submitted in total' });
+  if (pooledItems.length < MIN_POOL) {
+    return res.status(400).json({ error: `Need at least ${MIN_POOL} different items in total` });
   }
 
-  // Mark generating
   game.travelBingoConfig.phase = 'generating';
+  game.travelBingoConfig.generatingSince = new Date();
   await game.save();
 
   let parsed = null;
@@ -130,11 +144,11 @@ export default async function handler(req, res) {
     console.error('Claude error in travel-bingo generate:', err);
   }
 
+  // No usable answer from the AI: deal the cards from the pool instead. A car
+  // full of people waiting on a retry button is worse than cards without the
+  // AI's categories.
   if (!parsed || !Array.isArray(parsed.cards) || !Array.isArray(parsed.categories)) {
-    // Roll back the phase and surface error
-    game.travelBingoConfig.phase = 'submission';
-    await game.save();
-    return res.status(502).json({ error: 'AI failed to generate valid cards. Please try again.' });
+    parsed = { categories: ['Spot it'], cards: dealCards(pooledItems, cars.map((c) => c.carId)) };
   }
 
   // Apply the result
@@ -164,7 +178,21 @@ export default async function handler(req, res) {
     car.card = tiles;
   }
 
+  // A car the AI left out gets a dealt card rather than an empty one.
+  for (const car of cars) {
+    if (car.card?.length) continue;
+    const [dealt] = dealCards(pooledItems, [car.carId]);
+    car.card = (dealt?.tiles || []).map((t) => ({
+      tileId: generateId('tile'),
+      label: t.label,
+      category: t.category,
+      found: false,
+      comments: [],
+    }));
+  }
+
   game.travelBingoConfig.phase = 'playing';
+  game.travelBingoConfig.generatingSince = undefined;
   await game.save();
 
   return res.status(200).json({ game: serializeGame(game) });
