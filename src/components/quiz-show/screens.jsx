@@ -19,8 +19,10 @@ export function GetReady({ game, title = 'Quiz Night', waitingFor = false }) {
   useEffect(() => {
     if (waitingFor) return undefined;
     play('beep');
+    // Stops at GO!: counting on past it re-animated GO! every beat.
     const t = setInterval(() => {
       setN((x) => {
+        if (x <= 0) return 0;
         const next = x - 1;
         if (next > 0) play('beep');
         if (next === 0) play('go');

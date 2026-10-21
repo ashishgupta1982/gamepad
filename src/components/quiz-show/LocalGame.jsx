@@ -36,7 +36,6 @@ export default function LocalGame({ setup, resume, onExit, onNewQuiz }) {
   const { status } = useSession();
   const [game, setGame] = useState(() => resume?.game || createGame({ mode: setup.mode, settings: settingsOf(setup), players: setup.players }));
   const [error, setError] = useState('');
-  const [readyAt, setReadyAt] = useState(null);
   const fetching = useRef(false);
   const saved = useRef(!!resume?.recorded);
   const me = game.mode === 'solo' ? game.players[0]?.id : null;
@@ -82,13 +81,17 @@ export default function LocalGame({ setup, resume, onExit, onNewQuiz }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Once the first questions are in, the 3-2-1, then the first question.
+  // Once the first questions are in, the 3-2-1, then the first question. Keyed
+  // on whether there are any questions, not how many: the second batch landing
+  // mid-countdown must not restart it. (It used to keep a "started" state in
+  // its own dependencies, so the re-render cleared the timer it had just set
+  // and the game sat on GO! for ever.)
+  const haveQuestions = game.questions.length > 0;
   useEffect(() => {
-    if (game.phase !== 'ready' || !game.questions.length || readyAt) return;
-    setReadyAt(Date.now());
+    if (game.phase !== 'ready' || !haveQuestions) return undefined;
     const t = setTimeout(() => setGame((g) => start(g, Date.now())), READY_MS);
     return () => clearTimeout(t);
-  }, [game.phase, game.questions.length, readyAt]);
+  }, [game.phase, haveQuestions]);
 
   // At the end: remember the questions so they do not come back, and keep the
   // result in a signed-in player's history.
