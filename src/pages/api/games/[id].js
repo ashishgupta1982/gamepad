@@ -33,7 +33,7 @@ export default async function handler(req, res) {
 
   if (req.method === 'PATCH') {
     try {
-      const { players, status, quizConfig, dartsConfig } = req.body;
+      const { players, status, quizConfig, dartsConfig, scrabbleConfig } = req.body;
 
       const game = await Game.findOne({
         _id: id,
@@ -60,6 +60,12 @@ export default async function handler(req, res) {
         game.dartsConfig = dartsConfig;
         // dartsConfig.match is Mixed, which Mongoose does not watch for changes.
         game.markModified('dartsConfig');
+      }
+
+      if (scrabbleConfig) {
+        game.scrabbleConfig = scrabbleConfig;
+        // Mixed again: Mongoose has to be told it changed.
+        game.markModified('scrabbleConfig');
       }
 
       game.updatedAt = Date.now();

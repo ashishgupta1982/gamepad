@@ -67,6 +67,12 @@ const GameSchema = new mongoose.Schema({
       pointsPerQuestion: [Number]
     }]
   },
+  // Scrabble (Phase 5): the whole match, its players and the log of every
+  // turn, which replays to every score (lib/scrabble/rules.js). Games saved by
+  // the old scorer have none and are not read.
+  scrabbleConfig: {
+    match: mongoose.Schema.Types.Mixed
+  },
   // Additional fields for darts game
   dartsConfig: {
     gameMode: String,
