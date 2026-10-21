@@ -29,8 +29,12 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
+  // The quiz's custom categories, {id, name, description, emoji} each
+  // (lib/quiz/catalogue.js). Older accounts hold "Name: description" strings;
+  // they are read through normaliseCustomList and rewritten as objects on the
+  // next save, so both shapes are allowed here.
   customQuizCategories: {
-    type: [String],
+    type: [mongoose.Schema.Types.Mixed],
     default: []
   }
 });
