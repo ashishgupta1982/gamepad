@@ -27,7 +27,9 @@ export default function QuizHome({ resume, onResume, onStart, onJoin, onHistory,
         <p className="mt-4 text-lg font-semibold text-white/90">Fresh questions every game, for any age.</p>
       </motion.div>
 
-      <div className="mt-auto grid gap-3 pt-10">
+      {/* grid-cols-1 is minmax(0, 1fr): a bare grid sizes its column to the
+          widest line, and a one-line subtitle pushed the buttons off a phone. */}
+      <div className="mt-auto grid grid-cols-1 gap-3 pt-10">
         {resume && (
           <BigChoice emoji="▶️" title="Carry on" text={resume} tone="bg-violet-500 text-white [--toy-edge:theme(colors.violet.800)]" onClick={onResume} />
         )}
@@ -49,7 +51,7 @@ function BigChoice({ emoji, title, text, tone, onClick }) {
         play('tap');
         onClick();
       }}
-      className={`toy flex items-center gap-4 rounded-3xl px-5 py-4 text-left ${tone}`}
+      className={`toy flex w-full min-w-0 items-center gap-4 rounded-3xl px-5 py-4 text-left ${tone}`}
     >
       <span className="text-4xl" aria-hidden="true">{emoji}</span>
       <span className="min-w-0">

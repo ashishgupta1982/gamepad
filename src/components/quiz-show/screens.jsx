@@ -274,7 +274,7 @@ export function FinalScreen({ game, me, big = false, children }) {
         </p>
       )}
       {!solo && rows.length > 3 && <Leaderboard rows={rows.slice(3)} highlight={me} />}
-      <div className="mt-auto grid gap-3">{children}</div>
+      <div className="mt-auto grid grid-cols-1 gap-3">{children}</div>
     </div>
   );
 }

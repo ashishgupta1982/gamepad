@@ -91,7 +91,7 @@ export default function Setup({ initial, onStart, onCancel }) {
         <motion.div key={at} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.22 }} className="flex-1 py-5">
           {at === 'mode' && (
             <Section title="How are you playing?">
-              <div className="grid gap-3">
+              <div className="grid grid-cols-1 gap-3">
                 {MODES.map((m) => (
                   <button
                     key={m.id}
@@ -187,7 +187,7 @@ export default function Setup({ initial, onStart, onCancel }) {
 
           {at === 'level' && (
             <Section title="Who’s it for?" sub="Everyone gets the same questions.">
-              <div className="grid gap-2">
+              <div className="grid grid-cols-1 gap-2">
                 {LEVELS.map((l) => (
                   <Chip key={l.id} on={level === l.id} onClick={() => setLevel(l.id)}>
                     <span className="text-2xl" aria-hidden="true">{l.emoji}</span>
