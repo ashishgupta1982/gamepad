@@ -6,8 +6,8 @@ import { cn } from '@/lib/cn';
 
 // Two big buttons, then one short form. A join link (?code=) skips straight to
 // the join form with the code filled in.
-export default function StartScreen({ onCreate, onJoin, busy, initialCode = '' }) {
-  const [mode, setMode] = useState(initialCode ? 'join' : null); // null | 'create' | 'join'
+export default function StartScreen({ onCreate, onJoin, busy, initialCode = '', initialMode = null }) {
+  const [mode, setMode] = useState(initialCode ? 'join' : initialMode); // null | 'create' | 'join'
   const [name, setName] = useState('');
   const [code, setCode] = useState(initialCode.toUpperCase().slice(0, 6));
   const [error, setError] = useState('');
@@ -105,7 +105,7 @@ export default function StartScreen({ onCreate, onJoin, busy, initialCode = '' }
               onChange={(e) => setName(e.target.value.slice(0, 30))}
               placeholder="e.g. Back seat, or The Smiths"
               className="w-full rounded-2xl border-2 border-border bg-muted/40 px-4 py-3 text-lg focus:border-game-bingo focus:outline-none"
-              autoFocus={mode === 'create' || !!initialCode}
+              autoFocus={mode === 'create' || !!initialCode || initialMode === 'join'}
             />
           </label>
 

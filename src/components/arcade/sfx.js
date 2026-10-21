@@ -101,6 +101,37 @@ const EFFECTS = {
   },
   // Something went wrong.
   error: (ac) => note(ac, { freq: 200, slide: 120, type: 'square', dur: 0.25, gain: 0.1 }),
+  // The camera pushing into the room: a rising swish of filtered noise.
+  whoosh: (ac) => {
+    const t0 = ac.currentTime;
+    const len = Math.ceil(ac.sampleRate * 0.5);
+    const buffer = ac.createBuffer(1, len, ac.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < len; i++) data[i] = (Math.random() * 2 - 1) * Math.sin((Math.PI * i) / len) * 0.5;
+    const src = ac.createBufferSource();
+    const filter = ac.createBiquadFilter();
+    const amp = ac.createGain();
+    filter.type = 'bandpass';
+    filter.Q.value = 1.2;
+    filter.frequency.setValueAtTime(300, t0);
+    filter.frequency.exponentialRampToValueAtTime(2400, t0 + 0.45);
+    amp.gain.value = 0.45;
+    src.buffer = buffer;
+    src.connect(filter).connect(amp).connect(ac.destination);
+    src.start(t0);
+  },
+  // Pulling back out of it.
+  back: (ac) => note(ac, { freq: 700, slide: 380, type: 'triangle', dur: 0.12, gain: 0.14 }),
+  // The cupboard doors: a creak and a click.
+  door: (ac) => {
+    note(ac, { freq: 180, slide: 120, type: 'sawtooth', dur: 0.25, gain: 0.05 });
+    note(ac, { freq: 520, slide: 780, type: 'triangle', start: 0.2, dur: 0.12, gain: 0.12 });
+  },
+  // A dart landing in the board.
+  thunk: (ac) => {
+    note(ac, { freq: 140, slide: 70, type: 'sine', dur: 0.1, gain: 0.25 });
+    noise(ac, { dur: 0.03, gain: 0.1 });
+  },
   // Cards dealt.
   deal: (ac) => [0, 0.07, 0.14, 0.21].forEach((start) => noise(ac, { start, dur: 0.04, gain: 0.08 })),
 };

@@ -1,6 +1,7 @@
 # GamePad — the toy-box arcade rebuild
 
-**Status:** agreed with Ash 2026-10-21. Phase 1 (Travel Bingo) in progress.
+**Status:** agreed with Ash 2026-10-21. Phase 1 (Travel Bingo) live 2026-10-21.
+Phase 2 (the games room) built.
 **Replaces** the August realignment plan, which is finished (every phase landed
 2026-08-27; it is in git history at `934d2e5:REDESIGN-PLAN.md`). The decisions
 from it that still bind are carried forward in §6.
@@ -28,7 +29,7 @@ fixes on the way through.
 | Question | Decision |
 |---|---|
 | Look | **Toy-box arcade**: bright, chunky, tiles that look like toys and bounce and wobble. Not a dark neon cabinet. |
-| Landing layout | **Every game visible at once, no swiping.** A grid, not a carousel. |
+| Landing layout | **Every game visible at once, no swiping.** Then, from the mock-ups: **a games room** where each game is an object (Phase 2). |
 | Quiz | Keeps **both** modes: one phone passed round, and multi-phone. Adds a **TV mode**. |
 | TV mode | **Quiz only.** Not Darts. |
 | Sound | **On by default, with a mute switch** that is remembered. Vibration where the phone supports it. |
@@ -98,14 +99,26 @@ every car's `userId`, and a guest's id is what `resolvePlayer` accepts from the
 request body, so anyone in a game can act as another guest car (mark its tiles,
 or generate as host). The serializer must stop returning ids.
 
-### Phase 2 — Landing page
+### Phase 2 — Landing page: the games room
 
-The toy-box grid: every game on screen at once, each a chunky toy tile with its
-own artwork that idles (a gentle bob or wobble) and squashes when pressed.
-Continue-where-you-left-off for a signed-in player, the sign-in offer below the
-games as now. **Before building, two or three mock-ups on a page Ash opens on his
-phone,** and the brand-colour question settled with them. Game artwork from
-Higgsfield is an option here (a few credits; ask first).
+Three tile-grid mock-ups were shown, then Ash asked for a room instead, and a
+clickable mock-up of it settled it: **one painted room in a soft 3D toy style,
+every game an object in it.** The plane is Travel Bingo, the dartboard Darts,
+the TV the Quiz (its TV mode's screen), the map with the gold pyramid Egypt
+Explorer, and the cupboard opens onto shelves of board-game boxes (Scrabble,
+and room for more). Tap an object and the camera pushes in; a card rises with
+that game's choices.
+
+Ash's calls on the mock-up: **nothing drawn over the picture.** Name labels
+show for a few seconds on arrival and when the empty room is tapped, then fade.
+**Carry on, new and join live on each game's card**, not on the room. Sign-in is
+the account button in the corner and a line on each card for a guest.
+
+The plane, a dart and the TV screen are layered over the picture so they move:
+the plane sways on its strings, a dart lands in the board now and then, the TV
+cycles through the quiz's answer shapes. Where the art came from is in
+`src/data/gamesRoom.js`. The brand colour stays: the wordmark is ink and orange
+on the room's ceiling.
 
 ### Phase 3 — Darts
 

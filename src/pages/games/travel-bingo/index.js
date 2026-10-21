@@ -148,9 +148,11 @@ function TravelBingo() {
     [receive],
   );
 
-  // Resume the game this phone was in.
+  // Resume the game this phone was in, unless the games room sent us here to
+  // start or join a different one (?start=new or ?start=join).
   useEffect(() => {
-    if (authStatus === 'loading') return;
+    if (authStatus === 'loading' || !router.isReady) return;
+    if (router.query.start === 'new' || router.query.start === 'join') stored('clear');
     const s = stored('get');
     if (s?.gameId && s?.carId) {
       myCarRef.current = s.carId;
@@ -158,7 +160,7 @@ function TravelBingo() {
       fetchGame(s.gameId).catch(() => stored('clear'));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [authStatus]);
+  }, [authStatus, router.isReady]);
 
   const gameId = game?._id;
   const phase = game?.travelBingoConfig?.phase;
@@ -179,6 +181,9 @@ function TravelBingo() {
   }, [gameId, phase, fetchGame]);
 
   const enter = (id, carId) => {
+    // Drop ?start=new / ?start=join, so a reload resumes this game rather than
+    // clearing it to start another.
+    if (router.query.start) router.replace('/games/travel-bingo', undefined, { shallow: true });
     stored('set', { gameId: id, carId });
     myCarRef.current = carId;
     setMyCarId(carId);
@@ -415,7 +420,13 @@ function TravelBingo() {
         className="bg-gradient-to-b from-teal-50 to-amber-50"
       >
         {!game && authStatus !== 'loading' && router.isReady && (
-          <StartScreen onCreate={handleCreate} onJoin={handleJoin} busy={busy} initialCode={typeof router.query.code === 'string' ? router.query.code : ''} />
+          <StartScreen
+            onCreate={handleCreate}
+            onJoin={handleJoin}
+            busy={busy}
+            initialCode={typeof router.query.code === 'string' ? router.query.code : ''}
+            initialMode={router.query.start === 'join' ? 'join' : router.query.start === 'new' ? 'create' : null}
+          />
         )}
 
         {game && phase === 'submission' && <SetupScreen game={game} myCarId={myCarId} onSaveItems={saveItems} />}
