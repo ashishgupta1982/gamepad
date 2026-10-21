@@ -87,6 +87,17 @@ export function fingerprint(questionText) {
 }
 
 /**
+ * A question's key: its fingerprint, counting its picture or emoji clue as
+ * part of it, since "Which country's flag is this?" is a different question
+ * for every flag. A question with neither keys as its text alone.
+ */
+export function questionKey(q) {
+  // fingerprint keeps letters and digits only, so emoji go in as code points.
+  const clue = q.media?.kind === 'emoji' ? [...q.media.text].map((c) => c.codePointAt(0).toString(36)).join(' ') : q.media?.src || '';
+  return fingerprint(`${q.question} ${clue}`);
+}
+
+/**
  * Checked, shuffled questions with no repeats, either within the batch or
  * against `avoid` (fingerprints already played). At most `count`.
  */
@@ -96,7 +107,7 @@ export function acceptQuestions(rawList, { count, avoid = [], random = Math.rand
   for (const raw of Array.isArray(rawList) ? rawList : []) {
     const q = checkQuestion(raw);
     if (!q) continue;
-    const fp = fingerprint(q.question);
+    const fp = questionKey(q);
     if (seen.has(fp)) continue;
     seen.add(fp);
     out.push({ ...shuffleOptions(q, random), id: fp });

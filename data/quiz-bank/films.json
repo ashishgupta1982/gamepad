@@ -1,0 +1,165 @@
+{
+  "category": "films",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which film do these emoji describe?",
+      "options": [
+        "Finding Nemo",
+        "Shark Tale",
+        "Luca",
+        "The Little Mermaid"
+      ],
+      "answer": "Finding Nemo",
+      "explanation": "Marlin crosses the ocean to find his son Nemo, with forgetful Dory along for the ride.",
+      "family": true,
+      "difficulty": 1,
+      "media": {
+        "kind": "emoji",
+        "text": "🐠🔍🌊"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which film do these emoji describe?",
+      "options": [
+        "Frozen",
+        "Tangled",
+        "Brave",
+        "Moana"
+      ],
+      "answer": "Frozen",
+      "explanation": "Elsa and Anna are sisters, and Olaf is a snowman who dreams of summer.",
+      "family": true,
+      "difficulty": 1,
+      "media": {
+        "kind": "emoji",
+        "text": "❄️👑👭⛄"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "What is the name of the cowboy doll in Toy Story?",
+      "options": [
+        "Woody",
+        "Bullseye",
+        "Slinky",
+        "Rex"
+      ],
+      "answer": "Woody",
+      "explanation": "Woody is voiced by Tom Hanks, and Bullseye is his horse.",
+      "family": true,
+      "difficulty": 1
+    },
+    {
+      "band": "kids",
+      "question": "In The Lion King, what kind of animal is Pumbaa?",
+      "options": [
+        "A warthog",
+        "A meerkat",
+        "A hyena",
+        "A baboon"
+      ],
+      "answer": "A warthog",
+      "explanation": "Pumbaa's best friend Timon is the meerkat, and together they sing Hakuna Matata.",
+      "family": true,
+      "difficulty": 1
+    },
+    {
+      "band": "kids",
+      "question": "Which film do these emoji describe?",
+      "options": [
+        "WALL-E",
+        "Big Hero 6",
+        "Robots",
+        "The Iron Giant"
+      ],
+      "answer": "WALL-E",
+      "explanation": "WALL-E is a little robot left tidying up an empty Earth, until a tiny plant changes everything.",
+      "family": true,
+      "difficulty": 2,
+      "media": {
+        "kind": "emoji",
+        "text": "🤖🌱🚀💛"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which film won the very first Academy Award for Best Picture?",
+      "options": [
+        "Wings",
+        "The General",
+        "The Jazz Singer",
+        "Metropolis"
+      ],
+      "answer": "Wings",
+      "explanation": "Wings, a silent film about First World War pilots, won at the first Oscars in 1929.",
+      "family": false,
+      "difficulty": 3
+    },
+    {
+      "band": "adults",
+      "question": "Which film do these emoji describe?",
+      "options": [
+        "Titanic",
+        "Poseidon",
+        "Jaws",
+        "The Perfect Storm"
+      ],
+      "answer": "Titanic",
+      "explanation": "James Cameron's Titanic won 11 Oscars, a record it shares with Ben-Hur and The Return of the King.",
+      "family": true,
+      "difficulty": 1,
+      "media": {
+        "kind": "emoji",
+        "text": "🚢🧊💔"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Who directed Jaws, E.T. and Jurassic Park?",
+      "options": [
+        "Steven Spielberg",
+        "George Lucas",
+        "James Cameron",
+        "Ridley Scott"
+      ],
+      "answer": "Steven Spielberg",
+      "explanation": "Steven Spielberg was just 27 when he shot Jaws.",
+      "family": true,
+      "difficulty": 1
+    },
+    {
+      "band": "adults",
+      "question": "Who played the travel bookshop owner in Notting Hill?",
+      "options": [
+        "Hugh Grant",
+        "Colin Firth",
+        "Rhys Ifans",
+        "Jude Law"
+      ],
+      "answer": "Hugh Grant",
+      "explanation": "Hugh Grant plays William Thacker, and Rhys Ifans steals scenes as his flatmate Spike.",
+      "family": false,
+      "difficulty": 2
+    },
+    {
+      "band": "adults",
+      "question": "Which film do these emoji describe?",
+      "options": [
+        "Jurassic Park",
+        "King Kong",
+        "The Land Before Time",
+        "Godzilla"
+      ],
+      "answer": "Jurassic Park",
+      "explanation": "Scientists bring dinosaurs back from DNA found in mosquitoes trapped in amber.",
+      "family": true,
+      "difficulty": 1,
+      "media": {
+        "kind": "emoji",
+        "text": "🦖🏝️🧬"
+      }
+    }
+  ]
+}

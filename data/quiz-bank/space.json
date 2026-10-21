@@ -1,0 +1,145 @@
+{
+  "category": "space",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which planet is closest to the Sun?",
+      "options": [
+        "Mercury",
+        "Venus",
+        "Mars",
+        "Earth"
+      ],
+      "answer": "Mercury",
+      "explanation": "A year on Mercury lasts just 88 Earth days.",
+      "family": true,
+      "difficulty": 1
+    },
+    {
+      "band": "kids",
+      "question": "Who was the first person to walk on the Moon?",
+      "options": [
+        "Neil Armstrong",
+        "Buzz Aldrin",
+        "Yuri Gagarin",
+        "Michael Collins"
+      ],
+      "answer": "Neil Armstrong",
+      "explanation": "Neil Armstrong stepped onto the Moon in July 1969, with Buzz Aldrin close behind him.",
+      "family": true,
+      "difficulty": 1
+    },
+    {
+      "band": "kids",
+      "question": "Which planet has a giant storm called the Great Red Spot, bigger than the whole Earth?",
+      "options": [
+        "Jupiter",
+        "Saturn",
+        "Neptune",
+        "Mars"
+      ],
+      "answer": "Jupiter",
+      "explanation": "The Great Red Spot has been swirling for at least 150 years.",
+      "family": true,
+      "difficulty": 2
+    },
+    {
+      "band": "kids",
+      "question": "What do we call a rock from space that lands on Earth?",
+      "options": [
+        "A meteorite",
+        "A comet",
+        "An asteroid",
+        "A satellite"
+      ],
+      "answer": "A meteorite",
+      "explanation": "It is a meteor while it streaks across the sky, and a meteorite once it lands.",
+      "family": true,
+      "difficulty": 2
+    },
+    {
+      "band": "kids",
+      "question": "Roughly how long does sunlight take to reach Earth?",
+      "options": [
+        "About 8 minutes",
+        "About 8 seconds",
+        "About 8 hours",
+        "About 8 days"
+      ],
+      "answer": "About 8 minutes",
+      "explanation": "Sunlight travels about 150 million kilometres to reach us, in a little over 8 minutes.",
+      "family": true,
+      "difficulty": 2
+    },
+    {
+      "band": "adults",
+      "question": "Who was the first person to travel into space?",
+      "options": [
+        "Yuri Gagarin",
+        "Neil Armstrong",
+        "Alan Shepard",
+        "John Glenn"
+      ],
+      "answer": "Yuri Gagarin",
+      "explanation": "Yuri Gagarin orbited the Earth once in Vostok 1 on 12 April 1961.",
+      "family": true,
+      "difficulty": 1
+    },
+    {
+      "band": "adults",
+      "question": "Which planet spins on its side, its axis tilted by about 98 degrees?",
+      "options": [
+        "Uranus",
+        "Neptune",
+        "Saturn",
+        "Venus"
+      ],
+      "answer": "Uranus",
+      "explanation": "Uranus rolls round the Sun on its side, probably knocked over by a giant collision long ago.",
+      "family": false,
+      "difficulty": 2
+    },
+    {
+      "band": "adults",
+      "question": "Which is the largest moon in the Solar System?",
+      "options": [
+        "Ganymede",
+        "Titan",
+        "Callisto",
+        "Europa"
+      ],
+      "answer": "Ganymede",
+      "explanation": "Jupiter's moon Ganymede is even wider than the planet Mercury.",
+      "family": false,
+      "difficulty": 2
+    },
+    {
+      "band": "adults",
+      "question": "Who became the first British person in space, in 1991?",
+      "options": [
+        "Helen Sharman",
+        "Tim Peake",
+        "Michael Foale",
+        "Piers Sellers"
+      ],
+      "answer": "Helen Sharman",
+      "explanation": "Helen Sharman spent about eight days in space in May 1991, most of them aboard the Soviet space station Mir.",
+      "family": true,
+      "difficulty": 2
+    },
+    {
+      "band": "adults",
+      "question": "Which is the hottest planet in the Solar System?",
+      "options": [
+        "Venus",
+        "Mercury",
+        "Mars",
+        "Jupiter"
+      ],
+      "answer": "Venus",
+      "explanation": "Venus is hotter than Mercury, even though it is further from the Sun, because its thick carbon dioxide atmosphere traps the heat.",
+      "family": true,
+      "difficulty": 2
+    }
+  ]
+}

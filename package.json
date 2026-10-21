@@ -12,7 +12,8 @@
     "lint": "next lint",
     "test": "vitest run",
     "test:watch": "vitest",
-    "quiz:import": "node --no-warnings --env-file=.env.local scripts/import-quiz-bank.mjs"
+    "quiz:import": "node --no-warnings --env-file=.env.local scripts/import-quiz-bank.mjs",
+    "quiz:images": "node --no-warnings scripts/quiz-images.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.36.3",

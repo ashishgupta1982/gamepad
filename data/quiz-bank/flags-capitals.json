@@ -1,0 +1,180 @@
+{
+  "category": "flags-capitals",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which country's flag is this?",
+      "options": [
+        "Brazil",
+        "Portugal",
+        "Argentina",
+        "Mexico"
+      ],
+      "answer": "Brazil",
+      "explanation": "The blue globe on Brazil's flag shows the stars over Rio de Janeiro on the morning the country became a republic in 1889.",
+      "family": true,
+      "difficulty": 1,
+      "media": {
+        "kind": "image",
+        "flag": "br",
+        "alt": "A national flag",
+        "src": "/quiz/flags/br.svg",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which country's flag is this?",
+      "options": [
+        "Canada",
+        "Switzerland",
+        "Peru",
+        "Austria"
+      ],
+      "answer": "Canada",
+      "explanation": "Canada's maple leaf flag was first raised in 1965.",
+      "family": true,
+      "difficulty": 1,
+      "media": {
+        "kind": "image",
+        "flag": "ca",
+        "alt": "A national flag",
+        "src": "/quiz/flags/ca.svg",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "What is the capital city of Australia?",
+      "options": [
+        "Canberra",
+        "Sydney",
+        "Melbourne",
+        "Perth"
+      ],
+      "answer": "Canberra",
+      "explanation": "Canberra was built specially to be the capital, partly because Sydney and Melbourne both wanted the job.",
+      "family": true,
+      "difficulty": 2
+    },
+    {
+      "band": "kids",
+      "question": "Which city is the capital of Egypt?",
+      "options": [
+        "Cairo",
+        "Alexandria",
+        "Luxor",
+        "Giza"
+      ],
+      "answer": "Cairo",
+      "explanation": "Cairo sits on the River Nile, and the pyramids of Giza are just outside the city.",
+      "family": true,
+      "difficulty": 1
+    },
+    {
+      "band": "kids",
+      "question": "Which country's flag is this, the only national flag that isn't a rectangle?",
+      "options": [
+        "Nepal",
+        "Bhutan",
+        "India",
+        "Sri Lanka"
+      ],
+      "answer": "Nepal",
+      "explanation": "Nepal's two stacked triangles are often said to stand for the peaks of the Himalayas.",
+      "family": true,
+      "difficulty": 2,
+      "media": {
+        "kind": "image",
+        "flag": "np",
+        "alt": "A national flag",
+        "src": "/quiz/flags/np.svg",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which country's flag is this?",
+      "options": [
+        "Kazakhstan",
+        "Uzbekistan",
+        "Kyrgyzstan",
+        "Turkmenistan"
+      ],
+      "answer": "Kazakhstan",
+      "explanation": "Kazakhstan's sky-blue flag has a golden sun with a steppe eagle soaring beneath it.",
+      "family": false,
+      "difficulty": 2,
+      "media": {
+        "kind": "image",
+        "flag": "kz",
+        "alt": "A national flag",
+        "src": "/quiz/flags/kz.svg",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "What is the capital of Canada?",
+      "options": [
+        "Ottawa",
+        "Toronto",
+        "Montreal",
+        "Vancouver"
+      ],
+      "answer": "Ottawa",
+      "explanation": "Queen Victoria chose Ottawa as the capital in 1857.",
+      "family": true,
+      "difficulty": 1
+    },
+    {
+      "band": "adults",
+      "question": "Wellington is the capital of which country?",
+      "options": [
+        "New Zealand",
+        "Australia",
+        "South Africa",
+        "Canada"
+      ],
+      "answer": "New Zealand",
+      "explanation": "Wellington is the southernmost capital city of any country in the world.",
+      "family": true,
+      "difficulty": 2
+    },
+    {
+      "band": "adults",
+      "question": "Which city became the capital of Turkey in 1923?",
+      "options": [
+        "Ankara",
+        "Istanbul",
+        "Izmir",
+        "Antalya"
+      ],
+      "answer": "Ankara",
+      "explanation": "Ankara replaced Istanbul as the capital in October 1923, the same month the Republic of Turkey was proclaimed.",
+      "family": false,
+      "difficulty": 2
+    },
+    {
+      "band": "adults",
+      "question": "Which country's flag is this?",
+      "options": [
+        "Sri Lanka",
+        "Bhutan",
+        "Malaysia",
+        "Myanmar"
+      ],
+      "answer": "Sri Lanka",
+      "explanation": "The lion carrying a sword gives Sri Lanka's flag its nickname, the Lion Flag.",
+      "family": false,
+      "difficulty": 3,
+      "media": {
+        "kind": "image",
+        "flag": "lk",
+        "alt": "A national flag",
+        "src": "/quiz/flags/lk.svg",
+        "credit": ""
+      }
+    }
+  ]
+}

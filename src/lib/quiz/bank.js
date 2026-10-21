@@ -3,7 +3,7 @@
 // tagged on its way in. Shared by the question route, the writer and the seed
 // import script (scripts/import-quiz-bank.mjs), so relative imports only.
 import { CATEGORIES, GROUPS, MIXED, categoryById, groupOfPick } from './catalogue.js';
-import { checkQuestion, fingerprint, shuffleOptions } from './questions.js';
+import { checkQuestion, questionKey, shuffleOptions } from './questions.js';
 
 export const BANDS = ['kids', 'adults'];
 
@@ -58,7 +58,7 @@ export function toBank(raw, { category, band, source = 'writer', model } = {}) {
   const q = checkQuestion(raw);
   if (!q) return null;
   return {
-    fingerprint: fingerprint(q.question),
+    fingerprint: questionKey(q),
     question: q.question,
     options: q.options,
     correctAnswer: q.correctAnswer,

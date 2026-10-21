@@ -1,0 +1,145 @@
+{
+  "category": "harry-potter",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "What position does Harry play in the Gryffindor Quidditch team?",
+      "options": [
+        "Seeker",
+        "Keeper",
+        "Beater",
+        "Chaser"
+      ],
+      "answer": "Seeker",
+      "explanation": "The Seeker's job is to catch the Golden Snitch, which ends the game.",
+      "family": true,
+      "difficulty": 1
+    },
+    {
+      "band": "kids",
+      "question": "What is the name of Harry's owl?",
+      "options": [
+        "Hedwig",
+        "Errol",
+        "Pigwidgeon",
+        "Crookshanks"
+      ],
+      "answer": "Hedwig",
+      "explanation": "Hagrid gave Hedwig to Harry for his eleventh birthday.",
+      "family": true,
+      "difficulty": 1
+    },
+    {
+      "band": "kids",
+      "question": "Which Hogwarts house is Hermione Granger sorted into?",
+      "options": [
+        "Gryffindor",
+        "Ravenclaw",
+        "Hufflepuff",
+        "Slytherin"
+      ],
+      "answer": "Gryffindor",
+      "explanation": "Hermione says the Sorting Hat seriously thought about putting her in Ravenclaw.",
+      "family": true,
+      "difficulty": 1
+    },
+    {
+      "band": "kids",
+      "question": "Which platform does the Hogwarts Express leave from at King's Cross?",
+      "options": [
+        "Platform Nine and Three-Quarters",
+        "Platform Seven and a Half",
+        "Platform Ten and a Quarter",
+        "Platform Nine and a Half"
+      ],
+      "answer": "Platform Nine and Three-Quarters",
+      "explanation": "You get there by walking straight at the barrier between platforms nine and ten.",
+      "family": true,
+      "difficulty": 1
+    },
+    {
+      "band": "kids",
+      "question": "Which spell does Harry use most often to knock an opponent's wand away?",
+      "options": [
+        "Expelliarmus",
+        "Expecto Patronum",
+        "Wingardium Leviosa",
+        "Stupefy"
+      ],
+      "answer": "Expelliarmus",
+      "explanation": "Harry uses it so often that the Death Eaters call it his signature move.",
+      "family": true,
+      "difficulty": 2
+    },
+    {
+      "band": "adults",
+      "question": "What is the Weasley family's home called?",
+      "options": [
+        "The Burrow",
+        "Shell Cottage",
+        "Grimmauld Place",
+        "Spinner's End"
+      ],
+      "answer": "The Burrow",
+      "explanation": "The Burrow's family clock shows where each Weasley is, rather than the time.",
+      "family": true,
+      "difficulty": 2
+    },
+    {
+      "band": "adults",
+      "question": "What is the core of Harry's wand?",
+      "options": [
+        "Phoenix feather",
+        "Unicorn hair",
+        "Dragon heartstring",
+        "Veela hair"
+      ],
+      "answer": "Phoenix feather",
+      "explanation": "The feather came from Fawkes, who gave just one other feather, to the wand of Lord Voldemort.",
+      "family": false,
+      "difficulty": 2
+    },
+    {
+      "band": "adults",
+      "question": "What does the spell Lumos do?",
+      "options": [
+        "Lights the tip of a wand",
+        "Unlocks a door",
+        "Makes things float",
+        "Summons an object"
+      ],
+      "answer": "Lights the tip of a wand",
+      "explanation": "Nox puts the light out again.",
+      "family": true,
+      "difficulty": 1
+    },
+    {
+      "band": "adults",
+      "question": "Which magical object lets Harry dive into other people's memories?",
+      "options": [
+        "The Pensieve",
+        "The Mirror of Erised",
+        "The Marauder's Map",
+        "The Remembrall"
+      ],
+      "answer": "The Pensieve",
+      "explanation": "Dumbledore keeps his Pensieve in a cabinet in his office.",
+      "family": true,
+      "difficulty": 2
+    },
+    {
+      "band": "adults",
+      "question": "Who turns out to be the Half-Blood Prince?",
+      "options": [
+        "Severus Snape",
+        "Tom Riddle",
+        "Sirius Black",
+        "Remus Lupin"
+      ],
+      "answer": "Severus Snape",
+      "explanation": "Snape's mother was Eileen Prince, so he called himself the Half-Blood Prince.",
+      "family": false,
+      "difficulty": 2
+    }
+  ]
+}

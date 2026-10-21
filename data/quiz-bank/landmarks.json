@@ -1,0 +1,185 @@
+{
+  "category": "landmarks",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which famous landmark is this?",
+      "options": [
+        "The Statue of Liberty",
+        "Christ the Redeemer",
+        "The Angel of the North",
+        "The Little Mermaid"
+      ],
+      "answer": "The Statue of Liberty",
+      "explanation": "The Statue of Liberty was a present to the United States from France, unveiled in 1886.",
+      "family": true,
+      "difficulty": 1,
+      "media": {
+        "kind": "image",
+        "wiki": "Statue_of_Liberty",
+        "alt": "A famous statue",
+        "src": "/quiz/pics/statue-of-liberty.webp",
+        "credit": "Photo: AskALotl, public domain (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Front_view_of_Statue_of_Liberty_(cropped).jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "In which city is this famous building?",
+      "options": [
+        "Sydney",
+        "Melbourne",
+        "Auckland",
+        "Singapore"
+      ],
+      "answer": "Sydney",
+      "explanation": "The Sydney Opera House's roof is covered in more than a million tiles.",
+      "family": true,
+      "difficulty": 1,
+      "media": {
+        "kind": "image",
+        "wiki": "Sydney_Opera_House",
+        "alt": "A famous building by the water",
+        "src": "/quiz/pics/sydney-opera-house.webp",
+        "credit": "Photo: Bernard Spragg. NZ from Christchurch, New Zealand, public domain (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Sydney_Australia._(21339175489).jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "What is the official name of the London clock tower that holds the bell called Big Ben?",
+      "options": [
+        "Elizabeth Tower",
+        "Victoria Tower",
+        "Albert Tower",
+        "Westminster Tower"
+      ],
+      "answer": "Elizabeth Tower",
+      "explanation": "It was renamed the Elizabeth Tower in 2012 for the Queen's Diamond Jubilee; Big Ben is the great bell inside.",
+      "family": true,
+      "difficulty": 2
+    },
+    {
+      "band": "kids",
+      "question": "In which country would you find the Leaning Tower of Pisa?",
+      "options": [
+        "Italy",
+        "Spain",
+        "France",
+        "Greece"
+      ],
+      "answer": "Italy",
+      "explanation": "The tower started to lean while it was still being built, more than 800 years ago.",
+      "family": true,
+      "difficulty": 1
+    },
+    {
+      "band": "kids",
+      "question": "Which famous landmark is this?",
+      "options": [
+        "The Great Wall of China",
+        "Hadrian's Wall",
+        "The Berlin Wall",
+        "The Western Wall"
+      ],
+      "answer": "The Great Wall of China",
+      "explanation": "All the sections of the Great Wall added together stretch for more than 20,000 kilometres.",
+      "family": true,
+      "difficulty": 1,
+      "media": {
+        "kind": "image",
+        "wiki": "Great_Wall_of_China",
+        "alt": "A long wall across hills",
+        "src": "/quiz/pics/great-wall-of-china.webp",
+        "credit": "Photo: Severin.stalder, CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:The_Great_Wall_of_China_at_Jinshanling-edit.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "This building, carved into a cliff, is in which ancient city?",
+      "options": [
+        "Petra",
+        "Palmyra",
+        "Persepolis",
+        "Carthage"
+      ],
+      "answer": "Petra",
+      "explanation": "Petra, in Jordan, was carved straight into rose-red sandstone cliffs by the Nabataeans.",
+      "family": false,
+      "difficulty": 2,
+      "media": {
+        "kind": "image",
+        "wiki": "Al-Khazneh",
+        "alt": "A building carved into a rock face",
+        "src": "/quiz/pics/al-khazneh.webp",
+        "credit": "Photo: Susanahajer, CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Al_khazneh.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "The Alhambra palace is in which Spanish city?",
+      "options": [
+        "Granada",
+        "Seville",
+        "Córdoba",
+        "Toledo"
+      ],
+      "answer": "Granada",
+      "explanation": "Most of the Alhambra was built by the Nasrid rulers of Granada in the 13th and 14th centuries.",
+      "family": false,
+      "difficulty": 2
+    },
+    {
+      "band": "adults",
+      "question": "Which Paris landmark was built as the entrance arch to the 1889 World's Fair?",
+      "options": [
+        "The Eiffel Tower",
+        "The Arc de Triomphe",
+        "The Sacré-Cœur",
+        "The Louvre Pyramid"
+      ],
+      "answer": "The Eiffel Tower",
+      "explanation": "It was only meant to stand for 20 years.",
+      "family": true,
+      "difficulty": 2
+    },
+    {
+      "band": "adults",
+      "question": "In which country is this temple?",
+      "options": [
+        "Cambodia",
+        "Thailand",
+        "Vietnam",
+        "Laos"
+      ],
+      "answer": "Cambodia",
+      "explanation": "Angkor Wat is the largest religious monument in the world, and it appears on Cambodia's flag.",
+      "family": false,
+      "difficulty": 2,
+      "media": {
+        "kind": "image",
+        "wiki": "Angkor_Wat",
+        "alt": "A large stone temple",
+        "src": "/quiz/pics/angkor-wat.webp",
+        "credit": "Photo: Bjørn Christian Tørrissen, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Angkor_Wat.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "The statue of Christ the Redeemer looks out over which city?",
+      "options": [
+        "Rio de Janeiro",
+        "São Paulo",
+        "Lisbon",
+        "Buenos Aires"
+      ],
+      "answer": "Rio de Janeiro",
+      "explanation": "The statue stands on top of Corcovado mountain and was finished in 1931.",
+      "family": true,
+      "difficulty": 1
+    }
+  ]
+}
