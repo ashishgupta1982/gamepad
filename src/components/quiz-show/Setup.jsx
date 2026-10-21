@@ -325,7 +325,7 @@ function GroupRow({ emoji, name, badge, open, onOpen, children }) {
       <AnimatePresence initial={false}>
         {open && (
           <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} transition={{ duration: 0.2 }} className="overflow-hidden">
-            <div className="flex flex-wrap gap-2 px-3 pb-3">{children}</div>
+            <div className="flex flex-wrap gap-2 px-3 pb-3 pt-1">{children}</div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -341,7 +341,7 @@ function PickChip({ on, onClick, strong, children }) {
       aria-pressed={on}
       className={cn(
         'flex min-h-[36px] items-center gap-1 rounded-full px-3 py-1.5 text-sm font-bold',
-        on ? 'bg-amber-300 text-amber-950 ring-2 ring-amber-500' : strong ? 'bg-violet-100 text-violet-900' : 'bg-[#f1eefb] text-[#241a45]',
+        on ? 'bg-amber-300 text-amber-950 ring-2 ring-inset ring-amber-500' : strong ? 'bg-violet-100 text-violet-900' : 'bg-[#f1eefb] text-[#241a45]',
       )}
     >
       {children}
