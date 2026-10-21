@@ -109,7 +109,10 @@ export default function GamesRoom({ active = {}, isGuest, onSignIn }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [focus]);
 
-  const inCupboard = focus === 'cupboard' || CUPBOARD_SHELVES.flat().includes(focus);
+  // Empty shelf spaces are null in CUPBOARD_SHELVES, so a null focus (the
+  // whole room) must never be looked up there: it matched, and the page opened
+  // zoomed into the cupboard.
+  const inCupboard = !!focus && (focus === 'cupboard' || CUPBOARD_SHELVES.flat().includes(focus));
   const cameraTarget = inCupboard ? 'cupboard' : focus;
   const target = ROOM_OBJECTS.find((o) => o.id === cameraTarget);
   const camera =
