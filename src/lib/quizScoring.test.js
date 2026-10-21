@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { scoreAnswer, scoreClassic } from './quizScoring';
-import { SCORING } from '@/data/quizConstants';
+import { SCORING, scoreAnswer, scoreClassic } from './quizScoring';
 
 // Pins the formula that was duplicated between hooks/useQuizScoring.js and the
 // answer API route. The numbers below are what BOTH copies already produced, so

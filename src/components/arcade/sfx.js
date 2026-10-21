@@ -132,6 +132,27 @@ const EFFECTS = {
     note(ac, { freq: 140, slide: 70, type: 'sine', dur: 0.1, gain: 0.25 });
     noise(ac, { dur: 0.03, gain: 0.1 });
   },
+  // The quiz clock's last seconds: a dry tick, higher for the final three.
+  tick: (ac) => note(ac, { freq: 1400, type: 'square', dur: 0.03, gain: 0.06 }),
+  tickHigh: (ac) => note(ac, { freq: 1900, type: 'square', dur: 0.04, gain: 0.08 }),
+  // The 3-2-1 before a quiz: beep, beep, then a long high one.
+  beep: (ac) => note(ac, { freq: 660, type: 'sine', dur: 0.14, gain: 0.2 }),
+  go: (ac) => note(ac, { freq: 1320, type: 'sine', dur: 0.4, gain: 0.22 }),
+  // The answer revealed: a rising sting.
+  sting: (ac) => [392, 523, 659].forEach((f, i) => note(ac, { freq: f, type: 'sawtooth', start: i * 0.06, dur: 0.22, gain: 0.06 })),
+  // Right: two bright bells. Wrong: a low double buzz.
+  correct: (ac) => {
+    note(ac, { freq: 988, type: 'sine', dur: 0.18, gain: 0.22 });
+    note(ac, { freq: 1319, type: 'sine', start: 0.1, dur: 0.35, gain: 0.22 });
+  },
+  wrong: (ac) => {
+    note(ac, { freq: 150, type: 'square', dur: 0.16, gain: 0.09 });
+    note(ac, { freq: 140, type: 'square', start: 0.2, dur: 0.28, gain: 0.09 });
+  },
+  // An answer locked in.
+  lock: (ac) => note(ac, { freq: 520, slide: 780, type: 'triangle', dur: 0.09, gain: 0.16 }),
+  // Someone joined the quiz.
+  pop: (ac) => note(ac, { freq: 440, slide: 1100, type: 'sine', dur: 0.12, gain: 0.16 }),
   // Cards dealt.
   deal: (ac) => [0, 0.07, 0.14, 0.21].forEach((start) => noise(ac, { start, dur: 0.04, gain: 0.08 })),
 };

@@ -32,7 +32,12 @@ const GameSchema = new mongoose.Schema({
     difficulty: String,
     currentQuestionIndex: { type: Number, default: 0 },
     currentRound: { type: Number, default: 1 },
-    mode: { type: String, enum: ['same-device', 'multi-device'], default: 'same-device' },
+    // 'solo' | 'shout' | 'multi' since the 2026-10-21 rebuild; the two older
+    // values are kept so old history still loads.
+    mode: { type: String, enum: ['same-device', 'multi-device', 'solo', 'shout', 'multi'], default: 'same-device' },
+    // A finished quiz's final standings (api/quiz/history):
+    // [{name, avatar, color, score, correct, best, place}].
+    result: mongoose.Schema.Types.Mixed,
     timePerQuestion: { type: Number, default: 20 },
     scoringType: { type: String, enum: ['speed', 'classic'], default: 'speed' },
     rounds: [{

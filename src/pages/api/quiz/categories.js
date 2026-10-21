@@ -6,7 +6,7 @@ import User from '@/models/User';
 import { MAX_CUSTOM, normaliseCustomList } from '@/lib/quiz/catalogue';
 
 // A signed-in player's custom quiz categories. A guest's live on the device
-// (components/quiz/useCustomCategories.js), so this is for accounts only.
+// (components/quiz-show/data.js), so this is for accounts only.
 //
 // GET  → { categories: [{id, name, description, emoji}] }
 // PUT  { categories } → the whole list, replaced, cleaned and capped.

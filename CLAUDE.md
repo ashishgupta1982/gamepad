@@ -36,7 +36,7 @@ src/
 │   ├── _document.js              # icons, manifest, PWA meta, structured data
 │   ├── games/
 │   │   ├── scrabble-scorer/      # Local-only scoring
-│   │   ├── quiz/                 # index.js (host), join.js (player)
+│   │   ├── quiz/                 # index.js (home, setup, solo/shout, multi host), join.js (a player's phone)
 │   │   ├── darts/                # index.js (mode picker + game)
 │   │   ├── travel-bingo/         # index.js (lobby + play)
 │   │   └── egypt-explorer/       # index.js (family, who is playing, trip picker, ?trip= and &stop=)
@@ -53,22 +53,22 @@ src/
 │           ├── stats/{index.js,[playerId].js}
 │           └── rooms/
 │               ├── index.js
-│               └── [roomCode]/{index,join,answer,stream}.js   # stream.js = SSE
+│               └── live/[code]/{index,join,answer,host}.js   # multi-phone: index.js is the poll
 ├── components/
 │   ├── ui/                       # button, card, alert, input, badge, sheet
 │   ├── layout/                   # AppHeader, GameShell
 │   ├── game/                     # NumericKeypad, TurnIndicator
-│   ├── quiz/                     # Host + player screens, lobby, podium, etc.
+│   ├── quiz-show/                # the quiz as a game show: setup, screens, solo/shout runner, multi host + player
 │   ├── darts/                    # X01/Cricket/Clock/Killer boards + setup
 │   ├── travel-bingo/             # Card, lobby, feed
 │   ├── egypt/                    # Trip picker, trip, map, stop, quiz, quest, guide, passport, activities
 │   ├── settings/
 │   ├── ClaudeChat.js
 ├── models/                       # Mongoose (Game, EgyptFamily, ...)
-├── hooks/                        # useQuizRoom, useQuizScoring, useQuizTimer, useWakeLock, useEgyptProgress, useEgyptFamily
+├── hooks/                        # useWakeLock, useEgyptProgress, useEgyptFamily
 ├── lib/                          # auth, brand, cn, identity, mongodb, mongodb-adapter, travelBingo, egypt/
 ├── utils/                        # authHelper, playerIdentity, rateLimiter
-├── data/                         # games (launcher metadata), quizConstants, dartsConstants, egypt/ (trips, photos)
+├── data/                         # games (launcher metadata), gamesRoom (the home page's room), bingoPacks, dartsConstants, egypt/ (trips, photos)
 └── styles/globals.css            # design tokens + base layer + utilities
 ```
 
@@ -90,7 +90,7 @@ One document per game session. `gameType` enum: `scrabble-scorer | quiz | darts 
 | Field | Used by |
 |-------|---------|
 | `players[]` (name, scores[], roundScores[]) | All games |
-| `quizConfig` | quiz (rounds, questions, playerStats, mode, timePerQuestion, scoringType) |
+| `quizConfig` | quiz history: `mode` (solo, shout, multi), categories, `difficulty` (the level's name), totalQuestions, `result` (final standings). Older documents carry the pre-rebuild fields |
 | `dartsConfig` | darts (gameMode, startingScore, double-in/out, turns, cricketMarks, clockTargets, killerLives) |
 | `travelBingoConfig` | travel-bingo (joinCode, hostUserId, phase, cars[] with card tiles + comments, categories) |
 | `egyptConfig` | egypt-explorer (`trip`; `progress`, the whole client state, shape owned by `lib/egypt/progress.js`; `rev`, bumped per save; `v1Backup`, the record before version 2) |
@@ -103,13 +103,9 @@ Pre-save hook updates `updatedAt`.
 > **email**; that moved in Phase 4 with **no backfill**, so games saved before
 > then are orphaned by design.
 
-### `QuizRoom` (src/models/QuizRoom.js)
+### `QuizLive` (src/models/QuizLive.js)
 
-Live multi-device quiz session keyed by 6-char `roomCode` (uppercase, unique). TTL-expires 24h via `expiresAt` index. Status flow: `lobby → playing → question → reveal → scores → finished`. `stateVersion` increments on every save and is the cursor used by the SSE stream (`/api/quiz/rooms/[roomCode]/stream`). Links to a `Game` doc via `gameId`.
-
-### `PlayerStats` (src/models/PlayerStats.js)
-
-Aggregated per-player quiz stats — gamesPlayed/Won, totalScore, bestStreak, avgResponseTime, categoryStats[], recentGames[]. Indexed by `householdId + playerName` and `totalScore`.
+A multi-phone quiz in progress, keyed by a 6-character `code`, expiring after 12 hours. `game` is the whole game object from `lib/quiz/machine.js`; `version` is the poll's cursor and the guard on concurrent writes; `hostToken` and `tokens` (one per player) are the passes that let the host run it and a dropped phone rejoin as itself. Replaced `QuizRoom` on 2026-10-21.
 
 ### `CachedResponse` (src/models/CachedResponse.js)
 
@@ -290,47 +286,15 @@ Phase 4 notes in `REDESIGN-PLAN.md` for what that allowed.
   setup screen — it renders nothing for a signed-in user and nothing while the
   session is loading.
 
-## Quiz internals
+## Quiz
 
-**The quiz advances itself, and a question has TWO stops, not four.** It used to
-be answer → points → leaderboard, each behind a Continue tap. Points and the
-leaderboard are now one screen — they answer the same question, "how did that
-go?" — and both stops are countdowns. `hooks/useAutoAdvance.js` +
-`components/quiz/AutoAdvance.jsx`; durations in `AUTO_ADVANCE`
-(`data/quizConstants.js`).
+Rebuilt 2026-10-21 as a game show (`REDESIGN-PLAN.md`, Phase 3). Three modes: **solo** (one player, this phone), **shout** (one screen shows the question, everyone shouts, the quizmaster taps who got it right), **multi** (everyone answers on their own phone; the host's screen is the show, and on a laptop or TV it is TV mode).
 
-> There is no `scoreboard` screen any more. The room status `scores` now means
-> the combined results screen. Don't reintroduce a separate leaderboard step.
-
-> **Only one device runs the clock** — the host in multi-device play, the single
-> device otherwise (`drivesRoom`). Everyone else is moved by SSE. A timer per
-> device would drift, and "the whole table starts the next question together" is
-> the point. A non-driving device is passed `secondsLeft={null}` and shows the
-> message without a number, because a frozen or disagreeing count reads as broken.
-
-The countdown is deliberately visible, and the host's Skip is deliberately
-quiet: if skipping becomes the normal way through, the durations are wrong —
-change `AUTO_ADVANCE`, don't add another button.
-
-
-
-- **`lib/quizScoring.js` is the only scoring formula.** It used to exist twice —
-  in `hooks/useQuizScoring.js` for same-device play and inline in the answer API
-  route for multi-device. They were identical by coincidence, with nothing
-  keeping them so, and a tuning change to one would have made the same quiz score
-  differently depending on how it was played. Both now call the shared module.
-- **`lib/quizRoom.js` states the room state machine** — `canTransition`,
-  `nextStatus`, `allAnswered`, `canAnswer`. The statuses were on the model but
-  the legal *transitions* lived only in the order the UI happened to call things.
-- Both are covered by `npm test`. The tests were written against the behaviour as
-  it stood **before** the reskin, so they describe what the game already did.
-- `answer.js` bumps `stateVersion` manually **and** the model's `pre('save')`
-  hook bumps it again, so an answer advances it by two. Harmless — the SSE cursor
-  only needs it to increase — but don't read it as a count of anything.
-
-## Realtime (Quiz)
-
-Multi-device quiz uses SSE, not WebSockets. Client opens `GET /api/quiz/rooms/[roomCode]/stream`; server polls the room and pushes when `stateVersion` increments. Players submit answers via `POST /api/quiz/rooms/[roomCode]/answer`. Hook: `src/hooks/useQuizRoom.js`.
+- **One set of rules, `lib/quiz/machine.js`**: a game is a plain object and every move a pure function given the time (`start`, `answer`, `reveal`, `judge`, `next`, `tick`). The browser runs it for solo and shout and saves it to the device after every move (`quiz:local`), so a reload resumes. The server runs the same functions for multi. Scoring is still `lib/quizScoring.js`.
+- **Questions are written on the server**, `POST /api/quiz/questions` (`lib/quiz/writer.js`): Claude at the `quiz` workload (balanced tier) through a tool with a fixed shape, then checked (four distinct options, one answer among them), shuffled, positions balanced, and filtered against what this device has already been asked (`quiz:seen`). A game asks for three first so it starts within seconds, then the rest while it plays. It counts against a durable budget per requester and site-wide.
+- **Custom categories are objects** `{id, name, description, emoji}` (`lib/quiz/catalogue.js`): on the account (`/api/quiz/categories`) when signed in, on the device otherwise. Old `"Name: description"` strings are read and rewritten.
+- **Multi-phone is polled, not streamed.** Each client polls `GET /api/quiz/live/[code]?v=` once a second; the server answers `same` when nothing changed, and applies the clock on every poll (`lib/quiz/live.js#change`), so the game moves on even if the host's phone goes quiet. Every write is read-apply-write guarded by `version`, retried on a clash, so answers that arrive together all count. Answer times are measured on the server. A phone is sent only the question on screen, never the answer or anyone else's pick while it is open (`project`).
+- **History**: finished quizzes for a signed-in player, `GET/POST /api/quiz/history`; delete is `DELETE /api/games/:id`.
 
 ## Travel Bingo Flow
 
@@ -445,7 +409,7 @@ playing on this phone, then opens a trip picker; `?trip=<id>` opens a trip and
 
 ## Claude AI
 
-`/api/claude` caches by base64-truncated prompt key in `CachedResponse`. No streaming. Quiz questions are static (`src/data/quizConstants.js`). Travel Bingo's `generate` route calls the SDK directly. **Egypt Explorer is the one game that calls Claude during play** (see above), through `@aspiro/ai/server` with its own durable budget, and with no sign-in. Models per workload are in `src/lib/aiModels.js` (`@aspiro/ai` v0.7.0).
+`/api/claude` caches by base64-truncated prompt key in `CachedResponse`. No streaming. Quiz questions come from `/api/quiz/questions` (see Quiz); `/api/claude` now serves only Scrabble's word check. Travel Bingo's `generate` route calls the SDK directly. **Egypt Explorer is the one game that calls Claude during play** (see above), through `@aspiro/ai/server` with its own durable budget, and with no sign-in. Models per workload are in `src/lib/aiModels.js` (`@aspiro/ai` v0.7.0).
 
 ## UI Conventions
 
@@ -471,7 +435,6 @@ playing on this phone, then opens a trip picker; `?trip=<id>` opens a trip and
 
 - **One header: `layout/AppHeader.jsx`.** `Header.js` and `ProfessionalHeader.js` were near-identical duplicates and are deleted. Don't add a second. Its account menu is a bottom **sheet**, not a dropdown — this phone gets passed around, and a hover-anchored menu is meaningless on touch. **The email address is deliberately not in the header bar**; it lives one tap inside the sheet.
 - **`src/pages/api/quiz/...` uses `@/...` absolute imports**, but some other files use relative paths (`../../../lib/mongodb`). Both work via `jsconfig.json` baseUrl=src.
-- **`QuizRoom.pre('save')` always bumps `stateVersion`** — even on no-op saves. Don't rely on it as a change detector beyond SSE.
 - **`Game.gameType` enum is the source of truth** for which sub-config is populated. Polymorphic doc — be careful with mass projections.
 - **The viewport meta is declared once, in `_app.js`.** Seven pages each carried their own copy, which overrode it (next/head dedupes by name, page wins) and would silently drop `viewport-fit=cover`. Don't reintroduce a per-page one.
 - **`.eslintrc.json` is minimal** — lint is permissive.

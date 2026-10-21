@@ -1,4 +1,12 @@
-import { SCORING } from '@/data/quizConstants';
+// The numbers, here with the formula since the old quiz's constants file went
+// in the 2026-10-21 rebuild.
+export const SCORING = {
+  BASE_POINTS: 1000,
+  SPEED_WEIGHT: 0.5, // up to half the points lost for using the whole clock
+  STREAK_BONUS: 0.1, // 10% more per consecutive right answer
+  MAX_STREAK_MULTIPLIER: 1.5,
+  NO_ANSWER_POINTS: 0,
+};
 
 // The scoring formula, in one place.
 //

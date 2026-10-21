@@ -37,7 +37,7 @@ export const GAMES = [
     href: '/games/quiz',
     emoji: '🧠',
     tone: 'quiz',
-    description: 'Test your knowledge across 16 categories — one phone or many!',
+    description: 'A family quiz show with fresh questions every game: just you, shout it out, or everyone on their phones.',
   },
   {
     id: 'darts',

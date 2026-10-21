@@ -148,6 +148,11 @@ export default {
           '0%': { transform: 'scale(0.9)', opacity: '0' },
           '100%': { transform: 'scale(1)', opacity: '1' },
         },
+        // The quiz marquee's chasing bulbs (components/quiz-show/ui.jsx).
+        bulb: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0.3' },
+        },
       },
 
       animation: {
