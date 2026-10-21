@@ -4,11 +4,13 @@ import { cn } from '@/lib/cn';
 
 // The dartboard you score on: tap where the dart landed.
 //
-// The rings are drawn wider than a real board's (lib/darts/board.js) so a
-// treble is a thumb's width, and a press works like a phone keyboard: while the
-// finger is down the region under it lights up with its name above it, sliding
-// moves it, and lifting the finger scores it. Lifting off the board scores
-// nothing, so a slip is just slid away.
+// The trebles, doubles and bull are drawn much wider than a real board's
+// (lib/darts/board.js), and a press works like a phone's magnifier: the board
+// zooms in around the finger, the region under it lights up with its name
+// above it, sliding moves it at half speed, and lifting the finger scores it.
+// The point under the finger stays put as it zooms, so a quick tap scores
+// exactly where it landed. Sliding off the board scores nothing, so a slip is
+// just slid away.
 //
 //   dim(n)   numbers that do not count in this game, drawn faded
 //   glow     regions to light up: [{ n, m, strong }]; m 0 lights the whole
@@ -26,6 +28,9 @@ const COLOURS = {
   band: '#17141f',
   rim: '#8a5a2b',
 };
+
+// How far the board zooms in while a finger is down.
+const ZOOM = 2;
 
 const pt = (r, deg) => {
   const a = (deg * Math.PI) / 180;
@@ -55,10 +60,12 @@ function regionPath({ n, m }) {
   return sector(RINGS.outerBull, RINGS.innerSingle, a1, a2) + sector(RINGS.treble, RINGS.outerSingle, a1, a2);
 }
 
+const mid = (a, b) => (a + b) / 2;
+
 /** Where a pin goes for a dart in a region. */
 function pinAt({ n, m }, k) {
-  if (n === BULL) return pt(m === 2 ? 4 + k * 3 : 17, k * 120);
-  const r = { 1: 60 + k * 14, 2: 162, 3: 106 }[m];
+  if (n === BULL) return pt(m === 2 ? 4 + k * 3 : mid(RINGS.bull, RINGS.outerBull), k * 120);
+  const r = { 1: mid(RINGS.outerBull, RINGS.innerSingle) + (k - 1) * 10, 2: mid(RINGS.outerSingle, RINGS.double), 3: mid(RINGS.innerSingle, RINGS.treble) }[m];
   return pt(r, angleOf(n) + (k - 1) * 5);
 }
 
@@ -82,22 +89,34 @@ const SEGMENT_SHAPES = SEGMENTS.map((n, k) => {
 });
 
 export default function Dartboard({ onHit, dim, glow = [], tags = [], darts = [], className, font }) {
+  const boxRef = useRef(null);
   const svgRef = useRef(null);
-  const [aim, setAim] = useState(null); // { dart, x, y } while a finger is down
+  // While a finger is down: the region under it, and where it is in the box.
+  const [aim, setAim] = useState(null);
+  // Where the last press began, in board units: the point the zoom holds still.
+  const [focus, setFocus] = useState(null);
   const tagByNumber = useMemo(() => Object.fromEntries(tags.map((t) => [t.n, t])), [tags]);
 
   const locate = (e) => {
+    // The SVG's on-screen box includes the zoom, so this is right at any scale.
     const rect = svgRef.current.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 400 - 200;
     const y = ((e.clientY - rect.top) / rect.height) * 400 - 200;
-    return { dart: hitAt(x, y), x, y };
+    const box = boxRef.current.getBoundingClientRect();
+    const sx = e.clientX - box.left;
+    const sy = e.clientY - box.top;
+    // Off the round window the board shows through is off the board.
+    const inside = Math.hypot(sx - box.width / 2, sy - box.height / 2) <= box.width / 2;
+    return { dart: inside ? hitAt(x, y) : null, x, y, sx, sy, w: box.width };
   };
 
   const handlers = onHit
     ? {
         onPointerDown: (e) => {
           e.currentTarget.setPointerCapture?.(e.pointerId);
-          setAim(locate(e));
+          const p = locate(e);
+          setFocus({ x: p.x, y: p.y });
+          setAim(p);
         },
         onPointerMove: (e) => {
           if (aim) setAim(locate(e));
@@ -112,101 +131,111 @@ export default function Dartboard({ onHit, dim, glow = [], tags = [], darts = []
     : {};
 
   const faded = (n) => (dim ? dim(n) : false);
-  // The name above the finger, kept on the board.
-  const loupe = aim?.dart && { x: Math.max(-150, Math.min(150, aim.x)), y: Math.max(-170, aim.y - 70) };
+  const zoom = onHit && {
+    transform: `scale(${aim ? ZOOM : 1})`,
+    transformOrigin: focus ? `${(focus.x + 200) / 4}% ${(focus.y + 200) / 4}%` : '50% 50%',
+  };
 
   return (
-    <svg
-      ref={svgRef}
-      viewBox="-200 -200 400 400"
-      className={cn('block aspect-square w-full select-none', onHit && 'cursor-crosshair touch-none', className)}
-      role={onHit ? 'application' : 'img'}
-      aria-label={onHit ? 'Dartboard: tap where the dart landed' : 'Dartboard'}
-      {...handlers}
-    >
-      <circle r="199" fill={COLOURS.band} stroke={COLOURS.rim} strokeWidth="6" />
+    <div ref={boxRef} className={cn('relative', className)}>
+      {/* The round window the board zooms inside; transform-gpu makes Safari clip the zoomed board to it. */}
+      <div className="transform-gpu overflow-hidden rounded-full">
+        <svg
+          ref={svgRef}
+          viewBox="-200 -200 400 400"
+          className={cn('block aspect-square w-full select-none', onHit && 'cursor-crosshair touch-none transition-transform duration-200 ease-out motion-reduce:transition-none')}
+          style={zoom || undefined}
+          role={onHit ? 'application' : 'img'}
+          aria-label={onHit ? 'Dartboard: tap where the dart landed' : 'Dartboard'}
+          {...handlers}
+        >
+          <circle r="197" fill={COLOURS.band} stroke={COLOURS.rim} strokeWidth="6" />
 
-      {SEGMENT_SHAPES.map((seg) => (
-        <g key={seg.n} opacity={faded(seg.n) ? 0.28 : 1}>
-          <path d={seg.paths.inner} fill={seg.single} />
-          <path d={seg.paths.treble} fill={seg.ring} />
-          <path d={seg.paths.outer} fill={seg.single} />
-          <path d={seg.paths.double} fill={seg.ring} />
-        </g>
-      ))}
-      {/* The wires. */}
-      <g fill="none" stroke={COLOURS.wire} strokeWidth="1.2" opacity="0.7" pointerEvents="none">
-        {[RINGS.outerBull, RINGS.innerSingle, RINGS.treble, RINGS.outerSingle, RINGS.double].map((r) => (
-          <circle key={r} r={r} />
-        ))}
-        {SEGMENTS.map((_, k) => {
-          const [x1, y1] = pt(RINGS.outerBull, k * 18 + 9);
-          const [x2, y2] = pt(RINGS.double, k * 18 + 9);
-          return <line key={k} x1={x1} y1={y1} x2={x2} y2={y2} />;
-        })}
-      </g>
-      <g opacity={faded(BULL) ? 0.28 : 1}>
-        <circle r={RINGS.outerBull} fill={COLOURS.green} stroke={COLOURS.wire} strokeWidth="1.2" />
-        <circle r={RINGS.bull} fill={COLOURS.red} stroke={COLOURS.wire} strokeWidth="1.2" />
-      </g>
-
-      {/* Killer's numbers: the player's colour on their double and badge. */}
-      {tags.map((t) => (
-        <path key={`tag${t.n}`} d={regionPath({ n: t.n, m: 2 })} fill="none" fillRule="evenodd" stroke={t.color} strokeWidth="5" pointerEvents="none" />
-      ))}
-
-      {glow.map((g, i) => (
-        <path
-          key={`glow${i}`}
-          d={regionPath(g)}
-          fillRule="evenodd"
-          fill="#fde68a"
-          fillOpacity={g.strong ? 0.75 : 0.35}
-          stroke="#fbbf24"
-          strokeWidth={g.strong ? 4 : 2}
-          className={g.strong ? 'animate-pulse' : undefined}
-          pointerEvents="none"
-        />
-      ))}
-
-      {SEGMENT_SHAPES.map((seg) => {
-        const tag = tagByNumber[seg.n];
-        return (
-          <g key={`n${seg.n}`} pointerEvents="none" opacity={faded(seg.n) && !tag ? 0.4 : 1}>
-            {tag && <circle cx={seg.number[0]} cy={seg.number[1]} r="13" fill={tag.color} stroke="#fff" strokeWidth="2" />}
-            <text
-              x={seg.number[0]}
-              y={seg.number[1]}
-              textAnchor="middle"
-              dominantBaseline="central"
-              fontSize="17"
-              fill="#fff"
-              style={font}
-            >
-              {seg.n}
-            </text>
+          {SEGMENT_SHAPES.map((seg) => (
+            <g key={seg.n} opacity={faded(seg.n) ? 0.28 : 1}>
+              <path d={seg.paths.inner} fill={seg.single} />
+              <path d={seg.paths.treble} fill={seg.ring} />
+              <path d={seg.paths.outer} fill={seg.single} />
+              <path d={seg.paths.double} fill={seg.ring} />
+            </g>
+          ))}
+          {/* The wires. */}
+          <g fill="none" stroke={COLOURS.wire} strokeWidth="1.2" opacity="0.7" pointerEvents="none">
+            {[RINGS.outerBull, RINGS.innerSingle, RINGS.treble, RINGS.outerSingle, RINGS.double].map((r) => (
+              <circle key={r} r={r} />
+            ))}
+            {SEGMENTS.map((_, k) => {
+              const [x1, y1] = pt(RINGS.outerBull, k * 18 + 9);
+              const [x2, y2] = pt(RINGS.double, k * 18 + 9);
+              return <line key={k} x1={x1} y1={y1} x2={x2} y2={y2} />;
+            })}
           </g>
-        );
-      })}
-
-      {darts.map((d, k) =>
-        d.n ? (
-          <g key={`pin${k}`} pointerEvents="none">
-            <circle cx={pinAt(d, k)[0]} cy={pinAt(d, k)[1]} r="7" fill="#fff" stroke="#111" strokeWidth="2.5" />
-            <circle cx={pinAt(d, k)[0]} cy={pinAt(d, k)[1]} r="2.5" fill="#111" />
+          <g opacity={faded(BULL) ? 0.28 : 1}>
+            <circle r={RINGS.outerBull} fill={COLOURS.green} stroke={COLOURS.wire} strokeWidth="1.2" />
+            <circle r={RINGS.bull} fill={COLOURS.red} stroke={COLOURS.wire} strokeWidth="1.2" />
           </g>
-        ) : null,
-      )}
 
+          {/* Killer's numbers: the player's colour on their double and badge. */}
+          {tags.map((t) => (
+            <path key={`tag${t.n}`} d={regionPath({ n: t.n, m: 2 })} fill="none" fillRule="evenodd" stroke={t.color} strokeWidth="5" pointerEvents="none" />
+          ))}
+
+          {glow.map((g, i) => (
+            <path
+              key={`glow${i}`}
+              d={regionPath(g)}
+              fillRule="evenodd"
+              fill="#fde68a"
+              fillOpacity={g.strong ? 0.75 : 0.35}
+              stroke="#fbbf24"
+              strokeWidth={g.strong ? 4 : 2}
+              className={g.strong ? 'animate-pulse' : undefined}
+              pointerEvents="none"
+            />
+          ))}
+
+          {SEGMENT_SHAPES.map((seg) => {
+            const tag = tagByNumber[seg.n];
+            return (
+              <g key={`n${seg.n}`} pointerEvents="none" opacity={faded(seg.n) && !tag ? 0.4 : 1}>
+                {tag && <circle cx={seg.number[0]} cy={seg.number[1]} r="13" fill={tag.color} stroke="#fff" strokeWidth="2" />}
+                <text
+                  x={seg.number[0]}
+                  y={seg.number[1]}
+                  textAnchor="middle"
+                  dominantBaseline="central"
+                  fontSize="17"
+                  fill="#fff"
+                  style={font}
+                >
+                  {seg.n}
+                </text>
+              </g>
+            );
+          })}
+
+          {darts.map((d, k) =>
+            d.n ? (
+              <g key={`pin${k}`} pointerEvents="none">
+                <circle cx={pinAt(d, k)[0]} cy={pinAt(d, k)[1]} r="7" fill="#fff" stroke="#111" strokeWidth="2.5" />
+                <circle cx={pinAt(d, k)[0]} cy={pinAt(d, k)[1]} r="2.5" fill="#111" />
+              </g>
+            ) : null,
+          )}
+
+          {aim?.dart && <path d={regionPath(aim.dart)} fillRule="evenodd" fill="#ffffff" fillOpacity="0.55" stroke="#fff" strokeWidth="2" pointerEvents="none" />}
+        </svg>
+      </div>
+
+      {/* The name above the finger, outside the zoom so it stays the same size. */}
       {aim?.dart && (
-        <g pointerEvents="none">
-          <path d={regionPath(aim.dart)} fillRule="evenodd" fill="#ffffff" fillOpacity="0.55" stroke="#fff" strokeWidth="3" />
-          <rect x={loupe.x - 46} y={loupe.y - 24} width="92" height="44" rx="14" fill="#111827" opacity="0.92" />
-          <text x={loupe.x} y={loupe.y - 1} textAnchor="middle" dominantBaseline="central" fontSize="26" fill="#fde68a" style={font}>
-            {label(aim.dart)}
-          </text>
-        </g>
+        <div
+          className="pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-full rounded-2xl bg-gray-900/90 px-4 py-1 text-3xl leading-tight text-amber-200 shadow-xl"
+          style={{ left: Math.max(48, Math.min(aim.w - 48, aim.sx)), top: Math.max(52, aim.sy - 52), ...font }}
+        >
+          {label(aim.dart)}
+        </div>
       )}
-    </svg>
+    </div>
   );
 }

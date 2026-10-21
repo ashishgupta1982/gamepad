@@ -38,15 +38,16 @@ export function longLabel(d) {
   return `${['', 'Double ', 'Treble '][d.m - 1]}${d.n}`;
 }
 
-// The board as drawn, in a 400-unit square centred on 0. The rings are wider
-// than a real board's so a thumb can hit a treble; the order and the colours
-// are a real board's.
+// The board as drawn, in a 400-unit square centred on 0. A "big-target" board:
+// the trebles, doubles and bull are much wider than a real board's, paid for
+// by the inner single, since both singles score the same. The order and the
+// colours are a real board's.
 export const RINGS = {
-  bull: 11,
-  outerBull: 24,
-  innerSingle: 92,
-  treble: 120,
-  outerSingle: 148,
+  bull: 12,
+  outerBull: 27,
+  innerSingle: 66,
+  treble: 106,
+  outerSingle: 134,
   double: 176,
   numbers: 200,
 };
