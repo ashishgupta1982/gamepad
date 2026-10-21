@@ -2,8 +2,8 @@
 
 **Status:** agreed with Ash 2026-10-21. Phase 1 (Travel Bingo) live 2026-10-21.
 Phase 2 (the games room) live 2026-10-21. **Quiz moved up to Phase 3** at
-Ash's request (it was last), live 2026-10-21. Phase 4 (Darts) built 2026-10-21;
-Scrabble follows it.
+Ash's request (it was last), live 2026-10-21. Phase 4 (Darts) built 2026-10-21.
+Phase 5 (Scrabble) built 2026-10-21; Egypt Explorer, lightly, is last.
 **Replaces** the August realignment plan, which is finished (every phase landed
 2026-08-27; it is in git history at `934d2e5:REDESIGN-PLAN.md`). The decisions
 from it that still bind are carried forward in §6.
@@ -178,7 +178,7 @@ shown); Killer and Clock turn fields dropped on save; double-in not enforced;
 undo after a won leg; the game-over screen always crowning row 0; the progress
 bar assuming 501.
 
-### Phase 5 — Scrabble
+### Phase 5 — Scrabble *(built 2026-10-21)*
 
 Keep: `lib/scrabble.js` (standings with shared places, turn extremes, next
 player), the single write path, `/api/games`.
@@ -193,6 +193,15 @@ Claude call.
 Fixes: editing a turn can save the wrong value over another (uncontrolled
 inputs keyed by position); out-of-order saves; the word sent to Claude
 unescaped.
+
+As built: Ash said to redesign it freely, with no backward compatibility, so
+old games are not read. `lib/scrabble.js` was replaced by `lib/scrabble/rules.js`
+(a match and a log of turns, everything derived by `replay`, as Darts). Turn
+editing is gone; undo pops the last turn, which is what fixes the wrong-turn
+bug. Saves go one at a time per match (`components/scrabble/store.js`), which
+fixes the out-of-order saves. The word check is the ENABLE list bundled in
+`public/scrabble/words.txt`, so `/api/claude`, its last caller gone, was
+deleted with `CachedResponse` and the unused `ClaudeChat`.
 
 ### Phase 6 — Egypt Explorer, lightly
 

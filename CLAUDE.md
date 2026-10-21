@@ -35,14 +35,13 @@ src/
 │   ├── _app.js                   # fonts, SEO/OG defaults, SessionProvider
 │   ├── _document.js              # icons, manifest, PWA meta, structured data
 │   ├── games/
-│   │   ├── scrabble-scorer/      # Local-only scoring
+│   │   ├── scrabble-scorer/      # index.js (home, setup, play)
 │   │   ├── quiz/                 # index.js (home, setup, solo/shout, multi host), join.js (a player's phone)
 │   │   ├── darts/                # index.js (home, setup, play)
 │   │   ├── travel-bingo/         # index.js (lobby + play)
 │   │   └── egypt-explorer/       # index.js (family, who is playing, trip picker, ?trip= and &stop=)
 │   └── api/
 │       ├── auth/                 # [...nextauth] + 6 @aspiro/auth re-exports
-│       ├── claude.js             # Cached AI chat (rate-limited)
 │       ├── user.js
 │       ├── egypt/                # guide, quest (Claude), progress (merged per save), family
 │       ├── games/                # CRUD for Game records
@@ -60,13 +59,13 @@ src/
 │   ├── game/                     # NumericKeypad, TurnIndicator
 │   ├── quiz-show/                # the quiz as a game show: setup, screens, solo/shout runner, multi host + player
 │   ├── darts/                    # the tappable Dartboard, scoreboards, setup, play, game over, saving (store.js)
+│   ├── scrabble/                 # home, setup, play (tile keypad, pass-the-phone, history), word check, game over, saving (store.js)
 │   ├── travel-bingo/             # Card, lobby, feed
 │   ├── egypt/                    # Trip picker, trip, map, stop, quiz, quest, guide, passport, activities
 │   ├── settings/
-│   ├── ClaudeChat.js
 ├── models/                       # Mongoose (Game, EgyptFamily, ...)
 ├── hooks/                        # useWakeLock, useEgyptProgress, useEgyptFamily
-├── lib/                          # auth, brand, cn, identity, mongodb, mongodb-adapter, travelBingo, egypt/
+├── lib/                          # auth, brand, cn, identity, mongodb, mongodb-adapter, travelBingo, darts/, scrabble/, quiz/, egypt/
 ├── utils/                        # authHelper, playerIdentity, rateLimiter
 ├── data/                         # games (launcher metadata), gamesRoom (the home page's room), bingoPacks, dartsConstants, egypt/ (trips, photos)
 └── styles/globals.css            # design tokens + base layer + utilities
@@ -91,6 +90,7 @@ One document per game session. `gameType` enum: `scrabble-scorer | quiz | darts 
 |-------|---------|
 | `players[]` (name, scores[], roundScores[]) | All games |
 | `quizConfig` | quiz history: `mode` (solo, shout, multi), categories, `difficulty` (the level's name), totalQuestions, `result` (final standings). Older documents carry the pre-rebuild fields |
+| `scrabbleConfig` | scrabble-scorer: `match` (Mixed: the players and the log of every turn; see Scrabble). Games from the old scorer have none and are not read |
 | `dartsConfig` | darts: `gameMode` and `match` (Mixed: the setup plus every dart thrown; see Darts). The other fields are the old scorer's, kept so its games still list |
 | `travelBingoConfig` | travel-bingo (joinCode, hostUserId, phase, cars[] with card tiles + comments, categories) |
 | `egyptConfig` | egypt-explorer (`trip`; `progress`, the whole client state, shape owned by `lib/egypt/progress.js`; `rev`, bumped per save; `v1Backup`, the record before version 2) |
@@ -114,10 +114,6 @@ The quiz's question bank, one document per question keyed by `fingerprint`. Tagg
 ### `QuizSeen` (src/models/QuizSeen.js)
 
 The questions each player on an account has seen: one document per account `email` and player `nameKey` (the name trimmed and lower-cased), `seen` the question keys, newest last, capped at 2,000. Read by `/api/quiz/questions`, written and cleared by `/api/quiz/seen`. Added 2026-10-21.
-
-### `CachedResponse` (src/models/CachedResponse.js)
-
-Generic cache for Claude responses, keyed off prompt hash. Used by `/api/claude`.
 
 ### `User` (src/models/User.js)
 
@@ -192,9 +188,9 @@ These are burst shields: in memory, they reset on every cold start. The real
 AI budget is the durable per-account counter in `lib/egypt/ai.js` (Mongo
 `RateLimit`), used by Egypt Explorer.
 
-`/api/claude` derives its `X-RateLimit-*` headers from `RATE_LIMITS.CLAUDE_API`
-rather than hardcoding them, so the advertised limit cannot drift from the
-enforced one again.
+`CLAUDE_API` is the burst shield on every route that calls Claude (quiz
+questions, Egypt Explorer's guide and quests, Travel Bingo's card generation).
+The open `/api/claude` proxy it was named for is gone (2026-10-21).
 
 `getClientIP` is exported — `@aspiro/auth` takes it as config, rate-limiting its
 routes through this limiter rather than shipping a second one. The `AUTH_API`
@@ -286,9 +282,10 @@ Phase 4 notes in `REDESIGN-PLAN.md` for what that allowed.
 - **Guests still play everything**, including multiplayer Travel Bingo — those
   games live on the server against a join code. What a guest does not get is
   *history*, because there is no account to attribute it to.
-- Local, unsaved games use the sentinel `_id: 'guest'`. Scrabble uses it; never
-  PATCH or DELETE a game with that id. Darts and the Quiz keep a guest's game on
-  the device instead.
+- Darts, Scrabble and the Quiz keep a guest's game on the device
+  (`localStorage`), and a signed-in player's on the device and the account. The
+  old `_id: 'guest'` sentinel went with the old Scrabble scorer; nothing uses it
+  now.
 - **There is no guest→account adoption.** Saving starts at sign-in. That was
   already the de facto behaviour, and is now the stated one.
 - `game/GuestNotice` says so before the game starts. Mount it on any new game's
@@ -320,6 +317,17 @@ Rebuilt 2026-10-21 (`REDESIGN-PLAN.md`, Phase 4): you tap the board where each d
 - **Saving, `components/darts/store.js`**: the match goes to the device after every dart (`darts:match`), so a reload offers "Carry on"; a signed-in player's goes to `/api/games` a moment later as `dartsConfig.match`, one save at a time. Games saved by the old scorer have no `match`; they are listed for deleting only.
 - **The caller**, `components/arcade/caller.js`: `speechSynthesis` in en-GB calls each X01 visit, "One hundred and eighty!", bust and game shot. It follows the mute switch.
 - The backdrop `public/darts/wall.webp` is Higgsfield (job id in `components/darts/ui.jsx`).
+
+## Scrabble
+
+Rebuilt 2026-10-21 (`REDESIGN-PLAN.md`, Phase 5): a scorer for the table, two to four players. Old games were dropped by Ash's decision ("no need for backward compatibility"): the old scorer's documents have no `scrabbleConfig.match` and are not read or listed.
+
+- **One set of rules, `lib/scrabble/rules.js`**: a match is `{v: 1, id, players, first, log, finished, createdAt}`, the log one entry per turn (`{p, score, word?, bingo?, pass?}`). Turns go round the table in seat order from `first`, and `replay(match)` works out everything else: totals, each player's turns with their round, whose go it is, the round, standings with shared places, the `leader` (null while level), best turn, best word, bingos and the `awards` (best word, biggest turn, most bingos, and the wooden spoon for last place with three or more players). Moves (`addTurn`, `pass`, `undo`, `finish`, `reopen`) return a new match. A score is a whole number 0 to 999; a bingo's score includes the 50.
+- **No editing a turn, only undoing the last.** The old scorer's edit-a-turn could write a value onto the wrong turn (inputs keyed by position); undo popping the log cannot.
+- **Play, `components/scrabble/Play.jsx`**: the scoreboard sorted best first (cards move when someone overtakes, with an **OVERTAKE!** banner), whose go it is, a keypad of cream tiles (the corner number is the Scrabble value of the digit name's first letter), **+50** for using all seven tiles, an optional word for the turn, Pass, Undo, and a "pass the phone" card after each turn (switchable in Setup, `scrabble:handoff`). A player's card opens their turns, read-only. 50 or more, or a bingo, gets a fanfare. End game (the flag) confirms, then the podium and awards; "Back to the game" reopens it.
+- **Word check, `components/scrabble/WordCheck.jsx`**: offline, against `public/scrabble/words.txt`, the public-domain ENABLE list (172,823 words). Fetched the first time the checker opens, then kept in memory as a `Set`. It is not Collins or TWL (no QI, ZA), and the sheet says so.
+- **Saving, `components/scrabble/store.js`**: the Darts pattern. The match goes to the device after every turn (`scrabble:match`), so a reload offers "Carry on" (with an X to forget it); a signed-in player's goes to `/api/games` a moment later as `scrabbleConfig.match`, one save at a time, keyed by match id.
+- The backdrop `public/scrabble/table.webp` is Higgsfield art: a lamp-lit table from above, racks round the edge, the middle left clear.
 
 ## Travel Bingo Flow
 
@@ -434,7 +442,7 @@ playing on this phone, then opens a trip picker; `?trip=<id>` opens a trip and
 
 ## Claude AI
 
-`/api/claude` caches by base64-truncated prompt key in `CachedResponse`. No streaming. Quiz questions come from `/api/quiz/questions` (see Quiz); `/api/claude` now serves only Scrabble's word check. Travel Bingo's `generate` route calls the SDK directly. **Egypt Explorer is the one game that calls Claude during play** (see above), through `@aspiro/ai/server` with its own durable budget, and with no sign-in. Models per workload are in `src/lib/aiModels.js` (`@aspiro/ai` v0.7.0).
+There is no open Claude proxy: `/api/claude` (and its `CachedResponse` cache and `ClaudeChat` component) was retired 2026-10-21, when Scrabble's word check moved to a bundled word list. Every Claude call is made by a server route for one job. Quiz questions come from `/api/quiz/questions` (see Quiz). Travel Bingo's `generate` route calls the SDK directly. **Egypt Explorer is the one game that calls Claude during play** (see above), through `@aspiro/ai/server` with its own durable budget, and with no sign-in. Models per workload are in `src/lib/aiModels.js` (`@aspiro/ai` v0.7.0).
 
 ## UI Conventions
 
