@@ -49,7 +49,9 @@ export const GAMES = [
   },
   {
     id: 'travel-bingo',
-    name: 'Travel Bingo',
+    // The home screen names the kind of game; inside it is Travel Bingo, as
+    // more travel games may join it (Ash, 2026-10-21).
+    name: 'Travel Games',
     href: '/games/travel-bingo',
     emoji: '🚗',
     tone: 'bingo',
@@ -57,7 +59,8 @@ export const GAMES = [
   },
   {
     id: 'egypt-explorer',
-    name: 'Egypt Explorer',
+    // Likewise: inside it is Egypt Explorer, the first of the places.
+    name: 'World Explorer',
     href: '/games/egypt-explorer',
     emoji: '🏺',
     tone: 'egypt',
