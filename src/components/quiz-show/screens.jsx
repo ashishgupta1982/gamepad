@@ -84,7 +84,9 @@ function QuestionHeader({ game, big }) {
  * picture is on Cloudinary and is sized for the phone by @aspiro/media
  * (transformUrl with the hero preset: capped width, automatic format and
  * quality). It carries its credit, which some Wikimedia licences require.
- * `small` is the reveal, where it is a reminder rather than the clue.
+ * `small` is the reveal, where it is a reminder rather than the clue, except
+ * for a close-up (Zoomed in), whose whole picture is the answer and is shown
+ * full size.
  */
 function QuestionMedia({ media, big, small }) {
   if (!media) return null;
@@ -95,10 +97,12 @@ function QuestionMedia({ media, big, small }) {
       </p>
     );
   }
+  const whole = small && media.reveal;
+  if (whole) small = false;
   return (
     <figure className="w-full">
       <img
-        src={transformUrl(media.src, IMAGE_PRESETS.hero)}
+        src={transformUrl(whole ? media.reveal : media.src, IMAGE_PRESETS.hero)}
         alt={media.alt || ''}
         draggable={false}
         className={cn('mx-auto w-auto select-none rounded-2xl object-contain shadow-[0_3px_0_rgba(0,0,0,0.15)]', small ? 'max-h-[16dvh]' : big ? 'max-h-[40dvh]' : 'max-h-[30dvh]')}

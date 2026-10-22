@@ -37,6 +37,7 @@ const QuizQuestionSchema = new mongoose.Schema(
       src: String,
       alt: String,
       credit: String,
+      reveal: String, // the whole picture, when `src` is a close-up of it
       text: String,
     },
     source: { type: String, enum: ['seed', 'writer'], default: 'writer' },

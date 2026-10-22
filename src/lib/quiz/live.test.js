@@ -35,4 +35,11 @@ describe('what a phone is sent', () => {
     expect(out.questions[0]).toMatchObject({ correctAnswer: 2, explanation: 'because' });
     expect(out.players[1].answers[0]).toMatchObject({ option: 1, correct: false });
   });
+
+  it("a close-up's whole picture only once the answer is revealed", () => {
+    const zoomed = { kind: 'image', src: 'https://x/near.jpg', reveal: 'https://x/whole.jpg' };
+    const g = start(createGame({ mode: 'multi', settings: { count: 1, timer: 20 }, players: [{ id: 'p1', name: 'A' }], questions: [{ ...q(0), media: zoomed }] }), t0);
+    expect(project({ game: g }).questions[0].media).toEqual({ kind: 'image', src: 'https://x/near.jpg', reveal: undefined });
+    expect(project({ game: reveal(g, t0 + 2000) }).questions[0].media.reveal).toBe('https://x/whole.jpg');
+  });
 });

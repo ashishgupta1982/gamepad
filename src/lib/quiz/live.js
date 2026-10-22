@@ -55,7 +55,9 @@ export function project(doc, { playerId = null } = {}) {
   const g = doc.game;
   const open = g.phase === 'question' || g.phase === 'ready' || g.phase === 'loading';
   const q = g.questions[g.index];
-  const shown = q ? (open ? { ...q, correctAnswer: null, explanation: '' } : q) : null;
+  // A close-up's whole picture would give it away, so it waits for the reveal too.
+  const hide = (m) => (m?.reveal ? { ...m, reveal: undefined } : m);
+  const shown = q ? (open ? { ...q, correctAnswer: null, explanation: '', media: hide(q.media) } : q) : null;
   const questions = Array.from({ length: Math.max(0, g.index + 1) }, (_, i) => (i === g.index ? shown : null));
   const players = g.players.map((p) => {
     if (!open || p.id === playerId) return p;

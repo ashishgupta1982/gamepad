@@ -56,7 +56,10 @@ export function checkMedia(raw) {
   if (raw.kind === 'image') {
     const src = String(raw.src ?? '').trim();
     if (src.length > 500 || !/^https:\/\//.test(src)) return null;
-    return { kind: 'image', src, alt: tidy(raw.alt, 160), credit: tidy(raw.credit, 160) };
+    // `reveal`: the whole picture, shown with the answer, when the question is a close-up of it.
+    const reveal = String(raw.reveal ?? '').trim();
+    const whole = reveal.length <= 500 && /^https:///.test(reveal) ? { reveal } : {};
+    return { kind: 'image', src, alt: tidy(raw.alt, 160), credit: tidy(raw.credit, 160), ...whole };
   }
   return null;
 }
