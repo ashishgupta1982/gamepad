@@ -44,7 +44,7 @@ describe('custom categories', () => {
       { name: 'Trains', brief: 'steam engines' },
     ]);
     expect(topicsFor([])).toEqual([expect.objectContaining({ name: 'Mixed bag' })]);
-    expect(topicsFor(['group:sport'])).toEqual([{ name: 'Sport', brief: 'a mix of Football, Olympics, Sport Mix' }]);
+    expect(topicsFor(['group:sport'])).toEqual([{ name: 'Sport', brief: 'a mix of Football, Olympics, Sport Mix, Formula 1, Sporting Legends, Which Sport?' }]);
   });
 
   it('names every pick, and keeps category ids unique', () => {
@@ -53,7 +53,7 @@ describe('custom categories', () => {
     expect(pickName({ id: 'c_trains0001', name: 'Trains' })).toBe('Trains');
     const ids = CATEGORIES.map((c) => c.id);
     expect(new Set(ids).size).toBe(ids.length);
-    expect(ids).toHaveLength(36);
+    expect(ids).toHaveLength(41);
   });
 
   it('picks: Mixed bag alone, whole groups, and one category out of a group', () => {
@@ -63,9 +63,9 @@ describe('custom categories', () => {
     // A whole group replaces its categories.
     expect(togglePick(['space', 'football'], 'group:science')).toEqual(['football', 'group:science']);
     // One category off a picked group leaves the rest.
-    expect(togglePick(['group:sport'], 'olympics')).toEqual(['football', 'sport-mix']);
+    expect(togglePick(['group:sport'], 'olympics')).toEqual(['football', 'sport-mix', 'formula-1', 'sporting-legends', 'which-sport']);
     // Every category of a group, one by one, becomes the group.
-    expect(togglePick(['football', 'olympics'], 'sport-mix')).toEqual(['group:sport']);
+    expect(togglePick(['football', 'olympics', 'sport-mix', 'formula-1', 'sporting-legends'], 'which-sport')).toEqual(['group:sport']);
     // Over the limit, nothing changes.
     const full = ['films', 'tv', 'music', 'space', 'football', 'dinosaurs', 'animals', 'tv-x'].slice(0, MAX_TOPICS);
     expect(togglePick(full, 'marvel')).toBe(full);

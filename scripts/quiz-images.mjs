@@ -76,7 +76,9 @@ async function file(name) {
 
 async function outline(code) {
   const svg = (await download(`https://raw.githubusercontent.com/djaiss/mapsicon/master/all/${code}/vector.svg`)).toString('utf8').replace(/fill="#000000"/g, 'fill="#6d28d9"');
-  const png = await sharp(Buffer.from(svg), { density: 96 }).resize({ width: 900, height: 900, fit: 'contain', background: '#ffffff' }).flatten({ background: '#ffffff' }).png().toBuffer();
+  // A white margin round the shape, so a coastline never runs into the edge of the card.
+  const shape = await sharp(Buffer.from(svg), { density: 96 }).resize({ width: 780, height: 780, fit: 'contain', background: '#ffffff' }).flatten({ background: '#ffffff' }).toBuffer();
+  const png = await sharp(shape).extend({ top: 60, bottom: 60, left: 60, right: 60, background: '#ffffff' }).png().toBuffer();
   return { bytes: png, format: 'png', publicId: `outline-${code}`, credit: '' };
 }
 

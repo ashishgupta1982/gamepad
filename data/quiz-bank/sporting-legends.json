@@ -1,0 +1,495 @@
+{
+  "category": "sporting-legends",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which tennis legend is this?",
+      "options": [
+        "Venus Williams",
+        "Serena Williams",
+        "Naomi Osaka",
+        "Coco Gauff"
+      ],
+      "answer": "Serena Williams",
+      "explanation": "Serena Williams won 23 Grand Slam singles titles, more than any other woman since tennis turned professional in 1968.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Serena Williams",
+        "alt": "A smiling tennis player on court",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706044/GamePad/quiz/serena-williams.jpg",
+        "credit": "Photo: AndrewHenkelman, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Serena-Smiling-2020.png"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which gymnast is this?",
+      "options": [
+        "Simone Biles",
+        "Gabby Douglas",
+        "Aly Raisman",
+        "Shawn Johnson"
+      ],
+      "answer": "Simone Biles",
+      "explanation": "Several moves in the gymnastics rulebook are named after Biles, because she was the first to land them in competition.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Simone Biles",
+        "alt": "A smiling gymnast in a red team jacket",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706046/GamePad/quiz/simone-biles.jpg",
+        "credit": "Photo: Ocoudis, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Simone_Biles_National_Team_2024.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which tennis legend is this?",
+      "options": [
+        "Rafael Nadal",
+        "Novak Djokovic",
+        "Andy Murray",
+        "Roger Federer"
+      ],
+      "answer": "Roger Federer",
+      "explanation": "Federer won the Wimbledon men's singles a record eight times.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Roger Federer",
+        "alt": "A tennis player wearing a headband",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706047/GamePad/quiz/roger-federer.jpg",
+        "credit": "Photo: Tatiana from Moscow, Russia, CC BY-SA 2.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Roger_Federer_2015_(cropped).jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Basketball legend Michael Jordan famously wore which shirt number?",
+      "options": [
+        "7",
+        "10",
+        "23",
+        "33"
+      ],
+      "answer": "23",
+      "explanation": "Jordan won six NBA titles with the Chicago Bulls, and his first Air Jordan trainers came out in 1985.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which darts legend was nicknamed 'The Power'?",
+      "options": [
+        "Eric Bristow",
+        "Phil Taylor",
+        "Michael van Gerwen",
+        "Raymond van Barneveld"
+      ],
+      "answer": "Phil Taylor",
+      "explanation": "Taylor, from Stoke-on-Trent, won 16 world championships.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which snooker legend is nicknamed 'The Rocket'?",
+      "options": [
+        "Ronnie O'Sullivan",
+        "Stephen Hendry",
+        "Steve Davis",
+        "Judd Trump"
+      ],
+      "answer": "Ronnie O'Sullivan",
+      "explanation": "He earned the nickname for his lightning-fast play, once making a maximum break in five minutes and eight seconds.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Sir Chris Hoy won six Olympic gold medals in which sport?",
+      "options": [
+        "Rowing",
+        "Swimming",
+        "Sailing",
+        "Cycling"
+      ],
+      "answer": "Cycling",
+      "explanation": "Hoy grew up in Edinburgh, and the velodrome in Glasgow is named after him.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Wayne Gretzky, known as 'The Great One', is a legend of which sport?",
+      "options": [
+        "Basketball",
+        "Baseball",
+        "Ice hockey",
+        "American football"
+      ],
+      "answer": "Ice hockey",
+      "explanation": "His shirt number, 99, was retired by every team in the NHL, so nobody can wear it again.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Sachin Tendulkar, nicknamed 'the Little Master', played cricket for which country?",
+      "options": [
+        "Pakistan",
+        "India",
+        "Sri Lanka",
+        "Bangladesh"
+      ],
+      "answer": "India",
+      "explanation": "Tendulkar was the first player to score 100 international centuries.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which Dutch football legend gave his name to a famous trick, first seen at the 1974 World Cup?",
+      "options": [
+        "Johan Cruyff",
+        "Marco van Basten",
+        "Ruud Gullit",
+        "Dennis Bergkamp"
+      ],
+      "answer": "Johan Cruyff",
+      "explanation": "The Cruyff turn drags the ball behind the standing leg, and it left a Swedish defender going the wrong way.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which tennis player is known as 'the King of Clay'?",
+      "options": [
+        "Novak Djokovic",
+        "Roger Federer",
+        "Andy Murray",
+        "Rafael Nadal"
+      ],
+      "answer": "Rafael Nadal",
+      "explanation": "Nadal won the French Open, played on clay courts in Paris, a record 14 times.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In 2012, Bradley Wiggins became the first British rider to win which famous race?",
+      "options": [
+        "Giro d'Italia",
+        "Vuelta a España",
+        "Tour de France",
+        "Milan–San Remo"
+      ],
+      "answer": "Tour de France",
+      "explanation": "Just ten days after finishing in Paris, he won Olympic gold in the time trial in London.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In 2019, Eliud Kipchoge became the first person to run a marathon in under how long?",
+      "options": [
+        "2 and a half hours",
+        "2 hours",
+        "3 hours",
+        "3 and a half hours"
+      ],
+      "answer": "2 hours",
+      "explanation": "He ran 1 hour 59 minutes 40 seconds in Vienna, though it was a special event with pacemakers, so it is not an official record.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Jonah Lomu, the giant winger who ran through defenders at the 1995 Rugby World Cup, played for which country?",
+      "options": [
+        "New Zealand",
+        "Australia",
+        "South Africa",
+        "Fiji"
+      ],
+      "answer": "New Zealand",
+      "explanation": "He scored four tries against England in the semi-final.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Babe Ruth was a legend of which sport?",
+      "options": [
+        "Boxing",
+        "Golf",
+        "Basketball",
+        "Baseball"
+      ],
+      "answer": "Baseball",
+      "explanation": "Ruth hit 60 home runs for the New York Yankees in 1927, a record that stood for 34 years.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which boxing legend is this, pictured as a young man?",
+      "options": [
+        "Joe Frazier",
+        "George Foreman",
+        "Muhammad Ali",
+        "Sonny Liston"
+      ],
+      "answer": "Muhammad Ali",
+      "explanation": "Ali called himself The Greatest and promised to 'float like a butterfly, sting like a bee'.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Muhammad Ali",
+        "alt": "A black-and-white portrait of a young man",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706049/GamePad/quiz/muhammad-ali.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:Muhammad_Ali_NYWTS.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which Brazilian football legend is this?",
+      "options": [
+        "Garrincha",
+        "Pelé",
+        "Zico",
+        "Ronaldinho"
+      ],
+      "answer": "Pelé",
+      "explanation": "Pelé is the only player to have won the World Cup three times: 1958, 1962 and 1970.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Pelé",
+        "alt": "A footballer in a yellow shirt with a green collar",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706050/GamePad/quiz/pel.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:Pele_con_brasil_(cropped).jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Martina Navratilova won the Wimbledon women's singles a record how many times?",
+      "options": [
+        "9",
+        "6",
+        "7",
+        "12"
+      ],
+      "answer": "9",
+      "explanation": "Six of her titles came in a row, from 1982 to 1987.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which golfer was nicknamed 'the Golden Bear'?",
+      "options": [
+        "Arnold Palmer",
+        "Gary Player",
+        "Greg Norman",
+        "Jack Nicklaus"
+      ],
+      "answer": "Jack Nicklaus",
+      "explanation": "Nicklaus won 18 major championships, still the most by any man at the end of 2025.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Carl Lewis won Olympic gold at four Games in a row, from 1984 to 1996, in which event?",
+      "options": [
+        "100m",
+        "200m",
+        "Long jump",
+        "Triple jump"
+      ],
+      "answer": "Long jump",
+      "explanation": "In all, Lewis won nine Olympic gold medals in sprinting and jumping.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Eddy Merckx, the cyclist nicknamed 'the Cannibal' for wanting to win everything, came from which country?",
+      "options": [
+        "France",
+        "Belgium",
+        "Netherlands",
+        "Italy"
+      ],
+      "answer": "Belgium",
+      "explanation": "Merckx won the Tour de France five times, and in 1969 took the overall, points and mountains prizes in the same Tour.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "To which piece of music did Torvill and Dean skate to Olympic gold in 1984?",
+      "options": [
+        "Boléro",
+        "The Blue Danube",
+        "Swan Lake",
+        "Carmen"
+      ],
+      "answer": "Boléro",
+      "explanation": "All nine judges gave them a perfect 6.0 for artistic impression.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Shane Warne's 'Ball of the Century' in 1993 bowled out which England batsman?",
+      "options": [
+        "Graham Gooch",
+        "Michael Atherton",
+        "Alec Stewart",
+        "Mike Gatting"
+      ],
+      "answer": "Mike Gatting",
+      "explanation": "It was Warne's very first ball in a Test in England, and it spun sharply to clip the top of off stump.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is Tiger Woods's real first name?",
+      "options": [
+        "Earl",
+        "Elliott",
+        "Eldrick",
+        "Edwin"
+      ],
+      "answer": "Eldrick",
+      "explanation": "His father, Earl, nicknamed him Tiger after a fellow soldier who had saved his life in the Vietnam War.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Daley Thompson won Olympic gold in 1980 and 1984 in which ten-event contest?",
+      "options": [
+        "Heptathlon",
+        "Decathlon",
+        "Pentathlon",
+        "Triathlon"
+      ],
+      "answer": "Decathlon",
+      "explanation": "He famously whistled along to the national anthem on the podium in Los Angeles.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Brazilian striker, nicknamed 'O Fenômeno', scored both goals in the 2002 World Cup final?",
+      "options": [
+        "Ronaldo",
+        "Rivaldo",
+        "Ronaldinho",
+        "Romário"
+      ],
+      "answer": "Ronaldo",
+      "explanation": "Brazil beat Germany 2–0 in Yokohama, four years after Ronaldo was taken ill on the day of the 1998 final.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In 2004, who became the first batsman to score 400 in a Test innings?",
+      "options": [
+        "Sachin Tendulkar",
+        "Matthew Hayden",
+        "Viv Richards",
+        "Brian Lara"
+      ],
+      "answer": "Brian Lara",
+      "explanation": "Lara made 400 not out against England in Antigua, ten years after scoring 375 against them on the same ground.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who won the 1985 World Snooker Championship final on the very last black, watched by 18.5 million people on BBC Two?",
+      "options": [
+        "Steve Davis",
+        "Alex Higgins",
+        "Dennis Taylor",
+        "Jimmy White"
+      ],
+      "answer": "Dennis Taylor",
+      "explanation": "Taylor beat Steve Davis just after midnight, in one of the most watched broadcasts in BBC Two history.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In 1996, Frankie Dettori rode all seven winners on a single day at which racecourse?",
+      "options": [
+        "Epsom",
+        "Ascot",
+        "Cheltenham",
+        "Aintree"
+      ],
+      "answer": "Ascot",
+      "explanation": "The 'Magnificent Seven' came at combined odds of 25,095 to 1 and cost bookmakers millions.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Gareth Edwards scored 'that try' for the Barbarians in 1973 against which team?",
+      "options": [
+        "New Zealand",
+        "Australia",
+        "South Africa",
+        "France"
+      ],
+      "answer": "New Zealand",
+      "explanation": "The move began deep in the Barbarians' own half and is often called the greatest try ever scored.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    }
+  ]
+}

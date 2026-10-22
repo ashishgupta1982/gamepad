@@ -1,0 +1,755 @@
+{
+  "category": "which-sport",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which sport is this a close-up from?",
+      "options": [
+        "Darts",
+        "Archery",
+        "Shooting",
+        "Bowls"
+      ],
+      "answer": "Darts",
+      "explanation": "The numbers round the board are jumbled on purpose, so a throw that just misses the 20 lands in the measly 1 or 5.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Dartboard",
+        "alt": "A round target board with three thrown pieces stuck in it",
+        "zoom": [
+          0.7,
+          0.22,
+          0.4
+        ],
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706052/GamePad/quiz/dartboard-zoom.jpg",
+        "credit": "",
+        "reveal": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706052/GamePad/quiz/dartboard.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Darts_in_a_dartboard.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which sport uses these?",
+      "options": [
+        "Boxing",
+        "Karate",
+        "Judo",
+        "Wrestling"
+      ],
+      "answer": "Boxing",
+      "explanation": "Wearing gloves became part of the rules in 1867, under the Marquess of Queensberry Rules.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Boxing_glove",
+        "alt": "A pair of padded black gloves",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706054/GamePad/quiz/boxing-glove.jpg",
+        "credit": "Photo: Julieb2768, CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Sports_Model_John_Quinlan_Autographed_Muay_Thai_Boxing_Gloves.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which sport is this a close-up from?",
+      "options": [
+        "Basketball",
+        "Netball",
+        "Volleyball",
+        "Handball"
+      ],
+      "answer": "Basketball",
+      "explanation": "The hoop is 10 feet (about 3 metres) off the ground, the same height as when the game was invented in 1891.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Backboard_(basketball)",
+        "alt": "A hoop with a net, fixed to a see-through board on a pole",
+        "zoom": [
+          0.42,
+          0.58,
+          0.28
+        ],
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706056/GamePad/quiz/backboard-basketball-zoom.jpg",
+        "credit": "Photo: Tonniedixon, CC BY-SA 3.0 (Wikimedia Commons)",
+        "reveal": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706055/GamePad/quiz/backboard-basketball.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Lifetime_Elite_Basketball_hoop.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which sport is this a close-up from?",
+      "options": [
+        "Cricket",
+        "Baseball",
+        "Rounders",
+        "Croquet"
+      ],
+      "answer": "Cricket",
+      "explanation": "The two small pieces of wood balanced on top are the bails: knock one off and the batter could be out.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Wicket",
+        "alt": "Three wooden posts in the grass, topped with two small pieces of wood",
+        "zoom": [
+          0.5,
+          0.2,
+          0.4
+        ],
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706058/GamePad/quiz/wicket-zoom.jpg",
+        "credit": "Photo: Acabashi, CC BY-SA 4.0 (Wikimedia Commons)",
+        "reveal": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706057/GamePad/quiz/wicket.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Highgate_Cricket_Club_wicket_at_Crouch_End,_Haringey,_London,_England_01.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which sport uses this ball?",
+      "options": [
+        "Rugby",
+        "American football",
+        "Australian rules football",
+        "Volleyball"
+      ],
+      "answer": "Rugby",
+      "explanation": "Early balls like this had a pig's bladder inside a leather case, which helped give them their oval shape.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Rugby_ball",
+        "alt": "An oval ball covered in signatures",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706059/GamePad/quiz/rugby-ball.jpg",
+        "credit": "Photo: Unknown, CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Lions_signed_ball.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which sport uses this?",
+      "options": [
+        "Golf",
+        "Croquet",
+        "Cricket",
+        "Bowls"
+      ],
+      "answer": "Golf",
+      "explanation": "The dimples help the ball fly about twice as far as a smooth one would.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Golf_ball",
+        "alt": "A small white dimpled ball beside a hole in short grass",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706061/GamePad/quiz/golf-ball.jpg",
+        "credit": "Photo: Lotus Head from Johannesburg, Gauteng, South Africa, CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Golfball.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which sport uses these?",
+      "options": [
+        "Badminton",
+        "Tennis",
+        "Squash",
+        "Table tennis"
+      ],
+      "answer": "Badminton",
+      "explanation": "A smash can send one of these flying at over 500 km/h, making it the fastest thing in any racket sport.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Shuttlecock",
+        "alt": "Feathered objects with rounded cork bases",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706062/GamePad/quiz/shuttlecock.jpg",
+        "credit": "Photo: Arne Nordmann (user:norro), Germany, CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Shuttlecocks_Yonex_Aerosensa_20.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which sport is this a close-up from?",
+      "options": [
+        "Ten-pin bowling",
+        "Bowls",
+        "Curling",
+        "Pétanque"
+      ],
+      "answer": "Ten-pin bowling",
+      "explanation": "Knocking all the pins down with your first ball is a strike, and twelve strikes in a row makes a perfect score of 300.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Ten-pin_bowling",
+        "alt": "A row of white pins with a ball rolling towards them",
+        "zoom": [
+          0.5,
+          0.42,
+          0.6
+        ],
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706064/GamePad/quiz/ten-pin-bowling-zoom.jpg",
+        "credit": "",
+        "reveal": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706064/GamePad/quiz/ten-pin-bowling.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:10-pin-bowling-strike.gif"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which sport is being played here?",
+      "options": [
+        "Table tennis",
+        "Tennis",
+        "Badminton",
+        "Squash"
+      ],
+      "answer": "Table tennis",
+      "explanation": "It began as an after-dinner game in Victorian England, sometimes with a row of books as the net.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Table_tennis",
+        "alt": "Two players either side of a small table with a net, in a big arena",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706066/GamePad/quiz/table-tennis.jpg",
+        "credit": "Photo: Pierre-Yves Beaudouin, CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Mondial_Ping_-_Men%27s_Singles_-_Round_4_-_Kenta_Matsudaira-Vladimir_Samsonov_-_57.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which sport is this?",
+      "options": [
+        "Fencing",
+        "Kendo",
+        "Karate",
+        "Judo"
+      ],
+      "answer": "Fencing",
+      "explanation": "The suits and blades are wired up, so a light comes on and a buzzer sounds when a hit lands.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Fencing",
+        "alt": "Two people in white suits and masks, one lunging with a thin blade",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706067/GamePad/quiz/fencing.jpg",
+        "credit": "Photo: Marie-Lan Nguyen, CC BY 2.5 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Final_Trophee_Monal_2012_n08.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which sport uses this racket and ball?",
+      "options": [
+        "Squash",
+        "Tennis",
+        "Badminton",
+        "Lacrosse"
+      ],
+      "answer": "Squash",
+      "explanation": "The ball hardly bounces until it's warm, which is why players hit it about for a few minutes before a match.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Racket_(sports_equipment)",
+        "alt": "A racket and a small black ball on a wooden floor",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706069/GamePad/quiz/racket-sports-equipment.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:Squash-racquet-and-ball.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which sport is being played here?",
+      "options": [
+        "Water polo",
+        "Canoe polo",
+        "Handball",
+        "Netball"
+      ],
+      "answer": "Water polo",
+      "explanation": "Players can't touch the bottom of the pool, so they tread water all game with a kick called the eggbeater.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Water_polo",
+        "alt": "Players in caps swimming after a yellow ball beside a goal in a pool",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706070/GamePad/quiz/water-polo.jpg",
+        "credit": "Photo: Massimo Finizio, CC BY-SA 2.0 it (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:WaterPolo.JPG"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which sport is this?",
+      "options": [
+        "Rhythmic gymnastics",
+        "Trampolining",
+        "Figure skating",
+        "Cheerleading"
+      ],
+      "answer": "Rhythmic gymnastics",
+      "explanation": "As well as hoops, these gymnasts perform with a ball, clubs and a long ribbon.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Rhythmic_gymnastics",
+        "alt": "Five gymnasts in sparkly outfits holding hoops and clubs",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706072/GamePad/quiz/rhythmic-gymnastics.jpg",
+        "credit": "Photo: Miriam Jeske, CC BY 3.0 br (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Brazil_Group_2016_Olympics_Test_Event_1.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which event is this athlete taking part in?",
+      "options": [
+        "Pole vault",
+        "High jump",
+        "Long jump",
+        "Triple jump"
+      ],
+      "answer": "Pole vault",
+      "explanation": "The bendy poles are made of fibreglass or carbon fibre, and they can fling the best vaulters over six metres up.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Pole_vault",
+        "alt": "An athlete flying upside down over a high bar, with a long bending stick",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706073/GamePad/quiz/pole-vault.jpg",
+        "credit": "Photo: Unknown, CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Pole_Vault_Sequence_3.jpg"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which sport is this?",
+      "options": [
+        "Show jumping",
+        "Dressage",
+        "Horse racing",
+        "Polo"
+      ],
+      "answer": "Show jumping",
+      "explanation": "Every pole a horse knocks down costs its rider four faults.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Show_jumping",
+        "alt": "A rider on a horse leaping over a white fence in front of a crowd",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706075/GamePad/quiz/show-jumping.jpg",
+        "credit": "Photo: Ronjamin (Ronald C. Yochum Jr.), CC BY 2.5 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:R3DE_StadiumJump.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which sport is this a close-up from?",
+      "options": [
+        "Track cycling",
+        "Speed skating",
+        "BMX racing",
+        "Motorcycle speedway"
+      ],
+      "answer": "Track cycling",
+      "explanation": "Track bikes have a single fixed gear and no brakes at all.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Track_cycling",
+        "alt": "Two riders racing on a steeply banked wooden track",
+        "zoom": [
+          0.5,
+          0.37,
+          0.3
+        ],
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706077/GamePad/quiz/track-cycling-zoom.jpg",
+        "credit": "Photo: Daieuxetdailleurs, CC BY 4.0 (Wikimedia Commons)",
+        "reveal": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706076/GamePad/quiz/track-cycling.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Cycling_at_the_2024_Summer_Olympics_%E2%80%93_Men%27s_sprint_1-32_finals_-_13.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which sport is being played here?",
+      "options": [
+        "Australian rules football",
+        "Rugby league",
+        "Gaelic football",
+        "American football"
+      ],
+      "answer": "Australian rules football",
+      "explanation": "A clean catch from a kick is called a mark, and leaping ones like this are known as 'speccies'.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Australian_rules_football",
+        "alt": "A player leaping high over another to catch an oval red ball",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706079/GamePad/quiz/australian-rules-football.jpg",
+        "credit": "Photo: Flickerd, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Archie_Smith.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which sport is this a close-up from?",
+      "options": [
+        "Hammer throw",
+        "Discus throw",
+        "Shot put",
+        "Javelin throw"
+      ],
+      "answer": "Hammer throw",
+      "explanation": "The men's 'hammer' is a metal ball on a steel wire that weighs 7.26 kg, the same as the men's shot.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Hammer_throw",
+        "alt": "An athlete spinning inside a netted cage, a metal ball flying behind him",
+        "zoom": [
+          0.53,
+          0.28,
+          0.22
+        ],
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706081/GamePad/quiz/hammer-throw-zoom.jpg",
+        "credit": "Photo: Daltoro, CC BY-SA 4.0 (Wikimedia Commons)",
+        "reveal": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706081/GamePad/quiz/hammer-throw.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:3A9A0218.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which sport uses this equipment?",
+      "options": [
+        "Croquet",
+        "Polo",
+        "Golf",
+        "Bowls"
+      ],
+      "answer": "Croquet",
+      "explanation": "The All England Club at Wimbledon was founded for this game in 1868, before lawn tennis took over.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Croquet",
+        "alt": "A mallet, coloured balls and a white hoop on a lawn",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706083/GamePad/quiz/croquet.jpg",
+        "credit": "Photo: Winnywinn, CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Modern_croquet_equipment.JPG"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which sport is this a close-up from?",
+      "options": [
+        "Artistic swimming",
+        "Diving",
+        "Water polo",
+        "Trampolining"
+      ],
+      "answer": "Artistic swimming",
+      "explanation": "Until 2017 the sport was officially called synchronised swimming.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Artistic_swimming",
+        "alt": "A swimmer held up out of the water by team-mates in an Olympic pool",
+        "zoom": [
+          0.33,
+          0.55,
+          0.35
+        ],
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706085/GamePad/quiz/artistic-swimming-zoom.jpg",
+        "credit": "Photo: Rafael Brais/brasil2016.gov.br, CC BY 3.0 (Wikimedia Commons)",
+        "reveal": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706084/GamePad/quiz/artistic-swimming.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Synchronized_swimming_at_the_2016_Summer_Olympics_-Presentation_of_the_Brazilian_team_02.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which sport is played with this ball?",
+      "options": [
+        "Hurling",
+        "Shinty",
+        "Lacrosse",
+        "Field hockey"
+      ],
+      "answer": "Hurling",
+      "explanation": "The sliotar has a cork centre, and players can run with it balanced on the flat end of the stick.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Sliotar",
+        "alt": "A small white leather ball with raised stitched ridges",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706087/GamePad/quiz/sliotar.jpg",
+        "credit": "Photo: The Grimclaw, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:A_Hurling_Sliotar.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which martial art is this?",
+      "options": [
+        "Kendo",
+        "Fencing",
+        "Sumo",
+        "Judo"
+      ],
+      "answer": "Kendo",
+      "explanation": "Kendo fighters strike with a sword made from four slats of bamboo, called a shinai.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Kendo",
+        "alt": "Two fighters in dark armour and masks, one striking with a long wooden sword",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706089/GamePad/quiz/kendo.jpg",
+        "credit": "Photo: 江戸村のとくぞう, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:2022_All_Japan_Kendo_Championship_Tetsuhiko_Murakami4.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which sport is this a close-up from?",
+      "options": [
+        "Luge",
+        "Skeleton",
+        "Bobsleigh",
+        "Speed skating"
+      ],
+      "answer": "Luge",
+      "explanation": "Sliders lie on their backs, feet first, steering with their calves and shoulders at around 140 km/h.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Luge",
+        "alt": "Two sliders lying on their backs, feet first, on an icy track",
+        "zoom": [
+          0.72,
+          0.72,
+          0.5
+        ],
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706091/GamePad/quiz/luge-zoom.jpg",
+        "credit": "Photo: The U.S. Army, CC BY 2.0 (Wikimedia Commons)",
+        "reveal": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706090/GamePad/quiz/luge.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Mortensen_and_Griffall.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which sport is this a close-up from?",
+      "options": [
+        "Biathlon",
+        "Nordic combined",
+        "Cross-country skiing",
+        "Modern pentathlon"
+      ],
+      "answer": "Biathlon",
+      "explanation": "The sport grew out of ski patrols by soldiers, and it has been in the Winter Olympics since 1960.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Biathlon",
+        "alt": "Skiers lying down and standing at a row of targets, holding rifles",
+        "zoom": [
+          0.25,
+          0.73,
+          0.25
+        ],
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706093/GamePad/quiz/biathlon-zoom.jpg",
+        "credit": "Photo: Unknown, CC BY-SA 3.0 (Wikimedia Commons)",
+        "reveal": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706092/GamePad/quiz/biathlon.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Biathlon_Schalke.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which sport is this a close-up from?",
+      "options": [
+        "Steeplechase",
+        "Hurdles",
+        "Cross country",
+        "Triathlon"
+      ],
+      "answer": "Steeplechase",
+      "explanation": "In the 3,000 metres steeplechase runners clear 28 barriers and seven water jumps.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Steeplechase_(athletics)",
+        "alt": "Runners splashing through a water pit after jumping a barrier",
+        "zoom": [
+          0.55,
+          0.82,
+          0.35
+        ],
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706095/GamePad/quiz/steeplechase-athletics-zoom.jpg",
+        "credit": "Photo: Augustas Didžgalvis, CC BY-SA 4.0 (Wikimedia Commons)",
+        "reveal": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706094/GamePad/quiz/steeplechase-athletics.jpg",
+        "source": "https://commons.wikimedia.org/wiki/File:Steeplechase_by_Augustas_Didzgalvis.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which sport is played on this court?",
+      "options": [
+        "Real tennis",
+        "Squash",
+        "Rackets",
+        "Eton fives"
+      ],
+      "answer": "Real tennis",
+      "explanation": "It was a favourite game of Henry VIII, and his court at Hampton Court Palace is still played on today.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Real_tennis",
+        "alt": "A long indoor court with a sloping roofed gallery down one side and a net",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706096/GamePad/quiz/real-tennis.jpg",
+        "credit": "Photo: Horacio Gomes, CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Jesmond-Dene-tennis-court.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which sport is being played here?",
+      "options": [
+        "Underwater hockey",
+        "Water polo",
+        "Underwater rugby",
+        "Canoe polo"
+      ],
+      "answer": "Underwater hockey",
+      "explanation": "Players hold their breath to push a puck along the pool floor; the game was invented in Southsea in 1954.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Underwater_hockey",
+        "alt": "Swimmers in masks and snorkels pushing a puck along the bottom of a pool",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706097/GamePad/quiz/underwater-hockey.jpg",
+        "credit": "Photo: DavidUnderwater, CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:OctopushTwoPlayers28092009.JPG"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which sport is being played here?",
+      "options": [
+        "Sepak takraw",
+        "Footvolley",
+        "Volleyball",
+        "Badminton"
+      ],
+      "answer": "Sepak takraw",
+      "explanation": "Its name joins the Malay word for kick, sepak, with the Thai word for the woven ball, takraw.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Sepak_takraw",
+        "alt": "A player flipping upside down to kick a ball over a net",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706099/GamePad/quiz/sepak-takraw.jpg",
+        "credit": "Photo: Republic of Korea from Seoul, Republic of Korea, CC BY-SA 2.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Incheon_AsianGames_Sepaktakraw_09_(15291705581).jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which sport is this?",
+      "options": [
+        "Canoe slalom",
+        "Canoe sprint",
+        "Rowing",
+        "White-water rafting"
+      ],
+      "answer": "Canoe slalom",
+      "explanation": "Paddlers must pass through hanging gates: green ones heading downstream, red ones heading back upstream.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Canoe_slalom",
+        "alt": "A paddler in a small boat on white water, between hanging poles",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706100/GamePad/quiz/canoe-slalom.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:Kanuslalom.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which sport is being played here?",
+      "options": [
+        "Kabaddi",
+        "Kho kho",
+        "Wrestling",
+        "Judo"
+      ],
+      "answer": "Kabaddi",
+      "explanation": "The attacking 'raider' must keep chanting 'kabaddi' on a single breath while trying to tag opponents.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Kabaddi",
+        "alt": "A player in white being tackled by a group of opponents on a mat",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706102/GamePad/quiz/kabaddi.jpg",
+        "credit": "Photo: Amir Hosseini, CC BY 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Iran_men%27s_national_kabaddi_team_13970602000432636707284535394012_98208.jpg"
+      }
+    }
+  ]
+}

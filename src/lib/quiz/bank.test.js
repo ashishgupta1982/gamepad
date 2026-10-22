@@ -17,7 +17,7 @@ const raw = (over = {}) => ({
 describe('the question bank', () => {
   it('knows what each pick draws from', () => {
     expect(categoriesOf('space')).toEqual(['space']);
-    expect(categoriesOf('group:sport')).toEqual(['football', 'olympics', 'sport-mix']);
+    expect(categoriesOf('group:sport')).toEqual(['football', 'olympics', 'sport-mix', 'formula-1', 'sporting-legends', 'which-sport']);
     // Mixed bag is everything but Big Worlds.
     expect(categoriesOf('mixed')).toContain('geography');
     expect(categoriesOf('mixed')).not.toContain('harry-potter');

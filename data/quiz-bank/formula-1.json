@@ -1,0 +1,490 @@
+{
+  "category": "formula-1",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which circuit, home of the British Grand Prix, has this shape?",
+      "options": [
+        "Monza",
+        "Suzuka",
+        "Silverstone",
+        "Interlagos"
+      ],
+      "answer": "Silverstone",
+      "explanation": "Silverstone was built on a Second World War airfield, and some of its straights follow the old runways.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "2022 F1 CourseLayout Britain.svg",
+        "alt": "A map of a motor racing track",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705994/GamePad/quiz/file-2022-f1-courselayout-britain.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "This twisty track runs through the streets of a tiny country, past a harbour full of yachts. Which race is it?",
+      "options": [
+        "Singapore Grand Prix",
+        "Monaco Grand Prix",
+        "Azerbaijan Grand Prix",
+        "Canadian Grand Prix"
+      ],
+      "answer": "Monaco Grand Prix",
+      "explanation": "Monaco's streets are so narrow that overtaking is almost impossible, so qualifying near the front matters hugely.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "2022 F1 CourseLayout Monaco.svg",
+        "alt": "A map of a twisty motor racing track",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705996/GamePad/quiz/file-2022-f1-courselayout-monaco.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which Formula 1 team has this prancing horse on its badge?",
+      "options": [
+        "Ferrari",
+        "McLaren",
+        "Williams",
+        "Mercedes"
+      ],
+      "answer": "Ferrari",
+      "explanation": "The horse was painted on the plane of an Italian wartime pilot, and his mother suggested Enzo Ferrari use it for luck.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Prancing horse.svg",
+        "alt": "A black horse rearing up on its back legs",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705998/GamePad/quiz/file-prancing-horse.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which flag is waved as the winner crosses the finish line?",
+      "options": [
+        "A green flag",
+        "A blue flag",
+        "A yellow flag",
+        "A chequered flag"
+      ],
+      "answer": "A chequered flag",
+      "explanation": "The black-and-white chequered flag is waved at the winner first, then at every car that finishes behind.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Formula 1, what does a waved yellow flag tell the drivers?",
+      "options": [
+        "One lap to go",
+        "Rain is on the way",
+        "Danger ahead: slow down and do not overtake",
+        "Come into the pits now"
+      ],
+      "answer": "Danger ahead: slow down and do not overtake",
+      "explanation": "Marshals wave yellow flags when there is a crashed car or debris near the track.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "At a pit stop, about how long does a top team take to change all four tyres?",
+      "options": [
+        "About 20 seconds",
+        "About 2 seconds",
+        "About 1 minute",
+        "About 5 minutes"
+      ],
+      "answer": "About 2 seconds",
+      "explanation": "Around twenty mechanics work on the car at once, and the fastest stops take less than two seconds.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In 2020, Lewis Hamilton won his seventh world title to equal the record of which German driver?",
+      "options": [
+        "Michael Schumacher",
+        "Sebastian Vettel",
+        "Nico Rosberg",
+        "Ralf Schumacher"
+      ],
+      "answer": "Michael Schumacher",
+      "explanation": "Schumacher won his seven titles with Benetton and Ferrari; Hamilton won his with McLaren and Mercedes.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Lewis Hamilton was born in which English town?",
+      "options": [
+        "Milton Keynes",
+        "Swindon",
+        "Basingstoke",
+        "Stevenage"
+      ],
+      "answer": "Stevenage",
+      "explanation": "Hamilton started racing go-karts aged eight, near his home in Hertfordshire.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Max Verstappen races under the flag of which country?",
+      "options": [
+        "Germany",
+        "Austria",
+        "Netherlands",
+        "Denmark"
+      ],
+      "answer": "Netherlands",
+      "explanation": "His Dutch fans dress head to toe in orange and are known as the Orange Army.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What does the F in F1 stand for?",
+      "options": [
+        "Fastest",
+        "Formula",
+        "Fuel",
+        "Finish"
+      ],
+      "answer": "Formula",
+      "explanation": "The formula is the set of rules that every car must be built to.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the 'halo' on a Formula 1 car?",
+      "options": [
+        "A strong bar that protects the driver's head",
+        "A light that flashes in the rain",
+        "A ring on the steering wheel",
+        "A spare wheel"
+      ],
+      "answer": "A strong bar that protects the driver's head",
+      "explanation": "The halo arrived in 2018 and is strong enough to hold the weight of a double-decker bus.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In 2008, the Singapore Grand Prix became the first Formula 1 race held when?",
+      "options": [
+        "At dawn",
+        "On Christmas Day",
+        "In the snow",
+        "At night"
+      ],
+      "answer": "At night",
+      "explanation": "Hundreds of huge floodlights light up the streets so the drivers can see.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Since 2010, how many points has a driver earned for winning a Grand Prix?",
+      "options": [
+        "10",
+        "50",
+        "25",
+        "100"
+      ],
+      "answer": "25",
+      "explanation": "Second place earns 18 and third earns 15, all the way down to a single point for tenth.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In 2025, which British driver won his first Formula 1 world championship, driving for McLaren?",
+      "options": [
+        "George Russell",
+        "Lando Norris",
+        "Oliver Bearman",
+        "Lewis Hamilton"
+      ],
+      "answer": "Lando Norris",
+      "explanation": "Norris clinched the title at the very last race of the season, in Abu Dhabi.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is it called when a driver starts the race from the very front of the grid?",
+      "options": [
+        "Pole position",
+        "Head start",
+        "Top spot",
+        "Lead lane"
+      ],
+      "answer": "Pole position",
+      "explanation": "The fastest driver in qualifying earns pole position.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Grand Prix circuit, which crosses over itself in a figure of eight, has this shape?",
+      "options": [
+        "Spa-Francorchamps",
+        "Interlagos",
+        "Hungaroring",
+        "Suzuka"
+      ],
+      "answer": "Suzuka",
+      "explanation": "Suzuka in Japan was built by Honda as a test track, and a bridge carries one part of the circuit over another.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "2022 F1 CourseLayout Japan.svg",
+        "alt": "A map of a motor racing track",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705999/GamePad/quiz/file-2022-f1-courselayout-japan.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which circuit, with its famous Eau Rouge corner, has this shape?",
+      "options": [
+        "Monza",
+        "Silverstone",
+        "Spa-Francorchamps",
+        "Interlagos"
+      ],
+      "answer": "Spa-Francorchamps",
+      "explanation": "At about 7 km, Spa-Francorchamps in Belgium's Ardennes forest is one of the longest circuits in Formula 1.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "2022 F1 CourseLayout Belgium.svg",
+        "alt": "A map of a long motor racing track",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706001/GamePad/quiz/file-2022-f1-courselayout-belgium.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Ayrton Senna won the Monaco Grand Prix a record how many times?",
+      "options": [
+        "4",
+        "6",
+        "5",
+        "8"
+      ],
+      "answer": "6",
+      "explanation": "Senna won in 1987 and then five years in a row from 1989 to 1993.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which British driver won the 1976 world title by a single point from Niki Lauda?",
+      "options": [
+        "James Hunt",
+        "Nigel Mansell",
+        "John Surtees",
+        "Jackie Stewart"
+      ],
+      "answer": "James Hunt",
+      "explanation": "Their rivalry, and Lauda's return from a terrible crash, was told in the 2013 film Rush.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Jim Clark won both of his world titles, in 1963 and 1965, with which team?",
+      "options": [
+        "Ferrari",
+        "BRM",
+        "Cooper",
+        "Lotus"
+      ],
+      "answer": "Lotus",
+      "explanation": "In 1965 Clark also won the Indianapolis 500 in a Lotus.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Juan Manuel Fangio won five world titles in the 1950s with how many different teams?",
+      "options": [
+        "1",
+        "2",
+        "4",
+        "5"
+      ],
+      "answer": "4",
+      "explanation": "Fangio won with Alfa Romeo, Mercedes, Ferrari and Maserati.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "McLaren's headquarters, the McLaren Technology Centre, is in which Surrey town?",
+      "options": [
+        "Guildford",
+        "Woking",
+        "Epsom",
+        "Camberley"
+      ],
+      "answer": "Woking",
+      "explanation": "The building, designed by Norman Foster, sits beside a large man-made lake.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Michael Schumacher won his first two world titles, in 1994 and 1995, with which team?",
+      "options": [
+        "Benetton",
+        "Ferrari",
+        "Jordan",
+        "Williams"
+      ],
+      "answer": "Benetton",
+      "explanation": "Schumacher joined Ferrari in 1996 and won five titles in a row with them from 2000.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In 1958, who became the first British Formula 1 world champion?",
+      "options": [
+        "Stirling Moss",
+        "Graham Hill",
+        "Jim Clark",
+        "Mike Hawthorn"
+      ],
+      "answer": "Mike Hawthorn",
+      "explanation": "Hawthorn beat Stirling Moss to the title by a single point, then retired at the end of the season.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which British driver, often called the greatest never to win the title, was runner-up four years in a row from 1955?",
+      "options": [
+        "John Surtees",
+        "Mike Hawthorn",
+        "Stirling Moss",
+        "Jackie Stewart"
+      ],
+      "answer": "Stirling Moss",
+      "explanation": "Moss won 16 Grands Prix but finished second in the championship in 1955, 1956, 1957 and 1958.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In 1972, who completed motor racing's 'Triple Crown' by adding Le Mans to wins at Monaco and the Indianapolis 500?",
+      "options": [
+        "Jackie Stewart",
+        "Graham Hill",
+        "Jim Clark",
+        "Mario Andretti"
+      ],
+      "answer": "Graham Hill",
+      "explanation": "Hill won Monaco five times, earning the nickname 'Mr Monaco'.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In Formula 1, what does a waved blue flag tell a driver?",
+      "options": [
+        "A faster car is about to lap you: let it pass",
+        "Your car is on fire",
+        "The track is wet",
+        "You have been disqualified"
+      ],
+      "answer": "A faster car is about to lap you: let it pass",
+      "explanation": "Drivers who ignore blue flags for too long can be given a penalty.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Italian circuit is nicknamed 'the Temple of Speed'?",
+      "options": [
+        "Imola",
+        "Mugello",
+        "Misano",
+        "Monza"
+      ],
+      "answer": "Monza",
+      "explanation": "Monza's long straights make it the fastest track in Formula 1, with cars passing 350 km/h.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Finnish world champion was nicknamed 'the Iceman' for his cool calm?",
+      "options": [
+        "Mika Häkkinen",
+        "Valtteri Bottas",
+        "Kimi Räikkönen",
+        "Keke Rosberg"
+      ],
+      "answer": "Kimi Räikkönen",
+      "explanation": "Räikkönen won the 2007 title with Ferrari, and once told his team over the radio 'Leave me alone, I know what I'm doing'.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Jenson Button won the 2009 world title with which team, in its one and only season?",
+      "options": [
+        "Red Bull",
+        "Brawn GP",
+        "Toyota",
+        "Super Aguri"
+      ],
+      "answer": "Brawn GP",
+      "explanation": "Brawn rose from the ashes of Honda's team and was then sold to become Mercedes.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    }
+  ]
+}

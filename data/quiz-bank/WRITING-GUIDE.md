@@ -48,11 +48,14 @@ One file per category, named for its id: `data/quiz-bank/<category>.json`.
 **Emoji clue**, for films, TV, cartoons, music, games and stories:
 `"media": { "kind": "emoji", "text": "🦁👑🌅" }`. Two to six emoji a fan would recognise. The clue shows above the question, so the question is just "Which film do these emoji describe?" (or show, song, book, game) and holds no emoji itself.
 
-**Picture**, for flags, landmarks, places, animals, dinosaurs, planets, famous paintings and historical rulers. Written as a hint; `npm run quiz:images` fetches it:
+**Picture**, for flags, landmarks, places, animals, dinosaurs, planets, famous paintings, historical rulers, logos, country outlines, sports kit and sport stars. Written as a hint; `npm run quiz:images` fetches it:
 - a flag: `"media": { "kind": "image", "flag": "jp", "alt": "A national flag" }` (ISO 3166 two-letter code, lower case; `gb-sct`, `gb-wls`, `gb-eng`, `gb-nir` for the UK nations)
 - anything else: `"media": { "kind": "image", "wiki": "Angkor_Wat", "alt": "A large stone temple" }`, the exact English Wikipedia article title, whose lead image is what is shown. Only use an article whose lead image clearly shows the answer by itself (check with `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&piprop=original&redirects=1&titles=<Title>` when unsure). A map, a logo, a diagram or a crowd scene will not do.
+- one named file on Wikipedia or Commons, for a logo, a club crest or a circuit map: `"media": { "kind": "image", "file": "Apple logo black.svg", "alt": "A company logo" }`. Find the exact file name on the article (`https://en.wikipedia.org/w/api.php?action=query&format=json&prop=images&titles=<Article>`).
+- a country's outline: `"media": { "kind": "image", "outline": "it", "alt": "The outline of a country" }` (ISO two-letter code, lower case, from mapsicon).
 - `alt` describes the picture without giving away the answer.
-- **Never a photo of a living person.**
+- **Look at every picture before using it** (a preview tool makes it exactly as the game will show it). A picture must not give the answer away: no brand or club name written in a logo, no caption, no name on a shirt.
+- Copyright is no bar: GamePad is for Ash's family (Ash, 2026-10-22). Logos, crests and photos of famous people (sport stars for Sporting Legends) are all fine.
 - The question asks about the picture: "Which country's flag is this?", "Which famous landmark is this?", "Which animal is this?", "Who painted this?".
 
 ## How many

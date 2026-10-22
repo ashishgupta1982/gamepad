@@ -1,0 +1,665 @@
+{
+  "category": "country-outlines",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which country has this shape?",
+      "options": [
+        "United Kingdom",
+        "Ireland",
+        "Iceland",
+        "New Zealand"
+      ],
+      "answer": "United Kingdom",
+      "explanation": "Nowhere in the UK is more than about 70 miles from the sea.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "gb",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705957/GamePad/quiz/outline-gb.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which country has this outline?",
+      "options": [
+        "Australia",
+        "New Zealand",
+        "Papua New Guinea",
+        "Indonesia"
+      ],
+      "answer": "Australia",
+      "explanation": "The island at the bottom is Tasmania, the only place where Tasmanian devils still live in the wild.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "au",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705959/GamePad/quiz/outline-au.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which country has this shape on the map?",
+      "options": [
+        "United States",
+        "Canada",
+        "Mexico",
+        "Brazil"
+      ],
+      "answer": "United States",
+      "explanation": "This is just the 48 states that join up; Alaska and Hawaii are too far away to fit in the picture.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "us",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705960/GamePad/quiz/outline-us.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which country has this shape?",
+      "options": [
+        "New Zealand",
+        "Japan",
+        "United Kingdom",
+        "Philippines"
+      ],
+      "answer": "New Zealand",
+      "explanation": "New Zealand's two big islands are simply called the North Island and the South Island.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "nz",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705961/GamePad/quiz/outline-nz.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which country's outline is this?",
+      "options": [
+        "Japan",
+        "Philippines",
+        "New Zealand",
+        "South Korea"
+      ],
+      "answer": "Japan",
+      "explanation": "Japan is made of four main islands and thousands of smaller ones.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "jp",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705962/GamePad/quiz/outline-jp.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which country has this shape?",
+      "options": [
+        "India",
+        "Pakistan",
+        "Bangladesh",
+        "Sri Lanka"
+      ],
+      "answer": "India",
+      "explanation": "At India's southern tip, Kanyakumari, the Arabian Sea, the Bay of Bengal and the Indian Ocean all meet.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "in",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705963/GamePad/quiz/outline-in.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which country has this outline?",
+      "options": [
+        "France",
+        "Spain",
+        "Germany",
+        "Belgium"
+      ],
+      "answer": "France",
+      "explanation": "The island at the bottom right is Corsica, where Napoleon was born.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "fr",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705964/GamePad/quiz/outline-fr.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which country has this shape?",
+      "options": [
+        "Spain",
+        "Portugal",
+        "France",
+        "Italy"
+      ],
+      "answer": "Spain",
+      "explanation": "The little islands on the right are the Balearic Islands, which include Majorca and Ibiza.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "es",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705965/GamePad/quiz/outline-es.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which country's outline is this?",
+      "options": [
+        "Ireland",
+        "Iceland",
+        "Denmark",
+        "Portugal"
+      ],
+      "answer": "Ireland",
+      "explanation": "The bite out of the top right is Northern Ireland, which is part of the UK.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "ie",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705967/GamePad/quiz/outline-ie.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which country has this shape on the map?",
+      "options": [
+        "Mexico",
+        "Guatemala",
+        "Cuba",
+        "Colombia"
+      ],
+      "answer": "Mexico",
+      "explanation": "The long thin arm on the left is Baja California, a peninsula more than 1,200 km long.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "mx",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705968/GamePad/quiz/outline-mx.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which country has this long, thin shape?",
+      "options": [
+        "Chile",
+        "Norway",
+        "Argentina",
+        "Peru"
+      ],
+      "answer": "Chile",
+      "explanation": "Chile is more than 4,000 km long, but on average only about 175 km wide.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "cl",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705970/GamePad/quiz/outline-cl.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which country has this outline?",
+      "options": [
+        "Brazil",
+        "Argentina",
+        "Colombia",
+        "Peru"
+      ],
+      "answer": "Brazil",
+      "explanation": "Brazil touches every country in South America except Chile and Ecuador.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "br",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705971/GamePad/quiz/outline-br.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which island country has this shape?",
+      "options": [
+        "Iceland",
+        "Ireland",
+        "Norway",
+        "Finland"
+      ],
+      "answer": "Iceland",
+      "explanation": "Iceland sits on the crack between two of the Earth's plates, which are slowly pulling it apart.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "is",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705972/GamePad/quiz/outline-is.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which country has this shape?",
+      "options": [
+        "Egypt",
+        "Libya",
+        "Sudan",
+        "Saudi Arabia"
+      ],
+      "answer": "Egypt",
+      "explanation": "The triangle on the right is the Sinai Peninsula, the part of Egypt that is in Asia.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "eg",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705973/GamePad/quiz/outline-eg.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which island country has this outline?",
+      "options": [
+        "Madagascar",
+        "Sri Lanka",
+        "Cuba",
+        "Japan"
+      ],
+      "answer": "Madagascar",
+      "explanation": "Madagascar is the world's fourth-biggest island.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "mg",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705974/GamePad/quiz/outline-mg.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which country has this shape?",
+      "options": [
+        "Vietnam",
+        "Laos",
+        "Cambodia",
+        "Thailand"
+      ],
+      "answer": "Vietnam",
+      "explanation": "At its narrowest point, the middle of the S, Vietnam is only about 50 km wide.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "vn",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705975/GamePad/quiz/outline-vn.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which country's outline is this?",
+      "options": [
+        "Norway",
+        "Sweden",
+        "Finland",
+        "Denmark"
+      ],
+      "answer": "Norway",
+      "explanation": "At the North Cape, near the country's northern tip, the sun doesn't set for more than two months each summer.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "no",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705977/GamePad/quiz/outline-no.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which island country has this shape?",
+      "options": [
+        "Sri Lanka",
+        "Taiwan",
+        "Madagascar",
+        "Bangladesh"
+      ],
+      "answer": "Sri Lanka",
+      "explanation": "Hanging off the tip of India, Sri Lanka is often called 'the Teardrop of India'.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "lk",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705978/GamePad/quiz/outline-lk.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which country has this outline?",
+      "options": [
+        "South Korea",
+        "North Korea",
+        "Taiwan",
+        "Japan"
+      ],
+      "answer": "South Korea",
+      "explanation": "The island at the bottom is Jeju, home of Hallasan, South Korea's highest mountain.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "kr",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705979/GamePad/quiz/outline-kr.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which country has this shape?",
+      "options": [
+        "Cuba",
+        "Jamaica",
+        "Haiti",
+        "Dominican Republic"
+      ],
+      "answer": "Cuba",
+      "explanation": "Cubans nickname their island 'El Caimán', because from above it looks like a crocodile basking in the sea.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "cu",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705980/GamePad/quiz/outline-cu.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which country has this shape, a bit like the number 7?",
+      "options": [
+        "Somalia",
+        "Ethiopia",
+        "Kenya",
+        "Eritrea"
+      ],
+      "answer": "Somalia",
+      "explanation": "Somalia has the longest coastline of any country on mainland Africa.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "so",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705981/GamePad/quiz/outline-so.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which country has this outline?",
+      "options": [
+        "Thailand",
+        "Myanmar",
+        "Laos",
+        "Cambodia"
+      ],
+      "answer": "Thailand",
+      "explanation": "Thais often compare their country's shape to an elephant's head, with the southern peninsula as its trunk.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "th",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705983/GamePad/quiz/outline-th.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which country has this crescent shape?",
+      "options": [
+        "Croatia",
+        "Slovenia",
+        "Bosnia and Herzegovina",
+        "Montenegro"
+      ],
+      "answer": "Croatia",
+      "explanation": "Croatia wraps around Bosnia and Herzegovina, whose only coast is a strip of about 20 km at Neum.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "hr",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705984/GamePad/quiz/outline-hr.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which country's outline is this?",
+      "options": [
+        "Pakistan",
+        "Afghanistan",
+        "Iran",
+        "Nepal"
+      ],
+      "answer": "Pakistan",
+      "explanation": "Its far northern tip holds K2, the world's second-highest mountain, on the border with China.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "pk",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705985/GamePad/quiz/outline-pk.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which country has this outline?",
+      "options": [
+        "Finland",
+        "Sweden",
+        "Norway",
+        "Estonia"
+      ],
+      "answer": "Finland",
+      "explanation": "Finns see a girl with a raised arm in this shape, the 'Finnish Maiden'; she had two arms until land was given up to the Soviet Union in 1944.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "fi",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705986/GamePad/quiz/outline-fi.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which country has this shape?",
+      "options": [
+        "Austria",
+        "Switzerland",
+        "Hungary",
+        "Czech Republic"
+      ],
+      "answer": "Austria",
+      "explanation": "Landlocked Austria borders eight countries, from Germany to Liechtenstein.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "at",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705987/GamePad/quiz/outline-at.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which country has this outline?",
+      "options": [
+        "Mongolia",
+        "Kazakhstan",
+        "Uzbekistan",
+        "Turkmenistan"
+      ],
+      "answer": "Mongolia",
+      "explanation": "Mongolia is the most thinly populated independent country on Earth.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "mn",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705988/GamePad/quiz/outline-mn.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which long, thin country has this shape?",
+      "options": [
+        "Malawi",
+        "Zambia",
+        "Mozambique",
+        "Uganda"
+      ],
+      "answer": "Malawi",
+      "explanation": "Malawi runs along Lake Malawi, which has more kinds of fish than any other lake in the world.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "mw",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705990/GamePad/quiz/outline-mw.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which country's outline is this?",
+      "options": [
+        "The Gambia",
+        "Senegal",
+        "Guinea-Bissau",
+        "Sierra Leone"
+      ],
+      "answer": "The Gambia",
+      "explanation": "The smallest country on mainland Africa is a thin strip either side of the River Gambia, almost surrounded by Senegal.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "gm",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705991/GamePad/quiz/outline-gm.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which country has this outline?",
+      "options": [
+        "Namibia",
+        "Botswana",
+        "Angola",
+        "Zambia"
+      ],
+      "answer": "Namibia",
+      "explanation": "The thin strip at the top right is the Caprivi Strip, handed to Germany in 1890 so its colony could reach the Zambezi River.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "outline": "na",
+        "alt": "The outline of a country",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792705993/GamePad/quiz/outline-na.png",
+        "credit": ""
+      }
+    }
+  ]
+}

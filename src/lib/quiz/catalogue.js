@@ -41,6 +41,7 @@ export const GROUPS = [
       { id: 'flags-capitals', name: 'Flags & Capitals', emoji: '🚩', brief: 'capital cities and national flags around the world' },
       { id: 'landmarks', name: 'Famous Landmarks', emoji: '🗼', brief: 'famous buildings, monuments and wonders of the world, and where they are' },
       { id: 'around-uk', name: 'Around the UK', emoji: '🇬🇧', brief: 'places, landmarks, counties, cities, traditions and record-breakers across the UK' },
+      { id: 'country-outlines', name: 'Country Shapes', emoji: '🗾', brief: 'picture round: name the country from its outline on the map' },
     ],
   },
   {
@@ -74,7 +75,10 @@ export const GROUPS = [
     categories: [
       { id: 'football', name: 'Football', emoji: '⚽', brief: 'football: clubs, players, the Premier League, the World Cup and the rules' },
       { id: 'olympics', name: 'Olympics', emoji: '🥇', brief: 'the Olympic and Paralympic Games: events, records, host cities and great champions' },
-      { id: 'sport-mix', name: 'Sport Mix', emoji: '🎾', brief: 'tennis, cricket, rugby, Formula 1, golf, athletics and other sports' },
+      { id: 'sport-mix', name: 'Sport Mix', emoji: '🎾', brief: 'tennis, cricket, rugby, golf, athletics and other sports' },
+      { id: 'formula-1', name: 'Formula 1', emoji: '🏎️', brief: 'Formula 1: drivers, teams, circuits, flags, rules and famous races' },
+      { id: 'sporting-legends', name: 'Sporting Legends', emoji: '🐐', brief: 'the greatest sportspeople of all time across every sport, and what made them famous' },
+      { id: 'which-sport', name: 'Which Sport?', emoji: '🏏', brief: 'picture round: name the sport from its kit, ball, venue or a moment of play' },
     ],
   },
   {
@@ -95,6 +99,7 @@ export const GROUPS = [
     categories: [
       { id: 'food-drink', name: 'Food & Drink', emoji: '🍕', brief: 'dishes, ingredients, sweets, where foods come from, famous brands and drinks' },
       { id: 'toys-games', name: 'Toys & Games', emoji: '🧸', brief: 'toys, board games, card games, playground games and their history' },
+      { id: 'logos', name: 'Logos', emoji: '™️', brief: 'picture round: name the brand, club, team or app from its logo' },
       { id: 'celebrities', name: 'Celebrities', emoji: '🌟', brief: 'famous people today: pop stars, YouTubers, presenters, sports stars and actors' },
       { id: 'holidays', name: 'Christmas & Holidays', emoji: '🎄', brief: 'Christmas, Easter, Halloween, Bonfire Night, Diwali, Eid and holidays around the world' },
     ],

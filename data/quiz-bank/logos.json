@@ -1,0 +1,665 @@
+{
+  "category": "logos",
+  "questions": [
+    {
+      "band": "kids",
+      "question": "Which company's logo is this?",
+      "options": [
+        "Apple",
+        "Samsung",
+        "Google",
+        "Microsoft"
+      ],
+      "answer": "Apple",
+      "explanation": "The designer added the bite so that, at a small size, people would see an apple and not a cherry.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Apple logo black.svg",
+        "alt": "A black piece of fruit with a bite taken out",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706002/GamePad/quiz/file-apple-logo-black.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which sports brand's logo is this?",
+      "options": [
+        "Nike",
+        "Adidas",
+        "Puma",
+        "Reebok"
+      ],
+      "answer": "Nike",
+      "explanation": "The swoosh was drawn in 1971 by a student, Carolyn Davidson, who was paid just 35 dollars for it.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Logo NIKE.svg",
+        "alt": "A black curved tick shape",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706003/GamePad/quiz/file-logo-nike.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which restaurant chain's logo is this?",
+      "options": [
+        "McDonald's",
+        "Burger King",
+        "KFC",
+        "Subway"
+      ],
+      "answer": "McDonald's",
+      "explanation": "The golden arches copy the real yellow arches that stood on the sides of the early restaurants in the 1950s.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "McDonald's Golden Arches.svg",
+        "alt": "Two yellow arches side by side",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706004/GamePad/quiz/file-mcdonald-s-golden-arches.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which app's icon is this?",
+      "options": [
+        "YouTube",
+        "Netflix",
+        "TikTok",
+        "Twitch"
+      ],
+      "answer": "YouTube",
+      "explanation": "The red box comes from the first logo, where it held the word 'Tube', an old nickname for a television.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "YouTube full-color icon (2017).svg",
+        "alt": "A white triangle on a red rounded rectangle",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706006/GamePad/quiz/file-youtube-full-color-icon-2017.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which games brand's logo is this?",
+      "options": [
+        "PlayStation",
+        "Xbox",
+        "Nintendo",
+        "Sega"
+      ],
+      "answer": "PlayStation",
+      "explanation": "The logo is a P standing upright on an S lying flat, the first letters of the brand's name.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "PlayStation logo.svg",
+        "alt": "A black symbol made of two chunky shapes",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706007/GamePad/quiz/file-playstation-logo.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which game's app icon is this?",
+      "options": [
+        "Roblox",
+        "Minecraft",
+        "Fortnite",
+        "Among Us"
+      ],
+      "answer": "Roblox",
+      "explanation": "The tilted square started life as the letter O in the game's name, drawn as a square tipped on its side.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Roblox (2025) (App Icon).svg",
+        "alt": "A tilted white square on a blue background",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706008/GamePad/quiz/file-roblox-2025-app-icon.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which football club's crest is this?",
+      "options": [
+        "Tottenham Hotspur",
+        "Chelsea",
+        "West Ham United",
+        "Everton"
+      ],
+      "answer": "Tottenham Hotspur",
+      "explanation": "The cockerel wears fighting spurs, a nod to Harry Hotspur, the medieval knight the club is named after.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Spurs 2017 badge.svg",
+        "alt": "A football crest with a cockerel standing on a ball",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706010/GamePad/quiz/file-spurs-2017-badge.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which football club's crest is this?",
+      "options": [
+        "Wolverhampton Wanderers",
+        "Leicester City",
+        "Huddersfield Town",
+        "Millwall"
+      ],
+      "answer": "Wolverhampton Wanderers",
+      "explanation": "Wolves is short for Wolverhampton, and a wolf's head has been the club badge on its gold shirts since 1979.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Wolverhampton_Wanderers_FC_crest.svg",
+        "alt": "A black animal's head on an orange-gold badge",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706012/GamePad/quiz/file-wolverhampton-wanderers-fc-crest.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which coffee shop chain's logo is this?",
+      "options": [
+        "Starbucks",
+        "Costa Coffee",
+        "Caffè Nero",
+        "Pret A Manger"
+      ],
+      "answer": "Starbucks",
+      "explanation": "The lady in green is a siren, a mermaid with two tails from old sea stories, because the first shop was in the port city of Seattle.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Starbucks Corporation Logo 2011.svg",
+        "alt": "A green circle with a crowned woman with long wavy hair",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706013/GamePad/quiz/file-starbucks-corporation-logo-2011.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which games console's icon is this?",
+      "options": [
+        "Nintendo Switch",
+        "PlayStation 5",
+        "Xbox Series X",
+        "Steam Deck"
+      ],
+      "answer": "Nintendo Switch",
+      "explanation": "The icon shows the console's two Joy-Con controllers, one on each side, ready to click into place.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Nintendo-switch-icon.png",
+        "alt": "A red icon of two rounded halves, each with a circle",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706015/GamePad/quiz/file-nintendo-switch-icon.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which learning app's mascot is this?",
+      "options": [
+        "Duolingo",
+        "Kahoot!",
+        "Quizlet",
+        "Babbel"
+      ],
+      "answer": "Duolingo",
+      "explanation": "The green owl is called Duo, and he is famous online for nagging people who forget their daily lesson.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Duo from Duolingo.svg",
+        "alt": "A bright green cartoon owl",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706016/GamePad/quiz/file-duo-from-duolingo.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which car maker's badge is this?",
+      "options": [
+        "Mercedes-Benz",
+        "BMW",
+        "Audi",
+        "Volkswagen"
+      ],
+      "answer": "Mercedes-Benz",
+      "explanation": "The three points of the star stand for land, sea and air, because the company built engines for all three.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Mercedes-Benz Star (1969-1986, 2025-).svg",
+        "alt": "A three-pointed star inside a circle",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706017/GamePad/quiz/file-mercedes-benz-star-1969-1986-2025.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which car maker's badge is this?",
+      "options": [
+        "Audi",
+        "Volkswagen",
+        "BMW",
+        "Vauxhall"
+      ],
+      "answer": "Audi",
+      "explanation": "Each ring stands for one of four car companies that joined together in 1932: Audi, DKW, Horch and Wanderer.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Audi-Logo 2016.svg",
+        "alt": "Four black rings linked in a row",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706019/GamePad/quiz/file-audi-logo-2016.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which phone software uses this robot as its logo?",
+      "options": [
+        "Android",
+        "iOS",
+        "Windows",
+        "Chrome"
+      ],
+      "answer": "Android",
+      "explanation": "Designer Irina Blok drew the green robot in 2007, and said she got the idea from the little people on toilet door signs.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Android robot 2014.svg",
+        "alt": "A green robot with two antennae",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706020/GamePad/quiz/file-android-robot-2014.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which music app's logo is this?",
+      "options": [
+        "Spotify",
+        "Apple Music",
+        "Amazon Music",
+        "SoundCloud"
+      ],
+      "answer": "Spotify",
+      "explanation": "The app began in Sweden in 2006, and its three curved lines look like sound waves coming out of a speaker.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Spotify icon.svg",
+        "alt": "Three curved black lines on a green circle",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706021/GamePad/quiz/file-spotify-icon.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which payment card's logo is this?",
+      "options": [
+        "Mastercard",
+        "Visa",
+        "American Express",
+        "Discover"
+      ],
+      "answer": "Mastercard",
+      "explanation": "In 2019 the company dropped its name from the logo, trusting the two overlapping circles to speak for themselves.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Mastercard 2019 logo.svg",
+        "alt": "A red circle and an orange circle overlapping",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706022/GamePad/quiz/file-mastercard-2019-logo.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which social network used this bird as its logo until 2023?",
+      "options": [
+        "Twitter",
+        "Tumblr",
+        "Bluesky",
+        "Myspace"
+      ],
+      "answer": "Twitter",
+      "explanation": "The bird was nicknamed Larry, after the Boston Celtics basketball star Larry Bird, before it was replaced by an X.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Logo of Twitter.svg",
+        "alt": "A blue bird in flight",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706024/GamePad/quiz/file-logo-of-twitter.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which football club's crest is this?",
+      "options": [
+        "Real Madrid",
+        "Atlético Madrid",
+        "Barcelona",
+        "Valencia"
+      ],
+      "answer": "Real Madrid",
+      "explanation": "The crown was added in 1920, when King Alfonso XIII gave the club the title 'Real', meaning royal.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Real Madrid CF.svg",
+        "alt": "A gold-edged football crest with a crown on top",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706025/GamePad/quiz/file-real-madrid-cf.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which web browser's logo is this?",
+      "options": [
+        "Firefox",
+        "Chrome",
+        "Safari",
+        "Opera"
+      ],
+      "answer": "Firefox",
+      "explanation": "Firefox is another name for the red panda, yet the animal curled round the logo is drawn as a fox.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Firefox logo, 2019.svg",
+        "alt": "An orange animal curled round a purple ball",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706027/GamePad/quiz/file-firefox-logo-2019.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which games console brand's logo is this?",
+      "options": [
+        "Xbox",
+        "PlayStation",
+        "Nintendo",
+        "Sega"
+      ],
+      "answer": "Xbox",
+      "explanation": "The name comes from the console's working title, the DirectX Box, after Microsoft's DirectX graphics software.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Xbox one logo.svg",
+        "alt": "A white X across a green sphere",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706028/GamePad/quiz/file-xbox-one-logo.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which car maker's badge is this?",
+      "options": [
+        "Mitsubishi",
+        "Mazda",
+        "Suzuki",
+        "Subaru"
+      ],
+      "answer": "Mitsubishi",
+      "explanation": "The name means 'three diamonds', and the badge blends the family crest of founder Yataro Iwasaki with that of the Tosa clan.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Mitsubishi logo.svg",
+        "alt": "Three red diamonds meeting in the middle",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706030/GamePad/quiz/file-mitsubishi-logo.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which car maker's badge is this?",
+      "options": [
+        "Toyota",
+        "Honda",
+        "Nissan",
+        "Kia"
+      ],
+      "answer": "Toyota",
+      "explanation": "Unveiled in 1989, its two inner ovals stand for the hearts of the customer and the company, held inside a third.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Toyota Symbol.svg",
+        "alt": "Three red ovals, two of them crossing inside the third",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706031/GamePad/quiz/file-toyota-symbol.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which football club's crest is this?",
+      "options": [
+        "Juventus",
+        "AC Milan",
+        "Inter Milan",
+        "Napoli"
+      ],
+      "answer": "Juventus",
+      "explanation": "In 2017 the club swapped its traditional oval crest for this simple black-and-white J, to plenty of grumbling from fans.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Juventus_FC_-_logo_black_(Italy,_2020).svg",
+        "alt": "A tall black letter made of two stripes",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706032/GamePad/quiz/file-juventus-fc-logo-black-italy-2020.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which computer operating system has this penguin as its mascot?",
+      "options": [
+        "Linux",
+        "Windows",
+        "macOS",
+        "Chrome OS"
+      ],
+      "answer": "Linux",
+      "explanation": "Linus Torvalds wanted a penguin, saying he had once been nipped by one at a zoo in Australia; it is called Tux.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Tux.svg",
+        "alt": "A cartoon penguin sitting down",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706034/GamePad/quiz/file-tux.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which wireless technology uses this symbol?",
+      "options": [
+        "Bluetooth",
+        "Wi-Fi",
+        "5G",
+        "NFC"
+      ],
+      "answer": "Bluetooth",
+      "explanation": "It joins the runes for H and B, the initials of Harald Bluetooth, a Viking king of Denmark.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Bluetooth.svg",
+        "alt": "A white angular symbol on a blue rounded shape",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706035/GamePad/quiz/file-bluetooth.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which football club's crest is this?",
+      "options": [
+        "Derby County",
+        "Huddersfield Town",
+        "Sheffield United",
+        "Bradford City"
+      ],
+      "answer": "Derby County",
+      "explanation": "The club are the Rams, a nod to the local regiment's ram mascot and the old folk song 'The Derby Ram'.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Derby County crest.svg",
+        "alt": "A black outline of a ram with curled horns",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706036/GamePad/quiz/file-derby-county-crest.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which video game company's logo is this?",
+      "options": [
+        "Atari",
+        "Sega",
+        "Commodore",
+        "Namco"
+      ],
+      "answer": "Atari",
+      "explanation": "Fans call it the 'Fuji' because it looks like Japan's famous mountain, though its designer meant it as a letter A.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "AtariFuji.svg",
+        "alt": "Three black stripes, the outer two curving outwards at the bottom",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706038/GamePad/quiz/file-atarifuji.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which American TV network's logo is this?",
+      "options": [
+        "NBC",
+        "CBS",
+        "ABC",
+        "Fox"
+      ],
+      "answer": "NBC",
+      "explanation": "The peacock first appeared in 1956 to show off the network's new colour broadcasts.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "NBC Peacock (2022).svg",
+        "alt": "Six colourful feathers fanned out",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706039/GamePad/quiz/file-nbc-peacock-2022.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which car maker's badge is this?",
+      "options": [
+        "Hyundai",
+        "Honda",
+        "Kia",
+        "SsangYong"
+      ],
+      "answer": "Hyundai",
+      "explanation": "The slanted H is meant to show two people shaking hands: the company and its customer.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Hyundai symbol.svg",
+        "alt": "A slanted letter inside a blue oval",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706040/GamePad/quiz/file-hyundai-symbol.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which airline's logo is this?",
+      "options": [
+        "Lufthansa",
+        "Air France",
+        "KLM",
+        "Swiss"
+      ],
+      "answer": "Lufthansa",
+      "explanation": "The flying crane was drawn in 1918 by designer Otto Firle, years before the airline itself was founded in 1926.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Lufthansa Logo 2018 crane.svg",
+        "alt": "A flying bird inside a circle",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706042/GamePad/quiz/file-lufthansa-logo-2018-crane.png",
+        "credit": ""
+      }
+    }
+  ]
+}
