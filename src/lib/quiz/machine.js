@@ -22,8 +22,8 @@ export const MODES = ['solo', 'shout', 'multi'];
 export const PHASES = ['ready', 'loading', 'question', 'reveal', 'scores', 'finished'];
 
 // How long the between-question screens stay up before the game moves on.
-// The reveal was 4 seconds, too quick to read the explanation (Ash, 2026-10-22).
-export const REVEAL_MS = 8000;
+// The reveal was 4 seconds, too quick to read the explanation; 8 was too long (Ash, 2026-10-22).
+export const REVEAL_MS = 6000;
 export const SCORES_MS = 4500;
 // Network grace: an answer that left the phone in time but arrived just after
 // the bell still counts.
