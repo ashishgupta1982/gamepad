@@ -131,7 +131,7 @@ export default function LiveHost({ setup, resume, onExit }) {
     if (!game || game.phase !== 'finished' || host?.recorded || !game.players.length) return;
     keepHost({ ...host, recorded: true });
     if (status === 'authenticated') {
-      saveResult(game).catch(() => {});
+      saveResult(game, sentRef.current).catch(() => {});
       rememberSeen(game.players.map((p) => p.name), sentRef.current);
     }
   }, [game, host, status]);

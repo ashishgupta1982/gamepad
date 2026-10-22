@@ -4,6 +4,7 @@ import { X } from 'lucide-react';
 import { play } from '@/components/arcade/sfx';
 import { addQuestions, answer, createGame, judge, next, reveal, start, standings, tick } from '@/lib/quiz/machine';
 import { levelById } from '@/lib/quiz/catalogue';
+import { categoryTally } from '@/lib/quiz/stats';
 import { fetchQuestions, rememberSeen } from './data';
 import { FinalScreen, GetReady, QuestionScreen, RevealScreen, ScoresScreen, categoryLabel } from './screens';
 import { SHOW_FONT, ShowButton } from './ui';
@@ -191,9 +192,14 @@ export function settingsOf(setup) {
   return { picks: setup.picks, level: setup.level, count: setup.count, timer: setup.timer };
 }
 
-/** A finished quiz into the signed-in player's history. */
-export async function saveResult(game) {
+/**
+ * A finished quiz into the signed-in player's history, with each player's
+ * right and asked by category for Your quizzes. `questions` are the ones
+ * played, in order: a live game's own copy only holds the one on screen.
+ */
+export async function saveResult(game, questions = game.questions) {
   const rows = standings(game);
+  const tally = categoryTally(game, questions);
   const res = await fetch('/api/quiz/history', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -202,7 +208,7 @@ export async function saveResult(game) {
       level: levelById(game.settings.level).name,
       categories: game.settings.picks.map(categoryLabel),
       count: game.settings.count,
-      players: rows.map((r) => ({ name: r.name, avatar: r.avatar, color: r.color, score: r.score, correct: r.correct, best: r.best, place: r.place })),
+      players: rows.map((r) => ({ name: r.name, avatar: r.avatar, color: r.color, score: r.score, correct: r.correct, best: r.best, place: r.place, cats: tally[r.id] })),
     }),
   });
   if (!res.ok) throw new Error('not saved');

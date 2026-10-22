@@ -8,9 +8,23 @@ import Game from '@/models/Game';
 // GET  → { games: [{id, at, mode, level, categories, count, players}] }, newest first
 // POST { mode, level, categories, count, players } → saves one finished quiz
 //
+// Each player carries `cats`, { [category name]: [right, asked] }, since
+// 2026-10-22: what Your quizzes works out best and worst categories from.
+//
 // Deleting one is DELETE /api/games/:id, which already checks the owner.
 
 const clip = (s, n) => String(s ?? '').slice(0, n);
+
+function cleanCats(raw) {
+  const out = {};
+  if (!raw || typeof raw !== 'object') return out;
+  for (const [name, v] of Object.entries(raw).slice(0, 20)) {
+    const right = Number(v?.[0]) || 0;
+    const asked = Number(v?.[1]) || 0;
+    if (asked > 0 && asked <= 100 && right >= 0 && right <= asked) out[clip(name, 60)] = [right, asked];
+  }
+  return out;
+}
 
 export default async function handler(req, res) {
   const session = await getServerSession(req, res, authOptions);
@@ -20,7 +34,7 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
     const docs = await Game.find({ userId: session.user.id, gameType: 'quiz', status: 'completed', 'quizConfig.result': { $exists: true } })
       .sort({ createdAt: -1 })
-      .limit(50)
+      .limit(300)
       .lean();
     return res.status(200).json({
       games: docs.map((d) => ({
@@ -48,6 +62,7 @@ export default async function handler(req, res) {
       correct: Number(p.correct) || 0,
       best: Number(p.best) || 0,
       place: Number(p.place) || 0,
+      cats: cleanCats(p.cats),
     }));
     const game = await Game.create({
       userId: session.user.id,
