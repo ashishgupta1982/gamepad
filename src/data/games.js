@@ -64,6 +64,8 @@ export const GAMES = [
     // Explorer's front page, which goes straight to Egypt while it is the only
     // place (data/worldExplorer.js).
     name: 'World Explorer',
+    // The room's zoomed-in card names the place it opens (Ash, 2026-10-22).
+    cardName: 'Egypt Explorer',
     href: '/games/world-explorer',
     emoji: '🏺',
     tone: 'egypt',

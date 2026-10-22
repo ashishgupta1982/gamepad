@@ -427,10 +427,11 @@ function GameBox({ game, style, opening, onOpen }) {
 // in (Ash, 2026-10-21): carrying on, starting and joining are chosen inside
 // each game, so the card has one button.
 function GameCard({ game, isGuest, onSignIn, reduce }) {
+  const name = game.cardName || game.name;
   return (
     <motion.div
       role="dialog"
-      aria-label={game.name}
+      aria-label={name}
       className="absolute inset-x-3 bottom-3 z-30 rounded-3xl bg-[#fffaf2] p-4 pb-[max(1rem,env(safe-area-inset-bottom))] text-[#241a45] shadow-[0_6px_0_rgba(0,0,0,0.18),0_20px_40px_-12px_rgba(0,0,0,0.5)]"
       initial={{ y: '130%' }}
       animate={{ y: 0 }}
@@ -440,7 +441,7 @@ function GameCard({ game, isGuest, onSignIn, reduce }) {
       <div className="flex items-start gap-3">
         <span className="text-4xl leading-none" aria-hidden="true">{game.emoji}</span>
         <div className="min-w-0 flex-1">
-          <h2 className="font-display text-2xl font-extrabold leading-tight">{game.name}</h2>
+          <h2 className="font-display text-2xl font-extrabold leading-tight">{name}</h2>
           <p className="mt-0.5 text-sm leading-snug text-[#6b6390]">{game.description}</p>
         </div>
       </div>
@@ -450,7 +451,7 @@ function GameCard({ game, isGuest, onSignIn, reduce }) {
         onClick={() => play('tap')}
         className={cn('toy mt-4 flex min-h-[54px] items-center justify-center rounded-2xl font-display text-xl font-extrabold', BUTTON_TONES[game.id])}
       >
-        Open {game.name}
+        Open {name}
       </Link>
 
       {isGuest && (
