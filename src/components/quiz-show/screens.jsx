@@ -283,12 +283,24 @@ export function RevealScreen({ game, me, big = false, onJudge, onNext, rate = fa
               </ShowButton>
             </div>
           )}
-          {rate && !judging && <RateQuestion key={q.id} id={q.id} onCard />}
-          {onNext && !judging && (
-            <ShowButton className="w-full" onClick={onNext}>
-              Next
-            </ShowButton>
-          )}
+          {/* Solo: the thumbs sit beside Next, so a picture and a long explanation
+              still fit on a phone (Ash, 2026-10-22). */}
+          {!judging &&
+            (rate ? (
+              <RateQuestion key={q.id} id={q.id} onCard>
+                {onNext && (
+                  <ShowButton className="min-w-0 flex-1" onClick={onNext}>
+                    Next
+                  </ShowButton>
+                )}
+              </RateQuestion>
+            ) : (
+              onNext && (
+                <ShowButton className="w-full" onClick={onNext}>
+                  Next
+                </ShowButton>
+              )
+            ))}
         </div>
       </div>
       {answeredCount != null && (
@@ -309,7 +321,9 @@ export function RevealScreen({ game, me, big = false, onJudge, onNext, rate = fa
  * Each phone votes once a question and can change its mind
  * (components/quiz-show/data.js#rateQuestion).
  */
-export function RateQuestion({ id, onCard = false }) {
+// With `children` (the reveal card's Next button) the thumbs sit in one row
+// beside them, with no label.
+export function RateQuestion({ id, onCard = false, children }) {
   const [mine, setMine] = useState(() => myVote(id) || {});
   if (!id) return null;
   const thumb = (vote) => {
@@ -324,7 +338,8 @@ export function RateQuestion({ id, onCard = false }) {
       aria-label={label}
       aria-pressed={mine.vote === vote}
       className={cn(
-        'press flex h-12 w-14 items-center justify-center rounded-2xl text-2xl ring-2',
+        'press flex w-14 shrink-0 items-center justify-center rounded-2xl text-2xl ring-2',
+        children ? 'h-[58px]' : 'h-12',
         mine.vote === vote ? (vote === 'up' ? 'bg-emerald-400 ring-emerald-200' : 'bg-rose-400 ring-rose-200') : onCard ? 'bg-[#f1eefb] ring-[#d9d2f2]' : 'bg-white/15 ring-white/30',
       )}
     >
@@ -332,11 +347,14 @@ export function RateQuestion({ id, onCard = false }) {
     </button>
   );
   return (
-    <div className="flex flex-col items-center gap-2">
-      <div className="flex items-center gap-3">
-        <span className={cn('text-lg', onCard ? 'text-[#241a45]' : 'text-white/90')} style={SHOW_FONT}>
-          {mine.vote ? 'Thanks!' : 'Good question?'}
-        </span>
+    <div className={cn('flex flex-col items-center gap-2', children && 'w-full')}>
+      <div className={cn('flex items-center', children ? 'w-full gap-2' : 'gap-3')}>
+        {children}
+        {!children && (
+          <span className={cn('text-lg', onCard ? 'text-[#241a45]' : 'text-white/90')} style={SHOW_FONT}>
+            {mine.vote ? 'Thanks!' : 'Good question?'}
+          </span>
+        )}
         {thumbButton('up', '👍', 'Good question')}
         {thumbButton('down', '👎', 'Not a good question')}
       </div>
