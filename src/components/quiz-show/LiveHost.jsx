@@ -6,6 +6,7 @@ import { play } from '@/components/arcade/sfx';
 import { fetchQuestions, rememberSeen } from './data';
 import { saveResult } from './LocalGame';
 import useLive, { post } from './useLive';
+import { JoinForm } from './LivePlayer';
 import { FinalScreen, GetReady, QuestionScreen, RevealScreen, ScoresScreen } from './screens';
 import { Avatar, Marquee, SHOW_FONT, ShowButton } from './ui';
 
@@ -13,6 +14,11 @@ import { Avatar, Marquee, SHOW_FONT, ShowButton } from './ui';
 // TV and everyone watches it while answering on their own phones (TV mode is
 // simply this screen on a big display). The host's pass is kept on the device,
 // so a reload carries on hosting the same quiz.
+//
+// The host can play too (Ash, 2026-10-22): "I'm playing too" in the lobby
+// joins them like any phone, the seat is kept with the host's pass, and this
+// screen then takes their answers. On a big screen everyone is watching, so
+// there it asks them to join on their phone instead.
 
 export const HOST_KEY = 'quiz:host';
 const FIRST_BATCH = 3;
@@ -31,10 +37,11 @@ export function clearHost() {
 }
 
 export default function LiveHost({ setup, resume, onExit }) {
-  const { status } = useSession();
-  const [host, setHost] = useState(resume || null); // { code, hostToken, recorded? }
+  const { data: session, status } = useSession();
+  const [host, setHost] = useState(resume || null); // { code, hostToken, at, recorded?, seat? }
   const [error, setError] = useState('');
-  const live = useLive(host?.code);
+  const seat = host?.seat || null; // { playerId, token } when the host is playing too
+  const live = useLive(host?.code, { player: seat?.playerId });
   const game = live.game;
   const writing = useRef(false);
   const sentRef = useRef([]); // the questions sent to this game, in order
@@ -42,6 +49,14 @@ export default function LiveHost({ setup, resume, onExit }) {
   const seenPlayers = useRef(0);
   const [big, setBig] = useState(false);
   const [counting, setCounting] = useState(false); // the 3-2-1 before the first question
+  const [joining, setJoining] = useState(false); // the host's own join form is open
+
+  const keepHost = (h) => {
+    setHost(h);
+    try {
+      localStorage.setItem(HOST_KEY, JSON.stringify(h));
+    } catch {}
+  };
 
   useEffect(() => {
     setBig(window.matchMedia('(min-width: 900px)').matches);
@@ -66,7 +81,7 @@ export default function LiveHost({ setup, resume, onExit }) {
 
   const act = async (action, extra = {}) => {
     try {
-      live.apply(await post(`/api/quiz/live/${host.code}/host`, { hostToken: host.hostToken, action, ...extra }));
+      live.apply(await post(`/api/quiz/live/${host.code}/host`, { hostToken: host.hostToken, seat, action, ...extra }));
     } catch (err) {
       setError(err.message);
     }
@@ -114,11 +129,7 @@ export default function LiveHost({ setup, resume, onExit }) {
   // The result into the signed-in host's history, once.
   useEffect(() => {
     if (!game || game.phase !== 'finished' || host?.recorded || !game.players.length) return;
-    const h = { ...host, recorded: true };
-    setHost(h);
-    try {
-      localStorage.setItem(HOST_KEY, JSON.stringify(h));
-    } catch {}
+    keepHost({ ...host, recorded: true });
     if (status === 'authenticated') {
       saveResult(game).catch(() => {});
       rememberSeen(game.players.map((p) => p.name), sentRef.current);
@@ -155,6 +166,30 @@ export default function LiveHost({ setup, resume, onExit }) {
   if (!game) return <GetReady game={{ players: [] }} waitingFor />;
 
   const answered = game.players.filter((p) => p.answers[game.index]).length;
+  // The host's own player, while they are still in the quiz.
+  const me = seat && game.players.some((p) => p.id === seat.playerId) ? seat.playerId : null;
+  const answerIt = async (option) => {
+    try {
+      live.apply(await post(`/api/quiz/live/${host.code}/answer`, { ...seat, option }));
+    } catch {
+      play('error');
+    }
+  };
+
+  if (game.phase === 'ready' && joining) {
+    return (
+      <JoinForm
+        hostCode={host.code}
+        defaultName={session?.user?.name?.split(' ')[0] || ''}
+        onBack={() => setJoining(false)}
+        onJoined={(s, data) => {
+          keepHost({ ...host, seat: { playerId: s.playerId, token: s.token } });
+          live.apply(data);
+          setJoining(false);
+        }}
+      />
+    );
+  }
 
   return (
     <>
@@ -176,6 +211,8 @@ export default function LiveHost({ setup, resume, onExit }) {
           code={host.code}
           big={big}
           error={error}
+          playing={Boolean(me)}
+          onJoin={() => setJoining(true)}
           onStart={() => {
             setCounting(true);
             setTimeout(() => act('start'), 2800);
@@ -200,16 +237,16 @@ export default function LiveHost({ setup, resume, onExit }) {
       )}
       {game.phase === 'question' && (
         <>
-          <QuestionScreen game={game} big={big} offset={live.offset} answeredCount={answered} />
+          <QuestionScreen game={game} me={me} onAnswer={me ? answerIt : undefined} big={big} offset={live.offset} answeredCount={answered} />
           <HostBar>
             <button type="button" onClick={() => act('reveal')} className="font-bold underline">Show the answer now</button>
           </HostBar>
         </>
       )}
-      {game.phase === 'reveal' && <RevealScreen game={game} big={big} offset={live.offset} answeredCount={answered} onNext={() => act('scores')} />}
-      {game.phase === 'scores' && <ScoresScreen game={game} big={big} onNext={() => act('next')} />}
+      {game.phase === 'reveal' && <RevealScreen game={game} me={me} big={big} offset={live.offset} answeredCount={answered} onNext={() => act('scores')} />}
+      {game.phase === 'scores' && <ScoresScreen game={game} me={me} big={big} onNext={() => act('next')} />}
       {game.phase === 'finished' && (
-        <FinalScreen game={game} big={big}>
+        <FinalScreen game={game} me={me} big={big}>
           <ShowButton onClick={() => { clearHost(); onExit({ again: true }); }}>New quiz</ShowButton>
           <ShowButton className="bg-white text-[#241a45] [--toy-edge:rgba(0,0,0,0.25)]" onClick={() => { clearHost(); onExit(); }}>
             Back to the quiz
@@ -262,7 +299,7 @@ function ShareInvite({ code, url }) {
   );
 }
 
-function Lobby({ game, code, big, error, onStart, onRemove }) {
+function Lobby({ game, code, big, error, playing, onJoin, onStart, onRemove }) {
   const [qr, setQr] = useState(null);
   const url = typeof window !== 'undefined' ? `${window.location.origin}/games/quiz/join?code=${code}` : '';
   useEffect(() => {
@@ -310,6 +347,14 @@ function Lobby({ game, code, big, error, onStart, onRemove }) {
           </AnimatePresence>
         </ul>
         {error && <p className="text-center font-semibold text-rose-200">{error}</p>}
+        {!playing &&
+          (big ? (
+            <p className="text-center text-white/80">Playing too? Join on your phone with the code.</p>
+          ) : (
+            <ShowButton className="bg-white text-[#241a45] [--toy-edge:rgba(0,0,0,0.25)]" onClick={onJoin}>
+              I’m playing too
+            </ShowButton>
+          ))}
         {/* The questions are fetched once Start is pressed, for the players who joined. */}
         <ShowButton onClick={onStart} disabled={!game.players.length}>
           {game.players.length ? 'Start the quiz!' : 'Waiting for players'}

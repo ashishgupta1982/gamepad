@@ -165,8 +165,9 @@ function PlayerScores({ game, me }) {
 
 const ordinal = (n) => (n % 100 >= 11 && n % 100 <= 13 ? 'th' : ['th', 'st', 'nd', 'rd'][n % 10] || 'th');
 
-function JoinForm({ initialCode, defaultName, onBack, onJoined }) {
-  const [code, setCode] = useState(initialCode.toUpperCase().slice(0, 6));
+// `hostCode`: the host joining their own quiz, so the code is not asked for.
+export function JoinForm({ initialCode = "", hostCode = null, defaultName, onBack, onJoined }) {
+  const [code, setCode] = useState((hostCode || initialCode).toUpperCase().slice(0, 6));
   const [name, setName] = useState(defaultName);
   // On a signed-in phone, the names this account has played under.
   const known = useSeenPlayers().players.map((p) => p.name);
@@ -199,8 +200,9 @@ function JoinForm({ initialCode, defaultName, onBack, onJoined }) {
         <ArrowLeft className="h-5 w-5" aria-hidden="true" />
       </button>
       <div className="text-center">
-        <Marquee small>Join the quiz</Marquee>
+        <Marquee small>{hostCode ? "You’re playing too" : "Join the quiz"}</Marquee>
       </div>
+      {!hostCode && (
       <label className="block">
         <span className="mb-1 block text-lg" style={SHOW_FONT}>Code from the host’s screen</span>
         <input
@@ -214,6 +216,7 @@ function JoinForm({ initialCode, defaultName, onBack, onJoined }) {
           style={SHOW_FONT}
         />
       </label>
+      )}
       <label className="block">
         <span className="mb-1 block text-lg" style={SHOW_FONT}>Your name</span>
         <input

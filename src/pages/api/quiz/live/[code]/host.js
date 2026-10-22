@@ -8,16 +8,20 @@ import { change, project } from '@/lib/quiz/live';
 //   reveal | scores | next   move on now rather than waiting for the clock
 //   remove { playerId }      take a player out (only in the lobby)
 //   end                      finish the quiz
+// A host who is playing too sends `seat` { playerId, token } as well, so the
+// answer they picked comes back to them like it does to any player.
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
-  const { hostToken, action } = req.body || {};
+  const { hostToken, action, seat } = req.body || {};
   try {
     let refused = false;
+    let me = null;
     const doc = await change(req.query.code, (d, now) => {
       if (!hostToken || d.hostToken !== hostToken) {
         refused = true;
         return null;
       }
+      if (seat?.playerId && d.tokens?.[seat.playerId] === seat.token) me = seat.playerId;
       const g = d.game;
       switch (action) {
         case 'questions': {
@@ -50,7 +54,7 @@ export default async function handler(req, res) {
     if (refused) return res.status(403).json({ error: 'Only the host can do that.' });
     // The host sees what everyone sees: the answer stays hidden while a
     // question is open, since the host's screen is often the one on show.
-    return res.status(200).json({ v: doc.version, now: Date.now(), game: project(doc) });
+    return res.status(200).json({ v: doc.version, now: Date.now(), game: project(doc, { playerId: me }) });
   } catch (err) {
     return res.status(503).json({ error: err.message });
   }
