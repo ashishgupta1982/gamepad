@@ -482,6 +482,168 @@
       "family": true,
       "difficulty": 2,
       "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Disney film do these emoji describe?",
+      "options": [
+        "Cinderella",
+        "Sleeping Beauty",
+        "Enchanted",
+        "Tangled"
+      ],
+      "answer": "Cinderella",
+      "explanation": "The Fairy Godmother's spell wears off at the stroke of midnight, leaving just one glass slipper behind.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🎃👠🕛👸"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which Disney film do these emoji describe?",
+      "options": [
+        "Zootropolis",
+        "Robin Hood",
+        "The Fox and the Hound",
+        "Bolt"
+      ],
+      "answer": "Zootropolis",
+      "explanation": "Judy Hopps is the city's first rabbit police officer, and Nick Wilde the fox ends up as her partner.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🐰👮‍♀️🦊🦥"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which Disney film do these emoji describe?",
+      "options": [
+        "Pinocchio",
+        "Bambi",
+        "Peter Pan",
+        "The Sword in the Stone"
+      ],
+      "answer": "Pinocchio",
+      "explanation": "Jiminy Cricket sings 'When You Wish Upon a Star', which won the Oscar for Best Original Song.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "emoji",
+        "text": "🤥🪵🐋🦗"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which theme park did Walt Disney open in California in 1955?",
+      "options": [
+        "Disneyland",
+        "Walt Disney World",
+        "Epcot",
+        "Magic Kingdom"
+      ],
+      "answer": "Disneyland",
+      "explanation": "It opened in Anaheim in July 1955, and Walt Disney World in Florida followed in 1971, after Walt's death.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who voiced the Genie in Disney's 1992 film Aladdin?",
+      "options": [
+        "Robin Williams",
+        "Eddie Murphy",
+        "Billy Crystal",
+        "Will Smith"
+      ],
+      "answer": "Robin Williams",
+      "explanation": "Will Smith took on the role in the 2019 live-action remake.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In Finding Nemo, in which city does Nemo end up in a dentist's fish tank?",
+      "options": [
+        "Sydney",
+        "Melbourne",
+        "Perth",
+        "Brisbane"
+      ],
+      "answer": "Sydney",
+      "explanation": "Dory remembers the address on the diver's mask: P. Sherman, 42 Wallaby Way, Sydney.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Disney villain sings 'Poor Unfortunate Souls'?",
+      "options": [
+        "Ursula",
+        "Maleficent",
+        "Cruella de Vil",
+        "Yzma"
+      ],
+      "answer": "Ursula",
+      "explanation": "The sea witch takes Ariel's voice in exchange for a pair of legs.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which American city is Disney's The Princess and the Frog set?",
+      "options": [
+        "New Orleans",
+        "Atlanta",
+        "Memphis",
+        "Nashville"
+      ],
+      "answer": "New Orleans",
+      "explanation": "Tiana, who dreams of opening her own restaurant, was Disney's first African-American princess.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In Wreck-It Ralph, which arcade game is Ralph the bad guy in?",
+      "options": [
+        "Fix-It Felix Jr.",
+        "Hero's Duty",
+        "Sugar Rush",
+        "Turbo Time"
+      ],
+      "answer": "Fix-It Felix Jr.",
+      "explanation": "After 30 years as the villain, Ralph sneaks into other games to win a medal and prove he can be a hero.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What was Walt Disney's first choice of name for Mickey Mouse, before his wife talked him out of it?",
+      "options": [
+        "Mortimer",
+        "Marvin",
+        "Montgomery",
+        "Maurice"
+      ],
+      "answer": "Mortimer",
+      "explanation": "As the story goes, Lillian Disney thought Mortimer sounded too pompous and suggested Mickey instead.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
     }
   ]
 }

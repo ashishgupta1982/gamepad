@@ -57,4 +57,4 @@ One file per category, named for its id: `data/quiz-bank/<category>.json`.
 
 ## How many
 
-Fifteen per band in every category: 15 `kids` and 15 `adults`. In picture or emoji categories, about four or five of each fifteen use one.
+Fifteen per band in every category to start: 15 `kids` and 15 `adults`. A category the family plays a lot is topped up ten at a time, in the band that is running low (2026-10-22: the first top-up). In picture or emoji categories, about four or five of each fifteen use one.

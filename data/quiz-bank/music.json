@@ -308,6 +308,108 @@
       "family": false,
       "difficulty": 3,
       "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Beatles album has a cover photo of the band walking over a zebra crossing?",
+      "options": ["Abbey Road", "Let It Be", "Revolver", "Help!"],
+      "answer": "Abbey Road",
+      "explanation": "The crossing, outside the recording studios in north London, was given listed status in 2010.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which was the Spice Girls' first single, a UK number one in 1996?",
+      "options": ["Wannabe", "Say You'll Be There", "Spice Up Your Life", "2 Become 1"],
+      "answer": "Wannabe",
+      "explanation": "It spent seven weeks at number one in the UK and topped the charts in more than 30 countries.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which singer was nicknamed the 'King of Pop'?",
+      "options": ["Michael Jackson", "Elvis Presley", "Prince", "Justin Timberlake"],
+      "answer": "Michael Jackson",
+      "explanation": "His 1982 album Thriller is the best-selling album of all time.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which song do these emoji describe?",
+      "options": ["Umbrella", "Diamonds", "Halo", "Toxic"],
+      "answer": "Umbrella",
+      "explanation": "Rihanna's hit spent ten weeks at number one in the UK during the very wet summer of 2007.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "☂️🌧️☔" }
+    },
+    {
+      "band": "adults",
+      "question": "Which song do these emoji describe?",
+      "options": ["Hotel California", "Heartbreak Hotel", "California Dreamin'", "Holiday"],
+      "answer": "Hotel California",
+      "explanation": "The Eagles' song ends with one of rock's most famous guitar solos, played by Don Felder and Joe Walsh.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": { "kind": "emoji", "text": "🏨🌴🌅🎸" }
+    },
+    {
+      "band": "adults",
+      "question": "Which band released the 1977 album Rumours, written as its members' relationships were falling apart?",
+      "options": ["Fleetwood Mac", "ABBA", "Supertramp", "The Eagles"],
+      "answer": "Fleetwood Mac",
+      "explanation": "It has sold more than 40 million copies and includes 'Dreams' and 'Go Your Own Way'.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "How many symphonies did Beethoven complete?",
+      "options": ["Nine", "Seven", "Twelve", "Five"],
+      "answer": "Nine",
+      "explanation": "He wrote the Ninth, with its famous 'Ode to Joy', when he was almost completely deaf.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which composer wrote the oratorio Messiah, with its famous 'Hallelujah' chorus?",
+      "options": ["George Frideric Handel", "Johann Sebastian Bach", "Joseph Haydn", "Wolfgang Amadeus Mozart"],
+      "answer": "George Frideric Handel",
+      "explanation": "The German-born Handel made his home in London, and Messiah was first performed in Dublin in 1742.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which composer wrote the Enigma Variations and the tune known as 'Land of Hope and Glory'?",
+      "options": ["Edward Elgar", "Gustav Holst", "Ralph Vaughan Williams", "Benjamin Britten"],
+      "answer": "Edward Elgar",
+      "explanation": "Elgar's face appeared on the Bank of England's £20 note from 1999 to 2010.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Whose recording of 'White Christmas' is the best-selling single of all time?",
+      "options": ["Bing Crosby", "Frank Sinatra", "Dean Martin", "Nat King Cole"],
+      "answer": "Bing Crosby",
+      "explanation": "Crosby first sang Irving Berlin's song in the 1942 film Holiday Inn, and his record has sold an estimated 50 million copies.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
     }
   ]
 }

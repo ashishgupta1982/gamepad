@@ -63,10 +63,10 @@
     },
     {
       "band": "kids",
-      "question": "Who played Willy Wonka in the 2023 film Wonka?",
-      "options": ["Timothée Chalamet", "Tom Holland", "Johnny Depp", "Gene Wilder"],
-      "answer": "Timothée Chalamet",
-      "explanation": "Johnny Depp and Gene Wilder both played Wonka in earlier films, but Timothée Chalamet played him as a young man in 2023.",
+      "question": "Which girl group became the first group ever to win The X Factor, in 2011?",
+      "options": ["Little Mix", "Girls Aloud", "Sugababes", "Fifth Harmony"],
+      "answer": "Little Mix",
+      "explanation": "Perrie, Jade, Jesy and Leigh-Anne's first single was a cover of the song 'Cannonball'.",
       "family": true,
       "difficulty": 2,
       "dated": false
@@ -83,10 +83,10 @@
     },
     {
       "band": "kids",
-      "question": "Harry Styles first became famous in which boy band, formed on The X Factor in 2010?",
-      "options": ["One Direction", "The Wanted", "JLS", "Take That"],
-      "answer": "One Direction",
-      "explanation": "The five boys entered The X Factor as solo singers and were put together as a group.",
+      "question": "Which fitness coach became known as 'the nation's PE teacher' for his live YouTube workouts during the 2020 lockdown?",
+      "options": ["Joe Wicks", "Mr Motivator", "Davina McCall", "Steve Backshall"],
+      "answer": "Joe Wicks",
+      "explanation": "His PE with Joe sessions went out every weekday morning, and earned him a Guinness World Record and an MBE.",
       "family": true,
       "difficulty": 1,
       "dated": false
@@ -183,10 +183,10 @@
     },
     {
       "band": "adults",
-      "question": "What are Adele's albums 19, 21, 25 and 30 named after?",
-      "options": ["Her age when she made them", "Her house numbers", "Their chart positions", "The number of songs on them"],
-      "answer": "Her age when she made them",
-      "explanation": "Each title is the age Adele was when she was writing or making that album.",
+      "question": "Which former Take That singer had a huge solo hit with 'Angels' in 1997?",
+      "options": ["Robbie Williams", "Gary Barlow", "Mark Owen", "Ronan Keating"],
+      "answer": "Robbie Williams",
+      "explanation": "His three concerts at Knebworth in 2003 drew around 375,000 fans, about 125,000 a night.",
       "family": true,
       "difficulty": 2,
       "dated": false
@@ -203,10 +203,10 @@
     },
     {
       "band": "adults",
-      "question": "In 2013, who became the first British man to win the Wimbledon singles title since Fred Perry in 1936?",
-      "options": ["Andy Murray", "Tim Henman", "Greg Rusedski", "Cameron Norrie"],
-      "answer": "Andy Murray",
-      "explanation": "Andy Murray beat Novak Djokovic in the final, then won Wimbledon again in 2016.",
+      "question": "Which fiery chef tried to rescue struggling restaurants on the TV show Kitchen Nightmares?",
+      "options": ["Gordon Ramsay", "Heston Blumenthal", "Rick Stein", "Gino D'Acampo"],
+      "answer": "Gordon Ramsay",
+      "explanation": "Before he became a chef he played youth football for Rangers, until a knee injury ended his hopes.",
       "family": true,
       "difficulty": 1,
       "dated": false
@@ -233,10 +233,10 @@
     },
     {
       "band": "adults",
-      "question": "Which athlete won the 5,000 and 10,000 metres at both London 2012 and Rio 2016?",
-      "options": ["Mo Farah", "Haile Gebrselassie", "Kenenisa Bekele", "Steve Cram"],
-      "answer": "Mo Farah",
-      "explanation": "Mo Farah's double double made him Britain's most successful track athlete at the Olympics.",
+      "question": "Which former England striker presented Match of the Day from 1999 to 2025?",
+      "options": ["Gary Lineker", "Alan Shearer", "Ian Wright", "Michael Owen"],
+      "answer": "Gary Lineker",
+      "explanation": "He won the Golden Boot at the 1986 World Cup and was never shown a yellow or red card in his whole career.",
       "family": true,
       "difficulty": 1,
       "dated": false

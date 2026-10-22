@@ -374,15 +374,15 @@
     },
     {
       "band": "adults",
-      "question": "Which composer wrote the music for Star Wars, Jaws and Superman?",
+      "question": "Which London-born director made Inception, Interstellar and Oppenheimer?",
       "options": [
-        "John Williams",
-        "Hans Zimmer",
-        "Howard Shore",
-        "Jerry Goldsmith"
+        "Christopher Nolan",
+        "Ridley Scott",
+        "Sam Mendes",
+        "Guy Ritchie"
       ],
-      "answer": "John Williams",
-      "explanation": "John Williams has been nominated for more than 50 Oscars.",
+      "answer": "Christopher Nolan",
+      "explanation": "Oppenheimer won him the Oscars for Best Director and Best Picture in 2024.",
       "family": false,
       "difficulty": 2,
       "dated": false
@@ -404,15 +404,15 @@
     },
     {
       "band": "adults",
-      "question": "What is the name of Black Panther's African homeland?",
+      "question": "Which actor wrote the script for Rocky and refused to sell it unless he could play the boxer himself?",
       "options": [
-        "Wakanda",
-        "Zamunda",
-        "Genovia",
-        "Latveria"
+        "Sylvester Stallone",
+        "Robert De Niro",
+        "Arnold Schwarzenegger",
+        "Al Pacino"
       ],
-      "answer": "Wakanda",
-      "explanation": "Zamunda is the kingdom from Coming to America, and Genovia is from The Princess Diaries.",
+      "answer": "Sylvester Stallone",
+      "explanation": "Rocky went on to win the Oscar for Best Picture, beating Taxi Driver and All the President's Men.",
       "family": false,
       "difficulty": 2,
       "dated": false

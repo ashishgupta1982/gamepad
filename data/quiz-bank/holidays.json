@@ -300,6 +300,106 @@
       "family": false,
       "difficulty": 3,
       "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Whose saint's day, on 17 March, is Ireland's national day?",
+      "options": ["St Patrick", "St Andrew", "St George", "St David"],
+      "answer": "St Patrick",
+      "explanation": "The city of Chicago even dyes its river bright green for the celebrations.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "On which day do people traditionally dance around a maypole?",
+      "options": ["May Day", "Midsummer's Day", "Easter Monday", "Harvest Festival"],
+      "answer": "May Day",
+      "explanation": "Each dancer holds a long ribbon, and as they weave in and out the ribbons are plaited around the pole.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What do people in the USA celebrate on 4 July?",
+      "options": ["Independence Day", "Thanksgiving", "Labor Day", "Memorial Day"],
+      "answer": "Independence Day",
+      "explanation": "It marks the day in 1776 when the Declaration of Independence was adopted, breaking away from Britain.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Japan, which takeaway food has become a hugely popular Christmas treat?",
+      "options": ["Fried chicken", "Pizza", "Fish and chips", "Hot dogs"],
+      "answer": "Fried chicken",
+      "explanation": "A 1970s advert called 'Kentucky for Christmas' started it, and some families order their bucket weeks ahead.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Spain, people eat twelve of which fruit at midnight on New Year's Eve, one for each chime of the clock?",
+      "options": ["Grapes", "Olives", "Cherries", "Strawberries"],
+      "answer": "Grapes",
+      "explanation": "They are called the twelve grapes of luck, and getting them all down in time is harder than it sounds.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In the UK, by what time of day are April Fools' tricks traditionally supposed to stop?",
+      "options": ["Midday", "Teatime", "Bedtime", "Midnight"],
+      "answer": "Midday",
+      "explanation": "Anyone who plays a trick after that is said to be the fool themselves.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the spinning top that children play with at Hanukkah called?",
+      "options": ["A dreidel", "A menorah", "A shofar", "A kippah"],
+      "answer": "A dreidel",
+      "explanation": "Each of its four sides has a Hebrew letter, and the side it lands on decides whether you win sweets or chocolate coins.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "At which Chinese festival do families share round mooncakes and admire the full moon?",
+      "options": ["Mid-Autumn Festival", "Dragon Boat Festival", "Lantern Festival", "Chinese New Year"],
+      "answer": "Mid-Autumn Festival",
+      "explanation": "It falls on the 15th day of the eighth month of the Chinese calendar, when the moon is said to be at its brightest.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Boxing Day, 26 December, is also the feast day of which saint?",
+      "options": ["St Stephen", "St Nicholas", "St Valentine", "St Andrew"],
+      "answer": "St Stephen",
+      "explanation": "That is why the carol says Good King Wenceslas looked out 'on the Feast of Stephen'.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Halloween falls on the night before which special day?",
+      "options": ["All Saints' Day", "Armistice Day", "Michaelmas", "Candlemas"],
+      "answer": "All Saints' Day",
+      "explanation": "Halloween is short for All Hallows' Eve, and 'hallow' is an old word for a saint.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
     }
   ]
 }

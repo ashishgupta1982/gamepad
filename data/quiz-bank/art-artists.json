@@ -530,6 +530,180 @@
       "family": false,
       "difficulty": 3,
       "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who painted this?",
+      "options": [
+        "Sandro Botticelli",
+        "Titian",
+        "Raphael",
+        "Fra Angelico"
+      ],
+      "answer": "Sandro Botticelli",
+      "explanation": "The Birth of Venus, from the 1480s, shows the goddess arriving on a giant scallop shell, and it hangs in the Uffizi in Florence.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "The_Birth_of_Venus",
+        "alt": "A woman standing on a huge shell at the edge of the sea, blown ashore by winds",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792703850/GamePad/quiz/the-birth-of-venus.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Who painted this?",
+      "options": [
+        "Grant Wood",
+        "Edward Hopper",
+        "Norman Rockwell",
+        "Andrew Wyeth"
+      ],
+      "answer": "Grant Wood",
+      "explanation": "American Gothic, from 1930, shows a farmer and his daughter, and the models were Wood's own sister and his dentist.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "American_Gothic",
+        "alt": "A stern farmer holding a pitchfork beside a woman, in front of a white farmhouse",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792703852/GamePad/quiz/american-gothic.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:Grant_Wood_-_American_Gothic_(1930).jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "What is this painting by Jan van Eyck called?",
+      "options": [
+        "The Arnolfini Portrait",
+        "The Ambassadors",
+        "The Ghent Altarpiece",
+        "The Madonna of Chancellor Rolin"
+      ],
+      "answer": "The Arnolfini Portrait",
+      "explanation": "Look closely at the round mirror on the back wall and you can see two more people reflected in it; the painting hangs in the National Gallery in London.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Arnolfini_Portrait",
+        "alt": "A richly dressed couple holding hands in a room with a round mirror and a small dog",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792703853/GamePad/quiz/arnolfini-portrait.jpg",
+        "credit": "",
+        "source": "https://commons.wikimedia.org/wiki/File:The_Arnolfini_portrait_(1434).jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which Mexican artist painted dozens of self-portraits, often with flowers in her hair?",
+      "options": [
+        "Frida Kahlo",
+        "Georgia O'Keeffe",
+        "Tamara de Lempicka",
+        "Mary Cassatt"
+      ],
+      "answer": "Frida Kahlo",
+      "explanation": "Her childhood home in Mexico City, La Casa Azul or the Blue House, is now a museum about her life and work.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What do we call the stand that holds a painter's canvas while they work?",
+      "options": [
+        "An easel",
+        "A palette",
+        "A trestle",
+        "A lectern"
+      ],
+      "answer": "An easel",
+      "explanation": "The word comes from the Dutch 'ezel', meaning donkey, because it carries a load.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Dutch artist is famous for grids of black lines filled with blocks of red, yellow and blue?",
+      "options": [
+        "Piet Mondrian",
+        "Wassily Kandinsky",
+        "Kazimir Malevich",
+        "Paul Klee"
+      ],
+      "answer": "Piet Mondrian",
+      "explanation": "Yves Saint Laurent turned his paintings into a famous range of dresses in 1965.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In a fresco, what is the paint applied to?",
+      "options": [
+        "Wet plaster",
+        "Wooden panels",
+        "Stretched canvas",
+        "Copper sheets"
+      ],
+      "answer": "Wet plaster",
+      "explanation": "Fresco is Italian for 'fresh', because the paint soaks into the plaster while it is still wet.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Bradford-born artist is famous for sunny paintings of Californian swimming pools, such as A Bigger Splash?",
+      "options": [
+        "David Hockney",
+        "Francis Bacon",
+        "Lucian Freud",
+        "Howard Hodgkin"
+      ],
+      "answer": "David Hockney",
+      "explanation": "A Bigger Splash, from 1967, took him about two weeks to paint, though the splash itself would have lasted a moment.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which sculptor's studio and garden in St Ives, Cornwall, is now a museum run by the Tate?",
+      "options": [
+        "Barbara Hepworth",
+        "Henry Moore",
+        "Elisabeth Frink",
+        "Antony Gormley"
+      ],
+      "answer": "Barbara Hepworth",
+      "explanation": "Hepworth lived and worked at Trewyn Studio from 1949 until her death in 1975.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which British pop artist co-designed the cover of The Beatles' album Sgt. Pepper's Lonely Hearts Club Band?",
+      "options": [
+        "Peter Blake",
+        "Richard Hamilton",
+        "Eduardo Paolozzi",
+        "Patrick Caulfield"
+      ],
+      "answer": "Peter Blake",
+      "explanation": "He made it with his then wife Jann Haworth, and Richard Hamilton designed the Beatles' plain White Album cover the following year.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
     }
   ]
 }

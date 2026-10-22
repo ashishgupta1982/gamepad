@@ -490,6 +490,172 @@
       "family": false,
       "difficulty": 3,
       "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which is the longest river in Europe?",
+      "options": [
+        "Volga",
+        "Danube",
+        "Rhine",
+        "Dnieper"
+      ],
+      "answer": "Volga",
+      "explanation": "The Volga runs for about 3,500 km through Russia before emptying into the Caspian Sea.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Counting its overseas territories, which country spans the most time zones?",
+      "options": [
+        "France",
+        "Russia",
+        "United States",
+        "United Kingdom"
+      ],
+      "answer": "France",
+      "explanation": "Thanks to islands from the Caribbean to the Pacific, France covers 12 time zones, one more than Russia.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which sea is the only one in the world with no coastline at all?",
+      "options": [
+        "Sargasso Sea",
+        "Caspian Sea",
+        "Coral Sea",
+        "Tasman Sea"
+      ],
+      "answer": "Sargasso Sea",
+      "explanation": "The Sargasso Sea sits in the middle of the North Atlantic, bounded by ocean currents instead of land.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which is the largest US state by area?",
+      "options": [
+        "Alaska",
+        "Texas",
+        "California",
+        "Montana"
+      ],
+      "answer": "Alaska",
+      "explanation": "Alaska is more than twice the size of Texas, the next biggest state.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which is the highest mountain in South America?",
+      "options": [
+        "Aconcagua",
+        "Chimborazo",
+        "Huascarán",
+        "Ojos del Salado"
+      ],
+      "answer": "Aconcagua",
+      "explanation": "At almost 7,000 metres, Aconcagua in the Andes is the highest mountain anywhere outside Asia.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which river forms much of the border between the United States and Mexico?",
+      "options": [
+        "Rio Grande",
+        "Colorado",
+        "Mississippi",
+        "Missouri"
+      ],
+      "answer": "Rio Grande",
+      "explanation": "In Mexico the same river is known as the Río Bravo.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which country is the volcano Krakatoa?",
+      "options": [
+        "Indonesia",
+        "Philippines",
+        "Japan",
+        "Papua New Guinea"
+      ],
+      "answer": "Indonesia",
+      "explanation": "Its 1883 eruption was heard on the island of Rodrigues, nearly 4,800 km away.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which country is this lake, with a church on its little island?",
+      "options": [
+        "Slovenia",
+        "Austria",
+        "Switzerland",
+        "Croatia"
+      ],
+      "answer": "Slovenia",
+      "explanation": "Visitors row out to the island church on Lake Bled to ring its wishing bell.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Lake_Bled",
+        "alt": "A blue lake with a small wooded island and a church, ringed by mountains",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792703864/GamePad/quiz/lake-bled.jpg",
+        "credit": "Photo: Canadianhockey91, CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Lake_Bled_from_the_Mountain.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which ocean lies between Africa and Australia?",
+      "options": [
+        "Indian Ocean",
+        "Atlantic Ocean",
+        "Pacific Ocean",
+        "Southern Ocean"
+      ],
+      "answer": "Indian Ocean",
+      "explanation": "The Indian Ocean is the only ocean named after a country.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which country is this fjord?",
+      "options": [
+        "Norway",
+        "New Zealand",
+        "Iceland",
+        "Canada"
+      ],
+      "answer": "Norway",
+      "explanation": "Geirangerfjord is a UNESCO World Heritage Site, famous for waterfalls such as the Seven Sisters.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Geirangerfjord",
+        "alt": "A deep, narrow inlet of water between steep green mountains",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792703865/GamePad/quiz/geirangerfjord.jpg",
+        "credit": "Photo: Andreas Trepte, CC BY-SA 2.5 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Geirangerfjord_.jpg"
+      }
     }
   ]
 }

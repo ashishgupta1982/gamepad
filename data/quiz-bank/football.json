@@ -300,6 +300,106 @@
       "family": false,
       "difficulty": 3,
       "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Months before the 1966 World Cup, the stolen trophy was found wrapped in newspaper by a dog. What was the dog called?",
+      "options": ["Pickles", "Biscuit", "Rover", "Sparky"],
+      "answer": "Pickles",
+      "explanation": "Pickles, a collie, sniffed out the parcel under a hedge while on a walk with his owner, and became a national hero.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In 1863, the Football Association met to write the first rules of the game in which kind of place?",
+      "options": ["A pub", "A school", "A church hall", "A castle"],
+      "answer": "A pub",
+      "explanation": "Club captains met at the Freemasons' Tavern in London, and the rules they agreed are the roots of today's game.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which club is nicknamed 'the Canaries'?",
+      "options": ["Norwich City", "Watford", "Ipswich Town", "Leeds United"],
+      "answer": "Norwich City",
+      "explanation": "Norwich has a long history of breeding canaries, brought there by Flemish weavers who settled in the city centuries ago.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Goal machine Erling Haaland plays for which country?",
+      "options": ["Norway", "Sweden", "Denmark", "Iceland"],
+      "answer": "Norway",
+      "explanation": "He was actually born in Leeds, while his dad Alf-Inge was playing for Leeds United.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which country's football team plays in bright orange shirts?",
+      "options": ["Netherlands", "Belgium", "Denmark", "Sweden"],
+      "answer": "Netherlands",
+      "explanation": "Orange honours the Dutch royal family, the House of Orange-Nassau, even though the Dutch flag has no orange in it.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What size of football is used in grown-up matches?",
+      "options": ["Size 5", "Size 3", "Size 4", "Size 6"],
+      "answer": "Size 5",
+      "explanation": "Younger children often play with a smaller size 3 or size 4 ball.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What does it mean when a goalkeeper keeps a 'clean sheet'?",
+      "options": ["Their team lets in no goals", "They never touch the ball", "They get no yellow cards", "They save a penalty"],
+      "answer": "Their team lets in no goals",
+      "explanation": "The defenders share the credit too, because nobody has managed to score against them.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which London club plays at Craven Cottage, right beside the River Thames?",
+      "options": ["Fulham", "Chelsea", "Brentford", "Crystal Palace"],
+      "answer": "Fulham",
+      "explanation": "The ground is named after a real cottage that once stood there, and a little pavilion called the Cottage still sits in one corner.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which country's women's football team is nicknamed 'the Matildas'?",
+      "options": ["Australia", "New Zealand", "Canada", "Ireland"],
+      "answer": "Australia",
+      "explanation": "The name comes from the much-loved Australian folk song 'Waltzing Matilda'.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which country's football team is nicknamed 'Les Bleus', meaning 'the Blues'?",
+      "options": ["France", "Portugal", "Belgium", "Switzerland"],
+      "answer": "France",
+      "explanation": "Their blue shirts match the blue on the French flag.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
     }
   ]
 }

@@ -206,15 +206,15 @@
     },
     {
       "band": "kids",
-      "question": "On Bonfire Night, we remember a plot to blow up which building?",
+      "question": "Which Scottish lake is said to be home to a monster called Nessie?",
       "options": [
-        "The Houses of Parliament",
-        "The Tower of London",
-        "Buckingham Palace",
-        "Westminster Abbey"
+        "Loch Ness",
+        "Loch Lomond",
+        "Lake Windermere",
+        "Loch Morar"
       ],
-      "answer": "The Houses of Parliament",
-      "explanation": "Guy Fawkes was caught guarding barrels of gunpowder under the House of Lords in 1605.",
+      "answer": "Loch Ness",
+      "explanation": "Loch Ness holds more fresh water than all the lakes in England and Wales put together.",
       "family": true,
       "difficulty": 1,
       "dated": false
@@ -494,6 +494,180 @@
       ],
       "answer": "Buckinghamshire",
       "explanation": "Runners must wear an apron and a head covering, and toss their pancake at the start and again at the finish.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which city was the Titanic built?",
+      "options": [
+        "Belfast",
+        "Liverpool",
+        "Glasgow",
+        "Southampton"
+      ],
+      "answer": "Belfast",
+      "explanation": "She was built at the Harland and Wolff shipyard, and the Titanic Belfast museum now stands beside the slipway where she was launched.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which seaside town is this famous tower?",
+      "options": [
+        "Blackpool",
+        "Scarborough",
+        "Skegness",
+        "Great Yarmouth"
+      ],
+      "answer": "Blackpool",
+      "explanation": "Blackpool Tower opened in 1894, stands about 158 metres tall and has a circus between its four legs.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Blackpool_Tower",
+        "alt": "A tall iron tower above a seafront",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792703845/GamePad/quiz/blackpool-tower.jpg",
+        "credit": "Photo: Nathanemmison, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Blackpool_Tower_05082017_(cropped).jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "In which city are these Roman baths?",
+      "options": [
+        "Bath",
+        "Chester",
+        "Colchester",
+        "St Albans"
+      ],
+      "answer": "Bath",
+      "explanation": "The Romans called the town Aquae Sulis, and its hot spring water still bubbles up at about 46°C.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Roman_Baths_(Bath)",
+        "alt": "A green pool surrounded by stone columns",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792703847/GamePad/quiz/roman-baths-bath.jpg",
+        "credit": "Photo: Diliff, CC BY 2.5 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Roman_Baths_in_Bath_Spa,_England_-_July_2006.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Llanfairpwllgwyngyll, the village with one of the longest place names in Europe, is on which island?",
+      "options": [
+        "Anglesey",
+        "Isle of Man",
+        "Isle of Skye",
+        "Isle of Wight"
+      ],
+      "answer": "Anglesey",
+      "explanation": "Its full 58-letter name was made up in the 1860s, partly to draw in visitors arriving by train.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Scottish city is nicknamed 'the Granite City'?",
+      "options": [
+        "Aberdeen",
+        "Dundee",
+        "Inverness",
+        "Perth"
+      ],
+      "answer": "Aberdeen",
+      "explanation": "Many of its buildings are made of a local grey granite that sparkles in the sunshine.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which seaside city is this palace?",
+      "options": [
+        "Brighton",
+        "Bournemouth",
+        "Eastbourne",
+        "Scarborough"
+      ],
+      "answer": "Brighton",
+      "explanation": "The Royal Pavilion was built for the Prince Regent, later George IV, in a style inspired by India, with onion domes and minarets.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Royal_Pavilion",
+        "alt": "A white palace with onion-shaped domes",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792703849/GamePad/quiz/royal-pavilion.jpg",
+        "credit": "Photo: Qmin, CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Brighton_royal_pavilion_Qmin.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "The Jurassic Coast, England's first natural World Heritage Site, runs along the shores of Devon and which other county?",
+      "options": [
+        "Dorset",
+        "Cornwall",
+        "Somerset",
+        "Hampshire"
+      ],
+      "answer": "Dorset",
+      "explanation": "Its rocks record about 185 million years of the Earth's history, and fossils still tumble out of its crumbling cliffs.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "The Pontcysyllte Aqueduct carries which canal high above the River Dee in Wales?",
+      "options": [
+        "Llangollen Canal",
+        "Grand Union Canal",
+        "Leeds and Liverpool Canal",
+        "Kennet and Avon Canal"
+      ],
+      "answer": "Llangollen Canal",
+      "explanation": "Thomas Telford's 'stream in the sky' carries boats about 38 metres above the river.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which English cathedral has the tallest spire in the UK?",
+      "options": [
+        "Salisbury Cathedral",
+        "Lincoln Cathedral",
+        "Durham Cathedral",
+        "Canterbury Cathedral"
+      ],
+      "answer": "Salisbury Cathedral",
+      "explanation": "Its spire, added in the 1300s, rises about 123 metres above the city.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "At which Welsh castle was Prince Charles invested as Prince of Wales in 1969?",
+      "options": [
+        "Caernarfon Castle",
+        "Conwy Castle",
+        "Harlech Castle",
+        "Cardiff Castle"
+      ],
+      "answer": "Caernarfon Castle",
+      "explanation": "The castle was built by Edward I, and the future Edward VIII had been invested there in 1911 too.",
       "family": false,
       "difficulty": 3,
       "dated": false

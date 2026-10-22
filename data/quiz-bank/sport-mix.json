@@ -300,6 +300,106 @@
       "family": false,
       "difficulty": 3,
       "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "How many feathers does a proper badminton shuttlecock have?",
+      "options": ["16", "8", "12", "20"],
+      "answer": "16",
+      "explanation": "The feathers usually come from geese or ducks and are fixed into a little rounded cork base.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "The sport of rugby takes its name from what?",
+      "options": ["A school", "A river", "A king", "A Roman fort"],
+      "answer": "A school",
+      "explanation": "It is named after Rugby School in Warwickshire, where the game grew up in the 1800s.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In tennis, what is it called when a serve is so good that the other player cannot even touch it?",
+      "options": ["An ace", "A smash", "A volley", "A let"],
+      "answer": "An ace",
+      "explanation": "The fastest serves in top tennis fly at well over 200 kilometres an hour.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In the Tour de France, what colour jersey does the rider leading the race wear?",
+      "options": ["Yellow", "Green", "Red", "Pink"],
+      "answer": "Yellow",
+      "explanation": "It is yellow because the newspaper that started the race, L'Auto, was printed on yellow paper.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "When basketball was invented in 1891, what did players throw the ball into?",
+      "options": ["Peach baskets", "Milk buckets", "Fishing nets", "Flower pots"],
+      "answer": "Peach baskets",
+      "explanation": "The baskets still had their bottoms in, so someone had to fetch the ball out after every score.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "How many holes are there in a full round of golf?",
+      "options": ["18", "9", "12", "20"],
+      "answer": "18",
+      "explanation": "Scotland's most famous old course once had 22 holes, until some were joined together in 1764 to make 18.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In North America, which sport's top prize is the Stanley Cup?",
+      "options": ["Ice hockey", "Baseball", "Basketball", "American football"],
+      "answer": "Ice hockey",
+      "explanation": "It is named after Lord Stanley, a British governor general of Canada, who gave the cup in 1892.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Sumo wrestling is the national sport of which country?",
+      "options": ["Japan", "China", "South Korea", "Thailand"],
+      "answer": "Japan",
+      "explanation": "Before a bout, the wrestlers throw salt into the ring to make it pure.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In cricket, what do the letters LBW stand for?",
+      "options": ["Leg before wicket", "Long ball wide", "Last batter waiting", "Low bounce warning"],
+      "answer": "Leg before wicket",
+      "explanation": "A batter can be out LBW if the ball hits their leg when it would have gone on to hit the stumps.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "How many players are on each team in a polo match?",
+      "options": ["4", "5", "6", "8"],
+      "answer": "4",
+      "explanation": "The riders swap to fresh ponies during a match, because galloping about soon tires them out.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
     }
   ]
 }

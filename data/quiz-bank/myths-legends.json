@@ -300,6 +300,106 @@
       "family": false,
       "difficulty": 3,
       "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What was the name of the winged horse in Greek myths?",
+      "options": ["Pegasus", "Bucephalus", "Arion", "Shadowfax"],
+      "answer": "Pegasus",
+      "explanation": "Wherever Pegasus struck the ground with his hoof, a spring of water was said to burst out.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In the Greek myth, King Midas wished that everything he touched would turn into what?",
+      "options": ["Gold", "Silver", "Chocolate", "Diamonds"],
+      "answer": "Gold",
+      "explanation": "It went wrong when his food and drink turned to gold too, so he begged for the gift to be taken away.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which wizard was King Arthur's wise helper in the legends?",
+      "options": ["Merlin", "Gandalf", "Prospero", "Dumbledore"],
+      "answer": "Merlin",
+      "explanation": "In T. H. White's book The Once and Future King, Merlin lives backwards through time, so he remembers the future.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which legendary creature had the body of a lion and the head and wings of an eagle?",
+      "options": ["A griffin", "A sphinx", "A chimera", "A manticore"],
+      "answer": "A griffin",
+      "explanation": "Old stories said griffins guarded great hoards of gold in faraway mountains.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which Greek hero could only be wounded on his heel?",
+      "options": ["Achilles", "Perseus", "Ajax", "Hector"],
+      "answer": "Achilles",
+      "explanation": "The story goes that his mother dipped him in the River Styx as a baby, holding him by the heel, so that one spot stayed dry.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Greek myth, the handsome young man Narcissus fell in love with what?",
+      "options": ["His own reflection", "The Moon", "A sea nymph", "A singing bird"],
+      "answer": "His own reflection",
+      "explanation": "He gazed into a pool until he faded away, and the narcissus flower is named after him.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which giant sea monster from Scandinavian legend was said to drag whole ships under the waves?",
+      "options": ["The Kraken", "The Hydra", "The Minotaur", "The Chimera"],
+      "answer": "The Kraken",
+      "explanation": "Some people think the legend began with sightings of real giant squid.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Greek myth, Persephone had to spend part of every year in the underworld because she ate the seeds of which fruit?",
+      "options": ["Pomegranate", "Fig", "Olive", "Grape"],
+      "answer": "Pomegranate",
+      "explanation": "The Greeks said her mother Demeter's sadness while she was away is why we have winter.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Norse myths, what is Yggdrasil?",
+      "options": ["A giant tree", "A sea serpent", "A magic ship", "A golden hall"],
+      "answer": "A giant tree",
+      "explanation": "It is usually described as a huge ash tree whose branches and roots join the nine worlds together.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "The Egyptian sky god Horus had the head of which bird?",
+      "options": ["A falcon", "An ibis", "A vulture", "An owl"],
+      "answer": "A falcon",
+      "explanation": "The Egyptians wore the Eye of Horus as a lucky charm to keep them safe.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
     }
   ]
 }

@@ -510,6 +510,184 @@
       "family": false,
       "difficulty": 3,
       "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which country's flag is this?",
+      "options": [
+        "Greece",
+        "Finland",
+        "Israel",
+        "Uruguay"
+      ],
+      "answer": "Greece",
+      "explanation": "The white cross on Greece's flag is said to stand for the Greek Orthodox Church, with blue and white for the sea and the sky.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "flag": "gr",
+        "alt": "A national flag",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792703855/GamePad/quiz/flag-gr.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which country's flag is this?",
+      "options": [
+        "Ireland",
+        "Italy",
+        "India",
+        "Hungary"
+      ],
+      "answer": "Ireland",
+      "explanation": "The green stands for Ireland's Catholics, the orange for its Protestants, and the white in the middle for peace between them.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "flag": "ie",
+        "alt": "A national flag",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792703856/GamePad/quiz/flag-ie.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which country's flag is this, with a tree in the middle?",
+      "options": [
+        "Lebanon",
+        "Syria",
+        "Jordan",
+        "Israel"
+      ],
+      "answer": "Lebanon",
+      "explanation": "The tree is a cedar, and cedars of Lebanon are mentioned many times in the Bible.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "flag": "lb",
+        "alt": "A national flag",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792703857/GamePad/quiz/flag-lb.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which country's flag is this?",
+      "options": [
+        "Sweden",
+        "Norway",
+        "Finland",
+        "Iceland"
+      ],
+      "answer": "Sweden",
+      "explanation": "Sweden's blue and yellow come from its old coat of arms, which shows three golden crowns on a blue background.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "flag": "se",
+        "alt": "A national flag",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792703858/GamePad/quiz/flag-se.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "What is the capital city of Portugal?",
+      "options": [
+        "Lisbon",
+        "Porto",
+        "Faro",
+        "Coimbra"
+      ],
+      "answer": "Lisbon",
+      "explanation": "Lisbon is the most westerly capital city on mainland Europe.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Buenos Aires is the capital city of which country?",
+      "options": [
+        "Argentina",
+        "Uruguay",
+        "Chile",
+        "Paraguay"
+      ],
+      "answer": "Argentina",
+      "explanation": "Buenos Aires means 'good airs' in Spanish.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the capital city of Nigeria?",
+      "options": [
+        "Abuja",
+        "Lagos",
+        "Kano",
+        "Ibadan"
+      ],
+      "answer": "Abuja",
+      "explanation": "Abuja took over from Lagos as the capital in 1991, though Lagos is still Nigeria's biggest city.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Bangkok is the capital city of which country?",
+      "options": [
+        "Thailand",
+        "Vietnam",
+        "Cambodia",
+        "Malaysia"
+      ],
+      "answer": "Thailand",
+      "explanation": "Bangkok's full ceremonial name is so long that it holds the record as the world's longest place name.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the capital city of Austria?",
+      "options": [
+        "Vienna",
+        "Salzburg",
+        "Innsbruck",
+        "Graz"
+      ],
+      "answer": "Vienna",
+      "explanation": "Vienna's Schönbrunn Zoo opened in 1752, making it the oldest zoo in the world that is still open.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the capital city of Poland?",
+      "options": [
+        "Warsaw",
+        "Kraków",
+        "Gdańsk",
+        "Wrocław"
+      ],
+      "answer": "Warsaw",
+      "explanation": "Warsaw's old town was rebuilt brick by brick after the Second World War, using old paintings and photos as a guide.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
     }
   ]
 }

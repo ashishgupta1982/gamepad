@@ -478,15 +478,15 @@
     },
     {
       "band": "adults",
-      "question": "The Terracotta Army was made to guard the tomb of which Chinese emperor?",
+      "question": "In the 1960s Egypt's giant temples at Abu Simbel were cut into blocks and moved uphill, to escape the lake made by which dam?",
       "options": [
-        "Qin Shi Huang",
-        "Kublai Khan",
-        "Emperor Wu of Han",
-        "Puyi"
+        "Aswan High Dam",
+        "Hoover Dam",
+        "Three Gorges Dam",
+        "Kariba Dam"
       ],
-      "answer": "Qin Shi Huang",
-      "explanation": "Farmers digging a well found the first figures in 1974, and no two soldiers' faces are quite the same.",
+      "answer": "Aswan High Dam",
+      "explanation": "The temples were rebuilt about 65 metres higher up, safe above the waters of Lake Nasser.",
       "family": false,
       "difficulty": 3,
       "dated": false

@@ -490,6 +490,172 @@
       "family": false,
       "difficulty": 3,
       "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which curry's name means 'two onions'?",
+      "options": [
+        "Dopiaza",
+        "Jalfrezi",
+        "Korma",
+        "Vindaloo"
+      ],
+      "answer": "Dopiaza",
+      "explanation": "Onions go into a dopiaza twice, cooked into the sauce at the start and added again near the end.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is Bombay duck?",
+      "options": [
+        "A dried fish",
+        "A spiced duck curry",
+        "A lentil pancake",
+        "A rice pudding"
+      ],
+      "answer": "A dried fish",
+      "explanation": "Bombay duck is a lizardfish, usually salted and dried, and it has nothing to do with ducks at all.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which country was the Caesar salad invented?",
+      "options": [
+        "Mexico",
+        "Italy",
+        "United States",
+        "Spain"
+      ],
+      "answer": "Mexico",
+      "explanation": "Restaurateur Caesar Cardini is said to have thrown it together in his restaurant in Tijuana in 1924.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which vegetable is the main ingredient of baba ganoush?",
+      "options": [
+        "Aubergine",
+        "Courgette",
+        "Chickpeas",
+        "Red pepper"
+      ],
+      "answer": "Aubergine",
+      "explanation": "The aubergine is charred until the inside is soft and smoky, then mashed with tahini and lemon.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In a 1991 tax case, a tribunal ruled that Jaffa Cakes are what?",
+      "options": [
+        "A cake",
+        "A biscuit",
+        "A sweet",
+        "A pastry"
+      ],
+      "answer": "A cake",
+      "explanation": "McVitie's won partly by showing that Jaffa Cakes go hard when stale, like a cake, rather than soft, like a biscuit.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which spirit gets its main flavour from juniper berries?",
+      "options": [
+        "Gin",
+        "Vodka",
+        "Rum",
+        "Whisky"
+      ],
+      "answer": "Gin",
+      "explanation": "The word gin comes from genever, the Dutch word for juniper.",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Cullen skink, a Scottish soup, is made with which smoked fish?",
+      "options": [
+        "Haddock",
+        "Salmon",
+        "Mackerel",
+        "Herring"
+      ],
+      "answer": "Haddock",
+      "explanation": "It is named after Cullen, a fishing village on the Moray coast.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which country is this stew from?",
+      "options": [
+        "Hungary",
+        "Germany",
+        "Russia",
+        "Turkey"
+      ],
+      "answer": "Hungary",
+      "explanation": "Goulash began as a stew cooked in a kettle over an open fire by Hungarian cattle herders.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Goulash",
+        "alt": "A rich red stew in a black pot over a fire",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792703860/GamePad/quiz/goulash.jpg",
+        "credit": "Photo: Lily15, CC BY-SA 3.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Gulyas080.jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "What is this vegetable?",
+      "options": [
+        "Romanesco",
+        "Cauliflower",
+        "Broccoli",
+        "Kohlrabi"
+      ],
+      "answer": "Romanesco",
+      "explanation": "The number of spirals on a Romanesco head is usually a Fibonacci number.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "wiki": "Romanesco_broccoli",
+        "alt": "A green vegetable made of pointed spiralling cones",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792703862/GamePad/quiz/romanesco-broccoli.jpg",
+        "credit": "Photo: Ivar Leidus, CC BY-SA 4.0 (Wikimedia Commons)",
+        "source": "https://commons.wikimedia.org/wiki/File:Romanesco_broccoli_(Brassica_oleracea).jpg"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Miso, the Japanese paste, is made by fermenting which beans?",
+      "options": [
+        "Soya beans",
+        "Adzuki beans",
+        "Mung beans",
+        "Broad beans"
+      ],
+      "answer": "Soya beans",
+      "explanation": "Miso is fermented with a mould called koji, which is also used to make sake and soy sauce.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
     }
   ]
 }

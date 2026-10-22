@@ -23,10 +23,10 @@
     },
     {
       "band": "kids",
-      "question": "In which country were the ancient Olympic Games held?",
-      "options": ["Greece", "Italy", "Egypt", "Turkey"],
-      "answer": "Greece",
-      "explanation": "They took place at Olympia, in honour of the god Zeus.",
+      "question": "Which city will host the 2028 Summer Olympic Games?",
+      "options": ["Los Angeles", "Brisbane", "Madrid", "Paris"],
+      "answer": "Los Angeles",
+      "explanation": "It will be LA's third Summer Games, after 1932 and 1984; Brisbane hosts in 2032.",
       "family": true,
       "difficulty": 1,
       "dated": false
