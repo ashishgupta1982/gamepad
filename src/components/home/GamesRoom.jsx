@@ -453,6 +453,7 @@ function GameCard({ game, isGuest, onSignIn, reduce }) {
       >
         Open {name}
       </Link>
+      {game.cardNote && <p className="mt-2 text-center text-sm font-semibold text-[#6b6390]">{game.cardNote}</p>}
 
       {isGuest && (
         <button type="button" onClick={onSignIn} className="mt-3 w-full text-center text-sm font-semibold text-brand">

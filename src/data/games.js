@@ -66,6 +66,7 @@ export const GAMES = [
     name: 'World Explorer',
     // The room's zoomed-in card names the place it opens (Ash, 2026-10-22).
     cardName: 'Egypt Explorer',
+    cardNote: '🧳 More trips coming soon',
     href: '/games/world-explorer',
     emoji: '🏺',
     tone: 'egypt',
