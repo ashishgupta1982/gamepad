@@ -358,18 +358,9 @@ export function RateQuestion({ id, onCard = false, children }) {
         {thumbButton('up', '👍', 'Good question')}
         {thumbButton('down', '👎', 'Not a good question')}
       </div>
+      {/* A thumbs down means not liked, not wrong (Ash, 2026-10-22). */}
       {mine.vote === 'down' && (
-        <button
-          type="button"
-          disabled={mine.wrong}
-          onClick={() => {
-            play('tap');
-            setMine(rateQuestion(id, { wrong: true }));
-          }}
-          className={cn('press rounded-full px-3 py-1.5 text-sm font-bold ring-1 disabled:opacity-70', onCard ? 'bg-[#f1eefb] text-[#241a45] ring-[#d9d2f2]' : 'bg-black/30 text-white ring-white/30')}
-        >
-          {mine.wrong ? 'Flagged, thanks: we’ll check it' : 'The answer’s wrong'}
-        </button>
+        <p className={cn('text-sm font-semibold', onCard ? 'text-[#6b6390]' : 'text-white/80')}>Sorry you didn’t like that one. We’ll use it to pick better questions.</p>
       )}
     </div>
   );
