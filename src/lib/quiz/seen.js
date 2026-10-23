@@ -18,6 +18,15 @@ export function playerKeys(names) {
   return out.slice(0, 12);
 }
 
+/**
+ * The questions a game got as far as: all of them once it is over, or up to
+ * the one on screen when it was ended early. None if it never started.
+ */
+export function playedIds(game) {
+  const upTo = Math.max(0, (game?.index ?? -1) + 1);
+  return (game?.questions || []).slice(0, upTo).filter((q) => q?.id).map((q) => q.id);
+}
+
 /** A player's list after a game: the new questions added at the end, no repeats, capped. */
 export function addSeen(list, ids) {
   const fresh = (Array.isArray(ids) ? ids : []).filter((id) => typeof id === 'string' && id.length < 16);

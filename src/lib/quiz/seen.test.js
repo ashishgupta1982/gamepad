@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { needsReview } from './bank';
-import { SEEN_CAP, addSeen, nameKey, playerKeys } from './seen';
+import { SEEN_CAP, addSeen, nameKey, playedIds, playerKeys } from './seen';
 
 describe('who has seen what', () => {
   it('matches a name however it is typed', () => {
@@ -28,5 +28,19 @@ describe('the thumbs', () => {
     expect(needsReview({ up: 1, down: 4 })).toBe(true);
     expect(needsReview({ up: 3, down: 4 })).toBe(false);
     expect(needsReview({ up: 10, down: 2 })).toBe(false);
+  });
+});
+
+describe('the questions a game got as far as', () => {
+  const qs = [{ id: 'a' }, { id: 'b' }, { id: 'c' }];
+  it('all of them once it is over', () => {
+    expect(playedIds({ index: 2, questions: qs })).toEqual(['a', 'b', 'c']);
+  });
+  it('up to the one on screen when it was ended early', () => {
+    expect(playedIds({ index: 1, questions: qs })).toEqual(['a', 'b']);
+  });
+  it('none if it never started', () => {
+    expect(playedIds({ index: -1, questions: qs })).toEqual([]);
+    expect(playedIds({})).toEqual([]);
   });
 });

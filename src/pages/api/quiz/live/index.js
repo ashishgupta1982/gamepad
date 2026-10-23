@@ -30,6 +30,7 @@ export default async function handler(req, res) {
         code: newCode(),
         hostToken: newToken(),
         hostUserId: session?.user?.id,
+        hostEmail: session?.user?.email,
         game: createGame({ mode: 'multi', settings }),
       });
       return res.status(201).json({ code: doc.code, hostToken: doc.hostToken, v: doc.version, now: Date.now(), game: project(doc.toObject()) });

@@ -14,6 +14,9 @@ const QuizLiveSchema = new mongoose.Schema({
   hostToken: { type: String, required: true },
   tokens: { type: mongoose.Schema.Types.Mixed, default: {} },
   hostUserId: String,
+  // The signed-in host's account, whose players' memory of seen questions the
+  // game is added to when it finishes (lib/quiz/live.js#change).
+  hostEmail: String,
   game: { type: mongoose.Schema.Types.Mixed, required: true },
   // Bumped on every change: the poll's cursor, and the guard that stops two
   // changes landing at once from overwriting each other.

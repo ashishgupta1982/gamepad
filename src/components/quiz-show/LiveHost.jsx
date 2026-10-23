@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Share, Tv, X } from 'lucide-react';
 import { play } from '@/components/arcade/sfx';
-import { fetchQuestions, rememberSeen } from './data';
+import { fetchQuestions } from './data';
 import { saveResult } from './LocalGame';
 import useLive, { post } from './useLive';
 import { JoinForm } from './LivePlayer';
@@ -126,22 +126,19 @@ export default function LiveHost({ setup, resume, onExit }) {
     seenPlayers.current = n;
   }, [game?.players.length]);
 
-  // The result into the signed-in host's history, once.
+  // The result into the signed-in host's history, once. Who saw which
+  // questions is recorded by the server when the game finishes (lib/quiz/live.js).
   useEffect(() => {
     if (!game || game.phase !== 'finished' || host?.recorded || !game.players.length) return;
     keepHost({ ...host, recorded: true });
     if (status === 'authenticated') {
       saveResult(game, sentRef.current).catch(() => {});
-      rememberSeen(game.players.map((p) => p.name), sentRef.current);
     }
   }, [game, host, status]);
 
   const end = async () => {
     if (game && game.phase !== 'finished' && !window.confirm('End the quiz for everyone?')) return;
-    // The questions already played still count as seen.
-    if (game && game.phase !== 'finished' && game.index >= 0 && status === 'authenticated') {
-      rememberSeen(game.players.map((p) => p.name), sentRef.current.slice(0, game.index + 1));
-    }
+    // Ending it counts the questions played so far as seen (on the server).
     if (game && game.phase !== 'finished') await act('end');
     clearHost();
     onExit();
