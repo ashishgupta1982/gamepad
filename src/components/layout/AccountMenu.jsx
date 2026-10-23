@@ -1,19 +1,29 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
-import { Settings, LogOut, LogIn, User } from 'lucide-react';
+import { LogOut, LogIn, User } from 'lucide-react';
 import { Sheet, SheetContent, SheetClose } from '@/components/ui/sheet';
 import { cn } from '@/lib/cn';
+import QuizName from './QuizName';
 
 // The round account button and the bottom sheet it opens. Lifted out of
 // AppHeader so the games room on the home page can put the same button in its
 // corner without the header bar.
 //
 // `onSignIn`, when given, is what the guest's "Sign in" does instead of going
-// to /signin: the home page opens its own SignInDialog.
-export default function AccountMenu({ className, onSignIn }) {
+// to /signin: the home page opens its own SignInDialog. `open` and
+// `onOpenChange`, when given, let a screen open the drawer itself (the quiz's
+// "Signed in as").
+//
+// The drawer is the settings: who you are, your quiz name and signing in or
+// out. It slides over whatever is on screen, so closing it leaves you where
+// you were (Ash, 2026-10-23: the old Settings page sent you back to the games
+// room). /settings is still there for an old link.
+export default function AccountMenu({ className, onSignIn, open: openProp, onOpenChange }) {
   const { data: session } = useSession();
-  const [open, setOpen] = useState(false);
+  const [openState, setOpenState] = useState(false);
+  const open = openProp ?? openState;
+  const setOpen = onOpenChange || setOpenState;
 
   const user = session?.user;
   const isAuthenticated = !!session;
@@ -41,7 +51,10 @@ export default function AccountMenu({ className, onSignIn }) {
           {/* The email lives here — one tap away, on a surface the owner opened
               deliberately — rather than on every screen of a shared device. */}
           {isAuthenticated ? (
-            <p className="-mt-3 truncate text-sm text-muted-foreground">{user?.email}</p>
+            <>
+              <p className="-mt-3 truncate text-sm text-muted-foreground">{user?.email}</p>
+              <QuizName className="mt-4" />
+            </>
           ) : (
             <p className="-mt-3 text-sm leading-relaxed text-muted-foreground">
               Every game works without an account. Sign in and your scores start saving.
@@ -49,13 +62,6 @@ export default function AccountMenu({ className, onSignIn }) {
           )}
 
           <div className="mt-5 flex flex-col gap-1">
-            <SheetClose asChild>
-              <Link href="/settings" className={rowClass}>
-                <Settings className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
-                Settings
-              </Link>
-            </SheetClose>
-
             {isAuthenticated ? (
               <button
                 type="button"

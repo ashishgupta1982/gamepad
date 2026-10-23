@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/card';
 import { UserCircle, Shield } from 'lucide-react';
 import { Button } from '../ui/button';
+import QuizName from '../layout/QuizName';
 
 const SettingsPage = ({ session, isGuest, onSignIn, onSignOut }) => {
   return (
@@ -33,6 +34,7 @@ const SettingsPage = ({ session, isGuest, onSignIn, onSignOut }) => {
                       {session?.user?.email || 'demo@example.com'}
                     </span>
                   </div>
+                  <QuizName />
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-600">Status</span>
                     <span className="px-2 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800">

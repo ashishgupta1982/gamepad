@@ -16,8 +16,10 @@ export default function Settings() {
     signOut();
   };
 
+  // Back to wherever you came from; the games room only when opened directly.
   const handleBack = () => {
-    router.push('/');
+    if (typeof window !== 'undefined' && window.history.length > 1) router.back();
+    else router.push('/');
   };
 
   return (

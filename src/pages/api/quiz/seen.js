@@ -1,5 +1,5 @@
 import { getAuthenticatedUser } from '@/utils/authHelper';
-import { forget, listSeen, remember } from '@/lib/quiz/seenStore';
+import { forget, listSeen, remember, takenNames } from '@/lib/quiz/seenStore';
 
 // The questions each player on a signed-in account has seen (models/QuizSeen.js),
 // so a game leaves out what anyone playing has had before. Guests have no
@@ -18,7 +18,9 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
       const { names, ids } = req.body || {};
       if (!Array.isArray(names) || !Array.isArray(ids)) return res.status(400).json({ error: 'names and ids must be lists' });
-      await remember(user.email, names.slice(0, 12), ids.slice(0, 40));
+      // Another signed-in player's name is not this phone's to record for.
+      const theirs = new Set(await takenNames(names.slice(0, 12), user.email));
+      await remember(user.email, names.slice(0, 12).filter((n) => !theirs.has(n)), ids.slice(0, 40));
       return res.status(200).json({ ok: true });
     }
     if (req.method === 'DELETE') {

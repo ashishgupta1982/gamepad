@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { claimHandle, forget, handleOf, listSeen, remember, seenBy } from './memory';
+import { claimHandle, forget, handleOf, listSeen, remember, seenBy, takenNames } from './memory';
 
 // Just enough of a Mongo database for lib/quiz/memory.js: equality, $in,
 // $ne, $exists and $or in queries; $set, $unset and $setOnInsert, with upsert.
@@ -88,6 +88,14 @@ describe('handles and who has seen what', () => {
     const list = await listSeen(db, 'ash@x');
     expect(list.find((p) => p.name === 'Anya')).toMatchObject({ count: 4, signedIn: true, me: false });
     expect(list.find((p) => p.name === 'Nikhil')).toMatchObject({ count: 1, signedIn: false });
+  });
+
+  it("someone else's handle is taken; your own is not", async () => {
+    const db = family();
+    await handleOf(db, 'ash@x');
+    await handleOf(db, 'anya@x');
+    expect(await takenNames(db, ['anya', 'Ashish', 'Nikhil'], 'ash@x')).toEqual(['anya']);
+    expect(await takenNames(db, ['Anya', 'Ashish'])).toEqual(['Anya', 'Ashish']);
   });
 
   it('a handle is unique across GamePad', async () => {

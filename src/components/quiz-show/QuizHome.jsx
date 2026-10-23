@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { motion } from 'motion/react';
-import { ArrowLeft, ChevronDown, Pencil, Trash2, X } from 'lucide-react';
+import { ArrowLeft, ChevronDown, Trash2, X } from 'lucide-react';
 import AccountMenu from '@/components/layout/AccountMenu';
 import MuteButton from '@/components/arcade/MuteButton';
 import { play } from '@/components/arcade/sfx';
@@ -14,6 +14,7 @@ import { Avatar, Marquee, SHOW_FONT } from './ui';
 // joining and looking back are all chosen here (Ash, 2026-10-21).
 export default function QuizHome({ resume, onResume, onDismissResume, onStart, onJoin, onHistory, onBack }) {
   const { status } = useSession();
+  const [menu, setMenu] = useState(false);
   return (
     <div className="mx-auto flex min-h-dvh max-w-xl flex-col px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-[max(1rem,env(safe-area-inset-top))]">
       <div className="flex items-center justify-between">
@@ -25,14 +26,14 @@ export default function QuizHome({ resume, onResume, onDismissResume, onStart, o
             <MuteButton />
           </span>
           {/* Sign in, or who is signed in and Sign out (Ash, 2026-10-23). */}
-          <AccountMenu className="h-11 w-11 text-base shadow-[0_3px_0_rgba(0,0,0,0.25)]" />
+          <AccountMenu open={menu} onOpenChange={setMenu} className="h-11 w-11 text-base shadow-[0_3px_0_rgba(0,0,0,0.25)]" />
         </div>
       </div>
 
       <motion.div className="mt-8 text-center" initial={{ scale: 0.5, rotate: -6, opacity: 0 }} animate={{ scale: 1, rotate: 0, opacity: 1 }} transition={{ type: 'spring', stiffness: 240, damping: 13 }}>
         <Marquee>Quiz Night</Marquee>
         <p className="mt-4 text-lg font-semibold text-white/90">Fresh questions every game, for any age.</p>
-        <WhoAmI />
+        <WhoAmI onOpen={() => setMenu(true)} />
       </motion.div>
 
       {/* grid-cols-1 is minmax(0, 1fr): a bare grid sizes its column to the
@@ -65,72 +66,18 @@ export default function QuizHome({ resume, onResume, onDismissResume, onStart, o
   );
 }
 
-// The signed-in player's quiz name, which is theirs alone across GamePad, and
-// changing it. Nothing for a guest: the account menu offers Sign in.
-function WhoAmI() {
-  const { handle, change } = useHandle();
-  const [editing, setEditing] = useState(false);
-  const [draft, setDraft] = useState('');
-  const [error, setError] = useState('');
-  const [busy, setBusy] = useState(false);
+// Who is signed in, under the title. Tapping it opens the account drawer,
+// where the quiz name is changed. Nothing for a guest: the menu offers Sign in.
+function WhoAmI({ onOpen }) {
+  const { handle } = useHandle();
   if (!handle) return null;
-  if (!editing) {
-    return (
-      <p className="mt-3 flex items-center justify-center gap-2 text-base font-semibold text-white/85">
-        <span className="min-w-0 truncate">
-          Signed in as <span style={SHOW_FONT}>{handle}</span>
-        </span>
-        <button
-          type="button"
-          onClick={() => {
-            setDraft(handle);
-            setError('');
-            setEditing(true);
-          }}
-          aria-label="Change your quiz name"
-          className="press shrink-0 rounded-full bg-white/15 p-1.5"
-        >
-          <Pencil className="h-4 w-4" aria-hidden="true" />
-        </button>
-      </p>
-    );
-  }
-  const save = async (e) => {
-    e.preventDefault();
-    setBusy(true);
-    setError('');
-    try {
-      await change(draft);
-      setEditing(false);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setBusy(false);
-    }
-  };
   return (
-    <form onSubmit={save} className="mx-auto mt-3 max-w-xs">
-      <label className="block text-sm font-semibold text-white/85" htmlFor="quiz-handle">
-        Your quiz name, yours alone
-      </label>
-      <div className="mt-1 flex gap-2">
-        <input
-          id="quiz-handle"
-          value={draft}
-          onChange={(e) => setDraft(e.target.value.slice(0, 20))}
-          autoFocus
-          className="min-w-0 flex-1 rounded-full bg-white px-4 py-2 text-lg text-[#241a45] outline-none"
-          style={SHOW_FONT}
-        />
-        <button type="submit" disabled={busy} className="press shrink-0 rounded-full bg-amber-300 px-4 font-bold text-amber-950 disabled:opacity-60">
-          {busy ? 'Saving…' : 'Save'}
-        </button>
-        <button type="button" onClick={() => setEditing(false)} aria-label="Cancel" className="press shrink-0 rounded-full bg-white/15 px-3">
-          <X className="h-4 w-4" aria-hidden="true" />
-        </button>
-      </div>
-      {error && <p className="mt-2 rounded-xl bg-rose-500/90 px-3 py-1.5 text-sm font-semibold">{error}</p>}
-    </form>
+    <button type="button" onClick={onOpen} className="press mx-auto mt-3 flex max-w-full items-center gap-1.5 rounded-full bg-white/15 px-4 py-1.5 text-base font-semibold text-white/90">
+      <span className="min-w-0 truncate">
+        Signed in as <span style={SHOW_FONT}>{handle}</span>
+      </span>
+      <ChevronDown className="h-4 w-4 shrink-0" aria-hidden="true" />
+    </button>
   );
 }
 

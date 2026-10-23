@@ -27,17 +27,30 @@ const MODES = [
 export default function Setup({ initial, onStart, onCancel }) {
   const { data: session } = useSession();
   const custom = useCustomCategories();
-  const known = useSeenPlayers().players.map((p) => p.name);
+  // Guests this account has played with. Other signed-in players are not
+  // offered, and cannot be typed in (Ash, 2026-10-23); you are, first.
+  const known = useSeenPlayers().players.filter((p) => !p.signedIn).map((p) => p.name);
+  const [nameError, setNameError] = useState('');
+  // Solo on a signed-in phone is you, as on a phone joining a quiz; "Not you?"
+  // makes it a guest's game, with the guest names to tap (Ash, 2026-10-23).
+  const [soloGuest, setSoloGuest] = useState(false);
   const [step, setStep] = useState(initial?.mode ? 1 : 0);
   const [mode, setMode] = useState(initial?.mode || null);
   const { handle } = useHandle();
+  const soloMe = mode === 'solo' && !!handle && !soloGuest;
   const firstName = session?.user?.name?.split(' ')[0];
   const [players, setPlayers] = useState(initial?.players || [makePlayer(0, handle || firstName)]);
   // A signed-in phone's first player is its owner, under their quiz name, once
   // it arrives, unless the name has been changed meanwhile (Ash, 2026-10-23).
   useEffect(() => {
-    if (!handle || initial?.players) return;
+    if (!handle) return;
+    // Playing again: a game that was a guest's stays a guest's.
+    if (initial?.players) {
+      if (nameKey(initial.players[0]?.name) !== nameKey(handle)) setSoloGuest(true);
+      return;
+    }
     setPlayers((ps) => (ps.length && (!ps[0].name.trim() || ps[0].name === firstName) ? [{ ...ps[0], name: handle }, ...ps.slice(1)] : ps));
+    setSoloGuest(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handle]);
   const [picks, setPicks] = useState(initial?.picks || [MIXED.id]);
@@ -49,9 +62,22 @@ export default function Setup({ initial, onStart, onCancel }) {
   const steps = mode === 'multi' ? ['mode', 'topics', 'level'] : ['mode', 'players', 'topics', 'level'];
   const at = steps[step];
 
-  const go = (d) => {
+  const go = async (d) => {
     play('tap');
     if (step + d < 0) return onCancel();
+    if (at === 'players' && d > 0) {
+      setNameError('');
+      if (soloGuest && handle && nameKey(players[0].name) === nameKey(handle)) {
+        play('error');
+        return setNameError(`That’s you. Go back to playing as ${handle}, or pick a guest name.`);
+      }
+      const res = await fetch('/api/quiz/handle', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ names: players.map((p) => p.name) }) }).catch(() => null);
+      const taken = (await res?.json().catch(() => null))?.taken || [];
+      if (taken.length) {
+        play('error');
+        return setNameError(`${taken[0]} is a signed-in player’s name. Pick another name.`);
+      }
+    }
     setStep(step + d);
   };
 
@@ -80,7 +106,7 @@ export default function Setup({ initial, onStart, onCancel }) {
     play('go');
     onStart({
       mode,
-      players: mode === 'multi' ? [] : players.map((p, i) => ({ ...p, name: p.name.trim() || `Player ${i + 1}` })),
+      players: mode === 'multi' ? [] : soloMe ? [{ ...players[0], name: handle }] : players.map((p, i) => ({ ...p, name: p.name.trim() || `Player ${i + 1}` })),
       picks: picks.length ? picks : [MIXED.id],
       level,
       count,
@@ -137,6 +163,34 @@ export default function Setup({ initial, onStart, onCancel }) {
 
           {at === 'players' && (
             <Section title={mode === 'solo' ? 'Who’s playing?' : 'Who’s round the table?'} sub={mode === 'shout' ? 'The quizmaster taps who got each one right.' : null}>
+              {soloMe ? (
+                <div className="flex items-center gap-3 rounded-2xl bg-white/95 p-3 text-[#241a45]">
+                  <button
+                    type="button"
+                    onClick={() => setPlayers((ps) => [{ ...ps[0], avatar: AVATARS[(AVATARS.indexOf(ps[0].avatar) + 1) % AVATARS.length] }])}
+                    aria-label="Change avatar"
+                    className="press"
+                  >
+                    <Avatar player={players[0]} size={52} />
+                  </button>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-semibold text-[#6b6390]">You’re signed in as</p>
+                    <p className="truncate text-2xl" style={SHOW_FONT}>{handle}</p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        play('tap');
+                        setSoloGuest(true);
+                        setPlayers((ps) => [{ ...ps[0], name: '' }]);
+                      }}
+                      className="text-sm font-bold text-violet-700 underline underline-offset-2"
+                    >
+                      Not you? Play as a guest
+                    </button>
+                  </div>
+                </div>
+              ) : (
+              <>
               <ul className="space-y-2.5">
                 {players.map((p, i) => (
                   <li key={p.id} className="flex items-center gap-2 rounded-2xl bg-white/95 p-2 text-[#241a45]">
@@ -163,7 +217,16 @@ export default function Setup({ initial, onStart, onCancel }) {
                   </li>
                 ))}
               </ul>
-              <NamePills names={known} isOn={isIn} onPick={pickName} label={mode === 'solo' ? 'Who’s this? Tap a name' : 'Played before: tap to add'} />
+              <NamePills
+                names={known}
+                me={mode === 'solo' ? null : handle}
+                isOn={isIn}
+                onPick={pickName}
+                label={handle && mode !== 'solo' ? `You’re signed in as ${handle}. Tap to add who’s playing` : mode === 'solo' ? 'Who’s this? Tap a name' : 'Played before: tap to add'}
+              />
+              </>
+              )}
+              {nameError && <p className="mt-3 rounded-xl bg-rose-500/90 px-3 py-2 font-semibold text-white">{nameError}</p>}
               {mode === 'shout' && players.length < MAX_PLAYERS && (
                 <button
                   type="button"

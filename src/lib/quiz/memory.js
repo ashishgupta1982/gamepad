@@ -26,6 +26,16 @@ export async function handlesFor(db, keys) {
   return new Map(users.map((u) => [u.quizNameKey, { email: u.email, handle: u.quizName }]));
 }
 
+/** The names here that are someone else's handle (anyone's but `email`'s), as typed. */
+export async function takenNames(db, names, email = null) {
+  const list = (Array.isArray(names) ? names : []).map((n) => String(n ?? '')).filter((n) => nameKey(n));
+  const users = await handlesFor(db, [...new Set(list.map(nameKey))]);
+  return list.filter((n) => {
+    const u = users.get(nameKey(n));
+    return u && u.email !== email;
+  });
+}
+
 /** Who has this name as their handle: their email, or null. */
 export async function handleOwner(db, name) {
   const key = nameKey(name);

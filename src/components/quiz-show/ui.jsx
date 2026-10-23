@@ -245,13 +245,15 @@ export function ShowButton({ className, children, ...props }) {
  * (Ash, 2026-10-21). `isOn(name)` marks the ones already in; `onPick(name)`
  * adds or takes off. Nothing shows for a guest or an account with no names.
  */
-export function NamePills({ names, isOn, onPick, label = 'Played before' }) {
-  if (!names?.length) return null;
+export function NamePills({ names, isOn, onPick, label = 'Played before', me = null }) {
+  // The signed-in player first, marked as them (Ash, 2026-10-23).
+  const list = me ? [me, ...(names || []).filter((n) => n.trim().toLowerCase() !== me.trim().toLowerCase())] : names || [];
+  if (!list.length) return null;
   return (
     <div className="mt-3">
       <p className="mb-1.5 text-sm font-bold text-white/80">{label}</p>
       <div className="flex flex-wrap gap-2">
-        {names.map((n) => {
+        {list.map((n) => {
           const on = isOn(n);
           return (
             <button
@@ -266,6 +268,7 @@ export function NamePills({ names, isOn, onPick, label = 'Played before' }) {
             >
               {on ? '✓ ' : '+ '}
               {n}
+              {n === me && <span className={cn('ml-1 rounded-full px-1.5 text-xs', on ? 'bg-amber-950/15' : 'bg-[#241a45]/10')}>you</span>}
             </button>
           );
         })}

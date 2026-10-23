@@ -27,5 +27,8 @@ export const handleOf = async (email) => memory.handleOf(await db(), email);
 /** Change this account's handle. */
 export const claimHandle = async (email, name) => memory.claimHandle(await db(), email, name);
 
+/** The names here that are someone else's handle. */
+export const takenNames = async (names, email) => memory.takenNames(await db(), names, email || null);
+
 /** Whose handle this name is: an email, or null. */
 export const handleOwner = async (name) => memory.handleOwner(await db(), name);
