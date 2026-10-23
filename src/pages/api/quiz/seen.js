@@ -7,7 +7,7 @@ import { forget, listSeen, remember } from '@/lib/quiz/seenStore';
 //
 // GET                    → { players: [{ name, count }] }, most recent first
 // POST { names, ids }    a finished (or abandoned) game's questions, for each player
-// DELETE { name }        forget one player's questions
+// DELETE { name }        forget one player's questions: admins only (Ash, 2026-10-23)
 
 export default async function handler(req, res) {
   const user = await getAuthenticatedUser(req, res).catch(() => null);
@@ -22,6 +22,7 @@ export default async function handler(req, res) {
       return res.status(200).json({ ok: true });
     }
     if (req.method === 'DELETE') {
+      if (user.role !== 'admin') return res.status(403).json({ error: 'Only an admin can forget questions.' });
       const name = req.body?.name;
       if (typeof name !== 'string' || !name.trim()) return res.status(400).json({ error: 'Which player?' });
       await forget(user.email, name);

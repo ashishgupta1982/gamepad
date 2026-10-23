@@ -61,9 +61,13 @@ export default function QuizHome({ resume, onResume, onDismissResume, onStart, o
 
 // Who this account remembers questions for, so nobody gets one twice, and the
 // easy reset: forgetting a name lets their questions come round again. Folded
-// to one line until opened (Ash, 2026-10-21: it was too prominent).
+// to one line until opened (Ash, 2026-10-21: it was too prominent). Everyone
+// sees the list; only an admin gets Forget (Ash, 2026-10-23), and the server
+// refuses it from anyone else (api/quiz/seen.js).
 function Remembered() {
   const { players, forget } = useSeenPlayers();
+  const { data: session } = useSession();
+  const admin = session?.user?.role === 'admin';
   const [busy, setBusy] = useState('');
   const [open, setOpen] = useState(false);
   if (!players.length) return null;
@@ -77,12 +81,15 @@ function Remembered() {
       </button>
       {open && (
         <div className="px-4 pb-4">
-          <p className="text-sm font-semibold text-white/75">Each player is kept from questions they have had before. Forget someone to let theirs come round again.</p>
+          <p className="text-sm font-semibold text-white/75">
+            Each player is kept from questions they have had before.{admin && ' Forget someone to let theirs come round again.'}
+          </p>
           <ul className="mt-3 space-y-2">
             {players.map((p) => (
               <li key={p.name} className="flex min-w-0 items-center gap-3">
                 <span className="min-w-0 flex-1 truncate text-lg" style={SHOW_FONT}>{p.name}</span>
                 <span className="shrink-0 text-sm font-semibold text-white/70">{p.count} seen</span>
+                {admin && (
                 <button
                   type="button"
                   disabled={!!busy}
@@ -96,6 +103,7 @@ function Remembered() {
                 >
                   {busy === p.name ? 'Forgetting…' : 'Forget'}
                 </button>
+                )}
               </li>
             ))}
           </ul>
