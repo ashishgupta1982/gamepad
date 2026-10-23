@@ -1,7 +1,7 @@
 import { SessionProvider } from 'next-auth/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import SessionSplashGate from '@aspiro/auth/splash';
+import ArcadeSplash from '@/components/arcade/ArcadeSplash';
 import { Outfit, Inter } from 'next/font/google';
 import '../styles/globals.css';
 
@@ -49,12 +49,9 @@ function AppContent({ Component, pageProps }) {
   const router = useRouter();
   return (
     <>
-      <SessionSplashGate
-        active={SPLASH_ROUTES.includes(router.pathname)}
-        iconSrc="/icon-192.png"
-        wordmark={<span className="font-display text-2xl font-bold text-white">GamePad</span>}
-        groundClassName="bg-orange-950"
-      />
+      {/* GamePad's own splash, the same job as @aspiro/auth's SessionSplashGate
+          with an arcade powering up instead of a spinner (Ash, 2026-10-23). */}
+      <ArcadeSplash active={SPLASH_ROUTES.includes(router.pathname)} />
       <Component {...pageProps} />
     </>
   );
