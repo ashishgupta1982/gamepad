@@ -14,6 +14,7 @@
     "test:watch": "vitest",
     "quiz:import": "node --no-warnings --env-file=.env.local scripts/import-quiz-bank.mjs",
     "quiz:images": "node --no-warnings --env-file=.env.local scripts/quiz-images.mjs",
+    "quiz:check": "node --no-warnings --env-file=.env.local scripts/check-quiz-bank.mjs",
     "make-admin": "node --no-warnings --env-file=.env.local scripts/make-admin.mjs"
   },
   "dependencies": {
