@@ -51,7 +51,7 @@ const SPARKS = [
 const BLOCKS = ['#fb7185', '#fb923c', '#fcd34d', '#34d399', '#38bdf8', '#818cf8', '#c084fc', '#f472b6'];
 const RING = 118; // orbit radius, px
 
-export default function ArcadeSplash({ active = true, minMs = 1200 }) {
+export default function ArcadeSplash({ active = true, minMs = 900 }) {
   const { status } = useSession();
   const still = useReducedMotion();
   const [minElapsed, setMinElapsed] = useState(false);
