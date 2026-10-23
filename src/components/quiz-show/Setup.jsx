@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { AnimatePresence, motion } from 'motion/react';
 import { ArrowLeft, ChevronDown, Pencil, Plus, X } from 'lucide-react';
@@ -7,7 +7,7 @@ import { play } from '@/components/arcade/sfx';
 import { AVATARS, COLORS, makePlayer } from '@/components/arcade/players';
 import { GROUP_PREFIX, GROUPS, LEVELS, MIXED, QUESTION_COUNTS, TIMERS, hasPick, keyOf, pickName, surprisePicks, togglePick } from '@/lib/quiz/catalogue';
 import { cn } from '@/lib/cn';
-import { fetchQuestions, useCustomCategories, useSeenPlayers } from './data';
+import { fetchQuestions, useCustomCategories, useHandle, useSeenPlayers } from './data';
 import { nameKey } from '@/lib/quiz/seen';
 import { Avatar, NamePills, SHOW_FONT, ShowButton } from './ui';
 
@@ -30,7 +30,16 @@ export default function Setup({ initial, onStart, onCancel }) {
   const known = useSeenPlayers().players.map((p) => p.name);
   const [step, setStep] = useState(initial?.mode ? 1 : 0);
   const [mode, setMode] = useState(initial?.mode || null);
-  const [players, setPlayers] = useState(initial?.players || [makePlayer(0, session?.user?.name?.split(' ')[0])]);
+  const { handle } = useHandle();
+  const firstName = session?.user?.name?.split(' ')[0];
+  const [players, setPlayers] = useState(initial?.players || [makePlayer(0, handle || firstName)]);
+  // A signed-in phone's first player is its owner, under their quiz name, once
+  // it arrives, unless the name has been changed meanwhile (Ash, 2026-10-23).
+  useEffect(() => {
+    if (!handle || initial?.players) return;
+    setPlayers((ps) => (ps.length && (!ps[0].name.trim() || ps[0].name === firstName) ? [{ ...ps[0], name: handle }, ...ps.slice(1)] : ps));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [handle]);
   const [picks, setPicks] = useState(initial?.picks || [MIXED.id]);
   const [level, setLevel] = useState(initial?.level || 'family');
   const [count, setCount] = useState(initial?.count || 10);

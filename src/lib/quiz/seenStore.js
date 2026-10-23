@@ -1,39 +1,31 @@
-// Server-only: the per-player memory of questions seen (models/QuizSeen.js).
+// Server-only: handles and the memory of questions seen, for the routes. The
+// rules are lib/quiz/memory.js, shared with the scripts; this connects first.
+import mongoose from 'mongoose';
 import dbConnect from '@/lib/mongodb';
-import QuizSeen from '@/models/QuizSeen';
-import { addSeen, nameKey, playerKeys } from './seen';
+import * as memory from './memory';
 
-/** Every question any of these players on this account has seen. */
-export async function seenBy(email, names) {
-  const keys = playerKeys(names);
-  if (!email || !keys.length) return [];
+const db = async () => {
   await dbConnect();
-  const docs = await QuizSeen.find({ email, nameKey: { $in: keys } }, { seen: 1 }).lean();
-  return [...new Set(docs.flatMap((d) => d.seen || []))];
-}
+  return mongoose.connection.db;
+};
+
+/** Every question any of these players has seen (a guest host's game: signed-in players only). */
+export const seenBy = async (host, names) => memory.seenBy(await db(), host || null, names);
 
 /** Add a game's questions to each player's memory. */
-export async function remember(email, names, ids) {
-  if (!email) return;
-  await dbConnect();
-  for (const raw of Array.isArray(names) ? names : []) {
-    const key = nameKey(raw);
-    if (!key) continue;
-    const doc = (await QuizSeen.findOne({ email, nameKey: key })) || new QuizSeen({ email, nameKey: key, name: String(raw).trim().slice(0, 40) });
-    doc.seen = addSeen(doc.seen, ids);
-    await doc.save();
-  }
-}
+export const remember = async (host, names, ids) => memory.remember(await db(), host || null, names, ids);
 
-/** The players this account has a memory for, most recently played first. */
-export async function listSeen(email) {
-  await dbConnect();
-  const docs = await QuizSeen.find({ email }, { name: 1, seen: 1, updatedAt: 1 }).sort({ updatedAt: -1 }).lean();
-  return docs.map((d) => ({ name: d.name, count: d.seen?.length || 0 }));
-}
+/** The players this account remembers, most recently played first. */
+export const listSeen = async (host) => memory.listSeen(await db(), host);
 
 /** Forget one player's questions. */
-export async function forget(email, name) {
-  await dbConnect();
-  await QuizSeen.deleteOne({ email, nameKey: nameKey(name) });
-}
+export const forget = async (host, name) => memory.forget(await db(), host, name);
+
+/** This account's handle, given one if it has none. */
+export const handleOf = async (email) => memory.handleOf(await db(), email);
+
+/** Change this account's handle. */
+export const claimHandle = async (email, name) => memory.claimHandle(await db(), email, name);
+
+/** Whose handle this name is: an email, or null. */
+export const handleOwner = async (name) => memory.handleOwner(await db(), name);

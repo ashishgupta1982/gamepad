@@ -56,11 +56,12 @@ export async function change(code, fn) {
  * on the host's account, so nobody gets those questions again. Done here, once,
  * on the write that finished it (the version guard makes that one write), and
  * not on the host's phone: a reload there loses its list of the questions sent,
- * and with it the record (Ash, 2026-10-23). A guest host has no memory.
+ * and with it the record (Ash, 2026-10-23). A guest host keeps no guests'
+ * memory, but signed-in players still keep their own.
  */
 async function rememberGame(email, game) {
   const ids = playedIds(game);
-  if (!email || !ids.length) return;
+  if (!ids.length) return;
   await remember(email, game.players.map((p) => p.name), ids).catch((err) => console.error('[quiz-live] could not remember the questions:', err.message));
 }
 

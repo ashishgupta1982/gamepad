@@ -20,9 +20,10 @@ import { checkQuizBudget, writeForBank, writeQuestions } from '@/lib/quiz/writer
 //           then the rest while it plays);
 //   avoid:  question ids already in this game, which are left out;
 //   recent: their texts, which the writer is told to steer away from;
-//   players: the names playing. On a signed-in account, whatever any of them
-//           has seen before is left out too (models/QuizSeen.js), so Dad gets
-//           no repeats while Mum on her own still can. Guests have no memory.
+//   players: the names playing. Whatever any of them has seen before is left
+//           out too (lib/quiz/memory.js): a signed-in player's own memory, and
+//           a guest's on the host's account, so Dad gets no repeats while Mum
+//           on her own still can. A guest in a guest host's game has none.
 // }
 // → { questions: [{id, question, options, correctAnswer, category, explanation, media?}] }
 //
@@ -53,7 +54,8 @@ export default async function handler(req, res) {
   // not always the first picks that get questions.
   slots.sort(() => Math.random() - 0.5);
   const user = await getAuthenticatedUser(req, res).catch(() => null);
-  const seenBefore = user?.email ? await seenBy(user.email, players).catch(() => []) : [];
+  // Signed-in players' own memories count even when the host is a guest.
+  const seenBefore = await seenBy(user?.email, players).catch(() => []);
   const avoidList = [...seenBefore, ...(Array.isArray(avoid) ? avoid : []).filter((x) => typeof x === 'string' && x.length < 16).slice(-100)];
   const recentList = (Array.isArray(recent) ? recent : []).filter((x) => typeof x === 'string').map((x) => x.slice(0, 140)).slice(-30);
 

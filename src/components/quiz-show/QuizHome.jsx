@@ -2,10 +2,11 @@ import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { motion } from 'motion/react';
-import { ArrowLeft, ChevronDown, Trash2, X } from 'lucide-react';
+import { ArrowLeft, ChevronDown, Pencil, Trash2, X } from 'lucide-react';
+import AccountMenu from '@/components/layout/AccountMenu';
 import MuteButton from '@/components/arcade/MuteButton';
 import { play } from '@/components/arcade/sfx';
-import { useSeenPlayers } from './data';
+import { useHandle, useSeenPlayers } from './data';
 import { MIN_FOR_RANKING, leaderboard, playerStats } from '@/lib/quiz/stats';
 import { Avatar, Marquee, SHOW_FONT } from './ui';
 
@@ -19,14 +20,19 @@ export default function QuizHome({ resume, onResume, onDismissResume, onStart, o
         <button type="button" onClick={onBack} aria-label="Back to the games room" className="toy flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-[#241a45] [--toy-edge:rgba(0,0,0,0.25)]">
           <ArrowLeft className="h-5 w-5" aria-hidden="true" />
         </button>
-        <span className="rounded-full bg-white/85 text-[#241a45]">
-          <MuteButton />
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="rounded-full bg-white/85 text-[#241a45]">
+            <MuteButton />
+          </span>
+          {/* Sign in, or who is signed in and Sign out (Ash, 2026-10-23). */}
+          <AccountMenu className="h-11 w-11 text-base shadow-[0_3px_0_rgba(0,0,0,0.25)]" />
+        </div>
       </div>
 
       <motion.div className="mt-8 text-center" initial={{ scale: 0.5, rotate: -6, opacity: 0 }} animate={{ scale: 1, rotate: 0, opacity: 1 }} transition={{ type: 'spring', stiffness: 240, damping: 13 }}>
         <Marquee>Quiz Night</Marquee>
         <p className="mt-4 text-lg font-semibold text-white/90">Fresh questions every game, for any age.</p>
+        <WhoAmI />
       </motion.div>
 
       {/* grid-cols-1 is minmax(0, 1fr): a bare grid sizes its column to the
@@ -56,6 +62,75 @@ export default function QuizHome({ resume, onResume, onDismissResume, onStart, o
       </div>
       <Remembered />
     </div>
+  );
+}
+
+// The signed-in player's quiz name, which is theirs alone across GamePad, and
+// changing it. Nothing for a guest: the account menu offers Sign in.
+function WhoAmI() {
+  const { handle, change } = useHandle();
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState('');
+  const [error, setError] = useState('');
+  const [busy, setBusy] = useState(false);
+  if (!handle) return null;
+  if (!editing) {
+    return (
+      <p className="mt-3 flex items-center justify-center gap-2 text-base font-semibold text-white/85">
+        <span className="min-w-0 truncate">
+          Signed in as <span style={SHOW_FONT}>{handle}</span>
+        </span>
+        <button
+          type="button"
+          onClick={() => {
+            setDraft(handle);
+            setError('');
+            setEditing(true);
+          }}
+          aria-label="Change your quiz name"
+          className="press shrink-0 rounded-full bg-white/15 p-1.5"
+        >
+          <Pencil className="h-4 w-4" aria-hidden="true" />
+        </button>
+      </p>
+    );
+  }
+  const save = async (e) => {
+    e.preventDefault();
+    setBusy(true);
+    setError('');
+    try {
+      await change(draft);
+      setEditing(false);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setBusy(false);
+    }
+  };
+  return (
+    <form onSubmit={save} className="mx-auto mt-3 max-w-xs">
+      <label className="block text-sm font-semibold text-white/85" htmlFor="quiz-handle">
+        Your quiz name, yours alone
+      </label>
+      <div className="mt-1 flex gap-2">
+        <input
+          id="quiz-handle"
+          value={draft}
+          onChange={(e) => setDraft(e.target.value.slice(0, 20))}
+          autoFocus
+          className="min-w-0 flex-1 rounded-full bg-white px-4 py-2 text-lg text-[#241a45] outline-none"
+          style={SHOW_FONT}
+        />
+        <button type="submit" disabled={busy} className="press shrink-0 rounded-full bg-amber-300 px-4 font-bold text-amber-950 disabled:opacity-60">
+          {busy ? 'Saving…' : 'Save'}
+        </button>
+        <button type="button" onClick={() => setEditing(false)} aria-label="Cancel" className="press shrink-0 rounded-full bg-white/15 px-3">
+          <X className="h-4 w-4" aria-hidden="true" />
+        </button>
+      </div>
+      {error && <p className="mt-2 rounded-xl bg-rose-500/90 px-3 py-1.5 text-sm font-semibold">{error}</p>}
+    </form>
   );
 }
 

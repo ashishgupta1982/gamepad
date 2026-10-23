@@ -33,3 +33,23 @@ export function addSeen(list, ids) {
   const set = new Set(fresh);
   return [...(list || []).filter((id) => !set.has(id)), ...new Set(fresh)].slice(-SEEN_CAP);
 }
+
+// A signed-in player's handle: their quiz name, unique across GamePad
+// (Ash, 2026-10-23). A name in a game that matches a handle is that player,
+// and their memory is their account's own, kept under this key, which a typed
+// name can never become (nameKey lower-cases).
+export const SELF = 'SELF';
+export const HANDLE_MAX = 20;
+
+/** A handle as typed, tidied; '' if it will not do (it needs a letter or digit). */
+export function cleanHandle(text) {
+  const h = String(text ?? '').trim().replace(/\s+/g, ' ').slice(0, HANDLE_MAX).trim();
+  return /[\p{L}\p{N}]/u.test(h) ? h : '';
+}
+
+/** The handle a new player starts with: their first name, else their email's first part. */
+export function handleBase(name, email) {
+  const first = String(name ?? '').trim().split(/\s+/)[0] || String(email ?? '').split('@')[0].replace(/[^\p{L}\p{N}]+/gu, ' ').trim().split(' ')[0];
+  const h = cleanHandle(first) || 'Player';
+  return h.charAt(0).toUpperCase() + h.slice(1);
+}

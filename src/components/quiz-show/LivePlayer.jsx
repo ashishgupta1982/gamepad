@@ -8,7 +8,7 @@ import useLive, { post } from './useLive';
 import { AVATARS, COLORS } from './Setup';
 import { FinalScreen, QuestionScreen, RateQuestion, RevealScreen } from './screens';
 import { nameKey } from '@/lib/quiz/seen';
-import { useSeenPlayers } from './data';
+import { useHandle, useSeenPlayers } from './data';
 import { Avatar, Leaderboard, Marquee, NamePills, SHOW_FONT, ShowButton } from './ui';
 
 // A player's phone in a multi-phone quiz: join with the code, then answer.
@@ -169,8 +169,14 @@ const ordinal = (n) => (n % 100 >= 11 && n % 100 <= 13 ? 'th' : ['th', 'st', 'nd
 export function JoinForm({ initialCode = "", hostCode = null, defaultName, onBack, onJoined }) {
   const [code, setCode] = useState((hostCode || initialCode).toUpperCase().slice(0, 6));
   const [name, setName] = useState(defaultName);
-  // On a signed-in phone, the names this account has played under.
-  const known = useSeenPlayers().players.map((p) => p.name);
+  // A signed-in phone joins as its owner, under their quiz name, unless they
+  // choose to join as a guest (someone else on their phone). A guest cannot
+  // take a signed-in player's name; the server refuses it (Ash, 2026-10-23).
+  const { handle } = useHandle();
+  const [asGuest, setAsGuest] = useState(false);
+  const me = handle && !asGuest;
+  // On a signed-in phone, the guests this account has played with.
+  const known = useSeenPlayers().players.filter((p) => !p.signedIn).map((p) => p.name);
   const [avatar, setAvatar] = useState(() => AVATARS[Math.floor(Math.random() * AVATARS.length)]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
@@ -180,10 +186,10 @@ export function JoinForm({ initialCode = "", hostCode = null, defaultName, onBac
     e.preventDefault();
     setError('');
     if (code.length !== 6) return setError('The code is six letters and numbers, on the host’s screen.');
-    if (!name.trim()) return setError('Give yourself a name.');
+    if (!me && !name.trim()) return setError('Give yourself a name.');
     setBusy(true);
     try {
-      const data = await post(`/api/quiz/live/${code}/join`, { name, avatar, color });
+      const data = await post(`/api/quiz/live/${code}/join`, { name: me ? handle : name, avatar, color, asGuest: !me });
       play('pop');
       onJoined({ code, playerId: data.playerId, token: data.token }, data);
     } catch (err) {
@@ -217,6 +223,23 @@ export function JoinForm({ initialCode = "", hostCode = null, defaultName, onBac
         />
       </label>
       )}
+      {me ? (
+        <div className="rounded-2xl bg-white/15 px-4 py-3 text-center">
+          <p className="text-lg font-semibold text-white/85">You’re signed in as</p>
+          <p className="text-3xl" style={SHOW_FONT}>{handle}</p>
+          <button
+            type="button"
+            onClick={() => {
+              play('tap');
+              setName('');
+              setAsGuest(true);
+            }}
+            className="mt-1 text-sm font-bold text-amber-200 underline underline-offset-2"
+          >
+            Not you? Join as a guest
+          </button>
+        </div>
+      ) : (
       <label className="block">
         <span className="mb-1 block text-lg" style={SHOW_FONT}>Your name</span>
         <input
@@ -235,6 +258,7 @@ export function JoinForm({ initialCode = "", hostCode = null, defaultName, onBac
           label="Or tap who you are"
         />
       </label>
+      )}
       <div>
         <span className="mb-1 block text-lg" style={SHOW_FONT}>Pick your face</span>
         <div className="grid grid-cols-8 gap-1.5">

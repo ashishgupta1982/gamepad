@@ -1,18 +1,35 @@
 import { checkRate, getClientIP } from '@/utils/rateLimiter';
+import { getAuthenticatedUser } from '@/utils/authHelper';
+import { handleOf, handleOwner } from '@/lib/quiz/seenStore';
 import { addPlayer } from '@/lib/quiz/machine';
 import { change, newToken, project } from '@/lib/quiz/live';
 
-// Join, or come back. POST { name, avatar, color } for a new player, or
-// { playerId, token } to rejoin as yourself after a dropped connection.
+// Join, or come back. POST { name, avatar, color, asGuest } for a new player,
+// or { playerId, token } to rejoin as yourself after a dropped connection.
+// A signed-in phone joins under its handle, unless it asks to be a guest; a
+// guest cannot take anyone's handle (Ash, 2026-10-23: a handle is that player).
 // → { playerId, token, v, game }
 const clip = (s, n) => String(s ?? '').replace(/\s+/g, ' ').trim().slice(0, n);
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
   if (!checkRate(getClientIP(req), 'STANDARD_API').allowed) return res.status(429).json({ error: 'Slow down a moment.' });
-  const { playerId, token, name, avatar, color } = req.body || {};
+  const { playerId, token, name, avatar, color, asGuest } = req.body || {};
 
   try {
+    const rejoining = !!(playerId && token);
+    let wanted = name;
+    if (!rejoining) {
+      const user = await getAuthenticatedUser(req, res).catch(() => null);
+      const mine = user?.email && !asGuest ? await handleOf(user.email) : null;
+      if (mine) wanted = mine;
+      else {
+        const owner = await handleOwner(clip(name, 20));
+        if (owner && owner !== user?.email) {
+          return res.status(409).json({ error: `${clip(name, 20)} is a signed-in player's name. Pick another, or sign in as them.` });
+        }
+      }
+    }
     let result = null;
     const doc = await change(req.query.code, (d) => {
       // Coming back: the pass must match.
@@ -20,7 +37,7 @@ export default async function handler(req, res) {
         result = { playerId, token };
         return null;
       }
-      const n = clip(name, 20);
+      const n = clip(wanted, 20);
       if (!n) {
         result = { error: 'Give yourself a name.' };
         return null;

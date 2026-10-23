@@ -68,6 +68,39 @@ export function rememberSeen(names, questions) {
   }).catch(() => {});
 }
 
+// The handle last fetched on this page, so a screen opened later shows it at once.
+let knownHandle = null;
+
+/**
+ * This phone's signed-in player: their quiz name, unique across GamePad
+ * (lib/quiz/memory.js), given one on first use. `change` throws with a
+ * message fit to show when the name is taken.
+ */
+export function useHandle() {
+  const { status } = useSession();
+  const [handle, setHandle] = useState(knownHandle);
+  useEffect(() => {
+    if (status !== 'authenticated') return;
+    fetch('/api/quiz/handle')
+      .then((r) => (r.ok ? r.json() : {}))
+      .then((d) => {
+        if (!d.handle) return;
+        knownHandle = d.handle;
+        setHandle(d.handle);
+      })
+      .catch(() => {});
+  }, [status]);
+  const change = useCallback(async (name) => {
+    const res = await fetch('/api/quiz/handle', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name }) });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || 'Could not change it just now. Try again?');
+    knownHandle = data.handle;
+    setHandle(data.handle);
+    return data.handle;
+  }, []);
+  return { handle: status === 'authenticated' ? handle : null, status, change };
+}
+
 /** The players this account remembers, and forgetting one. Signed in only. */
 export function useSeenPlayers() {
   const { status } = useSession();

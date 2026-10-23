@@ -25,6 +25,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: 'user'
   },
+  // The quiz name, unique across GamePad (lib/quiz/memory.js#claimHandle), and
+  // its matching key (lower case, spaces squashed).
+  quizName: String,
+  quizNameKey: { type: String, index: true },
   lastLoginAt: {
     type: Date,
     default: Date.now

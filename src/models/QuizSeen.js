@@ -8,12 +8,17 @@ import mongoose from 'mongoose';
 //   nameKey  the name as matched: trimmed, spaces squashed, lower case
 //            (lib/quiz/seen.js#nameKey), so "Dad" and " dad " are one person
 //   seen     question keys (QuizQuestion.fingerprint), newest last, capped
+//
+// Since 2026-10-23 a signed-in player's handle is them (lib/quiz/memory.js):
+// their own memory is {email: theirs, nameKey: 'SELF'}, and a host who has had
+// them in a game keeps a link, {email: host, nameKey, linkTo: theirs, seen: []}.
 const QuizSeenSchema = new mongoose.Schema(
   {
     email: { type: String, required: true },
     nameKey: { type: String, required: true },
     name: { type: String, required: true },
     seen: { type: [String], default: [] },
+    linkTo: String,
   },
   { timestamps: true },
 );

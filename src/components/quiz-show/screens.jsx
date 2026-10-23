@@ -5,7 +5,7 @@ import { buzz, celebrate } from '@/components/arcade/feedback';
 import { transformUrl } from '@aspiro/media';
 import { IMAGE_PRESETS } from '@aspiro/media/presets';
 import { pickName } from '@/lib/quiz/catalogue';
-import { myVote, rateQuestion } from './data';
+import { myVote, rateQuestion, useHandle } from './data';
 import { currentQuestion, standings } from '@/lib/quiz/machine';
 import { cn } from '@/lib/cn';
 import { AnswerTiles, Avatar, Clock, Leaderboard, Marquee, Podium, SHOW_FONT, ShowButton } from './ui';
@@ -19,6 +19,7 @@ const CONFETTI = ['#fbbf24', '#f43f5e', '#38bdf8', '#a78bfa', '#34d399'];
 /** "Get ready": the title, the line-up, and 3-2-1. */
 export function GetReady({ game, title = 'Quiz Night', waitingFor = false }) {
   const [n, setN] = useState(3);
+  const { handle, status } = useHandle();
   useEffect(() => {
     if (waitingFor) return undefined;
     play('beep');
@@ -39,6 +40,18 @@ export function GetReady({ game, title = 'Quiz Night', waitingFor = false }) {
       <motion.div initial={{ scale: 0.4, rotate: -8, opacity: 0 }} animate={{ scale: 1, rotate: 0, opacity: 1 }} transition={{ type: 'spring', stiffness: 260, damping: 14 }}>
         <Marquee>{title}</Marquee>
       </motion.div>
+      {/* Who this screen belongs to (Ash, 2026-10-23). */}
+      {status !== 'loading' && (
+        <p className="-mt-4 text-lg font-semibold text-white/85">
+          {handle ? (
+            <>
+              You’re signed in as <span style={SHOW_FONT}>{handle}</span>
+            </>
+          ) : status === 'unauthenticated' ? (
+            'Playing as a guest'
+          ) : null}
+        </p>
+      )}
       {game.players.length > 0 && (
         <div className="flex flex-wrap justify-center gap-3">
           {game.players.map((p, i) => (
