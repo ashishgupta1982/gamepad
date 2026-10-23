@@ -257,6 +257,19 @@ export function JoinForm({ initialCode = "", hostCode = null, defaultName, onBac
           }}
           label="Or tap who you are"
         />
+        {handle && (
+          <button
+            type="button"
+            onClick={() => {
+              play('tap');
+              setError('');
+              setAsGuest(false);
+            }}
+            className="mt-3 text-sm font-bold text-amber-200 underline underline-offset-2"
+          >
+            Join as {handle} (signed in) instead
+          </button>
+        )}
       </label>
       )}
       <div>

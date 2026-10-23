@@ -224,6 +224,20 @@ export default function Setup({ initial, onStart, onCancel }) {
                 onPick={pickName}
                 label={handle && mode !== 'solo' ? `You’re signed in as ${handle}. Tap to add who’s playing` : mode === 'solo' ? 'Who’s this? Tap a name' : 'Played before: tap to add'}
               />
+              {mode === 'solo' && handle && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    play('tap');
+                    setNameError('');
+                    setSoloGuest(false);
+                    setPlayers((ps) => [{ ...ps[0], name: handle }]);
+                  }}
+                  className="mt-4 text-base font-bold text-amber-200 underline underline-offset-2"
+                >
+                  Play as {handle} (signed in) instead
+                </button>
+              )}
               </>
               )}
               {nameError && <p className="mt-3 rounded-xl bg-rose-500/90 px-3 py-2 font-semibold text-white">{nameError}</p>}
