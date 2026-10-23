@@ -79,7 +79,7 @@ export default async function handler(req, res) {
 
   if (req.method === 'DELETE') {
     try {
-      const game = await Game.findOneAndDelete({
+      const game = await Game.findOne({
         _id: id,
         userId: session.user.id
       });
@@ -87,6 +87,14 @@ export default async function handler(req, res) {
       if (!game) {
         return res.status(404).json({ error: 'Game not found' });
       }
+
+      // A quiz in Your quizzes is deleted by an admin only (Ash, 2026-10-23).
+      // Darts and Scrabble games are still the owner's to delete.
+      if (game.gameType === 'quiz' && session.user.role !== 'admin') {
+        return res.status(403).json({ error: 'Only an admin can delete a quiz.' });
+      }
+
+      await Game.deleteOne({ _id: game._id });
 
       return res.status(200).json({ message: 'Game deleted successfully' });
     } catch (error) {

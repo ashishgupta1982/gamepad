@@ -141,6 +141,9 @@ export function History({ onBack }) {
   const [rankBy, setRankBy] = useState('wins');
   const [who, setWho] = useState(null);
   const [tab, setTab] = useState('together');
+  // Only an admin can delete a past quiz (Ash, 2026-10-23); api/games/[id].js checks too.
+  const { data: session } = useSession();
+  const admin = session?.user?.role === 'admin';
   useEffect(() => {
     fetch('/api/quiz/history')
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error('Could not load your quizzes.'))))
@@ -264,7 +267,7 @@ export function History({ onBack }) {
             {!shown.length && <p className="text-white/80">{tab === 'together' ? 'No games with two or more players yet.' : 'No solo games yet.'}</p>}
             <ul className="space-y-3">
               {shown.map((g) => (
-                <PastGame key={g.id} game={g} onRemove={() => remove(g.id)} />
+                <PastGame key={g.id} game={g} onRemove={admin ? () => remove(g.id) : null} />
               ))}
             </ul>
           </section>
@@ -342,9 +345,11 @@ function PastGame({ game: g, onRemove }) {
         </p>
         {g.players.length > 1 && <p className="truncate text-xs text-[#6b6390]">{g.players.map((p) => `${p.name} ${p.score}`).join(' · ')}</p>}
       </div>
-      <button type="button" onClick={onRemove} aria-label="Delete this quiz" className="press rounded-full p-2 text-[#6b6390] hover:text-rose-600">
-        <Trash2 className="h-5 w-5" aria-hidden="true" />
-      </button>
+      {onRemove && (
+        <button type="button" onClick={onRemove} aria-label="Delete this quiz" className="press rounded-full p-2 text-[#6b6390] hover:text-rose-600">
+          <Trash2 className="h-5 w-5" aria-hidden="true" />
+        </button>
+      )}
     </li>
   );
 }
