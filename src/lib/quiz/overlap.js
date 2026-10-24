@@ -35,13 +35,13 @@ export function similarity(a, b) {
 /**
  * Which picture or emoji clue a question shows, or null: the seed file's hint
  * (flag, wiki, file, outline) when it has one, else the picture's name on
- * Cloudinary without its version or close-up suffix.
+ * Cloudinary without its version or its -zoom or -hidden suffix.
  */
 export function pictureKey(media) {
   if (!media?.kind) return null;
   if (media.kind === 'emoji') return media.text ? `emoji:${media.text}` : null;
   for (const hint of ['flag', 'outline', 'wiki', 'file']) if (media[hint]) return `${hint}:${String(media[hint]).toLowerCase().replace(/[ _]+/g, '_')}`;
-  const name = String(media.src || '').split('/').pop()?.replace(/\.[a-z]+$/i, '').replace(/-zoom$/, '');
+  const name = String(media.src || '').split('/').pop()?.replace(/\.[a-z]+$/i, '').replace(/-(zoom|hidden)$/, '');
   return name ? `src:${name}` : null;
 }
 

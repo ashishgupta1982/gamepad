@@ -773,7 +773,7 @@
     },
     {
       "band": "adults",
-      "question": "Which drinks brand's logo is this a close-up from?",
+      "question": "Which drinks brand's logo is this?",
       "options": [
         "Pepsi",
         "Coca-Cola",
@@ -781,7 +781,7 @@
         "Fanta"
       ],
       "answer": "Pepsi",
-      "explanation": "Pepsi turned red, white and blue in the 1940s, to show support for American troops in the Second World War.",
+      "explanation": "Pepsi turned its bottle caps red, white and blue in 1941, to support America's war effort.",
       "family": true,
       "difficulty": 1,
       "dated": false,
@@ -789,12 +789,15 @@
         "kind": "image",
         "file": "Pepsi logo 2014.svg",
         "alt": "A red, white and blue circle",
-        "zoom": [
-          0.5,
-          0.35,
-          0.95
+        "hide": [
+          [
+            0,
+            0.78,
+            1,
+            0.22
+          ]
         ],
-        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792817951/GamePad/quiz/file-pepsi-logo-2014-zoom.jpg",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792824560/GamePad/quiz/file-pepsi-logo-2014-hidden.png",
         "credit": "",
         "reveal": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792817951/GamePad/quiz/file-pepsi-logo-2014.png"
       }
@@ -885,6 +888,326 @@
         "alt": "A black outline of a bow tie shape",
         "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792817956/GamePad/quiz/file-chevrolet-bowtie-2023.png",
         "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which sports brand's logo is this?",
+      "options": [
+        "Puma",
+        "Adidas",
+        "Reebok",
+        "Umbro"
+      ],
+      "answer": "Puma",
+      "explanation": "Puma was started in 1948 by Rudolf Dassler after he split from his brother Adolf, who went on to start Adidas in the same small German town.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Puma complete logo.svg",
+        "alt": "A leaping big cat",
+        "hide": [
+          [
+            0,
+            0.48,
+            0.78,
+            0.52
+          ],
+          [
+            0.78,
+            0.82,
+            0.1,
+            0.18
+          ]
+        ],
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792824562/GamePad/quiz/file-puma-complete-logo-hidden.png",
+        "credit": "",
+        "reveal": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792824561/GamePad/quiz/file-puma-complete-logo.png"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which pizza company's logo is this?",
+      "options": [
+        "Domino's",
+        "Pizza Hut",
+        "Papa John's",
+        "PizzaExpress"
+      ],
+      "answer": "Domino's",
+      "explanation": "The three dots stood for its first three shops; the plan to add a dot for every new shop was soon dropped.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Domino's 2025.svg",
+        "alt": "A red and blue tile with three dots",
+        "hide": [
+          [
+            0.205,
+            0,
+            0.795,
+            1
+          ]
+        ],
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792824564/GamePad/quiz/file-domino-s-2025-hidden.png",
+        "credit": "",
+        "reveal": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792824563/GamePad/quiz/file-domino-s-2025.png"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which supercar maker's badge is this a close-up from?",
+      "options": [
+        "Lamborghini",
+        "Ferrari",
+        "Bugatti",
+        "McLaren"
+      ],
+      "answer": "Lamborghini",
+      "explanation": "Ferruccio Lamborghini was born under Taurus, the bull, and was fascinated by fighting bulls, so a charging bull went on his badge.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Lamborghini Logo.svg",
+        "alt": "A gold animal on a black badge",
+        "zoom": [
+          0.5,
+          0.61,
+          0.5
+        ],
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792824566/GamePad/quiz/file-lamborghini-logo-zoom.jpg",
+        "credit": "",
+        "reveal": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792824565/GamePad/quiz/file-lamborghini-logo.png"
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which car maker's logo is this?",
+      "options": [
+        "Jaguar",
+        "Lotus",
+        "Bentley",
+        "Aston Martin"
+      ],
+      "answer": "Jaguar",
+      "explanation": "The leaping cat is called the Leaper, and for years it sat on the bonnet of Jaguar cars.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Jaguar logo 2021.svg",
+        "alt": "A leaping big cat",
+        "hide": [
+          [
+            0,
+            0.78,
+            1,
+            0.22
+          ]
+        ],
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792824568/GamePad/quiz/file-jaguar-logo-2021-hidden.png",
+        "credit": "",
+        "reveal": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792824567/GamePad/quiz/file-jaguar-logo-2021.png"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which energy drink's logo is this?",
+      "options": [
+        "Red Bull",
+        "Monster",
+        "Lucozade",
+        "Relentless"
+      ],
+      "answer": "Red Bull",
+      "explanation": "It grew out of a Thai energy drink, Krating Daeng, whose name means red gaur, a kind of wild ox.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "RedBullEnergyDrink.svg",
+        "alt": "Two animals charging at a yellow sun",
+        "hide": [
+          [
+            0,
+            0,
+            1,
+            0.42
+          ],
+          [
+            0,
+            0.84,
+            1,
+            0.16
+          ]
+        ],
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792824570/GamePad/quiz/file-redbullenergydrink-hidden.png",
+        "credit": "",
+        "reveal": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792824569/GamePad/quiz/file-redbullenergydrink.png"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which app's logo is this?",
+      "options": [
+        "Discord",
+        "Twitch",
+        "Slack",
+        "Reddit"
+      ],
+      "answer": "Discord",
+      "explanation": "The friendly face is called Clyde, and Discord began as a way for gamers to talk while they played.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Discord logo.svg",
+        "alt": "A blue cartoon face",
+        "hide": [
+          [
+            0.3,
+            0,
+            0.7,
+            1
+          ]
+        ],
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792824571/GamePad/quiz/file-discord-logo-hidden.png",
+        "credit": "",
+        "reveal": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792824571/GamePad/quiz/file-discord-logo.png"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which fashion brand's logo is this?",
+      "options": [
+        "Lacoste",
+        "Ralph Lauren",
+        "Fred Perry",
+        "Tommy Hilfiger"
+      ],
+      "answer": "Lacoste",
+      "explanation": "René Lacoste, a French tennis champion, was nicknamed the Crocodile, and put one on the shirts he made.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Lacoste logo.svg",
+        "alt": "A green reptile",
+        "hide": [
+          [
+            0,
+            0,
+            0.7,
+            1
+          ]
+        ],
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792824573/GamePad/quiz/file-lacoste-logo-hidden.png",
+        "credit": "",
+        "reveal": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792824573/GamePad/quiz/file-lacoste-logo.png"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which car maker's logo is this?",
+      "options": [
+        "Peugeot",
+        "Citroën",
+        "Alfa Romeo",
+        "Vauxhall"
+      ],
+      "answer": "Peugeot",
+      "explanation": "Peugeot has used a lion since the 1850s, when it marked the family firm's steel saw blades.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Peugeot 2021 Logo.svg",
+        "alt": "An animal's head on a black shield",
+        "hide": [
+          [
+            0.085,
+            0.095,
+            0.83,
+            0.095
+          ]
+        ],
+        "hideGround": "#000000",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792824575/GamePad/quiz/file-peugeot-2021-logo-hidden.png",
+        "credit": "",
+        "reveal": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792824575/GamePad/quiz/file-peugeot-2021-logo.png"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which car maker's logo is this?",
+      "options": [
+        "Citroën",
+        "Peugeot",
+        "Renault",
+        "Fiat"
+      ],
+      "answer": "Citroën",
+      "explanation": "The two chevrons are gear teeth: André Citroën started out making gears with V-shaped teeth.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Citroen 2016 logo.svg",
+        "alt": "Two grey chevrons",
+        "hide": [
+          [
+            0,
+            0.78,
+            1,
+            0.22
+          ]
+        ],
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792824577/GamePad/quiz/file-citroen-2016-logo-hidden.png",
+        "credit": "",
+        "reveal": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792824576/GamePad/quiz/file-citroen-2016-logo.png"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which car maker's logo is this?",
+      "options": [
+        "Subaru",
+        "Mitsubishi",
+        "Mazda",
+        "Nissan"
+      ],
+      "answer": "Subaru",
+      "explanation": "Subaru is the Japanese name for the star cluster the Pleiades, and the badge shows six of its stars.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Subaru logo (transparent).svg",
+        "alt": "Stars on a blue oval",
+        "hide": [
+          [
+            0,
+            0.7,
+            1,
+            0.3
+          ]
+        ],
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792824579/GamePad/quiz/file-subaru-logo-transparent-hidden.png",
+        "credit": "",
+        "reveal": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792824578/GamePad/quiz/file-subaru-logo-transparent.png"
       }
     }
   ]

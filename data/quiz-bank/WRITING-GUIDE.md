@@ -104,6 +104,7 @@ Every style is the same JSON question; the style is its `media`.
 - **a logo, crest or circuit map**: one named file on Wikipedia or Commons, `"media": { "kind": "image", "file": "Apple logo black.svg", "alt": "A company logo" }`. Find the exact file name on the article (`https://en.wikipedia.org/w/api.php?action=query&format=json&prop=images&titles=<Article>`). Symbol-only logos: nothing in it may spell out the answer.
 - **a country's outline**: `"media": { "kind": "image", "outline": "it", "alt": "The outline of a country" }` (ISO two-letter code, lower case, from mapsicon, given a white margin so a coastline never runs into the edge of the card).
 - **a close-up**: any picture above plus `"zoom": [x, y, size]`: the centre of a square crop as fractions of the picture's width and height, and its side as a fraction of the shorter side (0.3 to 0.45 works). The close-up is the question; the whole picture is uploaded too, as `reveal`, and shown with the answer (a phones game keeps it back until then). The question says so: "Which sport is this a close-up from?". Choose a detail a fan would know but that is not the whole giveaway (the numbers round a dartboard, not the bullseye with darts in it).
+- **a logo with its name written in it**: any picture above plus `"hide": [[x, y, w, h], ...]`, rectangles (fractions of the picture's width and height) round the name, which is painted out; add `"hideGround": "#000000"` when the name sits on a dark shield. The logo is then trimmed and centred. The logo without its name is the question, and the whole logo is uploaded as `reveal`, shown with the answer. Leave each rectangle a little clear of the symbol, and look at the result: lettering on a glossy badge (Lamborghini) leaves a shadow, so use a close-up there instead.
 - `alt` describes the picture without giving away the answer.
 - The question asks about the picture: "Which country's flag is this?", "Which famous landmark is this?", "Which animal is this?", "Who painted this?".
 - Copyright is no bar: GamePad is for Ash's family (Ash, 2026-10-22). Logos, crests and photos of famous people (sport stars for Sporting Legends) are all fine.
@@ -149,10 +150,11 @@ Fifteen per band in every category to start: 15 `kids` and 15 `adults`. A catego
 - A second fact-checking pass always finds things; never skip it.
 - A picture is the same picture after a re-upload: the key uses its name, not
   Cloudinary's version number.
-- Most current brand logos on Wikipedia have the name written in them. Look for an
-  icon-only file (search Commons for "<brand> icon"), or use a close-up that crops
-  the name off (the Pepsi globe). The same picture must not be used twice across
-  categories (the Ferrari horse is in Formula 1).
+- Most current brand logos on Wikipedia have the name written in them. Use an
+  icon-only file (search Commons for "<brand> icon") or paint the name out with
+  `hide` (Puma, Red Bull, Peugeot, 2026-10-24: Ash wanted them kept, name
+  scrubbed). The same picture must not be used twice across categories (the
+  Ferrari horse is in Formula 1).
 - A wrong option can turn out to be arguable: Rowling once said Hermione's middle
   name was Jane, and Porsche's crest has a black rearing horse too.
 - Every new kind of picture so far needed a look before use (logos with the name

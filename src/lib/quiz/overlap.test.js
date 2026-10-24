@@ -17,6 +17,7 @@ describe('questions too close to share a bank', () => {
   it('the same picture twice, hint or uploaded', () => {
     expect(tooClose(q("Which country's flag is this?", 'Japan', { kind: 'image', flag: 'jp' }), q('Which country uses this flag?', 'Japan', { kind: 'image', flag: 'jp' }))).toBe('same picture');
     expect(pictureKey({ kind: 'image', src: 'https://x/v17/GamePad/quiz/dartboard-zoom.jpg' })).toBe(pictureKey({ kind: 'image', src: 'https://x/v18/GamePad/quiz/dartboard.jpg' }));
+    expect(pictureKey({ kind: 'image', src: 'https://x/v17/GamePad/quiz/file-puma-hidden.png' })).toBe(pictureKey({ kind: 'image', src: 'https://x/v18/GamePad/quiz/file-puma.png' }));
   });
 
   it('not two picture questions that only share their wording', () => {
