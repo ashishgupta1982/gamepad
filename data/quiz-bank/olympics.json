@@ -300,6 +300,106 @@
       "family": false,
       "difficulty": 3,
       "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "How often are the Summer Olympic Games held?",
+      "options": ["Every four years", "Every two years", "Every three years", "Every five years"],
+      "answer": "Every four years",
+      "explanation": "The four years between Games are called an Olympiad.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which city hosted the 2020 Summer Olympics, held a year late in 2021?",
+      "options": ["Tokyo", "Beijing", "Paris", "Rio de Janeiro"],
+      "answer": "Tokyo",
+      "explanation": "They were postponed because of the Covid-19 pandemic, but kept the name Tokyo 2020.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In which Olympic sport would you race in a velodrome?",
+      "options": ["Cycling", "Rowing", "Swimming", "Athletics"],
+      "answer": "Cycling",
+      "explanation": "A velodrome's track is steeply banked, so riders can take the bends at speed.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What do the five Olympic rings stand for?",
+      "options": ["The continents of the world coming together", "The first five host cities", "Five Olympic sports", "The five founding countries"],
+      "answer": "The continents of the world coming together",
+      "explanation": "Pierre de Coubertin designed the rings in 1913, linked together to show the world united by sport.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "The Paris 2024 mascots, the Phryges, were shaped like which kind of hat?",
+      "options": ["A floppy red cap", "A beret", "A top hat", "A chef's hat"],
+      "answer": "A floppy red cap",
+      "explanation": "The Phrygian cap is a symbol of freedom in France, worn by Marianne, the figure of the French Republic.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which winter sport is sometimes called 'chess on ice'?",
+      "options": ["Curling", "Bobsleigh", "Ice hockey", "Biathlon"],
+      "answer": "Curling",
+      "explanation": "Teams plan every stone like a chess move, with sweepers steering it along the ice.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which country has won the most Summer Olympic gold medals of all time?",
+      "options": ["USA", "China", "Great Britain", "Russia"],
+      "answer": "USA",
+      "explanation": "The USA has topped the medal table at most Summer Games it has entered.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which country's team always leads the parade of athletes at the Olympic opening ceremony?",
+      "options": ["Greece", "The host country", "France", "Italy"],
+      "answer": "Greece",
+      "explanation": "Greece goes first as the home of the ancient Games, and the host nation comes last.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which British pair won ice dance gold at the 1984 Winter Olympics, dancing to Ravel's 'Boléro'?",
+      "options": ["Torvill and Dean", "Cousins and Curry", "Coomes and Buckland", "Gorman and Westlake"],
+      "answer": "Torvill and Dean",
+      "explanation": "Every judge gave them a perfect 6.0 for artistic impression.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which British cyclist won seven Olympic gold medals between Beijing 2008 and Tokyo 2020?",
+      "options": ["Jason Kenny", "Chris Hoy", "Bradley Wiggins", "Laura Kenny"],
+      "answer": "Jason Kenny",
+      "explanation": "His seven golds came at four Games, one more than Sir Chris Hoy's six.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
     }
   ]
 }

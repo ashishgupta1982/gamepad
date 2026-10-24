@@ -660,6 +660,232 @@
         "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792706042/GamePad/quiz/file-lufthansa-logo-2018-crane.png",
         "credit": ""
       }
+    },
+    {
+      "band": "kids",
+      "question": "Which app's icon is this?",
+      "options": [
+        "Instagram",
+        "Snapchat",
+        "TikTok",
+        "Pinterest"
+      ],
+      "answer": "Instagram",
+      "explanation": "The camera outline replaced an old-fashioned brown camera in 2016.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Instagram logo 2016.svg",
+        "alt": "A colourful square with a camera outline",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792817944/GamePad/quiz/file-instagram-logo-2016.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which messaging app's logo is this?",
+      "options": [
+        "WhatsApp",
+        "Messenger",
+        "Telegram",
+        "Signal"
+      ],
+      "answer": "WhatsApp",
+      "explanation": "More than two billion people use it to send messages around the world.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "WhatsApp Logo green.svg",
+        "alt": "A green speech bubble with a telephone",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792817946/GamePad/quiz/file-whatsapp-logo-green.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which app's logo is this ghost?",
+      "options": [
+        "Snapchat",
+        "TikTok",
+        "Instagram",
+        "Discord"
+      ],
+      "answer": "Snapchat",
+      "explanation": "The ghost is called Ghostface Chillah, and stands for messages that vanish after they are seen.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Snapchat logo.svg",
+        "alt": "A white ghost on a yellow square",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792817947/GamePad/quiz/file-snapchat-logo.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which video app's icon is this?",
+      "options": [
+        "TikTok",
+        "YouTube",
+        "Netflix",
+        "Twitch"
+      ],
+      "answer": "TikTok",
+      "explanation": "In China, its twin app is called Douyin.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Tiktok icon.svg",
+        "alt": "A white musical note on a black square",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792817948/GamePad/quiz/file-tiktok-icon.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which website's logo is this jigsaw globe?",
+      "options": [
+        "Wikipedia",
+        "Google",
+        "Amazon",
+        "BBC"
+      ],
+      "answer": "Wikipedia",
+      "explanation": "Each jigsaw piece carries a letter from a different writing system, because Wikipedia is written in hundreds of languages.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Wikipedia-logo-v2.svg",
+        "alt": "A globe made of jigsaw pieces with letters on them",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792817949/GamePad/quiz/file-wikipedia-logo-v2.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which drinks brand's logo is this a close-up from?",
+      "options": [
+        "Pepsi",
+        "Coca-Cola",
+        "7 Up",
+        "Fanta"
+      ],
+      "answer": "Pepsi",
+      "explanation": "Pepsi turned red, white and blue in the 1940s, to show support for American troops in the Second World War.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Pepsi logo 2014.svg",
+        "alt": "A red, white and blue circle",
+        "zoom": [
+          0.5,
+          0.35,
+          0.95
+        ],
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792817951/GamePad/quiz/file-pepsi-logo-2014-zoom.jpg",
+        "credit": "",
+        "reveal": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792817951/GamePad/quiz/file-pepsi-logo-2014.png"
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which web browser's logo is this?",
+      "options": [
+        "Google Chrome",
+        "Firefox",
+        "Safari",
+        "Microsoft Edge"
+      ],
+      "answer": "Google Chrome",
+      "explanation": "It uses Google's own red, yellow, green and blue around a blue centre.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Google Chrome icon (February 2022).svg",
+        "alt": "A red, yellow and green circle around a blue centre",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792817953/GamePad/quiz/file-google-chrome-icon-february-2022.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which oil company's logo is this?",
+      "options": [
+        "Shell",
+        "BP",
+        "Esso",
+        "Texaco"
+      ],
+      "answer": "Shell",
+      "explanation": "The company grew out of a London shop that sold seashells, long before it sold oil.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Shell logo.svg",
+        "alt": "A red and yellow scallop shape",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792817954/GamePad/quiz/file-shell-logo.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which car maker's badge is this diamond?",
+      "options": [
+        "Renault",
+        "Citroën",
+        "Mitsubishi",
+        "Peugeot"
+      ],
+      "answer": "Renault",
+      "explanation": "The French firm has used a diamond badge since 1925 and redrew it in 2021.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Renault 2021.svg",
+        "alt": "A diamond drawn in two black lines",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792817955/GamePad/quiz/file-renault-2021.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which car maker's badge is this bow tie?",
+      "options": [
+        "Chevrolet",
+        "Ford",
+        "Cadillac",
+        "Dodge"
+      ],
+      "answer": "Chevrolet",
+      "explanation": "One story says the co-founder copied it from the wallpaper of a Paris hotel.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "file": "Chevrolet bowtie 2023.svg",
+        "alt": "A black outline of a bow tie shape",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792817956/GamePad/quiz/file-chevrolet-bowtie-2023.png",
+        "credit": ""
+      }
     }
   ]
 }

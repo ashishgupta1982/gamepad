@@ -450,6 +450,156 @@
       "family": false,
       "difficulty": 3,
       "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which is the correct spelling of the day after Tuesday?",
+      "options": [
+        "Wednesday",
+        "Wensday",
+        "Wednsday",
+        "Wedensday"
+      ],
+      "answer": "Wednesday",
+      "explanation": "It is named after Woden, a chief god of the Anglo-Saxons, which is where the silent 'd' comes from.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which word can go in front of 'ball', 'flake' and 'man'?",
+      "options": [
+        "Snow",
+        "Foot",
+        "Rain",
+        "Hand"
+      ],
+      "answer": "Snow",
+      "explanation": "Snowball, snowflake and snowman: everything you need for a winter's day.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What do you call words that sound the same but mean different things, like 'bear' and 'bare'?",
+      "options": [
+        "Homophones",
+        "Synonyms",
+        "Antonyms",
+        "Acronyms"
+      ],
+      "answer": "Homophones",
+      "explanation": "'Homo' means same and 'phone' means sound, so a homophone is a same-sounding word.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which animal's name comes from Greek words meaning 'river horse'?",
+      "options": [
+        "Hippopotamus",
+        "Rhinoceros",
+        "Crocodile",
+        "Walrus"
+      ],
+      "answer": "Hippopotamus",
+      "explanation": "'Hippos' is Greek for horse and 'potamos' for river, though hippos are not related to horses at all.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which of these words can you type using only the top row of letters on a keyboard?",
+      "options": [
+        "Typewriter",
+        "Keyboard",
+        "Computer",
+        "Printer"
+      ],
+      "answer": "Typewriter",
+      "explanation": "Every letter in 'typewriter' sits on the QWERTYUIOP row.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What does the French phrase 'déjà vu' mean, word for word?",
+      "options": [
+        "Already seen",
+        "Never forgotten",
+        "Once again",
+        "Long ago"
+      ],
+      "answer": "Already seen",
+      "explanation": "It names that strange feeling that you have lived this exact moment before.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is a word made from the first letters of other words, like 'NASA' or 'scuba', called?",
+      "options": [
+        "An acronym",
+        "An anagram",
+        "A palindrome",
+        "An alliteration"
+      ],
+      "answer": "An acronym",
+      "explanation": "'Scuba' stands for self-contained underwater breathing apparatus.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which is the correct spelling of the word meaning to make someone feel awkward?",
+      "options": [
+        "Embarrass",
+        "Embarass",
+        "Embaress",
+        "Emberrass"
+      ],
+      "answer": "Embarrass",
+      "explanation": "Two r's and two s's catch out lots of good spellers.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is a sentence that uses every letter of the alphabet, like 'The quick brown fox jumps over the lazy dog', called?",
+      "options": [
+        "A pangram",
+        "A palindrome",
+        "An anagram",
+        "An acrostic"
+      ],
+      "answer": "A pangram",
+      "explanation": "'Pan' is Greek for all, and 'gram' for letter.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "The word 'muscle' comes from the Latin for which small animal?",
+      "options": [
+        "Mouse",
+        "Snake",
+        "Worm",
+        "Frog"
+      ],
+      "answer": "Mouse",
+      "explanation": "The Romans thought a flexing muscle looked like a little mouse moving under the skin.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
     }
   ]
 }

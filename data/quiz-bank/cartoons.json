@@ -482,6 +482,156 @@
       "family": false,
       "difficulty": 3,
       "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Paw Patrol, which pup is the firefighter?",
+      "options": [
+        "Marshall",
+        "Chase",
+        "Rubble",
+        "Zuma"
+      ],
+      "answer": "Marshall",
+      "explanation": "Marshall is a Dalmatian, the classic fire station dog.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In SpongeBob SquarePants, where does SpongeBob work as a fry cook?",
+      "options": [
+        "The Krusty Krab",
+        "The Chum Bucket",
+        "The Salty Spitoon",
+        "Goofy Goober's"
+      ],
+      "answer": "The Krusty Krab",
+      "explanation": "He flips Krabby Patties for his money-loving boss, Mr Krabs.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Dora the Explorer, what is the name of Dora's monkey friend?",
+      "options": [
+        "Boots",
+        "Swiper",
+        "Benny",
+        "Isa"
+      ],
+      "answer": "Boots",
+      "explanation": "He is named after the red boots he loves to wear.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Bluey, what are the names of Bluey's mum and dad?",
+      "options": [
+        "Chilli and Bandit",
+        "Bingo and Rusty",
+        "Lucky and Muffin",
+        "Calypso and Pat"
+      ],
+      "answer": "Chilli and Bandit",
+      "explanation": "Bandit is an archaeologist and Chilli works in airport security.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Shaun the Sheep, what is the name of the farmer's sheepdog?",
+      "options": [
+        "Bitzer",
+        "Gromit",
+        "Pidsley",
+        "Timmy"
+      ],
+      "answer": "Bitzer",
+      "explanation": "Bitzer tries to keep the flock in order, usually while listening to music on his headphones.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the name of Homer Simpson's boss at the nuclear power plant?",
+      "options": [
+        "Mr Burns",
+        "Mr Smithers",
+        "Principal Skinner",
+        "Ned Flanders"
+      ],
+      "answer": "Mr Burns",
+      "explanation": "His full name is Charles Montgomery Burns, and his catchphrase is 'Excellent'.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In The Flintstones, what is the name of the family's pet dinosaur?",
+      "options": [
+        "Dino",
+        "Rex",
+        "Spike",
+        "Bamm-Bamm"
+      ],
+      "answer": "Dino",
+      "explanation": "Dino barks and behaves just like a big, excitable dog.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which company makes the gadgets Wile E. Coyote buys to try to catch the Road Runner?",
+      "options": [
+        "Acme",
+        "Apex",
+        "Zenith",
+        "Nimbus"
+      ],
+      "answer": "Acme",
+      "explanation": "Acme rockets, anvils and giant magnets never seem to work quite as planned.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which cartoon bear loves stealing 'pic-a-nic baskets' in Jellystone Park?",
+      "options": [
+        "Yogi Bear",
+        "Baloo",
+        "Fozzie Bear",
+        "Barney Bear"
+      ],
+      "answer": "Yogi Bear",
+      "explanation": "His little sidekick Boo-Boo always warns him the park ranger won't like it.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which cartoon character has three nephews called Huey, Dewey and Louie?",
+      "options": [
+        "Donald Duck",
+        "Mickey Mouse",
+        "Goofy",
+        "Daffy Duck"
+      ],
+      "answer": "Donald Duck",
+      "explanation": "The three ducklings first appeared in a Donald Duck comic strip in 1937.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
     }
   ]
 }

@@ -464,6 +464,156 @@
       "family": false,
       "difficulty": 3,
       "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the name of Ron Weasley's only sister?",
+      "options": [
+        "Ginny",
+        "Luna",
+        "Lavender",
+        "Cho"
+      ],
+      "answer": "Ginny",
+      "explanation": "Ginny is the youngest of the seven Weasley children, and later marries Harry.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the name of the wizard bank in Diagon Alley, run by goblins?",
+      "options": [
+        "Gringotts",
+        "Ollivanders",
+        "Flourish and Blotts",
+        "Gladrags"
+      ],
+      "answer": "Gringotts",
+      "explanation": "Its vaults lie deep underground and are reached by a rattling cart, with a dragon guarding some of them.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What does Professor Lupin give Harry to eat after he faints near a Dementor?",
+      "options": [
+        "Chocolate",
+        "A Pumpkin Pasty",
+        "A Chocolate Frog",
+        "A Cauldron Cake"
+      ],
+      "answer": "Chocolate",
+      "explanation": "Chocolate is the wizarding cure for the cold, gloomy feeling Dementors leave behind.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What is the name of Argus Filch's cat?",
+      "options": [
+        "Mrs Norris",
+        "Crookshanks",
+        "Tibbles",
+        "Mrs Figg"
+      ],
+      "answer": "Mrs Norris",
+      "explanation": "She prowls the corridors and fetches Filch whenever she spots a pupil breaking the rules.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "When Ron joins the Gryffindor Quidditch team, which position does he play?",
+      "options": [
+        "Keeper",
+        "Seeker",
+        "Beater",
+        "Chaser"
+      ],
+      "answer": "Keeper",
+      "explanation": "He guards the three goal hoops, and the Slytherins sing 'Weasley Is Our King' to put him off.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which spell do first-years practise to make a feather float?",
+      "options": [
+        "Wingardium Leviosa",
+        "Accio",
+        "Alohomora",
+        "Reparo"
+      ],
+      "answer": "Wingardium Leviosa",
+      "explanation": "In the film, Hermione famously corrects Ron: 'It's Levi-O-sa, not Levi-o-SA!'",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the wizarding world's main daily newspaper called?",
+      "options": [
+        "The Daily Prophet",
+        "The Quibbler",
+        "Witch Weekly",
+        "The Evening Owl"
+      ],
+      "answer": "The Daily Prophet",
+      "explanation": "Its photographs move, and its reporter Rita Skeeter rarely lets the truth get in the way of a story.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What kind of creature is Buckbeak?",
+      "options": [
+        "A hippogriff",
+        "A griffin",
+        "A thestral",
+        "A sphinx"
+      ],
+      "answer": "A hippogriff",
+      "explanation": "Half eagle, half horse, a hippogriff expects you to bow before you approach it.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the name of the village near Hogwarts that older pupils may visit at weekends?",
+      "options": [
+        "Hogsmeade",
+        "Godric's Hollow",
+        "Ottery St Catchpole",
+        "Little Hangleton"
+      ],
+      "answer": "Hogsmeade",
+      "explanation": "It is said to be the only village in Britain with no Muggles at all, and it is home to Honeydukes sweet shop.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is Hermione Granger's middle name?",
+      "options": [
+        "Jean",
+        "Rose",
+        "Anne",
+        "Grace"
+      ],
+      "answer": "Jean",
+      "explanation": "It is first given in Deathly Hallows, when Rufus Scrimgeour reads out Dumbledore's will to 'Miss Hermione Jean Granger'.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
     }
   ]
 }

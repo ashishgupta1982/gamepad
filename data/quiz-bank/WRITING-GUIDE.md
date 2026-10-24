@@ -95,8 +95,8 @@ Every style is the same JSON question; the style is its `media`.
 
 **Plain**: no `media`. Most questions.
 
-**Emoji clue**, for films, TV, cartoons, music, games and stories:
-`"media": { "kind": "emoji", "text": "🦁👑🌅" }`. Two to six emoji a fan would recognise. The clue shows above the question, so the question is just "Which film do these emoji describe?" (or show, song, book, game) and holds no emoji itself. About four or five in fifteen in a category that suits them.
+**Emoji clue**, now and then, for films, TV, cartoons, music, games and stories:
+`"media": { "kind": "emoji", "text": "🦁👑🌅" }`. Two to six emoji a fan would recognise. The clue shows above the question, so the question is just "Which film do these emoji describe?" (or show, song, book, game) and holds no emoji itself. **Use them sparingly** (Ash, 2026-10-24: proper questions about the characters and stories first). At most one in ten new questions in a category, and none in a category that already has five or more (`npm run quiz:check -- <category>.json --all` counts them). The ones already in the bank stay. The live writer is told the same: at most one in a batch.
 
 **Picture**, for flags, landmarks, places, animals, dinosaurs, planets, famous paintings, historical rulers, logos, country outlines, sports kit and sport stars. Written as a hint, which `npm run quiz:images` turns into a picture on Cloudinary (`GamePad/quiz/`, through `@aspiro/media`), writing `src` and `credit` back into the file:
 - **a flag**: `"media": { "kind": "image", "flag": "jp", "alt": "A national flag" }` (ISO 3166 two-letter code, lower case; `gb-sct`, `gb-wls`, `gb-eng`, `gb-nir` for the UK nations). From flagcdn.com.
@@ -125,7 +125,7 @@ shirt, no credit that names the answer.
 
 ## How many
 
-Fifteen per band in every category to start: 15 `kids` and 15 `adults`. A category the family plays a lot is topped up ten at a time, in the band that is running low (2026-10-22: the first top-up, the eleven busiest band-categories). When a category runs short in play, the writer (Sonnet, `lib/quiz/writer.js`) writes more on the spot and keeps them (`source: writer`); they are not in these files, but `npm run quiz:check` compares against them, so a seed question does not repeat one.
+Fifteen per band in every category to start: 15 `kids` and 15 `adults`. A category the family plays a lot is topped up ten at a time, in the band that is running low (2026-10-22: the first top-up, the eleven busiest band-categories). Family mix, the level played most, draws only `family: true` questions, so watch that pool: on 2026-10-24 eleven categories were down to 5 to 9 unseen family questions, and each got ten more, all family, five Kids and five Grown-ups. When a category runs short in play, the writer (Sonnet, `lib/quiz/writer.js`) writes more on the spot and keeps them (`source: writer`); they are not in these files, but `npm run quiz:check` compares against them, so a seed question does not repeat one.
 
 ## Fixing a question
 
@@ -149,5 +149,11 @@ Fifteen per band in every category to start: 15 `kids` and 15 `adults`. A catego
 - A second fact-checking pass always finds things; never skip it.
 - A picture is the same picture after a re-upload: the key uses its name, not
   Cloudinary's version number.
+- Most current brand logos on Wikipedia have the name written in them. Look for an
+  icon-only file (search Commons for "<brand> icon"), or use a close-up that crops
+  the name off (the Pepsi globe). The same picture must not be used twice across
+  categories (the Ferrari horse is in Formula 1).
+- A wrong option can turn out to be arguable: Rowling once said Hermione's middle
+  name was Jane, and Porsche's crest has a black rearing horse too.
 - Every new kind of picture so far needed a look before use (logos with the name
   in them, outlines touching the edge, a photo whose lead image was a map).

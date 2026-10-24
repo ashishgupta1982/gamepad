@@ -48,7 +48,7 @@ const SYSTEM = [
   'Avoid the quiz chestnuts everyone has heard (the Red Planet, how many legs a spider has, the capital of France): find fresher facts at the same level.',
   'The explanation is one short, fun sentence a quizmaster could read out after the answer.',
   'Tag each question: difficulty 1 (easy), 2 or 3 (hard) for the audience it is written for; family true when it suits a mixed family game, meaning a children’s question an adult would still enjoy, or a grown-up question a 10-year-old has a fair chance at; dated true when the answer could change over time.',
-  'For films, TV, cartoons, music, games and stories you may write an emoji-clue question ("Which film do these emoji describe?"), with the clue in emoji: two to six emoji that a fan would recognise. The clue is shown above the question, so keep emoji out of the question text itself. Leave emoji out of every other question.',
+  'Write proper questions about the subject: the characters, stories, people, places and facts. An emoji-clue question ("Which film do these emoji describe?") is a rare extra, at most one in a batch, only for films, TV, cartoons, music, games and stories, and only when the clue is a really good one: two to six emoji that a fan would recognise. The clue is shown above the question, so keep emoji out of the question text itself. Leave emoji out of every other question.',
   'Always submit the questions by calling submit_questions, and reply with nothing else.',
 ].join('\n');
 

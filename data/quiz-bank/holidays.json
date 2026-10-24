@@ -400,6 +400,106 @@
       "family": true,
       "difficulty": 3,
       "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which Christmas plant with white berries are people supposed to kiss under?",
+      "options": ["Mistletoe", "Holly", "Ivy", "Poinsettia"],
+      "answer": "Mistletoe",
+      "explanation": "The custom goes back at least to the 1700s in England.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which spiced bun with a cross on top is traditionally eaten at Easter?",
+      "options": ["Hot cross bun", "Chelsea bun", "Bath bun", "Iced bun"],
+      "answer": "Hot cross bun",
+      "explanation": "They are traditionally eaten on Good Friday, the day Christians remember Jesus dying on the cross.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Counting Rudolph, how many reindeer pull Santa's sleigh?",
+      "options": ["Nine", "Seven", "Eight", "Twelve"],
+      "answer": "Nine",
+      "explanation": "Dasher, Dancer, Prancer, Vixen, Comet, Cupid, Donner and Blitzen, with Rudolph leading the way.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In the Netherlands, what do children leave by the fireplace for Sinterklaas to fill with sweets?",
+      "options": ["A shoe", "A stocking", "A hat", "A basket"],
+      "answer": "A shoe",
+      "explanation": "Some children put a carrot or hay in the shoe for Sinterklaas's horse.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "At Diwali, what are the little clay oil lamps that people light called?",
+      "options": ["Diyas", "Rangolis", "Rakhis", "Kolams"],
+      "answer": "Diyas",
+      "explanation": "Rows of diyas light the way for Lakshmi, the goddess of good fortune.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which saint, said to have slain a dragon, is England's patron saint, remembered on 23 April?",
+      "options": ["St George", "St Andrew", "St Michael", "St Christopher"],
+      "answer": "St George",
+      "explanation": "His red cross on a white background is the flag of England.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the name for the four weeks leading up to Christmas?",
+      "options": ["Advent", "Epiphany", "Pentecost", "Michaelmas"],
+      "answer": "Advent",
+      "explanation": "The word comes from the Latin for 'coming', and it is why we open Advent calendars.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In 'The Twelve Days of Christmas', what does my true love give me on the fifth day?",
+      "options": ["Gold rings", "Calling birds", "Geese a-laying", "Swans a-swimming"],
+      "answer": "Gold rings",
+      "explanation": "Singers traditionally slow right down and belt out 'five go-old rings'.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Jewish festival remembers the Israelites' escape from slavery in Egypt?",
+      "options": ["Passover", "Hanukkah", "Purim", "Yom Kippur"],
+      "answer": "Passover",
+      "explanation": "Families share a special meal, the Seder, with flat bread called matzah.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which decade was the first commercial Christmas card sent in Britain?",
+      "options": ["The 1840s", "The 1790s", "The 1880s", "The 1920s"],
+      "answer": "The 1840s",
+      "explanation": "Henry Cole (later Sir Henry) had about 1,000 printed in 1843, to save himself writing lots of Christmas letters.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
     }
   ]
 }

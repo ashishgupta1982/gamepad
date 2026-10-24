@@ -400,6 +400,156 @@
       "family": false,
       "difficulty": 2,
       "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "How long is a normal professional football match, not counting extra time or added time?",
+      "options": ["90 minutes", "60 minutes", "80 minutes", "100 minutes"],
+      "answer": "90 minutes",
+      "explanation": "Two halves of 45 minutes, with a break at half-time.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Stamford Bridge is the home ground of which London club?",
+      "options": ["Chelsea", "Fulham", "Arsenal", "Tottenham Hotspur"],
+      "answer": "Chelsea",
+      "explanation": "It has been Chelsea's home since the club was founded in 1905.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "How many points does a team get for winning a Premier League match?",
+      "options": ["3", "1", "2", "4"],
+      "answer": "3",
+      "explanation": "A draw earns 1 point, and a loss earns nothing.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which country won the men's World Cup in 2018?",
+      "options": ["France", "Croatia", "Belgium", "Brazil"],
+      "answer": "France",
+      "explanation": "They beat Croatia 4–2 in the final in Moscow, with a 19-year-old Kylian Mbappé scoring.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which country won its fourth men's World Cup in 2014?",
+      "options": ["Germany", "Italy", "Argentina", "Spain"],
+      "answer": "Germany",
+      "explanation": "Mario Götze scored the winner against Argentina in extra time in Rio de Janeiro.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which footballer is known by the nickname 'CR7'?",
+      "options": ["Cristiano Ronaldo", "Ronaldinho", "Kylian Mbappé", "Neymar"],
+      "answer": "Cristiano Ronaldo",
+      "explanation": "His initials and his famous number 7 shirt.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "The 2026 men's World Cup was hosted by the USA, Canada and which other country?",
+      "options": ["Mexico", "Brazil", "Costa Rica", "Colombia"],
+      "answer": "Mexico",
+      "explanation": "It was the first World Cup shared by three countries, and the first with 48 teams.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which club did David Beckham join when he left Manchester United in 2003?",
+      "options": ["Real Madrid", "Barcelona", "AC Milan", "LA Galaxy"],
+      "answer": "Real Madrid",
+      "explanation": "He moved to LA Galaxy later, in 2007.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which city is the San Siro stadium?",
+      "options": ["Milan", "Rome", "Turin", "Naples"],
+      "answer": "Milan",
+      "explanation": "AC Milan and Inter Milan share it, so the city's derby is played at the same ground both ways.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "How many World Cups did Pelé win as a player with Brazil?",
+      "options": ["3", "1", "2", "4"],
+      "answer": "3",
+      "explanation": "1958, 1962 and 1970: he is the only player to win three.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Who scored a hat-trick for England in the 1966 World Cup final?",
+      "options": ["Geoff Hurst", "Bobby Charlton", "Roger Hunt", "Martin Peters"],
+      "answer": "Geoff Hurst",
+      "explanation": "His third goal came as fans ran on to the pitch: 'They think it's all over... it is now!'",
+      "family": false,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which club won the first Premier League title, in 1992–93?",
+      "options": ["Manchester United", "Aston Villa", "Blackburn Rovers", "Leeds United"],
+      "answer": "Manchester United",
+      "explanation": "It was their first league title for 26 years.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Kenny Dalglish managed which club to the Premier League title in 1994–95?",
+      "options": ["Blackburn Rovers", "Liverpool", "Newcastle United", "Manchester United"],
+      "answer": "Blackburn Rovers",
+      "explanation": "Steel magnate Jack Walker's millions and Alan Shearer's 34 goals brought the title to Ewood Park.",
+      "family": false,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Brian Clough led which club to two European Cups, in 1979 and 1980?",
+      "options": ["Nottingham Forest", "Derby County", "Leeds United", "Aston Villa"],
+      "answer": "Nottingham Forest",
+      "explanation": "Forest had only been promoted to the top division in 1977.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Welsh player won the Champions League five times with Real Madrid?",
+      "options": ["Gareth Bale", "Ryan Giggs", "Aaron Ramsey", "Ian Rush"],
+      "answer": "Gareth Bale",
+      "explanation": "His overhead kick in the 2018 final against Liverpool is one of the great final goals.",
+      "family": false,
+      "difficulty": 3,
+      "dated": false
     }
   ]
 }

@@ -450,6 +450,156 @@
       "family": false,
       "difficulty": 3,
       "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Where on your body is your 'funny bone'?",
+      "options": [
+        "Your elbow",
+        "Your knee",
+        "Your ankle",
+        "Your shoulder"
+      ],
+      "answer": "Your elbow",
+      "explanation": "It isn't a bone at all: it is a nerve, which is why knocking it tingles so much.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "A baby has more bones than a grown-up. What happens to the extra ones?",
+      "options": [
+        "They join together",
+        "They dissolve",
+        "They turn into muscle",
+        "They fall out like teeth"
+      ],
+      "answer": "They join together",
+      "explanation": "Lots of a baby's bones, like those in the skull, grow together into bigger bones.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which is the biggest muscle in your body?",
+      "options": [
+        "Your bottom muscle",
+        "Your tummy muscle",
+        "Your heart",
+        "Your tongue"
+      ],
+      "answer": "Your bottom muscle",
+      "explanation": "The gluteus maximus helps you stand up, climb stairs and run.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Roughly how many hairs are on a person's head?",
+      "options": [
+        "About 100,000",
+        "About 1,000",
+        "About 10,000",
+        "About 10 million"
+      ],
+      "answer": "About 100,000",
+      "explanation": "Most people lose 50 to 100 of them every day, and new ones grow back.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Your hair and fingernails are mostly made of which material?",
+      "options": [
+        "Keratin",
+        "Calcium",
+        "Enamel",
+        "Cartilage"
+      ],
+      "answer": "Keratin",
+      "explanation": "It is the same tough stuff as animals' claws, horns and hooves.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which blood vessels carry blood away from the heart?",
+      "options": [
+        "Arteries",
+        "Veins",
+        "Capillaries",
+        "Lymph vessels"
+      ],
+      "answer": "Arteries",
+      "explanation": "Veins bring it back, and tiny capillaries link the two.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the outer layer of your skin called?",
+      "options": [
+        "The epidermis",
+        "The dermis",
+        "The cortex",
+        "The membrane"
+      ],
+      "answer": "The epidermis",
+      "explanation": "You shed tens of thousands of its dead cells every minute.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In which organ would you find millions of tiny air sacs called alveoli?",
+      "options": [
+        "The lungs",
+        "The kidneys",
+        "The liver",
+        "The stomach"
+      ],
+      "answer": "The lungs",
+      "explanation": "Their huge surface lets oxygen pass quickly into your blood.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "The hippocampus, named after the seahorse it is shaped like, is part of which organ?",
+      "options": [
+        "The brain",
+        "The heart",
+        "The ear",
+        "The stomach"
+      ],
+      "answer": "The brain",
+      "explanation": "It plays a big part in making new memories.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Where is the thinnest skin on the human body?",
+      "options": [
+        "On the eyelids",
+        "On the lips",
+        "On the fingertips",
+        "On the earlobes"
+      ],
+      "answer": "On the eyelids",
+      "explanation": "Eyelid skin is only about half a millimetre thick.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
     }
   ]
 }

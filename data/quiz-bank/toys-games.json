@@ -300,6 +300,106 @@
       "family": false,
       "difficulty": 3,
       "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In the classic UK game of Monopoly, how much do you collect for passing Go?",
+      "options": ["£200", "£100", "£250", "£500"],
+      "answer": "£200",
+      "explanation": "Land on Go To Jail instead and you don't collect a penny.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In chess, which piece moves in an L shape?",
+      "options": ["Knight", "Bishop", "Rook", "Queen"],
+      "answer": "Knight",
+      "explanation": "It is also the only piece that can jump over others in an ordinary move.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "What colours are the counters in a classic game of Connect 4?",
+      "options": ["Red and yellow", "Black and white", "Blue and green", "Red and blue"],
+      "answer": "Red and yellow",
+      "explanation": "You drop them into a blue frame and try to get four in a row.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which toy company makes Hot Wheels cars?",
+      "options": ["Mattel", "Hasbro", "LEGO", "Bandai"],
+      "answer": "Mattel",
+      "explanation": "Mattel, who also make Barbie, launched Hot Wheels in 1968.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In the classic game of Guess Who?, how many faces are on each player's board?",
+      "options": ["24", "16", "20", "30"],
+      "answer": "24",
+      "explanation": "With good questions you can find the mystery person in about five goes.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which spinning toy, held between finger and thumb, was a huge craze in 2017?",
+      "options": ["The fidget spinner", "The yo-yo", "The Beyblade", "The spinning top"],
+      "answer": "The fidget spinner",
+      "explanation": "For a few months in 2017, fidget spinners were in almost every school bag.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which game uses a mat of coloured circles and a spinner telling you where to put your hands and feet?",
+      "options": ["Twister", "Hopscotch", "Simon Says", "Operation"],
+      "answer": "Twister",
+      "explanation": "It shot to fame in 1966 when Johnny Carson played it on American TV.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "How many letter tiles are in a standard English game of Scrabble?",
+      "options": ["100", "80", "120", "144"],
+      "answer": "100",
+      "explanation": "That includes two blank tiles, which can stand for any letter.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which company makes Monopoly today?",
+      "options": ["Hasbro", "Mattel", "Ravensburger", "Spin Master"],
+      "answer": "Hasbro",
+      "explanation": "Hasbro took over Parker Brothers, Monopoly's American maker, in 1991, when it bought Tonka.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In the classic British game of Cluedo, what is the murder victim called?",
+      "options": ["Dr Black", "Colonel Mustard", "Mr Boddy", "Reverend Green"],
+      "answer": "Dr Black",
+      "explanation": "In the American version, Clue, he is called Mr Boddy.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
     }
   ]
 }

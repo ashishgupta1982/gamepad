@@ -688,6 +688,198 @@
       "family": false,
       "difficulty": 2,
       "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which country's flag is this?",
+      "options": [
+        "Italy",
+        "Ireland",
+        "Mexico",
+        "Hungary"
+      ],
+      "answer": "Italy",
+      "explanation": "Its green, white and red are sometimes said to be the colours of basil, mozzarella and tomato, just like a pizza.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "flag": "it",
+        "alt": "A national flag",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792817959/GamePad/quiz/flag-it.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which country's flag is this?",
+      "options": [
+        "Switzerland",
+        "Denmark",
+        "Tonga",
+        "Georgia"
+      ],
+      "answer": "Switzerland",
+      "explanation": "It is one of only two square national flags in the world, with Vatican City's.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "flag": "ch",
+        "alt": "A national flag",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792817960/GamePad/quiz/flag-ch.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "Which country's flag is this?",
+      "options": [
+        "India",
+        "Niger",
+        "Ireland",
+        "Côte d'Ivoire"
+      ],
+      "answer": "India",
+      "explanation": "The blue wheel in the middle is the Ashoka Chakra, with 24 spokes.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "flag": "in",
+        "alt": "A national flag",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792817961/GamePad/quiz/flag-in.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "kids",
+      "question": "What is the capital city of Norway?",
+      "options": [
+        "Oslo",
+        "Bergen",
+        "Stockholm",
+        "Helsinki"
+      ],
+      "answer": "Oslo",
+      "explanation": "It was called Christiania until 1925.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "Which country's flag is this, with a famous temple on it?",
+      "options": [
+        "Cambodia",
+        "Laos",
+        "Thailand",
+        "Vietnam"
+      ],
+      "answer": "Cambodia",
+      "explanation": "The temple is Angkor Wat, the largest religious monument in the world.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "flag": "kh",
+        "alt": "A national flag",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792817963/GamePad/quiz/flag-kh.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which country's flag is this?",
+      "options": [
+        "Mexico",
+        "Italy",
+        "Iran",
+        "Hungary"
+      ],
+      "answer": "Mexico",
+      "explanation": "The eagle on a cactus eating a snake comes from the Aztec legend of how Mexico City was founded.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "flag": "mx",
+        "alt": "A national flag",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792817964/GamePad/quiz/flag-mx.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "Which country's flag is this?",
+      "options": [
+        "Argentina",
+        "Uruguay",
+        "Honduras",
+        "Nicaragua"
+      ],
+      "answer": "Argentina",
+      "explanation": "The face in the middle is the Sun of May, from the revolution of May 1810.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false,
+      "media": {
+        "kind": "image",
+        "flag": "ar",
+        "alt": "A national flag",
+        "src": "https://res.cloudinary.com/dbvire8uv/image/upload/v1792817965/GamePad/quiz/flag-ar.png",
+        "credit": ""
+      }
+    },
+    {
+      "band": "adults",
+      "question": "What is the capital of Hungary?",
+      "options": [
+        "Budapest",
+        "Bucharest",
+        "Prague",
+        "Belgrade"
+      ],
+      "answer": "Budapest",
+      "explanation": "Buda and Óbuda on one bank of the Danube joined Pest on the other in 1873.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "What is the capital of Vietnam?",
+      "options": [
+        "Hanoi",
+        "Ho Chi Minh City",
+        "Da Nang",
+        "Hue"
+      ],
+      "answer": "Hanoi",
+      "explanation": "Ho Chi Minh City, once called Saigon, is bigger, but Hanoi in the north is the capital.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which is the only capital city that borders two other countries?",
+      "options": [
+        "Bratislava",
+        "Vienna",
+        "Luxembourg",
+        "Vaduz"
+      ],
+      "answer": "Bratislava",
+      "explanation": "Slovakia's capital touches both Austria and Hungary.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
     }
   ]
 }

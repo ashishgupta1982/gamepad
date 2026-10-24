@@ -644,6 +644,156 @@
       "family": false,
       "difficulty": 3,
       "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Frozen, what is the name of the snowman who loves warm hugs?",
+      "options": [
+        "Olaf",
+        "Sven",
+        "Kristoff",
+        "Hans"
+      ],
+      "answer": "Olaf",
+      "explanation": "Elsa brings him to life, and he dreams of seeing summer.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Toy Story, what is Buzz Lightyear's famous catchphrase?",
+      "options": [
+        "To infinity and beyond!",
+        "Reach for the sky!",
+        "There's a snake in my boot!",
+        "Just keep swimming!"
+      ],
+      "answer": "To infinity and beyond!",
+      "explanation": "'Reach for the sky' and the snake in the boot are Woody's lines.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In The Lion King, what does 'Hakuna Matata' mean?",
+      "options": [
+        "No worries",
+        "Good luck",
+        "Be brave",
+        "Welcome home"
+      ],
+      "answer": "No worries",
+      "explanation": "It is a Swahili phrase, made famous by Timon and Pumbaa's song.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In Finding Nemo, what kind of fish is Dory?",
+      "options": [
+        "A blue tang",
+        "A clownfish",
+        "A pufferfish",
+        "An angelfish"
+      ],
+      "answer": "A blue tang",
+      "explanation": "Nemo and his dad Marlin are the clownfish.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "kids",
+      "question": "In WALL-E, what is the name of the sleek white robot WALL-E falls in love with?",
+      "options": [
+        "EVE",
+        "AURA",
+        "NOVA",
+        "IRIS"
+      ],
+      "answer": "EVE",
+      "explanation": "She is sent to Earth to look for signs of plant life.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In Monsters, Inc., what is the name of Sulley's one-eyed best friend?",
+      "options": [
+        "Mike Wazowski",
+        "Randall Boggs",
+        "George Sanderson",
+        "Henry J. Waternoose"
+      ],
+      "answer": "Mike Wazowski",
+      "explanation": "He was voiced by Billy Crystal, who had turned down the part of Buzz Lightyear and regretted it.",
+      "family": true,
+      "difficulty": 1,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In Ratatouille, what is the name of the rat who dreams of being a chef?",
+      "options": [
+        "Remy",
+        "Emile",
+        "Linguini",
+        "Gusteau"
+      ],
+      "answer": "Remy",
+      "explanation": "He cooks by tugging on Linguini's hair, steering him like a puppet.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In Aladdin, which princess has a pet tiger called Rajah?",
+      "options": [
+        "Jasmine",
+        "Mulan",
+        "Pocahontas",
+        "Moana"
+      ],
+      "answer": "Jasmine",
+      "explanation": "Rajah scares off the princes who come to ask for her hand.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "Which Disney princess falls into a deep sleep after pricking her finger on a spinning wheel?",
+      "options": [
+        "Aurora",
+        "Belle",
+        "Ariel",
+        "Snow White"
+      ],
+      "answer": "Aurora",
+      "explanation": "She is the Sleeping Beauty, cursed by Maleficent at her christening.",
+      "family": true,
+      "difficulty": 2,
+      "dated": false
+    },
+    {
+      "band": "adults",
+      "question": "In Frozen, what is the name of the kingdom where Elsa and Anna live?",
+      "options": [
+        "Arendelle",
+        "Corona",
+        "Agrabah",
+        "Atlantica"
+      ],
+      "answer": "Arendelle",
+      "explanation": "It was inspired by Norway, with its fjords and wooden stave churches.",
+      "family": true,
+      "difficulty": 3,
+      "dated": false
     }
   ]
 }
